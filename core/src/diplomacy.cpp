@@ -133,9 +133,91 @@ bool federal_state(const World& world, Index state) {
     if (in_range(world.left_federation, state) && world.left_federation[at(state)] != 0) {
         return false;
     }
+    if (federation_founded(world)) {
+        // Seit M13a2: die Mitglieder des Bundes zur Laufzeit, solange sie Orte besitzen.
+        return in_range(world.federation.members, state) && world.federation.members[at(state)] != 0 &&
+               std::any_of(world.locations.begin(), world.locations.end(),
+                           [&](const Location& loc) { return loc.owner == state; });
+    }
     return in_range(world.states, state) &&
            std::any_of(world.locations.begin(), world.locations.end(),
                        [&](const Location& loc) { return loc.federal && loc.owner == state; });
+}
+
+bool federation_founded(const World& world) {
+    return in_range(world.federation_templates, world.federation.diet);
+}
+
+const FederalDiet& active_diet(const World& world) {
+    return federation_founded(world) ? world.federation_templates[at(world.federation.diet)] : world.diet;
+}
+
+bool in_federal_area(const World& world, Index location) {
+    if (!in_range(world.locations, location)) {
+        return false;
+    }
+    const Location& loc = world.locations[at(location)];
+    if (!federation_founded(world)) {
+        return loc.federal;
+    }
+    return in_range(world.federation.members, loc.owner) && world.federation.members[at(loc.owner)] != 0 &&
+           !(in_range(world.left_federation, loc.owner) && world.left_federation[at(loc.owner)] != 0);
+}
+
+void found_federation(World& world, Index template_index, const std::vector<std::uint8_t>& members) {
+    if (!in_range(world.federation_templates, template_index) || members.size() != world.states.size()) {
+        return;
+    }
+    const FederalDiet& diet = world.federation_templates[at(template_index)];
+    world.federation.diet = template_index;
+    world.federation.members = members;
+    world.federation.founded = world.date;
+    // Wer Mitglied ist, gehört wieder zum Bund (auch nach der Auflösung des alten, militaer.md 4.5).
+    if (world.left_federation.size() == world.states.size()) {
+        for (std::size_t s = 0; s < members.size(); ++s) {
+            world.left_federation[s] = members[s] != 0 ? 0 : 1;
+        }
+    }
+    world.diet_presidency = diet.presidency;
+    world.diet_suspended = 0;
+    world.motions.clear();
+    std::string names;
+    std::int64_t count = 0;
+    for (std::size_t s = 0; s < members.size(); ++s) {
+        if (members[s] != 0) {
+            ++count;
+        }
+    }
+    names = std::to_string(count) + " Staaten";
+    ChronicleEntry entry;
+    entry.date = world.date;
+    entry.state = diet.presidency;
+    entry.text = "Gründung: " + (diet.federation_name.empty() ? diet.name : diet.federation_name) + " mit " +
+                 names +
+                 (in_range(world.states, diet.presidency)
+                      ? ", Präsidium " + world.states[at(diet.presidency)].short_name
+                      : std::string()) +
+                 ".";
+    world.chronicle.push_back(std::move(entry));
+}
+
+bool join_federation(World& world, Index state) {
+    if (!federation_founded(world) || !in_range(world.federation.members, state) ||
+        world.federation.members[at(state)] != 0) {
+        return false;
+    }
+    world.federation.members[at(state)] = 1;
+    if (in_range(world.left_federation, state)) {
+        world.left_federation[at(state)] = 0;
+    }
+    ChronicleEntry entry;
+    entry.date = world.date;
+    entry.state = state;
+    const FederalDiet& diet = active_diet(world);
+    entry.text = world.states[at(state)].short_name +
+                 " tritt bei: " + (diet.federation_name.empty() ? diet.name : diet.federation_name) + ".";
+    world.chronicle.push_back(std::move(entry));
+    return true;
 }
 
 void adjust_relation(World& world, Index a, Index b, Fixed delta) {

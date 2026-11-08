@@ -131,6 +131,10 @@ enum class EffectKind : std::uint8_t {
     Motion,         // antrag { art = a ziel = b } (seit a4): Antrag in der Bundesversammlung (MotionKind)
     War,            // krieg = TAG (seit a4): Kriegserklärung an den Staat a (Militär, mit Bündnisfall);
                     // seit b3 auch krieg { gegner = TAG … } mit Kriegszielen in goals
+    // Seit M13a2 (vertical_slice.md 3.3):
+    Federation,     // bund { vorlage = a … }: gründet den Bund; b Bits 1 bundesgebiet, 2 bisherige, 4 der
+                    // Staat des Ereignisses; name = merkmal; states dazu, excluded ohne
+    FederationJoin, // bund_beitritt = ja: der Staat tritt dem Bund zur Laufzeit bei
 };
 
 /// Werte einer befristeten Wirkung (Abschnitt 3.7).
@@ -156,7 +160,9 @@ struct Effect {
     std::vector<Fixed> weights;
     std::vector<std::vector<Effect>> branches;
     std::vector<std::int64_t>
-        goals; // War (seit b3): Kriegsziele (encode_war_goal), das erste mit der Erklärung
+        goals;                   // War (seit b3): Kriegsziele (encode_war_goal), das erste mit der Erklärung
+    std::vector<Index> states;   // Federation (seit M13a2): Mitglieder zusätzlich
+    std::vector<Index> excluded; // Federation: keine Mitglieder
 };
 
 // ─── Ereignisse (Abschnitt 3.1) ─────────────────────────────────────────────

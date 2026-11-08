@@ -78,15 +78,15 @@ bool plenum_motion(MotionKind kind) {
 } // namespace
 
 bool has_diet(const World& world) {
-    return !world.diet.id.empty() && !world.relations.empty();
+    return !active_diet(world).id.empty() && !world.relations.empty();
 }
 
 std::int32_t plenum_votes(const World& world, Index state) {
     // Seit M10 (militaer.md 4.5): Wer den Bund verlassen hat oder unterging, stimmt nicht mehr.
-    if (!in_range(world.diet.plenum, state) || !federal_state(world, state)) {
+    if (!in_range(active_diet(world).plenum, state) || !federal_state(world, state)) {
         return 0;
     }
-    return world.diet.plenum[at(state)];
+    return active_diet(world).plenum[at(state)];
 }
 
 Index motion_opponent(const World& world, MotionKind kind, Index applicant, Index target) {
@@ -168,7 +168,7 @@ DiplomacyDecision file_motion(World& world, Index applicant, MotionKind kind, In
     vote.month = vote.month == 12 ? 1 : vote.month + 1;
     vote.year = world.date.month == 12 ? world.date.year + 1 : world.date.year;
     chronicle(world, applicant,
-              world.states[at(applicant)].short_name + " beantragt in der " + world.diet.name + " " +
+              world.states[at(applicant)].short_name + " beantragt in der " + active_diet(world).name + " " +
                   motion_text(world, kind, target) + "; abgestimmt wird am " + format_date_long(vote) + ".");
     return decision;
 }
@@ -194,7 +194,7 @@ MotionResult tally_motion(const World& world, const Motion& motion) {
     }
     // Engerer Rat: eine Stimme je Eintrag; in einer Kurie entscheidet die Mehrheit ihrer Plenarstimmen,
     // bei Gleichstand Nein.
-    for (const CouncilVote& vote : world.diet.council) {
+    for (const CouncilVote& vote : active_diet(world).council) {
         std::int32_t for_votes = 0;
         std::int32_t against = 0;
         for (const Index state : vote.states) {
@@ -235,7 +235,7 @@ void run_diet(World& world) {
     const MotionResult result = tally_motion(world, motion);
     world.motion_results.push_back(result);
     const std::string applicant = world.states[at(motion.applicant)].short_name;
-    std::string text = "Die " + world.diet.name +
+    std::string text = "Die " + active_diet(world).name +
                        (result.accepted ? " nimmt den Antrag von " : " lehnt den Antrag von ") + applicant +
                        " auf " + motion_text(world, motion.kind, motion.target) +
                        (result.accepted ? " an" : " ab");

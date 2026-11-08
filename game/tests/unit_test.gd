@@ -88,7 +88,7 @@ func _test_launch_options() -> void:
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
 		[
-			"--tage=-3", "--kartenmodus=17", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--tage=-3", "--kartenmodus=18", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
 			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja", "--diplomatie=krieg",
 			"--krieg=frieden", "--heer=1", "--ereignis=ja", "--journal=1"
 		]
@@ -251,7 +251,12 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 17, "siebzehn Kartenmodi (Unruhe seit M11)")
+	_equal(MapModes.COUNT, 18, "achtzehn Kartenmodi (Bund seit M13)")
+	_equal(MapModes.MAP_BUND, 17, "Kartenmodus Bund = 17 (bridge-api.md)")
+	_equal(MapModes.KEY_HINTS[MapModes.MAP_BUND], "C", "Taste C für Bund")
+	var c_key := InputEventKey.new()
+	c_key.physical_keycode = KEY_C
+	_equal(MapModes.mode_for_event(c_key), MapModes.MAP_BUND, "Taste C: Bund")
 	_equal(MapModes.MAP_UNRUHE, 16, "Kartenmodus Unruhe = 16 (bridge-api.md)")
 	_equal(MapModes.KEY_HINTS[MapModes.MAP_UNRUHE], "X", "Taste X für Unruhe")
 	_true(InputMap.has_action(&"kartenmodus_unruhe"), "Aktion für den Kartenmodus Unruhe")

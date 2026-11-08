@@ -27,7 +27,7 @@ const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
 	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR,
 	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN, MapModes.MAP_WAHLEN, MapModes.MAP_ZOLLGEBIETE,
-	MapModes.MAP_BEZIEHUNGEN, MapModes.MAP_KRIEG, MapModes.MAP_UNRUHE,
+	MapModes.MAP_BEZIEHUNGEN, MapModes.MAP_KRIEG, MapModes.MAP_UNRUHE, MapModes.MAP_BUND,
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -1236,6 +1236,14 @@ func _rebuild_legend() -> void:
 			else:
 				war.append_array(no_data)
 				_legend.show_swatches(title, war)
+		MapModes.MAP_BUND:
+			var federation := LegendData.federation_entries(_sim)
+			if federation.is_empty():
+				_legend.show_message(title, "Den Deutschen Bund und neue Bünde gibt es erst ab 1848.")
+			else:
+				title = "%s" % str(_sim.get_diet().get("federation_name", title))
+				federation.append_array(no_data)
+				_legend.show_swatches(title, federation)
 		MapModes.MAP_UNRUHE:
 			var unrest := LegendData.unrest_entries(_sim)
 			if unrest.is_empty():

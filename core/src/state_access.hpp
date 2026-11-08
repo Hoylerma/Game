@@ -449,6 +449,10 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("angenommen", r.accepted);
         });
         v.field("bundesversammlung_ruht", w.diet_suspended);
+        // Bund zur Laufzeit (seit M13a2, vertical_slice.md 3.3).
+        v.field("bund.vorlage", w.federation.diet);
+        list(v, "bund.mitglieder", w.federation.members, Extent::State, [&](auto& m) { v.field("", m); });
+        v.field("bund.gegruendet", w.federation.founded);
     }
 
     // KI der Staaten (seit M12, Schritt a1): nur mit KI-Daten (1648 bleibt bitgleich). Personen im Amt je

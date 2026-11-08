@@ -13,6 +13,16 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Bünde zur Laufzeit (Schritt a2):** Die deutsche Frage verändert jetzt die Ordnung im Bund. Die
+  Bundesversammlungen in `common/bundesversammlung.chron` können **Vorlagen** sein (Norddeutscher Bund,
+  Reich der Paulskirche, großdeutsches Reich, Deutsches Reich 1871); die neue Wirkung `bund { … }` gründet
+  daraus einen Bund mit Mitgliedern (nach Bundesgebiet, bisherigem Bund, Merkmal oder Liste), `bund_beitritt`
+  lässt einen Staat beitreten. Dann gelten seine Mitglieder als Bundesstaaten, ihre Orte als Bundesgebiet,
+  seine Stimmen und sein Präsidium in der Bundesversammlung, und Mitglieder führen keinen Krieg gegeneinander.
+  In einer Partie ab 1848 gründen die Reichsverfassung, der Norddeutsche Bund (1867), die Novemberverträge und
+  die Kaiserproklamation ihre Bünde. Neuer Kartenmodus **„Bund“** (Taste C). Das Journal „Die deutsche Frage“
+  springt nicht mehr im März 1848 in „Der Deutsche Krieg“, wenn Österreich an Dänemarks Seite steht. Alle
+  Labore 1848 halten ihre Korridore; 1648 bitgleich.
 - **Start und Spieleinstellungen (Schritt a1):** Das Spiel beginnt mit einem **Startbildschirm** statt
   mit 1648: Neues Spiel, Fortsetzen (jüngster Spielstand), Laden, Beenden. Ein neues Spiel führt über
   Lesezeichen (1848 und die drei Kriegslesezeichen, 1648 als Technikprototyp unter „Weitere“), Staat

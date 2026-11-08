@@ -1023,7 +1023,10 @@ void war_sides(const World& world, Index attacker, Index target, std::vector<Ind
 bool can_declare_war(const World& world, Index state, Index target) {
     return military_active(world) && in_range(world.states, state) && in_range(world.states, target) &&
            state != target && has_locations(world, state) && has_locations(world, target) &&
-           !at_war(world, state, target) && !comrades(world, state, target);
+           !at_war(world, state, target) && !comrades(world, state, target) &&
+           // Bundespflicht (seit M13a2, vertical_slice.md 3.3): Mitglieder eines Bundes zur Laufzeit führen
+           // keinen Krieg gegeneinander.
+           !(federation_founded(world) && federal_state(world, state) && federal_state(world, target));
 }
 
 bool start_war(World& world, std::vector<Index> attackers, std::vector<Index> defenders, WarCause cause,

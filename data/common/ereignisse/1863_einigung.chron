@@ -346,7 +346,12 @@ ereignis norddeutscher.bund {
         text = "Der Norddeutsche Bund wird gegründet"
         historisch = ja
         gewicht = 1
-        wirkung { welt_merke = norddeutscher_bund }
+        # seit M13a2: der Bund zur Laufzeit – das Bundesgebiet ohne Österreich, die süddeutschen Staaten,
+        # Liechtenstein, Luxemburg und Limburg
+        wirkung {
+            welt_merke = norddeutscher_bund
+            bund { vorlage = norddeutscher_bund  bundesgebiet = ja  ohne = { AUT BAV WUE BAD HED LIE LUX NED DEN } }
+        }
     }
 }
 
@@ -454,7 +459,7 @@ ereignis novembervertraege {
         ki { reform = 0.5 }
         gewicht_wenn { staat_in = { BAD HED }  plus = 15 }
         gewicht_wenn { welt_merkmal = sueden_fuer_anschluss  plus = 10 }
-        wirkung { merke = reichsbeitritt  zustimmung_nationalbewegung = 3  zustimmung_katholische_kirche = -2 }
+        wirkung { merke = reichsbeitritt  bund_beitritt = ja  zustimmung_nationalbewegung = 3  zustimmung_katholische_kirche = -2 }
     }
     option abseits {
         text = "Selbständig bleiben"
@@ -510,6 +515,11 @@ ereignis kaiserproklamation {
         text = "Das Deutsche Reich wird ausgerufen"
         historisch = ja
         gewicht = 1
-        wirkung { welt_merke = kaiserproklamation  staat PRU { zustimmung_nationalbewegung = 4 } }
+        # seit M13a2: aus dem Norddeutschen Bund und den beigetretenen Staaten wird das Reich
+        wirkung {
+            welt_merke = kaiserproklamation
+            bund { vorlage = deutsches_reich  bisherige = ja  merkmal = reichsbeitritt  staaten = { PRU }  ohne = { AUT } }
+            staat PRU { zustimmung_nationalbewegung = 4 }
+        }
     }
 }

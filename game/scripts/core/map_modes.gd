@@ -20,7 +20,8 @@ const MAP_ZOLLGEBIETE := 13
 const MAP_BEZIEHUNGEN := 14
 const MAP_KRIEG := 15
 const MAP_UNRUHE := 16
-const COUNT := 17
+const MAP_BUND := 17
+const COUNT := 18
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -41,6 +42,7 @@ const NAMES: PackedStringArray = [
 	"Beziehungen",
 	"Krieg",
 	"Unruhe",
+	"Bund",
 ]
 
 ## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 kurz gehalten,
@@ -63,6 +65,7 @@ const SHORT_NAMES: PackedStringArray = [
 	"Beziehung",
 	"Krieg",
 	"Unruhe",
+	"Bund",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -84,6 +87,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Beziehung jedes Staates zum Spielerstaat: grün freundlich, rot feindlich; seit 1848",
 	"Wer die Orte hält: besetzte Orte schraffiert in der Farbe des Besitzers, Fronten als Grenzen; seit 1848",
 	"Unruhe der Staaten von 0 (blass) bis 100 (rot), Staaten mit Aufstand violett; seit 1848",
+	"Bundesgebiet, das gilt (Deutscher Bund oder ein neuer Bund): Präsidialmacht kräftig, Mitglieder blass; seit 1848",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -105,6 +109,7 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_beziehungen",
 	&"kartenmodus_krieg",
 	&"kartenmodus_unruhe",
+	&"kartenmodus_bund",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
@@ -113,7 +118,7 @@ const ACTIONS: Array[StringName] = [
 ## „'“, seit M8), „Ö“ die links neben Ä (englisch „;“, seit M9), „#“ die rechts neben Ä (englisch
 ## „\“, seit M9), „Y“ die links unten neben X (englisch „Z“, seit M10), „X“ (seit M11).
 const KEY_HINTS: PackedStringArray = [
-	"Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä", "Ö", "#", "Y", "X"
+	"Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä", "Ö", "#", "Y", "X", "C"
 ]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
@@ -135,6 +140,7 @@ const DATA_MODES: PackedInt32Array = [
 	MAP_BEZIEHUNGEN,
 	MAP_KRIEG,
 	MAP_UNRUHE,
+	MAP_BUND,
 ]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).

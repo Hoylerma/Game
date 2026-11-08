@@ -493,11 +493,21 @@ struct CouncilVote {
 struct FederalDiet {
     std::string id; // leer: keine Bundesversammlung im Szenario
     std::string name;
+    std::string federation_name;      // seit M13a2: Name des Bundes (bund = "Norddeutscher Bund"), Anzeige
     Index presidency = kNone;         // Präsidialmacht zum Start (im Spiel: World::diet_presidency)
     Index seat = kNone;               // Tagungsort (Ort), Anzeige
     std::vector<std::int32_t> plenum; // Stimmen im Plenum je Staat, 0 = keine
     std::vector<CouncilVote> council; // Engerer Rat
     std::string source;
+};
+
+/// Bund zur Laufzeit (seit M13a2, vertical_slice.md 3.3): eine Wirkung bund { … } gründet ihn aus einer
+/// Vorlage (World::federation_templates); dann gelten seine Mitglieder als Bundesstaaten, ihre Orte als
+/// Bundesgebiet und seine Stimmen in der Bundesversammlung.
+struct FederationState {
+    Index diet = kNone;                // Vorlage des Bundes; kNone: die Bundesversammlung des Starts
+    std::vector<std::uint8_t> members; // je Staat 1 = Mitglied (nur mit diet != kNone)
+    Date founded;
 };
 
 enum class MotionKind : std::uint8_t {
@@ -1081,6 +1091,7 @@ struct World {
     DiplomacyRules diplomacy_rules;                     // seit M9 (b1)
     std::vector<BaseRelation> base_relations;           // seit M9 (b1): Paare dieses Szenarios
     FederalDiet diet;                                   // seit M9 (b2), id leer ohne Bundesversammlung
+    std::vector<FederalDiet> federation_templates;      // seit M13a2: Vorlagen (vorlage = ja) für Bünde
     MilitaryRules military_rules;                       // seit M10 (a1)
     std::vector<std::vector<Neighbor>> neighbors; // seit M10 (a1): je Ort, nach Nachbarort; nur mit Militär
     std::vector<Garrison> garrisons;              // seit M10 (a1): nach Staat, dann in Dateireihenfolge
@@ -1136,6 +1147,7 @@ struct World {
     std::vector<Treaty> treaties; // Bündnisse und Garantien in der Reihenfolge des Abschlusses
     // Bundesversammlung und diplomatische Spiele (seit Schritt b2), ebenso nur mit Deutschem Bund.
     Index diet_presidency = kNone;            // Präsidialmacht (Antrag Präsidium)
+    FederationState federation;               // seit M13a2: Bund zur Laufzeit (vertical_slice.md 3.3)
     std::vector<Motion> motions;              // offener Antrag (höchstens einer)
     std::vector<MotionResult> motion_results; // abgestimmte Anträge in zeitlicher Folge
     std::vector<DiplomaticPlay> plays;        // laufende Spiele in der Reihenfolge ihres Beginns

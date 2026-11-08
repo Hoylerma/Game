@@ -1,8 +1,9 @@
 # Journal „Die deutsche Frage“ 1848–1871 (Meilenstein M11, Schritt b3; docs/technik/ereignisse.md
 # Abschnitt 5.4). Format: docs/technik/chronik-skript.md, Abschnitt 3.35.
 #
-# In einer Partie ab 1848 bleiben Besitz, Bundesgebiet und Bundesversammlung die des Starts (militaer.md
-# 6.1); die deutsche Frage entscheiden daher die Merkmale der Ereignisse: das Reich der Paulskirche, die
+# In einer Partie ab 1848 bleiben Besitz und Bundesgebiet zunächst die des Starts (militaer.md 6.1); seit
+# M13a2 gründen die Wirkungen bund { … } der Ereignisse zur Laufzeit den Norddeutschen Bund und das Reich
+# (vertical_slice.md 3.3). Die Stufen folgen den Merkmalen der Ereignisse: das Reich der Paulskirche, die
 # Union, der Krieg von 1866, der Norddeutsche Bund, die Kaiserproklamation. In den Lesezeichen 1866 und
 # 1870 beginnt das Journal mit dem Krieg bzw. mit dem Norddeutschen Bund (Bundesgebiet ohne Österreich).
 # Ohne Spieler kommt eine Reichsgründung 1871 nur über Ereignisse zustande, die Kriege auslösen
@@ -28,7 +29,12 @@ journal deutsche_frage {
         ziel { text = "Schleswig-Holstein ist dänisch nicht mehr" bedingung { welt_merkmal = wiener_frieden } }
         weiter { zu = kleindeutsch  wenn { oder { welt_merkmal = reich_paulskirche  welt_merkmal = kaiserproklamation } } }
         weiter { zu = grossdeutsch  wenn { welt_merkmal = grossdeutsches_reich } }
-        weiter { zu = bruderkrieg   wenn { oder { welt_merkmal = deutscher_krieg  staat PRU { krieg_mit = AUT } } } }
+        # Seit M13a2: ein Krieg Preußens mit Österreich ist der Deutsche Krieg, nicht aber Österreich an der
+        # Seite Dänemarks im Schleswigschen Krieg (Bündnisfall der KI 1848).
+        weiter {
+            zu = bruderkrieg
+            wenn { oder { welt_merkmal = deutscher_krieg  alle { staat PRU { krieg_mit = AUT }  nicht { staat PRU { krieg_mit = DEN } } } } }
+        }
         weiter {
             zu = nordbund
             wenn {
@@ -46,6 +52,9 @@ journal deutsche_frage {
         text  = "Preußen und Österreich führen Krieg um die Vorherrschaft in Deutschland, die Mittelstaaten stehen meist auf Österreichs Seite. Wer siegt, bestimmt die Ordnung nach dem Krieg."
         ziel { text = "Der Bund ist aufgelöst" bedingung { welt_merkmal = bund_aufgeloest } }
         ziel { text = "Ein Bund unter Preußen nördlich des Mains" bedingung { welt_merkmal = norddeutscher_bund } }
+        # Seit M13a2: ein gegründetes Reich (Paulskirche, Kaiserproklamation) beantwortet die Frage auch hier.
+        weiter { zu = kleindeutsch  wenn { oder { welt_merkmal = reich_paulskirche  welt_merkmal = kaiserproklamation } } }
+        weiter { zu = grossdeutsch  wenn { welt_merkmal = grossdeutsches_reich } }
         weiter { zu = nordbund  wenn { welt_merkmal = norddeutscher_bund } }
         weiter { zu = deutscher_bund  wenn { welt_merkmal = bundesreform_oesterreich } }
         weiter { zu = gescheitert  wenn { welt_merkmal = bund_aufgeloest  datum >= 1871.06.30 } }

@@ -3,6 +3,7 @@
 // Inhaltsbereich ereignisse und Spielstand Format 5 (Abschnitt 8).
 
 #include "test_hilfen.hpp"
+#include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/event_lab.hpp"
 #include "uhrwerk/events.hpp"
 #include "uhrwerk/military.hpp"
@@ -1045,6 +1046,111 @@ ereignis b.tagt { titel = "Tagt" text = "x" art = dynamisch wer = welt termin = 
     step_until(sim, uhrwerk::Date{1648, 12, 1});
     CHECK(w.diet_suspended == 0);
     CHECK(has_chronicle(w, "tritt wieder zusammen"));
+}
+
+namespace {
+
+/// Deutscher Bund der Fixture (Brandenburg, Sachsen, Anhalt) mit einer Vorlage „Nordbund“ unter
+/// Brandenburg (seit M13a2, vertical_slice.md 3.3).
+void write_federation(const testhilfen::TempDir& dir) {
+    for (const char* file : {"history/orte/10_brandenburg.chron", "history/orte/20_sachsen.chron",
+                             "history/orte/30_anhalt.chron"}) {
+        std::string text = testhilfen::read_file(dir / file);
+        std::string::size_type pos = 0;
+        while ((pos = text.find("\n    kreis", pos)) != std::string::npos) {
+            text.insert(pos + 1, "    bund = ja\n");
+            pos += 20;
+        }
+        testhilfen::write_file(dir / file, text);
+    }
+    testhilfen::write_file(
+        dir / "common/bundesversammlung.chron",
+        "bundesversammlung bund {\n    name = \"Bundesversammlung\"\n    praesidium = SAX\n"
+        "    plenum = { BRA = 4 SAX = 4 ANH = 1 }\n"
+        "    rat = { stimme = { staaten = { BRA } } stimme = { staaten = { SAX } } "
+        "stimme = { staaten = { ANH } } }\n    quelle = \"Testdaten\"\n}\n"
+        "bundesversammlung nordbund {\n    name = \"Bundesrat\"\n    bund = \"Nordbund\"\n    vorlage = ja\n"
+        "    praesidium = BRA\n    plenum = { BRA = 3 SAX = 2 ANH = 1 }\n"
+        "    rat = { stimme = { staaten = { BRA } } stimme = { staaten = { SAX } } "
+        "stimme = { staaten = { ANH } } }\n    quelle = \"Testdaten\"\n}\n");
+}
+
+} // namespace
+
+TEST_CASE("Ereignisse: Bund zur Laufzeit (seit M13a2)") {
+    const RuleData data("", R"(
+ereignis a.bund { titel = "Bund" text = "x" art = dynamisch wer = welt
+    option a { text = "a" gewicht = 1 wirkung { bund { vorlage = nordbund  bundesgebiet = ja  ohne = { ANH } } } } }
+ereignis b.beitritt { titel = "Beitritt" text = "x" art = dynamisch termin = 1648.12.01
+    bedingung { staat = ANH  bund = nein }
+    option a { text = "a" gewicht = 1 wirkung { bund_beitritt = ja } } }
+)");
+    write_federation(data.dir());
+    Simulation sim(data.load());
+    const World& w = sim.world();
+    REQUIRE(w.federation_templates.size() == 1);
+    CHECK(w.federation_templates[0].federation_name == "Nordbund");
+    const Index bra = state_of(w, "BRA");
+    const Index sax = state_of(w, "SAX");
+    const Index anh = state_of(w, "ANH");
+    CHECK_FALSE(uhrwerk::federation_founded(w));
+    CHECK(uhrwerk::active_diet(w).id == "bund");
+    CHECK(uhrwerk::federal_state(w, anh));
+
+    sim.step_day();
+    REQUIRE(uhrwerk::federation_founded(w));
+    CHECK(uhrwerk::active_diet(w).id == "nordbund");
+    CHECK(w.diet_presidency == bra);
+    CHECK(uhrwerk::federal_state(w, bra));
+    CHECK(uhrwerk::federal_state(w, sax));
+    CHECK_FALSE(uhrwerk::federal_state(w, anh));
+    CHECK(uhrwerk::plenum_votes(w, bra) == 3);
+    CHECK(uhrwerk::plenum_votes(w, anh) == 0);
+    CHECK(has_chronicle(w, "Gründung: Nordbund mit 2 Staaten, Präsidium Brandenburg."));
+    const auto anhalt_place = std::find_if(w.locations.begin(), w.locations.end(),
+                                           [&](const uhrwerk::Location& l) { return l.owner == anh; });
+    REQUIRE(anhalt_place != w.locations.end());
+    const auto anhalt_index = static_cast<Index>(anhalt_place - w.locations.begin());
+    CHECK(anhalt_place->federal);                           // Inhalt: Bundesgebiet zum Start
+    CHECK_FALSE(uhrwerk::in_federal_area(w, anhalt_index)); // Zustand: nicht im Bund
+
+    // Spielstand mitten im Bund.
+    const Bytes bytes = uhrwerk::save_game(sim, SaveMeta{});
+    uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, data.load(), 1);
+    INFO(loaded.error);
+    REQUIRE(loaded.ok());
+    CHECK(loaded.simulation->world().federation.members == w.federation.members);
+    CHECK(loaded.simulation->checksum() == sim.checksum());
+
+    step_until(sim, uhrwerk::Date{1648, 12, 2});
+    CHECK(uhrwerk::federal_state(w, anh));
+    CHECK(uhrwerk::in_federal_area(w, anhalt_index));
+    CHECK(uhrwerk::plenum_votes(w, anh) == 1);
+    CHECK(has_chronicle(w, "Anhalt tritt bei: Nordbund."));
+
+    // Unbekannte Vorlage, fehlende Vorlage, Beitritt ohne Staat.
+    const std::pair<std::string_view, std::string_view> errors[] = {
+        {"ereignis x { titel = \"x\" text = \"x\" art = dynamisch wer = welt option a { text = \"a\" gewicht "
+         "= 1 "
+         "wirkung { bund { vorlage = suedbund } } } }",
+         "unbekannte Vorlage 'suedbund'"},
+        {"ereignis x { titel = \"x\" text = \"x\" art = dynamisch wer = welt option a { text = \"a\" gewicht "
+         "= 1 "
+         "wirkung { bund { bundesgebiet = ja } } } }",
+         "Pflichtfeld 'vorlage' fehlt in bund"},
+        {"ereignis x { titel = \"x\" text = \"x\" art = dynamisch wer = welt option a { text = \"a\" gewicht "
+         "= 1 "
+         "wirkung { bund_beitritt = ja } } }",
+         "bund_beitritt"},
+    };
+    for (const auto& [events, message] : errors) {
+        CAPTURE(message);
+        const RuleData bad("", events);
+        write_federation(bad.dir());
+        const std::string issues = testhilfen::issues_text(bad.result());
+        CAPTURE(issues);
+        CHECK(issues.find(message) != std::string::npos);
+    }
 }
 
 TEST_CASE("Ereignisse: Lader a4") {

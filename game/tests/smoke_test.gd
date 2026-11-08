@@ -107,7 +107,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17]
 const CHRONICLE_FIELDS: PackedStringArray = [
 	"date_text", "text", "location_index", "state_index", "turning_point"
 ]
@@ -440,6 +440,14 @@ func _check_events_1848() -> void:
 	_check(
 		sim.get_map_colors(MapModes.MAP_UNRUHE).size() == sim.get_location_count(),
 		"Kartenmodus Unruhe: eine Farbe je Ort", "Kartenmodus Unruhe: falsche Zahl der Farben"
+	)
+	# Kartenmodus Bund (seit M13a2): 1848 der Deutsche Bund des Starts, noch kein Bund zur Laufzeit.
+	var diet := sim.get_diet()
+	_check(
+		sim.get_map_colors(MapModes.MAP_BUND).size() == sim.get_location_count()
+		and str(diet.get("federation_name", "")) == "Deutscher Bund" and not bool(diet.get("founded", true)),
+		"Kartenmodus Bund: %s, Präsidium %s" % [diet.get("federation_name", ""), diet.get("presidency_name", "")],
+		"Kartenmodus Bund oder get_diet: %s" % str(diet).left(200)
 	)
 	# Bis in den August 1848: Die Bundesversammlung ruht (seit b1, Reichsverweser).
 	sim.advance_days(maxi(0, 165 - _days_since_start(sim)))
