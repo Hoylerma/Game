@@ -114,6 +114,10 @@ var _journal_window: JournalWindow = null
 var _windows := WindowManager.new()
 var _area_bar: AreaBar = null
 var _yearbook_window: YearbookWindow = null
+## Fenster der Bereiche (seit M13a5b), nach Bereich.
+var _area_windows: Dictionary = {}
+var _areas_cache: Dictionary = {}
+var _areas_player := -2
 ## Urteil der Geschichte (seit M13a4) und ob es nach dem Ende schon gezeigt wurde.
 var _verdict_window: VerdictWindow = null
 var _verdict_shown := false
@@ -535,6 +539,8 @@ func _refresh_all() -> void:
 	_update_armies()
 	_war_window.refresh()
 	_journal_window.refresh()
+	for window: Variant in _area_windows.values():
+		(window as AreaWindow).refresh()
 	if _yearbook_window.is_open() and int(_sim.get_date().get("day", 0)) == 2:
 		_yearbook_window.refresh() # die Jahresreihe des 1. Januar ist da
 	_pull_chronicle()
@@ -843,6 +849,7 @@ func _read_scenario_constants() -> bool:
 	# Journale (seit M11, Schritt b4): Knopf „Journale …“ nur in Szenarien mit Journalen.
 	_state_panel.set_journals_available(not _sim.get_journals().is_empty())
 	_location_panel.player_index = _player
+	_areas_player = -2 # Bereiche des neuen Lesezeichens (seit M13a5b)
 	# Ende der Partie (seit M13a4): Wer nach dem Ende lädt, spielt weiter, ohne Urteil beim Laden.
 	var verdict := _sim.get_verdict()
 	_end_day = -1
@@ -2330,6 +2337,23 @@ func _build_areas() -> void:
 	_yearbook_window.resized.connect(_place_diplomacy)
 	for window: Control in [_diplomacy_window, _war_window, _journal_window, _yearbook_window]:
 		_windows.add(window)
+	# Fenster der Bereiche (seit M13a5b).
+	for entry: Array in [
+		[&"kabinett", CabinetWindow.new()], [&"gesetze", LawsWindow.new()], [&"gruppen", GroupsWindow.new()],
+		[&"parlament", ParliamentWindow.new()], [&"gesellschaft", SocietyWindow.new()],
+		[&"wirtschaft", EconomyWindow.new()],
+	]:
+		var window: AreaWindow = entry[1]
+		root.add_child(window)
+		root.move_child(window, _top_bar.get_index())
+		window.close_requested.connect(
+			func() -> void:
+				window.close()
+				_sync_area_bar()
+		)
+		window.resized.connect(_place_diplomacy)
+		_windows.add(window)
+		_area_windows[entry[0]] = window
 
 
 ## Bereichsleiste (Zugriff für Tests).
@@ -2362,13 +2386,34 @@ func _fit_mode_bar() -> void:
 	_place_reports.call_deferred()
 
 
+## Fenster eines Bereichs (Tests): kabinett, gesetze, gruppen, parlament, gesellschaft, wirtschaft.
+func area_window(area: StringName) -> AreaWindow:
+	return _area_windows.get(area) as AreaWindow
+
+
+## Öffnet oder schließt das Fenster eines Bereichs (seit M13a5b).
+func toggle_area_window(area: StringName) -> void:
+	var window := _area_windows.get(area) as AreaWindow
+	if window == null or _sim == null:
+		return
+	if window.is_open():
+		window.close()
+	else:
+		_state_panel.hide_popups()
+		_windows.opening(window)
+		window.open(_sim, _player)
+		_place_diplomacy()
+	_sync_area_bar()
+
+
 ## Klick in der Bereichsleiste: Fenster oder Ansicht des Bereichs (ein zweiter Klick schließt es).
 func open_area(area: StringName) -> void:
+	if _area_windows.has(area):
+		toggle_area_window(area)
+		return
 	match area:
 		&"haushalt":
 			_state_panel.show_budget()
-		&"gesetze":
-			_state_panel.show_politics()
 		&"zollunion":
 			_state_panel.show_customs()
 		&"diplomatie":
@@ -2387,11 +2432,36 @@ func open_area(area: StringName) -> void:
 ## Welche Bereiche es im Lesezeichen und für den Spielerstaat gibt.
 func _update_area_bar() -> void:
 	var areas := _state_panel.available_areas()
-	areas[&"jahrbuch"] = _sim != null and bool(_sim.get_legacy(_player).get("active", false))
+	areas.merge(_scenario_areas(), true)
 	areas[&"chronik"] = true
 	_area_bar.set_available(areas)
 	_area_bar.visible = _state_panel.visible
+	# Ein offenes Fenster folgt dem Spielerstaat (Ortsinfo „Diesen Staat spielen“).
+	for window: Variant in _area_windows.values():
+		var w := window as AreaWindow
+		if w.is_open() and w.player_index() != _player:
+			w.open(_sim, _player)
 	_sync_area_bar()
+
+
+## Bereiche, die vom Lesezeichen und vom Spielerstaat abhängen; neu nur mit einem anderen Spielerstaat.
+func _scenario_areas() -> Dictionary:
+	if _sim == null:
+		return {}
+	if _areas_player == _player:
+		return _areas_cache
+	_areas_player = _player
+	var politics := _sim.get_state_politics(_player)
+	_areas_cache = {
+		&"kabinett": not _sim.get_state_persons(_player).is_empty(),
+		&"gesetze": not _sim.get_state_laws(_player).is_empty() or not politics.is_empty(),
+		&"gruppen": not (politics.get("interest_groups", []) as Array).is_empty(),
+		&"parlament": not _sim.get_parliaments().is_empty(),
+		&"gesellschaft": true,
+		&"wirtschaft": true,
+		&"jahrbuch": bool(_sim.get_legacy(_player).get("active", false)),
+	}
+	return _areas_cache
 
 
 ## Gedrückt erscheint der Bereich mit offenem Fenster.
@@ -2408,6 +2478,10 @@ func _sync_area_bar() -> void:
 		area = &"journale"
 	elif open == _yearbook_window:
 		area = &"jahrbuch"
+	else:
+		for key: Variant in _area_windows:
+			if _area_windows[key] == open:
+				area = key
 	_area_bar.set_active(area)
 	(_area_bar.button(&"chronik") as Button).set_pressed_no_signal(_chronicle_panel.visible)
 
@@ -2887,6 +2961,8 @@ func _run_screenshot() -> void:
 		open_journal()
 	if _options.show_yearbook:
 		open_yearbook()
+	if not _options.area.is_empty():
+		toggle_area_window(StringName(_options.area))
 	if _options.show_game_menu:
 		open_game_menu()
 	if _options.show_election_night:

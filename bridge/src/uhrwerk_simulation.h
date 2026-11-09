@@ -198,6 +198,13 @@ public:
     godot::Dictionary get_state_events(std::int64_t state_index) const;
     godot::Array get_revolts() const;
 
+    // Fenster der Bereiche (seit M13, Schritt a5b, vertical_slice.md 4.2)
+    godot::Dictionary get_state_society(std::int64_t state_index) const;
+    godot::Dictionary get_state_economy(std::int64_t state_index) const;
+    godot::Array get_state_laws(std::int64_t state_index) const;
+    godot::Array get_votes() const;
+    godot::Array get_office_history(std::int64_t state_index) const;
+
     // Vermächtnis, Jahrbuch und Ende der Partie (seit M13, Schritt a4, vertical_slice.md 3.5 und 4.3)
     godot::Dictionary get_legacy(std::int64_t state_index) const;
     godot::Dictionary get_yearbook(std::int64_t state_index) const;

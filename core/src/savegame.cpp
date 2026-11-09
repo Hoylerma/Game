@@ -47,7 +47,7 @@ constexpr std::uint64_t kEventContentVersion =
 /// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki), 2 = a2
 /// (Strategie, Protokoll, Abkühlung; Planer Haushalt und Mobilmachung), 3 = a3
 /// (Diplomatie, Wahlkampf, Spielerströmung), 4 = a4 (Krieg und Frieden).
-constexpr std::uint64_t kAiContentVersion = 5;
+constexpr std::uint64_t kAiContentVersion = 6; // 6 seit M13a5b: frühere Amtszeiten im Zustand
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1161,6 +1161,13 @@ std::string validate_state(const Simulation& sim) {
                 static_cast<std::size_t>(w.persons[static_cast<std::size_t>(person)].role) !=
                     i % kPersonRoles) {
                 return "Amt mit ungültiger Person";
+            }
+        }
+        for (const OfficeTerm& t : w.office_history) {
+            if (!in(t.person, w.persons.size()) ||
+                w.persons[static_cast<std::size_t>(t.person)].state != t.state ||
+                w.persons[static_cast<std::size_t>(t.person)].role != t.role || !is_valid(t.to)) {
+                return "frühere Amtszeit ungültig";
             }
         }
         if (w.ai_strategy.size() != S) {

@@ -609,6 +609,34 @@ func _check_areas() -> void:
 	if yearbook.is_open():
 		_fail("Taste B schließt das Jahrbuch nicht")
 	print("  Bereiche: %s; Jahrbuch mit %d Spalten, Vergleich, Fensterverwaltung" % [", ".join(areas), columns.size()])
+	# Fenster der Bereiche (seit M13a5b): je Bereich ein Stichwort im Inhalt.
+	var expected_text := {
+		&"kabinett": "FRÜHERE AMTSINHABER", &"gesetze": "VERFASSUNG UND WAHLRECHT", &"gruppen": "Zustimmung",
+		&"parlament": "Wahlrecht", &"gesellschaft": "ALTERSAUFBAU", &"wirtschaft": "GÜTER JE MONAT",
+	}
+	for area: StringName in expected_text:
+		if not bar.visible_areas().has(str(area)):
+			_fail("Bereichsleiste ohne „%s“" % area)
+			continue
+		bar.button(area).emit_signal("pressed")
+		await _frames(2)
+		var window: AreaWindow = _main.call("area_window", area)
+		if window == null or not window.is_open() or windows.open_window() != window or not bar.button(area).button_pressed:
+			_fail("Bereich %s: Fenster nicht offen" % area)
+			continue
+		if not window.window_text().contains(str(expected_text[area])):
+			_fail("Bereich %s ohne „%s“: %s" % [area, expected_text[area], window.window_text().left(200).replace("\n", " / ")])
+	var parliament: ParliamentWindow = _main.call("area_window", &"parlament")
+	bar.button(&"parlament").emit_signal("pressed")
+	await _frames(1)
+	parliament.select_parliament(0)
+	await _frames(1)
+	if parliament.chosen_parliament() != 0 or not parliament.window_text().contains("Wahlrecht"):
+		_fail("Parlament: Auswahl der Nationalversammlung")
+	await _key(KEY_ESCAPE)
+	if windows.open_window() != null:
+		_fail("Fensterverwaltung: Escape schließt das Fenster des Bereichs nicht")
+	print("  Fenster der Bereiche: Kabinett, Gesetze, Gruppen, Parlament, Gesellschaft, Wirtschaft")
 
 
 ## Urteil der Geschichte (seit M13a4) in der Partie ab 1848: Inhalt, Export der Chronik, Weiterspielen,

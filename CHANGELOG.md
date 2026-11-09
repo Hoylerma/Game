@@ -13,6 +13,13 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Fenster der Bereiche (Schritt a5b):** Die Bereichsleiste öffnet sechs neue Fenster: **Kabinett und Hof**
+  (Herrscher und Minister mit Werten und Eigenschaften, Neigungen des Staates, frühere Amtsinhaber der
+  Partie), **Gesetze** (Verfassung, Wahlrecht, jede Gesetzesoption mit ihrer Wirkung auf die Unruhe und den
+  Gruppen dafür und dagegen), **Interessengruppen** (Anteil, Einfluss, Zustimmung, Forderungen), **Parlament**
+  (Halbrund der letzten Wahl nach Fraktionen, nächste Wahl, Abstimmungen), **Gesellschaft** (Altersaufbau,
+  Kulturen, Konfessionen, Berufe, Wanderung) und **Wirtschaft** (Güter mit Preisen, Betriebe, Märkte,
+  Zollgebiet). 1648 bitgleich.
 - **Bereiche und Jahrbuch (Schritt a5a):** Eine **Bereichsleiste** neben dem Staatspanel öffnet Haushalt,
   Gesetze, Zollunion, Diplomatie, Militär, Journale und das neue **Statistische Jahrbuch** (Taste B) und
   blendet die Chronik ein und aus. Das Jahrbuch zeigt jede Kennzahl und jede Dimension des Vermächtnisses

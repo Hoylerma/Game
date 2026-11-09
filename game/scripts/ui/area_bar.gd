@@ -1,6 +1,6 @@
 class_name AreaBar
 extends PanelContainer
-## Bereiche des Spielerstaates (seit M13, Schritt a5a; vertical_slice.md 4.1): eine senkrechte Leiste
+## Bereiche des Spielerstaates (seit M13, Schritt a5a, Fenster der Bereiche seit a5b; vertical_slice.md 4.1): eine senkrechte Leiste
 ## kleiner Knöpfe rechts neben der linken Spalte (in der Spalte selbst ist neben dem Staatspanel kein
 ## Platz); die Fenster der Bereiche öffnen rechts daneben. Ein Klick öffnet das Fenster des Bereichs (main.gd). Bereiche ohne Inhalt im
 ## Lesezeichen (Zollunion, Diplomatie, Krieg, Journale, Jahrbuch) sind ausgeblendet.
@@ -9,8 +9,13 @@ signal area_requested(area: StringName)
 
 ## Bereiche in der Reihenfolge der Leiste: Kennung, Aufschrift, Tooltip.
 const AREAS: Array[Array] = [
+	[&"kabinett", "Kabinett", "Kabinett und Hof: Herrscher, Minister, Neigungen, frühere Amtsinhaber"],
+	[&"gesetze", "Gesetze", "Verfassung, Wahlrecht und Gesetze mit den Wünschen der Gruppen"],
+	[&"gruppen", "Gruppen", "Interessengruppen: Anteil, Einfluss, Zustimmung, Forderungen"],
+	[&"parlament", "Parlament", "Plenarsaal: letzte Wahl nach Fraktionen, nächste Wahl, Abstimmungen"],
+	[&"gesellschaft", "Gesellschaft", "Bevölkerung: Alter, Kulturen, Konfessionen, Berufe, Wanderung"],
+	[&"wirtschaft", "Wirtschaft", "Güter, Preise, Betriebe, Märkte und Zollgebiet"],
 	[&"haushalt", "Haushalt", "Einnahmen und Ausgaben im Einzelnen"],
-	[&"gesetze", "Gesetze", "Verfassung, Wahlrecht, Gesetze und Interessengruppen"],
 	[&"zollunion", "Zollunion", "Zollunionen und Wechsel zum 1. Januar"],
 	[&"diplomatie", "Diplomatie", "Beziehungen, Bündnisse, Bundesversammlung und deutsche Frage"],
 	[&"militaer", "Militär", "Kriege, Heere und Frieden"],

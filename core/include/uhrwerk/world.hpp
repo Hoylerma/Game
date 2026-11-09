@@ -1198,8 +1198,9 @@ struct World {
     std::vector<AiCooldown> ai_cooldowns; // seit a2: laufende Abkühlungen nach Staat, Art und Ziel
     Index player_current = -1;            // seit a3: Strömung des Spielers im Parteienmodus (Befehl)
     GameSettings game_settings;           // seit M13a1: Stufe und Geschichtsverlauf (Befehl Spieleinstellung)
-    std::vector<YearRecord> yearbook;     // seit M13a4: Jahresreihen (Start, je 1. Januar, Ende); nur mit
-                                          // legacy_rules.active
+    std::vector<OfficeTerm> office_history; // seit M13a5b: beendete Amtszeiten in zeitlicher Folge
+    std::vector<YearRecord> yearbook;       // seit M13a4: Jahresreihen (Start, je 1. Januar, Ende); nur mit
+                                            // legacy_rules.active
 
     /// Person im Amt (Herrscher oder leitender Minister) oder -1.
     Index office(Index state, PersonRole role) const;

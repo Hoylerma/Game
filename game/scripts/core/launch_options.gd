@@ -27,6 +27,8 @@ extends RefCounted
 ##                          zeigt die offenen (seit M11; ohne rechnen Screenshots ohne Spieler)
 ##   --journal              Journalfenster öffnen (seit M11)
 ##   --jahrbuch             Statistisches Jahrbuch öffnen (seit M13a5a)
+##   --bereich=<bereich>    Fenster eines Bereichs öffnen: kabinett, gesetze, gruppen, parlament,
+##                          gesellschaft, wirtschaft (seit M13a5b)
 ##   --startbildschirm[=<seite>]  Startbildschirm vor dem Screenshot öffnen, Seite menue (Standard),
 ##                          lesezeichen oder einstellungen (seit M13; einstellungen: mit --szenario und
 ##                          dem Spielerstaat des Lesezeichens)
@@ -36,6 +38,8 @@ const DEFAULT_SCREENSHOT_DAYS := 60
 const DIPLOMACY_TABS: PackedStringArray = ["staaten", "bund", "frage"]
 ## Reiter des Kriegsfensters für --krieg=<reiter> (seit M10).
 const WAR_TABS: PackedStringArray = ["kriege", "heere"]
+## Bereiche für --bereich (seit M13a5b).
+const AREAS: PackedStringArray = ["kabinett", "gesetze", "gruppen", "parlament", "gesellschaft", "wirtschaft"]
 
 var screenshot_path := ""
 var days := DEFAULT_SCREENSHOT_DAYS
@@ -64,6 +68,8 @@ var show_events := false
 ## Journalfenster vor dem Screenshot öffnen (seit M11).
 var show_journal := false
 var show_yearbook := false
+## Fenster eines Bereichs (seit M13a5b), leer: keines.
+var area := ""
 ## Startbildschirm vor dem Screenshot (seit M13): 0 Hauptmenü, 1 Lesezeichen, 2 Einstellungen; -1 = keiner.
 var start_page := -1
 ## Seiten für --startbildschirm=<seite>.
@@ -179,6 +185,13 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_journal = true
 				else:
 					options.problems.append("--journal erwartet keinen Wert, nicht „%s“." % value)
+			"--bereich":
+				if AREAS.has(value):
+					options.area = value
+				else:
+					options.problems.append(
+						"--bereich erwartet %s, nicht „%s“." % [", ".join(AREAS), value]
+					)
 			"--jahrbuch":
 				if value.is_empty():
 					options.show_yearbook = true

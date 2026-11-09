@@ -101,6 +101,10 @@ func _test_launch_options() -> void:
 	var yearbook := LaunchOptions.parse(PackedStringArray(["--jahrbuch"]))
 	_true(yearbook.show_yearbook and yearbook.problems.is_empty(), "--jahrbuch öffnet das Jahrbuch")
 	_true(not LaunchOptions.parse(PackedStringArray(["--jahrbuch=1"])).show_yearbook, "--jahrbuch=1 gilt nicht")
+	var area := LaunchOptions.parse(PackedStringArray(["--bereich=parlament"]))
+	_true(area.area == "parlament" and area.problems.is_empty(), "--bereich=parlament")
+	var bad_area := LaunchOptions.parse(PackedStringArray(["--bereich=hof"]))
+	_true(bad_area.area.is_empty() and bad_area.problems.size() == 1, "--bereich=hof gilt nicht")
 	var events := LaunchOptions.parse(PackedStringArray(["--ereignis", "--journal", "--kartenmodus=16"]))
 	_true(
 		events.show_events and events.show_journal and events.map_mode == 16 and events.problems.is_empty()

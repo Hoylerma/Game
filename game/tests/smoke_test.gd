@@ -324,7 +324,50 @@ func _check_scenario_1848() -> void:
 	_check_diplomacy_1848(sim)
 	_check_ai_1848(sim)
 	_check_legacy_1848(sim)
+	_check_area_data_1848(sim)
 	_check_events_1848()
+
+
+## Daten der Fenster der Bereiche 1848 (seit M13a5b): Gesellschaft, Wirtschaft, Gesetze, Abstimmungen, Ämter.
+func _check_area_data_1848(sim: SimulationClient) -> void:
+	var prussia := sim.get_state_index("PRU")
+	var society := sim.get_state_society(prussia)
+	var shares := 0.0
+	for value: Variant in (society.get("cultures", {}) as Dictionary).values():
+		shares += float(value)
+	var ages := int(society.get("children", 0)) + int(society.get("young", 0)) + int(society.get("working", 0)) + int(society.get("old", 0))
+	_check(
+		int(society.get("population", 0)) > 15_000_000 and absf(shares - 100.0) < 0.5
+		and absi(ages - int(society.get("population", 0))) <= 4 and not (society.get("professions", []) as Array).is_empty(),
+		"Gesellschaft Preußens: %s Einwohner, %d Orte" % [GermanFormat.integer(int(society.get("population", 0))), int(society.get("locations", 0))],
+		"Gesellschaft Preußens: %s" % str(society).left(300)
+	)
+	var economy := sim.get_state_economy(prussia)
+	var goods: Array = economy.get("goods", [])
+	_check(
+		goods.size() >= 8 and not (economy.get("businesses", []) as Array).is_empty()
+		and not (economy.get("markets", []) as Array).is_empty() and float(economy.get("production_month", 0.0)) > 0.0
+		and str(economy.get("customs_zone_name", "")) == "Zollverein",
+		"Wirtschaft Preußens: %d Güter, Zollverein" % goods.size(),
+		"Wirtschaft Preußens: %s" % str(economy).left(300)
+	)
+	var laws := sim.get_state_laws(prussia)
+	var one_current := not laws.is_empty()
+	for law in laws:
+		var current := 0
+		for option: Dictionary in law.get("options", []):
+			current += 1 if bool(option.get("current", false)) else 0
+		one_current = one_current and current == 1
+	_check(laws.size() == 3 and one_current, "Gesetze Preußens: 3 Gruppen, je eine Option in Kraft", "Gesetze: %s" % str(laws).left(300))
+	var history := sim.get_office_history(prussia)
+	var complete := true
+	for term in history:
+		complete = complete and not str(term.get("name", "")).is_empty() and not str(term.get("to_text", "")).is_empty()
+	_check(
+		sim.get_votes() is Array and complete and sim.get_state_society(-1).is_empty(),
+		"Abstimmungen und frühere Amtsinhaber (%d) abrufbar" % history.size(),
+		"get_votes/get_office_history: %s" % str(history)
+	)
 
 
 ## Vermächtnis, Jahrbuch und Ende 1848 (seit M13a4, vertical_slice.md 3.5 und 4.3).

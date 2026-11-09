@@ -492,6 +492,12 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("ziel", c.target);
             v.field("bis", c.until);
         });
+        list(v, "aemter_frueher", w.office_history, Extent::State, [&](auto& t) { // seit M13a5b
+            v.field("staat", t.state);
+            v.field("rolle", t.role);
+            v.field("person", t.person);
+            v.field("bis", t.to);
+        });
         v.field("spielerstroemung", w.player_current);                 // seit a3
         v.field("spieleinstellung.stufe", w.game_settings.difficulty); // seit M13a1
         v.field("spieleinstellung.offen", w.game_settings.open);
