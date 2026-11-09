@@ -3681,6 +3681,35 @@ Array UhrwerkSimulation::get_office_history(std::int64_t state_index) const {
     return result;
 }
 
+Dictionary UhrwerkSimulation::get_state_overview(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const auto state = static_cast<uhrwerk::Index>(state_index);
+    std::vector<std::uint8_t> kreise(w->districts.size(), 0);
+    std::int64_t locations = 0;
+    std::int64_t kreis_count = 0;
+    for (const uhrwerk::Location& loc : w->locations) {
+        if (loc.owner != state) {
+            continue;
+        }
+        ++locations;
+        if (valid_index(kreise, loc.district) && kreise[static_cast<std::size_t>(loc.district)] == 0) {
+            kreise[static_cast<std::size_t>(loc.district)] = 1;
+            ++kreis_count;
+        }
+    }
+    const auto measures = uhrwerk::legacy_measures(*w, state);
+    result["locations"] = locations;
+    result["kreise"] = kreis_count;
+    result["legitimacy"] = measures[static_cast<std::size_t>(uhrwerk::LegacyMeasure::Approval)].to_double();
+    result["unrest"] = measures[static_cast<std::size_t>(uhrwerk::LegacyMeasure::Unrest)].to_double();
+    result["events"] = uhrwerk::events_active(*w);
+    return result;
+}
+
 // ─── Vermächtnis, Jahrbuch und Ende (seit M13a4) ────────────────────────────
 
 Dictionary UhrwerkSimulation::get_legacy(std::int64_t state_index) const {
@@ -3949,6 +3978,22 @@ Dictionary UhrwerkSimulation::get_state_events(std::int64_t state_index) const {
     uhrwerk::rebuild_event_cache(*w, cache);
     result["unrest"] = valid_index(w->unrest, state_index) ? at(w->unrest, state_index).to_double() : 0.0;
     result["unrest_target"] = uhrwerk::unrest_target(*w, cache, state).to_double();
+    // Seit M13a5c: Bestandteile des Zielwerts für den Tooltip „Unruhe“.
+    const uhrwerk::UnrestCauses causes = uhrwerk::unrest_causes(*w, cache, state);
+    Array cause_rows;
+    for (const auto& [name, value] :
+         {std::pair<const char*, uhrwerk::Fixed>{"Not der Unterschicht", causes.misery},
+          {"Teuerung des Getreides", causes.dearth},
+          {"Verfassung", causes.constitution},
+          {"Zensur und Gesetze", causes.censorship},
+          {"Unruhe der Nachbarn", causes.contagion},
+          {"Zustimmung der Gruppen", causes.approval}}) {
+        Dictionary row;
+        row["name"] = String::utf8(name);
+        row["value"] = value.to_double();
+        cause_rows.append(row);
+    }
+    result["unrest_causes"] = cause_rows;
     Dictionary revolt;
     for (const uhrwerk::Revolt& r : w->revolts) {
         if (r.state == state) {
@@ -4291,6 +4336,8 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_state_economy", "state_index"), &UhrwerkSimulation::get_state_economy);
     ClassDB::bind_method(D_METHOD("get_state_laws", "state_index"), &UhrwerkSimulation::get_state_laws);
     ClassDB::bind_method(D_METHOD("get_votes"), &UhrwerkSimulation::get_votes);
+    ClassDB::bind_method(D_METHOD("get_state_overview", "state_index"),
+                         &UhrwerkSimulation::get_state_overview);
     ClassDB::bind_method(D_METHOD("get_office_history", "state_index"),
                          &UhrwerkSimulation::get_office_history);
     ClassDB::bind_method(D_METHOD("get_legacy", "state_index"), &UhrwerkSimulation::get_legacy);

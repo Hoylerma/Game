@@ -15,7 +15,7 @@ layout_mode = 2
 [node name="Header" type="Label" parent="Content"]
 layout_mode = 2
 theme_type_variation = &"HeaderLabel"
-text = "STAAT"
+text = "STAATSÜBERSICHT"
 
 [node name="Identity" type="HBoxContainer" parent="Content"]
 layout_mode = 2

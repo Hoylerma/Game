@@ -594,13 +594,15 @@ func _check_areas() -> void:
 	await _key(KEY_ESCAPE)
 	if diplomacy.is_open() or windows.open_window() != null:
 		_fail("Fensterverwaltung: Escape schließt die Diplomatie nicht")
+	# Seit M13a5c ist die Chronik zu Beginn ausgeblendet (der Ticker zeigt das Neueste).
 	var chronicle: Control = _main.get("_chronicle_panel")
+	var before := chronicle.visible
 	bar.button(&"chronik").emit_signal("pressed")
-	if chronicle.visible:
-		_fail("Bereichsleiste: „Chronik“ blendet die Chronik nicht aus")
+	if chronicle.visible == before:
+		_fail("Bereichsleiste: „Chronik“ schaltet die Chronik nicht um")
 	bar.button(&"chronik").emit_signal("pressed")
-	if not chronicle.visible:
-		_fail("Bereichsleiste: „Chronik“ blendet die Chronik nicht wieder ein")
+	if chronicle.visible != before:
+		_fail("Bereichsleiste: „Chronik“ schaltet die Chronik nicht zurück")
 	await _key(KEY_B)
 	await _frames(1)
 	if not yearbook.is_open():
@@ -637,6 +639,59 @@ func _check_areas() -> void:
 	if windows.open_window() != null:
 		_fail("Fensterverwaltung: Escape schließt das Fenster des Bereichs nicht")
 	print("  Fenster der Bereiche: Kabinett, Gesetze, Gruppen, Parlament, Gesellschaft, Wirtschaft")
+	await _check_bars()
+
+
+## Obere Leiste, rechte Übersicht, Ticker und verschachtelte Tooltips (seit M13a5c).
+func _check_bars() -> void:
+	var top: TopBar = _main.call("top_bar")
+	var overview: OverviewPanel = _main.call("overview_panel")
+	var layer: TooltipLayer = _main.call("tooltip_layer")
+	var windows: WindowManager = _main.call("window_manager")
+	_main.call("select_location", -1)
+	_main.call("_refresh_bars", true)
+	await _frames(1)
+	if not top.field_text(&"kasse").contains("Taler") or not top.field_text(&"verwaltung").ends_with("Orte"):
+		_fail("Obere Leiste: Kasse „%s“, Verwaltung „%s“" % [top.field_text(&"kasse"), top.field_text(&"verwaltung")])
+	if top.field_text(&"vermaechtnis").split(" ").size() != 5 or top.field_text(&"legitimitaet") == "–":
+		_fail("Obere Leiste: Vermächtnis „%s“, Legitimität „%s“" % [top.field_text(&"vermaechtnis"), top.field_text(&"legitimitaet")])
+	layer.show_for(top.field(&"vermaechtnis"), Callable(_main, "_legacy_tooltip"), Callable(_main, "_legacy_link"))
+	await _frames(1)
+	if not layer.is_showing(0) or not layer.text_of(0).contains("Einigkeit"):
+		_fail("Tooltip Vermächtnis: „%s“" % layer.text_of(0))
+	layer.open_link("vermaechtnis:einigkeit")
+	await _frames(1)
+	if not layer.is_showing(1) or not layer.text_of(1).contains("Grundwert"):
+		_fail("Verschachtelter Tooltip Einigkeit: „%s“" % layer.text_of(1))
+	layer.show_for(top.field(&"kasse"), Callable(_main, "_cash_tooltip"))
+	layer.open_link("begriff:akzise")
+	await _frames(1)
+	if not layer.text_of(0).contains("Kontribution") or not layer.text_of(1).begins_with("Akzise:"):
+		_fail("Tooltip Kasse mit Begriff Akzise: „%s“ / „%s“" % [layer.text_of(0).left(80), layer.text_of(1)])
+	layer.show_for(top.field(&"legitimitaet"), Callable(_main, "_legitimacy_tooltip"))
+	if not layer.text_of(0).contains("Unruhe") or not layer.text_of(0).contains("Zustimmung der Gruppen"):
+		_fail("Tooltip Legitimität ohne Ursachen der Unruhe: „%s“" % layer.text_of(0).replace("\n", " / "))
+	layer.hide_all()
+	var texts := overview.entry_texts()
+	var journal := -1
+	for i in texts.size():
+		if texts[i].begins_with("Die deutsche Frage") or texts[i].begins_with("Revolution"):
+			journal = i
+			break
+	if not overview.visible or journal < 0:
+		_fail("Übersicht ohne Journal: %s" % ", ".join(texts))
+	else:
+		overview.entry_button(journal).emit_signal("pressed")
+		await _frames(1)
+		if windows.open_window() != _main.call("journal_window"):
+			_fail("Übersicht: Klick auf das Journal öffnet es nicht")
+		_main.call("close_journal")
+	var ticker: TickerBar = _main.call("ticker")
+	ticker.push([{"date_text": "01.01.1849", "text": "Probe für den Ticker", "turning_point": true, "location_index": -1}] as Array[Dictionary])
+	await _frames(1)
+	print("  Leisten: Kasse %s, Vermächtnis %s; Übersicht %d Einträge; Tooltips verschachtelt" % [
+		top.field_text(&"kasse"), top.field_text(&"vermaechtnis"), texts.size()
+	])
 
 
 ## Urteil der Geschichte (seit M13a4) in der Partie ab 1848: Inhalt, Export der Chronik, Weiterspielen,

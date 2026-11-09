@@ -13,6 +13,12 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Leisten und Tooltips (Schritt a5c):** Die obere Leiste zeigt Kasse mit Saldo, Legitimität, Verwaltung und
+  das Vermächtnis; jede Zahl hat einen **verschachtelten Tooltip** (Einnahmen je Steuer, Zustimmung je Gruppe
+  und Ursachen der Unruhe, Faktoren je Dimension), unterstrichene Begriffe erklärt ein zweiter Tooltip. Rechts
+  steht eine **Übersicht** der laufenden Dinge (Ereignisse, Krisen, Kriege, Journale, nächste Wahl, Heere auf
+  dem Marsch), unten ein **Ticker** mit dem Neuesten aus der Chronik, Wendepunkte zuerst. Das Staatspanel
+  heißt Staatsübersicht.
 - **Fenster der Bereiche (Schritt a5b):** Die Bereichsleiste öffnet sechs neue Fenster: **Kabinett und Hof**
   (Herrscher und Minister mit Werten und Eigenschaften, Neigungen des Staates, frühere Amtsinhaber der
   Partie), **Gesetze** (Verfassung, Wahlrecht, jede Gesetzesoption mit ihrer Wirkung auf die Unruhe und den

@@ -34,6 +34,7 @@ func _initialize() -> void:
 	_test_event_window()
 	_test_chronicle_export()
 	_test_window_manager()
+	_test_ticker_and_glossary()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -886,4 +887,22 @@ func _test_window_manager() -> void:
 	_true(not a.opened and not b.opened, "alle geschlossen")
 	a.free()
 	b.free()
+
+
+## Ticker und Glossar (seit M13a5c): Wendepunkte zuerst, Begrenzung, Verweise.
+func _test_ticker_and_glossary() -> void:
+	var ticker := TickerBar.new()
+	var entries: Array[Dictionary] = []
+	for i in 20:
+		entries.append({"date_text": "1848", "text": "Eintrag %d" % i, "turning_point": i == 15})
+	ticker.push(entries)
+	_true(ticker.shown_text().contains("WENDEPUNKT · Eintrag 15"), "Ticker zeigt den Wendepunkt zuerst (%s)" % ticker.shown_text())
+	_true(ticker.get("_queue").size() <= TickerBar.QUEUE_LIMIT, "Ticker begrenzt die Warteschlange")
+	_true(str((ticker.get("_queue") as Array)[0].get("text", "")) == "Eintrag 0", "danach die übrigen in Folge")
+	ticker.clear()
+	_true(ticker.shown_text() == "–", "Ticker geleert")
+	ticker.free()
+	_true(Glossary.link("akzise", "Akzise") == "[url=begriff:akzise]Akzise[/url]", "Verweis im Tooltip")
+	_true(Glossary.text("akzise").begins_with("Akzise:") and Glossary.text("gibt_es_nicht").is_empty(), "Glossar")
+	_true(AreaWindow.sorted_shares({"a": 10.0, "b": 50.0, "c": 40.0}, 2) == [["b", 50.0], ["c", 40.0], ["übrige", 10.0]], "Anteile sortiert mit Rest")
 

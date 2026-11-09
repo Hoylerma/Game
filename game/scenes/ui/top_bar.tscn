@@ -47,75 +47,73 @@ text_overrun_behavior = 3
 [node name="Separator1" type="VSeparator" parent="Row"]
 layout_mode = 2
 
-[node name="TreasuryBox" type="VBoxContainer" parent="Row"]
-custom_minimum_size = Vector2(130, 0)
+[node name="CashBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "Staatsschatz: Bestand der Staatskasse"
+mouse_filter = 0
 theme_override_constants/separation = 0
 
-[node name="Caption" type="Label" parent="Row/TreasuryBox"]
+[node name="Caption" type="Label" parent="Row/CashBox"]
 layout_mode = 2
 theme_type_variation = &"CaptionLabel"
-text = "STAATSSCHATZ"
+text = "KASSE · SALDO"
 
-[node name="Treasury" type="Label" parent="Row/TreasuryBox"]
+[node name="Cash" type="Label" parent="Row/CashBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"ValueLabel"
 text = "–"
 
-[node name="IncomeBox" type="VBoxContainer" parent="Row"]
-custom_minimum_size = Vector2(130, 0)
+[node name="LegitimacyBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "Steuereinnahmen des letzten Monats"
+mouse_filter = 0
 theme_override_constants/separation = 0
 
-[node name="Caption" type="Label" parent="Row/IncomeBox"]
+[node name="Caption" type="Label" parent="Row/LegitimacyBox"]
 layout_mode = 2
 theme_type_variation = &"CaptionLabel"
-text = "EINNAHMEN / MONAT"
+text = "LEGITIMITÄT"
 
-[node name="Income" type="Label" parent="Row/IncomeBox"]
+[node name="Legitimacy" type="Label" parent="Row/LegitimacyBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"ValueLabel"
-theme_override_colors/font_color = Color(0.184314, 0.419608, 0.227451, 1)
 text = "–"
 
-[node name="ExpensesBox" type="VBoxContainer" parent="Row"]
-custom_minimum_size = Vector2(130, 0)
+[node name="AdministrationBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "Ausgaben des letzten Monats (Hofhaltung und Verwaltung)"
+mouse_filter = 0
 theme_override_constants/separation = 0
 
-[node name="Caption" type="Label" parent="Row/ExpensesBox"]
+[node name="Caption" type="Label" parent="Row/AdministrationBox"]
 layout_mode = 2
 theme_type_variation = &"CaptionLabel"
-text = "AUSGABEN / MONAT"
+text = "VERWALTUNG"
 
-[node name="Expenses" type="Label" parent="Row/ExpensesBox"]
+[node name="Administration" type="Label" parent="Row/AdministrationBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"ValueLabel"
-theme_override_colors/font_color = Color(0.603922, 0.176471, 0.133333, 1)
 text = "–"
 
-[node name="PopulationBox" type="VBoxContainer" parent="Row"]
-custom_minimum_size = Vector2(110, 0)
+[node name="LegacyBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "Bevölkerung aller Orte des Staates"
+mouse_filter = 0
 theme_override_constants/separation = 0
 
-[node name="Caption" type="Label" parent="Row/PopulationBox"]
+[node name="Caption" type="Label" parent="Row/LegacyBox"]
 layout_mode = 2
 theme_type_variation = &"CaptionLabel"
-text = "BEVÖLKERUNG"
+text = "VERMÄCHTNIS"
 
-[node name="Population" type="Label" parent="Row/PopulationBox"]
+[node name="Legacy" type="Label" parent="Row/LegacyBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"ValueLabel"

@@ -118,6 +118,12 @@ var _yearbook_window: YearbookWindow = null
 var _area_windows: Dictionary = {}
 var _areas_cache: Dictionary = {}
 var _areas_player := -2
+## Leisten nach Kapitel 22 (seit M13a5c): rechte Übersicht, Ticker, verschachtelte Tooltips.
+var _overview: OverviewPanel = null
+var _ticker: TickerBar = null
+var _tooltips: TooltipLayer = null
+var _overview_filled_at := -100000
+const OVERVIEW_REFRESH_MS := 500
 ## Urteil der Geschichte (seit M13a4) und ob es nach dem Ende schon gezeigt wurde.
 var _verdict_window: VerdictWindow = null
 var _verdict_shown := false
@@ -161,6 +167,7 @@ func _ready() -> void:
 	_build_war()
 	_build_events()
 	_build_areas()
+	_build_bars()
 	_build_verdict()
 	_build_start_screen()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
@@ -198,7 +205,7 @@ func _ready() -> void:
 	_map_labels.set_covering_controls([
 		_top_bar, _state_panel, _party_panel, _chronicle_panel, _location_panel, _legend, _mode_bar,
 		_election_night, _diplomacy_window, _play_bar, _army_panel, _war_window, _battle_reports,
-		_event_window, _journal_window, _area_bar, _yearbook_window,
+		_event_window, _journal_window, _area_bar, _yearbook_window, _overview, _ticker,
 	])
 	_update_place_labels()
 	_update_owners()
@@ -531,6 +538,7 @@ func _refresh_all() -> void:
 		capital_name = str(_sim.get_location(capital).get("name", ""))
 	_state_panel.show_state(state, capital_name)
 	_update_area_bar()
+	_refresh_bars()
 	if _player_current >= 0:
 		_party_panel.show_party(_sim.get_party(_player_current))
 	_refresh_diplomacy()
@@ -1024,9 +1032,20 @@ func _pull_chronicle() -> void:
 	if count < _chronicle_read:
 		_chronicle_panel.clear()
 		_chronicle_read = 0
+		if _ticker != null:
+			_ticker.clear()
 	if count > _chronicle_read:
 		var entries := _sim.get_chronicle(_chronicle_read)
 		_chronicle_panel.add_entries(entries)
+		# Ticker (seit M13a5c): Wendepunkte, Einträge des Spielerstaates und der Welt; beim Laden nur die
+		# letzten drei davon.
+		if _ticker != null:
+			var relevant := entries.filter(
+				func(e: Dictionary) -> bool:
+					var who := int(e.get("state_index", -1))
+					return bool(e.get("turning_point", false)) or who == _player or who < 0
+			)
+			_ticker.push(relevant if _chronicle_read > 0 else relevant.slice(maxi(relevant.size() - 3, 0)))
 		# Ein neues Spiel liest die ganze Chronik: nur Schlachten aus dem laufenden Spiel melden.
 		if _chronicle_read > 0:
 			_report_battles(entries)
@@ -1715,7 +1734,7 @@ func _place_diplomacy() -> void:
 		top += bar_size.y + 8.0
 	# Alle Fenster der Bereiche an derselben Stelle (seit M13a5a: Fensterverwaltung, nie zwei zugleich
 	# offen); das Ereignisfenster mittig.
-	_windows.place(left, top, _mode_bar_area.position.y - 8.0)
+	_windows.place(left, top, _bottom_of_map_area())
 	_place_event_window()
 	_place_reports()
 
@@ -2382,6 +2401,7 @@ func _fit_mode_bar() -> void:
 		_mode_bar.set_rows(2)
 	var height := _mode_bar.get_combined_minimum_size().y
 	_mode_bar_area.offset_top = -12.0 - maxf(height, 52.0)
+	_place_ticker.call_deferred()
 	_place_diplomacy.call_deferred()
 	_place_reports.call_deferred()
 
@@ -2507,6 +2527,180 @@ func toggle_yearbook() -> void:
 		close_yearbook()
 	else:
 		open_yearbook()
+
+
+# --- Leisten und Tooltips (seit M13a5c, vertical_slice.md 4.1 und 4.3) -------------------
+
+
+func _build_bars() -> void:
+	var root: Control = $UI/Root
+	_overview = OverviewPanel.new()
+	_right_column.add_child(_overview)
+	_right_column.move_child(_overview, _location_panel.get_index() + 1)
+	_overview.entry_requested.connect(_on_overview_entry)
+	_ticker = TickerBar.new()
+	root.add_child(_ticker)
+	root.move_child(_ticker, _top_bar.get_index())
+	_ticker.location_requested.connect(func(location: int) -> void: _select_location(location, true))
+	_ticker.resized.connect(_place_ticker)
+	# Die Chronik ist über die Bereichsleiste erreichbar; der Ticker zeigt das Neueste.
+	_chronicle_panel.visible = false
+	_tooltips = TooltipLayer.new()
+	$UI.add_child(_tooltips)
+	_tooltips.attach(_top_bar.field(&"kasse"), _cash_tooltip)
+	_tooltips.attach(_top_bar.field(&"legitimitaet"), _legitimacy_tooltip)
+	_tooltips.attach(_top_bar.field(&"verwaltung"), _administration_tooltip)
+	_tooltips.attach(_top_bar.field(&"vermaechtnis"), _legacy_tooltip, _legacy_link)
+
+
+## Rechte Übersicht, Ticker und Tooltips (Tests).
+func overview_panel() -> OverviewPanel:
+	return _overview
+
+
+func ticker() -> TickerBar:
+	return _ticker
+
+
+func tooltip_layer() -> TooltipLayer:
+	return _tooltips
+
+
+## Untere Kante für Fenster: über dem Ticker (sonst über der Leiste der Kartenmodi).
+func _bottom_of_map_area() -> float:
+	if _ticker != null and _ticker.visible:
+		return _ticker.position.y - 8.0
+	return _mode_bar_area.position.y - 8.0
+
+
+## Ticker über der Leiste der Kartenmodi, so breit wie der Platz zwischen den Spalten.
+func _place_ticker() -> void:
+	if _ticker == null:
+		return
+	var left := _left_column.offset_right + 12.0
+	var right := _right_column.get_global_rect().position.x - 12.0
+	var height := _ticker.get_combined_minimum_size().y
+	_ticker.size = Vector2(maxf(right - left, 100.0), height)
+	_ticker.position = Vector2(left, _mode_bar_area.get_global_rect().position.y - height - 4.0)
+	_place_diplomacy.call_deferred()
+
+
+## Obere Leiste und rechte Übersicht höchstens zweimal je Sekunde.
+func _refresh_bars(force: bool = false) -> void:
+	if _sim == null or _overview == null:
+		return
+	if not force and Time.get_ticks_msec() - _overview_filled_at < OVERVIEW_REFRESH_MS:
+		return
+	_overview_filled_at = Time.get_ticks_msec()
+	_top_bar.show_overview(_sim.get_state_overview(_player), _sim.get_legacy(_player))
+	if _player_current >= 0:
+		_overview.show_entries([] as Array[Dictionary])
+		return
+	_overview.show_entries(OverviewPanel.collect(_sim, _player, str(_sim.get_state(_player).get("tag", ""))))
+	if _location_panel.visible:
+		_overview.visible = false
+
+
+func _on_overview_entry(kind: StringName, value: int) -> void:
+	match kind:
+		&"event":
+			_check_open_events()
+		&"crisis":
+			open_diplomacy(0)
+		&"war":
+			open_war_window(0)
+		&"journal":
+			open_journal(value)
+		&"election":
+			if not (_area_windows[&"parlament"] as AreaWindow).is_open():
+				toggle_area_window(&"parlament")
+			(_area_windows[&"parlament"] as ParliamentWindow).select_parliament(value)
+		&"army":
+			select_army(value)
+			focus_army(value)
+
+
+func _cash_tooltip() -> String:
+	var state := _sim.get_state(_player)
+	var taxes: Array = state.get("taxes_month", [])
+	var names := [Glossary.link("kontribution", "Kontribution"), Glossary.link("akzise", "Akzise"), Glossary.link("zoll", "Zoll")]
+	var lines := PackedStringArray(["[b]Kasse des Vormonats[/b]", "Einnahmen:"])
+	var income := 0.0
+	for k in mini(taxes.size(), names.size()):
+		income += float(taxes[k])
+		lines.append("  %s %s" % [names[k], GermanFormat.signed_money(float(taxes[k]))])
+	var hinterland := float(state.get("hinterland_month", 0.0))
+	if hinterland > 0.0:
+		income += hinterland
+		lines.append("  Hinterland %s" % GermanFormat.signed_money(hinterland))
+	lines.append("Ausgaben:")
+	var expenses := 0.0
+	for item: Array in [["Hof", "court_month"], ["Verwaltung", "administration_month"], ["Heer", "army_month"], ["Zinsen", "interest_month"], ["Bauten", "building_month"], ["Gesandte", "envoy_cost_month"]]:
+		var amount := float(state.get(str(item[1]), 0.0))
+		if amount > 0.0:
+			expenses += amount
+			lines.append("  %s %s" % [item[0], GermanFormat.signed_money(-amount)])
+	lines.append("%s %s" % [Glossary.link("saldo", "Saldo"), GermanFormat.signed_money(income - expenses)])
+	lines.append("Schatz %s · %s %s" % [GermanFormat.money(float(state.get("treasury", 0.0))), Glossary.link("schulden", "Schulden"), GermanFormat.money(float(state.get("debt", 0.0)))])
+	return "\n".join(lines)
+
+
+func _legitimacy_tooltip() -> String:
+	var events := _sim.get_state_events(_player)
+	if events.is_empty():
+		return "Ohne Ereignisse gibt es weder Zustimmung noch Unruhe."
+	var lines := PackedStringArray(["[b]%s[/b] (Zustimmung der Gruppen im Mittel)" % Glossary.link("legitimitaet", "Legitimität")])
+	for entry: Dictionary in events.get("approvals", []):
+		lines.append("  %s %s" % [str(entry.get("name", "")), GermanFormat.signed_number(roundi(float(entry.get("value", 0.0))))])
+	lines.append("%s %d, Ziel %d:" % [Glossary.link("unruhe", "Unruhe"), roundi(float(events.get("unrest", 0.0))), roundi(float(events.get("unrest_target", 0.0)))])
+	for cause: Dictionary in events.get("unrest_causes", []):
+		var value := float(cause.get("value", 0.0))
+		if absf(value) >= 0.5:
+			lines.append("  %s %s" % [str(cause.get("name", "")), GermanFormat.signed_number(roundi(value))])
+	return "\n".join(lines)
+
+
+func _administration_tooltip() -> String:
+	var overview := _sim.get_state_overview(_player)
+	var state := _sim.get_state(_player)
+	return "[b]Verwaltung[/b]\n%s Orte in %s %s\n%s Einwohner\nHauptstadt: %s" % [
+		GermanFormat.integer(int(overview.get("locations", 0))), GermanFormat.integer(int(overview.get("kreise", 0))),
+		Glossary.link("kreis", "Kreisen"), GermanFormat.integer(int(state.get("population", 0))),
+		_location_name(int(state.get("capital_index", -1))),
+	]
+
+
+func _legacy_tooltip() -> String:
+	var legacy := _sim.get_legacy(_player)
+	var dimensions: Array = legacy.get("dimensions", [])
+	if dimensions.is_empty():
+		return "Dieses Lesezeichen kennt kein Vermächtnis."
+	var lines := PackedStringArray(["[b]%s[/b] – Faktoren beim Überfahren einer Dimension" % Glossary.link("vermaechtnis", "Vermächtnis")])
+	for dimension: Dictionary in dimensions:
+		lines.append("[url=vermaechtnis:%s]%s[/url] %d – %s" % [
+			str(dimension.get("id", "")), str(dimension.get("name", "")), roundi(float(dimension.get("value", 0.0))),
+			str(dimension.get("sentence", "")),
+		])
+	return "\n".join(lines)
+
+
+## Zweiter Tooltip einer Dimension: Grundwert und Faktoren.
+func _legacy_link(meta: String) -> String:
+	if not meta.begins_with("vermaechtnis:"):
+		return ""
+	var id := meta.substr(13)
+	for dimension: Dictionary in _sim.get_legacy(_player).get("dimensions", []):
+		if str(dimension.get("id", "")) == id:
+			var lines := PackedStringArray([
+				"[b]%s %d[/b]" % [str(dimension.get("name", "")), roundi(float(dimension.get("value", 0.0)))],
+				Glossary.text(id), "Grundwert %+d" % roundi(float(dimension.get("base", 0.0))),
+			])
+			for factor: Dictionary in dimension.get("factors", []):
+				var value := float(factor.get("value", 0.0))
+				if bool(factor.get("active", false)) and absf(value) >= 0.5:
+					lines.append("  %s %+d" % [str(factor.get("name", "")), roundi(value)])
+			return "\n".join(lines)
+	return ""
 
 
 # --- Urteil der Geschichte (seit M13a4, vertical_slice.md 3.5) ------------------------

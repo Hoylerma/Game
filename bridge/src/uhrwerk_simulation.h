@@ -204,6 +204,7 @@ public:
     godot::Array get_state_laws(std::int64_t state_index) const;
     godot::Array get_votes() const;
     godot::Array get_office_history(std::int64_t state_index) const;
+    godot::Dictionary get_state_overview(std::int64_t state_index) const; // seit M13a5c: obere Leiste
 
     // Vermächtnis, Jahrbuch und Ende der Partie (seit M13, Schritt a4, vertical_slice.md 3.5 und 4.3)
     godot::Dictionary get_legacy(std::int64_t state_index) const;
