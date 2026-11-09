@@ -8,6 +8,7 @@
 szenario koeniggraetz {
     name     = "Königgrätz"
     datum    = 1866.06.16
+    ende     = 1871.07.01   # seit M13a4: Urteil der Geschichte (vertical_slice.md 3.5)
     spieler  = PRU
     spielbar = { PRU AUT SAX BAV HAN }
     waehrung = "Taler"

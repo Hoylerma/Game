@@ -6,6 +6,7 @@
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/events.hpp"
+#include "uhrwerk/legacy.hpp"
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/politics.hpp"
@@ -3401,6 +3402,136 @@ std::int64_t UhrwerkSimulation::get_event_player() const {
     return w ? w->event_player : -1;
 }
 
+// ─── Vermächtnis, Jahrbuch und Ende (seit M13a4) ────────────────────────────
+
+Dictionary UhrwerkSimulation::get_legacy(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    result["active"] = w != nullptr && w->legacy_rules.active;
+    Array dimensions;
+    if (w == nullptr || !w->legacy_rules.active || !valid_index(w->states, state_index)) {
+        result["dimensions"] = dimensions;
+        return result;
+    }
+    const std::vector<uhrwerk::LegacyValue> values =
+        uhrwerk::legacy(*w, simulation_->event_cache(), static_cast<uhrwerk::Index>(state_index));
+    for (std::size_t d = 0; d < values.size() && d < w->legacy_rules.dimensions.size(); ++d) {
+        const uhrwerk::LegacyDimension& def = w->legacy_rules.dimensions[d];
+        Dictionary entry;
+        entry["id"] = to_godot(def.id);
+        entry["name"] = to_godot(def.name);
+        entry["value"] = values[d].value.to_double();
+        entry["base"] = values[d].base.to_double();
+        entry["sentence"] = to_godot(uhrwerk::legacy_sentence(def, values[d].value));
+        Array factors;
+        for (const uhrwerk::LegacyContribution& c : values[d].factors) {
+            Dictionary f;
+            f["name"] = to_godot(c.name);
+            f["value"] = c.value.to_double();
+            f["active"] = c.active;
+            factors.append(f);
+        }
+        entry["factors"] = factors;
+        dimensions.append(entry);
+    }
+    result["dimensions"] = dimensions;
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_yearbook(std::int64_t state_index) const {
+    Dictionary result;
+    PackedStringArray columns;
+    Array rows;
+    const uhrwerk::World* w = world();
+    if (w != nullptr && w->legacy_rules.active && valid_index(w->states, state_index)) {
+        for (const uhrwerk::LegacyMeasure m : uhrwerk::kYearbookMeasures) {
+            columns.append(to_godot(uhrwerk::legacy_measure_name(m)));
+        }
+        for (const uhrwerk::LegacyDimension& d : w->legacy_rules.dimensions) {
+            columns.append(to_godot(d.name));
+        }
+        const std::size_t count = uhrwerk::yearbook_columns(*w);
+        for (const uhrwerk::YearRecord& r : w->yearbook) {
+            const std::size_t first = static_cast<std::size_t>(state_index) * count;
+            if (first + count > r.values.size()) {
+                continue;
+            }
+            Dictionary row;
+            row["date"] = date_dictionary(r.date);
+            row["year"] = r.date.year;
+            row["date_text"] = to_godot(uhrwerk::format_date(r.date));
+            PackedFloat64Array values;
+            for (std::size_t c = 0; c < count; ++c) {
+                values.append(r.values[first + c].to_double());
+            }
+            row["values"] = values;
+            rows.append(row);
+        }
+    }
+    result["columns"] = columns;
+    result["measure_count"] = static_cast<std::int64_t>(uhrwerk::kYearbookMeasures.size());
+    result["rows"] = rows;
+    return result;
+}
+
+bool UhrwerkSimulation::is_game_over() const {
+    const uhrwerk::World* w = world();
+    return w != nullptr && uhrwerk::game_over(*w);
+}
+
+Dictionary UhrwerkSimulation::get_verdict() const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    result["has_end"] = w != nullptr && w->scenario.has_end;
+    result["over"] = is_game_over();
+    if (w == nullptr) {
+        return result;
+    }
+    result["active"] = w->legacy_rules.active;
+    result["end_date_text"] =
+        w->scenario.has_end ? to_godot(uhrwerk::format_date_long(w->scenario.end)) : String();
+    if (w->scenario.has_end) {
+        result["end_date"] = date_dictionary(w->scenario.end);
+    }
+    result["start_date_text"] = to_godot(uhrwerk::format_date_long(w->scenario.start));
+    // Wendepunkte der Partie in zeitlicher Folge.
+    Array turning;
+    for (const uhrwerk::EventRecord& r : w->event_log) {
+        if (!valid_index(w->events, r.event) || !at(w->events, r.event).turning_point) {
+            continue;
+        }
+        const uhrwerk::EventDef& e = at(w->events, r.event);
+        Dictionary entry;
+        entry["date_text"] = to_godot(uhrwerk::format_date_long(r.date));
+        entry["title"] = to_godot(e.title);
+        entry["state_name"] = valid_index(w->states, r.state) ? short_name(*w, r.state) : String();
+        entry["option_text"] =
+            valid_index(e.options, r.option) ? to_godot(at(e.options, r.option).text) : String();
+        turning.append(entry);
+    }
+    result["turning_points"] = turning;
+    // Beendete Kriege der Partie mit Ausgang.
+    Array wars;
+    for (const uhrwerk::WarResult& r : w->war_results) {
+        if (!valid_index(w->states, r.attacker) || !valid_index(w->states, r.defender)) {
+            continue;
+        }
+        Dictionary entry;
+        entry["attacker_name"] = short_name(*w, r.attacker);
+        entry["defender_name"] = short_name(*w, r.defender);
+        entry["started_text"] = to_godot(uhrwerk::format_date_long(r.started));
+        entry["ended_text"] = to_godot(uhrwerk::format_date_long(r.ended));
+        entry["winner"] = r.winner;
+        entry["winner_name"] = r.winner > 0   ? short_name(*w, r.attacker)
+                               : r.winner < 0 ? short_name(*w, r.defender)
+                                              : String();
+        entry["transfers"] = r.transfers;
+        wars.append(entry);
+    }
+    result["wars"] = wars;
+    return result;
+}
+
 Array UhrwerkSimulation::get_event_log(std::int64_t limit) const {
     Array result;
     const uhrwerk::World* w = world();
@@ -3447,6 +3578,7 @@ Array UhrwerkSimulation::get_journals() const {
         entry["title"] = to_godot(def.title);
         entry["text"] = to_godot(def.text);
         entry["end_text"] = def.has_end ? to_godot(uhrwerk::format_date_long(def.end)) : String();
+        entry["historical"] = to_godot(def.historical); // seit M13a4: Vergleich im Urteil der Geschichte
         entry["started"] = valid_index(def.stages, state.stage);
         if (valid_index(def.stages, state.stage)) {
             const uhrwerk::JournalStage& stage = at(def.stages, state.stage);
@@ -3876,6 +4008,10 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_open_events"), &UhrwerkSimulation::get_open_events);
     ClassDB::bind_method(D_METHOD("choose_event_option", "event_index", "option_index"),
                          &UhrwerkSimulation::choose_event_option);
+    ClassDB::bind_method(D_METHOD("get_legacy", "state_index"), &UhrwerkSimulation::get_legacy);
+    ClassDB::bind_method(D_METHOD("get_yearbook", "state_index"), &UhrwerkSimulation::get_yearbook);
+    ClassDB::bind_method(D_METHOD("get_verdict"), &UhrwerkSimulation::get_verdict);
+    ClassDB::bind_method(D_METHOD("is_game_over"), &UhrwerkSimulation::is_game_over);
     ClassDB::bind_method(D_METHOD("get_game_settings"), &UhrwerkSimulation::get_game_settings);
     ClassDB::bind_method(D_METHOD("set_game_settings", "difficulty_id", "open"),
                          &UhrwerkSimulation::set_game_settings);

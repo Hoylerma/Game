@@ -6,6 +6,7 @@
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/event_lab.hpp"
 #include "uhrwerk/events.hpp"
+#include "uhrwerk/legacy.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
@@ -1393,4 +1394,151 @@ TEST_CASE("Ereignisse: Folgen als Text und Stand der Journalziele (b4)") {
     CHECK(lines[3] == "Folgt: „Welt“");
     CHECK(lines[4] == "mit 30 %: Kasse \u22121.000");
     CHECK(lines[5] == "mit 70 %: Beziehung zu Sachsen +10");
+}
+
+// ─── Vermächtnis, Jahrbuch und Ende (seit M13a4, vertical_slice.md 3.5 und 4.3) ──
+
+namespace {
+
+constexpr std::string_view kLegacy = R"(
+vermaechtnis {
+    dimension einigkeit {
+        name  = "Einigkeit"
+        grund = 30
+        faktor { name = "Bundesstaat"  wenn { bund = ja }  gewicht = 10 }
+        faktor { name = "Unruhe"       groesse = unruhe        gewicht = -1  hoechstens = 5 }
+        faktor { name = "Bevölkerung"  groesse = bevoelkerung  gewicht = 100 }
+        satz { ab = 0   text = "tief" }
+        satz { ab = 40  text = "hoch" }
+    }
+    dimension geltung {
+        name  = "Geltung"
+        grund = 0
+        faktor { name = "Stärke"  groesse = staerke  gewicht = 50 }
+    }
+}
+)";
+
+constexpr std::string_view kLegacyEvents = R"(
+ereignis a.vorher { titel = "Vorher" text = "x" art = dynamisch wer = welt termin = 1648.11.01
+    option a { text = "a" gewicht = 1 wirkung { welt_merke = vorher } } }
+ereignis b.am_ende { titel = "Am Ende" text = "x" art = dynamisch wer = welt termin = 1648.11.10
+    option a { text = "a" gewicht = 1 wirkung { welt_merke = am_ende } } }
+)";
+
+bool has_flag(const World& w, Index state, std::string_view name) {
+    return std::any_of(w.event_flags.begin(), w.event_flags.end(),
+                       [&](const uhrwerk::EventFlag& f) { return f.state == state && f.name == name; });
+}
+
+} // namespace
+
+TEST_CASE("Vermächtnis: Faktoren, Sätze und Jahresreihen (seit M13a4)") {
+    const RuleData data("", kLegacyEvents);
+    testhilfen::write_file(data.dir() / "common/vermaechtnis.chron", kLegacy);
+    testhilfen::replace_in_file(data.dir() / "szenarien/westfaelischer_frieden.chron", "datum   = 1648.10.24",
+                                "datum   = 1648.10.24\n    ende    = 1648.11.10");
+    Simulation sim(data.load());
+    const World& w = sim.world();
+    REQUIRE(w.legacy_rules.active);
+    REQUIRE(w.legacy_rules.dimensions.size() == 2);
+    const uhrwerk::LegacyDimension& unity = w.legacy_rules.dimensions[0];
+    CHECK(unity.factors.size() == 3);
+    CHECK(unity.factors[0].has_condition);
+    CHECK(unity.factors[1].measure == uhrwerk::LegacyMeasure::Unrest);
+    CHECK(unity.factors[1].cap == Fixed::from_int(5));
+    REQUIRE(unity.sentences.size() == 2);
+    CHECK(unity.sentences[0].text == "hoch"); // absteigend nach 'ab'
+    CHECK(w.scenario.has_end);
+    CHECK(w.scenario.end == uhrwerk::Date{1648, 11, 10});
+
+    // Wert = Grundwert + Beiträge, begrenzt auf 0 … 100.
+    const Index bra = state_of(w, "BRA");
+    const auto measures = uhrwerk::legacy_measures(w, bra);
+    const Fixed people = measures[static_cast<std::size_t>(uhrwerk::LegacyMeasure::Population)];
+    CHECK(people == w.state_population(bra) / Fixed::from_int(1'000'000));
+    const std::vector<uhrwerk::LegacyValue> values = uhrwerk::legacy(w, sim.event_cache(), bra);
+    REQUIRE(values.size() == 2);
+    const Fixed expected =
+        std::clamp(Fixed::from_int(30) + people * Fixed::from_int(100), Fixed::zero(), Fixed::from_int(100));
+    CHECK(values[0].value == expected);
+    REQUIRE(values[0].factors.size() == 3);
+    CHECK_FALSE(values[0].factors[0].active); // kein Bundesgebiet in den Testdaten
+    CHECK(values[0].factors[0].value == Fixed::zero());
+    CHECK(uhrwerk::legacy_sentence(unity, Fixed::from_int(50)) == "hoch");
+    CHECK(uhrwerk::legacy_sentence(unity, Fixed::from_int(10)) == "tief");
+    // Stärke: der stärkste Staat hat 1, also 50.
+    Fixed strongest;
+    for (std::size_t s = 0; s < w.states.size(); ++s) {
+        strongest =
+            Fixed::max(strongest, uhrwerk::legacy(w, sim.event_cache(), static_cast<Index>(s))[1].value);
+    }
+    CHECK(strongest == Fixed::from_int(50));
+
+    // Jahresreihe zum Start, keine zweite am selben Tag.
+    REQUIRE(w.yearbook.size() == 1);
+    CHECK(w.yearbook[0].date == uhrwerk::Date{1648, 10, 24});
+    CHECK(uhrwerk::yearbook_columns(w) == uhrwerk::kYearbookMeasures.size() + 2);
+    CHECK(w.yearbook[0].values.size() == w.states.size() * uhrwerk::yearbook_columns(w));
+    const std::size_t col = uhrwerk::yearbook_columns(w);
+    CHECK(w.yearbook[0].values[static_cast<std::size_t>(bra) * col + uhrwerk::kYearbookMeasures.size()] ==
+          values[0].value);
+
+    // Ereignisse vor dem Ende ja, am letzten Tag nicht; Jahresreihe und Chronik am letzten Tag.
+    step_until(sim, uhrwerk::Date{1648, 11, 9});
+    CHECK(has_flag(w, kNone, "vorher"));
+    CHECK_FALSE(uhrwerk::game_over(w));
+    sim.step_day(); // 10. November: der letzte Tag
+    CHECK(uhrwerk::game_over(w));
+    CHECK_FALSE(has_flag(w, kNone, "am_ende"));
+    REQUIRE(w.yearbook.size() == 2);
+    CHECK(w.yearbook[1].date == uhrwerk::Date{1648, 11, 10});
+    CHECK(has_chronicle(w, "Ende der Partie"));
+
+    // Weiterspielen: Jahresreihe am 1. Januar, keine Ereignisse.
+    step_until(sim, uhrwerk::Date{1649, 1, 1});
+    REQUIRE(w.yearbook.size() == 3);
+    CHECK(w.yearbook[2].date == uhrwerk::Date{1649, 1, 1});
+
+    // Spielstand mit Jahresreihen.
+    const Bytes bytes = uhrwerk::save_game(sim, SaveMeta{});
+    uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, data.load(), 1);
+    INFO(loaded.error);
+    REQUIRE(loaded.ok());
+    CHECK(loaded.simulation->world().yearbook == w.yearbook);
+    CHECK(loaded.simulation->checksum() == sim.checksum());
+}
+
+TEST_CASE("Vermächtnis: Fehler in vermaechtnis.chron und 'ende' (seit M13a4)") {
+    const std::pair<std::string_view, std::string_view> cases[] = {
+        {"vermaechtnis { dimension a { grund = 1 faktor { name = \"x\" groesse = unruhe gewicht = 1 } } }",
+         "Pflichtfeld 'name' fehlt in dimension a"},
+        {"vermaechtnis { dimension a { name = \"A\" faktor { name = \"x\" groesse = glueck gewicht = 1 } } }",
+         "unbekannte Größe 'glueck'"},
+        {"vermaechtnis { dimension a { name = \"A\" faktor { name = \"x\" groesse = unruhe } } }",
+         "Pflichtfeld 'gewicht' fehlt in faktor in dimension a"},
+        {"vermaechtnis { dimension a { name = \"A\" faktor { name = \"x\" gewicht = 1 } } }",
+         "braucht 'groesse' oder 'wenn'"},
+        {"vermaechtnis { dimension a { name = \"A\" faktor { name = \"x\" gewicht = 1 groesse = unruhe } "
+         "satz { ab = 10 } } }",
+         "satz in dimension a braucht 'ab' und 'text'"},
+        {"vermaechtnis { dimension a { name = \"A\" } }", "dimension a braucht mindestens einen Faktor"},
+        {"vermaechtnis { }", "vermaechtnis braucht mindestens eine Dimension"},
+    };
+    for (const auto& [text, needle] : cases) {
+        CAPTURE(needle);
+        const RuleData data("", kQuiet);
+        testhilfen::write_file(data.dir() / "common/vermaechtnis.chron", text);
+        const uhrwerk::LoadResult r = data.result();
+        CHECK(testhilfen::has_issue(r, needle));
+    }
+    const RuleData data("", kQuiet);
+    testhilfen::replace_in_file(data.dir() / "szenarien/westfaelischer_frieden.chron", "datum   = 1648.10.24",
+                                "datum   = 1648.10.24\n    ende    = 1648.01.01");
+    CHECK(testhilfen::has_issue(data.result(),
+                                "'ende' von szenario westfaelischer_frieden liegt nicht nach 'datum'"));
+    // Ohne vermaechtnis.chron kein Vermächtnis und keine Jahresreihen.
+    const Simulation plain(RuleData("", kQuiet).load());
+    CHECK_FALSE(plain.world().legacy_rules.active);
+    CHECK(plain.world().yearbook.empty());
 }

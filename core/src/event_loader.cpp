@@ -199,6 +199,9 @@ public:
         load_journals_and_votes();
         check_follow_cycles();
         load_ai(); // seit M12 (ki.md Abschnitt 3), nur mit Ereignissen
+        if (fs::is_regular_file(data_dir_ / utf8_to_path("common/vermaechtnis.chron"), ec)) {
+            load_legacy(read("common/vermaechtnis.chron")); // seit M13a4, vertical_slice.md 3.5
+        }
         // Meldungen nach Datei und Zeile wie im übrigen Lader (gelesen wird nach Kennung).
         std::stable_sort(issues_.begin() + static_cast<std::ptrdiff_t>(first_issue_), issues_.end(),
                          [](const LoadIssue& a, const LoadIssue& b) {
@@ -400,6 +403,192 @@ private:
                                  ")");
         }
         return inserted;
+    }
+
+    // ── Vermächtnis (seit M13a4, vertical_slice.md 3.5; chronik-skript.md 3.41) ──
+
+    static std::optional<LegacyMeasure> legacy_measure(std::string_view id) {
+        static constexpr std::array<std::pair<std::string_view, LegacyMeasure>, 21> kMeasures{{
+            {"bevoelkerung", LegacyMeasure::Population},
+            {"einnahmen", LegacyMeasure::Income},
+            {"schulden", LegacyMeasure::Debt},
+            {"schatz", LegacyMeasure::Treasury},
+            {"schuldenquote", LegacyMeasure::DebtRatio},
+            {"lebensstandard", LegacyMeasure::LivingStandard},
+            {"alphabetisierung", LegacyMeasure::Literacy},
+            {"auswanderung", LegacyMeasure::Emigration},
+            {"unruhe", LegacyMeasure::Unrest},
+            {"zustimmung", LegacyMeasure::Approval},
+            {"soldaten", LegacyMeasure::Soldiers},
+            {"staerke", LegacyMeasure::Strength},
+            {"orte", LegacyMeasure::Locations},
+            {"buendnisse", LegacyMeasure::Alliances},
+            {"siege", LegacyMeasure::WarsWon},
+            {"niederlagen", LegacyMeasure::WarsLost},
+            {"bankrotte", LegacyMeasure::Bankruptcies},
+            {"aufstaende", LegacyMeasure::Revolts},
+            {"wahlen", LegacyMeasure::Elections},
+            {"praesidium", LegacyMeasure::Presidency},
+            {"bundesmitglied", LegacyMeasure::FederationMember},
+        }};
+        for (const auto& [name, measure] : kMeasures) {
+            if (name == id) {
+                return measure;
+            }
+        }
+        return std::nullopt;
+    }
+
+    void load_legacy(const Source& source) {
+        file_ = source.name;
+        bool found = false;
+        LegacyRules rules;
+        for (const ScriptNode& node : source.root.children) {
+            if (node.key != "vermaechtnis" || !node.is_block || !node.value.empty()) {
+                warning(node.line, "unbekannter Eintrag " + quote(node.key.empty() ? node.value : node.key) +
+                                       " wird ignoriert (erwartet: vermaechtnis { dimension … })");
+                continue;
+            }
+            if (found) {
+                error(node.line, "Block 'vermaechtnis' ist mehrfach angegeben");
+                continue;
+            }
+            found = true;
+            std::set<std::string, std::less<>> ids;
+            for (const ScriptNode& child : node.children) {
+                if (child.key != "dimension" || !child.is_block || !is_lower_id(child.value, false)) {
+                    error(child.line,
+                          "ungültiger Eintrag in vermaechtnis, erwartet: dimension <kennung> { … }");
+                    continue;
+                }
+                if (!ids.insert(child.value).second) {
+                    error(child.line, "doppelte Dimension " + quote(child.value) + " in vermaechtnis");
+                    continue;
+                }
+                rules.dimensions.push_back(legacy_dimension(child));
+            }
+            if (rules.dimensions.empty()) {
+                error(node.line,
+                      "vermaechtnis braucht mindestens eine Dimension (dimension <kennung> { … })");
+            }
+        }
+        if (!found) {
+            error(0, "Block 'vermaechtnis { … }' fehlt");
+            return;
+        }
+        rules.active = !rules.dimensions.empty();
+        world_.legacy_rules = std::move(rules);
+    }
+
+    LegacyDimension legacy_dimension(const ScriptNode& node) {
+        LegacyDimension d;
+        d.id = node.value;
+        const std::string what = "dimension " + d.id;
+        std::map<std::string, int, std::less<>> seen;
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "faktor") {
+                if (!child.is_block) {
+                    error(child.line, "'faktor' in " + what + " erwartet einen Block { name … gewicht … }");
+                    continue;
+                }
+                d.factors.push_back(legacy_factor(child, what));
+                continue;
+            }
+            if (child.key == "satz") {
+                if (!child.is_block) {
+                    error(child.line, "'satz' in " + what + " erwartet einen Block { ab … text … }");
+                    continue;
+                }
+                LegacySentence sentence;
+                std::map<std::string, int, std::less<>> fields;
+                for (const ScriptNode& f : child.children) {
+                    if (!first_time(fields, f, "satz in " + what)) {
+                        continue;
+                    }
+                    if (f.key == "ab") {
+                        sentence.from = number(f, Fixed::zero(), Fixed::from_int(100)).value_or(Fixed{});
+                    } else if (f.key == "text") {
+                        sentence.text = text(f).value_or("");
+                    } else {
+                        warning(f.line, "unbekanntes Feld " + quote(f.key) + " in satz von " + what +
+                                            " wird ignoriert");
+                    }
+                }
+                if (fields.count("ab") == 0 || fields.count("text") == 0) {
+                    error(child.line, "satz in " + what + " braucht 'ab' und 'text'");
+                    continue;
+                }
+                d.sentences.push_back(std::move(sentence));
+                continue;
+            }
+            if (!first_time(seen, child, what)) {
+                continue;
+            }
+            if (child.key == "name") {
+                if (scalar(child)) {
+                    d.name = text(child).value_or("");
+                }
+            } else if (child.key == "grund") {
+                d.base = number(child, Fixed::zero(), Fixed::from_int(100)).value_or(Fixed{});
+            } else {
+                warning(child.line,
+                        "unbekanntes Feld " + quote(child.key) + " in " + what + " wird ignoriert");
+            }
+        }
+        if (seen.count("name") == 0) {
+            error(node.line, "Pflichtfeld 'name' fehlt in " + what);
+        }
+        if (d.factors.empty()) {
+            error(node.line, what + " braucht mindestens einen Faktor (faktor { … })");
+        }
+        std::stable_sort(d.sentences.begin(), d.sentences.end(),
+                         [](const LegacySentence& a, const LegacySentence& b) { return a.from > b.from; });
+        return d;
+    }
+
+    LegacyFactor legacy_factor(const ScriptNode& node, const std::string& dimension) {
+        LegacyFactor f;
+        const std::string what = "faktor in " + dimension;
+        std::map<std::string, int, std::less<>> seen;
+        for (const ScriptNode& child : node.children) {
+            if (!first_time(seen, child, what)) {
+                continue;
+            }
+            if (child.key == "name") {
+                if (scalar(child)) {
+                    f.name = text(child).value_or("");
+                }
+            } else if (child.key == "groesse") {
+                if (scalar(child) && assign(child)) {
+                    if (const auto measure = legacy_measure(child.value)) {
+                        f.measure = *measure;
+                    } else {
+                        error(child.line, "unbekannte Größe " + quote(child.value) + " in " + what +
+                                              " (chronik-skript.md 3.41)");
+                    }
+                }
+            } else if (child.key == "gewicht") {
+                f.weight = number(child, Fixed::from_int(-1000), Fixed::from_int(1000)).value_or(Fixed{});
+            } else if (child.key == "hoechstens") {
+                f.cap = number(child, Fixed::zero(), Fixed::from_int(100)).value_or(Fixed{});
+            } else if (child.key == "wenn") {
+                f.has_condition = true;
+                f.condition = condition_block(child, true);
+            } else {
+                warning(child.line,
+                        "unbekanntes Feld " + quote(child.key) + " in " + what + " wird ignoriert");
+            }
+        }
+        if (seen.count("name") == 0) {
+            error(node.line, "Pflichtfeld 'name' fehlt in " + what);
+        }
+        if (seen.count("gewicht") == 0) {
+            error(node.line, "Pflichtfeld 'gewicht' fehlt in " + what);
+        }
+        if (seen.count("groesse") == 0 && seen.count("wenn") == 0) {
+            error(node.line, what + " braucht 'groesse' oder 'wenn'");
+        }
+        return f;
     }
 
     // ── KI der Staaten (seit M12, ki.md Abschnitt 3; chronik-skript.md 3.37–3.39) ──
@@ -3031,6 +3220,8 @@ private:
                 }
             } else if (child.key == "text") {
                 j.text = text(child).value_or("");
+            } else if (child.key == "historisch") { // seit M13a4: Vergleich im Urteil der Geschichte
+                j.historical = text(child).value_or("");
             } else if (child.key == "beginn" || child.key == "ende") {
                 if (assign(child)) {
                     if (const auto d = date(child)) {

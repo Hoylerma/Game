@@ -20,6 +20,8 @@ journal deutsche_frage {
         "des Mains oder der alte Bund, entscheidet sich bis zum Sommer 1871."
     }
     ende = 1871.07.01
+    # Seit M13a4: Vergleich im Urteil der Geschichte (vertical_slice.md 3.5).
+    historisch = "Historisch: Nach den Kriegen von 1864, 1866 und 1870/71 riefen die deutschen Fürsten am 18. Januar 1871 in Versailles König Wilhelm I. von Preußen zum Deutschen Kaiser aus. Das kleindeutsche Reich umfasste die Staaten nördlich und südlich des Mains, Österreich blieb draußen."
 
     stufe deutscher_bund {
         titel = "Der Deutsche Bund"

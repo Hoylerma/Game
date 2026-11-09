@@ -8,6 +8,7 @@
 szenario sedan {
     name     = "Sedan"
     datum    = 1870.07.19
+    ende     = 1871.07.01   # seit M13a4: Urteil der Geschichte (vertical_slice.md 3.5)
     spieler  = PRU
     spielbar = { PRU FRK BAV }
     waehrung = "Taler"

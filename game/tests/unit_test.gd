@@ -32,6 +32,7 @@ func _initialize() -> void:
 	_test_election_tally()
 	_test_party_panel()
 	_test_event_window()
+	_test_chronicle_export()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -804,3 +805,38 @@ func _test_event_window() -> void:
 	window.show_events(none)
 	_true(not window.is_open(), "ohne offene Ereignisse geschlossen")
 	window.free()
+
+
+## Chronik als HTML (seit M13a4): Maskierung, Jahre, Wendepunkte, Dateiname; Tooltip des Urteils.
+func _test_chronicle_export() -> void:
+	_true(ChronicleExport.escape("a<b & \"c\">") == "a&lt;b &amp; &quot;c&quot;&gt;", "HTML maskiert")
+	_true(ChronicleExport.year_of("1. März 1848") == 1848 and ChronicleExport.year_of("01.03.1849") == 1849, "Jahr aus dem Datum")
+	_true(ChronicleExport.year_of("ohne") == 0, "ohne Jahr 0")
+	var sections: Array[Dictionary] = [{"heading": "Ausgang", "lines": PackedStringArray(["Die deutsche Frage: Reich"])}]
+	var entries: Array[Dictionary] = [
+		{"date_text": "1. März 1848", "text": "Revolution <Paris>", "turning_point": false},
+		{"date_text": "18. März 1848", "text": "Barrikaden", "turning_point": true},
+		{"date_text": "1. Mai 1849", "text": "Wahl", "turning_point": false},
+	]
+	var html := ChronicleExport.build_html("Chronik – Test", PackedStringArray(["Gespielt als Preußen"]), sections, entries)
+	_true(html.begins_with("<!DOCTYPE html>") and html.contains("<title>Chronik – Test</title>"), "Kopf der Seite")
+	_true(html.contains("<h3>1848</h3>") and html.contains("<h3>1849</h3>"), "Jahre als Überschriften")
+	_true(html.contains("Revolution &lt;Paris&gt;") and not html.contains("<Paris>"), "Einträge maskiert")
+	_true(html.contains("<li class=\"wende\"><span class=\"datum\">18. März 1848</span> Barrikaden</li>"), "Wendepunkt hervorgehoben")
+	_true(html.contains("<h2>Ausgang</h2>") and html.contains("<li>Die deutsche Frage: Reich</li>"), "Abschnitt vor der Chronik")
+	_true(html.count("<ul>") == html.count("</ul>"), "Listen geschlossen")
+	_true(
+		ChronicleExport.file_name("voelkerfruehling", {"year": 1871, "month": 7, "day": 2})
+		== "chronik_voelkerfruehling_1871-07-02.html", "Dateiname"
+	)
+	_true(ChronicleExport.file_name("a/b", {}).begins_with("chronik_a_b_"), "Dateiname ohne Pfadzeichen")
+	var tip := VerdictWindow._factor_text({
+		"base": 30.0,
+		"factors": [
+			{"name": "Bund", "value": 25.0, "active": true},
+			{"name": "Zollverein", "value": 0.0, "active": false},
+			{"name": "Unruhe", "value": -6.2, "active": true},
+		],
+	})
+	_true(tip == "Grundwert +30\nBund +25\nUnruhe -6", "Faktoren im Tooltip (%s)" % tip)
+

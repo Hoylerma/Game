@@ -16,6 +16,8 @@ signal new_game_requested(scenario_id: String)
 signal last_election_requested
 ## Bisherige Ereignisse zeigen (seit M11).
 signal events_requested
+## Urteil der Geschichte (seit M13a4), nach dem Ende der Partie.
+signal verdict_requested
 ## Rolle gewählt (seit M8): Index der Strömung im Parteienmodus, -1 = Staat.
 signal role_selected(current: int)
 
@@ -36,6 +38,7 @@ var _current_scenario := ""
 var _scenario_names := {}
 var _new_game_button: Button = null
 var _last_election_button: Button = null
+var _verdict_button: Button = null
 var _events_button: Button = null
 var _role_caption: Label = null
 var _role_select: OptionButton = null
@@ -138,6 +141,11 @@ func show_last_election(available: bool) -> void:
 ## Knopf „Ereignisse“ nur in Partien mit Ereignissen (seit M11).
 func show_events(available: bool) -> void:
 	_events_button.visible = available
+
+
+## Knopf „Urteil“ nur nach dem Ende der Partie (seit M13a4).
+func show_verdict(available: bool) -> void:
+	_verdict_button.visible = available
 
 
 ## Kennungen der angebotenen Szenarien (Tests).
@@ -296,6 +304,11 @@ func _build() -> void:
 	_events_button.tooltip_text = "Bisherige Ereignisse mit der gewählten Option; Journale"
 	_events_button.visible = false
 	row.add_child(_events_button)
+	_verdict_button = _button("Urteil", func() -> void: verdict_requested.emit())
+	_verdict_button.name = "VerdictButton"
+	_verdict_button.tooltip_text = "Urteil der Geschichte am Ende der Partie"
+	_verdict_button.visible = false
+	row.add_child(_verdict_button)
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(spacer)

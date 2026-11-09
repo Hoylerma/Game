@@ -453,6 +453,13 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("bund.vorlage", w.federation.diet);
         list(v, "bund.mitglieder", w.federation.members, Extent::State, [&](auto& m) { v.field("", m); });
         v.field("bund.gegruendet", w.federation.founded);
+        // Jahresreihen (seit M13a4, vertical_slice.md 4.3), nur mit Vermächtnis.
+        if (w.legacy_rules.active) {
+            list(v, "jahrbuch", w.yearbook, Extent::State, [&](auto& r) {
+                v.field("datum", r.date);
+                list(v, "werte", r.values, Extent::State, [&](auto& x) { v.field("", x); });
+            });
+        }
     }
 
     // KI der Staaten (seit M12, Schritt a1): nur mit KI-Daten (1648 bleibt bitgleich). Personen im Amt je

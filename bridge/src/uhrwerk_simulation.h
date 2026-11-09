@@ -198,6 +198,12 @@ public:
     godot::Dictionary get_state_events(std::int64_t state_index) const;
     godot::Array get_revolts() const;
 
+    // Vermächtnis, Jahrbuch und Ende der Partie (seit M13, Schritt a4, vertical_slice.md 3.5 und 4.3)
+    godot::Dictionary get_legacy(std::int64_t state_index) const;
+    godot::Dictionary get_yearbook(std::int64_t state_index) const;
+    godot::Dictionary get_verdict() const;
+    bool is_game_over() const;
+
     // Spieleinstellungen (seit M13, Schritt a1, vertical_slice.md 3.2)
     godot::Dictionary get_game_settings() const;
     bool set_game_settings(const godot::String& difficulty_id, bool open);

@@ -371,8 +371,15 @@ szenario westfaelischer_frieden {
     waehrung = "Reichstaler"               # optional (seit M7): Name der Rechnungseinheit
     tragfaehigkeit_faktor = 1              # optional (seit M7): Agrartechnik, Faktor 0,1–10 auf die
                                            # Tragfähigkeit aller Gelände (Standard 1)
+    ende     = 1871.07.01                  # optional (seit M13a4): letzter Tag der Partie
 }
 ```
+
+`ende` (seit M13a4, [vertical_slice.md](vertical_slice.md) 3.5) muss nach `datum` liegen. Am letzten Tag
+treten keine Ereignisse und Folgeereignisse mehr ein, die Journale wählen noch ihren Ausgang; mit einem
+Vermächtnis (Abschnitt 3.41) schreibt der Kern eine letzte Jahresreihe und die Chronik „Ende der Partie“.
+Danach ist die Partie zu Ende (`game_over`): Godot zeigt das Urteil der Geschichte, Weiterspielen bleibt
+möglich, aber ohne neue Ereignisse. Im Kern `Scenario::has_end` und `Scenario::end`.
 
 `tragfaehigkeit_faktor` (seit M7) gibt den Stand der Landwirtschaft zum Startdatum wieder: Kartoffel,
 Klee- und Fruchtwechselwirtschaft und die Agrarreformen ernähren 1848 weit mehr Menschen je km² als 1648
@@ -1358,6 +1365,7 @@ journal revolution {
     text   = "…"                      # optional, wie bei Ereignissen
     beginn = 1848.03.01               # optional: erste Stufe ab diesem Tag (sonst ab dem Start)
     ende   = 1851.12.31               # optional: dann gilt der Ausgang mit standard = ja (Pflicht)
+    historisch = "Historisch: …"      # optional seit M13a4: Vergleich im Urteil der Geschichte
     stufe maerz {                     # die erste Stufe beginnt; Stufen und Ausgänge in beliebiger Folge
         titel = "Märzunruhen"         # Pflicht
         text  = "…"
@@ -1543,6 +1551,63 @@ bankrott { staaten = { PRU AUT }  anteil = { 0 0.2 } } # Läufe mit einem Staats
 Ohne Eintrag gilt: **keine Abstürze**. Fehler (Exitcode 1): unbekannte Felder, Journale, Ausgänge und
 Staaten, ein Ausgang ohne `journal`, ein Bereich außerhalb von 0 bis 1, `gegen` mit demselben Staat, ein
 Ende vor dem Start.
+
+### 3.41 `common/vermaechtnis.chron` (seit M13a4)
+
+Vermächtnis der Staaten ([vertical_slice.md](vertical_slice.md) 3.5, Kapitel 00 Abschnitt 7.1); nur in
+Welten mit Ereignissen, die Datei darf fehlen (dann gibt es weder Vermächtnis noch Jahresreihen).
+
+```text
+vermaechtnis {                                   # Pflicht, genau einmal
+    dimension einigkeit {                        # mindestens eine; Kennung aus a–z, 0–9 und _
+        name  = "Einigkeit"                      # Pflicht
+        grund = 30                               # optional: Grundwert 0..100 (Standard 0)
+        faktor { name = "Bundesstaat"  wenn { bund = ja }  gewicht = 10 }      # mindestens einer
+        faktor { name = "Unruhe"  groesse = unruhe  gewicht = -0.3 }
+        faktor { name = "Aufstände"  groesse = aufstaende  gewicht = -3  hoechstens = 15 }
+        satz { ab = 70  text = "…" }             # optional, mehrfach: Satz im Urteil der Geschichte
+    }
+}
+```
+
+Der Wert einer Dimension ist `grund` plus die Beiträge der Faktoren, begrenzt auf 0 bis 100; er wird
+jederzeit aus dem Zustand berechnet (abgeleitet). Ein Faktor trägt `gewicht × groesse` bei, ohne
+`groesse` das Gewicht selbst, und nur, wenn die Bedingung `wenn` (wie in Ereignissen, Abschnitt 3.34, für
+den Staat) gilt; `hoechstens` (0..100) begrenzt den Betrag des Beitrags. `name` und `gewicht` (−1000 bis
+1000) sind Pflicht, dazu `groesse` oder `wenn`. Ein `satz` braucht `ab` (0..100) und `text`; im Urteil
+gilt der erste mit dem höchsten erreichten `ab`.
+
+Größen je Staat (`uhrwerk::LegacyMeasure`):
+
+| Größe | Bedeutung |
+|---|---|
+| `bevoelkerung` | Einwohner in Millionen |
+| `einnahmen`, `schulden`, `schatz` | Jahreseinnahmen, Staatsschulden, Staatskasse in Millionen Talern |
+| `schuldenquote` | Schulden ÷ Jahreseinnahmen |
+| `lebensstandard` | 0 bis 100, nach Einwohnern der Blöcke gemittelt |
+| `alphabetisierung` | Prozent der Einwohner |
+| `auswanderung` | Auswanderer des Vorjahres je 1.000 Einwohner |
+| `unruhe` | 0 bis 100 |
+| `zustimmung` | −10 bis +10, nach dem Anteil der Interessengruppen im Staat gemittelt |
+| `soldaten` | Soldaten in Tausend |
+| `staerke` | Soldaten ÷ Soldaten des stärksten Staates (0 bis 1) |
+| `orte` | Orte mit Daten |
+| `buendnisse` | Bündnisse |
+| `siege`, `niederlagen` | gewonnene bzw. verlorene Kriege als Hauptpartei |
+| `bankrotte` | Staatsbankrotte der Partie |
+| `aufstaende` | Aufstände der Partie, laufende und beendete |
+| `wahlen` | Wahlen der letzten zehn Jahre mit einem Wahlkreis des Staates |
+| `praesidium` | 1 mit dem Präsidium der Bundesversammlung, die gilt |
+| `bundesmitglied` | 1 als Mitglied eines Bundes zur Laufzeit (Abschnitt 3.29, Wirkung `bund`) |
+
+**Jahresreihen:** Mit einem Vermächtnis schreibt der Kern am Start, an jedem 1. Januar (mit der Bilanz des
+Vorjahres) und am letzten Tag der Partie (Abschnitt 3.7, `ende`) je Staat die zwölf Kennzahlen des
+Jahrbuchs (`bevoelkerung`, `einnahmen`, `schulden`, `schatz`, `lebensstandard`, `alphabetisierung`,
+`auswanderung`, `unruhe`, `zustimmung`, `soldaten`, `orte`, `buendnisse`) und die Werte der Dimensionen in
+`World::yearbook` (Zustand, im Spielstand). Fehler: ein zweiter Block `vermaechtnis`, eine doppelte
+Dimension, eine unbekannte Größe, fehlende Pflichtfelder, ein Block ohne Dimension oder eine Dimension ohne
+Faktor. Inhaltsbereich `ereignisse` (Stand 9). Im Kern `World::legacy_rules` (`LegacyRules`), Berechnung in
+`legacy.hpp`.
 
 ## 4. Startzustand
 

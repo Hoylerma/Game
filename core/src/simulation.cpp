@@ -5,6 +5,7 @@
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
+#include "uhrwerk/legacy.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/politics.hpp"
 
@@ -68,7 +69,16 @@ Simulation::Simulation(World world, SimConfig config)
     ensure_events_state(world_);
     rebuild_event_cache(world_, event_cache_);
     ensure_ai_state(world_, event_cache_);
+    record_year(); // seit M13a4: Jahresreihe zum Start (nur mit Vermächtnis, nicht nach dem Laden)
     start_checksum_ = checksum();
+}
+
+void Simulation::record_year() {
+    if (!world_.legacy_rules.active ||
+        (!world_.yearbook.empty() && world_.yearbook.back().date == world_.date)) {
+        return;
+    }
+    world_.yearbook.push_back(year_record(world_, event_cache_));
 }
 
 void Simulation::rebuild_derived() {
@@ -256,6 +266,8 @@ void Simulation::step_day() {
         world_.balance_previous = world_.balance_current;
         std::fill(world_.balance_current.begin(), world_.balance_current.end(), PopulationBalance{});
         draw_harvest(world_, topology_, rng_economy_);
+        // Jahresreihe zum 1. Januar mit der Bilanz des Vorjahres (seit M13a4, vertical_slice.md 4.3).
+        record_year();
         // Beantragte Wechsel der Zollunion werden wirksam (seit M9, diplomatie.md Abschnitt 3.5).
         if (!world_.customs_unions.empty()) {
             apply_customs_changes(world_);
@@ -376,6 +388,15 @@ void Simulation::step_day() {
     // 7. Jahreswechsel.
     if (new_year) {
         run_yearly();
+    }
+
+    // 7b. Letzter Tag der Partie (seit M13a4, vertical_slice.md 3.5): Jahresreihe und Chronik.
+    if (world_.scenario.has_end && world_.date == world_.scenario.end && world_.legacy_rules.active) {
+        record_year();
+        ChronicleEntry entry;
+        entry.date = world_.date;
+        entry.text = "Ende der Partie: Die Geschichte spricht ihr Urteil.";
+        world_.chronicle.push_back(std::move(entry));
     }
 
     // 8. Datum weiterschalten.

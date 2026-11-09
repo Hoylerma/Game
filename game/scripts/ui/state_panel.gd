@@ -98,6 +98,10 @@ var _mobilization_sent := -1
 const GOVERNMENT_REFRESH_MS := 1000
 var persons_source: Callable = Callable()
 var intentions_source: Callable = Callable()
+## Vermächtnis (seit M13a4, vertical_slice.md 3.5): die fünf Dimensionen in einer Zeile, je Dimension die
+## Faktoren im Tooltip; main.gd liefert sie über legacy_source (SimulationClient.get_legacy).
+var legacy_source: Callable = Callable()
+var _legacy: Label = null
 var _minister_caption: Label = null
 var _minister: Label = null
 var _government_inclinations: Label = null
@@ -603,6 +607,14 @@ func _build_government() -> void:
 	var content := facts.get_parent()
 	content.add_child(_government_inclinations)
 	content.move_child(_government_inclinations, facts.get_index() + 1)
+	_legacy = Label.new()
+	_legacy.name = "Legacy"
+	_legacy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_legacy.theme_type_variation = &"CaptionLabel"
+	_legacy.mouse_filter = Control.MOUSE_FILTER_PASS
+	_legacy.visible = false
+	content.add_child(_legacy)
+	content.move_child(_legacy, _government_inclinations.get_index() + 1)
 
 
 ## Füllt Herrscher, Minister und Neigungen höchstens einmal je Sekunde (die Absichten bauen den
@@ -614,6 +626,7 @@ func _update_government(state: Dictionary) -> void:
 		return
 	_government_state = tag
 	_government_filled_at = Time.get_ticks_msec()
+	_update_legacy()
 	var persons: Array = persons_source.call() if persons_source.is_valid() else []
 	var intentions: Dictionary = intentions_source.call() if intentions_source.is_valid() else {}
 	_government_lines = PackedStringArray()
@@ -666,6 +679,37 @@ func _update_government(state: Dictionary) -> void:
 		"Neigungen von −2 bis +2: Staatspersönlichkeit und die Eigenschaften von Herrscher und Minister nach "
 		+ "ihrem Anteil. Sie lenken die Entscheidungen der Staaten ohne Spieler und die Wahl bei Ereignissen."
 	)
+
+
+## Vermächtnis: „Vermächtnis: Einigkeit 44 · Recht 56 …“, im Tooltip je Dimension Satz und Faktoren.
+func _update_legacy() -> void:
+	var legacy: Dictionary = legacy_source.call() if legacy_source.is_valid() else {}
+	var dimensions: Array = legacy.get("dimensions", [])
+	_legacy.visible = not dimensions.is_empty()
+	if dimensions.is_empty():
+		return
+	var parts := PackedStringArray()
+	var tips := PackedStringArray()
+	for dimension: Dictionary in dimensions:
+		parts.append("%s %d" % [str(dimension.get("name", "")), roundi(float(dimension.get("value", 0.0)))])
+		var tip := PackedStringArray(
+			["%s %d: %s" % [
+				str(dimension.get("name", "")), roundi(float(dimension.get("value", 0.0))),
+				str(dimension.get("sentence", "")),
+			], "  Grundwert %+d" % roundi(float(dimension.get("base", 0.0)))]
+		)
+		for factor: Dictionary in dimension.get("factors", []):
+			var value := float(factor.get("value", 0.0))
+			if bool(factor.get("active", false)) and absf(value) >= 0.5:
+				tip.append("  %s %+d" % [str(factor.get("name", "")), roundi(value)])
+		tips.append("\n".join(tip))
+	_legacy.text = "Vermächtnis: " + " · ".join(parts)
+	_legacy.tooltip_text = "\n\n".join(tips)
+
+
+## Vermächtnis als Text (Tests); leer ohne Vermächtnis.
+func legacy_text() -> String:
+	return _legacy.text if _legacy.visible else ""
 
 
 ## Herrscher, Minister (mit Amt und Eigenschaften) und Neigungen als Text (Tests).

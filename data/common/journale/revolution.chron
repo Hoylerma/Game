@@ -17,6 +17,7 @@ journal revolution {
     }
     beginn = 1848.03.01
     ende   = 1851.12.31
+    historisch = "Historisch: Friedrich Wilhelm IV. lehnte die Kaiserkrone am 3. April 1849 ab. Die Reichsverfassung trat nicht in Kraft, die Aufstände in Sachsen, der Pfalz und Baden wurden niedergeschlagen, und 1851 tagte die Bundesversammlung wieder in Frankfurt."
 
     stufe maerz {
         titel = "Märzunruhen"

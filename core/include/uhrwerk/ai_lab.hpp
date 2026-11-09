@@ -93,6 +93,7 @@ struct AiLabRun {
     double seconds = 0;
     double ai_seconds = 0;
     std::uint64_t checksum = 0; // Prüfsumme am Ende (gleich mit jeder Zahl von Threads)
+    std::vector<Fixed> legacy;  // seit M13a4: Vermächtnis am Ende [staat × dimensionen], leer ohne
 };
 
 /// Rechnet einen Lauf mit config.seed bis targets.until, ohne Spieler.

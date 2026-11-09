@@ -110,6 +110,11 @@ var _player_gone_noticed := false
 ## Ereignisse und Journale (seit M11, Schritt b4, ereignisse.md Abschnitt 9).
 var _event_window: EventWindow = null
 var _journal_window: JournalWindow = null
+## Urteil der Geschichte (seit M13a4) und ob es nach dem Ende schon gezeigt wurde.
+var _verdict_window: VerdictWindow = null
+var _verdict_shown := false
+## Letzter Tag der Partie als Tagesnummer (ElectionTally.day_number), −1 ohne Ende.
+var _end_day := -1
 ## Tempo vor dem Ereignisfenster; nach der letzten Wahl geht es damit weiter.
 var _speed_before_event := 0
 ## Kriege beim letzten Aufbau der Legende im Kartenmodus „Krieg“ (_war_signature).
@@ -147,6 +152,7 @@ func _ready() -> void:
 	_build_diplomacy()
 	_build_war()
 	_build_events()
+	_build_verdict()
 	_build_start_screen()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
@@ -157,6 +163,8 @@ func _ready() -> void:
 		return _sim.get_state_persons(_player) if _sim != null else []
 	_state_panel.intentions_source = func() -> Dictionary:
 		return _sim.get_intentions(_player) if _sim != null else {}
+	_state_panel.legacy_source = func() -> Dictionary:
+		return _sim.get_legacy(_player) if _sim != null else {}
 	_state_panel.customs_change_requested.connect(_on_customs_change_requested)
 	_state_panel.customs_source = func() -> Array:
 		return _sim.get_customs_unions() if _sim != null else []
@@ -218,6 +226,8 @@ func _process(delta: float) -> void:
 	var step := mini(capped, SaveSlots.days_until_new_year(_sim.get_date()))
 	# Höchstens bis einschließlich zum nächsten Wahltag: Danach öffnet der Wahlabend (seit M8).
 	step = mini(step, _days_through_next_election())
+	# Höchstens bis einschließlich zum letzten Tag der Partie: Danach folgt das Urteil (seit M13a4).
+	step = mini(step, _days_through_end())
 	_day_accumulator += capped - step
 	_sim.advance_days(step)
 	_after_time_passed()
@@ -534,6 +544,10 @@ func _after_time_passed() -> void:
 		_update_owners(true)
 		if not _quiet_elections:
 			_open_election_night(_elections_seen - 1, _options.wants_screenshot())
+	# Ende der Partie (seit M13a4): einmal das Urteil der Geschichte, die Zeit hält an.
+	if not _verdict_shown and _end_day >= 0 and _sim.is_game_over():
+		_verdict_shown = true
+		open_verdict()
 	else:
 		# Ein Bund kann gegründet werden; seine erste Wahl liegt Monate später (seit M13a3).
 		var now := _sim.get_date()
@@ -823,6 +837,14 @@ func _read_scenario_constants() -> bool:
 	# Journale (seit M11, Schritt b4): Knopf „Journale …“ nur in Szenarien mit Journalen.
 	_state_panel.set_journals_available(not _sim.get_journals().is_empty())
 	_location_panel.player_index = _player
+	# Ende der Partie (seit M13a4): Wer nach dem Ende lädt, spielt weiter, ohne Urteil beim Laden.
+	var verdict := _sim.get_verdict()
+	_end_day = -1
+	if bool(verdict.get("has_end", false)) and bool(verdict.get("active", false)):
+		_end_day = ElectionTally.day_number(verdict.get("end_date", {}))
+	_verdict_shown = _sim.is_game_over()
+	if _verdict_window != null:
+		_verdict_window.close()
 	# Wahlen (seit M8): Was schon gewählt ist, öffnet keinen Wahlabend mehr.
 	_elections_seen = _sim.get_election_count()
 	_currents = _sim.get_currents()
@@ -1911,6 +1933,11 @@ func _build_game_menu() -> void:
 	_game_menu.close_requested.connect(close_game_menu)
 	_game_menu.new_game_requested.connect(func(id: String) -> void: start_new_game(id))
 	_game_menu.last_election_requested.connect(open_last_election)
+	_game_menu.verdict_requested.connect(
+		func() -> void:
+			close_game_menu(false)
+			open_verdict()
+	)
 	_game_menu.events_requested.connect(open_event_log)
 	_game_menu.role_selected.connect(set_party)
 
@@ -2277,6 +2304,68 @@ func _place_event_window() -> void:
 	)
 
 
+# --- Urteil der Geschichte (seit M13a4, vertical_slice.md 3.5) ------------------------
+
+
+func _build_verdict() -> void:
+	_verdict_window = VerdictWindow.new()
+	$UI.add_child(_verdict_window)
+	# Unter dem Spielmenü wie der Wahlabend.
+	$UI.move_child(_verdict_window, _game_menu.get_index())
+	_verdict_window.continue_requested.connect(close_verdict)
+	_verdict_window.menu_requested.connect(
+		func() -> void:
+			close_verdict()
+			open_start_screen()
+	)
+	_verdict_window.export_requested.connect(export_chronicle)
+	_verdict_window.minimum_size_changed.connect(_place_verdict)
+
+
+## Urteil der Geschichte (Zugriff für Tests).
+func verdict_window() -> VerdictWindow:
+	return _verdict_window
+
+
+## Öffnet das Urteil der Geschichte; die Zeit hält an.
+func open_verdict() -> void:
+	if _sim == null:
+		return
+	_set_speed(0)
+	_tooltip.hide_tooltip()
+	_state_panel.hide_popups()
+	close_diplomacy()
+	close_war_window()
+	close_journal()
+	_verdict_window.open(_sim, _player)
+	_place_verdict()
+
+
+## Weiterspielen: schließt das Urteil, die Zeit bleibt angehalten.
+func close_verdict() -> void:
+	_verdict_window.close()
+
+
+## Schreibt die Chronik als HTML-Datei und nennt den Pfad im Urteil.
+func export_chronicle() -> String:
+	var path := ChronicleExport.write(_sim)
+	if path.is_empty():
+		_verdict_window.show_export_note("Die Chronik konnte nicht geschrieben werden.")
+	else:
+		_verdict_window.show_export_note("Chronik gespeichert: %s" % ProjectSettings.globalize_path(path))
+	return path
+
+
+func _place_verdict() -> void:
+	if _verdict_window == null or not _verdict_window.is_open():
+		return
+	var area := get_viewport().get_visible_rect().size
+	_verdict_window.size = _verdict_window.get_combined_minimum_size()
+	_verdict_window.position = Vector2(
+		roundf((area.x - _verdict_window.size.x) * 0.5), maxf(8.0, roundf((area.y - _verdict_window.size.y) * 0.5))
+	)
+
+
 # --- Wahlabend (seit M8) ----------------------------------------------------------
 
 
@@ -2381,6 +2470,14 @@ func _update_pending_elections() -> void:
 			_pending_election_days.append(ElectionTally.day_number(parliament.get("election_date", {})))
 
 
+## Tage bis einschließlich zum letzten Tag der Partie (mindestens 1), solange das Urteil aussteht.
+func _days_through_end() -> int:
+	if _end_day < 0 or _verdict_shown:
+		return MAX_DAYS_PER_FRAME
+	var today := ElectionTally.day_number(_sim.get_date())
+	return maxi(_end_day - today + 1, 1)
+
+
 ## Tage bis einschließlich zum nächsten Wahltag (mindestens 1), sonst eine große Zahl.
 func _days_through_next_election() -> int:
 	var today := ElectionTally.day_number(_sim.get_date())
@@ -2427,6 +2524,7 @@ func open_game_menu() -> void:
 	_game_menu.show_scenarios(_sim.get_scenarios(_data_dir), str(_sim.get_scenario().get("id", "")))
 	_game_menu.show_last_election(_sim.get_election_count() > 0)
 	_game_menu.show_events(_events_available())
+	_game_menu.show_verdict(_sim.is_game_over())
 	# Parteienmodus nur mit Parlament (Review M8: 1648 hat Strömungen, aber keine Wahl).
 	var roles: Array[Dictionary] = []
 	if not _sim.get_parliaments().is_empty():

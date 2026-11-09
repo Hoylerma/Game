@@ -10,6 +10,7 @@ add_library(uhrwerk_core STATIC
     src/simulation.cpp
     src/parallel.cpp
     src/politics.cpp
+    src/legacy.cpp
     src/population.cpp
     src/customs.cpp
     src/diplomacy.cpp

@@ -306,6 +306,7 @@ struct JournalDef {
     Date end;
     std::vector<JournalStage> stages; // Stufen und Ausgänge in Dateireihenfolge; die erste Stufe beginnt
     Index fallback = -1;
+    std::string historical; // seit M13a4: historischer Vergleich im Urteil der Geschichte (historisch)
     std::string file;
     int line = 0;
 };
@@ -421,6 +422,73 @@ struct EventFlag {
     std::string name;
 
     friend bool operator==(const EventFlag&, const EventFlag&) = default;
+};
+
+// ─── Vermächtnis und Jahrbuch (seit M13a4, vertical_slice.md 3.5 und 4.3) ──────
+
+/// Kennzahl eines Staates für Faktoren des Vermächtnisses und für das Jahrbuch (groesse = …).
+enum class LegacyMeasure : std::uint8_t {
+    None,
+    Population,       // bevoelkerung: Einwohner in Millionen
+    Income,           // einnahmen: Jahreseinnahmen in Millionen Talern
+    Debt,             // schulden: Staatsschulden in Millionen Talern
+    Treasury,         // schatz: Staatskasse in Millionen Talern
+    DebtRatio,        // schuldenquote: Schulden ÷ Jahreseinnahmen
+    LivingStandard,   // lebensstandard: 0 … 100, nach Einwohnern gemittelt
+    Literacy,         // alphabetisierung: Prozent
+    Emigration,       // auswanderung: Auswanderer des Vorjahres je 1.000 Einwohner
+    Unrest,           // unruhe: 0 … 100
+    Approval,         // zustimmung: −10 … +10, nach Anteil der Gruppen gemittelt
+    Soldiers,         // soldaten: in Tausend
+    Strength,         // staerke: Soldaten ÷ Soldaten des stärksten Staates (0 … 1)
+    Locations,        // orte: Zahl der Orte mit Daten
+    Alliances,        // buendnisse: Bündnisse
+    WarsWon,          // siege: gewonnene Kriege als Hauptpartei
+    WarsLost,         // niederlagen: verlorene Kriege als Hauptpartei
+    Bankruptcies,     // bankrotte: Staatsbankrotte der Partie
+    Revolts,          // aufstaende: Aufstände der Partie (laufende und beendete)
+    Elections,        // wahlen: Wahlen der letzten zehn Jahre in Wahlkreisen des Staates
+    Presidency,       // praesidium: 1 mit dem Präsidium der Bundesversammlung, die gilt
+    FederationMember, // bundesmitglied: 1 als Mitglied eines Bundes zur Laufzeit (vertical_slice.md 3.3)
+    Count
+};
+
+/// Faktor einer Dimension: Beitrag = gewicht × Größe (ohne Größe: gewicht), nur wenn die Bedingung gilt.
+struct LegacyFactor {
+    std::string name;
+    LegacyMeasure measure = LegacyMeasure::None;
+    Fixed weight;
+    bool has_condition = false;
+    Condition condition;
+    Fixed cap; // seit M13a4: Betrag des Beitrags höchstens so groß (0 = ohne Grenze)
+};
+
+/// Satz im Urteil der Geschichte ab einem Wert der Dimension.
+struct LegacySentence {
+    Fixed from;
+    std::string text;
+};
+
+struct LegacyDimension {
+    std::string id; // z. B. "einigkeit"
+    std::string name;
+    Fixed base; // Grundwert vor den Faktoren
+    std::vector<LegacyFactor> factors;
+    std::vector<LegacySentence> sentences; // nach 'ab' absteigend
+};
+
+/// common/vermaechtnis.chron (chronik-skript.md 3.41); nur mit Ereignissen.
+struct LegacyRules {
+    bool active = false;
+    std::vector<LegacyDimension> dimensions;
+};
+
+/// Jahresreihe: Kennzahlen des Jahrbuchs und Vermächtnis je Staat zu einem Stichtag (Zustand).
+struct YearRecord {
+    Date date;
+    std::vector<Fixed> values; // [staat × spalten + spalte]: erst die Kennzahlen, dann die Dimensionen
+
+    friend bool operator==(const YearRecord&, const YearRecord&) = default;
 };
 
 } // namespace uhrwerk

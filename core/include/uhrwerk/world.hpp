@@ -1057,7 +1057,9 @@ struct Scenario {
     std::vector<std::string> playable; // hervorgehobene Staaten der Staatswahl (seit M7), Tags
     std::string currency; // Name der Rechnungseinheit, z. B. „Taler“ (seit M7); leer = „Reichstaler“
     Fixed capacity_factor =
-        Fixed::one(); // Faktor auf die Tragfähigkeit aller Gelände (Agrartechnik, seit M7)
+        Fixed::one();     // Faktor auf die Tragfähigkeit aller Gelände (Agrartechnik, seit M7)
+    bool has_end = false; // seit M13a4: Ende der Partie (ende), danach Urteil der Geschichte
+    Date end;
 };
 
 /// Eintrag der Chronik (Geschichtsbuch der Partie).
@@ -1117,6 +1119,7 @@ struct World {
     std::vector<DifficultyDef> ai_difficulties;   // common/ki.chron: stufe (seit M13a1)
     std::vector<PersonDef> persons;               // common/persoenlichkeiten.chron, nach Kennung
     std::vector<AgendaDef> agendas;               // je Staat (common/agenden.chron)
+    LegacyRules legacy_rules; // seit M13a4: common/vermaechtnis.chron, nur mit Ereignissen
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -1195,6 +1198,8 @@ struct World {
     std::vector<AiCooldown> ai_cooldowns; // seit a2: laufende Abkühlungen nach Staat, Art und Ziel
     Index player_current = -1;            // seit a3: Strömung des Spielers im Parteienmodus (Befehl)
     GameSettings game_settings;           // seit M13a1: Stufe und Geschichtsverlauf (Befehl Spieleinstellung)
+    std::vector<YearRecord> yearbook;     // seit M13a4: Jahresreihen (Start, je 1. Januar, Ende); nur mit
+                                          // legacy_rules.active
 
     /// Person im Amt (Herrscher oder leitender Minister) oder -1.
     Index office(Index state, PersonRole role) const;
