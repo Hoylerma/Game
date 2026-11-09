@@ -15,6 +15,8 @@ signal state_chosen(state_tag: String)
 signal game_requested(state_tag: String, difficulty_id: String, open: bool, compass: bool)
 signal load_requested(path: String)
 signal quit_requested
+## Knopf „Einstellungen“ (seit M13a5d).
+signal settings_requested
 ## Sichtbarkeit geändert (main.gd blendet die Leisten des Spiels dahinter aus).
 signal shown_changed(open: bool)
 
@@ -418,9 +420,8 @@ func _build_menu() -> VBoxContainer:
 	lesson.disabled = true
 	lesson.tooltip_text = "„März 1848 in Berlin“ folgt mit Schritt b3 (vertical_slice.md 5.4)"
 	page_box.add_child(lesson)
-	var settings := _menu_button("Einstellungen", "Settings", func() -> void: pass)
-	settings.disabled = true
-	settings.tooltip_text = "Das Fenster Einstellungen folgt mit Schritt a5 (vertical_slice.md 4.5)"
+	var settings := _menu_button("Einstellungen", "Settings", func() -> void: settings_requested.emit())
+	settings.tooltip_text = "Bild, Ton, Spiel, Barrierefreiheit, Tasten und Sprache"
 	page_box.add_child(settings)
 	page_box.add_child(_menu_button("Beenden", "Quit", func() -> void: quit_requested.emit()))
 	return page_box

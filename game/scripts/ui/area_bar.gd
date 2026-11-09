@@ -21,7 +21,8 @@ const AREAS: Array[Array] = [
 	[&"militaer", "Militär", "Kriege, Heere und Frieden"],
 	[&"journale", "Journale", "Revolution und deutsche Frage (J)"],
 	[&"jahrbuch", "Jahrbuch", "Statistisches Jahrbuch: Kennzahlen und Vermächtnis je Jahr (B)"],
-	[&"chronik", "Chronik", "Chronik ein- und ausblenden"],
+	[&"chronik", "Chronik", "Chronik der Partie mit Filter und Suche"],
+	[&"lexikon", "Lexikon", "Begriffe der Epoche und des Spiels"],
 ]
 
 var _buttons: Dictionary = {}

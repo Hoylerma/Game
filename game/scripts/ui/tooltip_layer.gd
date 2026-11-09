@@ -12,6 +12,12 @@ const CLOSE_DELAY := 0.3
 const MAX_WIDTH := 380.0
 const LEVELS := 2
 
+## Verweis angeklickt (seit M13a5d: main.gd öffnet das Lexikon).
+signal link_clicked(meta: String)
+
+## Lexikon für Begriffe ohne Eintrag im Glossar (erster Absatz).
+var lexicon: Lexicon = null
+
 var _panels: Array[PanelContainer] = []
 var _labels: Array[RichTextLabel] = []
 var _owner_control: Control = null
@@ -41,8 +47,10 @@ func _ready() -> void:
 		label.custom_minimum_size = Vector2(MAX_WIDTH, 0)
 		label.mouse_filter = Control.MOUSE_FILTER_PASS
 		label.meta_underlined = true
+		label.add_theme_color_override(&"default_color", UiPalette.INK)
 		label.meta_hover_started.connect(_on_meta_hover.bind(level))
 		label.meta_hover_ended.connect(func(_meta: Variant) -> void: _hovered_link = "")
+		label.meta_clicked.connect(func(meta: Variant) -> void: link_clicked.emit(str(meta)))
 		panel.add_child(label)
 		add_child(panel)
 		_panels.append(panel)
@@ -133,6 +141,11 @@ func _on_meta_hover(meta: Variant, level: int) -> void:
 	var text := ""
 	if key.begins_with("begriff:"):
 		text = Glossary.text(key.substr(8))
+		if text.is_empty() and lexicon != null and lexicon.has(key.substr(8)):
+			var body := str(lexicon.articles[key.substr(8)]["body"])
+			text = Lexicon.to_bbcode(body.split("\n\n")[0])
+		if lexicon != null and lexicon.has(key.substr(8)):
+			text += "\n[i]Klick: Lexikon[/i]"
 	elif _link_provider.is_valid():
 		text = str(_link_provider.call(key))
 	if text.is_empty():

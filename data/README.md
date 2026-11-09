@@ -344,6 +344,7 @@ Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,05 (Frank
 | `common/stroemungen.chron` | 5 Strömungen mit Position auf der Achse −100 … +100 |
 | `common/interessengruppen.chron` | 11 Interessengruppen mit Mitgliedern je Beruf, Konfession und Bildung und Neigung je Strömung (die Arbeiterbewegung ab August 1848) |
 | `common/parlamente.chron` | Nationalversammlung 1848 (8 Fraktionen), Preußische Zweite Kammer 1849 (3 Fraktionen; seit M13a3 mit `wiederwahl` bis 1870) und seit M13a3 der Reichstag eines Bundes (6 Fraktionen, Wahlkreise der Nationalversammlung) |
+| `lexikon/*.md` | seit M13a5d: Artikel des Lexikons (erste Zeile `# Titel`, Verweise `[[kennung]]` oder `[[kennung\|Text]]`); Godot liest sie, der Einheitentest prüft Titel und Verweise |
 | `common/vermaechtnis.chron` | seit M13a4: fünf Dimensionen des Vermächtnisses (Einigkeit, Recht, Freiheit, Wohlstand, Geltung) mit Faktoren und Sätzen für das Urteil der Geschichte; Spielwerte |
 | `common/wahlen.chron` | Wahlregeln, Wahlkampf und 14 Regionen der Wahlgeographie (Spielwerte) |
 | `common/wahlziele_voelkerfruehling.chron` | Zielkorridore des Wahllabors (`uhrwerk-cli wahl`) |

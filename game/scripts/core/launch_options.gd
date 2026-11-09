@@ -28,7 +28,9 @@ extends RefCounted
 ##   --journal              Journalfenster öffnen (seit M11)
 ##   --jahrbuch             Statistisches Jahrbuch öffnen (seit M13a5a)
 ##   --bereich=<bereich>    Fenster eines Bereichs öffnen: kabinett, gesetze, gruppen, parlament,
-##                          gesellschaft, wirtschaft (seit M13a5b)
+##                          gesellschaft, wirtschaft (seit M13a5b), chronik, lexikon (seit M13a5d)
+##   --einstellungen[=<r>]  Fenster Einstellungen öffnen, Reiter bild, ton, spiel, zugang, tasten, sprache
+##   --farbsehschwaeche     Farben für Rot-Grün-Schwäche, ohne die Einstellung zu speichern (seit M13a5d)
 ##   --startbildschirm[=<seite>]  Startbildschirm vor dem Screenshot öffnen, Seite menue (Standard),
 ##                          lesezeichen oder einstellungen (seit M13; einstellungen: mit --szenario und
 ##                          dem Spielerstaat des Lesezeichens)
@@ -38,8 +40,12 @@ const DEFAULT_SCREENSHOT_DAYS := 60
 const DIPLOMACY_TABS: PackedStringArray = ["staaten", "bund", "frage"]
 ## Reiter des Kriegsfensters für --krieg=<reiter> (seit M10).
 const WAR_TABS: PackedStringArray = ["kriege", "heere"]
+## Reiter für --einstellungen (seit M13a5d).
+const SETTINGS_TABS: PackedStringArray = ["bild", "ton", "spiel", "zugang", "tasten", "sprache"]
 ## Bereiche für --bereich (seit M13a5b).
-const AREAS: PackedStringArray = ["kabinett", "gesetze", "gruppen", "parlament", "gesellschaft", "wirtschaft"]
+const AREAS: PackedStringArray = [
+	"kabinett", "gesetze", "gruppen", "parlament", "gesellschaft", "wirtschaft", "chronik", "lexikon"
+]
 
 var screenshot_path := ""
 var days := DEFAULT_SCREENSHOT_DAYS
@@ -70,6 +76,9 @@ var show_journal := false
 var show_yearbook := false
 ## Fenster eines Bereichs (seit M13a5b), leer: keines.
 var area := ""
+## Einstellungen (seit M13a5d): Reiter oder −1; Farben für Farbsehschwäche nur für diesen Start.
+var settings_tab := -1
+var color_blind := false
 ## Startbildschirm vor dem Screenshot (seit M13): 0 Hauptmenü, 1 Lesezeichen, 2 Einstellungen; -1 = keiner.
 var start_page := -1
 ## Seiten für --startbildschirm=<seite>.
@@ -192,6 +201,17 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.problems.append(
 						"--bereich erwartet %s, nicht „%s“." % [", ".join(AREAS), value]
 					)
+			"--einstellungen":
+				var tab := 0 if value.is_empty() else SETTINGS_TABS.find(value)
+				if tab >= 0:
+					options.settings_tab = tab
+				else:
+					options.problems.append("--einstellungen erwartet %s, nicht „%s“." % [", ".join(SETTINGS_TABS), value])
+			"--farbsehschwaeche":
+				if value.is_empty():
+					options.color_blind = true
+				else:
+					options.problems.append("--farbsehschwaeche erwartet keinen Wert, nicht „%s“." % value)
 			"--jahrbuch":
 				if value.is_empty():
 					options.show_yearbook = true

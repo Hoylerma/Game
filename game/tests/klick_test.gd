@@ -594,15 +594,14 @@ func _check_areas() -> void:
 	await _key(KEY_ESCAPE)
 	if diplomacy.is_open() or windows.open_window() != null:
 		_fail("Fensterverwaltung: Escape schließt die Diplomatie nicht")
-	# Seit M13a5c ist die Chronik zu Beginn ausgeblendet (der Ticker zeigt das Neueste).
-	var chronicle: Control = _main.get("_chronicle_panel")
-	var before := chronicle.visible
+	# Seit M13a5d öffnet „Chronik“ das Fenster der Chronik (das Panel der linken Spalte ruht).
+	var chronicle: AreaWindow = _main.call("area_window", &"chronik")
 	bar.button(&"chronik").emit_signal("pressed")
-	if chronicle.visible == before:
-		_fail("Bereichsleiste: „Chronik“ schaltet die Chronik nicht um")
+	if not chronicle.is_open():
+		_fail("Bereichsleiste: „Chronik“ öffnet die Chronik nicht")
 	bar.button(&"chronik").emit_signal("pressed")
-	if chronicle.visible != before:
-		_fail("Bereichsleiste: „Chronik“ schaltet die Chronik nicht zurück")
+	if chronicle.is_open():
+		_fail("Bereichsleiste: „Chronik“ schließt die Chronik nicht")
 	await _key(KEY_B)
 	await _frames(1)
 	if not yearbook.is_open():
@@ -642,6 +641,77 @@ func _check_areas() -> void:
 	await _check_bars()
 
 
+## Einstellungen, Chronik und Lexikon (seit M13a5d), mit einer eigenen Datei der Einstellungen.
+func _check_settings_chronicle_lexicon() -> void:
+	var path := "user://klick_test_einstellungen.cfg"
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	_main.call("use_settings_file", path)
+	var settings: UserSettings = _main.call("settings")
+	var window: SettingsWindow = _main.call("settings_window")
+	var menu: GameMenu = _main.call("game_menu")
+	_main.call("open_game_menu")
+	(menu.find_child("SettingsButton", true, false) as Button).emit_signal("pressed")
+	await _frames(1)
+	if not window.is_open() or menu.is_open():
+		_fail("Einstellungen: Spielmenü öffnet das Fenster nicht")
+	window.show_tab(2)
+	await _frames(1)
+	var rule := window.control("spiel/pause_amt") as CheckBox
+	if rule == null:
+		_fail("Einstellungen: Pausenregel „Amtswechsel“ fehlt")
+	else:
+		rule.button_pressed = true
+		await _frames(1)
+		var saved := ConfigFile.new()
+		if not settings.pause_on("pause_amt") or saved.load(path) != OK or not bool(saved.get_value("spiel", "pause_amt", false)):
+			_fail("Einstellungen: Pausenregel nicht gespeichert")
+	window.show_tab(4)
+	if window.capture_key("jahrbuch", KEY_J):
+		_fail("Einstellungen: Taste J doppelt vergeben (Journale)")
+	if not window.capture_key("jahrbuch", KEY_G) or settings.key_of("jahrbuch") != KEY_G:
+		_fail("Einstellungen: Taste G für das Jahrbuch nicht übernommen")
+	await _key(KEY_G)
+	var yearbook: YearbookWindow = _main.call("yearbook_window")
+	if not yearbook.is_open():
+		_fail("Einstellungen: neue Taste G öffnet das Jahrbuch nicht")
+	_main.call("close_yearbook")
+	settings.reset_group("tasten")
+	settings.reset_group("spiel")
+	settings.apply(_main.get_tree())
+	_main.call("close_settings")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	# Chronik als Fenster mit Filter.
+	var bar: AreaBar = _main.call("area_bar")
+	bar.button(&"chronik").emit_signal("pressed")
+	await _frames(2)
+	var chronicle: ChronicleWindow = _main.call("area_window", &"chronik")
+	if not chronicle.is_open() or chronicle.entry_texts().is_empty():
+		_fail("Chronik: Fenster leer oder nicht offen")
+	chronicle.set_filter(0, true, "")
+	await _frames(1)
+	for text in chronicle.entry_texts():
+		if not text.contains("WENDEPUNKT"):
+			_fail("Chronik: Filter „nur Wendepunkte“ zeigt „%s“" % text)
+			break
+	chronicle.set_filter(0, false, "zzzz-gibt-es-nicht")
+	if not chronicle.entry_texts().is_empty():
+		_fail("Chronik: Suche ohne Treffer zeigt Einträge")
+	chronicle.set_filter(0, false, "")
+	# Lexikon über die Leiste und über einen Verweis im Tooltip.
+	bar.button(&"lexikon").emit_signal("pressed")
+	await _frames(1)
+	var lexicon: LexiconWindow = _main.call("lexicon_window")
+	if not lexicon.is_open() or chronicle.is_open():
+		_fail("Lexikon: Fenster nicht offen oder Chronik nicht geschlossen")
+	var layer: TooltipLayer = _main.call("tooltip_layer")
+	layer.link_clicked.emit("begriff:akzise")
+	await _frames(1)
+	if lexicon.current_article() != "akzise" or not lexicon.article_text().contains("Verbrauchssteuer"):
+		_fail("Lexikon: Verweis öffnet „%s“" % lexicon.current_article())
+	_main.call("close_lexicon_window")
+	print("  Einstellungen (Pausenregel, Taste), Chronik mit Filter, Lexikon mit Verweis")
+
+
 ## Obere Leiste, rechte Übersicht, Ticker und verschachtelte Tooltips (seit M13a5c).
 func _check_bars() -> void:
 	var top: TopBar = _main.call("top_bar")
@@ -655,7 +725,8 @@ func _check_bars() -> void:
 		_fail("Obere Leiste: Kasse „%s“, Verwaltung „%s“" % [top.field_text(&"kasse"), top.field_text(&"verwaltung")])
 	if top.field_text(&"vermaechtnis").split(" ").size() != 5 or top.field_text(&"legitimitaet") == "–":
 		_fail("Obere Leiste: Vermächtnis „%s“, Legitimität „%s“" % [top.field_text(&"vermaechtnis"), top.field_text(&"legitimitaet")])
-	layer.show_for(top.field(&"vermaechtnis"), Callable(_main, "_legacy_tooltip"), Callable(_main, "_legacy_link"))
+	var texts_source: BarTooltips = _main.call("bar_tooltips")
+	layer.show_for(top.field(&"vermaechtnis"), texts_source.legacy, texts_source.legacy_link)
 	await _frames(1)
 	if not layer.is_showing(0) or not layer.text_of(0).contains("Einigkeit"):
 		_fail("Tooltip Vermächtnis: „%s“" % layer.text_of(0))
@@ -663,12 +734,12 @@ func _check_bars() -> void:
 	await _frames(1)
 	if not layer.is_showing(1) or not layer.text_of(1).contains("Grundwert"):
 		_fail("Verschachtelter Tooltip Einigkeit: „%s“" % layer.text_of(1))
-	layer.show_for(top.field(&"kasse"), Callable(_main, "_cash_tooltip"))
+	layer.show_for(top.field(&"kasse"), texts_source.cash)
 	layer.open_link("begriff:akzise")
 	await _frames(1)
 	if not layer.text_of(0).contains("Kontribution") or not layer.text_of(1).begins_with("Akzise:"):
 		_fail("Tooltip Kasse mit Begriff Akzise: „%s“ / „%s“" % [layer.text_of(0).left(80), layer.text_of(1)])
-	layer.show_for(top.field(&"legitimitaet"), Callable(_main, "_legitimacy_tooltip"))
+	layer.show_for(top.field(&"legitimitaet"), texts_source.legitimacy)
 	if not layer.text_of(0).contains("Unruhe") or not layer.text_of(0).contains("Zustimmung der Gruppen"):
 		_fail("Tooltip Legitimität ohne Ursachen der Unruhe: „%s“" % layer.text_of(0).replace("\n", " / "))
 	layer.hide_all()
@@ -689,6 +760,7 @@ func _check_bars() -> void:
 	var ticker: TickerBar = _main.call("ticker")
 	ticker.push([{"date_text": "01.01.1849", "text": "Probe für den Ticker", "turning_point": true, "location_index": -1}] as Array[Dictionary])
 	await _frames(1)
+	await _check_settings_chronicle_lexicon()
 	print("  Leisten: Kasse %s, Vermächtnis %s; Übersicht %d Einträge; Tooltips verschachtelt" % [
 		top.field_text(&"kasse"), top.field_text(&"vermaechtnis"), texts.size()
 	])

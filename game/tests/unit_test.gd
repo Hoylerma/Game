@@ -35,6 +35,7 @@ func _initialize() -> void:
 	_test_chronicle_export()
 	_test_window_manager()
 	_test_ticker_and_glossary()
+	_test_settings_and_lexicon()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -104,6 +105,10 @@ func _test_launch_options() -> void:
 	_true(not LaunchOptions.parse(PackedStringArray(["--jahrbuch=1"])).show_yearbook, "--jahrbuch=1 gilt nicht")
 	var area := LaunchOptions.parse(PackedStringArray(["--bereich=parlament"]))
 	_true(area.area == "parlament" and area.problems.is_empty(), "--bereich=parlament")
+	var settings_option := LaunchOptions.parse(PackedStringArray(["--einstellungen=tasten", "--farbsehschwaeche"]))
+	_true(settings_option.settings_tab == 4 and settings_option.color_blind and settings_option.problems.is_empty(), "--einstellungen=tasten --farbsehschwaeche")
+	_true(LaunchOptions.parse(PackedStringArray(["--einstellungen"])).settings_tab == 0, "--einstellungen ohne Reiter")
+	_true(LaunchOptions.parse(PackedStringArray(["--bereich=lexikon"])).area == "lexikon", "--bereich=lexikon")
 	var bad_area := LaunchOptions.parse(PackedStringArray(["--bereich=hof"]))
 	_true(bad_area.area.is_empty() and bad_area.problems.size() == 1, "--bereich=hof gilt nicht")
 	var events := LaunchOptions.parse(PackedStringArray(["--ereignis", "--journal", "--kartenmodus=16"]))
@@ -796,6 +801,7 @@ func _test_event_window() -> void:
 		{"event_index": 9, "title": "Zweites", "options": []},
 	]
 	window.show_events(events)
+	_true(window.custom_minimum_size.x == EventWindow.TURNING_POINT_WIDTH, "Wendepunkt auf dem großen Bildschirm (seit M13a5d)")
 	var text := window.window_text()
 	_true(window.is_open() and text.contains("WENDEPUNKT") and text.contains("1 von 2"), "Wendepunkt und Zähler (%s)" % text)
 	_true(text.contains("◆ Gewähren") and text.contains("[Militär gesperrt]"), "Kompassmarke und gesperrte Option")
@@ -905,4 +911,56 @@ func _test_ticker_and_glossary() -> void:
 	_true(Glossary.link("akzise", "Akzise") == "[url=begriff:akzise]Akzise[/url]", "Verweis im Tooltip")
 	_true(Glossary.text("akzise").begins_with("Akzise:") and Glossary.text("gibt_es_nicht").is_empty(), "Glossar")
 	_true(AreaWindow.sorted_shares({"a": 10.0, "b": 50.0, "c": 40.0}, 2) == [["b", 50.0], ["c", 40.0], ["übrige", 10.0]], "Anteile sortiert mit Rest")
+
+
+## Einstellungen, Pausenregeln, Farbsehschwäche und Lexikon (seit M13a5d).
+func _test_settings_and_lexicon() -> void:
+	var path := "user://unit_test_einstellungen.cfg"
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	var settings := UserSettings.new(path)
+	_true(settings.get_value("spiel/autosave") == "jaehrlich" and settings.pause_on("pause_krieg"), "Vorgaben der Einstellungen")
+	settings.set_value("spiel/autosave", "halbjaehrlich")
+	settings.set_value("spiel/pause_krieg", false)
+	settings.set_value("gibt/es_nicht", true)
+	var journal_key := settings.key_of("journal")
+	settings.set_key("journal", KEY_F7)
+	_true(settings.save_file(), "Einstellungen gespeichert")
+	var again := UserSettings.new(path)
+	_true(again.load_file() and again.get_value("spiel/autosave") == "halbjaehrlich" and not again.pause_on("pause_krieg"), "Einstellungen geladen")
+	_true(again.key_of("journal") == KEY_F7 and again.action_with_key(KEY_F7) == "journal", "Taste neu belegt")
+	_true(again.action_with_key(journal_key).is_empty(), "alte Taste frei")
+	again.reset_group("tasten")
+	_true(again.key_of("journal") == journal_key, "Tasten zurückgesetzt")
+	again.reset_group("spiel")
+	_true(again.pause_on("pause_krieg"), "Spiel zurückgesetzt")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	# Pausenregeln aus der Chronik.
+	var rules := UserSettings.new("user://gibt_es_nicht.cfg")
+	var war: Array[Dictionary] = [{"text": "Österreich erklärt Preußen den Krieg.", "state_index": 3}]
+	_true(PauseRules.reason(war, "Preußen", 1, rules).contains("den Krieg"), "Pause bei Kriegserklärung")
+	rules.set_value("spiel/pause_krieg", false)
+	_true(PauseRules.reason(war, "Preußen", 1, rules).is_empty(), "Pausenregel abschaltbar")
+	var office: Array[Dictionary] = [{"text": "Preußen: Otto von Bismarck wird Ministerpräsident", "state_index": 1}]
+	_true(PauseRules.reason(office, "Preußen", 1, rules).is_empty(), "Amtswechsel ohne Pause (Vorgabe aus)")
+	rules.set_value("spiel/pause_amt", true)
+	_true(not PauseRules.reason(office, "Preußen", 1, rules).is_empty(), "Amtswechsel mit Pause")
+	var railway: Array[Dictionary] = [{"text": "Preußen: Eine Bahn wird eröffnet – Die Eröffnung feiern", "state_index": 1}]
+	_true(PauseRules.reason(railway, "Preußen", 1, rules).is_empty(), "Ereignis mit „wird“ ist kein Amtswechsel")
+	var federation: Array[Dictionary] = [{"text": "Gründung: Norddeutscher Bund mit 22 Staaten, Präsidium Preußen.", "state_index": -1}]
+	_true(not PauseRules.reason(federation, "Preußen", 1, rules).is_empty(), "Pause bei Bundesgründung")
+	# Farbsehschwäche: Grün wird Blau, Rot bleibt.
+	Accessibility.color_blind = true
+	var green := Accessibility.adjust(Color(0.2, 0.6, 0.25))
+	var red := Accessibility.adjust(Color(0.7, 0.2, 0.2))
+	_true(green.b > green.g and is_equal_approx(red.r, 0.7), "Farbsehschwäche: Grün wird Blau (%s)" % green)
+	Accessibility.color_blind = false
+	_true(Accessibility.adjust(Color(0.2, 0.6, 0.25)) == Color(0.2, 0.6, 0.25), "ohne Einstellung unverändert")
+	# Lexikon der Daten: jeder Artikel hat einen Titel, jeder Verweis ein Ziel.
+	var lexicon := Lexicon.load_dir(UhrwerkPaths.data_dir().path_join("lexikon"))
+	_true(lexicon.articles.size() >= 20 and lexicon.problems.is_empty(), "Lexikon: %d Artikel, Probleme %s" % [lexicon.articles.size(), ", ".join(lexicon.problems)])
+	_true(lexicon.bbcode("zollverein").contains("[url=begriff:zoll]Zoll[/url]"), "Lexikon: Verweis als BBCode")
+	_true(Lexicon.to_bbcode("**fett** und *kursiv* [Klammer]") == "[b]fett[/b] und [i]kursiv[/i] [lb]Klammer[rb]", "Markdown nach BBCode")
+	_true(lexicon.ids("Wahlrecht").has("dreiklassenwahlrecht"), "Lexikon: Suche")
+	for key: String in Glossary.TERMS:
+		_true(lexicon.has(key), "Glossarbegriff %s hat einen Lexikonartikel" % key)
 

@@ -801,6 +801,19 @@ jobs:
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_gesellschaft.png" --szenario=voelkerfruehling --staat=PRU --tage=500 --bereich=gesellschaft \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Einstellungen, Lexikon und Farben für Rot-Grün-Schwäche (seit M13a5d)
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_einstellungen.png" --szenario=voelkerfruehling --tage=10 --einstellungen=spiel \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_lexikon.png" --szenario=voelkerfruehling --tage=200 --bereich=lexikon \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_farbsehschwaeche.png" --szenario=voelkerfruehling --tage=60 --kartenmodus=14 --farbsehschwaeche \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
           if grep -E "SCRIPT ERROR|Parse Error|SHADER ERROR" "$RUNNER_TEMP/screenshot.log"; then
             echo "::error::Skript- oder Shaderfehler bei den Screenshots."
             exit 1

@@ -13,6 +13,13 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Einstellungen, Pausenregeln, Chronik, Lexikon (Schritt a5d):** Ein Fenster **Einstellungen** (aus
+  Startbildschirm und Spielmenü) speichert Bild, Ton, Spiel, Barrierefreiheit, Tasten und Sprache: unter
+  anderem halbjährliche Spielstände, **Pausenregeln** (Krieg, Forderung, Wahl, Amtswechsel, Bundesgründung,
+  Frieden), **Farben für Rot-Grün-Schwäche**, hoher Kontrast, größere Schrift und frei belegbare Tasten. Die
+  **Chronik** ist ein Fenster mit Filter und Suche, das neue **Lexikon** erklärt 26 Begriffe der Epoche und
+  öffnet sich auch aus den Tooltips. **Wendepunkte** erscheinen auf einem großen Bildschirm. `main.gd` ist in
+  drei Ebenen und drei Hilfsklassen zerlegt.
 - **Leisten und Tooltips (Schritt a5c):** Die obere Leiste zeigt Kasse mit Saldo, Legitimität, Verwaltung und
   das Vermächtnis; jede Zahl hat einen **verschachtelten Tooltip** (Einnahmen je Steuer, Zustimmung je Gruppe
   und Ursachen der Unruhe, Faktoren je Dimension), unterstrichene Begriffe erklärt ein zweiter Tooltip. Rechts
