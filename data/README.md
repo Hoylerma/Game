@@ -343,7 +343,7 @@ Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,05 (Frank
 |---|---|
 | `common/stroemungen.chron` | 5 Strömungen mit Position auf der Achse −100 … +100 |
 | `common/interessengruppen.chron` | 11 Interessengruppen mit Mitgliedern je Beruf, Konfession und Bildung und Neigung je Strömung (die Arbeiterbewegung ab August 1848) |
-| `common/parlamente.chron` | Nationalversammlung 1848 (8 Fraktionen) und Preußische Zweite Kammer 1849 (3 Fraktionen) |
+| `common/parlamente.chron` | Nationalversammlung 1848 (8 Fraktionen), Preußische Zweite Kammer 1849 (3 Fraktionen; seit M13a3 mit `wiederwahl` bis 1870) und seit M13a3 der Reichstag eines Bundes (6 Fraktionen, Wahlkreise der Nationalversammlung) |
 | `common/wahlen.chron` | Wahlregeln, Wahlkampf und 14 Regionen der Wahlgeographie (Spielwerte) |
 | `common/wahlziele_voelkerfruehling.chron` | Zielkorridore des Wahllabors (`uhrwerk-cli wahl`) |
 | `tabellen/wahlkreise.csv` → `history/wahlkreise/` | 633 Wahlkreise der Nationalversammlung, 337 der Zweiten Kammer; erzeugt von `tools/geodaten/wahlkreise_1848.py` |
@@ -385,7 +385,7 @@ Kriegslesezeichen nutzen die Daten von 1848 und die datierte Historie bis zu ihr
 | `common/aufmarsch_<lesezeichen>.chron` | Krieg zum Start mit Seiten und Zielen, Bündnisse und die Heere des Aufmarschs mit Befehlshaber und Führung: 1864 vier Heere (63.000 gegen 38.000), 1866 fünfzehn (313.000 Preußen gegen 238.000 Österreicher und die Verbündeten), 1870 vierzehn (429.000 gegen 285.000); Stärken ungeprüft, Führung Spielwert |
 | `common/kriegsziele_<lesezeichen>.chron` | die Kriege der Lesezeichen für das Kriegslabor mit den Korridoren der Kalibrierung (b2, militaer.md Abschnitt 6.3) |
 | `common/militaer.chron` (1849–1870) | Heerwesen Preußen 1860, Österreich 1859, Dänemark, Sachsen und Bayern 1867, Frankreich 1849 und 1866 (Chassepot); Garnisonen IX.–XII. Armeekorps und Frankreich; Danewerk, Düppeler Schanzen und 13 französische Festungen, Luxemburg bis 1867; Hinterland Frankreich (31,4 Mio. Einwohner, Ersatz 25.000 je Monat) und Dänemark; Regel `fuehrung` 0,2 |
-| `common/zollunionen.chron`, `common/parlamente.chron` | Steuerverein bis 1854; Nationalversammlung und Preußische Zweite Kammer nur bis 1849 (spätere Wahlen mit M11) |
+| `common/zollunionen.chron`, `common/parlamente.chron` | Steuerverein bis 1854; Nationalversammlung und Preußische Zweite Kammer zu späteren Startdaten nicht mehr (`bis`); in einer Partie ab 1848 wählt die Zweite Kammer bis 1870 weiter und der Reichstag eines Bundes (seit M13a3) |
 | `tabellen/eisenbahnen.csv` → `history/eisenbahnen/` | seit b1c: 62 Strecken mit 185 Abschnitten 1849–1870 (zusammen 104 Strecken, 361 Abschnitte): Ostbahn bis Königsberg und Eydtkuhnen, Posen–Breslau, Westfälische und Main-Weser-Bahn, Saarbrücker und Rhein-Nahe-Bahn, die Rheinstrecken, Hannoversche Süd- und Westbahn, Schleswig, Mecklenburg, Werrabahn, Elbtal nach Bodenbach und Prag, die Süd-Norddeutsche Verbindungsbahn über Königgrätz nach Reichenberg und Zittau, Ludwigs-Westbahn, Maximiliansbahn, Bayerische Ostbahn, Westbahn Wien–Salzburg, Semmering, in Frankreich die Ostbahn Paris–Straßburg mit Metz–Forbach und Metz–Luxemburg, die Ardennenbahn bis Sedan und Diedenhofen. Ungeprüft |
 
 **Militär** (seit M10, Schritt a1, [militaer.md](../docs/technik/militaer.md) Abschnitte 3.1 und 3.2):

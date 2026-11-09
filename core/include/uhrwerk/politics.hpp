@@ -13,6 +13,7 @@
 #include "uhrwerk/world.hpp"
 
 #include <cstdint>
+#include <optional>
 #include <vector>
 
 namespace uhrwerk {
@@ -41,6 +42,16 @@ std::vector<Fixed> current_leaning(const World& world, const PopBlock& pop, cons
 
 /// Fraktion zu einer Position auf der Links-rechts-Achse; kNone, wenn keine passt.
 Index faction_of(const Parliament& parliament, Fixed position);
+
+/// Nächster ausstehender Wahltag eines Parlaments ab heute (seit M13a3, vertical_slice.md 3.4): bei festen
+/// Wahltagen (wahltag, wiederwahl) der erste ab heute, an dem noch nicht gewählt wurde; bei einem
+/// Parlament eines Bundes Gründung + nach_gruendung Tage, dann alle wahlperiode Jahre, solange ein Bund
+/// aus einer seiner Vorlagen besteht. std::nullopt, wenn keine Wahl mehr aussteht.
+std::optional<Date> next_election_day(const World& world, Index parliament);
+
+/// Ob der Wahlkreis heute mitwählt (seit M13a3): Sein erster Ort gehört bei einem Landtag noch dem Staat,
+/// bei einem Parlament eines Bundes zum Gebiet eines Bundes aus seinen Vorlagen; sonst immer.
+bool district_votes(const World& world, Index district);
 
 /// Rechnet die Wahl eines Parlaments zum heutigen Datum der Welt (Abschnitt 7). seed ist der Seed der
 /// Partie; je Wahlkreis entsteht daraus ein eigener Zufallsgenerator (Strom Wahlen), deshalb hängt das

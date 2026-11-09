@@ -50,7 +50,8 @@ Vorschlag (Entscheidung 9): **zwei Teile** wie bei M7.
 - Dynamik der Interessengruppen (Zustimmung, Aktionen);
 - Persönlichkeiten mit Namen (Kapitel 13);
 - Wahlen nach 1849 (die Wahltermine stehen in den Daten; regelmäßige Wahlen kommen mit den
-  Verfassungen der Folgezeit).
+  Verfassungen der Folgezeit). Seit M13a3 wählen das preußische Abgeordnetenhaus bis 1870 und der
+  Reichstag eines Bundes weiter (Abschnitt 5.4).
 
 ## 2. Ausgangslage
 
@@ -268,6 +269,31 @@ sind das die `tschechen` in Böhmen (Absage Palackýs). In Mähren wählten die 
 Wahlkreise, deshalb gilt der Boykott dort nicht. Polen und Dänen wählen im Modell. Historisch lagen die
 polnischen Teile Posens außerhalb des Bundesgebiets; das Modell gibt Posen deshalb zu viele Sitze. Der
 Boykott lässt 62 Sitze leer, also 587 besetzte, nahe den rund 585 der Literatur.
+
+### 5.4 Wahlen bis 1871 (seit M13a3)
+
+Mit dem Vertical Slice ([vertical_slice.md](vertical_slice.md) 3.4, Entscheidung 6) endet das Wählen
+nicht mehr 1849:
+
+- **Preußisches Abgeordnetenhaus:** In einer Partie ab 1848 wählt die Zweite Kammer nach 1849 an den
+  Urwahltagen 20.10.1852, 8.10.1855, 12.11.1858, 6.12.1861, 28.4.1862, 20.10.1863, 3.7.1866, 7.11.1867 und
+  9.11.1870 (`wiederwahl`; Spielwerte, Prüfung offen), mit Dreiklassenwahlrecht in den Wahlkreisen von 1849.
+  Die Neuwahlen 1862 und 1863 nach den Auflösungen im Verfassungskonflikt stehen als feste Termine in den
+  Daten, ein Ereignis löst keine Neuwahl aus. Wahlkreise, deren erster Ort Preußen verloren hat, wählen
+  nicht; die Gewinne von 1866 wählen nicht mit (keine Wahlkreise).
+- **Reichstag eines Bundes:** Wird zur Laufzeit ein Bund gegründet (Reich der Paulskirche, großdeutsches
+  Reich, Norddeutscher Bund, Deutsches Reich; vertical_slice.md 3.3), wählt 90 Tage später der Reichstag,
+  danach alle drei Jahre; mit einem neuen Bund beginnt die Zählung neu. Allgemeines, direktes
+  Männerwahlrecht mit Stichwahl in den 633 Wahlkreisen der Nationalversammlung (`wahlkreise_von`), soweit
+  ihr erster Ort im Bundesgebiet liegt (Spielwert statt der 297 Kreise von 1867). Sechs Fraktionen von den
+  Konservativen bis zu den Sozialdemokraten; das Zentrum steht quer zur Links-rechts-Achse und fehlt.
+- **Zufall:** Jede weitere Wahl desselben Parlaments mischt die Zahl der früheren Wahlen in den
+  Generator je Wahlkreis; die erste Wahl rechnet wie bisher.
+- **Spieler und KI:** Wahlabend, Kartenmodus und Parteienmodus gelten für jede Wahl; Wahlkampf ist bis
+  zum nächsten ausstehenden Wahltag möglich, nach der Wahl wirken Versammlungen und Flugblätter nicht
+  mehr, Vereine bleiben. Die KI führt in den Monaten vor jeder Wahl Wahlkampf ([ki.md](ki.md) 6.4).
+- **Kern:** `next_election_day` (nächster ausstehender Wahltag) und `district_votes` (Wahlkreis wählt
+  mit) in `politics.hpp`; Simulation, Wahlkampf, KI und Brücke fragen nur noch sie.
 
 ## 6. Gesetze und Verfassungen in M8
 

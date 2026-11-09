@@ -598,6 +598,8 @@ struct ParliamentRef {
     int line = 0;
     std::string seat; // Ortskennung, leer = keine
     int seat_line = 0;
+    std::vector<std::pair<std::string, int>> federations; // seit M13a3: Vorlagen (bund), Zeile
+    Index districts_from = kNone;                         // seit M13a3: wahlkreise_von
 };
 
 /// Staaten einer Region der Wahlneigung (seit M8), aufgelöst nach dem Staatenbestand.
@@ -704,6 +706,7 @@ public:
         resolve_customs_unions();
         resolve_base_relations();
         resolve_diet();
+        resolve_parliament_federations();
         check_players(scenarios, selected);
         check_capitals();
         resolve_military(); // nach den Hauptstädten (Garnison eines Staates ohne Eintrag)
@@ -2068,8 +2071,25 @@ private:
                 }
             }
             Fields f(plain, file.name, what, issues_,
-                     {"name", "ebene", "sitze", "seit", "bis", "wahltag", "wahlrecht", "wahlsystem",
-                      "wahl_indirekt", "wahl_zensus", "fraktionen_ab", "boykott", "boykott_maerkte", "sitz",
+                     {"name",
+                      "ebene",
+                      "sitze",
+                      "seit",
+                      "bis",
+                      "wahltag",
+                      "wiederwahl",
+                      "bund",
+                      "nach_gruendung",
+                      "wahlperiode",
+                      "wahlkreise_von",
+                      "wahlrecht",
+                      "wahlsystem",
+                      "wahl_indirekt",
+                      "wahl_zensus",
+                      "fraktionen_ab",
+                      "boykott",
+                      "boykott_maerkte",
+                      "sitz",
                       "quelle"});
             Parliament p;
             p.id = node.value;
@@ -2089,7 +2109,84 @@ private:
                 }
             }
             p.seats = static_cast<std::int32_t>(f.integer("sitze", 1, 10'000).value_or(0));
-            p.election_day = f.date("wahltag").value_or(Date{});
+            // Seit M13a3 (vertical_slice.md 3.4): Ein Parlament eines Bundes wählt nach dessen Gründung
+            // (bund, nach_gruendung, wahlperiode) statt an einem festen Wahltag.
+            const bool federal = f.has("bund");
+            if (federal) {
+                if (f.has("wahltag") || f.has("wiederwahl")) {
+                    issues_.error(file.name, plain.find("bund")->line,
+                                  what +
+                                      " wählt nach der Gründung des Bundes und hat deshalb weder 'wahltag' "
+                                      "noch 'wiederwahl'");
+                }
+                if (const ScriptNode* list =
+                        f.block("bund", "Liste von Vorlagen, z. B. { norddeutscher_bund }")) {
+                    for (const ScriptNode& child : list->children) {
+                        if (!child.key.empty() || child.is_block) {
+                            issues_.error(file.name, child.line,
+                                          "ungültiger Eintrag in 'bund' von " + what +
+                                              " (erwartet Kennungen)");
+                            continue;
+                        }
+                        ref.federations.emplace_back(child.value, child.line);
+                    }
+                    if (list->children.empty()) {
+                        issues_.error(file.name, list->line, "'bund' ist leer in " + what);
+                    }
+                }
+                p.after_founding = static_cast<std::int32_t>(
+                    f.has("nach_gruendung") ? f.integer("nach_gruendung", 0, 3650).value_or(0) : 0);
+                p.period = static_cast<std::int32_t>(
+                    f.has("wahlperiode") ? f.integer("wahlperiode", 0, 20).value_or(0) : 0);
+            } else {
+                for (const char* key : {"nach_gruendung", "wahlperiode"}) {
+                    if (const ScriptNode* n = plain.find(key)) {
+                        issues_.error(file.name, n->line,
+                                      quote(key) + " gilt nur für ein Parlament eines Bundes ('bund') in " +
+                                          what);
+                    }
+                }
+                p.election_day = f.date("wahltag").value_or(Date{});
+            }
+            if (f.has("wiederwahl")) {
+                if (const ScriptNode* list = f.block("wiederwahl", "Liste von Daten, z. B. { 1852.10.20 }")) {
+                    for (const ScriptNode& child : list->children) {
+                        const std::optional<Date> day =
+                            child.key.empty() && !child.is_block ? parse_date(child.value) : std::nullopt;
+                        if (!day) {
+                            issues_.error(file.name, child.line,
+                                          "ungültiges Datum " + quote(child.value) + " in 'wiederwahl' von " +
+                                              what);
+                            continue;
+                        }
+                        const Date before = p.re_elections.empty() ? p.election_day : p.re_elections.back();
+                        if (*day <= before) {
+                            issues_.error(file.name, child.line,
+                                          "Wahltag " + format_date(*day) + " in 'wiederwahl' von " + what +
+                                              " liegt nicht nach dem vorigen Wahltag " + format_date(before));
+                            continue;
+                        }
+                        p.re_elections.push_back(*day);
+                    }
+                }
+            }
+            if (f.has("wahlkreise_von")) {
+                if (const auto from = f.text("wahlkreise_von")) {
+                    ref.districts_from = lookup(parliaments_, *from);
+                    if (ref.districts_from == kNone) {
+                        if (later_.count("parlament:" + *from) != 0) {
+                            // Ohne die Wahlkreise gehört das Parlament zum Startdatum nicht zur Welt.
+                            later_.emplace("parlament:" + node.value,
+                                           LaterDefinition{start_, file.name, node.line});
+                            later = true;
+                        } else {
+                            issues_.error(file.name, plain.find("wahlkreise_von")->line,
+                                          "unbekanntes Parlament " + quote(*from) +
+                                              " in 'wahlkreise_von' von " + what + " (muss vorher stehen)");
+                        }
+                    }
+                }
+            }
             p.law = read_electoral_law(f, plain, file.name, what, true);
             p.faction_day =
                 f.has("fraktionen_ab") ? f.date("fraktionen_ab").value_or(p.election_day) : p.election_day;
@@ -3911,6 +4008,61 @@ private:
                 issues_.error(def.file, def.line,
                               "parlament " + parliament.id + " hat " + std::to_string(parliament.seats) +
                                   " Sitze, seine Wahlkreise zusammen " + std::to_string(seats[p]));
+            }
+        }
+        // Seit M13a3: wahlkreise_von übernimmt die geprüften Wahlkreise eines anderen Parlaments als eigene
+        // (Kennung <parlament>_<wahlkreis>); welche davon mitwählen, entscheidet der Tag der Wahl.
+        const std::size_t loaded = world_.electoral_districts.size();
+        for (std::size_t p = 0; p < world_.parliaments.size(); ++p) {
+            const Index from = parliament_refs_[p].districts_from;
+            if (from == kNone) {
+                continue;
+            }
+            if (has_districts[p]) {
+                const Definition& def = parliaments_.find(world_.parliaments[p].id)->second;
+                issues_.error(def.file, def.line,
+                              "parlament " + world_.parliaments[p].id +
+                                  " hat eigene Wahlkreise und 'wahlkreise_von' zugleich");
+                continue;
+            }
+            for (std::size_t i = 0; i < loaded; ++i) {
+                if (world_.electoral_districts[i].parliament != from) {
+                    continue;
+                }
+                ElectoralDistrict copy = world_.electoral_districts[i];
+                copy.id = world_.parliaments[p].id + "_" + copy.id;
+                copy.parliament = static_cast<Index>(p);
+                const DistrictRef ref = district_refs_[i];
+                const auto index = static_cast<Index>(world_.electoral_districts.size());
+                if (register_id(electoral_districts_, copy.id, index, ref.file, ref.line, "Wahlkreis")) {
+                    world_.electoral_districts.push_back(std::move(copy));
+                    district_refs_.push_back(ref);
+                }
+            }
+        }
+    }
+
+    /// Seit M13a3: Vorlagen der Parlamente eines Bundes (bund = { … }) nach resolve_diet.
+    void resolve_parliament_federations() {
+        const bool templates = !world_.federation_templates.empty();
+        for (std::size_t p = 0; p < world_.parliaments.size(); ++p) {
+            const ParliamentRef& ref = parliament_refs_[p];
+            for (const auto& [id, line] : ref.federations) {
+                const auto it =
+                    std::find_if(world_.federation_templates.begin(), world_.federation_templates.end(),
+                                 [&](const FederalDiet& d) { return d.id == id; });
+                if (it == world_.federation_templates.end()) {
+                    if (templates) {
+                        issues_.error(
+                            ref.file, line,
+                            "unbekannte Vorlage " + quote(id) + " in 'bund' von parlament " +
+                                world_.parliaments[p].id +
+                                " (bundesversammlung mit vorlage = ja in common/bundesversammlung.chron)");
+                    }
+                    continue;
+                }
+                world_.parliaments[p].federations.push_back(
+                    static_cast<Index>(it - world_.federation_templates.begin()));
             }
         }
     }

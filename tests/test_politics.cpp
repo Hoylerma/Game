@@ -1,6 +1,7 @@
 // Tests der Wahlen (seit M8, docs/technik/politik.md, Abschnitt 7 und 11) mit dem Landtag der Testdaten.
 
 #include "test_hilfen.hpp"
+#include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/election_lab.hpp"
 #include "uhrwerk/parallel.hpp"
 #include "uhrwerk/politics.hpp"
@@ -691,4 +692,122 @@ TEST_CASE("Wahlkampf: Wiederholung und Spielstand mit Wahlkampfbefehlen") {
     INFO(result.error);
     CHECK(result.ok);
     CHECK(result.mismatch_day == -1);
+}
+
+// ─── Wahlen bis 1871 (seit M13a3, vertical_slice.md 3.4) ───────────────────
+
+TEST_CASE("Politik: weitere Wahltage (seit M13a3)") {
+    World w = landtag_world();
+    w.parliaments[0].re_elections = {Date{1650, 9, 1}};
+    Simulation sim(std::move(w));
+    CHECK(uhrwerk::next_election_day(sim.world(), 0) == kElectionDay);
+    step_to(sim, Date{1650, 3, 2});
+    REQUIRE(sim.world().elections.size() == 1);
+    CHECK(uhrwerk::next_election_day(sim.world(), 0) == Date{1650, 9, 1});
+    step_to(sim, Date{1650, 9, 2});
+    const World& after = sim.world();
+    REQUIRE(after.elections.size() == 2);
+    CHECK(after.elections[1].day == Date{1650, 9, 1});
+    CHECK(after.elections[1].deputies.size() == 4);
+    CHECK(after.chronicle.back().text.rfind("Wahltag – Sächsischer Landtag: 4 von 4 Sitzen besetzt", 0) == 0);
+    CHECK_FALSE(uhrwerk::next_election_day(after, 0).has_value());
+    sim.step_days(400);
+    CHECK(sim.world().elections.size() == 2);
+
+    // Die zweite Wahl würfelt neu: Mit einer Wahl davor ändert sich der Zufall je Wahlkreis.
+    World again = landtag_world();
+    again.parliaments[0].law.indirect = false;
+    Simulation fresh(std::move(again));
+    const ElectionResult first = uhrwerk::run_election(fresh.world(), 0, kSeed);
+    World with_earlier = fresh.world();
+    with_earlier.elections.push_back(first);
+    const ElectionResult second = uhrwerk::run_election(with_earlier, 0, kSeed);
+    bool differs = false;
+    for (std::size_t d = 0; d < first.districts.size(); ++d) {
+        differs = differs || first.districts[d].votes != second.districts[d].votes;
+    }
+    CHECK(differs);
+}
+
+TEST_CASE("Politik: Landtag wählt nur, wo sein Staat noch herrscht (seit M13a3)") {
+    World w = landtag_world();
+    const Index leipzig = w.find_location("leipzig");
+    w.locations[static_cast<std::size_t>(leipzig)].owner = w.find_state("BRA");
+    CHECK(uhrwerk::district_votes(w, 0));
+    CHECK_FALSE(uhrwerk::district_votes(w, 1));
+    const Simulation sim(std::move(w));
+    const ElectionResult e = uhrwerk::run_election(sim.world(), 0, kSeed);
+    REQUIRE(e.districts.size() == 1);
+    CHECK(e.districts[0].district == 0);
+    CHECK(e.deputies.size() == 3);
+}
+
+TEST_CASE("Politik: Reichstag eines Bundes (seit M13a3)") {
+    const testhilfen::TempDir dir(true);
+    // Alle Orte im Bundesgebiet; eine Vorlage ohne Bundesversammlung zum Start.
+    for (const char* file : {"history/orte/10_brandenburg.chron", "history/orte/20_sachsen.chron",
+                             "history/orte/30_anhalt.chron"}) {
+        std::string text = testhilfen::read_file(dir / file);
+        std::string::size_type pos = 0;
+        while ((pos = text.find("\n    besitzer", pos)) != std::string::npos) {
+            text.insert(pos + 1, "    bund = ja\n");
+            pos += 20;
+        }
+        testhilfen::write_file(dir / file, text);
+    }
+    testhilfen::write_file(
+        dir / "common/bundesversammlung.chron",
+        "bundesversammlung nordbund {\n    name = \"Bundesrat\"\n    bund = \"Nordbund\"\n"
+        "    vorlage = ja\n    praesidium = SAX\n    plenum = { BRA = 3 SAX = 2 ANH = 1 }\n"
+        "    rat = { stimme = { staaten = { BRA } } stimme = { staaten = { SAX } } "
+        "stimme = { staaten = { ANH } } }\n    quelle = \"Testdaten\"\n}\n");
+    testhilfen::write_file(
+        dir / "common/parlamente.chron",
+        testhilfen::read_file(dir / "common/parlamente.chron") +
+            "parlament reichstag {\n    name = \"Reichstag\"\n    ebene = bund\n    sitze = 4\n"
+            "    seit = 1649.01.01\n    bund = { nordbund }\n    nach_gruendung = 30\n"
+            "    wahlperiode = 1\n    wahlkreise_von = landtag\n    sitz = dresden\n"
+            "    wahlrecht = allgemein_maenner\n    quelle = \"Testdaten\"\n"
+            "    fraktion alle { name = \"Alle\" farbe = { 1 2 3 } von = -100 bis = 100 }\n}\n");
+    uhrwerk::LoadResult r = uhrwerk::load_world(dir.path(), kScenario);
+    INFO(testhilfen::issues_text(r));
+    REQUIRE(r.ok());
+    World w = std::move(*r.world);
+    REQUIRE(w.parliaments.size() == 2);
+    const uhrwerk::Parliament& reichstag = w.parliaments[1];
+    CHECK(reichstag.federations == std::vector<Index>{0});
+    CHECK(reichstag.after_founding == 30);
+    CHECK(reichstag.period == 1);
+    REQUIRE(w.electoral_districts.size() == 4);
+    CHECK(w.electoral_districts[2].id == "reichstag_lt_dresden");
+    CHECK(w.electoral_districts[2].parliament == 1);
+    CHECK(w.electoral_districts[2].seats == 3);
+    CHECK(w.electoral_districts[3].locations == std::vector<Index>{w.find_location("leipzig")});
+    // Ohne Bund keine Wahl.
+    CHECK_FALSE(uhrwerk::next_election_day(w, 1).has_value());
+    CHECK_FALSE(uhrwerk::district_votes(w, 2));
+
+    // Bund aus Sachsen allein; Leipzig gehört Brandenburg und wählt nicht mit.
+    const Index sax = w.find_state("SAX");
+    w.locations[static_cast<std::size_t>(w.find_location("leipzig"))].owner = w.find_state("BRA");
+    std::vector<std::uint8_t> members(w.states.size(), 0);
+    members[static_cast<std::size_t>(sax)] = 1;
+    uhrwerk::found_federation(w, 0, members);
+    CHECK(uhrwerk::next_election_day(w, 1) == Date{1650, 1, 31});
+    CHECK(uhrwerk::district_votes(w, 2));
+    CHECK_FALSE(uhrwerk::district_votes(w, 3));
+
+    Simulation sim(std::move(w));
+    step_to(sim, Date{1650, 2, 1});
+    const World& after = sim.world();
+    REQUIRE(after.elections.size() == 1);
+    const ElectionResult& e = after.elections[0];
+    CHECK(e.parliament == 1);
+    CHECK(e.day == Date{1650, 1, 31});
+    REQUIRE(e.districts.size() == 1);
+    CHECK(e.districts[0].district == 2);
+    CHECK(after.chronicle.back().text.rfind("Wahltag – Reichstag: 3 von 3 Sitzen besetzt", 0) == 0);
+    // Die nächste Wahl ein Jahr später, die des Landtags wie gehabt.
+    CHECK(uhrwerk::next_election_day(after, 1) == Date{1651, 1, 31});
+    CHECK(uhrwerk::next_election_day(after, 0) == kElectionDay);
 }

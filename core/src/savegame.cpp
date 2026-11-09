@@ -1457,6 +1457,19 @@ ContentFingerprint content_fingerprint(const World& w) {
             }
             h.i64(pa.seat);
             h.text(pa.name); // steht in der Chronik der Wahl
+            // Seit M13a3: weitere Wahltage und Wahlen eines Bundes (nur, wenn vorhanden).
+            if (!pa.re_elections.empty() || !pa.federations.empty()) {
+                h.u64(pa.re_elections.size());
+                for (const Date& day : pa.re_elections) {
+                    h.i64(to_day_number(day));
+                }
+                h.u64(pa.federations.size());
+                for (const Index f : pa.federations) {
+                    h.i64(f);
+                }
+                h.i64(pa.after_founding);
+                h.i64(pa.period);
+            }
         }
         // Wahlregeln und Regionen (seit M8, Schritt a3).
         const ElectionRules& r = w.election_rules;

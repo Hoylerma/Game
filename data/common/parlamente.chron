@@ -39,8 +39,11 @@ parlament pr_abgeordnetenhaus {
     ebene         = PRU
     sitze         = 350                  # Zweite Kammer nach der oktroyierten Verfassung
     seit          = 1848.03.01
-    bis           = 1849.07.18           # spätere Wahlen (1852–1870) folgen mit M11 (seit M10b)
+    bis           = 1849.07.18           # Kriegslesezeichen 1864–1870 ohne Abgeordnetenhaus (seit M10b)
     wahltag       = 1849.07.17
+    # Seit M13a3 (vertical_slice.md 3.4): In einer Partie ab 1848 wählt das Haus weiter, in den Wahlkreisen
+    # von 1849 (Gebietsgewinne 1866 wählen nicht mit). Urwahltage nach Wissensstand; Spielwerte, Prüfung offen.
+    wiederwahl    = { 1852.10.20 1855.10.08 1858.11.12 1861.12.06 1862.04.28 1863.10.20 1866.07.03 1867.11.07 1870.11.09 }
     sitz          = berlin_coelln
     wahlrecht     = dreiklassen          # Verordnung vom 30. Mai 1849
     wahlsystem    = stichwahl
@@ -50,4 +53,32 @@ parlament pr_abgeordnetenhaus {
     fraktion rechte  { name = "Rechte"  farbe = { 42 52 92 }   von = 35   bis = 100 }
     fraktion zentrum { name = "Zentrum" farbe = { 206 160 40 } von = -5   bis = 35 }
     fraktion linke   { name = "Linke"   farbe = { 192 54 44 }  von = -100 bis = -5 }
+}
+
+# Seit M13a3 (vertical_slice.md 3.4): der Reichstag eines Bundes, der zur Laufzeit entsteht (Wirkung bund,
+# Abschnitt 3.3). Er wählt nach allgemeinem, gleichem und direktem Männerwahlrecht (Wahlgesetz 1849 der
+# Reichsverfassung, Wahlgesetz des Norddeutschen Bundes 1869) in den Wahlkreisen der Nationalversammlung,
+# soweit ihr erster Ort im Bundesgebiet liegt. Erste Wahl drei Monate nach der Gründung, dann alle drei Jahre
+# (Legislaturperiode bis 1888). Fraktionen nach den Parteien 1867–1871 auf der Links-rechts-Achse;
+# das Zentrum (1870) steht quer zu dieser Achse und ist nicht abgebildet. Spielwerte, Prüfung offen.
+parlament reichstag {
+    name           = "Reichstag"
+    ebene          = bund
+    sitze          = 649                 # Sollzahl der übernommenen Wahlkreise; es wählen die im Bundesgebiet
+    seit           = 1848.03.01
+    bund           = { reich_paulskirche grossdeutsches_reich norddeutscher_bund deutsches_reich }
+    nach_gruendung = 90
+    wahlperiode    = 3
+    wahlkreise_von = nationalversammlung
+    sitz           = berlin_coelln
+    wahlrecht      = allgemein_maenner
+    wahlsystem     = stichwahl           # absolute Mehrheit, sonst Stichwahl
+    quelle         = "Wissensstand ohne Quellenzugang; Wahltermine und Fraktionsbereiche sind Spielwerte; Prüfung offen"
+
+    fraktion konservative     { name = "Konservative"       farbe = { 34 40 78 }    von = 45   bis = 100 }
+    fraktion freikonservative { name = "Freikonservative"   farbe = { 90 112 160 }  von = 25   bis = 45 }
+    fraktion nationalliberale { name = "Nationalliberale"   farbe = { 196 170 70 }  von = 0    bis = 25 }
+    fraktion fortschritt      { name = "Fortschritt"        farbe = { 214 140 60 }  von = -30  bis = 0 }
+    fraktion volkspartei      { name = "Volkspartei"        farbe = { 182 52 46 }   von = -60  bis = -30 }
+    fraktion sozialdemokraten { name = "Sozialdemokraten"   farbe = { 120 22 30 }   von = -100 bis = -60 }
 }

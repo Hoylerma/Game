@@ -760,15 +760,9 @@ void Simulation::run_economy(Index state) {
 void Simulation::run_elections() {
     for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
         const Parliament& parliament = world_.parliaments[i];
-        if (parliament.election_day != world_.date) {
-            continue;
-        }
         const auto index = static_cast<Index>(i);
-        const bool held =
-            std::any_of(world_.elections.begin(), world_.elections.end(), [&](const ElectionResult& e) {
-                return e.parliament == index && e.day == world_.date;
-            });
-        if (held) {
+        // Seit M13a3 auch weitere Wahltage und die Wahlen eines Bundes (vertical_slice.md 3.4).
+        if (next_election_day(world_, index) != world_.date) {
             continue;
         }
         world_.elections.push_back(run_election(world_, index, config_.seed, &pool_.get()));
@@ -782,15 +776,19 @@ void Simulation::run_elections() {
             }
         }
         std::int32_t empty = 0;
+        std::int32_t total = 0; // seit M13a3: Sitze der Wahlkreise, die mitwählen
         for (const DistrictResult& d : election.districts) {
+            const std::int32_t seats_here =
+                world_.electoral_districts[static_cast<std::size_t>(d.district)].seats;
+            total += seats_here;
             if (d.boycott) {
-                empty += world_.electoral_districts[static_cast<std::size_t>(d.district)].seats;
+                empty += seats_here;
             }
         }
         ChronicleEntry entry;
         entry.date = world_.date;
         entry.text = "Wahltag – " + parliament.name + ": " + std::to_string(election.deputies.size()) +
-                     " von " + std::to_string(parliament.seats) + " Sitzen besetzt";
+                     " von " + std::to_string(total) + " Sitzen besetzt";
         if (empty > 0) {
             entry.text += ", " + std::to_string(empty) + " leer (Boykott)";
         }

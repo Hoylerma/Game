@@ -1744,6 +1744,29 @@ TEST_CASE("Lader: Politik (seit M8)") {
         expect_error(load(dir, "jahresbeginn_1650"),
                      "'fraktionen_ab' liegt vor dem Wahltag von parlament landtag", parliaments);
     }
+    SUBCASE("weitere Wahltage und Parlament eines Bundes (seit M13a3)") {
+        replace_in_file(dir / parliaments, "wahltag       = 1650.03.01",
+                        "wahltag       = 1650.03.01\n    wiederwahl = { 1651.03.01 1651.02.01 }\n"
+                        "    wahlperiode = 3");
+        testhilfen::write_file(
+            dir / parliaments,
+            testhilfen::read_file(dir / parliaments) +
+                "parlament reichstag {\n    name = \"Reichstag\"\n    ebene = bund\n    sitze = 4\n"
+                "    seit = 1649.01.01\n    wahltag = 1650.05.01\n    bund = { nordbund }\n"
+                "    wahlkreise_von = kreistag\n    wahlrecht = allgemein_maenner\n    quelle = \"x\"\n"
+                "    fraktion alle { name = \"Alle\" farbe = { 1 2 3 } von = -100 bis = 100 }\n}\n");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r,
+                     "Wahltag 01.02.1651 in 'wiederwahl' von parlament landtag liegt nicht nach dem vorigen",
+                     parliaments);
+        expect_error(r, "'wahlperiode' gilt nur für ein Parlament eines Bundes ('bund') in parlament landtag",
+                     parliaments);
+        expect_error(r,
+                     "parlament reichstag wählt nach der Gründung des Bundes und hat deshalb weder 'wahltag'",
+                     parliaments);
+        expect_error(r, "unbekanntes Parlament 'kreistag' in 'wahlkreise_von' von parlament reichstag",
+                     parliaments);
+    }
     const char* const districts = "history/wahlkreise/landtag.chron";
     SUBCASE("Wahlkreise gelesen") {
         const LoadResult r = load(dir, "jahresbeginn_1650");

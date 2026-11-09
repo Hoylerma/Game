@@ -819,8 +819,13 @@ func _check_elections_1848(sim: SimulationClient) -> void:
 	var parliaments := sim.get_parliaments()
 	var currents := sim.get_currents()
 	var national: Dictionary = parliaments[0] if not parliaments.is_empty() else {}
+	# Seit M13a3: der Reichstag eines Bundes, vor der Gründung ohne Wahl und ohne Wahlkreise im Bund.
+	var reichstag: Dictionary = parliaments[2] if parliaments.size() > 2 else {}
 	_check(
-		parliaments.size() == 2 and currents.size() == 5
+		parliaments.size() == 3 and currents.size() == 5
+		and bool(national.get("pending", false)) and not bool(national.get("federal", true))
+		and bool(reichstag.get("federal", false)) and not bool(reichstag.get("pending", true))
+		and int(reichstag.get("district_count", -1)) == 0
 		and int(national.get("seats", 0)) == 649 and int(national.get("district_count", 0)) == 633
 		and (national.get("factions", []) as Array).size() == 8
 		and int(national.get("election_index", 0)) == -1 and sim.get_shown_parliament() == 0,

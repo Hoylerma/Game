@@ -1411,12 +1411,14 @@ private:
             return;
         }
         for (std::size_t p = 0; p < w_.parliaments.size(); ++p) {
-            const Parliament& parliament = w_.parliaments[p];
-            const std::int64_t days = to_day_number(parliament.election_day) - to_day_number(w_.date);
+            // Seit M13a3 der nächste ausstehende Wahltag (weitere Wahlen, Wahlen eines Bundes).
+            const std::optional<Date> election = next_election_day(w_, static_cast<Index>(p));
+            if (!election) {
+                continue;
+            }
+            const std::int64_t days = to_day_number(*election) - to_day_number(w_.date);
             const std::int64_t months = days / 30 + 1;
-            if (days < 0 || months > r_.campaign_months ||
-                std::any_of(w_.elections.begin(), w_.elections.end(),
-                            [&](const ElectionResult& e) { return e.parliament == static_cast<Index>(p); })) {
+            if (days < 0 || months > r_.campaign_months) {
                 continue;
             }
             // Lage je Wahlkreis einmal für alle Strömungen.
@@ -1426,7 +1428,8 @@ private:
             };
             std::vector<Seat> seats;
             for (std::size_t d = 0; d < w_.electoral_districts.size(); ++d) {
-                if (w_.electoral_districts[d].parliament != static_cast<Index>(p)) {
+                if (w_.electoral_districts[d].parliament != static_cast<Index>(p) ||
+                    !district_votes(w_, static_cast<Index>(d))) {
                     continue;
                 }
                 const DistrictEstimate estimate = estimate_district(w_, static_cast<Index>(d));
