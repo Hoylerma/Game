@@ -110,6 +110,10 @@ var _player_gone_noticed := false
 ## Ereignisse und Journale (seit M11, Schritt b4, ereignisse.md Abschnitt 9).
 var _event_window: EventWindow = null
 var _journal_window: JournalWindow = null
+## Fensterverwaltung, Bereichsleiste und Jahrbuch (seit M13a5a, vertical_slice.md 4.1–4.3).
+var _windows := WindowManager.new()
+var _area_bar: AreaBar = null
+var _yearbook_window: YearbookWindow = null
 ## Urteil der Geschichte (seit M13a4) und ob es nach dem Ende schon gezeigt wurde.
 var _verdict_window: VerdictWindow = null
 var _verdict_shown := false
@@ -152,6 +156,7 @@ func _ready() -> void:
 	_build_diplomacy()
 	_build_war()
 	_build_events()
+	_build_areas()
 	_build_verdict()
 	_build_start_screen()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
@@ -189,7 +194,7 @@ func _ready() -> void:
 	_map_labels.set_covering_controls([
 		_top_bar, _state_panel, _party_panel, _chronicle_panel, _location_panel, _legend, _mode_bar,
 		_election_night, _diplomacy_window, _play_bar, _army_panel, _war_window, _battle_reports,
-		_event_window, _journal_window,
+		_event_window, _journal_window, _area_bar, _yearbook_window,
 	])
 	_update_place_labels()
 	_update_owners()
@@ -202,6 +207,7 @@ func _ready() -> void:
 
 	# Erst nach dem ersten Layout sind die Panelgrößen bekannt.
 	await get_tree().process_frame
+	_fit_mode_bar()
 	_fit_camera()
 	_apply_launch_view()
 	view_is_ready = true
@@ -252,20 +258,17 @@ func _unhandled_input(event: InputEvent) -> void:
 				_set_speed(speed)
 			get_viewport().set_input_as_handled()
 			return
-	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _diplomacy_window.is_open():
-		close_diplomacy()
-		get_viewport().set_input_as_handled()
-		return
 	if event.is_action_pressed(&"journal", false, true):
 		toggle_journal()
 		get_viewport().set_input_as_handled()
 		return
-	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _journal_window.is_open():
-		close_journal()
+	if event.is_action_pressed(&"jahrbuch", false, true):
+		toggle_yearbook()
 		get_viewport().set_input_as_handled()
 		return
-	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _war_window.is_open():
-		close_war_window()
+	# Escape schließt das zuletzt geöffnete Fenster eines Bereichs (seit M13a5a).
+	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _windows.close_top():
+		_sync_area_bar()
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _selected_army >= 0:
@@ -523,6 +526,7 @@ func _refresh_all() -> void:
 	if capital >= 0:
 		capital_name = str(_sim.get_location(capital).get("name", ""))
 	_state_panel.show_state(state, capital_name)
+	_update_area_bar()
 	if _player_current >= 0:
 		_party_panel.show_party(_sim.get_party(_player_current))
 	_refresh_diplomacy()
@@ -531,6 +535,8 @@ func _refresh_all() -> void:
 	_update_armies()
 	_war_window.refresh()
 	_journal_window.refresh()
+	if _yearbook_window.is_open() and int(_sim.get_date().get("day", 0)) == 2:
+		_yearbook_window.refresh() # die Jahresreihe des 1. Januar ist da
 	_pull_chronicle()
 
 
@@ -1425,6 +1431,7 @@ func _select_location(sim_index: int, focus_camera: bool = false) -> void:
 func _on_viewport_size_changed() -> void:
 	if _selected >= 0:
 		_fit_location_panel.call_deferred()
+	_fit_mode_bar.call_deferred()
 	_place_diplomacy.call_deferred()
 	_place_reports.call_deferred()
 
@@ -1660,15 +1667,16 @@ func open_diplomacy(tab: int = 0) -> void:
 	if _sim == null or _player_current >= 0 or not bool(_sim.get_diplomacy(_player).get("active", false)):
 		return
 	_state_panel.hide_popups()
-	close_war_window()
-	close_journal()
+	_windows.opening(_diplomacy_window)
 	_diplomacy_window.open(_sim, _player, tab)
 	_place_diplomacy()
+	_sync_area_bar()
 
 
 func close_diplomacy() -> void:
 	if _diplomacy_window != null:
 		_diplomacy_window.close()
+		_sync_area_bar()
 
 
 func toggle_diplomacy() -> void:
@@ -1689,23 +1697,18 @@ func _place_diplomacy() -> void:
 	_play_bar.size = bar_size
 	_play_bar.position = Vector2(roundf((area.x - bar_size.x) * 0.5), top)
 	var left := _left_column.offset_right + 12.0
+	# Bereichsleiste (seit M13a5a) senkrecht neben der linken Spalte; die Fenster öffnen rechts daneben.
+	if _area_bar != null and _area_bar.visible:
+		var area_size := _area_bar.get_combined_minimum_size()
+		_area_bar.size = area_size
+		_area_bar.position = Vector2(_left_column.offset_right + 8.0, top)
+		left = _area_bar.position.x + area_size.x + 8.0
 	if _play_bar.visible:
 		_play_bar.position.x = maxf(_play_bar.position.x, left)
 		top += bar_size.y + 8.0
-	if _diplomacy_window.is_open():
-		_diplomacy_window.fit_height(_mode_bar_area.position.y - 8.0 - top)
-	_diplomacy_window.size = _diplomacy_window.get_combined_minimum_size()
-	_diplomacy_window.position = Vector2(left, top)
-	# Kriegsfenster an derselben Stelle (seit M10; nie beide zugleich offen).
-	if _war_window != null:
-		_war_window.size = _war_window.get_combined_minimum_size()
-		_war_window.position = Vector2(left, top)
-	# Journalfenster ebenso (seit M11); das Ereignisfenster mittig.
-	if _journal_window != null:
-		if _journal_window.is_open():
-			_journal_window.fit_height(_mode_bar_area.position.y - 8.0 - top)
-		_journal_window.size = _journal_window.get_combined_minimum_size()
-		_journal_window.position = Vector2(left, top)
+	# Alle Fenster der Bereiche an derselben Stelle (seit M13a5a: Fensterverwaltung, nie zwei zugleich
+	# offen); das Ereignisfenster mittig.
+	_windows.place(left, top, _mode_bar_area.position.y - 8.0)
 	_place_event_window()
 	_place_reports()
 
@@ -1823,15 +1826,16 @@ func open_war_window(tab: int = 0) -> void:
 	if _sim == null or _player_current >= 0 or not bool(_sim.get_state(_player).get("military", false)):
 		return
 	_state_panel.hide_popups()
-	close_diplomacy()
-	close_journal()
+	_windows.opening(_war_window)
 	_war_window.open(_sim, _player, tab)
 	_place_diplomacy()
+	_sync_area_bar()
 
 
 func close_war_window() -> void:
 	if _war_window != null:
 		_war_window.close()
+		_sync_area_bar()
 
 
 func toggle_war_window() -> void:
@@ -1856,7 +1860,7 @@ func _place_reports() -> void:
 		return
 	var right := _right_column.get_global_rect().position.x - 12.0
 	var left := _left_column.offset_right + 12.0
-	for window: Control in [_war_window, _diplomacy_window, _journal_window]:
+	for window: Control in _windows.windows():
 		if window != null and window.visible:
 			left = maxf(left, window.position.x + window.size.x + 8.0)
 	var width := clampf(right - left, BattleReports.MIN_WIDTH, BattleReports.MAX_WIDTH)
@@ -2141,10 +2145,12 @@ func _apply_role() -> void:
 	var party := _player_current >= 0
 	_party_panel.visible = party
 	_state_panel.visible = not party
+	if _area_bar != null:
+		_area_bar.visible = not party
 	if party:
 		_state_panel.hide_popups()
-		close_diplomacy()
-		close_war_window()
+		_windows.close_all()
+		_sync_area_bar()
 	_location_panel.set_party_mode(party)
 	if party:
 		_party_panel.show_party(_sim.get_party(_player_current))
@@ -2204,10 +2210,10 @@ func open_journal(tab: int = -1) -> void:
 	if not _events_available():
 		return
 	_state_panel.hide_popups()
-	close_diplomacy()
-	close_war_window()
+	_windows.opening(_journal_window)
 	_journal_window.open(_sim, tab)
 	_place_diplomacy()
+	_sync_area_bar()
 
 
 ## Spielmenü „Ereignisse“: schließt das Menü (das Tempo von vorher gilt) und zeigt die bisherigen
@@ -2227,6 +2233,7 @@ func _events_available() -> bool:
 func close_journal() -> void:
 	if _journal_window != null:
 		_journal_window.close()
+		_sync_area_bar()
 
 
 func toggle_journal() -> void:
@@ -2304,6 +2311,130 @@ func _place_event_window() -> void:
 	)
 
 
+# --- Bereiche und Jahrbuch (seit M13a5a, vertical_slice.md 4.1–4.3) ---------------------
+
+
+func _build_areas() -> void:
+	_area_bar = AreaBar.new()
+	var bar_root: Control = $UI/Root
+	bar_root.add_child(_area_bar)
+	bar_root.move_child(_area_bar, _top_bar.get_index())
+	_area_bar.resized.connect(_place_diplomacy)
+	_area_bar.area_requested.connect(open_area)
+	_state_panel.set_area_bar(true)
+	_yearbook_window = YearbookWindow.new()
+	var root: Control = $UI/Root
+	root.add_child(_yearbook_window)
+	root.move_child(_yearbook_window, _top_bar.get_index())
+	_yearbook_window.close_requested.connect(close_yearbook)
+	_yearbook_window.resized.connect(_place_diplomacy)
+	for window: Control in [_diplomacy_window, _war_window, _journal_window, _yearbook_window]:
+		_windows.add(window)
+
+
+## Bereichsleiste (Zugriff für Tests).
+func area_bar() -> AreaBar:
+	return _area_bar
+
+
+## Jahrbuch (Zugriff für Tests).
+func yearbook_window() -> YearbookWindow:
+	return _yearbook_window
+
+
+## Fensterverwaltung (Zugriff für Tests).
+func window_manager() -> WindowManager:
+	return _windows
+
+
+## Leiste der Kartenmodi in zwei Reihen, wenn eine nicht zwischen die Spalten passt (seit M13a5a); der
+## Bereich darüber wächst mit, damit Fenster und Schlachtberichte über ihr enden.
+func _fit_mode_bar() -> void:
+	# Die Breite aus den Abständen: Der CenterContainer wächst mit einer zu breiten Leiste mit.
+	var root_width := ($UI/Root as Control).size.x
+	var available := root_width - _mode_bar_area.offset_left + _mode_bar_area.offset_right
+	_mode_bar.set_rows(1)
+	if _mode_bar.get_combined_minimum_size().x > available:
+		_mode_bar.set_rows(2)
+	var height := _mode_bar.get_combined_minimum_size().y
+	_mode_bar_area.offset_top = -12.0 - maxf(height, 52.0)
+	_place_diplomacy.call_deferred()
+	_place_reports.call_deferred()
+
+
+## Klick in der Bereichsleiste: Fenster oder Ansicht des Bereichs (ein zweiter Klick schließt es).
+func open_area(area: StringName) -> void:
+	match area:
+		&"haushalt":
+			_state_panel.show_budget()
+		&"gesetze":
+			_state_panel.show_politics()
+		&"zollunion":
+			_state_panel.show_customs()
+		&"diplomatie":
+			toggle_diplomacy()
+		&"militaer":
+			toggle_war_window()
+		&"journale":
+			toggle_journal()
+		&"jahrbuch":
+			toggle_yearbook()
+		&"chronik":
+			_chronicle_panel.visible = not _chronicle_panel.visible
+	_sync_area_bar()
+
+
+## Welche Bereiche es im Lesezeichen und für den Spielerstaat gibt.
+func _update_area_bar() -> void:
+	var areas := _state_panel.available_areas()
+	areas[&"jahrbuch"] = _sim != null and bool(_sim.get_legacy(_player).get("active", false))
+	areas[&"chronik"] = true
+	_area_bar.set_available(areas)
+	_area_bar.visible = _state_panel.visible
+	_sync_area_bar()
+
+
+## Gedrückt erscheint der Bereich mit offenem Fenster.
+func _sync_area_bar() -> void:
+	if _area_bar == null:
+		return
+	var open := _windows.open_window()
+	var area := &""
+	if open == _diplomacy_window:
+		area = &"diplomatie"
+	elif open == _war_window:
+		area = &"militaer"
+	elif open == _journal_window:
+		area = &"journale"
+	elif open == _yearbook_window:
+		area = &"jahrbuch"
+	_area_bar.set_active(area)
+	(_area_bar.button(&"chronik") as Button).set_pressed_no_signal(_chronicle_panel.visible)
+
+
+func open_yearbook() -> void:
+	if _sim == null or not bool(_sim.get_legacy(_player).get("active", false)):
+		return
+	_state_panel.hide_popups()
+	_windows.opening(_yearbook_window)
+	_yearbook_window.open(_sim, _player)
+	_place_diplomacy()
+	_sync_area_bar()
+
+
+func close_yearbook() -> void:
+	if _yearbook_window != null:
+		_yearbook_window.close()
+		_sync_area_bar()
+
+
+func toggle_yearbook() -> void:
+	if _yearbook_window.is_open():
+		close_yearbook()
+	else:
+		open_yearbook()
+
+
 # --- Urteil der Geschichte (seit M13a4, vertical_slice.md 3.5) ------------------------
 
 
@@ -2334,9 +2465,8 @@ func open_verdict() -> void:
 	_set_speed(0)
 	_tooltip.hide_tooltip()
 	_state_panel.hide_popups()
-	close_diplomacy()
-	close_war_window()
-	close_journal()
+	_windows.close_all()
+	_sync_area_bar()
 	_verdict_window.open(_sim, _player)
 	_place_verdict()
 
@@ -2755,6 +2885,8 @@ func _run_screenshot() -> void:
 		_select_strongest_army()
 	if _options.show_journal:
 		open_journal()
+	if _options.show_yearbook:
+		open_yearbook()
 	if _options.show_game_menu:
 		open_game_menu()
 	if _options.show_election_night:

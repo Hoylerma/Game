@@ -83,6 +83,8 @@ var _journals_available := false
 var _journal_button: Button = null
 ## Zeile mit „Verfassung und Gruppen …“ und „Journale …“ (seit M11).
 var _politics_row: HBoxContainer = null
+## Seit M13a5a öffnet die Bereichsleiste die Fenster; die Knopfzeilen des Panels sind dann ausgeblendet.
+var _area_bar := false
 ## Zeile mit „Zollunion …“ und „Diplomatie …“ (seit M10), sichtbar, wenn einer der beiden es ist.
 var _window_row: HBoxContainer = null
 ## Militär (seit M10, Schritt b3): Stärke und Stufe der Mobilmachung, Knöpfe; nur in Szenarien mit
@@ -220,7 +222,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	_update_customs(state)
 	_diplomacy_button.visible = _diplomacy_available
 	_journal_button.visible = _journals_available
-	_window_row.visible = _customs_button.visible or _diplomacy_button.visible
+	_window_row.visible = not _area_bar and (_customs_button.visible or _diplomacy_button.visible)
 	_update_military(state)
 	_update_government(state)
 	_update_hint()
@@ -228,7 +230,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	if _budget_popup.visible:
 		_fill_budget()
 	_politics_button.visible = bool(state.get("politik", false))
-	_politics_row.visible = _politics_button.visible or _journal_button.visible
+	_politics_row.visible = not _area_bar and (_politics_button.visible or _journal_button.visible)
 	if _politics_popup.visible:
 		if not _politics_button.visible:
 			_politics_popup.hide()
@@ -283,6 +285,28 @@ func clear_pending() -> void:
 		_customs_note.text = ""
 
 
+## Bereichsleiste (seit M13a5a): blendet „Haushalt im Einzelnen …“ und die Zeilen der Fensterknöpfe aus.
+func set_area_bar(on: bool) -> void:
+	_area_bar = on
+	_budget_button.visible = not on
+	if _window_row != null:
+		_window_row.visible = not on and (_customs_button.visible or _diplomacy_button.visible)
+		_politics_row.visible = not on and (_politics_button.visible or _journal_button.visible)
+
+
+## Bereiche, die es für den gezeigten Staat gibt (Bereichsleiste, seit M13a5a).
+func available_areas() -> Dictionary:
+	var shown := not _state.is_empty()
+	return {
+		&"haushalt": shown and not _budget_button.disabled,
+		&"gesetze": shown and _politics_button.visible,
+		&"zollunion": shown and _customs_button.visible,
+		&"diplomatie": shown and _diplomacy_button.visible,
+		&"militaer": shown and _military_box != null and _military_box.visible,
+		&"journale": shown and _journal_button.visible,
+	}
+
+
 ## Szenario mit Deutschem Bund (seit M9, Schritt b3): Knopf „Diplomatie …“ zeigen.
 func set_diplomacy_available(available: bool) -> void:
 	_diplomacy_available = available
@@ -295,7 +319,7 @@ func set_journals_available(available: bool) -> void:
 	_journals_available = available
 	if _journal_button != null and not _state.is_empty():
 		_journal_button.visible = available
-		_politics_row.visible = _politics_button.visible or available
+		_politics_row.visible = not _area_bar and (_politics_button.visible or available)
 
 
 ## Szenario mit Zollunionen (seit M9): Knopf „Zollunion …“ zeigen.

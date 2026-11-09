@@ -787,6 +787,11 @@ jobs:
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_start_einstellungen.png" --szenario=voelkerfruehling --tage=0 --startbildschirm=einstellungen \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Bereichsleiste und Statistisches Jahrbuch (seit M13a5a): Preußen im Januar 1850
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_jahrbuch.png" --szenario=voelkerfruehling --staat=PRU --tage=700 --jahrbuch \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
           if grep -E "SCRIPT ERROR|Parse Error|SHADER ERROR" "$RUNNER_TEMP/screenshot.log"; then
             echo "::error::Skript- oder Shaderfehler bei den Screenshots."
             exit 1

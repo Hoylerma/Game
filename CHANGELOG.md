@@ -13,6 +13,12 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Bereiche und Jahrbuch (Schritt a5a):** Eine **Bereichsleiste** neben dem Staatspanel öffnet Haushalt,
+  Gesetze, Zollunion, Diplomatie, Militär, Journale und das neue **Statistische Jahrbuch** (Taste B) und
+  blendet die Chronik ein und aus. Das Jahrbuch zeigt jede Kennzahl und jede Dimension des Vermächtnisses
+  je Jahr als Diagramm und Tabelle, mit bis zu drei Staaten zum Vergleich. Eine **Fensterverwaltung** hält
+  höchstens ein Fenster offen; Esc schließt das zuletzt geöffnete. Die Leiste der Kartenmodi bricht in zwei
+  Reihen um, statt Chronik und Legende zu überdecken.
 - **Vermächtnis, Jahresreihen und Ende (Schritt a4):** Jeder Staat hat ein **Vermächtnis** in fünf
   Dimensionen – Einigkeit, Recht, Freiheit, Wohlstand, Geltung – von 0 bis 100, berechnet aus Faktoren in
   `common/vermaechtnis.chron` (Bedingungen wie in Ereignissen oder gewichtete Kennzahlen wie Unruhe,

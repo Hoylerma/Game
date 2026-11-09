@@ -118,6 +118,7 @@ func _run() -> void:
 	await _check_save_ui(sim)
 	await _check_new_game()
 	await _check_start_screen_flow()
+	await _check_areas()
 	await _check_verdict()
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
@@ -559,6 +560,55 @@ func _check_start_screen_flow() -> void:
 	if sim.set_game_settings("lehrling", false):
 		_fail("Startbildschirm: Stufe nach dem ersten Tag noch änderbar")
 	print("  Startbildschirm: 1848 als Bayern, Stufe %s, Verlauf offen" % settings.get("difficulty_name", ""))
+
+
+## Bereichsleiste, Fensterverwaltung und Jahrbuch (seit M13a5a) in der Partie ab 1848 (als Bayern).
+func _check_areas() -> void:
+	var bar: AreaBar = _main.call("area_bar")
+	var windows: WindowManager = _main.call("window_manager")
+	var yearbook: YearbookWindow = _main.call("yearbook_window")
+	var diplomacy: DiplomacyWindow = _main.call("diplomacy_window")
+	var sim: SimulationClient = _main.call("simulation")
+	_main.call("_refresh_all")
+	var areas := bar.visible_areas()
+	for expected in ["haushalt", "gesetze", "diplomatie", "journale", "jahrbuch", "chronik"]:
+		if not areas.has(expected):
+			_fail("Bereichsleiste ohne „%s“ (%s)" % [expected, ", ".join(areas)])
+	bar.button(&"jahrbuch").emit_signal("pressed")
+	await _frames(2)
+	if not yearbook.is_open() or not bar.button(&"jahrbuch").button_pressed:
+		_fail("Bereichsleiste: „Jahrbuch“ öffnet das Jahrbuch nicht")
+	var columns := yearbook.column_names()
+	if columns.size() != 17 or columns[0] != "Bevölkerung (Mio.)" or not columns.has("Einigkeit"):
+		_fail("Jahrbuch: Spalten %s" % ", ".join(columns))
+	yearbook.select_column(columns.find("Einigkeit"))
+	yearbook.set_compare(0, sim.get_state_index("AUT"))
+	await _frames(1)
+	var table := yearbook.table_text()
+	if yearbook.shown_states().size() != 2 or not table.contains("Österreich") or not table.contains("01.03.1848"):
+		_fail("Jahrbuch: Vergleich mit Österreich fehlt (%s)" % table.replace("\n", " / "))
+	bar.button(&"diplomatie").emit_signal("pressed")
+	await _frames(2)
+	if not diplomacy.is_open() or yearbook.is_open() or windows.open_window() != diplomacy:
+		_fail("Fensterverwaltung: Diplomatie schließt das Jahrbuch nicht")
+	await _key(KEY_ESCAPE)
+	if diplomacy.is_open() or windows.open_window() != null:
+		_fail("Fensterverwaltung: Escape schließt die Diplomatie nicht")
+	var chronicle: Control = _main.get("_chronicle_panel")
+	bar.button(&"chronik").emit_signal("pressed")
+	if chronicle.visible:
+		_fail("Bereichsleiste: „Chronik“ blendet die Chronik nicht aus")
+	bar.button(&"chronik").emit_signal("pressed")
+	if not chronicle.visible:
+		_fail("Bereichsleiste: „Chronik“ blendet die Chronik nicht wieder ein")
+	await _key(KEY_B)
+	await _frames(1)
+	if not yearbook.is_open():
+		_fail("Taste B öffnet das Jahrbuch nicht")
+	await _key(KEY_B)
+	if yearbook.is_open():
+		_fail("Taste B schließt das Jahrbuch nicht")
+	print("  Bereiche: %s; Jahrbuch mit %d Spalten, Vergleich, Fensterverwaltung" % [", ".join(areas), columns.size()])
 
 
 ## Urteil der Geschichte (seit M13a4) in der Partie ab 1848: Inhalt, Export der Chronik, Weiterspielen,

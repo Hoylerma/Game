@@ -89,6 +89,7 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--partei=<strömung>` | Parteienmodus mit dieser Strömung beim Start, z. B. `liberale` (seit M8; nur in Szenarien mit Parlament, 1848) |
 | `--ereignis` | Ereignisse des Spielerstaates warten auf die Wahl, das Ereignisfenster zeigt die offenen (seit M11; 1848 z. B. `--staat=BAD --tage=8`). Ohne die Option rechnen Screenshots wie die Kommandozeile ohne Ereignisspieler |
 | `--journal` | Journalfenster vor dem Screenshot öffnen (seit M11; ab 1848) |
+| `--jahrbuch` | Statistisches Jahrbuch vor dem Screenshot öffnen (seit M13a5a; ab 1848, mit `--tage` über einen 1. Januar) |
 | `--startbildschirm[=<seite>]` | Startbildschirm vor dem Screenshot öffnen, Seite `menue` (Standard), `lesezeichen` oder `einstellungen` (Spieleinstellungen für den Spielerstaat des Lesezeichens, mit `--szenario`; seit M13) |
 
 Auf der Kernraum-Karte bei 1600 × 900 Pixeln reicht die ferne Stufe (Staatsnamen) bis etwa
@@ -115,7 +116,9 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Linksklick auf die Karte | Ort auswählen, Ortsinfo öffnen (Klick ins Leere, ins Meer oder Ausland schließt sie) |
 | Linksklick auf eine Heeresmarke | seit M10: Heer auswählen (Rahmen, Weg bis zum Ziel gestrichelt) |
 | Rechtsklick ohne Ziehen | seit M10, mit einem eigenen Feldheer ausgewählt: Marschbefehl zum Ort (wirksam ab dem nächsten Tag); der Tooltip nennt beim Überfahren Tage und Ankunft, die Karte zeigt den Weg gestrichelt |
-| Esc | Auswahl aufheben (zuerst das Heer, dann den Ort) |
+| Esc | seit M13a5a zuerst das zuletzt geöffnete Fenster eines Bereichs schließen; sonst Auswahl aufheben (zuerst das Heer, dann den Ort) |
+| Bereichsleiste | seit M13a5a, rechts neben dem Staatspanel: Haushalt, Gesetze („Verfassung und Gruppen“), Zollunion, Diplomatie, Militär (Kriegsfenster), Journale, Jahrbuch und Chronik (ein- und ausblenden); Bereiche ohne Inhalt im Lesezeichen fehlen. Ein Klick öffnet das Fenster neben der Leiste, ein zweiter schließt es; die Fensterverwaltung hält höchstens eines offen. Die Knöpfe „Haushalt im Einzelnen …“, „Verfassung und Gruppen …“, „Zollunion …“, „Diplomatie …“ und „Journale …“ des Staatspanels sind dafür ausgeblendet |
+| B, „Jahrbuch“ | seit M13a5a, ab 1848: Statistisches Jahrbuch mit einer Kennzahl oder Dimension des Vermächtnisses (Auswahl) je Stichtag (Start, jeder 1. Januar, Ende) als Liniendiagramm und Tabelle, für den Spielerstaat und bis zu drei Staaten zum Vergleich |
 | Rechte oder mittlere Maustaste ziehen | Karte verschieben |
 | Mausrad | Zoomen (zum Mauszeiger hin, von knapp unter der Übersicht, bis ein Kartenpixel 6 Bildschirmpixel groß ist) |
 | W A S D, Pfeiltasten | Karte verschieben |
@@ -125,7 +128,7 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | 1 – 5 | Geschwindigkeit: 2, 5, 15, 40 oder 120 Tage je Sekunde |
 | Q W E R T Z U I O P Ü + Ä Ö # Y X C | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“), Wahlen (seit M8; „Ä“ rechts neben Ö, englisch „'“), Zollgebiete (seit M9; „Ö“, englisch „;“) und Beziehungen (seit M9; „#“ rechts neben Ä, englisch „\“: Beziehung jedes Staates zum Spielerstaat, grün freundlich, rot feindlich) und Krieg (seit M10; „Y“ links unten, englisch „Z“: wer die Orte hält, besetzte Orte schraffiert in der Farbe des Besitzers, Fronten als Grenzen, dazu Garnisonen, Schlachten und Belagerungen) und Unruhe (seit M11; „X“: Unruhe des Besitzers von 0 bis 100, Staaten mit Aufstand violett; der Tooltip nennt Unruhe, Ziel und Aufstand) und Bund (seit M13; „C“: das Bundesgebiet, das gilt – der Deutsche Bund oder ein neuer Bund wie der Norddeutsche Bund oder das Reich –, die Präsidialmacht kräftig, die Mitglieder blass) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, die der nächsten fünf Jahre gestrichelt |
 | Ereignisfenster | seit M11, ab 1848: Ein Ereignis des Spielerstaates hält die Zeit an (das Tempo bleibt gesperrt, bis es entschieden ist). Kopfzeile „EREIGNIS“ bzw. „WENDEPUNKT“, Datum, Text, Optionen mit ihren Folgen, Quelle; der historische Kompass ◆ markiert die historische Wahl (Häkchen „Kompass“ schaltet ihn ab). Gesperrte Optionen sind ausgegraut. Die Wahl gilt ab dem nächsten Tag; danach folgt das nächste offene Ereignis oder die Zeit läuft mit dem Tempo von vorher weiter ([docs/technik/ereignisse.md](../docs/technik/ereignisse.md), Abschnitt 9) |
-| J, „Journale …“ (Staatspanel) | seit M11, ab 1848: Journalfenster mit je einem Reiter für „Revolution 1848/49“ und „Die deutsche Frage“ (Stufe seit wann, Ziele ✓/○ mit Fortschritt, Weg bisher, mögliche Ausgänge mit Wertung) und „Bisherige Ereignisse“ (mit der gewählten Option, ◆ historisch, Wendepunkte rot). Esc oder × schließt |
+| J, „Journale“ (Bereichsleiste) | seit M11, ab 1848: Journalfenster mit je einem Reiter für „Revolution 1848/49“ und „Die deutsche Frage“ (Stufe seit wann, Ziele ✓/○ mit Fortschritt, Weg bisher, mögliche Ausgänge mit Wertung) und „Bisherige Ereignisse“ (mit der gewählten Option, ◆ historisch, Wendepunkte rot). Esc oder × schließt |
 | Wahlabend | seit M8: öffnet am Wahltag von selbst, die Zeit hält an. Die Wahlkreise treffen in der Meldereihenfolge ein (Tempo ×1, ×4 oder sofort); Halbrund, Balken mit Hochrechnung und Fehlerband, Telegramme (Klick zeigt den Wahlkreis). Danach im Spielmenü „Letzte Wahl“ |
 | Steuerregler | Kontribution, Akzise und Zoll des Spielerstaates (wirksam ab dem nächsten simulierten Tag); seit M9 ist der Zollregler eines Mitglieds einer Zollunion gesperrt und zeigt den Tarif der Union |
 | „Haushalt im Einzelnen …“ | Haushaltsfenster: Einnahmen je Steuerart, Ausgaben je Posten (Hof, Verwaltung, Heer, Zinsen, Bauten), Schatz, Schulden, Zins, Staatsbankrotte |
@@ -152,7 +155,7 @@ Kartenmodus „Bevölkerungsdichte“. Kurz getippt (unter 0,18 s) schaltet W de
 gehalten bewegt es die Karte nach oben. Die Pfeiltaste nach oben bewegt immer sofort.
 
 Die Tastenbelegung steht als Aktionen in `project.godot` (`kamera_*`, `kartenmodus_*`,
-`tempo_*`, `auswahl_aufheben`, `spielmenue`, `schnellspeichern`, `schnellladen`) und lässt sich im Editor unter *Projekteinstellungen →
+`tempo_*`, `auswahl_aufheben`, `spielmenue`, `schnellspeichern`, `schnellladen`, `journal`, `jahrbuch`) und lässt sich im Editor unter *Projekteinstellungen →
 Eingabebelegung* ändern. Es werden physische Tasten verwendet, die Belegung gilt also auf
 jeder Tastatur an derselben Stelle: „Z“ ist die Taste rechts neben T (auf englischen
 Tastaturen beschriftet mit „Y“), „Ü“ die rechts neben P (englisch „[“), „Y“ die links unten neben der Umschalttaste (englisch „Z“).

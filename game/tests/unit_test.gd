@@ -33,6 +33,7 @@ func _initialize() -> void:
 	_test_party_panel()
 	_test_event_window()
 	_test_chronicle_export()
+	_test_window_manager()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -97,6 +98,9 @@ func _test_launch_options() -> void:
 	var bad := LaunchOptions.parse(bad_args)
 	_equal(bad.problems.size(), 15, "fehlerhafte Optionen gemeldet")
 	_true(not bad.show_events and not bad.show_journal, "fehlerhaftes --ereignis und --journal gelten nicht")
+	var yearbook := LaunchOptions.parse(PackedStringArray(["--jahrbuch"]))
+	_true(yearbook.show_yearbook and yearbook.problems.is_empty(), "--jahrbuch öffnet das Jahrbuch")
+	_true(not LaunchOptions.parse(PackedStringArray(["--jahrbuch=1"])).show_yearbook, "--jahrbuch=1 gilt nicht")
 	var events := LaunchOptions.parse(PackedStringArray(["--ereignis", "--journal", "--kartenmodus=16"]))
 	_true(
 		events.show_events and events.show_journal and events.map_mode == 16 and events.problems.is_empty()
@@ -839,4 +843,43 @@ func _test_chronicle_export() -> void:
 		],
 	})
 	_true(tip == "Grundwert +30\nBund +25\nUnruhe -6", "Faktoren im Tooltip (%s)" % tip)
+
+
+class FakeWindow:
+	extends Control
+	var opened := false
+
+	func is_open() -> bool:
+		return opened
+
+	func close() -> void:
+		opened = false
+
+	func fit_height(max_height: float) -> void:
+		custom_minimum_size.y = minf(300.0, max_height)
+
+
+## Fensterverwaltung (seit M13a5a): höchstens ein Fenster offen, Escape schließt das jüngste, Platz.
+func _test_window_manager() -> void:
+	var manager := WindowManager.new()
+	var a := FakeWindow.new()
+	var b := FakeWindow.new()
+	manager.add(a)
+	manager.add(b)
+	manager.add(a)
+	_true(manager.windows().size() == 2, "Fenster nur einmal angemeldet")
+	_true(manager.open_window() == null and not manager.close_top(), "ohne offenes Fenster nichts zu schließen")
+	manager.opening(a)
+	a.opened = true
+	manager.opening(b)
+	b.opened = true
+	_true(not a.opened and b.opened and manager.open_window() == b, "das neue Fenster schließt das alte")
+	manager.place(100.0, 80.0, 280.0)
+	_true(b.position == Vector2(100, 80) and b.custom_minimum_size.y == 200.0, "Platz und Höhe (%s)" % str(b.position))
+	_true(manager.close_top() and not b.opened and manager.open_window() == null, "Escape schließt das jüngste")
+	a.opened = true
+	manager.close_all()
+	_true(not a.opened and not b.opened, "alle geschlossen")
+	a.free()
+	b.free()
 
