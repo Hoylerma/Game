@@ -118,6 +118,8 @@ func _run() -> void:
 	await _check_save_ui(sim)
 	await _check_new_game()
 	await _check_start_screen_flow()
+	await _check_areas()
+	await _check_verdict()
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
 		print("KLICK OK %d/%d" % [all_levels, testable.size()])
@@ -558,6 +560,118 @@ func _check_start_screen_flow() -> void:
 	if sim.set_game_settings("lehrling", false):
 		_fail("Startbildschirm: Stufe nach dem ersten Tag noch änderbar")
 	print("  Startbildschirm: 1848 als Bayern, Stufe %s, Verlauf offen" % settings.get("difficulty_name", ""))
+
+
+## Bereichsleiste, Fensterverwaltung und Jahrbuch (seit M13a5a) in der Partie ab 1848 (als Bayern).
+func _check_areas() -> void:
+	var bar: AreaBar = _main.call("area_bar")
+	var windows: WindowManager = _main.call("window_manager")
+	var yearbook: YearbookWindow = _main.call("yearbook_window")
+	var diplomacy: DiplomacyWindow = _main.call("diplomacy_window")
+	var sim: SimulationClient = _main.call("simulation")
+	_main.call("_refresh_all")
+	var areas := bar.visible_areas()
+	for expected in ["haushalt", "gesetze", "diplomatie", "journale", "jahrbuch", "chronik"]:
+		if not areas.has(expected):
+			_fail("Bereichsleiste ohne „%s“ (%s)" % [expected, ", ".join(areas)])
+	bar.button(&"jahrbuch").emit_signal("pressed")
+	await _frames(2)
+	if not yearbook.is_open() or not bar.button(&"jahrbuch").button_pressed:
+		_fail("Bereichsleiste: „Jahrbuch“ öffnet das Jahrbuch nicht")
+	var columns := yearbook.column_names()
+	if columns.size() != 17 or columns[0] != "Bevölkerung (Mio.)" or not columns.has("Einigkeit"):
+		_fail("Jahrbuch: Spalten %s" % ", ".join(columns))
+	yearbook.select_column(columns.find("Einigkeit"))
+	yearbook.set_compare(0, sim.get_state_index("AUT"))
+	await _frames(1)
+	var table := yearbook.table_text()
+	if yearbook.shown_states().size() != 2 or not table.contains("Österreich") or not table.contains("01.03.1848"):
+		_fail("Jahrbuch: Vergleich mit Österreich fehlt (%s)" % table.replace("\n", " / "))
+	bar.button(&"diplomatie").emit_signal("pressed")
+	await _frames(2)
+	if not diplomacy.is_open() or yearbook.is_open() or windows.open_window() != diplomacy:
+		_fail("Fensterverwaltung: Diplomatie schließt das Jahrbuch nicht")
+	await _key(KEY_ESCAPE)
+	if diplomacy.is_open() or windows.open_window() != null:
+		_fail("Fensterverwaltung: Escape schließt die Diplomatie nicht")
+	var chronicle: Control = _main.get("_chronicle_panel")
+	bar.button(&"chronik").emit_signal("pressed")
+	if chronicle.visible:
+		_fail("Bereichsleiste: „Chronik“ blendet die Chronik nicht aus")
+	bar.button(&"chronik").emit_signal("pressed")
+	if not chronicle.visible:
+		_fail("Bereichsleiste: „Chronik“ blendet die Chronik nicht wieder ein")
+	await _key(KEY_B)
+	await _frames(1)
+	if not yearbook.is_open():
+		_fail("Taste B öffnet das Jahrbuch nicht")
+	await _key(KEY_B)
+	if yearbook.is_open():
+		_fail("Taste B schließt das Jahrbuch nicht")
+	print("  Bereiche: %s; Jahrbuch mit %d Spalten, Vergleich, Fensterverwaltung" % [", ".join(areas), columns.size()])
+	# Fenster der Bereiche (seit M13a5b): je Bereich ein Stichwort im Inhalt.
+	var expected_text := {
+		&"kabinett": "FRÜHERE AMTSINHABER", &"gesetze": "VERFASSUNG UND WAHLRECHT", &"gruppen": "Zustimmung",
+		&"parlament": "Wahlrecht", &"gesellschaft": "ALTERSAUFBAU", &"wirtschaft": "GÜTER JE MONAT",
+	}
+	for area: StringName in expected_text:
+		if not bar.visible_areas().has(str(area)):
+			_fail("Bereichsleiste ohne „%s“" % area)
+			continue
+		bar.button(area).emit_signal("pressed")
+		await _frames(2)
+		var window: AreaWindow = _main.call("area_window", area)
+		if window == null or not window.is_open() or windows.open_window() != window or not bar.button(area).button_pressed:
+			_fail("Bereich %s: Fenster nicht offen" % area)
+			continue
+		if not window.window_text().contains(str(expected_text[area])):
+			_fail("Bereich %s ohne „%s“: %s" % [area, expected_text[area], window.window_text().left(200).replace("\n", " / ")])
+	var parliament: ParliamentWindow = _main.call("area_window", &"parlament")
+	bar.button(&"parlament").emit_signal("pressed")
+	await _frames(1)
+	parliament.select_parliament(0)
+	await _frames(1)
+	if parliament.chosen_parliament() != 0 or not parliament.window_text().contains("Wahlrecht"):
+		_fail("Parlament: Auswahl der Nationalversammlung")
+	await _key(KEY_ESCAPE)
+	if windows.open_window() != null:
+		_fail("Fensterverwaltung: Escape schließt das Fenster des Bereichs nicht")
+	print("  Fenster der Bereiche: Kabinett, Gesetze, Gruppen, Parlament, Gesellschaft, Wirtschaft")
+
+
+## Urteil der Geschichte (seit M13a4) in der Partie ab 1848: Inhalt, Export der Chronik, Weiterspielen,
+## Hauptmenü. Bis 1871 rechnet der Test nicht; er öffnet das Urteil wie das Spielmenü nach dem Ende.
+func _check_verdict() -> void:
+	var window: VerdictWindow = _main.call("verdict_window")
+	var sim: SimulationClient = _main.call("simulation")
+	_main.call("open_verdict")
+	await _frames(2)
+	var text := "\n".join(window.content_texts())
+	if not window.is_open() or not text.contains("Vermächtnis") or not text.contains("Die deutsche Frage"):
+		_fail("Urteil: nicht offen oder ohne Vermächtnis und Journal (%s)" % text.replace("\n", " | "))
+	var path: String = _main.call("export_chronicle")
+	if path.is_empty() or not FileAccess.file_exists(path):
+		_fail("Urteil: Chronik nicht exportiert (%s)" % path)
+	else:
+		var html := FileAccess.get_file_as_string(path)
+		if not html.contains("<h2>Chronik</h2>") or not html.contains("Vermächtnis"):
+			_fail("Urteil: exportierte Chronik ohne Chronik oder Vermächtnis")
+		DirAccess.remove_absolute(path)
+	window.button("Continue").emit_signal("pressed")
+	await _frames(1)
+	if window.is_open():
+		_fail("Urteil: „Weiterspielen“ schließt es nicht")
+	_main.call("open_verdict")
+	window.button("Menu").emit_signal("pressed")
+	await _frames(1)
+	var start: StartScreen = _main.call("start_screen")
+	if window.is_open() or not start.is_open():
+		_fail("Urteil: „Hauptmenü“ öffnet den Startbildschirm nicht")
+	start.close()
+	var legacy: String = (_main.call("state_panel") as StatePanel).legacy_text()
+	if not legacy.begins_with("Vermächtnis: Einigkeit"):
+		_fail("Staatspanel ohne Vermächtnis (%s)" % legacy)
+	print("  Urteil der Geschichte: Inhalt, Chronik als HTML, Weiterspielen, Hauptmenü (%s)" % sim.get_scenario_name())
 
 
 func _check_new_game() -> void:

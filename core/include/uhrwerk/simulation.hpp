@@ -112,6 +112,8 @@ public:
     Fixed reserved_campaign_funds(Index current) const;
 
     const World& world() const { return world_; }
+    /// Abgeleitete Angaben der Ereignisse (seit M13a4 für das Vermächtnis, das Bedingungen prüft).
+    const EventCache& event_cache() const { return event_cache_; }
     /// Märkte, Nachbarn und Bahnverbindungen (seit M7 auch für die Anzeige der Bahnfracht).
     const EconomyTopology& economy_topology() const { return topology_; }
     const SimConfig& config() const { return config_; }
@@ -211,6 +213,7 @@ private:
     void run_economy(Index state);
     void run_elections();
     void run_yearly();
+    void record_year(); // seit M13a4: Jahresreihe (World::yearbook), höchstens eine je Tag
 
     /// Hilfslisten aus dem unveränderlichen Inhalt und den Besitzverhältnissen (seit M4).
     /// Kein Zustand: nicht in der Prüfsumme, im Konstruktor aus der Welt aufgebaut.

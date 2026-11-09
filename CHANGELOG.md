@@ -13,6 +13,30 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Fenster der Bereiche (Schritt a5b):** Die Bereichsleiste öffnet sechs neue Fenster: **Kabinett und Hof**
+  (Herrscher und Minister mit Werten und Eigenschaften, Neigungen des Staates, frühere Amtsinhaber der
+  Partie), **Gesetze** (Verfassung, Wahlrecht, jede Gesetzesoption mit ihrer Wirkung auf die Unruhe und den
+  Gruppen dafür und dagegen), **Interessengruppen** (Anteil, Einfluss, Zustimmung, Forderungen), **Parlament**
+  (Halbrund der letzten Wahl nach Fraktionen, nächste Wahl, Abstimmungen), **Gesellschaft** (Altersaufbau,
+  Kulturen, Konfessionen, Berufe, Wanderung) und **Wirtschaft** (Güter mit Preisen, Betriebe, Märkte,
+  Zollgebiet). 1648 bitgleich.
+- **Bereiche und Jahrbuch (Schritt a5a):** Eine **Bereichsleiste** neben dem Staatspanel öffnet Haushalt,
+  Gesetze, Zollunion, Diplomatie, Militär, Journale und das neue **Statistische Jahrbuch** (Taste B) und
+  blendet die Chronik ein und aus. Das Jahrbuch zeigt jede Kennzahl und jede Dimension des Vermächtnisses
+  je Jahr als Diagramm und Tabelle, mit bis zu drei Staaten zum Vergleich. Eine **Fensterverwaltung** hält
+  höchstens ein Fenster offen; Esc schließt das zuletzt geöffnete. Die Leiste der Kartenmodi bricht in zwei
+  Reihen um, statt Chronik und Legende zu überdecken.
+- **Vermächtnis, Jahresreihen und Ende (Schritt a4):** Jeder Staat hat ein **Vermächtnis** in fünf
+  Dimensionen – Einigkeit, Recht, Freiheit, Wohlstand, Geltung – von 0 bis 100, berechnet aus Faktoren in
+  `common/vermaechtnis.chron` (Bedingungen wie in Ereignissen oder gewichtete Kennzahlen wie Unruhe,
+  Lebensstandard, Stärke, Bündnisse, Siege). Das Staatspanel zeigt die Werte mit den Faktoren im Tooltip.
+  Der Kern schreibt **Jahresreihen** (zwölf Kennzahlen und das Vermächtnis je Staat) am Start, an jedem
+  1. Januar und am letzten Tag in den Spielstand. Die Lesezeichen ab 1848 **enden am 1. Juli 1871**
+  (Szenariofeld `ende`): Die Journale wählen ihren Ausgang, dann öffnet das **Urteil der Geschichte** mit
+  dem Ausgang der deutschen Frage und der Revolution samt historischem Vergleich, dem Vermächtnis mit
+  Verlauf und Satz, den Wendepunkten, Kriegen, Herrscher und Minister. Weiterspielen geht ohne neue
+  Ereignisse; „Chronik exportieren“ schreibt die Chronik als HTML-Datei in den Benutzerordner. Das
+  KI-Labor berichtet die Verteilung des Vermächtnisses. 1648 bitgleich.
 - **Wahlen bis 1871 (Schritt a3):** Nach 1849 wird weiter gewählt. Das **preußische Abgeordnetenhaus**
   wählt an den Urwahltagen 1852 bis 1870 mit dem Dreiklassenwahlrecht in den Wahlkreisen von 1849 (neues
   Feld `wiederwahl`). Gründet sich ein Bund, wählt drei Monate später der **Reichstag** nach allgemeinem,

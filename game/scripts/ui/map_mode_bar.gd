@@ -19,14 +19,18 @@ const BUTTON_STYLES: Array[StringName] = [
 ]
 
 var _buttons: Array[Button] = []
+var _rows: Array[HBoxContainer] = []
+## Seit M13a5a: mit achtzehn Modi passt eine Reihe bei 1.600 Pixeln nicht mehr zwischen die Spalten; dann
+## brechen die Knöpfe in zwei Reihen um (set_rows, main.gd).
+var _row_count := 1
 
-@onready var _row: HBoxContainer = %Buttons
+@onready var _box: VBoxContainer = %Buttons
 
 
 func _ready() -> void:
 	var group := ButtonGroup.new()
 	group.allow_unpress = false
-	_row.add_theme_constant_override(&"separation", BUTTON_SEPARATION)
+	var first := _add_row()
 	for mode in MapModes.COUNT:
 		var button := Button.new()
 		button.text = MapModes.SHORT_NAMES[mode]
@@ -39,9 +43,39 @@ func _ready() -> void:
 		button.custom_minimum_size = Vector2(0, 32)
 		button.add_theme_font_size_override(&"font_size", BUTTON_FONT_SIZE)
 		button.pressed.connect(_on_button_pressed.bind(mode))
-		_row.add_child(button)
+		first.add_child(button)
 		_compact(button)
 		_buttons.append(button)
+
+
+func _add_row() -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override(&"separation", BUTTON_SEPARATION)
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_box.add_child(row)
+	_rows.append(row)
+	return row
+
+
+## Knöpfe auf rows Reihen verteilen (1 oder 2), gleich viele je Reihe.
+func set_rows(rows: int) -> void:
+	rows = clampi(rows, 1, 2)
+	if rows == _row_count:
+		return
+	_row_count = rows
+	while _rows.size() < rows:
+		_add_row()
+	var per_row := ceili(float(_buttons.size()) / float(rows))
+	for i in _buttons.size():
+		var target := _rows[mini(floori(float(i) / float(per_row)), rows - 1)]
+		if _buttons[i].get_parent() != target:
+			_buttons[i].reparent(target)
+	for r in _rows.size():
+		_rows[r].visible = r < rows
+
+
+func row_count() -> int:
+	return _row_count
 
 
 ## Aktiven Modus markieren, ohne das Signal auszulösen.

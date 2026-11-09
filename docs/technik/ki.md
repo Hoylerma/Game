@@ -475,7 +475,9 @@ Präzisiert in Schritt a5 (`core/src/ai_lab.cpp`, Zieldatei: chronik-skript.md A
 - **Je Lauf:** Ausgang mit Datum, Kriege mit Angreifer, Verteidiger, Beginn, Ende und Gewinner (auch
   laufende), untergegangene Staaten, Bankrotte je Staat, höchste Unruhe eines Staates an einem
   Monatsersten, Entscheidungen der KI je Art (aus dem KI-Protokoll des Monatsersten), Bündnisse am Ende,
-  Laufzeit und Prüfsumme. Über alle Läufe zusätzlich Kriege je Paar und die Entscheidungen je Art.
+  Laufzeit und Prüfsumme. Über alle Läufe zusätzlich Kriege je Paar und die Entscheidungen je Art; seit
+  M13a4 das Vermächtnis am Ende je hervorgehobenem Staat des Lesezeichens (`spielbar`) mit Mittel und Spanne
+  je Dimension ([vertical_slice.md](vertical_slice.md) 3.5; ohne Korridor).
 - **Laufzeit der KI:** Die Simulation misst die Rechenzeit von Schritt 6f (`Simulation::ai_seconds`, kein
   Zustand); der Bericht nennt ihren Anteil und die Zeit je Staat und Monatserstem (Ziel: höchstens 5 ms).
   Gemessen 1848–1850 (Release, zwei Läufe gleichzeitig): 1,5 ms je Staat und Monat, 36 % der Laufzeit;

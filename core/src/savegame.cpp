@@ -4,6 +4,7 @@
 
 #include "state_access.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/legacy.hpp"
 #include "uhrwerk/military.hpp"
 
 #include <algorithm>
@@ -41,12 +42,12 @@ constexpr std::uint64_t kMilitaryContentVersion = 9;
 /// Befristung, Spieler), 3 = a3 (Unruhe, Aufstände), 4 = a4 (Journale, Abstimmungen), 5 = a5 (beendete
 /// Aufstände).
 constexpr std::uint64_t kEventContentVersion =
-    8; // 7 seit M12a3: Block ki an den Optionen; 8 seit M13a2: Bund
+    9; // 7 seit M12a3: Block ki an den Optionen; 8 seit M13a2: Bund; 9 seit M13a4: Vermächtnis, Jahrbuch
 
 /// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki), 2 = a2
 /// (Strategie, Protokoll, Abkühlung; Planer Haushalt und Mobilmachung), 3 = a3
 /// (Diplomatie, Wahlkampf, Spielerströmung), 4 = a4 (Krieg und Frieden).
-constexpr std::uint64_t kAiContentVersion = 5;
+constexpr std::uint64_t kAiContentVersion = 6; // 6 seit M13a5b: frühere Amtszeiten im Zustand
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1135,6 +1136,15 @@ std::string validate_state(const Simulation& sim) {
             (w.federation.diet == kNone && !w.federation.members.empty())) {
             return "Bund ungültig";
         }
+        // Jahresreihen (seit M13a4): je Stichtag alle Staaten und Spalten, Stichtage aufsteigend.
+        const std::size_t columns = yearbook_columns(w);
+        for (std::size_t i = 0; i < w.yearbook.size(); ++i) {
+            const YearRecord& r = w.yearbook[i];
+            if (!w.legacy_rules.active || !is_valid(r.date) || r.values.size() != S * columns ||
+                (i > 0 && !(w.yearbook[i - 1].date < r.date))) {
+                return "Jahresreihe ungültig";
+            }
+        }
     }
     // KI (seit M12): je Staat und Rolle keine oder eine Person dieses Staates in dieser Rolle.
     if (w.ai_rules.active) {
@@ -1151,6 +1161,13 @@ std::string validate_state(const Simulation& sim) {
                 static_cast<std::size_t>(w.persons[static_cast<std::size_t>(person)].role) !=
                     i % kPersonRoles) {
                 return "Amt mit ungültiger Person";
+            }
+        }
+        for (const OfficeTerm& t : w.office_history) {
+            if (!in(t.person, w.persons.size()) ||
+                w.persons[static_cast<std::size_t>(t.person)].state != t.state ||
+                w.persons[static_cast<std::size_t>(t.person)].role != t.role || !is_valid(t.to)) {
+                return "frühere Amtszeit ungültig";
             }
         }
         if (w.ai_strategy.size() != S) {
@@ -1845,6 +1862,23 @@ ContentFingerprint content_fingerprint(const World& w) {
                 h.fixed(v.majority);
                 effects_hash(h, v.yes);
                 effects_hash(h, v.no);
+            }
+            // Vermächtnis und Ende der Partie (seit M13a4): bestimmen die Jahresreihen im Zustand.
+            h.flag(w.scenario.has_end);
+            h.i64(to_day_number(w.scenario.end));
+            h.flag(w.legacy_rules.active);
+            h.u64(w.legacy_rules.dimensions.size());
+            for (const LegacyDimension& d : w.legacy_rules.dimensions) {
+                h.text(d.id);
+                h.fixed(d.base);
+                h.u64(d.factors.size());
+                for (const LegacyFactor& f : d.factors) {
+                    h.u64(static_cast<std::uint64_t>(f.measure));
+                    h.fixed(f.weight);
+                    h.fixed(f.cap);
+                    h.flag(f.has_condition);
+                    condition_hash(h, f.condition);
+                }
             }
         }
         p[16] = h.value();

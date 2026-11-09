@@ -4,6 +4,7 @@
 
 #include "target_reader.hpp"
 #include "uhrwerk/ai.hpp"
+#include "uhrwerk/legacy.hpp"
 #include "uhrwerk/script.hpp"
 
 #include <algorithm>
@@ -264,6 +265,12 @@ AiLabRun run_ai_lab(const World& world, const SimConfig& config, const AiTargets
     }
     run.alliances = std::count_if(w.treaties.begin(), w.treaties.end(),
                                   [](const Treaty& t) { return t.kind == TreatyKind::Alliance; });
+    // Vermächtnis am Ende (seit M13a4, Verteilung im Bericht).
+    for (std::size_t s = 0; s < w.states.size(); ++s) {
+        for (const LegacyValue& v : legacy(w, sim.event_cache(), static_cast<Index>(s))) {
+            run.legacy.push_back(v.value);
+        }
+    }
     run.ai_seconds = sim.ai_seconds();
     run.checksum = sim.checksum();
     run.seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();

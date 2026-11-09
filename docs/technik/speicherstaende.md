@@ -289,7 +289,13 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
   (`spieleinstellung.stufe`, `spieleinstellung.offen`; Befehl `Spieleinstellung` am ersten Tag) und im
   Inhaltsbereich `ki` die Schwierigkeitsstufen mit ihren Faktoren und `standard_stufe` (Stand
   `kAiContentVersion` 5; [vertical_slice.md](vertical_slice.md), Abschnitt 3.2). Spielstände im Format 6
-  laden nicht. Ohne KI (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.
+  laden nicht. Ohne KI (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt. Format 7 wächst
+  mit M13 (vertical_slice.md Abschnitt 8): seit a2 in Welten mit Ereignissen der Bund zur Laufzeit
+  (`bund.vorlage`, `bund.mitglieder`, `bund.gegruendet`), seit a4 mit Vermächtnis die Jahresreihen
+  (`jahrbuch`: je Stichtag Datum und Werte je Staat und Spalte), seit a5b mit KI-Daten die früheren
+  Amtszeiten (`aemter_frueher`: Staat, Rolle, Person, letzter Tag; Inhaltsbereich `ki` Stand 6). Spielstände früherer Schritte laden nicht,
+  weil der Inhaltsbereich `ereignisse` seinen Stand erhöht (8 seit a2, 9 seit a4: Vermächtnis und Ende der
+  Partie).
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er

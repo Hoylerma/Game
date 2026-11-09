@@ -453,6 +453,13 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("bund.vorlage", w.federation.diet);
         list(v, "bund.mitglieder", w.federation.members, Extent::State, [&](auto& m) { v.field("", m); });
         v.field("bund.gegruendet", w.federation.founded);
+        // Jahresreihen (seit M13a4, vertical_slice.md 4.3), nur mit Vermächtnis.
+        if (w.legacy_rules.active) {
+            list(v, "jahrbuch", w.yearbook, Extent::State, [&](auto& r) {
+                v.field("datum", r.date);
+                list(v, "werte", r.values, Extent::State, [&](auto& x) { v.field("", x); });
+            });
+        }
     }
 
     // KI der Staaten (seit M12, Schritt a1): nur mit KI-Daten (1648 bleibt bitgleich). Personen im Amt je
@@ -484,6 +491,12 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("art", c.kind);
             v.field("ziel", c.target);
             v.field("bis", c.until);
+        });
+        list(v, "aemter_frueher", w.office_history, Extent::State, [&](auto& t) { // seit M13a5b
+            v.field("staat", t.state);
+            v.field("rolle", t.role);
+            v.field("person", t.person);
+            v.field("bis", t.to);
         });
         v.field("spielerstroemung", w.player_current);                 // seit a3
         v.field("spieleinstellung.stufe", w.game_settings.difficulty); // seit M13a1

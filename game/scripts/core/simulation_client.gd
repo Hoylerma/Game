@@ -84,6 +84,15 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"set_player_state",
 	&"get_game_settings",
 	&"set_game_settings",
+	&"get_state_society",
+	&"get_state_economy",
+	&"get_state_laws",
+	&"get_votes",
+	&"get_office_history",
+	&"get_legacy",
+	&"get_yearbook",
+	&"get_verdict",
+	&"is_game_over",
 	&"get_kreis_count",
 	&"get_kreis_index",
 	&"get_kreis",
@@ -648,6 +657,62 @@ func get_state_persons(state_index: int) -> Array[Dictionary]:
 ## default }, difficulty_id, difficulty_name, open, editable (nur am ersten Tag) }; ohne KI nur active.
 func get_game_settings() -> Dictionary:
 	return _as_dictionary(_native.call(&"get_game_settings"))
+
+
+## Gesellschaft eines Staates (seit M13a5b): { population, locations, cities, children, young, working, old,
+## living_standard, literacy_percent, confessions, cultures (Name → Prozent), balance_previous, professions:
+## je { name, stratum, people, percent } }.
+func get_state_society(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_state_society", state_index))
+
+
+## Wirtschaft eines Staates (seit M13a5b): { goods: je { name, color, supply, demand, price, price_factor },
+## businesses: je { name, profession, people }, markets: je { name, locations }, production_month,
+## taxes_month, customs_zone_name, customs_tariff_percent }.
+func get_state_economy(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_state_economy", state_index))
+
+
+## Gesetze eines Staates (seit M13a5b): je Gruppe { id, name, current, options: je { id, name, unrest,
+## current, wishes: je { group, color, value } } }.
+func get_state_laws(state_index: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_state_laws", state_index))
+
+
+## Abstimmungen in Parlamenten (seit M13a5b), neueste zuerst: je { title, parliament_index,
+## parliament_name, date_text, yes, no, accepted }.
+func get_votes() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_votes"))
+
+
+## Frühere Amtsinhaber eines Staates (seit M13a5b), zuletzt Ausgeschiedene zuerst: je { name, role, title,
+## from_text, to_text }; leer ohne KI-Daten.
+func get_office_history(state_index: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_office_history", state_index))
+
+
+## Vermächtnis eines Staates (seit M13a4, vertical_slice.md 3.5): { active, dimensions: je { id, name,
+## value (0–100), base, sentence, factors: je { name, value, active } } }; ohne Regeln active = false.
+func get_legacy(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_legacy", state_index))
+
+
+## Jahresreihen eines Staates (seit M13a4, vertical_slice.md 4.3): { columns (Namen: erst die Kennzahlen,
+## dann die Dimensionen), measure_count, rows: je { date, year, date_text, values (PackedFloat64Array) } }.
+func get_yearbook(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_yearbook", state_index))
+
+
+## Ende der Partie (seit M13a4): { has_end, over, active, end_date ({ year, month, day }), end_date_text, start_date_text, turning_points: je
+## { date_text, title, state_name, option_text }, wars: je { attacker_name, defender_name, started_text,
+## ended_text, winner (1, −1, 0), winner_name, transfers } }.
+func get_verdict() -> Dictionary:
+	return _as_dictionary(_native.call(&"get_verdict"))
+
+
+## Ob die Partie zu Ende ist (der letzte Tag des Lesezeichens ist gerechnet).
+func is_game_over() -> bool:
+	return bool(_native.call(&"is_game_over"))
 
 
 ## Stufe (Kennung, leer = Standard) und Geschichtsverlauf; nur am ersten Tag einer Partie mit KI.

@@ -83,6 +83,8 @@ var _journals_available := false
 var _journal_button: Button = null
 ## Zeile mit „Verfassung und Gruppen …“ und „Journale …“ (seit M11).
 var _politics_row: HBoxContainer = null
+## Seit M13a5a öffnet die Bereichsleiste die Fenster; die Knopfzeilen des Panels sind dann ausgeblendet.
+var _area_bar := false
 ## Zeile mit „Zollunion …“ und „Diplomatie …“ (seit M10), sichtbar, wenn einer der beiden es ist.
 var _window_row: HBoxContainer = null
 ## Militär (seit M10, Schritt b3): Stärke und Stufe der Mobilmachung, Knöpfe; nur in Szenarien mit
@@ -98,6 +100,10 @@ var _mobilization_sent := -1
 const GOVERNMENT_REFRESH_MS := 1000
 var persons_source: Callable = Callable()
 var intentions_source: Callable = Callable()
+## Vermächtnis (seit M13a4, vertical_slice.md 3.5): die fünf Dimensionen in einer Zeile, je Dimension die
+## Faktoren im Tooltip; main.gd liefert sie über legacy_source (SimulationClient.get_legacy).
+var legacy_source: Callable = Callable()
+var _legacy: Label = null
 var _minister_caption: Label = null
 var _minister: Label = null
 var _government_inclinations: Label = null
@@ -216,7 +222,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	_update_customs(state)
 	_diplomacy_button.visible = _diplomacy_available
 	_journal_button.visible = _journals_available
-	_window_row.visible = _customs_button.visible or _diplomacy_button.visible
+	_window_row.visible = not _area_bar and (_customs_button.visible or _diplomacy_button.visible)
 	_update_military(state)
 	_update_government(state)
 	_update_hint()
@@ -224,7 +230,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	if _budget_popup.visible:
 		_fill_budget()
 	_politics_button.visible = bool(state.get("politik", false))
-	_politics_row.visible = _politics_button.visible or _journal_button.visible
+	_politics_row.visible = not _area_bar and (_politics_button.visible or _journal_button.visible)
 	if _politics_popup.visible:
 		if not _politics_button.visible:
 			_politics_popup.hide()
@@ -279,6 +285,28 @@ func clear_pending() -> void:
 		_customs_note.text = ""
 
 
+## Bereichsleiste (seit M13a5a): blendet „Haushalt im Einzelnen …“ und die Zeilen der Fensterknöpfe aus.
+func set_area_bar(on: bool) -> void:
+	_area_bar = on
+	_budget_button.visible = not on
+	if _window_row != null:
+		_window_row.visible = not on and (_customs_button.visible or _diplomacy_button.visible)
+		_politics_row.visible = not on and (_politics_button.visible or _journal_button.visible)
+
+
+## Bereiche, die es für den gezeigten Staat gibt (Bereichsleiste, seit M13a5a).
+func available_areas() -> Dictionary:
+	var shown := not _state.is_empty()
+	return {
+		&"haushalt": shown and not _budget_button.disabled,
+		&"gesetze": shown and _politics_button.visible,
+		&"zollunion": shown and _customs_button.visible,
+		&"diplomatie": shown and _diplomacy_button.visible,
+		&"militaer": shown and _military_box != null and _military_box.visible,
+		&"journale": shown and _journal_button.visible,
+	}
+
+
 ## Szenario mit Deutschem Bund (seit M9, Schritt b3): Knopf „Diplomatie …“ zeigen.
 func set_diplomacy_available(available: bool) -> void:
 	_diplomacy_available = available
@@ -291,7 +319,7 @@ func set_journals_available(available: bool) -> void:
 	_journals_available = available
 	if _journal_button != null and not _state.is_empty():
 		_journal_button.visible = available
-		_politics_row.visible = _politics_button.visible or available
+		_politics_row.visible = not _area_bar and (_politics_button.visible or available)
 
 
 ## Szenario mit Zollunionen (seit M9): Knopf „Zollunion …“ zeigen.
@@ -603,6 +631,14 @@ func _build_government() -> void:
 	var content := facts.get_parent()
 	content.add_child(_government_inclinations)
 	content.move_child(_government_inclinations, facts.get_index() + 1)
+	_legacy = Label.new()
+	_legacy.name = "Legacy"
+	_legacy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_legacy.theme_type_variation = &"CaptionLabel"
+	_legacy.mouse_filter = Control.MOUSE_FILTER_PASS
+	_legacy.visible = false
+	content.add_child(_legacy)
+	content.move_child(_legacy, _government_inclinations.get_index() + 1)
 
 
 ## Füllt Herrscher, Minister und Neigungen höchstens einmal je Sekunde (die Absichten bauen den
@@ -614,6 +650,7 @@ func _update_government(state: Dictionary) -> void:
 		return
 	_government_state = tag
 	_government_filled_at = Time.get_ticks_msec()
+	_update_legacy()
 	var persons: Array = persons_source.call() if persons_source.is_valid() else []
 	var intentions: Dictionary = intentions_source.call() if intentions_source.is_valid() else {}
 	_government_lines = PackedStringArray()
@@ -666,6 +703,37 @@ func _update_government(state: Dictionary) -> void:
 		"Neigungen von −2 bis +2: Staatspersönlichkeit und die Eigenschaften von Herrscher und Minister nach "
 		+ "ihrem Anteil. Sie lenken die Entscheidungen der Staaten ohne Spieler und die Wahl bei Ereignissen."
 	)
+
+
+## Vermächtnis: „Vermächtnis: Einigkeit 44 · Recht 56 …“, im Tooltip je Dimension Satz und Faktoren.
+func _update_legacy() -> void:
+	var legacy: Dictionary = legacy_source.call() if legacy_source.is_valid() else {}
+	var dimensions: Array = legacy.get("dimensions", [])
+	_legacy.visible = not dimensions.is_empty()
+	if dimensions.is_empty():
+		return
+	var parts := PackedStringArray()
+	var tips := PackedStringArray()
+	for dimension: Dictionary in dimensions:
+		parts.append("%s %d" % [str(dimension.get("name", "")), roundi(float(dimension.get("value", 0.0)))])
+		var tip := PackedStringArray(
+			["%s %d: %s" % [
+				str(dimension.get("name", "")), roundi(float(dimension.get("value", 0.0))),
+				str(dimension.get("sentence", "")),
+			], "  Grundwert %+d" % roundi(float(dimension.get("base", 0.0)))]
+		)
+		for factor: Dictionary in dimension.get("factors", []):
+			var value := float(factor.get("value", 0.0))
+			if bool(factor.get("active", false)) and absf(value) >= 0.5:
+				tip.append("  %s %+d" % [str(factor.get("name", "")), roundi(value)])
+		tips.append("\n".join(tip))
+	_legacy.text = "Vermächtnis: " + " · ".join(parts)
+	_legacy.tooltip_text = "\n\n".join(tips)
+
+
+## Vermächtnis als Text (Tests); leer ohne Vermächtnis.
+func legacy_text() -> String:
+	return _legacy.text if _legacy.visible else ""
 
 
 ## Herrscher, Minister (mit Amt und Eigenschaften) und Neigungen als Text (Tests).

@@ -166,6 +166,13 @@ func _run() -> void:
 	):
 		return
 	_check_counts(sim)
+	# Seit M13a4: 1648 hat weder Vermächtnis noch Ende.
+	_check(
+		not bool(sim.get_legacy(0).get("active", true)) and not bool(sim.get_verdict().get("has_end", true))
+		and not sim.is_game_over() and (sim.get_yearbook(0).get("rows", []) as Array).is_empty(),
+		"1648 ohne Vermächtnis und Ende",
+		"1648: Vermächtnis %s, Urteil %s" % [str(sim.get_legacy(0)), str(sim.get_verdict())]
+	)
 	var player := sim.get_player_state_index()
 	var start := sim.get_date()
 	var max_tax := sim.get_max_tax_rate_percent()
@@ -316,7 +323,95 @@ func _check_scenario_1848() -> void:
 	_check_customs_1848(sim)
 	_check_diplomacy_1848(sim)
 	_check_ai_1848(sim)
+	_check_legacy_1848(sim)
+	_check_area_data_1848(sim)
 	_check_events_1848()
+
+
+## Daten der Fenster der Bereiche 1848 (seit M13a5b): Gesellschaft, Wirtschaft, Gesetze, Abstimmungen, Ämter.
+func _check_area_data_1848(sim: SimulationClient) -> void:
+	var prussia := sim.get_state_index("PRU")
+	var society := sim.get_state_society(prussia)
+	var shares := 0.0
+	for value: Variant in (society.get("cultures", {}) as Dictionary).values():
+		shares += float(value)
+	var ages := int(society.get("children", 0)) + int(society.get("young", 0)) + int(society.get("working", 0)) + int(society.get("old", 0))
+	_check(
+		int(society.get("population", 0)) > 15_000_000 and absf(shares - 100.0) < 0.5
+		and absi(ages - int(society.get("population", 0))) <= 4 and not (society.get("professions", []) as Array).is_empty(),
+		"Gesellschaft Preußens: %s Einwohner, %d Orte" % [GermanFormat.integer(int(society.get("population", 0))), int(society.get("locations", 0))],
+		"Gesellschaft Preußens: %s" % str(society).left(300)
+	)
+	var economy := sim.get_state_economy(prussia)
+	var goods: Array = economy.get("goods", [])
+	_check(
+		goods.size() >= 8 and not (economy.get("businesses", []) as Array).is_empty()
+		and not (economy.get("markets", []) as Array).is_empty() and float(economy.get("production_month", 0.0)) > 0.0
+		and str(economy.get("customs_zone_name", "")) == "Zollverein",
+		"Wirtschaft Preußens: %d Güter, Zollverein" % goods.size(),
+		"Wirtschaft Preußens: %s" % str(economy).left(300)
+	)
+	var laws := sim.get_state_laws(prussia)
+	var one_current := not laws.is_empty()
+	for law in laws:
+		var current := 0
+		for option: Dictionary in law.get("options", []):
+			current += 1 if bool(option.get("current", false)) else 0
+		one_current = one_current and current == 1
+	_check(laws.size() == 3 and one_current, "Gesetze Preußens: 3 Gruppen, je eine Option in Kraft", "Gesetze: %s" % str(laws).left(300))
+	var history := sim.get_office_history(prussia)
+	var complete := true
+	for term in history:
+		complete = complete and not str(term.get("name", "")).is_empty() and not str(term.get("to_text", "")).is_empty()
+	_check(
+		sim.get_votes() is Array and complete and sim.get_state_society(-1).is_empty(),
+		"Abstimmungen und frühere Amtsinhaber (%d) abrufbar" % history.size(),
+		"get_votes/get_office_history: %s" % str(history)
+	)
+
+
+## Vermächtnis, Jahrbuch und Ende 1848 (seit M13a4, vertical_slice.md 3.5 und 4.3).
+func _check_legacy_1848(sim: SimulationClient) -> void:
+	var prussia := sim.get_state_index("PRU")
+	var legacy := sim.get_legacy(prussia)
+	var dimensions: Array = legacy.get("dimensions", [])
+	var first: Dictionary = dimensions[0] if not dimensions.is_empty() else {}
+	var value := float(first.get("value", -1.0))
+	_check(
+		bool(legacy.get("active", false)) and dimensions.size() == 5 and str(first.get("id", "")) == "einigkeit"
+		and value >= 0.0 and value <= 100.0 and not str(first.get("sentence", "")).is_empty()
+		and not (first.get("factors", []) as Array).is_empty(),
+		"Vermächtnis Preußens: %s" % ", ".join(dimensions.map(
+			func(d: Dictionary) -> String: return "%s %d" % [d.get("name"), roundi(float(d.get("value", 0.0)))]
+		)),
+		"Vermächtnis Preußens: %s" % str(legacy)
+	)
+	var yearbook := sim.get_yearbook(prussia)
+	var rows: Array = yearbook.get("rows", [])
+	var columns: PackedStringArray = yearbook.get("columns", PackedStringArray())
+	var row: Dictionary = rows[0] if not rows.is_empty() else {}
+	var values: PackedFloat64Array = row.get("values", PackedFloat64Array())
+	_check(
+		rows.size() >= 1 and int(row.get("year", 0)) == 1848 and columns.size() == 17
+		and values.size() == columns.size() and int(yearbook.get("measure_count", 0)) == 12
+		and values[0] > 10.0,
+		"Jahrbuch Preußens: %d Stichtage, %d Spalten, %.1f Mio. Einwohner 1848" % [
+			rows.size(), columns.size(), values[0] if not values.is_empty() else 0.0
+		],
+		"Jahrbuch Preußens: %s" % str(yearbook)
+	)
+	var verdict := sim.get_verdict()
+	_check(
+		bool(verdict.get("has_end", false)) and not bool(verdict.get("over", true)) and not sim.is_game_over()
+		and str(verdict.get("end_date_text", "")) == "1. Juli 1871"
+		and int((verdict.get("end_date", {}) as Dictionary).get("year", 0)) == 1871,
+		"Ende der Partie am %s" % str(verdict.get("end_date_text", "")),
+		"Urteil: %s" % str(verdict)
+	)
+	var historical := false
+	for journal in sim.get_journals():
+		historical = historical or str(journal.get("historical", "")).begins_with("Historisch:")
+	_check(historical, "Journale mit historischem Vergleich", "kein Journal mit 'historical'")
 
 
 ## KI der Staaten 1848 (seit M12, Schritt b3, ki.md Abschnitt 9): Personen im Amt, Absichten mit

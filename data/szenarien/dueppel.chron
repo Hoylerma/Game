@@ -8,6 +8,7 @@
 szenario dueppel {
     name     = "Düppel"
     datum    = 1864.02.01
+    ende     = 1871.07.01   # seit M13a4: Urteil der Geschichte (vertical_slice.md 3.5)
     spieler  = PRU
     spielbar = { PRU AUT DEN }
     waehrung = "Taler"

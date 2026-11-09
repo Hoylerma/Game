@@ -6,6 +6,7 @@
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/events.hpp"
+#include "uhrwerk/legacy.hpp"
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/politics.hpp"
@@ -3401,6 +3402,415 @@ std::int64_t UhrwerkSimulation::get_event_player() const {
     return w ? w->event_player : -1;
 }
 
+// ─── Fenster der Bereiche (seit M13a5b) ─────────────────────────────────────
+
+Dictionary UhrwerkSimulation::get_state_society(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    People sum;
+    sum.per_confession.resize(w->confessions.size());
+    sum.per_culture.resize(w->cultures.size());
+    double living = 0.0;
+    double literacy = 0.0;
+    uhrwerk::PopulationBalance balance;
+    std::vector<uhrwerk::Fixed> professions(w->professions.size());
+    std::int64_t locations = 0;
+    std::int64_t cities = 0;
+    for (std::size_t l = 0; l < w->locations.size(); ++l) {
+        const uhrwerk::Location& loc = w->locations[l];
+        if (loc.owner != state_index || !loc.has_data()) {
+            continue;
+        }
+        ++locations;
+        cities += loc.is_city ? 1 : 0;
+        const auto index = static_cast<std::int64_t>(l);
+        const People people = people_of(*w, index);
+        sum.total += people.total;
+        sum.children += people.children;
+        sum.young += people.young;
+        sum.working += people.working;
+        sum.old += people.old;
+        living += people.living_standard * people.total.to_double();
+        literacy += people.literacy * people.total.to_double();
+        for (std::size_t c = 0; c < sum.per_confession.size(); ++c) {
+            sum.per_confession[c] += people.per_confession[c];
+        }
+        for (std::size_t c = 0; c < sum.per_culture.size(); ++c) {
+            sum.per_culture[c] += people.per_culture[c];
+        }
+        if (valid_index(w->balance_previous, index)) {
+            add_balance(balance, at(w->balance_previous, index));
+        }
+        const std::vector<uhrwerk::Fixed> by_profession = people_by_profession(*w, index);
+        for (std::size_t p = 0; p < professions.size(); ++p) {
+            professions[p] += by_profession[p];
+        }
+    }
+    const double total = sum.total.to_double();
+    result["population"] = sum.total.round();
+    result["locations"] = locations;
+    result["cities"] = cities;
+    result["children"] = sum.children.round();
+    result["young"] = sum.young.round();
+    result["working"] = sum.working.round();
+    result["old"] = sum.old.round();
+    result["living_standard"] = total > 0.0 ? living / total : 0.0;
+    result["literacy_percent"] = total > 0.0 ? literacy / total * 100.0 : 0.0;
+    result["confessions"] = shares_of(sum.per_confession, w->confessions, total);
+    result["cultures"] = shares_of(sum.per_culture, w->cultures, total);
+    result["balance_previous"] = balance_to_godot(balance);
+    Array rows;
+    for (std::size_t p = 0; p < professions.size(); ++p) {
+        if (professions[p].round() <= 0) {
+            continue;
+        }
+        Dictionary row;
+        row["name"] = to_godot(w->professions[p].name);
+        row["stratum"] = static_cast<std::int64_t>(w->professions[p].stratum);
+        row["people"] = professions[p].round();
+        row["percent"] = total > 0.0 ? professions[p].to_double() * 100.0 / total : 0.0;
+        rows.push_back(row);
+    }
+    result["professions"] = rows;
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_state_economy(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const std::size_t goods = w->goods.size();
+    const std::size_t businesses = w->businesses.size();
+    std::vector<double> supply(goods, 0.0);
+    std::vector<double> demand(goods, 0.0);
+    std::vector<double> price_weight(goods, 0.0);
+    std::vector<double> price_sum(goods, 0.0);
+    std::vector<uhrwerk::Fixed> heads(businesses);
+    std::vector<std::int64_t> market_places(w->markets.size(), 0);
+    double production = 0.0;
+    double taxes = 0.0;
+    for (std::size_t l = 0; l < w->locations.size(); ++l) {
+        const uhrwerk::Location& loc = w->locations[l];
+        if (loc.owner != state_index || !loc.has_data()) {
+            continue;
+        }
+        const auto index = static_cast<uhrwerk::Index>(l);
+        const uhrwerk::LocationEconomy economy = simulation_->location_economy(index);
+        production += economy.production.to_double();
+        taxes += economy.total_taxes().to_double();
+        if (valid_index(market_places, loc.market)) {
+            ++market_places[static_cast<std::size_t>(loc.market)];
+        }
+        const uhrwerk::MarketState* market =
+            valid_index(w->market_states, loc.market) ? &at(w->market_states, loc.market) : nullptr;
+        for (std::size_t g = 0; g < goods; ++g) {
+            const std::size_t slot = l * goods + g;
+            const double s = slot < w->location_supply.size() ? w->location_supply[slot].to_double() : 0.0;
+            const double d = slot < w->location_demand.size() ? w->location_demand[slot].to_double() : 0.0;
+            supply[g] += s;
+            demand[g] += d;
+            // Preis nach Umsatz gemittelt (Angebot und Nachfrage des Ortes zum Preis seines Marktes).
+            if (market != nullptr && g < market->price.size() && s + d > 0.0) {
+                price_sum[g] += market->price[g].to_double() * (s + d);
+                price_weight[g] += s + d;
+            }
+        }
+        const std::vector<uhrwerk::Fixed> people = people_by_profession(*w, static_cast<std::int64_t>(l));
+        for (std::size_t b = 0; b < businesses; ++b) {
+            const std::size_t slot = l * businesses + b;
+            const uhrwerk::BusinessType& business = w->businesses[b];
+            if (slot < w->business_shares.size() && valid_index(people, business.profession)) {
+                heads[b] += w->business_shares[slot] * at(people, business.profession);
+            }
+        }
+    }
+    Array good_rows;
+    for (std::size_t g = 0; g < goods; ++g) {
+        if (supply[g] <= 0.0 && demand[g] <= 0.0) {
+            continue;
+        }
+        const uhrwerk::Good& good = w->goods[g];
+        const double price = price_weight[g] > 0.0 ? price_sum[g] / price_weight[g] : 0.0;
+        const double base = good.base_price.to_double();
+        Dictionary row;
+        row["name"] = to_godot(good.name);
+        row["color"] = to_godot(good.color);
+        row["supply"] = supply[g];
+        row["demand"] = demand[g];
+        row["price"] = price;
+        row["price_factor"] = base > 0.0 ? price / base : 0.0;
+        good_rows.push_back(row);
+    }
+    Array business_rows;
+    for (std::size_t b = 0; b < businesses; ++b) {
+        if (heads[b].round() <= 0) {
+            continue;
+        }
+        Dictionary row;
+        row["name"] = to_godot(w->businesses[b].name);
+        row["profession"] = to_godot(at(w->professions, w->businesses[b].profession).name);
+        row["people"] = heads[b].round();
+        business_rows.push_back(row);
+    }
+    Array market_rows;
+    for (std::size_t m = 0; m < market_places.size(); ++m) {
+        if (market_places[m] == 0) {
+            continue;
+        }
+        Dictionary row;
+        row["name"] = to_godot(w->markets[m].name);
+        row["locations"] = market_places[m];
+        market_rows.push_back(row);
+    }
+    const uhrwerk::State& state = at(w->states, state_index);
+    result["goods"] = good_rows;
+    result["businesses"] = business_rows;
+    result["markets"] = market_rows;
+    result["production_month"] = production;
+    result["taxes_month"] = taxes;
+    result["customs_zone_name"] = to_godot(valid_index(w->customs_unions, state.customs_union)
+                                               ? at(w->customs_unions, state.customs_union).name
+                                               : state.short_name);
+    result["customs_tariff_percent"] =
+        (w->customs_unions.empty()
+             ? state.tax_rate(uhrwerk::TaxKind::Zoll)
+             : uhrwerk::zone_tariff(*w, uhrwerk::customs_zone(*w, static_cast<uhrwerk::Index>(state_index))))
+            .to_double() *
+        100.0;
+    return result;
+}
+
+Array UhrwerkSimulation::get_state_laws(std::int64_t state_index) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const uhrwerk::State& state = at(w->states, state_index);
+    for (std::size_t g = 0; g < w->law_groups.size(); ++g) {
+        const uhrwerk::LawGroup& group = w->law_groups[g];
+        const uhrwerk::Index current = g < state.laws.size() ? state.laws[g] : group.standard;
+        Dictionary entry;
+        entry["id"] = to_godot(group.id);
+        entry["name"] = to_godot(group.name);
+        entry["current"] = current;
+        Array options;
+        for (std::size_t o = 0; o < group.options.size(); ++o) {
+            const uhrwerk::LawOption& option = group.options[o];
+            Dictionary item;
+            item["id"] = to_godot(option.id);
+            item["name"] = to_godot(option.name);
+            item["unrest"] = option.unrest.to_double();
+            item["current"] = static_cast<uhrwerk::Index>(o) == current;
+            // Wünsche der Interessengruppen an diese Option (Zustimmung −10 … +10 auf Dauer).
+            Array wishes;
+            for (const uhrwerk::InterestGroup& ig : w->interest_groups) {
+                for (const uhrwerk::LawWish& wish : ig.wishes) {
+                    if (wish.law == static_cast<uhrwerk::Index>(g) &&
+                        wish.option == static_cast<uhrwerk::Index>(o)) {
+                        Dictionary wd;
+                        wd["group"] = to_godot(ig.name);
+                        wd["color"] = to_godot(ig.color);
+                        wd["value"] = wish.approval.to_double();
+                        wishes.append(wd);
+                    }
+                }
+            }
+            item["wishes"] = wishes;
+            options.append(item);
+        }
+        entry["options"] = options;
+        result.append(entry);
+    }
+    return result;
+}
+
+Array UhrwerkSimulation::get_votes() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    for (auto it = w->vote_results.rbegin(); it != w->vote_results.rend(); ++it) {
+        if (!valid_index(w->votes, it->vote)) {
+            continue;
+        }
+        const uhrwerk::VoteDef& def = at(w->votes, it->vote);
+        Dictionary entry;
+        entry["title"] = to_godot(def.title);
+        entry["parliament_index"] = def.parliament;
+        entry["parliament_name"] = valid_index(w->parliaments, def.parliament)
+                                       ? to_godot(at(w->parliaments, def.parliament).name)
+                                       : String();
+        entry["date_text"] = to_godot(uhrwerk::format_date_long(it->date));
+        entry["yes"] = it->yes;
+        entry["no"] = it->no;
+        entry["accepted"] = it->accepted;
+        result.append(entry);
+    }
+    return result;
+}
+
+Array UhrwerkSimulation::get_office_history(std::int64_t state_index) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    for (auto it = w->office_history.rbegin(); it != w->office_history.rend(); ++it) {
+        if (it->state != state_index || !valid_index(w->persons, it->person)) {
+            continue;
+        }
+        const uhrwerk::PersonDef& p = at(w->persons, it->person);
+        Dictionary entry;
+        entry["name"] = to_godot(p.name);
+        entry["role"] = it->role == uhrwerk::PersonRole::Ruler ? String("herrscher") : String("minister");
+        entry["title"] =
+            to_godot(!p.title.empty()                         ? p.title
+                     : it->role == uhrwerk::PersonRole::Ruler ? std::string("Herrscher")
+                                                              : std::string("leitender Minister"));
+        entry["from_text"] = to_godot(uhrwerk::format_date_long(std::max(p.from, w->scenario.start)));
+        entry["to_text"] = to_godot(uhrwerk::format_date_long(it->to));
+        result.append(entry);
+    }
+    return result;
+}
+
+// ─── Vermächtnis, Jahrbuch und Ende (seit M13a4) ────────────────────────────
+
+Dictionary UhrwerkSimulation::get_legacy(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    result["active"] = w != nullptr && w->legacy_rules.active;
+    Array dimensions;
+    if (w == nullptr || !w->legacy_rules.active || !valid_index(w->states, state_index)) {
+        result["dimensions"] = dimensions;
+        return result;
+    }
+    const std::vector<uhrwerk::LegacyValue> values =
+        uhrwerk::legacy(*w, simulation_->event_cache(), static_cast<uhrwerk::Index>(state_index));
+    for (std::size_t d = 0; d < values.size() && d < w->legacy_rules.dimensions.size(); ++d) {
+        const uhrwerk::LegacyDimension& def = w->legacy_rules.dimensions[d];
+        Dictionary entry;
+        entry["id"] = to_godot(def.id);
+        entry["name"] = to_godot(def.name);
+        entry["value"] = values[d].value.to_double();
+        entry["base"] = values[d].base.to_double();
+        entry["sentence"] = to_godot(uhrwerk::legacy_sentence(def, values[d].value));
+        Array factors;
+        for (const uhrwerk::LegacyContribution& c : values[d].factors) {
+            Dictionary f;
+            f["name"] = to_godot(c.name);
+            f["value"] = c.value.to_double();
+            f["active"] = c.active;
+            factors.append(f);
+        }
+        entry["factors"] = factors;
+        dimensions.append(entry);
+    }
+    result["dimensions"] = dimensions;
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_yearbook(std::int64_t state_index) const {
+    Dictionary result;
+    PackedStringArray columns;
+    Array rows;
+    const uhrwerk::World* w = world();
+    if (w != nullptr && w->legacy_rules.active && valid_index(w->states, state_index)) {
+        for (const uhrwerk::LegacyMeasure m : uhrwerk::kYearbookMeasures) {
+            columns.append(to_godot(uhrwerk::legacy_measure_name(m)));
+        }
+        for (const uhrwerk::LegacyDimension& d : w->legacy_rules.dimensions) {
+            columns.append(to_godot(d.name));
+        }
+        const std::size_t count = uhrwerk::yearbook_columns(*w);
+        for (const uhrwerk::YearRecord& r : w->yearbook) {
+            const std::size_t first = static_cast<std::size_t>(state_index) * count;
+            if (first + count > r.values.size()) {
+                continue;
+            }
+            Dictionary row;
+            row["date"] = date_dictionary(r.date);
+            row["year"] = r.date.year;
+            row["date_text"] = to_godot(uhrwerk::format_date(r.date));
+            PackedFloat64Array values;
+            for (std::size_t c = 0; c < count; ++c) {
+                values.append(r.values[first + c].to_double());
+            }
+            row["values"] = values;
+            rows.append(row);
+        }
+    }
+    result["columns"] = columns;
+    result["measure_count"] = static_cast<std::int64_t>(uhrwerk::kYearbookMeasures.size());
+    result["rows"] = rows;
+    return result;
+}
+
+bool UhrwerkSimulation::is_game_over() const {
+    const uhrwerk::World* w = world();
+    return w != nullptr && uhrwerk::game_over(*w);
+}
+
+Dictionary UhrwerkSimulation::get_verdict() const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    result["has_end"] = w != nullptr && w->scenario.has_end;
+    result["over"] = is_game_over();
+    if (w == nullptr) {
+        return result;
+    }
+    result["active"] = w->legacy_rules.active;
+    result["end_date_text"] =
+        w->scenario.has_end ? to_godot(uhrwerk::format_date_long(w->scenario.end)) : String();
+    if (w->scenario.has_end) {
+        result["end_date"] = date_dictionary(w->scenario.end);
+    }
+    result["start_date_text"] = to_godot(uhrwerk::format_date_long(w->scenario.start));
+    // Wendepunkte der Partie in zeitlicher Folge.
+    Array turning;
+    for (const uhrwerk::EventRecord& r : w->event_log) {
+        if (!valid_index(w->events, r.event) || !at(w->events, r.event).turning_point) {
+            continue;
+        }
+        const uhrwerk::EventDef& e = at(w->events, r.event);
+        Dictionary entry;
+        entry["date_text"] = to_godot(uhrwerk::format_date_long(r.date));
+        entry["title"] = to_godot(e.title);
+        entry["state_name"] = valid_index(w->states, r.state) ? short_name(*w, r.state) : String();
+        entry["option_text"] =
+            valid_index(e.options, r.option) ? to_godot(at(e.options, r.option).text) : String();
+        turning.append(entry);
+    }
+    result["turning_points"] = turning;
+    // Beendete Kriege der Partie mit Ausgang.
+    Array wars;
+    for (const uhrwerk::WarResult& r : w->war_results) {
+        if (!valid_index(w->states, r.attacker) || !valid_index(w->states, r.defender)) {
+            continue;
+        }
+        Dictionary entry;
+        entry["attacker_name"] = short_name(*w, r.attacker);
+        entry["defender_name"] = short_name(*w, r.defender);
+        entry["started_text"] = to_godot(uhrwerk::format_date_long(r.started));
+        entry["ended_text"] = to_godot(uhrwerk::format_date_long(r.ended));
+        entry["winner"] = r.winner;
+        entry["winner_name"] = r.winner > 0   ? short_name(*w, r.attacker)
+                               : r.winner < 0 ? short_name(*w, r.defender)
+                                              : String();
+        entry["transfers"] = r.transfers;
+        wars.append(entry);
+    }
+    result["wars"] = wars;
+    return result;
+}
+
 Array UhrwerkSimulation::get_event_log(std::int64_t limit) const {
     Array result;
     const uhrwerk::World* w = world();
@@ -3447,6 +3857,7 @@ Array UhrwerkSimulation::get_journals() const {
         entry["title"] = to_godot(def.title);
         entry["text"] = to_godot(def.text);
         entry["end_text"] = def.has_end ? to_godot(uhrwerk::format_date_long(def.end)) : String();
+        entry["historical"] = to_godot(def.historical); // seit M13a4: Vergleich im Urteil der Geschichte
         entry["started"] = valid_index(def.stages, state.stage);
         if (valid_index(def.stages, state.stage)) {
             const uhrwerk::JournalStage& stage = at(def.stages, state.stage);
@@ -3876,6 +4287,16 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_open_events"), &UhrwerkSimulation::get_open_events);
     ClassDB::bind_method(D_METHOD("choose_event_option", "event_index", "option_index"),
                          &UhrwerkSimulation::choose_event_option);
+    ClassDB::bind_method(D_METHOD("get_state_society", "state_index"), &UhrwerkSimulation::get_state_society);
+    ClassDB::bind_method(D_METHOD("get_state_economy", "state_index"), &UhrwerkSimulation::get_state_economy);
+    ClassDB::bind_method(D_METHOD("get_state_laws", "state_index"), &UhrwerkSimulation::get_state_laws);
+    ClassDB::bind_method(D_METHOD("get_votes"), &UhrwerkSimulation::get_votes);
+    ClassDB::bind_method(D_METHOD("get_office_history", "state_index"),
+                         &UhrwerkSimulation::get_office_history);
+    ClassDB::bind_method(D_METHOD("get_legacy", "state_index"), &UhrwerkSimulation::get_legacy);
+    ClassDB::bind_method(D_METHOD("get_yearbook", "state_index"), &UhrwerkSimulation::get_yearbook);
+    ClassDB::bind_method(D_METHOD("get_verdict"), &UhrwerkSimulation::get_verdict);
+    ClassDB::bind_method(D_METHOD("is_game_over"), &UhrwerkSimulation::is_game_over);
     ClassDB::bind_method(D_METHOD("get_game_settings"), &UhrwerkSimulation::get_game_settings);
     ClassDB::bind_method(D_METHOD("set_game_settings", "difficulty_id", "open"),
                          &UhrwerkSimulation::set_game_settings);

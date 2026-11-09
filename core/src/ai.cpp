@@ -60,6 +60,10 @@ void fill_offices(World& world, const EventCache& cache, bool chronicle) {
                 }
                 world.chronicle.push_back(std::move(entry));
             }
+            // Seit M13a5b: beendete Amtszeit für Kabinett und Hof.
+            if (current != kNone) {
+                world.office_history.push_back(OfficeTerm{state, role, current, world.date});
+            }
             current = next;
         }
     }

@@ -191,6 +191,16 @@ struct PersonalityDef {
 enum class PersonRole : std::uint8_t { Ruler, Minister };
 inline constexpr std::size_t kPersonRoles = 2;
 
+/// Beendete Amtszeit einer Person (seit M13a5b, Zustand): Kabinett und Hof zeigen die früheren Amtsinhaber.
+struct OfficeTerm {
+    Index state = -1;
+    PersonRole role = PersonRole::Ruler;
+    Index person = -1;
+    Date to; // letzter Tag im Amt (der Tag des Wechsels)
+
+    friend bool operator==(const OfficeTerm&, const OfficeTerm&) = default;
+};
+
 /// Grundwerte einer Person (Kapitel 13, Abschnitt 1.1), je 1 … 10.
 enum class PersonValue : std::uint8_t { Statecraft, Diplomacy, Warfare, Appeal };
 inline constexpr std::size_t kPersonValues = 4;

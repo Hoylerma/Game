@@ -4609,11 +4609,23 @@ private:
     void load_scenarios(const SourceFile& file, std::vector<Scenario>& scenarios) {
         for_each_definition(file, "szenario", "szenario <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "szenario " + node.value, issues_,
-                     {"name", "datum", "spieler", "spielbar", "waehrung", "tragfaehigkeit_faktor"});
+                     {"name", "datum", "ende", "spieler", "spielbar", "waehrung", "tragfaehigkeit_faktor"});
             Scenario s;
             s.id = node.value;
             s.name = f.text("name").value_or("");
             s.start = f.date("datum").value_or(Date{});
+            // Seit M13a4 (vertical_slice.md 3.5): Ende der Partie mit dem Urteil der Geschichte.
+            if (f.has("ende")) {
+                if (const auto end = f.date("ende")) {
+                    if (*end <= s.start) {
+                        issues_.error(file.name, node.find("ende")->line,
+                                      "'ende' von szenario " + node.value + " liegt nicht nach 'datum'");
+                    } else {
+                        s.has_end = true;
+                        s.end = *end;
+                    }
+                }
+            }
             if (f.has("waehrung")) {
                 s.currency = f.text("waehrung").value_or("");
             }

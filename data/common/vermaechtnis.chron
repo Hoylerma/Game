@@ -1,0 +1,93 @@
+# Vermächtnis (Meilenstein M13, Schritt a4; docs/technik/vertical_slice.md Abschnitt 3.5, Kapitel 00
+# Abschnitt 7.1). Format: docs/technik/chronik-skript.md, Abschnitt 3.41.
+#
+# Fünf Dimensionen von 0 bis 100 je Staat, jederzeit aus dem Zustand berechnet: Grundwert plus die
+# Beiträge der Faktoren, begrenzt auf 0 … 100. Ein Faktor mit 'groesse' trägt gewicht × Größe bei, einer
+# ohne 'groesse' das Gewicht selbst; 'wenn' gilt wie die Bedingung eines Ereignisses für den Staat,
+# 'hoechstens' begrenzt den Betrag des Beitrags. Die Sätze erscheinen im Urteil der Geschichte (der
+# erste, dessen 'ab' erreicht ist). Alle Gewichte sind Spielwerte; die Verteilung über die Partien prüft
+# das KI-Labor (Bericht „Vermächtnis 1871“).
+
+vermaechtnis {
+    dimension einigkeit {
+        name  = "Einigkeit"
+        grund = 30
+        faktor { name = "Mitglied eines gegründeten Bundes"  groesse = bundesmitglied  gewicht = 25 }
+        faktor { name = "Präsidium im Bund"                  groesse = praesidium      gewicht = 10 }
+        faktor { name = "Bundesstaat"                        wenn { bund = ja }        gewicht = 10 }
+        faktor { name = "Zollverein"                         wenn { zollunion = zollverein }  gewicht = 8 }
+        faktor {
+            name    = "Nationalstaat"
+            wenn    { bund = ja  oder { welt_merkmal = kleindeutsches_reich  welt_merkmal = grossdeutsches_reich  welt_merkmal = reich_paulskirche } }
+            gewicht = 10
+        }
+        faktor { name = "Unruhe"                             groesse = unruhe          gewicht = -0.3 }
+        faktor { name = "Aufstände"                          groesse = aufstaende      gewicht = -3  hoechstens = 15 }
+        satz { ab = 70  text = "Der Staat steht fest in einem geeinten Deutschland." }
+        satz { ab = 45  text = "Der Staat ist Teil einer Ordnung, die noch nicht alle Deutschen umfasst." }
+        satz { ab = 20  text = "Der Staat steht abseits der Einigung oder ist im Inneren zerrissen." }
+        satz { ab = 0   text = "Von Einigkeit kann keine Rede sein." }
+    }
+
+    dimension recht {
+        name  = "Recht"
+        grund = 40
+        faktor { name = "Konstitutionelle Verfassung"  wenn { verfassung = konstitutionell }  gewicht = 20 }
+        faktor { name = "Ständische Verfassung"        wenn { verfassung = staendisch }       gewicht = 8 }
+        faktor { name = "Zustimmung der Gruppen"       groesse = zustimmung  gewicht = 2 }
+        faktor { name = "Staatsbankrotte"              groesse = bankrotte   gewicht = -10  hoechstens = 30 }
+        faktor { name = "Aufstände"                    groesse = aufstaende  gewicht = -4   hoechstens = 20 }
+        faktor { name = "Unruhe"                       groesse = unruhe      gewicht = -0.2 }
+        satz { ab = 70  text = "Verfassung und Gesetz binden Krone und Untertanen gleichermaßen." }
+        satz { ab = 45  text = "Die Ordnung hält, doch sie ruht mehr auf der Macht als auf dem Recht." }
+        satz { ab = 20  text = "Bankrotte, Aufstände und Willkür haben das Vertrauen in den Staat erschüttert." }
+        satz { ab = 0   text = "Der Staat hat seine Legitimität verspielt." }
+    }
+
+    dimension freiheit {
+        name  = "Freiheit"
+        grund = 10
+        faktor { name = "Pressefreiheit"                 wenn { gesetz_presse = pressefreiheit }      gewicht = 15 }
+        faktor { name = "Repressives Pressegesetz"       wenn { gesetz_presse = pressegesetz }        gewicht = 5 }
+        faktor { name = "Vereinsfreiheit"                wenn { gesetz_vereine = vereinsfreiheit }    gewicht = 12 }
+        faktor { name = "Genehmigungspflicht für Vereine" wenn { gesetz_vereine = genehmigung }       gewicht = 4 }
+        faktor { name = "Freies Bauerntum"               wenn { gesetz_grundlasten = frei }           gewicht = 10 }
+        faktor { name = "Ablösung der Grundlasten"       wenn { gesetz_grundlasten = abloesung }      gewicht = 6 }
+        faktor { name = "Allgemeines Männerwahlrecht"    wenn { wahlrecht = allgemein_maenner }       gewicht = 15 }
+        faktor { name = "Zensuswahlrecht"                wenn { wahlrecht = zensus }                  gewicht = 7 }
+        faktor { name = "Dreiklassenwahlrecht"           wenn { wahlrecht = dreiklassen }             gewicht = 5 }
+        faktor { name = "Wahlen der letzten zehn Jahre"  groesse = wahlen  gewicht = 3  hoechstens = 15 }
+        satz { ab = 70  text = "Presse, Vereine und Wahlen sind frei; die Bürger reden mit." }
+        satz { ab = 45  text = "Manche Freiheiten von 1848 haben überlebt, andere nicht." }
+        satz { ab = 20  text = "Zensur und Polizei bestimmen, was gesagt werden darf." }
+        satz { ab = 0   text = "Die Untertanen schweigen." }
+    }
+
+    dimension wohlstand {
+        name  = "Wohlstand"
+        grund = 10
+        faktor { name = "Lebensstandard"     groesse = lebensstandard    gewicht = 0.8 }
+        faktor { name = "Alphabetisierung"   groesse = alphabetisierung  gewicht = 0.3 }
+        faktor { name = "Auswanderung"       groesse = auswanderung      gewicht = -3  hoechstens = 20 }
+        faktor { name = "Schuldenquote"      groesse = schuldenquote     gewicht = -5  hoechstens = 20 }
+        satz { ab = 70  text = "Das Land blüht; Fabriken, Schulen und Eisenbahnen tragen den Fortschritt ins Land." }
+        satz { ab = 45  text = "Den meisten geht es besser als 1848, vielen noch nicht gut." }
+        satz { ab = 20  text = "Not und Auswanderung prägen das Land." }
+        satz { ab = 0   text = "Das Land verarmt." }
+    }
+
+    dimension geltung {
+        name  = "Geltung"
+        grund = 10
+        faktor { name = "Stärke des Heeres"   groesse = staerke       gewicht = 35 }
+        faktor { name = "Bündnisse"           groesse = buendnisse    gewicht = 3   hoechstens = 15 }
+        faktor { name = "Gewonnene Kriege"    groesse = siege         gewicht = 8   hoechstens = 24 }
+        faktor { name = "Verlorene Kriege"    groesse = niederlagen   gewicht = -8  hoechstens = 24 }
+        faktor { name = "Präsidium im Bund"   groesse = praesidium    gewicht = 10 }
+        faktor { name = "Bevölkerung"         groesse = bevoelkerung  gewicht = 1   hoechstens = 15 }
+        satz { ab = 70  text = "Eine Großmacht, die in Europa mitentscheidet." }
+        satz { ab = 45  text = "Eine Macht, mit der die Nachbarn rechnen." }
+        satz { ab = 20  text = "Ein Staat, über den andere entscheiden." }
+        satz { ab = 0   text = "Ohne Gewicht in Europa." }
+    }
+}

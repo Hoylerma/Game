@@ -296,6 +296,35 @@ TEST_CASE("KI: Amtswechsel am Monatsersten mit Chronik") {
           fx(1) + ruler + (Fixed::one() - ruler) * fx(-2));
 }
 
+TEST_CASE("KI: frühere Amtsinhaber (seit M13a5b)") {
+    constexpr std::string_view persons = R"(
+person kurfuerst { name = "Friedrich Wilhelm" staat = BRA rolle = herrscher von = 1640.12.01 quelle = "Testdaten" }
+person erster { name = "Erster Minister" staat = BRA rolle = minister von = 1640.01.01 bis = 1648.11.15 quelle = "Testdaten" }
+person zweiter { name = "Zweiter Minister" staat = BRA rolle = minister von = 1648.11.15 quelle = "Testdaten" }
+)";
+    const AiData data(kAiRules, persons);
+    Simulation sim(data.load());
+    const World& w = sim.world();
+    const Index bra = w.find_state("BRA");
+    CHECK(w.office(bra, PersonRole::Minister) == w.find_person("erster"));
+    CHECK(w.office_history.empty());
+    while (!(w.date.month == 12 && w.date.day == 2)) {
+        sim.step_day();
+    }
+    CHECK(w.office(bra, PersonRole::Minister) == w.find_person("zweiter"));
+    REQUIRE(w.office_history.size() == 1);
+    const uhrwerk::OfficeTerm& term = w.office_history[0];
+    CHECK(term.state == bra);
+    CHECK(term.role == PersonRole::Minister);
+    CHECK(term.person == w.find_person("erster"));
+    CHECK(term.to == uhrwerk::Date{1648, 12, 1});
+    const Bytes bytes = uhrwerk::save_game(sim, SaveMeta{});
+    uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, data.load(), 1);
+    INFO(loaded.error);
+    REQUIRE(loaded.ok());
+    CHECK(loaded.simulation->world().office_history == w.office_history);
+}
+
 TEST_CASE("KI: Spielstand, Fingerabdruck und Spielerstaat") {
     const AiData data;
     Simulation sim(data.load());

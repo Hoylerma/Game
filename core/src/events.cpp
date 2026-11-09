@@ -1202,10 +1202,15 @@ void run_events(World& world, Pcg32& rng, EventCache& cache) {
         executor.resolve(p.event, p.state, default_option(world, cache, world.events[at(p.event)], p.state));
     }
 
-    run_scheduled(world, executor, cache);
+    // Seit M13a4 (vertical_slice.md 3.5): Am letzten Tag der Partie und danach treten keine Ereignisse und
+    // Folgeereignisse mehr ein; die Journale wählen am letzten Tag noch ihren Ausgang.
+    const bool closing = world.scenario.has_end && world.date >= world.scenario.end;
+    if (!closing) {
+        run_scheduled(world, executor, cache);
+    }
 
     // Auslösung (Abschnitt 3.4) in der Reihenfolge der Kennungen, je Staat in der Reihenfolge der Staaten.
-    for (std::size_t i = 0; i < world.events.size(); ++i) {
+    for (std::size_t i = 0; i < world.events.size() && !closing; ++i) {
         const EventDef& e = world.events[i];
         const auto event = static_cast<Index>(i);
         if (e.follow_only || (e.has_fixed_date && e.fixed_date != world.date) ||
@@ -1230,7 +1235,9 @@ void run_events(World& world, Pcg32& rng, EventCache& cache) {
     }
 
     // Folgeereignisse ohne Frist aus den heutigen Ereignissen.
-    run_scheduled(world, executor, cache);
+    if (!closing) {
+        run_scheduled(world, executor, cache);
+    }
 
     // Journale nach den Ereignissen (Abschnitt 5.1): Beginn, am Ende der Ausgang mit standard = ja, sonst
     // höchstens ein Übergang je Tag; dann die Folgen ohne Frist ihrer Wirkungen.
@@ -1261,7 +1268,9 @@ void run_events(World& world, Pcg32& rng, EventCache& cache) {
             }
         }
     }
-    run_scheduled(world, executor, cache);
+    if (!closing) {
+        run_scheduled(world, executor, cache);
+    }
 }
 
 bool choose_event_option(World& world, Pcg32& rng, EventCache& cache, Index state, Index event,

@@ -2789,6 +2789,50 @@ std::string state_tag(const World& w, Index state) {
     return state != uhrwerk::kNone ? w.states[static_cast<std::size_t>(state)].tag : std::string("–");
 }
 
+/// Vermächtnis am Ende je hervorgehobenem Staat des Lesezeichens (seit M13a4): Mittel und Spanne über die
+/// Läufe ohne Absturz.
+void print_legacy_distribution(const World& w, const std::vector<uhrwerk::AiLabRun>& runs) {
+    const std::size_t dims = w.legacy_rules.dimensions.size();
+    if (dims == 0) {
+        return;
+    }
+    std::cout << "\nVermächtnis am Ende (Mittel, kleinster bis größter Wert):\n";
+    std::cout << pad_right("Staat", 8);
+    for (const uhrwerk::LegacyDimension& d : w.legacy_rules.dimensions) {
+        std::cout << pad_right(d.name, 16);
+    }
+    std::cout << '\n';
+    for (const std::string& tag : w.scenario.playable) {
+        const Index state = w.find_state(tag);
+        if (state == uhrwerk::kNone) {
+            continue;
+        }
+        std::cout << pad_right(tag, 8);
+        for (std::size_t d = 0; d < dims; ++d) {
+            Fixed sum;
+            Fixed low = Fixed::from_int(100);
+            Fixed high;
+            std::int64_t n = 0;
+            for (const uhrwerk::AiLabRun& run : runs) {
+                const std::size_t slot = static_cast<std::size_t>(state) * dims + d;
+                if (run.crashed || slot >= run.legacy.size()) {
+                    continue;
+                }
+                const Fixed v = run.legacy[slot];
+                sum += v;
+                low = Fixed::min(low, v);
+                high = Fixed::max(high, v);
+                ++n;
+            }
+            const std::string cell = n == 0 ? std::string("–")
+                                            : format_fixed(sum / Fixed::from_int(n), 0) + " (" +
+                                                  format_fixed(low, 0) + "–" + format_fixed(high, 0) + ")";
+            std::cout << pad_right(cell, 16);
+        }
+        std::cout << '\n';
+    }
+}
+
 int cmd_ki(const Options& o, const fs::path& data_dir) {
     const auto world = load(data_dir, o.scenario, false);
     if (!world) {
@@ -2978,6 +3022,7 @@ int cmd_ki(const Options& o, const fs::path& data_dir) {
         std::cout << (k == 0 ? " " : ", ") << kAiDecisionLabels[k] << " " << format_int(summary.decisions[k]);
     }
     std::cout << '\n';
+    print_legacy_distribution(w, runs);
 
     using uhrwerk::AiCheck;
     const auto marked = [&](AiCheck check, std::size_t index) {
