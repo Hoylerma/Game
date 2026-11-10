@@ -1,6 +1,8 @@
 class_name TopBar
 extends PanelContainer
-## Obere Leiste: Spielerstaat, Kennzahlen, Datum und Geschwindigkeit.
+## Obere Leiste: Spielerstaat, Kennzahlen, Datum und Geschwindigkeit. Seit M13a5c (vertical_slice.md 4.1)
+## nach Kapitel 22: Kasse mit Saldo, Legitimität, Verwaltung und die fünf Dimensionen des Vermächtnisses; je
+## Zahl ein verschachtelter Tooltip (TooltipLayer, main.gd verbindet ihn).
 
 ## Geschwindigkeit gewählt (0 = Pause, 1–5).
 signal speed_selected(speed: int)
@@ -17,10 +19,10 @@ var _notice_active := false
 @onready var _coat: CoatOfArms = %Coat
 @onready var _state_name: Label = %StateName
 @onready var _state_detail: Label = %StateDetail
-@onready var _treasury: Label = %Treasury
-@onready var _income: Label = %Income
-@onready var _expenses: Label = %Expenses
-@onready var _population: Label = %Population
+@onready var _cash: Label = %Cash
+@onready var _legitimacy: Label = %Legitimacy
+@onready var _administration: Label = %Administration
+@onready var _legacy: Label = %Legacy
 @onready var _date: Label = %Date
 @onready var _speed_text: Label = %SpeedText
 @onready var _menu_button: Button = %GameMenuButton
@@ -57,14 +59,55 @@ func show_state(state: Dictionary) -> void:
 	_state_detail.text = "%s · %s" % [
 		str(state.get("ruler", "–")), GermanFormat.government(str(state.get("government", "")))
 	]
-	_treasury.text = GermanFormat.money(float(state.get("treasury", 0.0)))
-	_treasury.add_theme_color_override(
-		&"font_color",
-		UiPalette.NEGATIVE if float(state.get("treasury", 0.0)) < 0.0 else UiPalette.INK
-	)
-	_income.text = GermanFormat.signed_money(float(state.get("income_month", 0.0)))
-	_expenses.text = GermanFormat.signed_money(-float(state.get("expenses_month", 0.0)))
-	_population.text = GermanFormat.integer(int(state.get("population", 0)))
+	var treasury := float(state.get("treasury", 0.0))
+	var saldo := float(state.get("income_month", 0.0)) - float(state.get("expenses_month", 0.0))
+	_cash.text = "%s · %s" % [GermanFormat.money(treasury), GermanFormat.signed_number(roundi(saldo))]
+	_cash.add_theme_color_override(&"font_color", UiPalette.NEGATIVE if treasury < 0.0 or saldo < 0.0 else UiPalette.INK)
+
+
+## Kennzahlen aus get_state_overview und get_legacy (seit M13a5c; main.gd höchstens zweimal je Sekunde).
+func show_overview(overview: Dictionary, legacy: Dictionary) -> void:
+	if overview.is_empty():
+		return
+	if bool(overview.get("events", false)):
+		var value := float(overview.get("legitimacy", 0.0))
+		_legitimacy.text = GermanFormat.signed_number(value, 1)
+		_legitimacy.add_theme_color_override(&"font_color", UiPalette.POSITIVE if value > 0.5 else (UiPalette.NEGATIVE if value < -0.5 else UiPalette.INK))
+	else:
+		_legitimacy.text = "–"
+	_administration.text = "%s Orte" % GermanFormat.integer(int(overview.get("locations", 0)))
+	var parts := PackedStringArray()
+	for dimension: Dictionary in legacy.get("dimensions", []):
+		parts.append("%s%d" % [str(dimension.get("name", "")).left(1), roundi(float(dimension.get("value", 0.0)))])
+	_legacy.text = " ".join(parts) if not parts.is_empty() else "–"
+
+
+## Felder für die Tooltips (main.gd): kasse, legitimitaet, verwaltung, vermaechtnis.
+func field(key: StringName) -> Control:
+	match key:
+		&"kasse":
+			return _cash.get_parent() as Control
+		&"legitimitaet":
+			return _legitimacy.get_parent() as Control
+		&"verwaltung":
+			return _administration.get_parent() as Control
+		&"vermaechtnis":
+			return _legacy.get_parent() as Control
+	return null
+
+
+## Texte der Kennzahlen (Tests).
+func field_text(key: StringName) -> String:
+	match key:
+		&"kasse":
+			return _cash.text
+		&"legitimitaet":
+			return _legitimacy.text
+		&"verwaltung":
+			return _administration.text
+		&"vermaechtnis":
+			return _legacy.text
+	return ""
 
 
 ## Leere Anzeige, solange keine Simulation läuft.
@@ -72,7 +115,7 @@ func show_unavailable() -> void:
 	_coat.shield_color = UiPalette.INK_FAINT
 	_state_name.text = "Keine Simulation"
 	_state_detail.text = "Spielerstaat unbekannt"
-	for label: Label in [_treasury, _income, _expenses, _population]:
+	for label: Label in [_cash, _legitimacy, _administration, _legacy]:
 		label.text = "–"
 	_date.text = "–"
 	_set_speed_line("Simulation nicht geladen")

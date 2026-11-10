@@ -62,6 +62,19 @@ bool set_event_player(World& world, Index state);
 /// Zustimmung; 0 … 100.
 Fixed unrest_target(const World& world, const EventCache& cache, Index state);
 
+/// Bestandteile des Zielwerts der Unruhe (seit M13a5c, Tooltip „Unruhe“): Not der Unterschicht, Teuerung des
+/// Getreides, Verfassung, Zensur der Gesetze, Ansteckung durch Nachbarn und Zustimmung (negativ, wenn sie
+/// beruhigt). unrest_target ist ihre Summe, begrenzt auf 0 … 100.
+struct UnrestCauses {
+    Fixed misery;
+    Fixed dearth;
+    Fixed constitution;
+    Fixed censorship;
+    Fixed contagion;
+    Fixed approval;
+};
+UnrestCauses unrest_causes(const World& world, const EventCache& cache, Index state);
+
 /// Faktor auf den Steuerertrag aus befristeten Wirkungen und Steuerverweigerung bei hoher Unruhe.
 Fixed event_tax_factor(const World& world, Index state);
 /// Faktor auf die Auswanderung der unteren Schicht bei hoher Unruhe (1 sonst).

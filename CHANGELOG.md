@@ -13,6 +13,29 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Leistung und Durchspieltest (Schritt a6):** Ein Spieljahr 1848 mit allen Systemen braucht im Median
+  **1,5 s** statt 2,5 s (4 Kerne, Release). Drei Stellen sind schneller: die Frage nach dem Bundesgebiet,
+  die Festkommarechnung mit eingebauten 128-Bit-Zahlen und die Neigung der Wähler ohne neuen Speicher je
+  Aufruf. Alles bleibt bitgleich, 1648 auch. Neuer Befehl `uhrwerk-cli leistung` mit CTest und CI-Schritt.
+  Der neue **Durchspieltest** (`game/tests/durchspiel_test.gd`) spielt die Partie 1848–1871 als Preußen,
+  Österreich, Bayern und Sachsen über die Oberfläche durch: Startbildschirm, Ereignisse, Wahlabende, alle
+  Fenster, Speichern und Laden, Urteil. **Behoben:** Spielstände und Protokolle nach der oktroyierten
+  Verfassung Preußens (Dezember 1848) ließen sich nicht laden („passt nicht zu den Spieldaten (abweichend:
+  politik)“). Verfassung und Wahlrecht der Staaten zählen nicht mehr zum Fingerabdruck des Inhalts; ältere
+  Spielstände passen deshalb nicht mehr.
+- **Einstellungen, Pausenregeln, Chronik, Lexikon (Schritt a5d):** Ein Fenster **Einstellungen** (aus
+  Startbildschirm und Spielmenü) speichert Bild, Ton, Spiel, Barrierefreiheit, Tasten und Sprache: unter
+  anderem halbjährliche Spielstände, **Pausenregeln** (Krieg, Forderung, Wahl, Amtswechsel, Bundesgründung,
+  Frieden), **Farben für Rot-Grün-Schwäche**, hoher Kontrast, größere Schrift und frei belegbare Tasten. Die
+  **Chronik** ist ein Fenster mit Filter und Suche, das neue **Lexikon** erklärt 26 Begriffe der Epoche und
+  öffnet sich auch aus den Tooltips. **Wendepunkte** erscheinen auf einem großen Bildschirm. `main.gd` ist in
+  drei Ebenen und drei Hilfsklassen zerlegt.
+- **Leisten und Tooltips (Schritt a5c):** Die obere Leiste zeigt Kasse mit Saldo, Legitimität, Verwaltung und
+  das Vermächtnis; jede Zahl hat einen **verschachtelten Tooltip** (Einnahmen je Steuer, Zustimmung je Gruppe
+  und Ursachen der Unruhe, Faktoren je Dimension), unterstrichene Begriffe erklärt ein zweiter Tooltip. Rechts
+  steht eine **Übersicht** der laufenden Dinge (Ereignisse, Krisen, Kriege, Journale, nächste Wahl, Heere auf
+  dem Marsch), unten ein **Ticker** mit dem Neuesten aus der Chronik, Wendepunkte zuerst. Das Staatspanel
+  heißt Staatsübersicht.
 - **Fenster der Bereiche (Schritt a5b):** Die Bereichsleiste öffnet sechs neue Fenster: **Kabinett und Hof**
   (Herrscher und Minister mit Werten und Eigenschaften, Neigungen des Staates, frühere Amtsinhaber der
   Partie), **Gesetze** (Verfassung, Wahlrecht, jede Gesetzesoption mit ihrer Wirkung auf die Unruhe und den

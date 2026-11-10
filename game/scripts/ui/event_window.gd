@@ -11,6 +11,8 @@ extends PanelContainer
 signal option_chosen(event_index: int, option_index: int)
 
 const WIDTH := 580.0
+## Breite eines Wendepunkts (seit M13a5d).
+const TURNING_POINT_WIDTH := 760.0
 const TEXT_HEIGHT := 190.0
 const COMPASS_MARK := "◆"
 const TURNING_POINT_COLOR := Color("8e2b1d")
@@ -57,6 +59,11 @@ func is_open() -> bool:
 
 
 ## Das angezeigte Ereignis (leer, wenn keins).
+## Ob gerade ein Wendepunkt zu entscheiden ist (seit M13a5d).
+func is_turning_point() -> bool:
+	return visible and bool(current_event().get("turning_point", false))
+
+
 func current_event() -> Dictionary:
 	return _events[0] if not _events.is_empty() else {}
 
@@ -79,11 +86,18 @@ func window_text() -> String:
 	return "\n".join(lines)
 
 
+## Seit M13a5d: der Kompass gehört zu den Einstellungen (main.gd speichert ihn).
+signal compass_changed(on: bool)
+
+
 func set_compass(on: bool) -> void:
+	var changed := compass != on
 	compass = on
 	_compass_toggle.set_pressed_no_signal(on)
 	if visible:
 		_fill()
+	if changed:
+		compass_changed.emit(on)
 
 
 # --- Aufbau ------------------------------------------------------------------
@@ -147,6 +161,14 @@ func _fill() -> void:
 		_header.add_theme_color_override(&"font_color", TURNING_POINT_COLOR)
 	else:
 		_header.remove_theme_color_override(&"font_color")
+	# Seit M13a5d: Wendepunkte auf einem großen Bildschirm (breiter, größerer Titel; main.gd dunkelt ab).
+	custom_minimum_size.x = TURNING_POINT_WIDTH if turning else WIDTH
+	if turning:
+		_title.add_theme_font_size_override(&"font_size", 28)
+		_text.custom_minimum_size.x = TURNING_POINT_WIDTH - 40.0
+	else:
+		_title.remove_theme_font_size_override(&"font_size")
+		_text.custom_minimum_size.x = WIDTH - 40.0
 	_counter.text = "1 von %d" % _events.size() if _events.size() > 1 else ""
 	_title.text = str(event.get("title", ""))
 	var meta := PackedStringArray()

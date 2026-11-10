@@ -18,6 +18,8 @@ signal last_election_requested
 signal events_requested
 ## Urteil der Geschichte (seit M13a4), nach dem Ende der Partie.
 signal verdict_requested
+## Einstellungen (seit M13a5d).
+signal settings_requested
 ## Rolle gewählt (seit M8): Index der Strömung im Parteienmodus, -1 = Staat.
 signal role_selected(current: int)
 
@@ -309,6 +311,10 @@ func _build() -> void:
 	_verdict_button.tooltip_text = "Urteil der Geschichte am Ende der Partie"
 	_verdict_button.visible = false
 	row.add_child(_verdict_button)
+	var settings_button := _button("Einstellungen", func() -> void: settings_requested.emit())
+	settings_button.name = "SettingsButton"
+	settings_button.tooltip_text = "Bild, Ton, Spiel, Barrierefreiheit, Tasten und Sprache"
+	row.add_child(settings_button)
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(spacer)

@@ -229,6 +229,7 @@ void tally_votes(const World& world, Index parliament_index, Index district_inde
     // Stimmen je Ort (Abschnitt 7.1 bis 7.4).
     std::vector<Voter> voters;
     std::vector<Fixed> leanings;
+    std::vector<Fixed> leaning;
     for (const Index location : district.locations) {
         const Location& loc = world.locations[at(location)];
         const std::vector<Fixed> region = region_shift(world, location);
@@ -260,7 +261,7 @@ void tally_votes(const World& world, Index parliament_index, Index district_inde
                     shift[c] += campaign[c].persuasion * pop.literacy;
                 }
             }
-            const std::vector<Fixed> leaning = current_leaning(world, pop, shift);
+            current_leaning_into(world, pop, shift, leaning);
             leanings.insert(leanings.end(), leaning.begin(), leaning.end());
             voters.push_back(v);
         });
@@ -394,6 +395,28 @@ DistrictWork elect_district(const World& world, Index parliament_index, Index di
 
 } // namespace
 
+namespace {
+
+/// Mitgliedschaften in einen vorhandenen Vektor (seit M13a6 ohne neue Speicheranforderung je Block).
+void interest_memberships_into(const World& world, const PopBlock& pop, std::vector<Fixed>& out) {
+    out.assign(world.interest_groups.size(), Fixed{});
+    for (std::size_t g = 0; g < world.interest_groups.size(); ++g) {
+        const InterestGroup& group = world.interest_groups[g];
+        Fixed m =
+            in_range(group.professions, pop.profession) ? group.professions[at(pop.profession)] : Fixed{};
+        if (!group.confessions.empty()) {
+            m = m * (in_range(group.confessions, pop.confession) ? group.confessions[at(pop.confession)]
+                                                                 : Fixed{});
+        }
+        if (group.by_literacy) {
+            m = m * pop.literacy;
+        }
+        out[g] = m.clamp(Fixed::zero(), Fixed::one());
+    }
+}
+
+} // namespace
+
 std::vector<Fixed> interest_memberships(const World& world, const PopBlock& pop) {
     std::vector<Fixed> out(world.interest_groups.size(), Fixed{});
     for (std::size_t g = 0; g < world.interest_groups.size(); ++g) {
@@ -468,18 +491,26 @@ std::vector<Fixed> region_shift(const World& world, Index location) {
 
 std::vector<Fixed> current_leaning(const World& world, const PopBlock& pop,
                                    const std::vector<Fixed>& region) {
+    std::vector<Fixed> out;
+    current_leaning_into(world, pop, region, out);
+    return out;
+}
+
+void current_leaning_into(const World& world, const PopBlock& pop, const std::vector<Fixed>& region,
+                          std::vector<Fixed>& out) {
     const ElectionRules& r = world.election_rules;
     const std::size_t currents = world.currents.size();
-    std::vector<Fixed> out(currents, Fixed{});
+    out.assign(currents, Fixed{});
     if (currents == 0) {
-        return out;
+        return;
     }
     const auto value = [](const std::vector<Fixed>& v, std::size_t c) {
         return c < v.size() ? v[c] : Fixed{};
     };
 
     // Interessengruppen; wer keiner (ganz) angehört, neigt mit dem Rest wie die Grundneigung.
-    const std::vector<Fixed> memberships = interest_memberships(world, pop);
+    thread_local std::vector<Fixed> memberships;
+    interest_memberships_into(world, pop, memberships);
     Fixed members;
     for (std::size_t g = 0; g < memberships.size(); ++g) {
         members += memberships[g];
@@ -513,12 +544,11 @@ std::vector<Fixed> current_leaning(const World& world, const PopBlock& pop,
     if (sum <= Fixed::zero()) {
         std::fill(out.begin(), out.end(),
                   Fixed::one() / Fixed::from_int(static_cast<std::int64_t>(currents)));
-        return out;
+        return;
     }
     for (Fixed& v : out) {
         v = v / sum;
     }
-    return out;
 }
 
 Index faction_of(const Parliament& parliament, Fixed position) {
@@ -732,6 +762,7 @@ void collect_donations(World& world) {
     }
     const std::size_t professions = world.professions.size();
     std::vector<Fixed> support(currents, Fixed{});
+    std::vector<Fixed> leaning;
     for (std::size_t l = 0; l < world.locations.size(); ++l) {
         if (!in_area[l]) {
             continue;
@@ -750,7 +781,7 @@ void collect_donations(World& world) {
             if (purse <= Fixed::zero()) {
                 continue;
             }
-            const std::vector<Fixed> leaning = current_leaning(world, pop, region);
+            current_leaning_into(world, pop, region, leaning);
             for (std::size_t c = 0; c < currents; ++c) {
                 support[c] += purse * leaning[c];
             }

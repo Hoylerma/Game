@@ -39,6 +39,9 @@ std::vector<Fixed> region_shift(const World& world, Index location);
 
 /// Neigung eines Blocks zu den Strömungen ohne Rauschen (Abschnitt 7.3), Summe 1; region aus region_shift.
 std::vector<Fixed> current_leaning(const World& world, const PopBlock& pop, const std::vector<Fixed>& region);
+/// Dasselbe in einen vorhandenen Vektor (seit M13a6 für Schleifen über alle Blöcke).
+void current_leaning_into(const World& world, const PopBlock& pop, const std::vector<Fixed>& region,
+                          std::vector<Fixed>& out);
 
 /// Fraktion zu einer Position auf der Links-rechts-Achse; kNone, wenn keine passt.
 Index faction_of(const Parliament& parliament, Fixed position);

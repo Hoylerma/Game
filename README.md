@@ -243,6 +243,7 @@ Arbeitsverzeichnis), alternativ `--daten DIR`:
 
 # Release-Build: cmake --preset release && cmake --build --preset release
 ./build/release/cli/uhrwerk-cli lasttest --jahre 3 --vergleich 1 --grenze 2   # 500.000 Bevölkerungsblöcke
+./build/release/cli/uhrwerk-cli leistung --szenario voelkerfruehling --jahre 3 --threads 4 --grenze 2  # Leistungstest 1848: Sekunden je Spieljahr
 ./build/release/cli/uhrwerk-cli bilanz --seeds 16 --jahre 100               # Balancing-Bericht gegen die Zielwerte
 ./build/release/cli/uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16  # Wahllabor: Nationalversammlung 1848
 ./build/release/cli/uhrwerk-cli zoll --szenario voelkerfruehling            # Zolllabor: Beitritte zum Zollverein

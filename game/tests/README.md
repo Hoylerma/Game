@@ -6,6 +6,7 @@
 | `smoke_test.gd` – Brücke und Kartendaten | ja | nein | `SMOKE OK` |
 | `klick_test.gd` – Klickerkennung für jeden Ort | ja | nein | `KLICK OK n/n` |
 | `leistung_test.gd` – Bildzeiten beim Schwenken und Zoomen | ja | ja (z. B. xvfb) | Tabelle und `LEISTUNG OK` |
+| `durchspiel_test.gd` – Partie 1848–1871 über die Oberfläche | ja | nein | je Staat eine Zeile und `DURCHSPIEL OK n/n` |
 
 `godot` steht für Godot 4.4.1, z. B. `tools/godot/Godot_v4.4.1-stable_linux.x86_64`. Alle Tests
 laufen im `--script`-Modus und brauchen einen vorherigen Import, damit Godot die Klassennamen
@@ -303,6 +304,33 @@ Die Zeit geht fast ganz in das Rastern im Software-Renderer (Kartenshader etwa 4
 Panels etwa 14 ms); Einordnung und beseitigte Engpässe stehen in
 [game/README.md](../README.md#leistung). Der einzelne Höchstwert von 276 ms im letzten
 Abschnitt ist ein Ausreißer; ein Moduswechsel selbst kostet 4–12 ms.
+
+## Durchspieltest (`durchspiel_test.gd`)
+
+Seit M13a6 ([vertical_slice.md](../../docs/technik/vertical_slice.md), Abschnitt 12): Der Test spielt
+die Partie 1848–1871 je Staat vollständig über die Oberfläche durch, standardmäßig als Preußen,
+Österreich, Bayern und Sachsen.
+
+1. **Start** über den Startbildschirm: Neues Spiel, Lesezeichen Völkerfrühling, Staat, Spielbeginn.
+2. **Partie** in Schritten von zehn Tagen: Zeit vorrücken, Hauptszene aktualisieren wie nach einem
+   Spielbild, offene Ereignisse im Ereignisfenster mit der Standardoption beantworten, Wahlabende
+   schließen.
+3. **Fenster:** einmal im Jahr jeden Bereich der Bereichsleiste öffnen und schließen.
+4. **Spielstände:** alle fünf Jahre speichern (Ordner `user://durchspiel_test`, danach gelöscht),
+   laden und Prüfsumme und Datum vergleichen.
+5. **Ende:** Das Urteil der Geschichte öffnet sich von selbst und nennt das Vermächtnis. Die Chronik
+   lässt sich als HTML schreiben, „Weiterspielen“ schließt das Urteil.
+
+Je Staat nennt die Ausgabe Enddatum, Laufzeit, beantwortete Ereignisse, Wahlabende, geöffnete
+Fenster, Spielstände, Orte, den Ausgang der deutschen Frage und das Vermächtnis. Auf dem
+Cloud-Rechner dauert eine Partie gut 50 s, alle vier zusammen dreieinhalb Minuten. Der Test fand in
+M13a6 einen Fehler: Spielstände nach der oktroyierten Verfassung Preußens (Dezember 1848) passten
+nicht mehr zu den Spieldaten.
+
+```bash
+godot --headless --path game --script res://tests/durchspiel_test.gd
+godot --headless --path game --script res://tests/durchspiel_test.gd -- --staaten=PRU,BAD
+```
 
 ## Start ohne Erweiterung
 

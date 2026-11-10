@@ -89,6 +89,7 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_state_laws",
 	&"get_votes",
 	&"get_office_history",
+	&"get_state_overview",
 	&"get_legacy",
 	&"get_yearbook",
 	&"get_verdict",
@@ -640,7 +641,8 @@ func get_journals() -> Array[Dictionary]:
 
 ## Ereignisse eines Staates: { laws: je { group, option }, approvals: je { id, name, color, value }, unrest,
 ## unrest_target, revolt: { kind_text, strength, since_text, helper_index, helper_name } oder leer,
-## timed: je { text, until_text }, pending }; leer ohne Ereignisse.
+## timed: je { text, until_text }, pending, seit M13a5c unrest_causes: je { name, value } }; leer ohne
+## Ereignisse.
 func get_state_events(state_index: int) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_state_events", state_index))
 
@@ -689,6 +691,12 @@ func get_votes() -> Array[Dictionary]:
 ## from_text, to_text }; leer ohne KI-Daten.
 func get_office_history(state_index: int) -> Array[Dictionary]:
 	return _as_dictionaries(_native.call(&"get_office_history", state_index))
+
+
+## Kennzahlen der oberen Leiste (seit M13a5c): { locations, kreise, legitimacy (Zustimmung im Mittel −10 …
+## +10), unrest, events }.
+func get_state_overview(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_state_overview", state_index))
 
 
 ## Vermächtnis eines Staates (seit M13a4, vertical_slice.md 3.5): { active, dimensions: je { id, name,

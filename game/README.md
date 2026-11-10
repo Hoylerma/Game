@@ -90,7 +90,9 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--ereignis` | Ereignisse des Spielerstaates warten auf die Wahl, das Ereignisfenster zeigt die offenen (seit M11; 1848 z. B. `--staat=BAD --tage=8`). Ohne die Option rechnen Screenshots wie die Kommandozeile ohne Ereignisspieler |
 | `--journal` | Journalfenster vor dem Screenshot öffnen (seit M11; ab 1848) |
 | `--jahrbuch` | Statistisches Jahrbuch vor dem Screenshot öffnen (seit M13a5a; ab 1848, mit `--tage` über einen 1. Januar) |
-| `--bereich=<bereich>` | Fenster eines Bereichs vor dem Screenshot öffnen: `kabinett`, `gesetze`, `gruppen`, `parlament`, `gesellschaft`, `wirtschaft` (seit M13a5b) |
+| `--bereich=<bereich>` | Fenster eines Bereichs vor dem Screenshot öffnen: `kabinett`, `gesetze`, `gruppen`, `parlament`, `gesellschaft`, `wirtschaft` (seit M13a5b), `chronik`, `lexikon` (seit M13a5d) |
+| `--einstellungen[=<reiter>]` | Fenster Einstellungen öffnen, Reiter `bild` (Standard), `ton`, `spiel`, `zugang`, `tasten`, `sprache` (seit M13a5d) |
+| `--farbsehschwaeche` | Farben für Rot-Grün-Schwäche für diesen Start, ohne die Einstellung zu speichern (seit M13a5d) |
 | `--startbildschirm[=<seite>]` | Startbildschirm vor dem Screenshot öffnen, Seite `menue` (Standard), `lesezeichen` oder `einstellungen` (Spieleinstellungen für den Spielerstaat des Lesezeichens, mit `--szenario`; seit M13) |
 
 Auf der Kernraum-Karte bei 1600 × 900 Pixeln reicht die ferne Stufe (Staatsnamen) bis etwa
@@ -119,6 +121,13 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Rechtsklick ohne Ziehen | seit M10, mit einem eigenen Feldheer ausgewählt: Marschbefehl zum Ort (wirksam ab dem nächsten Tag); der Tooltip nennt beim Überfahren Tage und Ankunft, die Karte zeigt den Weg gestrichelt |
 | Esc | seit M13a5a zuerst das zuletzt geöffnete Fenster eines Bereichs schließen; sonst Auswahl aufheben (zuerst das Heer, dann den Ort) |
 | Bereichsleiste | seit M13a5a, rechts neben dem Staatspanel; seit M13a5b mit eigenen Fenstern für **Kabinett** (Herrscher und Minister mit Werten, Eigenschaften und Anteil an den Neigungen, die Neigungen des Staates, frühere Amtsinhaber der Partie), **Gesetze** (Verfassung, Wahlrecht, Unruhe mit Ziel, jede Gesetzesoption mit Wirkung auf die Unruhe und den Gruppen dafür und dagegen), **Gruppen** (Anteil, Einfluss, Zustimmung, Forderungen), **Parlament** (Auswahl des Parlaments, Halbrund der letzten Wahl nach Fraktionen, nächste Wahl, Abstimmungen), **Gesellschaft** (Altersaufbau, Kulturen, Konfessionen, Berufe, Vorjahr mit Wanderung) und **Wirtschaft** (Erzeugung, Steuern, Zollgebiet, Märkte, Güter mit Preisen, Betriebe). Dazu wie in a5a Haushalt, Zollunion, Diplomatie, Militär (Kriegsfenster), Journale, Jahrbuch und Chronik (ein- und ausblenden); Bereiche ohne Inhalt im Lesezeichen fehlen. Ein Klick öffnet das Fenster neben der Leiste, ein zweiter schließt es; die Fensterverwaltung hält höchstens eines offen. Die Knöpfe „Haushalt im Einzelnen …“, „Verfassung und Gruppen …“, „Zollunion …“, „Diplomatie …“ und „Journale …“ des Staatspanels sind dafür ausgeblendet |
+| Obere Leiste | seit M13a5c nach Kapitel 22: Wappen und Staat, **Kasse · Saldo** des Vormonats, **Legitimität** (Zustimmung der Gruppen im Mittel), **Verwaltung** (Orte), **Vermächtnis** (E R F W G), Datum und Tempo, Menü. Jede Zahl hat einen verschachtelten Tooltip: Kasse mit Einnahmen je Steuer und Ausgaben je Posten, Legitimität mit der Zustimmung je Gruppe und den Ursachen der Unruhe, Vermächtnis mit Satz je Dimension; unterstrichene Begriffe (Akzise, Saldo, Unruhe …) und die Dimensionen öffnen beim Überfahren einen zweiten Tooltip, beide bleiben offen, solange die Maus darüber steht |
+| Übersicht (rechts) | seit M13a5c: laufende Dinge – offene Ereignisse, Krisen, Kriege, Journale mit Stufe, die nächste Wahl, Heere auf dem Marsch; ein Klick öffnet das Fenster oder fährt das Heer an; ein Klick auf den Kopf klappt sie ein. Solange eine Ortsinfo offen ist, ruht sie |
+| Einstellungen (Startbildschirm, Spielmenü) | seit M13a5d, gespeichert in `user://einstellungen.cfg`: **Bild** (Vollbild, Größe der Oberfläche 75–200 %, Bildrate), **Ton** (Lautstärken; Musik folgt mit b2), **Spiel** (automatischer Spielstand aus, jährlich oder halbjährlich; historischer Kompass; Hinweise; **Pausenregeln**: Kriegserklärung, Forderung, Wahlergebnis, Amtswechsel, Bundesgründung, Frieden – ein Ereignis des Spielerstaates hält immer an), **Barrierefreiheit** (Farben für Rot-Grün-Schwäche: Grün wird Blau auf Karte und Legende; hoher Kontrast; reduzierte Animationen; Schriftgröße 100–150 %), **Tasten** (jede Aktion neu belegbar, doppelte Belegung wird abgelehnt, Zurücksetzen), **Sprache** (Deutsch) |
+| Chronik (Bereichsleiste) | seit M13a5d ein Fenster mit allen Einträgen, Filter nach Staat (alle, eigener, Welt) und „nur Wendepunkte“, Suche; ein Klick fährt den Ort an |
+| Lexikon (Bereichsleiste) | seit M13a5d: Artikel aus `data/lexikon` mit Suche und Verweisen; ein Klick auf einen unterstrichenen Begriff in einem Tooltip öffnet ihn |
+| Wendepunkt | seit M13a5d: Ereignisse mit `wendepunkt = ja` erscheinen breiter mit großem Titel, die Karte dunkelt dahinter ab |
+| Ticker | seit M13a5c über der Leiste der Kartenmodi: das Neueste aus der Chronik (Wendepunkte zuerst und rot, sonst Einträge des Spielerstaates und der Welt), alle vier Sekunden der nächste; ein Klick fährt den Ort an. Die Chronik selbst ist über die Bereichsleiste ein- und auszublenden und zu Beginn ausgeblendet |
 | B, „Jahrbuch“ | seit M13a5a, ab 1848: Statistisches Jahrbuch mit einer Kennzahl oder Dimension des Vermächtnisses (Auswahl) je Stichtag (Start, jeder 1. Januar, Ende) als Liniendiagramm und Tabelle, für den Spielerstaat und bis zu drei Staaten zum Vergleich |
 | Rechte oder mittlere Maustaste ziehen | Karte verschieben |
 | Mausrad | Zoomen (zum Mauszeiger hin, von knapp unter der Übersicht, bis ein Kartenpixel 6 Bildschirmpixel groß ist) |
@@ -175,7 +184,12 @@ game/
 │   └── ui/                    top_bar, state_panel, chronicle_panel, location_panel,
 │                              legend_panel, map_mode_bar, map_tooltip, notice_layer
 ├── scripts/
-│   ├── main.gd                Ablaufsteuerung: Laden, Zeit, Eingaben, Screenshot
+│   ├── main.gd                Hauptszene, oberste Ebene (seit M13a5d): Ablauf (_ready, Zeit, Eingaben),
+│   │                          Bereiche und Jahrbuch, Einstellungen und Pausenregeln, Leisten und Tooltips
+│   ├── main/                  seit M13a5d: main_core.gd (Felder, Laden, Anzeige, Bedienung, Spielstände,
+│   │                          Screenshot) ← main_windows.gd (Diplomatie, Militär, Startbildschirm, Partei,
+│   │                          Ereignisse, Urteil, Wahlabend) ← main.gd; dazu legend_view.gd (Legende),
+│   │                          map_tooltip_text.gd (Kartentooltip), bar_tooltips.gd (Tooltips der Leiste)
 │   ├── core/                  Hilfsklassen ohne Szenenbaum (auch im --script-Modus nutzbar)
 │   │   ├── uhrwerk_paths.gd       UhrwerkPaths: Datenordner (UHRWERK_DATEN oder res://../data)
 │   │   ├── simulation_client.gd   SimulationClient: typisierte Hülle um UhrwerkSimulation
@@ -186,6 +200,12 @@ game/
 │   │   ├── german_format.gd       GermanFormat: Tausenderpunkt, Dezimalkomma, Einheiten
 │   │   ├── save_slots.gd          SaveSlots: Ordner, Dateinamen und Liste der Spielstände, Autosave (seit M6)
 │   │   ├── election_tally.gd      ElectionTally: Meldereihenfolge, Hochrechnung, Halbrund (seit M8)
+│   │   ├── user_settings.gd       UserSettings: Einstellungen in user://einstellungen.cfg (seit M13a5d)
+│   │   ├── accessibility.gd       Accessibility: Farbsehschwäche, Kontrast, Animationen (seit M13a5d)
+│   │   ├── pause_rules.gd         PauseRules: automatische Pause aus der Chronik (seit M13a5d)
+│   │   ├── lexicon.gd             Lexicon: Artikel aus data/lexikon/*.md (seit M13a5d)
+│   │   ├── glossary.gd            Glossary: Begriffe der verschachtelten Tooltips (seit M13a5c)
+│   │   ├── chronicle_export.gd    ChronicleExport: Chronik als HTML (seit M13a4)
 │   │   └── launch_options.gd      LaunchOptions: --screenshot, --tage, --kartenmodus, --ort, --zoom
 │   ├── map/
 │   │   ├── map_view.gd            MapView: Darstellung, Nachschlagetexturen, Auswahl, Rahmen
@@ -198,7 +218,7 @@ game/
 │   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9); Heeresfenster (army_panel.gd), Kriegsfenster (war_window.gd) und Schlachtberichte (battle_reports.gd, alle seit M10)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte)
-└── tests/                     Einheiten-, Rauch-, Klick- und Leistungstest, siehe tests/README.md
+└── tests/                     Einheiten-, Rauch-, Klick-, Leistungs- und Durchspieltest, siehe tests/README.md
 ```
 
 ### Spielstände (seit M6)

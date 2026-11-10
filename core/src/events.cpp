@@ -865,10 +865,11 @@ Fixed approval_target(const World& world, Index state, const InterestGroup& grou
 
 } // namespace
 
-Fixed unrest_target(const World& world, const EventCache& cache, Index state) {
+UnrestCauses unrest_causes(const World& world, const EventCache& cache, Index state) {
+    UnrestCauses causes;
     const EventRules& r = world.event_rules;
     if (!in_range(world.states, state)) {
-        return Fixed::zero();
+        return causes;
     }
     Evaluator evaluator(world, cache);
     const State& s = world.states[at(state)];
@@ -907,9 +908,22 @@ Fixed unrest_target(const World& world, const EventCache& cache, Index state) {
     for (std::size_t g = 0; g < standing.size() && g < world.interest_groups.size(); ++g) {
         approval += standing[g].influence * evaluator.approval(state, static_cast<Index>(g));
     }
-    const Fixed target = r.misery * misery + r.dearth * dearth +
-                         r.constitution[static_cast<std::size_t>(s.constitution)] + censor + contagion -
-                         r.approval_weight * approval;
+    causes.misery = r.misery * misery;
+    causes.dearth = r.dearth * dearth;
+    causes.constitution = r.constitution[static_cast<std::size_t>(s.constitution)];
+    causes.censorship = censor;
+    causes.contagion = contagion;
+    causes.approval = -(r.approval_weight * approval);
+    return causes;
+}
+
+Fixed unrest_target(const World& world, const EventCache& cache, Index state) {
+    if (!in_range(world.states, state)) {
+        return Fixed::zero();
+    }
+    const UnrestCauses c = unrest_causes(world, cache, state);
+    // Seit M13a5c aus den Bestandteilen (gleiche Summe wie vorher, Festkomma addiert exakt).
+    const Fixed target = c.misery + c.dearth + c.constitution + c.censorship + c.contagion + c.approval;
     return std::clamp(target, Fixed::zero(), Fixed::from_int(100));
 }
 

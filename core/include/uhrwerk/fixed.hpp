@@ -20,6 +20,16 @@
 #include <optional>
 #include <string>
 #include <string_view>
+#include <type_traits>
+
+// Seit M13a6: Einbetten erzwingen, wo der Aufruf selbst messbar kostet.
+#if defined(__GNUC__) || defined(__clang__)
+#define UHRWERK_ALWAYS_INLINE [[gnu::always_inline]]
+#elif defined(_MSC_VER)
+#define UHRWERK_ALWAYS_INLINE [[msvc::forceinline]]
+#else
+#define UHRWERK_ALWAYS_INLINE
+#endif
 
 namespace uhrwerk {
 
@@ -32,6 +42,14 @@ struct U128 {
 
 // Vollständiges 64×64→128-Bit-Produkt ohne Compiler-Erweiterungen.
 constexpr U128 mul_u64(std::uint64_t a, std::uint64_t b) {
+#if defined(__SIZEOF_INT128__)
+    // Seit M13a6: mit eingebauter 128-Bit-Multiplikation (GCC, Clang), bitgleich mit dem Weg darunter.
+    if (!std::is_constant_evaluated()) {
+        __extension__ using Wide = unsigned __int128; // __extension__: keine Warnung bei -Wpedantic
+        const Wide p = static_cast<Wide>(a) * b;
+        return U128{static_cast<std::uint64_t>(p >> 64), static_cast<std::uint64_t>(p)};
+    }
+#endif
     const std::uint64_t a_lo = a & 0xFFFFFFFFu, a_hi = a >> 32;
     const std::uint64_t b_lo = b & 0xFFFFFFFFu, b_hi = b >> 32;
     const std::uint64_t p0 = a_lo * b_lo;
@@ -122,6 +140,17 @@ constexpr std::uint64_t div_u128_by_u64(U128 n, std::uint64_t d, std::uint64_t* 
         return n.lo / d;
     }
     if (n.hi < d) {
+#if defined(__SIZEOF_INT128__)
+        // Seit M13a6: eingebaute 128/64-Division (der Quotient passt in 64 Bit), bitgleich mit Knuth.
+        if (!std::is_constant_evaluated()) {
+            __extension__ using Wide = unsigned __int128;
+            const Wide wide = (static_cast<Wide>(n.hi) << 64) | n.lo;
+            if (remainder != nullptr) {
+                *remainder = static_cast<std::uint64_t>(wide % d);
+            }
+            return static_cast<std::uint64_t>(wide / d);
+        }
+#endif
         return div_u128_by_u64_knuth(n, d, remainder);
     }
     return div_u128_by_u64_bitwise(n, d, remainder);
@@ -188,7 +217,8 @@ public:
     friend constexpr Fixed operator-(Fixed a, Fixed b) { return from_raw(a.raw_ - b.raw_); }
     friend constexpr Fixed operator-(Fixed a) { return from_raw(-a.raw_); }
 
-    friend constexpr Fixed operator*(Fixed a, Fixed b) {
+    // Seit M13a6 immer eingebettet: Der Aufruf kostete im Profil 1848 ein Zehntel der Rechenzeit.
+    UHRWERK_ALWAYS_INLINE friend constexpr Fixed operator*(Fixed a, Fixed b) {
         const bool negative = (a.raw_ < 0) != (b.raw_ < 0);
         const std::uint64_t ua = detail::abs_u64(a.raw_);
         const std::uint64_t ub = detail::abs_u64(b.raw_);
@@ -207,7 +237,7 @@ public:
     }
 
     /// Division; Divisor 0 ergibt 0 (die Simulation prüft vorher).
-    friend constexpr Fixed operator/(Fixed a, Fixed b) {
+    UHRWERK_ALWAYS_INLINE friend constexpr Fixed operator/(Fixed a, Fixed b) {
         if (b.raw_ == 0) {
             return Fixed{};
         }

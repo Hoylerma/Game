@@ -21,7 +21,7 @@ var _shown: Array = []
 ## Farbfelder; entries: Dictionaries { "color": Color, "text": String, "detail": String,
 ## optional "hatch": true für die Schraffur „keine Daten“ }.
 func show_swatches(title: String, entries: Array[Dictionary]) -> void:
-	if not _begin(["swatches", title, entries]):
+	if not _begin(["swatches", title, entries, Accessibility.color_blind]):
 		return
 	_add_swatch_grid(entries)
 
@@ -39,7 +39,7 @@ func _add_swatch_grid(entries: Array[Dictionary]) -> void:
 			swatch = hatch_swatch()
 		else:
 			var plain := ColorRect.new()
-			plain.color = entry.get("color", Color.GRAY)
+			plain.color = Accessibility.adjust(entry.get("color", Color.GRAY))
 			swatch = plain
 		swatch.custom_minimum_size = SWATCH_SIZE
 		swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -72,10 +72,15 @@ func show_gradient(
 	unit: String,
 	extra: Array[Dictionary] = []
 ) -> void:
-	if not _begin(["gradient", title, gradient.offsets, gradient.colors, labels, unit, extra]):
+	if not _begin(["gradient", title, gradient.offsets, gradient.colors, labels, unit, extra, Accessibility.color_blind]):
 		return
 	var texture := GradientTexture2D.new()
-	texture.gradient = gradient
+	# Seit M13a5d: dieselbe Anpassung wie die Karte bei Farbsehschwäche.
+	var shown := gradient
+	if Accessibility.color_blind:
+		shown = gradient.duplicate() as Gradient
+		shown.colors = Accessibility.adjust_all(gradient.colors)
+	texture.gradient = shown
 	texture.width = 256
 	texture.height = 1
 	var bar := TextureRect.new()
@@ -116,7 +121,7 @@ func show_palette(title: String, colors: PackedColorArray, text: String) -> void
 	strip.add_theme_constant_override(&"separation", 2)
 	for color in colors:
 		var swatch := ColorRect.new()
-		swatch.color = color
+		swatch.color = Accessibility.adjust(color)
 		swatch.custom_minimum_size = SWATCH_SIZE
 		strip.add_child(swatch)
 	_body.add_child(strip)
