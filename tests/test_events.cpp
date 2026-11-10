@@ -8,6 +8,7 @@
 #include "uhrwerk/events.hpp"
 #include "uhrwerk/legacy.hpp"
 #include "uhrwerk/military.hpp"
+#include "uhrwerk/newspaper.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
 
@@ -1541,4 +1542,167 @@ TEST_CASE("Vermächtnis: Fehler in vermaechtnis.chron und 'ende' (seit M13a4)") 
     const Simulation plain(RuleData("", kQuiet).load());
     CHECK_FALSE(plain.world().legacy_rules.active);
     CHECK(plain.world().yearbook.empty());
+}
+
+// ─── Zeitung und Vignetten (seit M13b1, vertical_slice.md 5.1 und 5.2) ──
+
+namespace {
+
+constexpr std::string_view kNewspaper = R"(
+blatt bote     { name = "Der Bote"         richtung = liberal  maerkte = { brandenburg } }
+blatt kreuz    { name = "Das Kreuz"        richtung = konservativ  staaten = { SAX } }
+blatt welt     { name = "Die Welt im Blatt" richtung = demokratisch }
+anlass krieg {
+    muster  = "{staat} erklärt {gegner} den Krieg.*"
+    gewicht = 2
+    schlagzeile = "Krieg: {staat} gegen {gegner}"
+    unterzeile  = "Gemeldet am {datum} im {blatt}"
+    text        = "Aus {staat} wird gemeldet."
+    konservativ { schlagzeile = "Ordnung in Gefahr: {staat} gegen {gegner}" }
+}
+anlass wahl {
+    muster  = "Wahltag – {parlament}: {sitze} Sitze*; stärkste: {stroemung}."
+    gewicht = 3
+    schlagzeile = "{stroemung} vorn"
+}
+anlass wende {
+    muster     = "{staat}: {titel} – {wahl}"
+    wendepunkt = ja
+    gewicht    = 3
+    schlagzeile = "{titel}"
+}
+anlass leise {
+    muster  = "{staat} entsendet einen Gesandten nach {gegner}."
+    gewicht = 0
+}
+)";
+
+constexpr std::string_view kNewspaperEvents = R"(
+ereignis a.wende { titel = "Die Wende" text = "x" art = dynamisch wendepunkt = ja vignette = revolution
+    nur_folge = ja option a { text = "a" gewicht = 1 } }
+ereignis b.alltag { titel = "Alltag" text = "x" art = dynamisch vignette = wirtschaft
+    nur_folge = ja option a { text = "a" gewicht = 1 } }
+)";
+
+uhrwerk::ChronicleEntry entry_at(const uhrwerk::Date& date, std::string text, Index state = kNone) {
+    uhrwerk::ChronicleEntry e;
+    e.date = date;
+    e.text = std::move(text);
+    e.state = state;
+    return e;
+}
+
+} // namespace
+
+TEST_CASE("Zeitung: Muster, Blätter und Titelseite (seit M13b1)") {
+    const RuleData data("", kNewspaperEvents);
+    testhilfen::write_file(data.dir() / "common/zeitung.chron", kNewspaper);
+    World w = data.load();
+    REQUIRE(w.newspaper.active);
+    REQUIRE(w.newspaper.titles.size() == 3);
+    REQUIRE(w.newspaper.occasions.size() == 4);
+    CHECK(w.events[0].vignette == "revolution");
+    CHECK(w.events[1].vignette == "wirtschaft");
+    const Index bra = state_of(w, "BRA");
+    const Index sax = state_of(w, "SAX");
+    const std::string brandenburg = w.states[static_cast<std::size_t>(bra)].short_name;
+    const std::string sachsen = w.states[static_cast<std::size_t>(sax)].short_name;
+
+    // Platzhalter: Staaten müssen Staatsnamen sein, '*' nimmt den Rest auch in der Mitte.
+    const auto& war = w.newspaper.occasions[0];
+    const auto captures = uhrwerk::match_occasion(
+        w, war, entry_at({1648, 11, 1}, brandenburg + " erklärt " + sachsen + " den Krieg."));
+    REQUIRE(captures);
+    CHECK(*captures == uhrwerk::NewspaperCaptures{{"staat", brandenburg}, {"gegner", sachsen}});
+    CHECK_FALSE(uhrwerk::match_occasion(
+        w, war, entry_at({1648, 11, 1}, "Niemand erklärt " + sachsen + " den Krieg.")));
+    CHECK(uhrwerk::match_occasion(
+        w, war, entry_at({1648, 11, 1}, brandenburg + " erklärt " + sachsen + " den Krieg. Mit Folgen.")));
+    const auto vote = uhrwerk::match_occasion(
+        w, w.newspaper.occasions[1],
+        entry_at({1648, 11, 1}, "Wahltag – Landtag: 40 Sitze, 2 leer; stärkste: Liberale."));
+    REQUIRE(vote);
+    CHECK(vote->back() == std::pair<std::string, std::string>{"stroemung", "Liberale"});
+    CHECK_FALSE(
+        uhrwerk::match_occasion(w, w.newspaper.occasions[1],
+                                entry_at({1648, 11, 1}, "Wahltag – Landtag: viele Sitze; stärkste: X.")));
+    // Wendepunkt nur mit dem Titel eines Wendepunkts.
+    CHECK(uhrwerk::newspaper_occasion(w, entry_at({1648, 11, 1}, brandenburg + ": Die Wende – a")) == 2U);
+    CHECK_FALSE(uhrwerk::newspaper_occasion(w, entry_at({1648, 11, 1}, brandenburg + ": Alltag – a")));
+    CHECK(uhrwerk::newspaper_weight(w, entry_at({1648, 11, 1}, brandenburg + ": Alltag – a")) == -1);
+
+    // Titelseite: Blatt nach dem Markt der Hauptstadt, Wortlaut der Richtung, Platzhalter gefüllt.
+    w.chronicle.clear();
+    w.chronicle.push_back(
+        entry_at({1648, 10, 30}, brandenburg + " entsendet einen Gesandten nach " + sachsen + ".", bra));
+    w.chronicle.push_back(entry_at({1648, 10, 31}, "Ein Markttag.", kNone));
+    w.chronicle.push_back(entry_at({1648, 11, 1}, brandenburg + " erklärt " + sachsen + " den Krieg.", bra));
+    CHECK_FALSE(uhrwerk::front_page(w, 0, bra)); // Gewicht 0: nur Vermischtes
+    CHECK_FALSE(uhrwerk::front_page(w, 1, bra)); // kein Anlass
+    const auto page = uhrwerk::front_page(w, 2, bra);
+    REQUIRE(page);
+    CHECK(page->paper == "Der Bote");
+    CHECK(page->weight == 2);
+    CHECK(page->involved);
+    CHECK(page->headline == "Krieg: " + brandenburg + " gegen " + sachsen);
+    CHECK(page->subline == "Gemeldet am " + uhrwerk::format_date_long({1648, 11, 1}) + " im Der Bote");
+    CHECK(page->text == "Aus " + brandenburg + " wird gemeldet.");
+    CHECK(page->issue == 306);
+    CHECK(page->miscellany ==
+          std::vector<std::string>{"Ein Markttag.",
+                                   brandenburg + " entsendet einen Gesandten nach " + sachsen + "."});
+    // Sachsen liest das konservative Blatt seines Staates (beteiligt als Gegner); ohne Leser das
+    // überregionale.
+    const auto saxon = uhrwerk::front_page(w, 2, sax);
+    REQUIRE(saxon);
+    CHECK(saxon->paper == "Das Kreuz");
+    CHECK(saxon->headline == "Ordnung in Gefahr: " + brandenburg + " gegen " + sachsen);
+    CHECK(saxon->involved);
+    const auto nobody = uhrwerk::front_page(w, 2, kNone);
+    REQUIRE(nobody);
+    CHECK(nobody->paper == "Die Welt im Blatt");
+    CHECK_FALSE(nobody->involved);
+    // Dieselbe Ausgabe ergibt dieselbe Seite.
+    CHECK(uhrwerk::front_page(w, 2, bra)->headline == page->headline);
+    CHECK(uhrwerk::fill_placeholders("{a} und {b}", {{"a", "x"}}) == "x und {b}");
+}
+
+TEST_CASE("Zeitung: Fehler in zeitung.chron und Vignetten (seit M13b1)") {
+    const std::pair<std::string_view, std::string_view> cases[] = {
+        {"anlass a { muster = \"x\" schlagzeile = \"y\" }", "zeitung.chron braucht mindestens ein Blatt"},
+        {"blatt a { richtung = liberal }", "Pflichtfeld 'name' fehlt in blatt a"},
+        {"blatt a { name = \"A\" richtung = sozial }", "ungültige Richtung 'sozial'"},
+        {"blatt a { name = \"A\" richtung = liberal staaten = { XXX } }", "unbekannter Staat 'XXX'"},
+        {"blatt a { name = \"A\" richtung = liberal maerkte = { nirgends } }",
+         "unbekannter Markt 'nirgends'"},
+        {"blatt a { name = \"A\" richtung = liberal } anlass b { muster = \"{x\" schlagzeile = \"y\" }",
+         "ungültiger Platzhalter im Muster"},
+        {"blatt a { name = \"A\" richtung = liberal } anlass b { muster = \"{x}{y}\" schlagzeile = \"y\" }",
+         "zwei Platzhalter ohne Text dazwischen"},
+        {"blatt a { name = \"A\" richtung = liberal } anlass b { muster = \"{x} y\" schlagzeile = \"{z}\" }",
+         "unbekannter Platzhalter {z} in anlass b"},
+        {"blatt a { name = \"A\" richtung = liberal } anlass b { muster = \"{x} y\" }",
+         "anlass b braucht mindestens eine Schlagzeile"},
+        {"blatt a { name = \"A\" richtung = liberal } anlass b { schlagzeile = \"y\" }",
+         "Pflichtfeld 'muster' fehlt in anlass b"},
+        {"blatt a { name = \"A\" richtung = liberal } anlass b { muster = \"x {titel}\" ereignis = nirgends "
+         "schlagzeile = \"y\" }",
+         "unbekanntes Ereignis 'nirgends' in anlass b"},
+        {"blatt a { name = \"A\" richtung = liberal } anlass b { muster = \"x\" wendepunkt = ja schlagzeile "
+         "= \"y\" }",
+         "'ereignis' und 'wendepunkt' brauchen {titel}"},
+    };
+    for (const auto& [text, needle] : cases) {
+        CAPTURE(needle);
+        const RuleData data("", kQuiet);
+        testhilfen::write_file(data.dir() / "common/zeitung.chron", text);
+        CHECK(testhilfen::has_issue(data.result(), needle));
+    }
+    const RuleData bad("", R"(ereignis z.bild { titel = "x" text = "x" art = dynamisch vignette = landschaft
+        nur_folge = ja option a { text = "a" gewicht = 1 } })");
+    CHECK(testhilfen::has_issue(bad.result(), "ungültige Vignette 'landschaft'"));
+    // Ohne zeitung.chron keine Zeitung.
+    const World plain = RuleData("", kQuiet).load();
+    CHECK_FALSE(plain.newspaper.active);
+    CHECK_FALSE(uhrwerk::newspaper_occasion(plain, entry_at({1648, 11, 1}, "x")));
 }

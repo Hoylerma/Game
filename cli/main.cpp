@@ -17,6 +17,7 @@
 #include "uhrwerk/lasttest.hpp"
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/military.hpp"
+#include "uhrwerk/newspaper.hpp"
 #include "uhrwerk/rng.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/script.hpp"
@@ -90,6 +91,10 @@ Befehle:
   lasttest       Lasttest: jeder Ort mit Daten, viele Bevölkerungsblöcke; Zeit je Spieljahr
   leistung       Leistungstest: Spieljahre einer Partie mit allen Systemen (KI, Ereignisse, Krieg);
                  Zeit je Spieljahr, Median, Anteil der KI; mit --grenze Exitcode 1 darüber (seit M13)
+  zeitung        Zeitung: eine Partie ohne Spieler über --jahre; Titelseiten je Anlass, Einträge ohne
+                 Anlass, die Titelseiten für den Spielerstaat des Szenarios (Gewicht 3, Gewicht 2
+                 mit ihm beteiligt);
+                 Exitcode 1, wenn ein Platzhalter offen bleibt (seit M13b1)
   wirtschaft     Wirtschaft im Überblick: Güter, Berufe, Haushalt der Staaten (nach dem
                  Einschwingen oder nach --jahre/--tage); Werkzeug der Kalibrierung
   bilanz         Balancing-Bericht: mehrere Läufe ohne Spielereingriff (Seeds ab --seed);
@@ -3569,6 +3574,91 @@ int cmd_leistung(const Options& o, const fs::path& data_dir) {
     return kExitOk;
 }
 
+/// Zeitung (seit M13b1, vertical_slice.md 5.2): Anlässe und Titelseiten einer Partie ohne Spieler.
+int cmd_zeitung(const Options& o, const fs::path& data_dir) {
+    const auto world = load(data_dir, o.scenario, false);
+    if (!world) {
+        return kExitDataError;
+    }
+    uhrwerk::Simulation sim(*world, uhrwerk::SimConfig{o.seed, o.threads});
+    const auto& w = sim.world();
+    if (!w.newspaper.active) {
+        std::cout << "Keine Zeitung im Szenario " << w.scenario.id
+                  << " (common/zeitung.chron, nur mit Ereignissen)\n";
+        return kExitOk;
+    }
+    sim.step_days(o.days ? *o.days : o.years.value_or(24) * 365);
+    const Index reader = w.find_state(w.scenario.player_tag);
+    std::cout << "Zeitung (vertical_slice.md, Abschnitt 5.2)\n"
+              << "Szenario:  " << w.scenario.name << " bis " << uhrwerk::format_date(w.date) << ", Leser "
+              << (reader == uhrwerk::kNone ? std::string("überregional")
+                                           : w.states[static_cast<std::size_t>(reader)].short_name)
+              << '\n'
+              << "Blätter:   " << w.newspaper.titles.size() << ", Anlässe " << w.newspaper.occasions.size()
+              << '\n';
+    std::vector<std::size_t> counts(w.newspaper.occasions.size(), 0);
+    std::map<std::string, std::size_t> papers;
+    std::vector<std::string> unmatched;
+    std::size_t open_placeholders = 0;
+    std::vector<std::string> pages;
+    for (std::size_t i = 0; i < w.chronicle.size(); ++i) {
+        const auto occasion = uhrwerk::newspaper_occasion(w, w.chronicle[i]);
+        if (!occasion) {
+            unmatched.push_back(w.chronicle[i].text);
+            continue;
+        }
+        ++counts[*occasion];
+        const auto page = uhrwerk::front_page(w, i, reader);
+        if (!page) {
+            continue;
+        }
+        ++papers[page->paper];
+        for (const std::string* text : {&page->headline, &page->subline, &page->text}) {
+            if (text->find('{') != std::string::npos) {
+                ++open_placeholders;
+                std::cout << "FEHLER: offener Platzhalter in " << page->occasion << ": " << *text << '\n';
+            }
+        }
+        if (page->weight >= 3 || (page->weight == 2 && page->involved)) {
+            pages.push_back(uhrwerk::format_date(page->date) + "  " + std::to_string(page->weight) + "  " +
+                            page->paper + ": " + page->headline + " – " + page->subline);
+        }
+    }
+    std::cout << "\nAnlass               Einträge\n";
+    for (std::size_t i = 0; i < counts.size(); ++i) {
+        std::string id = w.newspaper.occasions[i].id;
+        id.resize(std::max<std::size_t>(id.size(), 20), ' ');
+        std::cout << id << ' ' << counts[i] << '\n';
+    }
+    std::cout << "ohne Anlass          " << unmatched.size() << " von " << w.chronicle.size() << '\n';
+    std::map<std::string, std::size_t> shapes; // häufigste Einträge ohne Anlass, nach den ersten Wörtern
+    for (const std::string& text : unmatched) {
+        ++shapes[text.substr(0, std::min<std::size_t>(text.size(), 48))];
+    }
+    std::vector<std::pair<std::size_t, std::string>> top;
+    for (const auto& [text, n] : shapes) {
+        top.emplace_back(n, text);
+    }
+    std::sort(top.begin(), top.end(), [](const auto& a, const auto& b) { return a.first > b.first; });
+    for (std::size_t i = 0; i < std::min<std::size_t>(top.size(), 8); ++i) {
+        std::cout << "  " << top[i].first << "× " << top[i].second << '\n';
+    }
+    std::cout << "\nBlätter der Titelseiten:\n";
+    for (const auto& [name, n] : papers) {
+        std::cout << "  " << name << ": " << n << '\n';
+    }
+    std::cout << "\nTitelseiten für den Leser (Gewicht 3, Gewicht 2 mit ihm beteiligt): " << pages.size()
+              << '\n';
+    for (const std::string& line : pages) {
+        std::cout << "  " << line << '\n';
+    }
+    if (open_placeholders > 0) {
+        std::cout << "FEHLER: " << open_placeholders << " offene Platzhalter\n";
+        return kExitDataError;
+    }
+    return kExitOk;
+}
+
 int cmd_lasttest(const Options& o, const fs::path& data_dir) {
     const auto base = load(data_dir, o.scenario, true);
     if (!base) {
@@ -3695,6 +3785,8 @@ int run(int argc, char** argv) {
                                  "--vergleich", "--grenze", "--speichern"});
         } else if (o.command == "leistung") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--grenze"});
+        } else if (o.command == "zeitung") {
+            check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads"});
         } else if (o.command == "wirtschaft") {
             check_applicable(
                 o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads", "--maerkte"});
@@ -3750,6 +3842,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "leistung") {
             return cmd_leistung(o, data_dir);
+        }
+        if (o.command == "zeitung") {
+            return cmd_zeitung(o, data_dir);
         }
         if (o.command == "wirtschaft") {
             return cmd_wirtschaft(o, data_dir);

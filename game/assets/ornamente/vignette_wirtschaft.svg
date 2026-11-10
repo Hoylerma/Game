@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="64" viewBox="0 0 96 64">
+  <!-- Vignette „Wirtschaft“: Rad der Eisenbahn zwischen Ähren. Eigene Zeichnung. -->
+  <circle cx="48" cy="34" r="20" fill="none" stroke="#2b2116" stroke-width="2.2"/>
+  <circle cx="48" cy="34" r="15" fill="none" stroke="#2b2116" stroke-width="0.8"/>
+  <g stroke="#2b2116" stroke-width="1.6" stroke-linecap="round">
+    <path d="M48 19 V49 M33 34 H63 M37.4 23.4 L58.6 44.6 M58.6 23.4 L37.4 44.6"/>
+  </g>
+  <circle cx="48" cy="34" r="4" fill="#b88930" stroke="#2b2116" stroke-width="1"/>
+  <g fill="#b88930" stroke="#2b2116" stroke-width="0.5">
+    <path d="M18 60 C16 44 18 30 22 18" fill="none" stroke-width="1"/>
+    <ellipse cx="21" cy="22" rx="2.2" ry="4.4" transform="rotate(15 21 22)"/>
+    <ellipse cx="17" cy="30" rx="2.2" ry="4.4" transform="rotate(-25 17 30)"/>
+    <ellipse cx="22" cy="34" rx="2.2" ry="4.4" transform="rotate(30 22 34)"/>
+    <ellipse cx="16" cy="40" rx="2.2" ry="4.4" transform="rotate(-25 16 40)"/>
+    <path d="M78 60 C80 44 78 30 74 18" fill="none" stroke-width="1"/>
+    <ellipse cx="75" cy="22" rx="2.2" ry="4.4" transform="rotate(-15 75 22)"/>
+    <ellipse cx="79" cy="30" rx="2.2" ry="4.4" transform="rotate(25 79 30)"/>
+    <ellipse cx="74" cy="34" rx="2.2" ry="4.4" transform="rotate(-30 74 34)"/>
+    <ellipse cx="80" cy="40" rx="2.2" ry="4.4" transform="rotate(25 80 40)"/>
+  </g>
+  <path d="M12 60 H84" stroke="#2b2116" stroke-width="1.6"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <!-- Eckornament der Epoche III (Biedermeier): Doppellinie, Volute und Palmette. Eigene Zeichnung. -->
+  <g fill="none" stroke="#2b2116" stroke-linecap="round">
+    <path d="M2 46 V2 H46" stroke-width="1.6"/>
+    <path d="M6 46 V6 H46" stroke-width="0.8"/>
+    <path d="M6 30 C6 18 18 6 30 6" stroke-width="1"/>
+    <path d="M10 22 C12 14 14 12 22 10" stroke-width="0.9"/>
+  </g>
+  <g fill="#b88930">
+    <circle cx="6" cy="6" r="2.6"/>
+    <path d="M12 12 C15 9 19 9 21 12 C18 12 15 14 12 17 C12 15 11 13 12 12 Z"/>
+    <path d="M12 12 C9 15 9 19 12 21 C12 18 14 15 17 12 C15 12 13 11 12 12 Z"/>
+    <circle cx="30" cy="6" r="1.4"/>
+    <circle cx="6" cy="30" r="1.4"/>
+  </g>
+</svg>

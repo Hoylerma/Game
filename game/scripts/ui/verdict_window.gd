@@ -34,6 +34,7 @@ func _ready() -> void:
 	visible = false
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	_build()
+	EpochTheme.frame(self)
 
 
 func open(sim: SimulationClient, player: int) -> void:

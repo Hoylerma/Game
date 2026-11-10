@@ -732,6 +732,84 @@ func _place_verdict() -> void:
 	)
 
 
+# --- Zeitung (seit M13b1, vertical_slice.md 5.2) ------------------------------------
+
+
+func _build_newspaper() -> void:
+	_newspaper_window = NewspaperWindow.new()
+	$UI.add_child(_newspaper_window)
+	# Unter dem Spielmenü wie das Urteil.
+	$UI.move_child(_newspaper_window, _game_menu.get_index())
+	_newspaper_window.close_requested.connect(close_newspaper)
+	_newspaper_window.minimum_size_changed.connect(_place_newspaper)
+
+
+## Zeitungsfenster (Zugriff für Tests).
+func newspaper_window() -> NewspaperWindow:
+	return _newspaper_window
+
+
+## Öffnet die Titelseite zum Chronikeintrag chronicle_index; die Zeit hält an, bis ein Klick sie schließt.
+## false ohne Titelseite.
+func open_newspaper(chronicle_index: int) -> bool:
+	if _sim == null:
+		return false
+	var page := _sim.get_front_page(chronicle_index, _player)
+	if page.is_empty():
+		return false
+	if not _newspaper_window.is_open():
+		_speed_before_newspaper = _speed
+	_set_speed(0)
+	_tooltip.hide_tooltip()
+	_newspaper_window.show_page(page)
+	_place_newspaper()
+	_place_newspaper.call_deferred()
+	return true
+
+
+## Legt die Zeitung beiseite; die Zeit läuft mit dem Tempo von vorher weiter.
+func close_newspaper() -> void:
+	if not _newspaper_window.is_open():
+		return
+	_newspaper_window.close()
+	_set_speed(_speed_before_newspaper)
+
+
+## Neue Chronikeinträge from … to−1: die wichtigste Titelseite (Gewicht 3, sonst Gewicht 2 mit dem
+## Spielerstaat beteiligt, höchstens eine je 30 Tage) öffnet die Zeitung, solange die Pausenregel an ist
+## und kein Ereignis, Wahlabend oder Urteil offen ist.
+func _check_newspapers(from: int, to: int) -> void:
+	if _settings == null or not _settings.pause_on("pause_zeitung") or _player < 0:
+		return
+	if _event_window.is_open() or _election_night.is_open() or _verdict_window.is_open():
+		return
+	var today := ElectionTally.day_number(_sim.get_date())
+	var best := -1
+	var best_weight := 0
+	for index in range(from, to):
+		var page := _sim.get_front_page(index, _player)
+		var weight := int(page.get("weight", 0))
+		if weight < 2 or (weight == 2 and not bool(page.get("involved", false))):
+			continue
+		if weight == 2 and today - _newspaper_day < 30:
+			continue
+		if weight >= best_weight:
+			best = index
+			best_weight = weight
+	if best >= 0 and open_newspaper(best):
+		_newspaper_day = today
+
+
+func _place_newspaper() -> void:
+	if _newspaper_window == null or not _newspaper_window.is_open():
+		return
+	var area := get_viewport().get_visible_rect().size
+	_newspaper_window.size = _newspaper_window.get_combined_minimum_size()
+	_newspaper_window.position = Vector2(
+		roundf((area.x - _newspaper_window.size.x) * 0.5), maxf(8.0, roundf((area.y - _newspaper_window.size.y) * 0.5))
+	)
+
+
 # --- Wahlabend (seit M8) ----------------------------------------------------------
 
 

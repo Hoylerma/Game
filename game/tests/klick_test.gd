@@ -40,6 +40,8 @@ var _map: MapData = null
 var _sprite: Sprite2D = null
 var _failures := PackedStringArray()
 var _failure_count := 0
+## Zeitungen, die der Test beiseitegelegt hat (seit M13b1).
+var _newspapers_seen := 0
 
 
 func _initialize() -> void:
@@ -120,6 +122,7 @@ func _run() -> void:
 	await _check_start_screen_flow()
 	await _check_areas()
 	await _check_verdict()
+	await _check_newspaper()
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
 		print("KLICK OK %d/%d" % [all_levels, testable.size()])
@@ -799,6 +802,80 @@ func _check_verdict() -> void:
 	if not legacy.begins_with("Vermächtnis: Einigkeit"):
 		_fail("Staatspanel ohne Vermächtnis (%s)" % legacy)
 	print("  Urteil der Geschichte: Inhalt, Chronik als HTML, Weiterspielen, Hauptmenü (%s)" % sim.get_scenario_name())
+
+
+## Zeitung und Epochenrahmen (seit M13b1, vertical_slice.md 5.1 und 5.2) in der Partie ab 1848 (als Bayern):
+## eingebettete Schriften im Theme, Rahmen der Fenster, die Zeitung öffnet sich bei einer wichtigen Nachricht
+## von selbst und hält die Zeit an, ein Klick legt sie beiseite, das Jahrbuch listet die Zeitungen.
+func _check_newspaper() -> void:
+	var sim: SimulationClient = _main.call("simulation")
+	var paper: NewspaperWindow = _main.call("newspaper_window")
+	var theme := ThemeDB.get_project_theme()
+	var base := theme.default_font as FontVariation
+	var masthead := theme.get_font(&"font", &"MastheadLabel") as FontFile
+	if base == null or not (base.base_font as FontFile).resource_path.ends_with("SourceSerif4.ttf") or masthead == null:
+		_fail("Schriften: Grundschrift %s, Zeitungskopf %s" % [base, masthead])
+	var diplomacy: Control = _main.call("diplomacy_window")
+	if not diplomacy.has_meta(&"epoch_frame"):
+		_fail("Diplomatiefenster ohne Rahmen der Epoche")
+	# Bis eine Zeitung von selbst erscheint (Ereignisse wie im Ereignislabor mit der Standardoption).
+	var opened := false
+	for _step in 200:
+		sim.advance_days(3)
+		_main.call("_after_time_passed")
+		if paper.is_open():
+			opened = true
+			break
+		_answer_events()
+		if paper.is_open(): # _answer_events legt sie sonst beiseite
+			opened = true
+			break
+	if not opened and _newspapers_seen == 0:
+		_fail("Keine Zeitung von selbst bis %s" % sim.get_date_text())
+		return
+	if not opened:
+		var pages := sim.get_front_pages(sim.get_player_state_index(), 2)
+		if pages.is_empty():
+			_fail("Keine Titelseite bis %s" % sim.get_date_text())
+			return
+		_main.call("open_newspaper", int(pages[-1].get("chronicle_index", -1)))
+	await _frames(2)
+	var page := paper.page()
+	var text := paper.page_text()
+	if int(_main.call("speed")) != 0 or str(page.get("paper", "")).is_empty() or str(page.get("headline", "")).is_empty():
+		_fail("Zeitung: Tempo %d, Seite %s" % [int(_main.call("speed")), str(page).left(300)])
+	if not text.contains("Nr. ") or text.contains("{"):
+		_fail("Zeitung: Kopf oder Platzhalter „%s“" % text.left(300))
+	var rect := paper.get_global_rect()
+	var area := _main.get_viewport().get_visible_rect()
+	if not area.encloses(rect):
+		_fail("Zeitung ragt aus dem Bild: %s in %s" % [rect, area])
+	_main.call("set_speed", 3)
+	await _click(rect.get_center())
+	await _frames(1)
+	if paper.is_open():
+		_fail("Ein Klick legt die Zeitung nicht beiseite")
+	# Jahrbuch: Liste der Zeitungen, ein Klick öffnet eine.
+	_main.call("open_yearbook")
+	await _frames(1)
+	var yearbook: YearbookWindow = _main.call("yearbook_window")
+	yearbook.show_papers(true)
+	await _frames(1)
+	var entries := yearbook.paper_entries()
+	if entries.is_empty():
+		_fail("Jahrbuch ohne Zeitungen")
+	else:
+		var index := int(entries[0].get("chronicle_index", -1))
+		(yearbook.find_child("PaperList", true, false).get_child(0).get_child(0) as Button).pressed.emit()
+		await _frames(1)
+		if not paper.is_open() or int(paper.page().get("chronicle_index", -2)) != index:
+			_fail("Jahrbuch: Klick auf „%s“ öffnet die Zeitung nicht" % str(entries[0].get("text", "")))
+		_main.call("close_newspaper")
+	yearbook.show_papers(false)
+	_main.call("close_yearbook")
+	print("  Zeitung: %d von selbst erschienen, „%s“ im %s; Jahrbuch mit %d Zeitungen; Schriften und Rahmen der Epoche" % [
+		_newspapers_seen + (1 if opened else 0), page.get("headline", ""), page.get("paper", ""), entries.size()
+	])
 
 
 func _check_new_game() -> void:
@@ -1519,6 +1596,12 @@ func _check_election_night(sim: SimulationClient) -> void:
 func _answer_events(preferred: Dictionary = {}) -> int:
 	var window: EventWindow = _main.call("event_window")
 	var answered := 0
+	# Seit M13b1 hält auch die Zeitung die Zeit an: ein Klick legt sie beiseite (zählt wie eine Wahl).
+	var paper: NewspaperWindow = _main.call("newspaper_window")
+	if paper != null and paper.is_open():
+		_newspapers_seen += 1
+		_main.call("close_newspaper")
+		answered += 1
 	for _round in 20:
 		if not window.is_open():
 			break
@@ -1606,9 +1689,14 @@ func _check_events_ui(sim: SimulationClient) -> void:
 		_fail("Ereignisspieler %d statt des Spielerstaates %d" % [sim.get_event_player(), player])
 	_answer_events()
 	_main.call("set_speed", 5)
+	var paper: NewspaperWindow = _main.call("newspaper_window")
 	for _frame in 3000:
 		if window.is_open():
 			break
+		if paper.is_open(): # seit M13b1: die Zeitung hält die Zeit an
+			_newspapers_seen += 1
+			_main.call("close_newspaper")
+			_main.call("set_speed", 5)
 		await process_frame
 	if not window.is_open():
 		_fail("Kein Ereignis für %s bis %s" % [sim.get_state(player).get("short_name"), sim.get_date_text()])

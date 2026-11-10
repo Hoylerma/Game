@@ -15,6 +15,7 @@ const PAUSE_RULES: Array[Array] = [
 	["pause_amt", "Amtswechsel im eigenen Staat"],
 	["pause_bund", "Gründung eines Bundes"],
 	["pause_frieden", "Frieden"],
+	["pause_zeitung", "Zeitung bei wichtigen Nachrichten"],
 ]
 ## Belegbare Aktionen (Abschnitt „Tasten“) mit Beschriftung.
 const ACTIONS: Array[Array] = [
@@ -46,6 +47,7 @@ const DEFAULTS := {
 	"spiel/pause_amt": false,
 	"spiel/pause_bund": true,
 	"spiel/pause_frieden": true,
+	"spiel/pause_zeitung": true,
 	"zugang/farbsehschwaeche": false,
 	"zugang/kontrast": false,
 	"zugang/animationen_reduziert": false,

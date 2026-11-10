@@ -36,6 +36,7 @@ func _initialize() -> void:
 	_test_window_manager()
 	_test_ticker_and_glossary()
 	_test_settings_and_lexicon()
+	_test_epoch_and_newspaper()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -800,8 +801,11 @@ func _test_event_window() -> void:
 		},
 		{"event_index": 9, "title": "Zweites", "options": []},
 	]
+	events[0]["vignette"] = "revolution"
 	window.show_events(events)
 	_true(window.custom_minimum_size.x == EventWindow.TURNING_POINT_WIDTH, "Wendepunkt auf dem großen Bildschirm (seit M13a5d)")
+	var vignette := window.find_child("Vignette", true, false) as TextureRect
+	_true(vignette != null and vignette.visible and vignette.texture == EpochTheme.vignette("revolution"), "Vignette der Art (seit M13b1)")
 	var text := window.window_text()
 	_true(window.is_open() and text.contains("WENDEPUNKT") and text.contains("1 von 2"), "Wendepunkt und Zähler (%s)" % text)
 	_true(text.contains("◆ Gewähren") and text.contains("[Militär gesperrt]"), "Kompassmarke und gesperrte Option")
@@ -964,3 +968,50 @@ func _test_settings_and_lexicon() -> void:
 	for key: String in Glossary.TERMS:
 		_true(lexicon.has(key), "Glossarbegriff %s hat einen Lexikonartikel" % key)
 
+
+
+## Epochenrahmen und Zeitung (seit M13b1, vertical_slice.md 5.1 und 5.2): Schriften, Ornamente, Vignetten,
+## Theme, Zeitungsfenster, Startoption --zeitung und Pausenregel.
+func _test_epoch_and_newspaper() -> void:
+	for role in ["text", "text_kraeftig", "kursiv", "titel", "kopf", "fraktur", "tabelle"]:
+		var f := EpochTheme.font(role)
+		_true(f != null and f.get_height(15) > 15.0 and f.get_height(15) < 30.0, "Schrift %s geladen (Höhe %s)" % [role, f.get_height(15) if f != null else 0.0])
+	_true(EpochTheme.font("fraktur").get_string_size("Zeitung", HORIZONTAL_ALIGNMENT_LEFT, -1, 20).x > 0.0, "Fraktur zeichnet Text")
+	for name in ["ecke", "trenner"]:
+		_true(EpochTheme.texture(name) != null, "Ornament %s" % name)
+	for kind in EpochTheme.VIGNETTES:
+		var t := EpochTheme.vignette(kind)
+		_true(t != null and t.get_width() > 0, "Vignette %s" % kind)
+	_true(EpochTheme.vignette("") == null and EpochTheme.vignette("landschaft") == null, "ohne oder unbekannte Vignette: keine")
+	var theme := Theme.new()
+	EpochTheme.apply(theme)
+	_true(theme.default_font == EpochTheme.font("text"), "Grundschrift im Theme")
+	_true(theme.get_font(&"font", &"MastheadLabel") == EpochTheme.font("fraktur") and theme.get_font_size(&"font_size", &"MastheadLabel") == 44, "Zeitungskopf in Fraktur, 44 px")
+	_true(theme.get_type_variation_base(&"HeadlineLabel") == &"Label", "Variante Schlagzeile")
+	_true(theme.get_font(&"bold_font", &"RichTextLabel") == EpochTheme.font("text_kraeftig"), "fette Schrift im RichTextLabel")
+
+	var window := NewspaperWindow.new()
+	window._ready()
+	_true(not window.is_open() and not window.show_page({}), "Zeitung ohne Seite bleibt zu")
+	var page := {
+		"paper": "Der Bote", "leaning": "liberal", "issue": 85, "date_text": "26. März 1849",
+		"headline": "Barrikaden", "subline": "Bürger und Truppen", "text": "In den Straßen.", "report": "Preußen: Barrikadenkämpfe",
+		"miscellany": ["Erste Meldung", "Zweite Meldung"],
+	}
+	_true(window.show_page(page) and window.is_open(), "Zeitung zeigt die Seite")
+	var text := window.page_text()
+	_true(text.contains("Der Bote") and text.contains("Nr. 85  ·  26. März 1849  ·  Liberales Blatt"), "Kopf und Ausgabe (%s)" % text.left(120))
+	_true(text.contains("Drahtbericht: Preußen: Barrikadenkämpfe") and text.contains("Zweite Meldung"), "Drahtbericht und Vermischtes")
+	var closed: Array[bool] = [false]
+	window.close_requested.connect(func() -> void: closed[0] = true)
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.pressed = true
+	window._gui_input(click)
+	_true(closed[0], "ein Klick legt die Zeitung beiseite")
+	page["miscellany"] = []
+	window.show_page(page)
+	_true(window.page_text().contains("nichts Neues"), "ohne Vermischtes ein Satz")
+	window.free()
+	_true(LaunchOptions.parse(PackedStringArray(["--zeitung"])).show_newspaper, "Startoption --zeitung")
+	_true(UserSettings.DEFAULTS.get("spiel/pause_zeitung", false) == true, "Pausenregel Zeitung an")

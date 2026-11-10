@@ -139,6 +139,9 @@ var _turning_backdrop: ColorRect = null
 const OVERVIEW_REFRESH_MS := 500
 ## Urteil der Geschichte (seit M13a4) und ob es nach dem Ende schon gezeigt wurde.
 var _verdict_window: VerdictWindow = null
+var _newspaper_window: NewspaperWindow = null # seit M13b1
+var _speed_before_newspaper := 0
+var _newspaper_day := -1000000 # Tag der letzten Zeitung (höchstens eine im Monat, Gewicht 3 ausgenommen)
 var _verdict_shown := false
 ## Letzter Tag der Partie als Tagesnummer (ElectionTally.day_number), −1 ohne Ende.
 var _end_day := -1
@@ -656,6 +659,9 @@ func _read_scenario_constants() -> bool:
 	_verdict_shown = _sim.is_game_over()
 	if _verdict_window != null:
 		_verdict_window.close()
+	if _newspaper_window != null:
+		_newspaper_window.close()
+	_newspaper_day = -1000000
 	# Wahlen (seit M8): Was schon gewählt ist, öffnet keinen Wahlabend mehr.
 	_elections_seen = _sim.get_election_count()
 	_currents = _sim.get_currents()
@@ -841,6 +847,7 @@ func _pull_chronicle() -> void:
 			_report_battles(entries)
 			_report_threats(entries)
 			_pause_for_entries(entries)
+			_check_newspapers(_chronicle_read, count)
 		_chronicle_read = count
 
 
@@ -1209,6 +1216,12 @@ func _run_screenshot() -> void:
 		open_journal()
 	if _options.show_yearbook:
 		open_yearbook()
+	if _options.show_newspaper:
+		var pages := _sim.get_front_pages(_player, 2)
+		for i in range(pages.size() - 1, -1, -1):
+			if int(pages[i].get("weight", 0)) >= 3 or bool(pages[i].get("involved", false)):
+				open_newspaper(int(pages[i].get("chronicle_index", -1)))
+				break
 	if not _options.area.is_empty():
 		open_area(StringName(_options.area))
 	if _options.settings_tab >= 0:
@@ -1284,6 +1297,16 @@ func _open_start_page(page: int) -> void:
 ## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.
 func _pause_for_entries(entries: Array[Dictionary]) -> void:
 	pass
+
+
+## Platzhalter; main_windows.gd überschreibt ihn (Zeitung, seit M13b1).
+func _check_newspapers(_from: int, _to: int) -> void:
+	pass
+
+
+## Platzhalter; main_windows.gd überschreibt ihn (Zeitung, seit M13b1).
+func open_newspaper(_chronicle_index: int) -> bool:
+	return false
 
 
 ## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.

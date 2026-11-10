@@ -15,6 +15,7 @@ ereignis paris.februarrevolution {
     quelle = "Siemann, Die deutsche Revolution von 1848/49 (1985); Nipperdey, Deutsche Geschichte 1800–1866 (1983)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { datum <= 1848.03.10 }
     option weiter {
@@ -32,6 +33,7 @@ ereignis heidelberg.versammlung {
     quelle = "Siemann (1985); Valentin, Geschichte der deutschen Revolution 1848–49 (1930/31)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { datum <= 1848.04.30 }
     termin = 1848.03.05
@@ -54,6 +56,7 @@ ereignis maerz.forderungen {
     quelle = "Siemann (1985); Wehler, Deutsche Gesellschaftsgeschichte Bd. 2 (1987)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wendepunkt = ja
     bedingung {
         datum <= 1848.05.31
@@ -105,6 +108,7 @@ ereignis maerz.petitionen {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = revolution
     nur_folge = ja
     bedingung { gesetz_presse = vorzensur }
     option gewaehren {
@@ -137,6 +141,7 @@ ereignis aut.metternich {
     quelle = "Siemann (1985); Rumpler, Eine Chance für Mitteleuropa (1997)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wendepunkt = ja
     bedingung { staat = AUT  datum <= 1848.04.30 }
     termin = 1848.03.13
@@ -172,6 +177,7 @@ ereignis pru.barrikaden {
     quelle = "Siemann (1985); Hachtmann, Berlin 1848 (1997)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wendepunkt = ja
     bedingung { staat = PRU  datum <= 1848.04.30 }
     termin = 1848.03.18
@@ -214,6 +220,7 @@ ereignis pru.umritt {
     quelle = "Siemann (1985); Clark, Preußen (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     bedingung { staat = PRU  datum <= 1848.04.30  geschehen { ereignis = pru.barrikaden option = abziehen } }
     termin = 1848.03.21
     option reiten {
@@ -236,6 +243,7 @@ ereignis bav.abdankung {
     quelle = "Siemann (1985); Gollwitzer, Ludwig I. von Bayern (1986)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     bedingung { staat = BAV  datum <= 1848.04.30 }
     termin = 1848.03.20
     option abdanken {
@@ -270,6 +278,7 @@ ereignis agrarunruhen {
     quelle = "Siemann (1985); Wirtz, Widersetzlichkeiten, Excesse, Crawalle, Tumulte und Skandale (1981)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = wirtschaft
     bedingung {
         datum <= 1848.05.31
         bund = ja
@@ -300,6 +309,7 @@ ereignis schleswig.erhebung {
     quelle = "Siemann (1985); Nipperdey (1983)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wendepunkt = ja
     wer    = welt
     bedingung { datum <= 1848.06.30  staat PRU { im_krieg = nein } }
@@ -328,6 +338,7 @@ ereignis vorparlament {
     quelle = "Siemann (1985); Valentin (1930/31)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wendepunkt = ja
     wer    = welt
     bedingung { welt_merkmal = heidelberger_versammlung  datum <= 1848.05.31 }
@@ -352,6 +363,7 @@ ereignis bund.wahlrecht {
     quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = revolution
     wer    = welt
     bedingung { welt_merkmal = vorparlament  datum <= 1848.05.31 }
     wartezeit = 5
@@ -369,6 +381,7 @@ ereignis bad.heckerzug {
     quelle = "Siemann (1985); Mommsen, 1848 – Die ungewollte Revolution (1998)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung { staat = BAD  datum >= 1848.04.10  datum <= 1848.05.15  welt_merkmal = vorparlament }
     wartezeit = 3
     option bundestruppen {
@@ -391,6 +404,7 @@ ereignis hed.hilfe.baden {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     bedingung { staat = HED  datum <= 1848.12.31  staat BAD { aufstand = ja } }
     option helfen {
         text = "Truppen schicken"
@@ -416,6 +430,7 @@ ereignis pru.posen {
     quelle = "Siemann (1985); Wehler Bd. 2 (1987)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung { staat = PRU  datum >= 1848.04.01  datum <= 1848.06.15 }
     wartezeit = 15
     option reorganisation {

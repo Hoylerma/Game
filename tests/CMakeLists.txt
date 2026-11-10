@@ -64,6 +64,10 @@ if(UHRWERK_BUILD_CLI)
         add_test(NAME leistung_1848
             COMMAND uhrwerk-cli leistung --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --jahre 1)
     endif()
+    # Zeitung (seit M13b1, vertical_slice.md 5.2): zwei Jahre 1848; Exitcode 1 bei einem offenen Platzhalter.
+    add_test(NAME zeitung_1848
+        COMMAND uhrwerk-cli zeitung --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --jahre 2)
+    set_tests_properties(zeitung_1848 PROPERTIES PASS_REGULAR_EXPRESSION "Titelseiten für den Leser")
     # Lasttest im Kleinen (seit M4): gleiche Prüfsummen mit 3 Threads und mit einem Thread.
     add_test(NAME lasttest_threads
         COMMAND uhrwerk-cli lasttest --daten ${PROJECT_SOURCE_DIR}/data --bloecke 20000 --jahre 1

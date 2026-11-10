@@ -5,7 +5,7 @@ extends SceneTree
 ## 1. Start über den Startbildschirm (Neues Spiel → Völkerfrühling → Staat → Spielbeginn).
 ## 2. In Schritten von SCHRITT_TAGE Tagen: Zeit vorrücken, die Hauptszene wie nach einem
 ##    Spielbild aktualisieren (_after_time_passed), offene Ereignisse im Ereignisfenster mit der
-##    Standardoption beantworten, einen Wahlabend schließen.
+##    Standardoption beantworten, einen Wahlabend schließen, eine Zeitung beiseitelegen (seit M13b1).
 ## 3. Einmal im Jahr jedes Fenster der Bereichsleiste öffnen und wieder schließen.
 ## 4. Alle SPEICHER_JAHRE Jahre speichern, den Spielstand laden und die Prüfsumme vergleichen.
 ## 5. Am Ende: Das Urteil der Geschichte öffnet sich von selbst, die Chronik lässt sich als HTML
@@ -74,6 +74,7 @@ func _play(tag: String) -> void:
 	var verdict: VerdictWindow = _main.call("verdict_window")
 	var answered := 0
 	var elections := 0
+	var newspapers := 0
 	var windows := 0
 	var saves := 0
 	var last_year := int(sim.get_date().get("year", 0))
@@ -82,6 +83,12 @@ func _play(tag: String) -> void:
 		sim.advance_days(SCHRITT_TAGE)
 		days += SCHRITT_TAGE
 		_main.call("_after_time_passed")
+		var paper: NewspaperWindow = _main.call("newspaper_window")
+		if paper.is_open(): # seit M13b1: wichtige Nachrichten als Zeitung
+			newspapers += 1
+			if paper.page_text().contains("{"):
+				_fail(tag, "Zeitung mit offenem Platzhalter: %s" % paper.page_text().left(200))
+			_main.call("close_newspaper")
 		answered += _answer_events(tag)
 		var night: ElectionNight = _main.call("election_night")
 		if night.is_open():
@@ -128,8 +135,8 @@ func _play(tag: String) -> void:
 		if str(journal.get("id", "")) == "deutsche_frage" or str(journal.get("title", "")).contains("deutsche Frage"):
 			outcome = str(journal.get("stage_title", outcome))
 	var state := sim.get_state(player)
-	print("  %s: Ende %s nach %.1f s; %d Ereignisse beantwortet, %d Wahlabende, %d Fenster, %d Spielstände; " % [
-		tag, sim.get_date_text(), (Time.get_ticks_msec() - started) / 1000.0, answered, elections, windows, saves
+	print("  %s: Ende %s nach %.1f s; %d Ereignisse beantwortet, %d Wahlabende, %d Zeitungen, %d Fenster, %d Spielstände; " % [
+		tag, sim.get_date_text(), (Time.get_ticks_msec() - started) / 1000.0, answered, elections, newspapers, windows, saves
 	] + "%d Orte; deutsche Frage: %s; Vermächtnis: %s" % [
 		int(state.get("location_count", 0)), outcome, ", ".join(legacy)
 	])

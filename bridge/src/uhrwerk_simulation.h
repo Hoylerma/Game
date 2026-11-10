@@ -234,6 +234,10 @@ public:
 
     std::int64_t get_chronicle_size() const;
     godot::Array get_chronicle(std::int64_t from_index) const;
+    // Zeitung (seit M13b1): Titelseite zu einem Chronikeintrag für den Leser (Spielerstaat), leer ohne;
+    // alle Titelseiten der Partie ab Gewicht min_weight (Jahrbuch, ohne Texte).
+    godot::Dictionary get_front_page(std::int64_t chronicle_index, std::int64_t reader) const;
+    godot::Array get_front_pages(std::int64_t reader, std::int64_t min_weight) const;
 
     godot::String get_checksum() const;
 

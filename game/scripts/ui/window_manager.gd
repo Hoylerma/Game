@@ -13,6 +13,7 @@ var _order: Array[Control] = []
 func add(window: Control) -> void:
 	if window != null and not _windows.has(window):
 		_windows.append(window)
+		EpochTheme.frame(window) # Rahmen der Epoche (seit M13b1)
 
 
 func windows() -> Array[Control]:

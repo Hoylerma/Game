@@ -27,6 +27,7 @@ extends RefCounted
 ##                          zeigt die offenen (seit M11; ohne rechnen Screenshots ohne Spieler)
 ##   --journal              Journalfenster öffnen (seit M11)
 ##   --jahrbuch             Statistisches Jahrbuch öffnen (seit M13a5a)
+##   --zeitung              die jüngste Titelseite für den Spielerstaat öffnen (seit M13b1)
 ##   --bereich=<bereich>    Fenster eines Bereichs öffnen: kabinett, gesetze, gruppen, parlament,
 ##                          gesellschaft, wirtschaft (seit M13a5b), chronik, lexikon (seit M13a5d)
 ##   --einstellungen[=<r>]  Fenster Einstellungen öffnen, Reiter bild, ton, spiel, zugang, tasten, sprache
@@ -74,6 +75,8 @@ var show_events := false
 ## Journalfenster vor dem Screenshot öffnen (seit M11).
 var show_journal := false
 var show_yearbook := false
+## Jüngste Titelseite der Zeitung öffnen (seit M13b1).
+var show_newspaper := false
 ## Fenster eines Bereichs (seit M13a5b), leer: keines.
 var area := ""
 ## Einstellungen (seit M13a5d): Reiter oder −1; Farben für Farbsehschwäche nur für diesen Start.
@@ -212,6 +215,11 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.color_blind = true
 				else:
 					options.problems.append("--farbsehschwaeche erwartet keinen Wert, nicht „%s“." % value)
+			"--zeitung":
+				if value.is_empty():
+					options.show_newspaper = true
+				else:
+					options.problems.append("--zeitung erwartet keinen Wert, nicht „%s“." % value)
 			"--jahrbuch":
 				if value.is_empty():
 					options.show_yearbook = true

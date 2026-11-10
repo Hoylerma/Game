@@ -9,6 +9,7 @@
 #include "uhrwerk/legacy.hpp"
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/military.hpp"
+#include "uhrwerk/newspaper.hpp"
 #include "uhrwerk/politics.hpp"
 
 #include <algorithm>
@@ -3087,6 +3088,63 @@ Array UhrwerkSimulation::get_chronicle(std::int64_t from_index) const {
     return result;
 }
 
+namespace {
+
+Dictionary front_page_dictionary(const uhrwerk::FrontPage& page, bool with_texts) {
+    Dictionary d;
+    d["chronicle_index"] = static_cast<std::int64_t>(page.entry);
+    d["occasion"] = to_godot(page.occasion);
+    d["weight"] = page.weight;
+    d["involved"] = page.involved;
+    d["paper"] = to_godot(page.paper);
+    d["leaning"] = to_godot(page.leaning);
+    d["issue"] = page.issue;
+    d["date_text"] = to_godot(uhrwerk::format_date_long(page.date));
+    d["date_short"] = to_godot(uhrwerk::format_date(page.date));
+    d["year"] = page.date.year;
+    d["headline"] = to_godot(page.headline);
+    d["subline"] = to_godot(page.subline);
+    if (with_texts) {
+        d["text"] = to_godot(page.text);
+        d["report"] = to_godot(page.report);
+        Array misc;
+        for (const std::string& m : page.miscellany) {
+            misc.push_back(to_godot(m));
+        }
+        d["miscellany"] = misc;
+    }
+    return d;
+}
+
+} // namespace
+
+Dictionary UhrwerkSimulation::get_front_page(std::int64_t chronicle_index, std::int64_t reader) const {
+    const uhrwerk::World* w = world();
+    if (!w || chronicle_index < 0) {
+        return Dictionary();
+    }
+    const auto page = uhrwerk::front_page(*w, static_cast<std::size_t>(chronicle_index),
+                                          static_cast<uhrwerk::Index>(reader));
+    return page ? front_page_dictionary(*page, true) : Dictionary();
+}
+
+Array UhrwerkSimulation::get_front_pages(std::int64_t reader, std::int64_t min_weight) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w || !w->newspaper.active) {
+        return result;
+    }
+    for (std::size_t i = 0; i < w->chronicle.size(); ++i) {
+        if (uhrwerk::newspaper_weight(*w, w->chronicle[i]) < min_weight) {
+            continue;
+        }
+        if (const auto page = uhrwerk::front_page(*w, i, static_cast<uhrwerk::Index>(reader))) {
+            result.push_back(front_page_dictionary(*page, false));
+        }
+    }
+    return result;
+}
+
 String UhrwerkSimulation::get_checksum() const {
     if (!simulation_) {
         return String();
@@ -3280,6 +3338,7 @@ Array UhrwerkSimulation::get_open_events() const {
         entry["source"] = to_godot(e.source);
         entry["kind_text"] = event_kind_text(e.kind);
         entry["turning_point"] = e.turning_point;
+        entry["vignette"] = to_godot(e.vignette); // seit M13b1
         // Schon gewählt, aber erst am nächsten Tag wirksam (Befehl wartet).
         std::int64_t chosen = -1;
         for (const uhrwerk::LoggedCommand& c : simulation_->command_log()) {
@@ -4380,6 +4439,10 @@ void UhrwerkSimulation::_bind_methods() {
 
     ClassDB::bind_method(D_METHOD("get_chronicle_size"), &UhrwerkSimulation::get_chronicle_size);
     ClassDB::bind_method(D_METHOD("get_chronicle", "from_index"), &UhrwerkSimulation::get_chronicle);
+    ClassDB::bind_method(D_METHOD("get_front_page", "chronicle_index", "reader"),
+                         &UhrwerkSimulation::get_front_page);
+    ClassDB::bind_method(D_METHOD("get_front_pages", "reader", "min_weight"),
+                         &UhrwerkSimulation::get_front_pages);
 
     ClassDB::bind_method(D_METHOD("get_checksum"), &UhrwerkSimulation::get_checksum);
 

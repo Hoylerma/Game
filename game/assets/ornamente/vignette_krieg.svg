@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="64" viewBox="0 0 96 64">
+  <!-- Vignette „Krieg“: gekreuzte Säbel im Lorbeer. Eigene Zeichnung. -->
+  <g fill="none" stroke="#2b2116" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 54 C40 38 56 22 74 8" stroke-width="2.2"/>
+    <path d="M72 54 C56 38 40 22 22 8" stroke-width="2.2"/>
+    <path d="M20 50 L30 58 M76 50 L66 58" stroke-width="2.4"/>
+  </g>
+  <g fill="#b88930">
+    <circle cx="22" cy="56" r="2.6"/>
+    <circle cx="74" cy="56" r="2.6"/>
+  </g>
+  <g fill="#6f6a3a">
+    <path d="M14 30 C10 40 14 50 26 58 C18 48 16 40 18 30 Z"/>
+    <path d="M82 30 C86 40 82 50 70 58 C78 48 80 40 78 30 Z"/>
+    <ellipse cx="13" cy="36" rx="2" ry="4" transform="rotate(-25 13 36)"/>
+    <ellipse cx="14" cy="45" rx="2" ry="4" transform="rotate(-40 14 45)"/>
+    <ellipse cx="83" cy="36" rx="2" ry="4" transform="rotate(25 83 36)"/>
+    <ellipse cx="82" cy="45" rx="2" ry="4" transform="rotate(40 82 45)"/>
+  </g>
+</svg>

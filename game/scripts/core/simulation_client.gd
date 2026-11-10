@@ -160,6 +160,8 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_max_tax_rate_percent",
 	&"get_chronicle_size",
 	&"get_chronicle",
+	&"get_front_page",
+	&"get_front_pages",
 	&"get_checksum",
 	&"save_game",
 	&"load_game",
@@ -415,6 +417,24 @@ func get_chronicle(from_index: int) -> Array[Dictionary]:
 			if entry is Dictionary:
 				entries.append(entry)
 	return entries
+
+
+## Titelseite der Zeitung (seit M13b1) zum Chronikeintrag chronicle_index für den Leser reader
+## (Spielerstaat): { chronicle_index, occasion, weight (1–3), involved, paper, leaning, issue, date_text,
+## date_short, year, headline, subline, text, miscellany }; leer ohne Anlass oder Zeitung.
+func get_front_page(chronicle_index: int, reader: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_front_page", chronicle_index, reader))
+
+
+## Alle Titelseiten der Partie ab Gewicht min_weight, ohne Text und Vermischtes (Jahrbuch).
+func get_front_pages(reader: int, min_weight: int) -> Array[Dictionary]:
+	var pages: Array[Dictionary] = []
+	var result: Variant = _native.call(&"get_front_pages", reader, min_weight)
+	if result is Array:
+		for page: Variant in result:
+			if page is Dictionary:
+				pages.append(page)
+	return pages
 
 
 ## Politische Strömungen (seit M8): { id, name, color, position }.

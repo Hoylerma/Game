@@ -1120,6 +1120,7 @@ struct World {
     std::vector<PersonDef> persons;               // common/persoenlichkeiten.chron, nach Kennung
     std::vector<AgendaDef> agendas;               // je Staat (common/agenden.chron)
     LegacyRules legacy_rules; // seit M13a4: common/vermaechtnis.chron, nur mit Ereignissen
+    NewspaperRules newspaper; // seit M13b1: common/zeitung.chron, nur mit Ereignissen (Darstellung)
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;

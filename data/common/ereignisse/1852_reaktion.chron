@@ -11,6 +11,7 @@ ereignis den.londoner_protokoll {
     quelle = "Nipperdey, Deutsche Geschichte 1800–1866 (1983); Clark, Preußen (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wer    = welt
     bedingung { datum >= 1852.05.01  datum <= 1852.12.31  staat DEN { im_krieg = nein } }
     wartezeit = 7
@@ -29,6 +30,7 @@ ereignis polizeiverein {
     quelle = "Siemann, Gesellschaft im Aufbruch (1990)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = diplomatie
     wer    = welt
     bedingung { welt_merkmal = bundesreaktion  datum >= 1852.01.01  datum <= 1853.12.31 }
     wartezeit = 60
@@ -51,6 +53,7 @@ ereignis zollverein.krise {
     quelle = "Hahn, Geschichte des Deutschen Zollvereins (1984); Nipperdey (1983)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = wirtschaft
     wendepunkt = ja
     bedingung { staat = BAV  datum >= 1852.04.01  datum <= 1853.03.31 }
     wartezeit = 30
@@ -78,6 +81,7 @@ ereignis pru.februarvertrag {
     quelle = "Hahn (1984); Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = wirtschaft
     bedingung { staat = PRU  welt_merkmal = zollverein_verlaengert  datum >= 1853.01.01  datum <= 1853.12.31 }
     wartezeit = 20
     option abschliessen {
@@ -104,6 +108,7 @@ ereignis krimkrieg {
     quelle = "Baumgart, Der Friede von Paris 1856 (1972); Nipperdey (1983)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wendepunkt = ja
     wer    = welt
     bedingung { datum >= 1854.03.01  datum <= 1854.12.31  staat PRU { im_krieg = nein }  staat AUT { im_krieg = nein } }
@@ -132,6 +137,7 @@ ereignis auswanderung.fuenfziger {
     quelle = "Bade, Europa in Bewegung (2000); Marschalck, Deutsche Überseewanderung im 19. Jahrhundert (1973)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = wirtschaft
     bedingung { datum >= 1852.01.01  datum <= 1855.12.31  bund = ja  lebensstandard_unten <= 45 }
     wartezeit = 180
     option ziehen_lassen {
@@ -163,6 +169,7 @@ ereignis pru.regentschaft {
     quelle = "Clark (2007); Nipperdey (1983)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     bedingung { staat = PRU  datum >= 1858.10.01  datum <= 1859.03.31 }
     wartezeit = 10
     option neue_aera {
@@ -190,6 +197,7 @@ ereignis italienischer.krieg {
     quelle = "Nipperdey (1983); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wendepunkt = ja
     wer    = welt
     bedingung { datum >= 1859.04.15  datum <= 1859.08.31  staat AUT { im_krieg = nein }  staat PRU { im_krieg = nein } }
@@ -214,6 +222,7 @@ ereignis nationalverein {
     quelle = "Biefang, Politisches Bürgertum in Deutschland 1857–1868 (1994); Nipperdey (1983)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { datum >= 1859.06.01  datum <= 1860.06.30 }
     wartezeit = 30
@@ -232,6 +241,7 @@ ereignis schillerfeier {
     quelle = "Noltenius, Dichterfeiern in Deutschland (1984)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = revolution
     wer    = welt
     bedingung { datum >= 1859.11.01  datum <= 1859.11.30 }
     termin = 1859.11.10
@@ -254,6 +264,7 @@ ereignis pru.heeresreform {
     quelle = "Clark (2007); Huber Bd. 3 (1963)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     bedingung { staat = PRU  datum >= 1860.01.01  datum <= 1861.06.30 }
     wartezeit = 20
     option durchsetzen {
@@ -277,6 +288,7 @@ ereignis pru.fortschrittspartei {
     quelle = "Nipperdey, Deutsche Geschichte 1866–1918 Bd. 2 (1992); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung { staat = PRU  merkmal = heeresreform  datum >= 1861.01.01  datum <= 1862.06.30 }
     wartezeit = 30
     option gruenden {
@@ -298,6 +310,7 @@ ereignis pru.verfassungskonflikt {
     quelle = "Clark (2007); Pflanze, Bismarck Bd. 1 (1990)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     bedingung { staat = PRU  merkmal = heeresreform  merkmal = fortschrittspartei  datum >= 1862.03.01  datum <= 1863.06.30 }
     wartezeit = 30
@@ -353,6 +366,7 @@ ereignis pru.blut_und_eisen {
     quelle = "Rede vor der Budgetkommission des Abgeordnetenhauses, 30.9.1862; Pflanze Bd. 1 (1990)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = krieg
     bedingung { staat = PRU  merkmal = bismarck  datum <= 1863.12.31 }
     wartezeit = 7
     option reden {

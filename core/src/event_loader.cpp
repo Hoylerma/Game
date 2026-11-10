@@ -202,6 +202,9 @@ public:
         if (fs::is_regular_file(data_dir_ / utf8_to_path("common/vermaechtnis.chron"), ec)) {
             load_legacy(read("common/vermaechtnis.chron")); // seit M13a4, vertical_slice.md 3.5
         }
+        if (fs::is_regular_file(data_dir_ / utf8_to_path("common/zeitung.chron"), ec)) {
+            load_newspaper(read("common/zeitung.chron")); // seit M13b1, vertical_slice.md 5.2
+        }
         // Meldungen nach Datei und Zeile wie im übrigen Lader (gelesen wird nach Kennung).
         std::stable_sort(issues_.begin() + static_cast<std::ptrdiff_t>(first_issue_), issues_.end(),
                          [](const LoadIssue& a, const LoadIssue& b) {
@@ -478,6 +481,273 @@ private:
         }
         rules.active = !rules.dimensions.empty();
         world_.legacy_rules = std::move(rules);
+    }
+
+    // ── Zeitung (seit M13b1, vertical_slice.md 5.2; chronik-skript.md 3.42) ──
+
+    void load_newspaper(const Source& source) {
+        file_ = source.name;
+        NewspaperRules rules;
+        std::set<std::string, std::less<>> titles;
+        std::set<std::string, std::less<>> occasions;
+        for (const ScriptNode& node : source.root.children) {
+            if ((node.key == "blatt" || node.key == "anlass") && node.is_block &&
+                is_lower_id(node.value, false)) {
+                auto& ids = node.key == "blatt" ? titles : occasions;
+                if (!ids.insert(node.value).second) {
+                    error(node.line, "doppelte Kennung " + quote(node.value) + " für " + node.key);
+                    continue;
+                }
+                if (node.key == "blatt") {
+                    rules.titles.push_back(newspaper_title(node));
+                } else if (auto occasion = newspaper_occasion(node)) {
+                    rules.occasions.push_back(std::move(*occasion));
+                }
+                continue;
+            }
+            warning(node.line,
+                    "unbekannter Eintrag " + quote(node.key.empty() ? node.value : node.key) +
+                        " wird ignoriert (erwartet: blatt <kennung> { … } oder anlass <kennung> { … })");
+        }
+        if (rules.titles.empty()) {
+            error(0, "zeitung.chron braucht mindestens ein Blatt (blatt <kennung> { … })");
+            return;
+        }
+        rules.active = true;
+        world_.newspaper = std::move(rules);
+    }
+
+    NewspaperTitle newspaper_title(const ScriptNode& node) {
+        NewspaperTitle t;
+        t.id = node.value;
+        const std::string what = "blatt " + t.id;
+        std::map<std::string, int, std::less<>> seen;
+        for (const ScriptNode& child : node.children) {
+            if (!first_time(seen, child, what)) {
+                continue;
+            }
+            if (child.key == "name") {
+                if (scalar(child)) {
+                    t.name = text(child).value_or("");
+                }
+            } else if (child.key == "richtung") {
+                if (const auto n = name(child)) {
+                    if (!is_leaning(*n)) {
+                        error(child.line, "ungültige Richtung " + quote(*n) +
+                                              " (erlaubt: liberal, konservativ, demokratisch, katholisch)");
+                    }
+                    t.leaning = *n;
+                }
+            } else if (child.key == "staaten" || child.key == "maerkte") {
+                const bool states = child.key == "staaten";
+                for (const ScriptNode& item : child.children) {
+                    if (!item.key.empty() || item.is_block) {
+                        error(item.line, "in " + quote(child.key) + " sind nur Kennungen erlaubt");
+                        continue;
+                    }
+                    if (states) {
+                        bool is_absent = false;
+                        if (const auto s = state_ref(child, item.value, is_absent); s && !is_absent) {
+                            t.states.push_back(*s);
+                        }
+                    } else if (const Index m = world_.find_market(item.value); m != kNone) {
+                        t.markets.push_back(m);
+                    } else {
+                        error(item.line, "unbekannter Markt " + quote(item.value) + " in " + what);
+                    }
+                }
+            } else {
+                warning(child.line,
+                        "unbekanntes Feld " + quote(child.key) + " in " + what + " wird ignoriert");
+            }
+        }
+        if (t.name.empty()) {
+            error(node.line, "Pflichtfeld 'name' fehlt in " + what);
+        }
+        if (t.leaning.empty()) {
+            error(node.line, "Pflichtfeld 'richtung' fehlt in " + what);
+        }
+        return t;
+    }
+
+    static bool is_leaning(std::string_view value) {
+        return value == "liberal" || value == "konservativ" || value == "demokratisch" ||
+               value == "katholisch";
+    }
+
+    /// Muster: fester Text, {name} (Kleinbuchstaben) und '*' (beliebiger Text, auch leer).
+    std::optional<std::vector<NewspaperPatternPart>> newspaper_pattern(const ScriptNode& node,
+                                                                       std::set<std::string>& captures) {
+        std::vector<NewspaperPatternPart> parts;
+        const std::string& p = node.value;
+        std::size_t i = 0;
+        std::string literal;
+        const auto flush = [&] {
+            if (!literal.empty()) {
+                parts.push_back({NewspaperPatternPart::Kind::Text, literal});
+                literal.clear();
+            }
+        };
+        while (i < p.size()) {
+            if (p[i] == '{') {
+                const std::size_t end = p.find('}', i);
+                const std::string id = end == std::string::npos ? "" : p.substr(i + 1, end - i - 1);
+                if (end == std::string::npos || !is_lower_id(id, false)) {
+                    error(node.line, "ungültiger Platzhalter im Muster " + quote(p) +
+                                         " (erwartet {name} mit a-z, 0-9 und _)");
+                    return std::nullopt;
+                }
+                if (!parts.empty() && parts.back().kind != NewspaperPatternPart::Kind::Text &&
+                    literal.empty()) {
+                    error(node.line, "zwei Platzhalter ohne Text dazwischen im Muster " + quote(p));
+                    return std::nullopt;
+                }
+                if (!captures.insert(id).second) {
+                    error(node.line, "Platzhalter {" + id + "} steht zweimal im Muster " + quote(p));
+                    return std::nullopt;
+                }
+                flush();
+                parts.push_back({NewspaperPatternPart::Kind::Capture, id});
+                i = end + 1;
+            } else if (p[i] == '*') {
+                if (i + 1 != p.size() && p[i + 1] == '{') {
+                    error(node.line, "nach '*' muss Text folgen, kein Platzhalter: " + quote(p));
+                    return std::nullopt;
+                }
+                if (literal.empty() && !parts.empty() &&
+                    parts.back().kind == NewspaperPatternPart::Kind::Capture && i + 1 != p.size()) {
+                    error(node.line, "zwischen Platzhalter und '*' muss Text stehen: " + quote(p));
+                    return std::nullopt;
+                }
+                flush();
+                parts.push_back({NewspaperPatternPart::Kind::Rest, ""});
+                ++i;
+            } else {
+                literal += p[i];
+                ++i;
+            }
+        }
+        flush();
+        if (parts.empty() || parts.front().kind == NewspaperPatternPart::Kind::Rest) {
+            error(node.line, "leeres Muster");
+            return std::nullopt;
+        }
+        return parts;
+    }
+
+    /// Platzhalter in einem Text der Zeitung: nur aus dem Muster oder die festen.
+    void check_placeholders(const ScriptNode& node, const std::string& value,
+                            const std::set<std::string>& captures, const std::string& what) {
+        static const std::set<std::string, std::less<>> kBuiltin{"datum", "jahr", "blatt", "ort", "staat"};
+        std::size_t i = 0;
+        while ((i = value.find('{', i)) != std::string::npos) {
+            const std::size_t end = value.find('}', i);
+            if (end == std::string::npos) {
+                error(node.line, "'{' ohne '}' in " + what);
+                return;
+            }
+            const std::string id = value.substr(i + 1, end - i - 1);
+            if (captures.count(id) == 0 && kBuiltin.count(id) == 0) {
+                error(node.line, "unbekannter Platzhalter {" + id + "} in " + what +
+                                     " (erlaubt: die des Musters, datum, jahr, blatt, ort, staat)");
+            }
+            i = end + 1;
+        }
+    }
+
+    void newspaper_wording(const ScriptNode& node, NewspaperWording& wording,
+                           const std::set<std::string>& captures, const std::string& what) {
+        for (const ScriptNode& child : node.children) {
+            std::vector<std::string>* list = child.key == "schlagzeile"  ? &wording.headlines
+                                             : child.key == "unterzeile" ? &wording.sublines
+                                             : child.key == "text"       ? &wording.texts
+                                                                         : nullptr;
+            if (list == nullptr) {
+                if (child.is_block && is_leaning(child.key) && wording.leaning.empty()) {
+                    continue; // Richtung, eigener Durchgang
+                }
+                if (child.key != "muster" && child.key != "gewicht" && child.key != "ereignis" &&
+                    child.key != "wendepunkt") {
+                    warning(child.line,
+                            "unbekanntes Feld " + quote(child.key) + " in " + what + " wird ignoriert");
+                }
+                continue;
+            }
+            if (auto t = text(child)) {
+                check_placeholders(child, *t, captures, what);
+                list->push_back(std::move(*t));
+            }
+        }
+    }
+
+    std::optional<NewspaperOccasion> newspaper_occasion(const ScriptNode& node) {
+        NewspaperOccasion o;
+        o.id = node.value;
+        o.file = file_;
+        o.line = node.line;
+        const std::string what = "anlass " + o.id;
+        std::map<std::string, int, std::less<>> seen;
+        std::set<std::string> captures;
+        bool ok = true;
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "schlagzeile" || child.key == "unterzeile" || child.key == "text" ||
+                (child.is_block && is_leaning(child.key))) {
+                continue; // mehrfach erlaubt, nach dem Muster
+            }
+            if (!first_time(seen, child, what)) {
+                continue;
+            }
+            if (child.key == "muster") {
+                if (scalar(child) && assign(child)) {
+                    o.pattern = child.value;
+                    if (auto parts = newspaper_pattern(child, captures)) {
+                        o.parts = std::move(*parts);
+                    } else {
+                        ok = false;
+                    }
+                }
+            } else if (child.key == "gewicht") {
+                o.weight = static_cast<std::int32_t>(integer(child, 0, 3).value_or(1));
+            } else if (child.key == "ereignis") {
+                if (scalar(child) && assign(child)) {
+                    if (const auto it = index_.find(child.value); it != index_.end()) {
+                        o.event = it->second;
+                    } else {
+                        error(child.line, "unbekanntes Ereignis " + quote(child.value) + " in " + what);
+                    }
+                }
+            } else if (child.key == "wendepunkt") {
+                o.turning_point = boolean(child).value_or(false);
+            } else {
+                warning(child.line,
+                        "unbekanntes Feld " + quote(child.key) + " in " + what + " wird ignoriert");
+            }
+        }
+        if (seen.count("muster") == 0) {
+            error(node.line, "Pflichtfeld 'muster' fehlt in " + what);
+            return std::nullopt;
+        }
+        if (!ok) {
+            return std::nullopt;
+        }
+        if ((o.event != kNone || o.turning_point) && captures.count("titel") == 0) {
+            error(node.line, "'ereignis' und 'wendepunkt' brauchen {titel} im Muster von " + what);
+        }
+        NewspaperWording general;
+        newspaper_wording(node, general, captures, what);
+        if (o.weight >= 1 && general.headlines.empty()) {
+            error(node.line, what + " braucht mindestens eine Schlagzeile (oder gewicht = 0)");
+        }
+        o.wordings.push_back(std::move(general));
+        for (const ScriptNode& child : node.children) {
+            if (child.is_block && is_leaning(child.key)) {
+                NewspaperWording w;
+                w.leaning = child.key;
+                newspaper_wording(child, w, captures, what + " (" + child.key + ")");
+                o.wordings.push_back(std::move(w));
+            }
+        }
+        return o;
     }
 
     LegacyDimension legacy_dimension(const ScriptNode& node) {
@@ -1517,6 +1787,19 @@ private:
             } else if (key == "wendepunkt") {
                 if (const auto b = boolean(child)) {
                     event.turning_point = *b;
+                }
+            } else if (key == "vignette") {
+                // Bild im Ereignisfenster (seit M13b1, vertical_slice.md 5.1); nur Darstellung.
+                if (scalar(child) && assign(child)) {
+                    static constexpr std::string_view kVignettes[] = {"revolution", "krieg", "diplomatie",
+                                                                      "wirtschaft", "hof"};
+                    if (std::find(std::begin(kVignettes), std::end(kVignettes), child.value) ==
+                        std::end(kVignettes)) {
+                        error(child.line, "ungültige Vignette " + quote(child.value) +
+                                              " (erlaubt: revolution, krieg, diplomatie, wirtschaft, hof)");
+                    } else {
+                        event.vignette = child.value;
+                    }
                 }
             } else if (key == "wer") {
                 if (scalar(child) && assign(child) && child.value != "staat" && child.value != "welt") {

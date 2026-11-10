@@ -18,6 +18,7 @@ ereignis pru.alvensleben {
     quelle = "Clark (2007); Pflanze Bd. 1 (1990)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     bedingung { staat = PRU  datum >= 1863.02.01  datum <= 1863.06.30 }
     wartezeit = 10
     option konvention {
@@ -41,6 +42,7 @@ ereignis adav {
     quelle = "Welskopp, Das Banner der Brüderlichkeit (2000); Nipperdey (1983)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { datum >= 1863.04.01  datum <= 1863.12.31 }
     wartezeit = 30
@@ -63,6 +65,7 @@ ereignis frankfurter.fuerstentag {
     quelle = "Huber Bd. 3 (1963); Pflanze Bd. 1 (1990)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wendepunkt = ja
     wer    = welt
     bedingung { datum >= 1863.07.15  datum <= 1863.10.31  bundesversammlung = tagt  nicht { welt_merkmal = kleindeutsches_reich }  nicht { welt_merkmal = grossdeutsches_reich } }
@@ -98,6 +101,7 @@ ereignis den.novemberverfassung {
     quelle = "Nipperdey (1983); Buk-Swienty, Schlachtbank Düppel (2011)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wendepunkt = ja
     wer    = welt
     bedingung {
@@ -134,6 +138,7 @@ ereignis wiener.frieden {
     quelle = "Nipperdey (1983); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wer    = welt
     bedingung { datum >= 1864.03.01  datum <= 1865.12.31  staat PRU { krieg_gewonnen = DEN } }
     wartezeit = 10
@@ -152,6 +157,7 @@ ereignis gasteiner.konvention {
     quelle = "Huber Bd. 3 (1963); Pflanze Bd. 1 (1990)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wer    = welt
     bedingung { welt_merkmal = wiener_frieden  datum >= 1865.05.01  datum <= 1866.03.31 }
     wartezeit = 30
@@ -179,6 +185,7 @@ ereignis pru.bundesreformantrag {
     quelle = "Huber Bd. 3 (1963); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wendepunkt = ja
     bedingung { staat = PRU  oder { welt_merkmal = gastein  merkmal = bismarck }  datum >= 1866.03.01  datum <= 1866.05.31  bundesversammlung = tagt  nicht { welt_merkmal = kleindeutsches_reich }  nicht { welt_merkmal = grossdeutsches_reich } }
     wartezeit = 14
@@ -209,6 +216,7 @@ ereignis bund.mobilmachung {
     quelle = "Huber Bd. 3 (1963); Wawro, The Austro-Prussian War (1996)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wendepunkt = ja
     wer    = welt
     bedingung {
@@ -243,6 +251,7 @@ ereignis prager.frieden {
     quelle = "Huber Bd. 3 (1963); Nipperdey (1983)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wendepunkt = ja
     wer    = welt
     bedingung { datum >= 1866.06.16  datum <= 1867.06.30  staat PRU { krieg_gewonnen = AUT } }
@@ -261,6 +270,7 @@ ereignis aut.sieg {
     quelle = "Kontrafaktisch nach den Reformplänen von 1863 (Huber Bd. 3, 1963)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = krieg
     wendepunkt = ja
     wer    = welt
     bedingung { datum >= 1866.06.16  datum <= 1867.06.30  staat AUT { krieg_gewonnen = PRU } }
@@ -287,6 +297,7 @@ ereignis pru.indemnitaet {
     quelle = "Winkler, Preußischer Liberalismus und deutscher Nationalstaat (1964); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     bedingung { staat = PRU  merkmal = bismarck  krieg_gewonnen = AUT  datum >= 1866.07.01  datum <= 1867.03.31 }
     wartezeit = 14
@@ -310,6 +321,7 @@ ereignis luxemburg.krise {
     quelle = "Nipperdey, Deutsche Geschichte 1866–1918 Bd. 2 (1992); Pflanze Bd. 1 (1990)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wer    = welt
     bedingung { welt_merkmal = bund_aufgeloest  datum >= 1867.03.01  datum <= 1867.06.30 }
     wartezeit = 14
@@ -338,6 +350,7 @@ ereignis norddeutscher.bund {
     quelle = "Huber Bd. 3 (1963); Nipperdey Bd. 2 (1992)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wendepunkt = ja
     wer    = welt
     bedingung { welt_merkmal = bund_aufgeloest  datum >= 1867.02.01  datum <= 1867.12.31 }
@@ -362,6 +375,7 @@ ereignis zollparlament {
     quelle = "Hahn (1984); Nipperdey Bd. 2 (1992)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = wirtschaft
     wer    = welt
     bedingung { welt_merkmal = norddeutscher_bund  datum >= 1868.02.01  datum <= 1868.12.31 }
     wartezeit = 30
@@ -385,6 +399,7 @@ ereignis eisenacher.partei {
     quelle = "Welskopp (2000); Nipperdey Bd. 2 (1992)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { datum >= 1869.06.01  datum <= 1869.12.31 }
     wartezeit = 30
@@ -408,6 +423,7 @@ ereignis pru.emser_depesche {
     quelle = "Pflanze Bd. 1 (1990); Wawro, The Franco-Prussian War (2003)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wendepunkt = ja
     bedingung { staat = PRU  welt_merkmal = norddeutscher_bund  im_krieg = nein  datum >= 1870.07.01  datum <= 1870.07.18 }
     wartezeit = 3
@@ -443,6 +459,7 @@ ereignis novembervertraege {
     quelle = "Huber Bd. 3 (1963); Nipperdey Bd. 2 (1992)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wendepunkt = ja
     bedingung {
         staat_in = { BAV WUE BAD HED }
@@ -476,6 +493,7 @@ ereignis bav.kaiserbrief {
     quelle = "Pflanze Bd. 1 (1990); Nipperdey Bd. 2 (1992)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     bedingung { staat = BAV  merkmal = reichsbeitritt  datum >= 1870.11.15  datum <= 1871.01.15 }
     wartezeit = 7
     option schreiben {
@@ -502,6 +520,7 @@ ereignis kaiserproklamation {
     quelle = "Nipperdey Bd. 2 (1992); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     wer    = welt
     bedingung {

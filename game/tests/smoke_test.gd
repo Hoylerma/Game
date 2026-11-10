@@ -495,6 +495,21 @@ func _check_events_1848() -> void:
 		"get_open_events: „%s“ mit %d Optionen, Quelle, Folgen" % [event.get("title"), options.size()],
 		"get_open_events: %s" % str(event).left(500)
 	)
+	_check(
+		EpochTheme.VIGNETTES.has(str(event.get("vignette", ""))),
+		"Vignette des Ereignisses: %s (seit M13b1)" % event.get("vignette", ""),
+		"get_open_events ohne gültige Vignette: %s" % str(event.get("vignette", ""))
+	)
+	# Zeitung (seit M13b1): Titelseiten zu den Einträgen der Chronik, für Baden als Leser.
+	var pages := sim.get_front_pages(baden, 1)
+	var full := sim.get_front_page(int(pages[-1].get("chronicle_index", -1)), baden) if not pages.is_empty() else {}
+	_check(
+		not pages.is_empty() and not str(full.get("paper", "")).is_empty() and not str(full.get("headline", "")).is_empty()
+		and int(full.get("issue", 0)) > 0 and full.get("miscellany", null) is Array and not str(full.get("headline", "")).contains("{")
+		and sim.get_front_page(-1, baden).is_empty() and sim.get_front_page(sim.get_chronicle_size(), baden).is_empty(),
+		"Zeitung: %d Titelseiten bis %s, zuletzt „%s“ im %s" % [pages.size(), sim.get_date_text(), full.get("headline", ""), full.get("paper", "")],
+		"Zeitung: %d Titelseiten, %s" % [pages.size(), str(full).left(400)]
+	)
 	var index := int(event.get("event_index", -1))
 	_check(
 		not sim.choose_event_option(index, options.size()) and sim.choose_event_option(index, available),

@@ -13,6 +13,7 @@ ereignis aut.maerzverfassung {
     quelle = "Rumpler (1997); Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     bedingung { staat = AUT  datum >= 1849.03.01  datum <= 1849.04.30 }
     wartezeit = 3
@@ -36,6 +37,7 @@ ereignis nv.wahlrecht {
     quelle = "Siemann (1985); Botzenhart (1977)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { journal_revolution = verfassungswerk  datum >= 1849.02.20  datum <= 1849.04.30 }
     wartezeit = 7
@@ -49,6 +51,7 @@ ereignis nv.erbkaiser {
     quelle = "Siemann (1985); Botzenhart (1977)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     wer    = welt
     bedingung { journal_revolution = verfassungswerk  datum >= 1849.03.20  datum <= 1849.05.31  geschehen = nv.wahlrecht }
@@ -68,6 +71,7 @@ ereignis nv.kaiserwahl {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     wer    = welt
     bedingung { welt_merkmal = erbkaiser  welt_merkmal = reichsverfassung_beschlossen  datum <= 1849.06.30 }
@@ -85,6 +89,7 @@ ereignis nv.direktorium {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = diplomatie
     wer    = welt
     bedingung {
         journal_revolution = verfassungswerk
@@ -105,6 +110,7 @@ ereignis pru.kaiserdeputation {
     quelle = "Siemann (1985); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     bedingung { staat = PRU  welt_merkmal = kaiser_gewaehlt  datum <= 1849.06.30 }
     wartezeit = 5
@@ -146,6 +152,7 @@ ereignis aut.reichsverfassung {
     quelle = "Wollstein (1977)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = diplomatie
     bedingung { staat = AUT  welt_merkmal = krone_angenommen  welt_merkmal = grossdeutsch  datum <= 1849.12.31 }
     wartezeit = 10
     option beitreten {
@@ -173,6 +180,7 @@ ereignis reichsverfassung.anerkennung {
     quelle = "Siemann (1985); Huber Bd. 2 (1960)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     bedingung {
         bund = ja
         nicht { staat_in = { AUT PRU DEN NED LIE } }
@@ -210,6 +218,7 @@ ereignis sax.maiaufstand {
     quelle = "Siemann (1985); Weber, Revolution in Sachsen 1848/49 (1970)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wendepunkt = ja
     bedingung { staat = SAX  journal_revolution = kampagne  nicht { merkmal = reichsverfassung }  datum <= 1849.07.31 }
     wartezeit = 5
@@ -235,6 +244,7 @@ ereignis bav.pfalz {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung { staat = BAV  journal_revolution = kampagne  nicht { merkmal = reichsverfassung }  datum <= 1849.07.31 }
     wartezeit = 7
     option erhebung {
@@ -261,6 +271,7 @@ ereignis bad.revolution {
     quelle = "Siemann (1985); Mommsen (1998)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wendepunkt = ja
     bedingung { staat = BAD  journal_revolution = kampagne  datum <= 1849.07.31 }
     wartezeit = 7
@@ -290,6 +301,7 @@ ereignis pru.elberfeld {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung { staat = PRU  journal_revolution = kampagne  nicht { merkmal = reichsverfassung }  datum <= 1849.07.31 }
     wartezeit = 7
     option militaer {
@@ -318,6 +330,7 @@ ereignis pru.hilfe.sachsen {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     bedingung { staat = PRU  staat SAX { aufstand = ja }  datum <= 1849.12.31 }
     option eingreifen {
         text = "Die Truppen marschieren"
@@ -339,6 +352,7 @@ ereignis pru.hilfe.baden {
     quelle = "Siemann (1985); Mommsen (1998)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     bedingung { staat = PRU  datum <= 1849.12.31  staat BAD { oder { aufstand = ja  merkmal = revolutionsregierung } } }
     option eingreifen {
         text = "Das Heer marschiert nach Baden"
@@ -360,6 +374,7 @@ ereignis pru.hilfe.pfalz {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     bedingung { staat = PRU  datum <= 1849.12.31  staat BAV { aufstand = ja } }
     option eingreifen {
         text = "Einrücken"
@@ -384,6 +399,7 @@ ereignis reaktion.niederwerfung {
     quelle = "Siemann (1985); Mommsen (1998)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung {
         merkmal = revolutionsregierung
         nicht { welt_merkmal = republik }
@@ -421,6 +437,7 @@ ereignis reaktion.standgerichte {
     quelle = "Siemann (1985); Mommsen (1998)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     nur_folge = ja
     option urteile {
         text = "Die Urteile werden vollstreckt"
@@ -446,6 +463,7 @@ ereignis rumpfparlament {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { journal_revolution = kampagne  datum >= 1849.06.01  datum <= 1849.12.31 }
     wartezeit = 10
@@ -468,6 +486,7 @@ ereignis pru.dreiklassen {
     quelle = "Huber Bd. 2 (1960); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     bedingung { staat = PRU  verfassung = konstitutionell  datum >= 1849.05.15  datum <= 1849.12.31 }
     wartezeit = 7
@@ -491,6 +510,7 @@ ereignis pru.dreikoenigsbuendnis {
     quelle = "Siemann (1985); Huber Bd. 2 (1960)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     bedingung { staat = PRU  welt_merkmal = krone_abgelehnt  datum >= 1849.05.15  datum <= 1849.12.31 }
     wartezeit = 7
     option union {
@@ -513,6 +533,7 @@ ereignis auswanderung.achtundvierziger {
     quelle = "Siemann (1985); Bade, Europa in Bewegung (2000)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = revolution
     bedingung { merkmal = aufstand_1849  datum >= 1849.07.01  datum <= 1850.12.31 }
     wartezeit = 60
     option gehen { text = "Die Auswanderung beginnt" gewicht = 1 wirkung { auswanderung = 0.005  zustimmung_bildungsbuergertum = -1 } }
@@ -524,6 +545,7 @@ ereignis reich.mitglied {
     quelle = "Kühne (1985)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = diplomatie
     nur_folge = ja
     bedingung { merkmal = reichsverfassung }
     option a {

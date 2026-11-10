@@ -11,6 +11,7 @@ add_library(uhrwerk_core STATIC
     src/parallel.cpp
     src/politics.cpp
     src/legacy.cpp
+    src/newspaper.cpp
     src/population.cpp
     src/customs.cpp
     src/diplomacy.cpp

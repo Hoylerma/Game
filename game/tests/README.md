@@ -244,6 +244,12 @@ Dazwischen prüft er:
     Märzforderungen mit dem Militär, Baden erlebt Barrikadenkämpfe (`get_revolts`, Text ohne
     Zeichensalat). Als Preußen nimmt es mit den Wahlen der Strategie `krone` die Kaiserkrone an; bis
     zum April 1849 erreicht das Journal „Revolution“ das Reich der Paulskirche.
+15. **Zeitung und Epochenrahmen** (seit M13b1, ganz am Ende als Bayern): Grundschrift Source Serif 4
+    und Zeitungskopf in Fraktur im Theme, Rahmen der Epoche an den Fenstern; bei laufender Partie
+    erscheint die Zeitung von selbst, hält die Zeit an, passt ins Bild und hat keine offenen
+    Platzhalter; ein echter Klick legt sie beiseite; „Zeitungen“ im Jahrbuch listet die Titelseiten, ein
+    Klick öffnet die gewählte. In den übrigen Abschnitten legt der Test eine Zeitung beiseite wie ein
+    Ereignis.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
@@ -316,13 +322,15 @@ die Partie 1848–1871 je Staat vollständig über die Oberfläche durch, standa
    Spielbild, offene Ereignisse im Ereignisfenster mit der Standardoption beantworten, Wahlabende
    schließen.
 3. **Fenster:** einmal im Jahr jeden Bereich der Bereichsleiste öffnen und schließen.
-4. **Spielstände:** alle fünf Jahre speichern (Ordner `user://durchspiel_test`, danach gelöscht),
+4. **Zeitungen** (seit M13b1): Erscheint eine, prüft der Test sie auf offene Platzhalter und legt
+   sie beiseite.
+5. **Spielstände:** alle fünf Jahre speichern (Ordner `user://durchspiel_test`, danach gelöscht),
    laden und Prüfsumme und Datum vergleichen.
-5. **Ende:** Das Urteil der Geschichte öffnet sich von selbst und nennt das Vermächtnis. Die Chronik
+6. **Ende:** Das Urteil der Geschichte öffnet sich von selbst und nennt das Vermächtnis. Die Chronik
    lässt sich als HTML schreiben, „Weiterspielen“ schließt das Urteil.
 
-Je Staat nennt die Ausgabe Enddatum, Laufzeit, beantwortete Ereignisse, Wahlabende, geöffnete
-Fenster, Spielstände, Orte, den Ausgang der deutschen Frage und das Vermächtnis. Auf dem
+Je Staat nennt die Ausgabe Enddatum, Laufzeit, beantwortete Ereignisse, Wahlabende, Zeitungen,
+geöffnete Fenster, Spielstände, Orte, den Ausgang der deutschen Frage und das Vermächtnis. Auf dem
 Cloud-Rechner dauert eine Partie gut 50 s, alle vier zusammen dreieinhalb Minuten. Der Test fand in
 M13a6 einen Fehler: Spielstände nach der oktroyierten Verfassung Preußens (Dezember 1848) passten
 nicht mehr zu den Spieldaten.

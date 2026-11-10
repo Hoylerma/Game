@@ -201,6 +201,8 @@ struct EventDef {
     std::string certainty; // z. B. "ungeprueft"
     EventKind kind = EventKind::Historical;
     bool turning_point = false;
+    std::string
+        vignette; // Bild im Ereignisfenster (seit M13b1): revolution, krieg, diplomatie, wirtschaft, hof
     EventScope scope = EventScope::State;
     Condition condition;
     std::int32_t wait = 0;       // mittlere Wartezeit in Tagen; 0 = sofort
@@ -481,6 +483,51 @@ struct LegacyDimension {
 struct LegacyRules {
     bool active = false;
     std::vector<LegacyDimension> dimensions;
+};
+
+/// Zeitung (seit M13b1, vertical_slice.md 5.2; chronik-skript.md 3.42): ein erfundenes Blatt mit
+/// Richtung und Verbreitung. Ohne Staaten und Märkte erscheint es überall.
+struct NewspaperTitle {
+    std::string id;
+    std::string name;           // z. B. "Der Rheinische Beobachter"
+    std::string leaning;        // Richtung: liberal, konservativ, demokratisch, katholisch
+    std::vector<Index> states;  // Verbreitung nach Staaten (Spielerstaat)
+    std::vector<Index> markets; // … nach Märkten (Markt der Hauptstadt des Spielerstaates)
+};
+
+/// Schlagzeilen, Unterzeilen und Texte eines Anlasses für eine Richtung (leer: alle Richtungen).
+struct NewspaperWording {
+    std::string leaning;
+    std::vector<std::string> headlines;
+    std::vector<std::string> sublines;
+    std::vector<std::string> texts;
+};
+
+/// Ein Teil eines Musters: fester Text, Platzhalter {name} oder Rest '*'.
+struct NewspaperPatternPart {
+    enum class Kind : std::uint8_t { Text, Capture, Rest };
+    Kind kind = Kind::Text;
+    std::string text; // Text oder Name des Platzhalters
+};
+
+/// Anlass einer Titelseite: ein Muster über dem Text eines Chronikeintrags (das erste passende gilt).
+struct NewspaperOccasion {
+    std::string id;
+    std::string pattern; // wie geschrieben (Meldungen)
+    std::vector<NewspaperPatternPart> parts;
+    std::int32_t weight = 1;    // 0 = nur Vermischtes, 1 = Jahrbuch, 2 = Titelseite, 3 = Titelseite immer
+    Index event = -1;           // nur dieses Ereignis ('ereignis'; Platzhalter {titel})
+    bool turning_point = false; // nur Wendepunkte ('wendepunkt = ja')
+    std::vector<NewspaperWording> wordings; // erst die allgemeine, dann je Richtung
+    std::string file;
+    int line = 0;
+};
+
+/// common/zeitung.chron; nur mit Ereignissen. Darstellung, kein Einfluss auf die Simulation.
+struct NewspaperRules {
+    bool active = false;
+    std::vector<NewspaperTitle> titles;
+    std::vector<NewspaperOccasion> occasions;
 };
 
 /// Jahresreihe: Kennzahlen des Jahrbuchs und Vermächtnis je Staat zu einem Stichtag (Zustand).
