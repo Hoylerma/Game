@@ -332,9 +332,16 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
         CHECK(uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w)) ==
               std::vector<std::string_view>{"politik"});
         w = base;
-        w.states[0].law.franchise = uhrwerk::Franchise::ThreeClass;
+        w.states[0].law.system = w.states[0].law.system == uhrwerk::ElectoralSystem::Runoff
+                                     ? uhrwerk::ElectoralSystem::Plurality
+                                     : uhrwerk::ElectoralSystem::Runoff;
         CHECK(uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w)) ==
               std::vector<std::string_view>{"politik"});
+        // Verfassung und Wahlrecht ändern Ereignisse; sie sind Zustand, kein Inhalt (seit M13a6).
+        w = base;
+        w.states[0].law.franchise = uhrwerk::Franchise::ThreeClass;
+        w.states[0].constitution = uhrwerk::Constitution::Constitutional;
+        CHECK(uhrwerk::content_fingerprint(w) == fp);
         w = base;
         w.professions[0].self_employed = Fixed::from_ratio(1, 2);
         CHECK(uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w)) ==
