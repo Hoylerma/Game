@@ -3,7 +3,8 @@ extends PanelContainer
 ## Ereignisfenster (seit M11, Schritt b4; ereignisse.md Abschnitt 9): offene Ereignisse des Spielerstaates
 ## nacheinander mit Datum, Titel, Text, Quelle und den Optionen samt ihren Folgen. Der historische
 ## Kompass markiert die Option, die historisch gewählt wurde (abschaltbar). Wendepunkte tragen eine
-## eigene Kopfzeile. main.gd hält die Zeit an, solange das Fenster offen ist.
+## eigene Kopfzeile. main.gd hält die Zeit an, solange das Fenster offen ist. Seit M13b1 zeigt eine
+## Vignette die Art des Ereignisses (Revolution, Krieg, Diplomatie, Wirtschaft, Hof).
 ##
 ## Wie die übrigen Fenster liest es nichts selbst: main.gd übergibt die Ereignisse aus
 ## SimulationClient.get_open_events und erhält die Wahl als Signal.
@@ -29,6 +30,7 @@ var _text: Label = null
 var _options: VBoxContainer = null
 var _source: Label = null
 var _compass_toggle: CheckBox = null
+var _vignette: TextureRect = null # Bild nach Art des Ereignisses (seit M13b1)
 
 
 func _ready() -> void:
@@ -37,6 +39,7 @@ func _ready() -> void:
 	visible = false
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	_build()
+	EpochTheme.frame(self)
 
 
 ## Zeigt das erste der offenen Ereignisse; leer schließt das Fenster.
@@ -117,12 +120,27 @@ func _build() -> void:
 	_counter.name = "Counter"
 	head.add_child(_counter)
 	box.add_child(head)
+	# Vignette links neben Titel und Datum (seit M13b1, vertical_slice.md 5.1).
+	var title_row := HBoxContainer.new()
+	title_row.add_theme_constant_override(&"separation", 12)
+	_vignette = TextureRect.new()
+	_vignette.name = "Vignette"
+	_vignette.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_vignette.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_vignette.custom_minimum_size = Vector2(72, 48)
+	_vignette.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	title_row.add_child(_vignette)
+	var titles := VBoxContainer.new()
+	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	titles.alignment = BoxContainer.ALIGNMENT_CENTER
 	_title = _label(&"NameLabel", true)
 	_title.name = "Title"
-	box.add_child(_title)
+	titles.add_child(_title)
 	_meta = _label(&"MutedLabel", true)
 	_meta.name = "Meta"
-	box.add_child(_meta)
+	titles.add_child(_meta)
+	title_row.add_child(titles)
+	box.add_child(title_row)
 	var scroll := ScrollContainer.new()
 	scroll.custom_minimum_size = Vector2(0, TEXT_HEIGHT)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -166,10 +184,15 @@ func _fill() -> void:
 	if turning:
 		_title.add_theme_font_size_override(&"font_size", 28)
 		_text.custom_minimum_size.x = TURNING_POINT_WIDTH - 40.0
+		_title.custom_minimum_size.x = TURNING_POINT_WIDTH - 180.0
 	else:
 		_title.remove_theme_font_size_override(&"font_size")
 		_text.custom_minimum_size.x = WIDTH - 40.0
+		_title.custom_minimum_size.x = WIDTH - 140.0
 	_counter.text = "1 von %d" % _events.size() if _events.size() > 1 else ""
+	_vignette.texture = EpochTheme.vignette(str(event.get("vignette", "")))
+	_vignette.visible = _vignette.texture != null
+	_vignette.custom_minimum_size = Vector2(108, 72) if turning else Vector2(72, 48)
 	_title.text = str(event.get("title", ""))
 	var meta := PackedStringArray()
 	var date := str(event.get("date_text", ""))

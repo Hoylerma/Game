@@ -13,6 +13,14 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Epochenrahmen, Schriften, Zeitung (Schritt b1):** Das Spiel bringt seine **Schriften** mit (Source Serif 4,
+  Playfair Display, Source Code Pro, UnifrakturMaguntia; SIL Open Font License) und rahmt seine Fenster mit
+  Doppellinie und **Eckornamenten** aus eigenen Vektorgrafiken. Jedes Ereignis zeigt eine **Vignette** nach Art
+  (Revolution, Krieg, Diplomatie, Wirtschaft, Hof). Bei wichtigen Nachrichten erscheint die **Zeitung**: die
+  Titelseite eines erfundenen Blattes der eigenen Gegend mit Kopf in Fraktur, Schlagzeile, Leitartikel und
+  Vermischtem, je nach Richtung des Blattes anders formuliert (`common/zeitung.chron`, 20 Blätter, 35
+  Anlässe). Ein Klick legt sie beiseite; das Jahrbuch listet alle Zeitungen der Partie. Neuer Befehl
+  `uhrwerk-cli zeitung`. 1648 bitgleich.
 - **Leistung und Durchspieltest (Schritt a6):** Ein Spieljahr 1848 mit allen Systemen braucht im Median
   **1,5 s** statt 2,5 s (4 Kerne, Release). Drei Stellen sind schneller: die Frage nach dem Bundesgebiet,
   die Festkommarechnung mit eingebauten 128-Bit-Zahlen und die Neigung der Wähler ohne neuen Speicher je

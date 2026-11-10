@@ -1,0 +1,471 @@
+# Zeitung (Meilenstein M13b1, docs/technik/vertical_slice.md Abschnitt 5.2).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.42. Die Blätter sind erfunden; Namen wirklicher
+# Zeitungen der Zeit sind vermieden. Die Titelseite gehört zu einem Chronikeintrag: Der erste Anlass,
+# dessen Muster auf den Text passt, liefert Schlagzeile, Unterzeile und Leitartikel. Pointiert, aber nie
+# bei Verbrechen und Opfern (Kapitel 20 und 22): Schlachten, Aufstände und ihre Niederschlagung bleiben
+# sachlich, Seuchen und Hunger erscheinen nur unter „Vermischtes“.
+#
+#   blatt   – name, richtung (liberal, konservativ, demokratisch, katholisch), Verbreitung nach
+#             staaten (Spielerstaat) oder maerkte (Markt seiner Hauptstadt); ohne beides überregional.
+#   anlass  – muster (Text des Eintrags mit Platzhaltern {name} und '*'), gewicht (0 nur Vermischtes,
+#             1 Jahrbuch, 2 Titelseite, wenn der Spielerstaat beteiligt ist (Staat des Eintrags oder
+#             ein Staat im Muster), 3 Titelseite immer),
+#             schlagzeile, unterzeile, text (je mehrfach, eine Fassung je Ausgabe), Fassungen je
+#             Richtung in liberal { … }, konservativ { … }, demokratisch { … }, katholisch { … }.
+
+# ── Blätter ──────────────────────────────────────────────────────────────────
+
+blatt vaterlandszeitung {
+    name     = "Allgemeine Vaterlandszeitung"
+    richtung = liberal
+}
+
+blatt volksfreund {
+    name     = "Der Deutsche Volksfreund"
+    richtung = demokratisch
+}
+
+blatt staatsbote {
+    name     = "Der Märkische Staatsbote"
+    richtung = konservativ
+    staaten  = { PRU }
+    maerkte  = { brandenburg pommern westpreussen posen magdeburg }
+}
+
+blatt spreebote {
+    name     = "Spree-Bote für Stadt und Land"
+    richtung = liberal
+    maerkte  = { brandenburg magdeburg anhalt lausitz }
+}
+
+blatt beobachter {
+    name     = "Der Rheinische Beobachter"
+    richtung = liberal
+    maerkte  = { rheinland niederrhein trier mittelrhein muensterland mark_sauerland ostwestfalen saar }
+}
+
+blatt rheinbote {
+    name     = "Rheinischer Glockenschlag"
+    richtung = katholisch
+    maerkte  = { rheinland niederrhein trier muensterland }
+}
+
+blatt ostseebote {
+    name     = "Ostpreußischer Hausfreund"
+    richtung = liberal
+    maerkte  = { ostpreussen westpreussen }
+}
+
+blatt oderbote {
+    name     = "Der Oderbote"
+    richtung = demokratisch
+    maerkte  = { niederschlesien oberschlesien glatz }
+}
+
+blatt donaubote {
+    name     = "Wiener Donaubote"
+    richtung = konservativ
+    staaten  = { AUT }
+}
+
+blatt abendblatt {
+    name     = "Donau-Abendblatt für Bürger und Gewerbe"
+    richtung = liberal
+    maerkte  = { niederoesterreich oberoesterreich boehmen maehren }
+}
+
+blatt landbote {
+    name     = "Der Isarbote"
+    richtung = katholisch
+    staaten  = { BAV }
+    maerkte  = { bayern oberpfalz schwaben }
+}
+
+blatt frankenmorgen {
+    name     = "Fränkischer Morgen"
+    richtung = liberal
+    maerkte  = { franken mainfranken }
+}
+
+blatt elbtal {
+    name     = "Der Elbtal-Kurier"
+    richtung = liberal
+    staaten  = { SAX }
+}
+
+blatt erzgebirge {
+    name     = "Erzgebirgischer Volksbote"
+    richtung = demokratisch
+    staaten  = { SAX }
+}
+
+blatt neckarbote {
+    name     = "Der Neckarbote"
+    richtung = liberal
+    staaten  = { WUE }
+}
+
+blatt seebote {
+    name     = "Badischer Seebote"
+    richtung = demokratisch
+    staaten  = { BAD }
+    maerkte  = { baden kurpfalz }
+}
+
+blatt weserbote {
+    name     = "Hannoverscher Weserbote"
+    richtung = konservativ
+    staaten  = { HAN }
+}
+
+blatt handelsbote {
+    name     = "Hanseatischer Handelsbote"
+    richtung = liberal
+    staaten  = { HAM BRE LUE }
+}
+
+blatt mainzeitung {
+    name     = "Frankfurter Mainpost für Politik und Handel"
+    richtung = liberal
+    staaten  = { FRA }
+    maerkte  = { rheinhessen starkenburg oberhessen wetterau nassau }
+}
+
+blatt hessenbote {
+    name     = "Kurhessischer Landesbote"
+    richtung = konservativ
+    staaten  = { HEK }
+}
+
+# ── Das Ende und die deutsche Frage ─────────────────────────────────────────
+
+anlass ende {
+    muster  = "Ende der Partie*"
+    gewicht = 1
+    schlagzeile = "Ein Zeitalter geht zu Ende"
+    unterzeile  = "Die Redaktion blickt auf die Jahre seit 1848 zurück"
+    text        = "Was die Märztage begonnen haben, ist nun Geschichte. Ob das Erreichte trägt, wird die Nachwelt entscheiden; unsere Leser haben es Tag für Tag in diesen Spalten verfolgt."
+}
+
+anlass frage_ende {
+    muster  = "Die deutsche Frage endet: {ausgang}."
+    gewicht = 3
+    schlagzeile = "Die deutsche Frage ist entschieden"
+    schlagzeile = "Das Ende der langen Ungewissheit"
+    unterzeile  = "{ausgang}"
+    text        = "Nach Jahren des Streits um Bund, Reich und Verfassung steht die Ordnung Deutschlands fest. Die einen feiern, die anderen schweigen; in den Kanzleien beginnt man, das Neue einzurichten."
+    demokratisch {
+        text = "Die Ordnung steht – gefragt hat man das Volk nicht. Wer 1848 auf den Barrikaden stand, wird prüfen, wie viel von der Freiheit in ihr Platz findet."
+    }
+}
+
+anlass frage {
+    muster  = "Die deutsche Frage: {stufe}."
+    gewicht = 3
+    schlagzeile = "Die deutsche Frage tritt in ein neues Stadium"
+    schlagzeile = "Wohin treibt Deutschland?"
+    unterzeile  = "{stufe}"
+    text        = "In allen Hauptstädten wird die neue Lage beraten. Noch ist nichts entschieden, doch die Gewichte im Bund haben sich verschoben."
+}
+
+anlass gruendung {
+    muster  = "Gründung: {bund} mit {zahl} Staaten*"
+    gewicht = 3
+    schlagzeile = "{bund} gegründet!"
+    schlagzeile = "Die Stunde des {bund}"
+    unterzeile  = "{zahl} Staaten schließen sich zusammen"
+    text        = "Mit dem heutigen Tage ist der {bund} ins Leben getreten. {zahl} Staaten haben ihre Unterschrift gegeben; was die Väter der Bundesakte versäumten, soll nun eine neue Verfassung leisten."
+    konservativ {
+        text = "Der {bund} steht. Möge er Ordnung und Ansehen der Fürsten wahren und nicht der Anfang neuer Umwälzungen sein."
+    }
+    demokratisch {
+        text = "Ein Bund der Regierungen ist gegründet. Ob er auch ein Bund der Bürger wird, entscheidet sich an seiner Volksvertretung."
+    }
+}
+
+anlass bund_ruht {
+    muster  = "Die Bundesversammlung ruht."
+    gewicht = 2
+    schlagzeile = "Frankfurt verstummt"
+    unterzeile  = "Die Bundesversammlung stellt ihre Tätigkeit ein"
+    text        = "Der Bundestag in Frankfurt tritt nicht mehr zusammen. Ob die Nationalversammlung an seine Stelle tritt, wird sich zeigen."
+}
+
+anlass bund_tagt {
+    muster  = "Die Bundesversammlung tritt wieder zusammen."
+    gewicht = 2
+    schlagzeile = "Der alte Bundestag kehrt zurück"
+    unterzeile  = "Die Gesandten nehmen ihre Plätze im Palais Thurn und Taxis wieder ein"
+    text        = "Wo eben noch die Abgeordneten der Nation stritten, sitzen wieder die Gesandten der Regierungen."
+    liberal {
+        text = "Die Gesandten sind wieder da, die Hoffnungen von 1848 nicht. Die Bundesversammlung tagt, als sei nichts geschehen."
+    }
+}
+
+# ── Krieg und Frieden (sachlich, ohne Siegesjubel über Verluste) ───────────
+
+anlass krieg {
+    muster  = "{staat} erklärt {gegner} den Krieg.*"
+    gewicht = 2
+    schlagzeile = "Krieg zwischen {staat} und {gegner}"
+    schlagzeile = "Die Würfel sind gefallen"
+    unterzeile  = "{staat} erklärt {gegner} den Krieg"
+    text        = "Was die Diplomaten nicht vermochten, sollen nun die Heere entscheiden. In den Garnisonen wird verladen, auf den Bahnhöfen drängen sich die Reservisten."
+    demokratisch {
+        schlagzeile = "Krieg – und wieder zahlt das Volk"
+        text        = "Die Kabinette haben gesprochen, die Söhne des Volkes ziehen ins Feld. Wem nützt dieser Krieg?"
+    }
+}
+
+anlass krise_krieg {
+    muster  = "Die {krise} wird zum Krieg."
+    gewicht = 2
+    schlagzeile = "Aus der Krise wird Krieg"
+    unterzeile  = "Die {krise} ist nicht mehr friedlich beizulegen"
+    text        = "Wochen der Noten und Ultimaten sind vorüber. Die Verhandlungen sind gescheitert, die Truppen marschieren."
+}
+
+anlass ultimatum {
+    muster  = "Krise zwischen {staat} und {gegner}: Ultimatum."
+    gewicht = 2
+    schlagzeile = "Ultimatum an {gegner}"
+    unterzeile  = "{staat} verlangt eine Antwort – binnen Tagen"
+    text        = "Zwischen {staat} und {gegner} spitzt sich die Lage zu. Noch kann eine Antwort den Frieden retten."
+}
+
+anlass mobil {
+    muster  = "{staat} macht mobil."
+    gewicht = 1
+    schlagzeile = "{staat} ruft die Reserven"
+    unterzeile  = "Die Mobilmachung ist befohlen"
+    text        = "In {staat} sind die Einberufungen ergangen. Man versichert, es diene allein der Sicherheit."
+}
+
+anlass frieden_sieg {
+    muster  = "Frieden zwischen {staat} und {gegner}: {sieger} siegt.*"
+    gewicht = 2
+    schlagzeile = "Frieden!"
+    schlagzeile = "Die Waffen schweigen"
+    unterzeile  = "{staat} und {gegner} schließen Frieden – {sieger} behält die Oberhand"
+    text        = "Der Krieg ist zu Ende. Die Bedingungen des Friedens werden nun in allen Kabinetten gelesen; die Heimkehr der Truppen wird vorbereitet."
+}
+
+anlass frieden_patt {
+    muster  = "Frieden zwischen {staat} und {gegner} ohne Gewinner.*"
+    gewicht = 2
+    schlagzeile = "Frieden ohne Sieger"
+    unterzeile  = "{staat} und {gegner} legen die Waffen nieder"
+    text        = "Keine Seite hat erreicht, was sie wollte. Der Friede kehrt zurück, die Rechnung bleibt offen."
+}
+
+anlass schlacht {
+    muster  = "Schlacht bei {ort}: {sieger} schlägt {verlierer};*"
+    gewicht = 1
+    schlagzeile = "Schlacht bei {ort}"
+    unterzeile  = "{sieger} behauptet das Feld"
+    text        = "Aus {ort} wird ein schwerer Kampf gemeldet. Über die Verluste liegen erst unvollständige Nachrichten vor."
+}
+
+anlass schlacht_mehrere {
+    muster  = "Schlacht bei {ort}: {sieger} schlagen {verlierer};*"
+    gewicht = 1
+    schlagzeile = "Schlacht bei {ort}"
+    unterzeile  = "{sieger} behaupten das Feld"
+    text        = "Aus {ort} wird ein schwerer Kampf gemeldet. Über die Verluste liegen erst unvollständige Nachrichten vor."
+}
+
+anlass buendnis {
+    muster  = "{staat} und {partner} schließen ein Bündnis."
+    gewicht = 1
+    schlagzeile = "Bündnis zwischen {staat} und {partner}"
+    unterzeile  = "Die beiden Regierungen sichern sich Beistand zu"
+    text        = "In den Kanzleien wird das neue Bündnis aufmerksam gelesen. Wem gilt es?"
+}
+
+# ── Wahlen und Abstimmungen ─────────────────────────────────────────────────
+
+anlass wahl {
+    muster  = "Wahltag – {parlament}: {besetzt} von {sitze} Sitzen besetzt*; stärkste Strömung: {stroemung} mit {zahl} Sitzen."
+    gewicht = 2
+    schlagzeile = "Die Wähler haben gesprochen"
+    schlagzeile = "Wahltag: {stroemung} vorn"
+    unterzeile  = "{parlament}: {stroemung} mit {zahl} von {sitze} Sitzen"
+    text        = "Aus den Wahlkreisen laufen die letzten Ergebnisse ein. Stärkste Kraft sind die {stroemung} mit {zahl} Sitzen; um die Mehrheit wird nun verhandelt."
+    konservativ {
+        text = "Die Wahl ist vorüber, die Ordnung bleibt. Die {stroemung} stellen mit {zahl} Sitzen die stärkste Gruppe; das Land erwartet Besonnenheit."
+    }
+}
+
+anlass abstimmung_an {
+    muster  = "{parlament}: {vorlage} angenommen ({ja} : {nein})."
+    gewicht = 1
+    schlagzeile = "Angenommen: {vorlage}"
+    unterzeile  = "{parlament} stimmt mit {ja} gegen {nein} Stimmen zu"
+    text        = "Nach langer Debatte hat {parlament} entschieden. Die Galerien waren voll, die Reden lang."
+}
+
+anlass abstimmung_ab {
+    muster  = "{parlament}: {vorlage} abgelehnt ({ja} : {nein})."
+    gewicht = 1
+    schlagzeile = "Abgelehnt: {vorlage}"
+    unterzeile  = "{parlament} verweigert mit {nein} gegen {ja} Stimmen die Zustimmung"
+    text        = "Die Vorlage ist gescheitert. Ihre Freunde kündigen an, nicht aufzugeben."
+}
+
+# ── Unruhe (sachlich) ──────────────────────────────────────────────────────
+
+anlass erhebung {
+    muster  = "{staat}: Erhebung gegen die Regierung"
+    gewicht = 2
+    schlagzeile = "Erhebung in {staat}"
+    unterzeile  = "Die Regierung verliert die Kontrolle über Teile des Landes"
+    text        = "Aus {staat} kommen beunruhigende Nachrichten. Bewaffnete Bürger und Bauern haben sich gegen die Regierung erhoben; die Lage ist unübersichtlich."
+    demokratisch {
+        text = "Das Volk von {staat} nimmt sein Recht in die eigene Hand. Die Regierung hat zu lange gezögert."
+    }
+    konservativ {
+        text = "In {staat} ist der Aufruhr ausgebrochen. Ordnung und Gesetz stehen auf dem Spiel."
+    }
+}
+
+anlass barrikaden {
+    muster  = "{staat}: Barrikadenkämpfe in der Hauptstadt"
+    gewicht = 2
+    schlagzeile = "Barrikaden in der Hauptstadt von {staat}"
+    unterzeile  = "Bürger und Truppen stehen sich gegenüber"
+    text        = "In den Straßen der Hauptstadt stehen Barrikaden. Über den Ausgang liegt noch keine sichere Nachricht vor."
+}
+
+anlass aufstand_ende {
+    muster  = "{staat}: Der Aufstand wird niedergeschlagen."
+    gewicht = 1
+    schlagzeile = "{staat}: Die Erhebung ist beendet"
+    unterzeile  = "Die Regierung stellt die Ordnung wieder her"
+    text        = "Die Truppen kontrollieren das Land wieder. Über die Folgen für die Beteiligten wird noch zu berichten sein."
+}
+
+anlass intervention {
+    muster  = "{staat} schickt Truppen gegen den Aufstand in {gegner}."
+    gewicht = 1
+    schlagzeile = "Truppen aus {staat} nach {gegner}"
+    unterzeile  = "Bundeshilfe gegen die Erhebung"
+    text        = "Auf Bitten der Regierung marschieren Truppen aus {staat} nach {gegner}."
+}
+
+# ── Höfe und Regierungen ────────────────────────────────────────────────────
+
+anlass thron_koenig {
+    muster  = "{staat}: {person} wird König*"
+    gewicht = 2
+    schlagzeile = "Thronwechsel in {staat}"
+    schlagzeile = "Ein neuer König für {staat}"
+    unterzeile  = "{person} besteigt den Thron"
+    text        = "Mit {person} beginnt in {staat} eine neue Regierung. Das Land wartet auf das erste Wort des neuen Herrschers."
+}
+
+anlass thron_kaiser {
+    muster  = "{staat}: {person} wird Kaiser*"
+    gewicht = 2
+    schlagzeile = "Ein neuer Kaiser"
+    unterzeile  = "{person} übernimmt die Krone"
+    text        = "In {staat} hat {person} die Herrschaft angetreten. Die Völker des Reiches blicken auf den jungen Monarchen."
+}
+
+anlass thron_regent {
+    muster  = "{staat}: {person} wird Prinzregent*"
+    gewicht = 2
+    schlagzeile = "Regentschaft in {staat}"
+    unterzeile  = "{person} führt die Regierung"
+    text        = "Die Regentschaft von {person} weckt Hoffnungen auf eine neue Ära."
+}
+
+anlass thron_grossherzog {
+    muster  = "{staat}: {person} wird Großherzog*"
+    gewicht = 2
+    schlagzeile = "Neuer Großherzog in {staat}"
+    unterzeile  = "{person} tritt die Regierung an"
+    text        = "In {staat} beginnt mit {person} eine neue Regierung."
+}
+
+anlass thron_herzog {
+    muster  = "{staat}: {person} wird Herzog*"
+    gewicht = 2
+    schlagzeile = "Neuer Herzog in {staat}"
+    unterzeile  = "{person} tritt die Regierung an"
+    text        = "In {staat} beginnt mit {person} eine neue Regierung."
+}
+
+anlass ministerium {
+    muster  = "{staat}: {person} wird {amt}"
+    gewicht = 1
+    schlagzeile = "{staat}: {person} wird {amt}"
+    unterzeile  = "Personalien aus der Regierung"
+    text        = "Die Ernennung von {person} wird in {staat} aufmerksam aufgenommen."
+}
+
+anlass zollverein {
+    muster  = "{staat} tritt zum {termin} dem {zollunion} bei."
+    gewicht = 1
+    schlagzeile = "{staat} kommt zum {zollunion}"
+    unterzeile  = "Der Beitritt gilt ab dem {termin}"
+    text        = "Die Zollschranken fallen. Kaufleute und Fabrikanten erwarten bessere Geschäfte."
+}
+
+# ── Wendepunkte und übrige Ereignisse ──────────────────────────────────────
+
+anlass kaiserproklamation {
+    muster   = "{staat}: {titel} – {wahl}"
+    ereignis = kaiserproklamation
+    gewicht  = 3
+    schlagzeile = "Das Deutsche Reich ist ausgerufen"
+    unterzeile  = "{wahl}"
+    text        = "Der König von Preußen ist Deutscher Kaiser. Was Generationen erhofft und gefürchtet haben, ist geschehen – nicht in der Paulskirche, sondern im Rat der Fürsten."
+    demokratisch {
+        text = "Ein Reich ist ausgerufen, ein Kaiser gekürt – das Volk sah zu. Die Einheit ist da; die Freiheit muss sie sich erst noch erstreiten."
+    }
+}
+
+anlass kaiserdeputation {
+    muster   = "{staat}: {titel} – {wahl}"
+    ereignis = pru.kaiserdeputation
+    gewicht  = 3
+    schlagzeile = "Die Antwort des Königs"
+    schlagzeile = "Krone der Nation – angenommen oder verworfen?"
+    unterzeile  = "{wahl}"
+    text        = "Die Abordnung der Nationalversammlung hat ihre Antwort erhalten. Von ihr hängt ab, ob die Reichsverfassung lebt."
+}
+
+anlass wendepunkt_staat {
+    muster     = "{staat}: {titel} – {wahl}"
+    wendepunkt = ja
+    gewicht    = 2
+    schlagzeile = "{titel}"
+    unterzeile  = "{staat}: {wahl}"
+    text        = "Aus {staat} kommt eine Nachricht, die das ganze Land bewegen wird. Die Redaktion wird in den kommenden Ausgaben ausführlich berichten."
+}
+
+anlass wendepunkt_welt {
+    muster     = "{titel} – {wahl}"
+    wendepunkt = ja
+    gewicht    = 3
+    schlagzeile = "{titel}"
+    unterzeile  = "{wahl}"
+    text        = "Eine Nachricht, die ganz Deutschland bewegt. Die Redaktion wird in den kommenden Ausgaben ausführlich berichten."
+}
+
+anlass ereignis_staat {
+    muster  = "{staat}: {titel} – {wahl}"
+    gewicht = 1
+    schlagzeile = "{titel}"
+    unterzeile  = "{staat}: {wahl}"
+    text        = "Aus {staat} wird gemeldet: {wahl}."
+}
+
+anlass ereignis_welt {
+    muster  = "{titel} – {wahl}"
+    gewicht = 1
+    schlagzeile = "{titel}"
+    unterzeile  = "{wahl}"
+    text        = "Unser Korrespondent meldet: {wahl}."
+}

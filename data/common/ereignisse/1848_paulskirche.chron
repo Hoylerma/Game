@@ -14,6 +14,7 @@ ereignis paulskirche.eroeffnung {
     quelle = "Siemann (1985); Wollstein, Das Großdeutschland der Paulskirche (1977)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wendepunkt = ja
     wer    = welt
     bedingung { welt_merkmal = vorparlament  datum >= 1848.05.18  datum <= 1848.08.31 }
@@ -32,6 +33,7 @@ ereignis pru.nationalversammlung {
     quelle = "Siemann (1985); Botzenhart (1977)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung { staat = PRU  datum >= 1848.05.22  datum <= 1848.08.31  geschehen = pru.barrikaden }
     option vereinbaren {
         text = "Mit der Versammlung über eine Verfassung verhandeln"
@@ -53,6 +55,7 @@ ereignis nv.zentralgewalt {
     quelle = "Siemann (1985); Huber Bd. 2 (1960)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wer    = welt
     bedingung { journal_revolution = nationalversammlung  datum >= 1848.06.20  datum <= 1848.09.30 }
     wartezeit = 6
@@ -71,6 +74,7 @@ ereignis bund.uebergabe {
     quelle = "Huber Bd. 2 (1960)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wer    = welt
     bedingung { abstimmung_zentralgewalt = angenommen  datum >= 1848.07.01  datum <= 1849.06.30 }
     wartezeit = 10
@@ -93,6 +97,7 @@ ereignis nv.malmoe {
     quelle = "Siemann (1985); Wollstein (1977)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = krieg
     wendepunkt = ja
     wer    = welt
     bedingung { welt_merkmal = schleswig_krieg  journal_revolution = nationalversammlung  datum >= 1848.09.01  datum <= 1848.12.31 }
@@ -116,6 +121,7 @@ ereignis frankfurt.septemberunruhen {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { welt_merkmal = malmoe_angenommen  datum <= 1848.12.31 }
     wartezeit = 2
@@ -139,6 +145,7 @@ ereignis bad.struve {
     quelle = "Siemann (1985); Mommsen (1998)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung { staat = BAD  datum >= 1848.09.15  datum <= 1848.10.15  welt_merkmal = vorparlament }
     wartezeit = 4
     option militaer {
@@ -165,6 +172,7 @@ ereignis nv.grossdeutsch {
     quelle = "Siemann (1985); Wollstein (1977)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wer    = welt
     bedingung { journal_revolution = nationalversammlung  datum >= 1848.10.20  datum <= 1849.01.31 }
     wartezeit = 7
@@ -187,6 +195,7 @@ ereignis aut.oktober {
     quelle = "Siemann (1985); Rumpler (1997)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wendepunkt = ja
     bedingung { staat = AUT  datum >= 1848.10.01  datum <= 1848.11.15 }
     wartezeit = 4
@@ -214,6 +223,7 @@ ereignis aut.blum {
     quelle = "Siemann (1985); Valentin (1930/31)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { datum >= 1848.11.01  datum <= 1848.12.31  staat AUT { geschehen { ereignis = aut.oktober option = aufstand } } }
     wartezeit = 7
@@ -235,6 +245,7 @@ ereignis pru.brandenburg {
     quelle = "Siemann (1985); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     bedingung { staat = PRU  datum >= 1848.11.01  datum <= 1848.12.15  merkmal = pr_nationalversammlung }
     wartezeit = 7
@@ -266,6 +277,7 @@ ereignis pru.verfassung {
     quelle = "Huber Bd. 2 (1960); Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     bedingung { staat = PRU  datum >= 1848.12.01  datum <= 1849.02.28  geschehen = pru.brandenburg }
     wartezeit = 5
@@ -293,6 +305,7 @@ ereignis nv.grundrechte {
     quelle = "Siemann (1985); Kühne, Die Reichsverfassung der Paulskirche (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     wer    = welt
     bedingung { journal_revolution = nationalversammlung  datum >= 1848.12.10  datum <= 1849.02.28 }
     wartezeit = 7
@@ -311,6 +324,7 @@ ereignis grundrechte.einfuehrung {
     quelle = "Siemann (1985); Kühne (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = revolution
     bedingung {
         abstimmung_grundrechte = angenommen
         bund = ja
@@ -346,6 +360,7 @@ ereignis grundlasten.abloesung {
     quelle = "Wehler Bd. 2 (1987); Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = wirtschaft
     bedingung { gesetz_grundlasten = grundherrschaft  datum >= 1848.04.01  datum <= 1849.12.31 }
     wartezeit = 90
     option abloesen {
@@ -369,6 +384,7 @@ ereignis arbeiterkongress {
     quelle = "Siemann (1985); Kocka, Arbeitsverhältnisse und Arbeiterexistenzen (1990)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = revolution
     wer    = welt
     bedingung { datum >= 1848.08.23  datum <= 1848.12.31 }
     wartezeit = 5
@@ -381,6 +397,7 @@ ereignis vereine.gruendung {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = revolution
     bedingung { gesetz_vereine = vereinsfreiheit  datum >= 1848.04.15  datum <= 1849.06.30 }
     wartezeit = 60
     option a { text = "Die Bewegung organisiert sich" gewicht = 1 wirkung { zustimmung_nationalbewegung = 1  unruhe = -2 } }
@@ -392,6 +409,7 @@ ereignis presse.zeitungen {
     quelle = "Siemann (1985)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = revolution
     bedingung { gesetz_presse = pressefreiheit  datum >= 1848.03.15  datum <= 1849.12.31 }
     wartezeit = 60
     option a { text = "Die Öffentlichkeit erwacht" gewicht = 1 wirkung { zustimmung_bildungsbuergertum = 1 } }

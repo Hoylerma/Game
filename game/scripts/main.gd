@@ -15,6 +15,7 @@ func _ready() -> void:
 	_data_dir = UhrwerkPaths.data_dir()
 	print("EINIGKEIT: Datenordner %s (%s)" % [_data_dir, UhrwerkPaths.data_dir_origin()])
 
+	EpochTheme.apply(ThemeDB.get_project_theme()) # Schriften der Epoche (seit M13b1)
 	_top_bar.configure_speeds(SPEED_DAYS_PER_SECOND)
 	_top_bar.speed_selected.connect(_set_speed)
 	_top_bar.menu_requested.connect(toggle_game_menu)
@@ -28,6 +29,7 @@ func _ready() -> void:
 	_build_bars()
 	_build_settings()
 	_build_verdict()
+	_build_newspaper()
 	_build_start_screen()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
@@ -238,6 +240,7 @@ func _build_areas() -> void:
 	root.add_child(_yearbook_window)
 	root.move_child(_yearbook_window, _top_bar.get_index())
 	_yearbook_window.close_requested.connect(close_yearbook)
+	_yearbook_window.newspaper_requested.connect(func(index: int) -> void: open_newspaper(index))
 	_yearbook_window.resized.connect(_place_diplomacy)
 	for window: Control in [_diplomacy_window, _war_window, _journal_window, _yearbook_window]:
 		_windows.add(window)

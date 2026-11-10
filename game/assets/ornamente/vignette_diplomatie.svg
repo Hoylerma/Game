@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="64" viewBox="0 0 96 64">
+  <!-- Vignette „Diplomatie“: Urkunde mit Siegel und Feder. Eigene Zeichnung. -->
+  <path d="M22 10 H66 C70 10 72 13 72 16 V52 H28 C24 52 22 49 22 46 Z" fill="#f8f2e4" stroke="#2b2116" stroke-width="1.4"/>
+  <g stroke="#2b2116" stroke-width="0.9" stroke-linecap="round">
+    <path d="M30 20 H64 M30 26 H64 M30 32 H58 M30 38 H50"/>
+  </g>
+  <circle cx="60" cy="46" r="7" fill="#973c2f"/>
+  <path d="M56 52 L54 60 L58 57 L60 61 L62 57 L66 60 L64 52" fill="#973c2f"/>
+  <circle cx="60" cy="46" r="3.2" fill="none" stroke="#f8f2e4" stroke-width="0.8"/>
+  <path d="M86 4 C76 10 68 22 62 36 C70 26 80 16 86 4 Z" fill="#b88930" stroke="#2b2116" stroke-width="0.8"/>
+  <path d="M86 4 L62 36" stroke="#2b2116" stroke-width="0.6"/>
+</svg>

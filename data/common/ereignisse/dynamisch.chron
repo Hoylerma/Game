@@ -11,6 +11,7 @@ ereignis missernte {
     quelle = "Abel, Massenarmut und Hungerkrisen im vorindustriellen Europa (1974); Bass, Hungerkrisen in Preußen während der ersten Hälfte des 19. Jahrhunderts (1991)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = wirtschaft
     bedingung { preis_getreide >= 1.5 }
     wartezeit = 30
     wiederholbar = ja
@@ -38,6 +39,7 @@ ereignis hungerkrawall {
     quelle = "Gailus, Straße und Brot. Sozialer Protest in den deutschen Staaten 1847–1849 (1990)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = wirtschaft
     bedingung { preis_getreide >= 1.7  unruhe >= 35  aufstand = nein }
     wartezeit = 60
     wiederholbar = ja
@@ -64,6 +66,7 @@ ereignis cholera {
     quelle = "Evans, Death in Hamburg (1987); Briese, Angst in den Zeiten der Cholera (2003)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = wirtschaft
     bedingung {
         lebensstandard_unten <= 50
         oder {
@@ -93,6 +96,7 @@ ereignis auswanderung.welle {
     quelle = "Bade (2000); Marschalck (1973)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = wirtschaft
     bedingung { datum >= 1856.01.01  lebensstandard_unten <= 35 }
     wartezeit = 365
     wiederholbar = ja
@@ -115,6 +119,7 @@ ereignis weberelend {
     quelle = "Kocka, Arbeitsverhältnisse und Arbeiterexistenzen (1990); Hodenberg, Aufstand der Weber (1997)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = wirtschaft
     bedingung { staat_in = { PRU SAX }  lebensstandard_unten <= 40  datum <= 1866.12.31 }
     wartezeit = 365
     wiederholbar = ja
@@ -137,6 +142,7 @@ ereignis eisenbahn.eroeffnung {
     quelle = "Gall/Pohl (Hg.), Die Eisenbahn in Deutschland (1999)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = wirtschaft
     bedingung { datum >= 1850.01.01  schatz >= 0 }
     wartezeit = 1460
     wiederholbar = ja
@@ -154,6 +160,7 @@ ereignis eisenbahn.unglueck {
     quelle = "Gall/Pohl (1999)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = wirtschaft
     bedingung { datum >= 1850.01.01 }
     wartezeit = 2920
     wiederholbar = ja
@@ -176,6 +183,7 @@ ereignis streik {
     quelle = "Kocka (1990); Tenfelde/Volkmann (Hg.), Streik (1981)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = revolution
     bedingung { datum >= 1860.01.01  lebensstandard_unten <= 45  gesetz_vereine != verbot }
     wartezeit = 365
     wiederholbar = ja
@@ -198,6 +206,7 @@ ereignis pressprozess {
     quelle = "Siemann, Gesellschaft im Aufbruch (1990); Requate, Journalismus als Beruf (1995)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = revolution
     bedingung { gesetz_presse = pressegesetz  unruhe >= 20 }
     wartezeit = 365
     wiederholbar = ja
@@ -220,6 +229,7 @@ ereignis turnfest {
     quelle = "Düding, Organisierter gesellschaftlicher Nationalismus in Deutschland (1984)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = revolution
     bedingung { datum >= 1858.01.01  gesetz_vereine != verbot }
     wartezeit = 1095
     wiederholbar = ja
@@ -237,6 +247,7 @@ ereignis saengerfest {
     quelle = "Klenke, Der singende „deutsche Mann“ (1998)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = revolution
     bedingung { datum >= 1850.01.01  gesetz_vereine != verbot }
     wartezeit = 1460
     wiederholbar = ja

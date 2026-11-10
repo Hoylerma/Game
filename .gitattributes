@@ -41,3 +41,7 @@
 *.tif   filter=lfs diff=lfs merge=lfs -text
 *.tiff  filter=lfs diff=lfs merge=lfs -text
 *.exr   filter=lfs diff=lfs merge=lfs -text
+
+# Ausnahme (seit M13b1): Die Schriften des Spiels (2,7 MB, SIL Open Font License) liegen direkt im
+# Repository, damit Checkouts ohne LFS (CI, Cloud) sie haben.
+game/assets/schriften/*.ttf binary -filter -diff -merge

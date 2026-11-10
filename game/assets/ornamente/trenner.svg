@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="16" viewBox="0 0 240 16">
+  <!-- Trennzeichen: feine Doppellinie mit Raute und Punkten. Eigene Zeichnung. -->
+  <g stroke="#2b2116" stroke-linecap="round">
+    <path d="M8 7 H100 M140 7 H232" stroke-width="1"/>
+    <path d="M24 10 H100 M140 10 H216" stroke-width="0.5"/>
+  </g>
+  <g fill="#b88930">
+    <path d="M120 1 L127 8 L120 15 L113 8 Z"/>
+    <circle cx="106" cy="8" r="2"/>
+    <circle cx="134" cy="8" r="2"/>
+  </g>
+  <path d="M120 4 L124 8 L120 12 L116 8 Z" fill="#f8f2e4"/>
+</svg>

@@ -1260,6 +1260,8 @@ ereignis maerz.forderungen {
     sicherheit = gesichert                     # optional: gesichert, schaetzung, spielwert, ungeprueft
     art    = historisch                        # Pflicht: historisch, dynamisch, atmosphaerisch
     wendepunkt = ja                            # optional (nein)
+    vignette = revolution                      # optional (seit M13b1): Bild im Ereignisfenster –
+                                               #   revolution, krieg, diplomatie, wirtschaft, hof
     wer    = staat                             # optional: staat (je Staat geprüft) oder welt
     bedingung { … }                            # optional: Prüfungen, die alle gelten müssen
     wartezeit = 10                             # optional, 0–36500 Tage (0 = sofort)
@@ -1608,6 +1610,52 @@ Jahrbuchs (`bevoelkerung`, `einnahmen`, `schulden`, `schatz`, `lebensstandard`, 
 Dimension, eine unbekannte Größe, fehlende Pflichtfelder, ein Block ohne Dimension oder eine Dimension ohne
 Faktor. Inhaltsbereich `ereignisse` (Stand 9). Im Kern `World::legacy_rules` (`LegacyRules`), Berechnung in
 `legacy.hpp`.
+
+### 3.42 `common/zeitung.chron` (seit M13b1)
+
+Zeitung ([vertical_slice.md](vertical_slice.md) 5.2): erfundene Blätter und die Anlässe ihrer Titelseiten;
+nur in Welten mit Ereignissen, die Datei darf fehlen (dann gibt es keine Zeitung). Die Zeitung ist
+Darstellung: Sie liest Chronik und Inhalt, ändert keinen Zustand und zählt nicht zum Fingerabdruck.
+
+```text
+blatt beobachter {                               # mindestens eines; Kennung aus a–z, 0–9 und _
+    name     = "Der Rheinische Beobachter"       # Pflicht
+    richtung = liberal                           # Pflicht: liberal, konservativ, demokratisch, katholisch
+    staaten  = { PRU }                           # optional: Verbreitung nach Spielerstaat (Tags zum Start)
+    maerkte  = { rheinland niederrhein }         # optional: … nach dem Markt seiner Hauptstadt
+}
+
+anlass krieg {                                   # beliebig viele, in Dateireihenfolge geprüft
+    muster  = "{staat} erklärt {gegner} den Krieg.*"   # Pflicht: Text des Chronikeintrags
+    gewicht = 2                                  # optional (1): 0 nur Vermischtes, 1 Jahrbuch,
+                                                 #   2 Titelseite, wenn der Leser beteiligt ist, 3 immer
+    ereignis = pru.kaiserdeputation              # optional: nur dieses Ereignis ({titel} im Muster)
+    wendepunkt = ja                              # optional: nur Wendepunkte ({titel} im Muster)
+    schlagzeile = "Krieg zwischen {staat} und {gegner}"   # mehrfach: eine Fassung je Ausgabe;
+    unterzeile  = "…"                            #   Pflicht ab gewicht 1 (Schlagzeile)
+    text        = "…"                            # mehrfach, auch als Block aus Zeichenketten
+    demokratisch { schlagzeile = "…" text = "…" } # optional je Richtung: ersetzt die Listen, die es hat
+}
+```
+
+**Muster.** Fester Text, Platzhalter `{name}` (a–z, 0–9 und _, jeder höchstens einmal, zwischen zwei
+Platzhaltern steht Text) und `*` für beliebigen, auch leeren Text (am Ende oder vor Text). Platzhalter
+nehmen so wenig Text wie möglich. `{staat}`, `{gegner}`, `{partner}` und `{sieger}` müssen Kurz- oder
+Langnamen eines Staates sein, `{zahl}`, `{sitze}` und `{besetzt}` Zahlen, `{titel}` der Titel eines
+Ereignisses (mit `ereignis` dieses, mit `wendepunkt` eines Wendepunkts). Es gilt der erste Anlass, dessen
+Muster auf den ganzen Text passt.
+
+**Texte.** Schlagzeile, Unterzeile und Text dürfen die Platzhalter des Musters und die festen `{datum}`
+(Datum des Eintrags, lang), `{jahr}`, `{blatt}`, `{ort}` (Ort des Eintrags) und `{staat}` (Staat des
+Eintrags, wenn das Muster ihn nicht hat) enthalten; andere meldet der Lader. Welche Fassung erscheint,
+folgt aus Datum und Text des Eintrags (ohne Zufallszahlen): Dieselbe Ausgabe zeigt immer dieselbe Seite.
+
+**Blatt.** Der Leser ist der Spielerstaat. Zuerst gelten die Blätter, deren `maerkte` den Markt seiner
+Hauptstadt enthalten, dann die mit seinem Staat in `staaten`, dann die überregionalen (ohne beides);
+unter ihnen wechselt das Blatt je Ausgabe, und mit ihm die Richtung. **Beteiligt** ist der Leser, wenn
+der Eintrag zu seinem Staat gehört, ein Staat des Musters seiner ist oder der Eintrag keinen Staat hat.
+Die Titelseite nennt außerdem Nummer (Tag im Jahr), den Wortlaut des Eintrags und als Vermischtes bis zu
+vier andere Einträge der vierzehn Tage davor, die keine eigene Titelseite (Gewicht 2 oder 3) haben.
 
 ## 4. Startzustand
 

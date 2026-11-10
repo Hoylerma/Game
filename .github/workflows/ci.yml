@@ -807,6 +807,11 @@ jobs:
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_ereignis.png" --szenario=voelkerfruehling --staat=BAD --tage=8 --ereignis --kartenmodus=16 \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Zeitung (seit M13b1): Titelseite mit Kopf in Fraktur, Schlagzeile und zwei Spalten
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_zeitung.png" --szenario=voelkerfruehling --staat=PRU --tage=400 --zeitung \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
           # Journalfenster (seit M11): die deutsche Frage im Juni 1848
           xvfb-run -a -s "-screen 0 1600x900x24" \
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \

@@ -9,6 +9,7 @@ ereignis erfurt.unionsparlament {
     quelle = "Siemann (1985); Huber Bd. 2 (1960)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wer    = welt
     bedingung { welt_merkmal = unionspolitik  datum >= 1850.03.01  datum <= 1850.12.31 }
     wartezeit = 10
@@ -27,6 +28,7 @@ ereignis den.frieden {
     quelle = "Siemann (1985); Nipperdey (1983)"
     sicherheit = ungeprueft
     art    = atmosphaerisch
+    vignette = krieg
     wer    = welt
     bedingung { welt_merkmal = schleswig_krieg  datum >= 1850.07.01  datum <= 1851.12.31  staat PRU { krieg_mit = DEN } }
     wartezeit = 15
@@ -44,6 +46,7 @@ ereignis hek.verfassungskonflikt {
     quelle = "Huber Bd. 2 (1960); Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     wendepunkt = ja
     bedingung { staat = HEK  datum >= 1850.09.01  datum <= 1850.12.31 }
     wartezeit = 7
@@ -79,6 +82,7 @@ ereignis pru.olmuetz {
     quelle = "Siemann (1985); Clark (2007)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wendepunkt = ja
     bedingung {
         staat = PRU
@@ -120,6 +124,7 @@ ereignis aut.olmuetz.antwort {
     quelle = "Siemann (1985); Clark (2007)"
     sicherheit = ungeprueft
     art    = dynamisch
+    vignette = diplomatie
     wendepunkt = ja
     nur_folge = ja
     bedingung { staat = AUT  welt_merkmal = olmuetz_standgehalten }
@@ -150,6 +155,7 @@ ereignis dresdner.konferenzen {
     quelle = "Huber Bd. 2 (1960)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wer    = welt
     bedingung { welt_merkmal = olmuetz  datum >= 1850.12.01  datum <= 1851.06.30 }
     wartezeit = 10
@@ -163,6 +169,7 @@ ereignis bund.wiederherstellung {
     quelle = "Huber Bd. 2 (1960); Siemann (1985)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wendepunkt = ja
     wer    = welt
     bedingung {
@@ -187,6 +194,7 @@ ereignis bund.reaktionsbeschluss {
     quelle = "Huber Bd. 2 (1960); Siemann, Gesellschaft im Aufbruch (1990)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = diplomatie
     wer    = welt
     bedingung { welt_merkmal = bund_wiederhergestellt  datum >= 1851.06.01  datum <= 1851.12.31 }
     wartezeit = 30
@@ -204,6 +212,7 @@ ereignis reaktion.staat {
     quelle = "Siemann, Gesellschaft im Aufbruch (1990)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     nur_folge = ja
     bedingung { bund = ja  nicht { staat_in = { DEN NED } } }
     option umsetzen {
@@ -235,6 +244,7 @@ ereignis aut.silvesterpatent {
     quelle = "Rumpler (1997)"
     sicherheit = ungeprueft
     art    = historisch
+    vignette = hof
     bedingung { staat = AUT  datum >= 1851.12.01  datum <= 1851.12.31 }
     termin = 1851.12.31
     option aufheben {

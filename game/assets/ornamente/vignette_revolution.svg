@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="64" viewBox="0 0 96 64">
+  <!-- Vignette „Revolution“: wehende Fahne über einem Pflasterwall. Eigene Zeichnung. -->
+  <g fill="none" stroke="#2b2116" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 58 V8" stroke-width="2"/>
+    <path d="M40 10 C52 4 60 16 76 10 V30 C60 36 52 24 40 30 Z" stroke-width="1.4"/>
+    <path d="M14 58 H82" stroke-width="1.6"/>
+    <path d="M20 58 L26 48 H38 M48 48 H70 L76 58" stroke-width="1.2"/>
+    <path d="M30 48 V42 H44 M52 48 V42 H64 V48" stroke-width="1"/>
+  </g>
+  <path d="M40 10 C52 4 60 16 76 10 V17 C60 23 52 11 40 17 Z" fill="#2b2116"/>
+  <path d="M40 17 C52 11 60 23 76 17 V24 C60 30 52 18 40 24 Z" fill="#973c2f"/>
+  <path d="M40 24 C52 18 60 30 76 24 V30 C60 36 52 24 40 30 Z" fill="#b88930"/>
+  <circle cx="40" cy="7" r="2.4" fill="#b88930"/>
+</svg>

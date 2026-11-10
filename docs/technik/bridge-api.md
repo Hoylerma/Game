@@ -65,7 +65,7 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `set_tax_percent(state_index: int, kind: int, percent: int)` | `bool` | seit M5: wie oben für eine Steuerart (`TAX_KONTRIBUTION` 0, `TAX_AKZISE` 1, `TAX_ZOLL` 2); `false` auch bei unbekannter Art und seit M9 für den Zoll eines Mitglieds einer Zollunion (`customs_locked`) |
 | `get_max_tax_rate_percent()` | `int` | Höchstsatz, gilt für alle drei Steuerarten |
 | `get_chronicle_size()` | `int` | |
-| `get_chronicle(from_index: int)` | `Array` | Einträge ab `from_index` als Dictionaries `{ "date_text": String, "text": String, "location_index": int, "state_index": int, "turning_point": bool }`; `turning_point` (seit M11) markiert Einträge, die ein Wendepunkt geschrieben hat (Standardtext oder `chronik` der Option am selben Tag) |
+| `get_chronicle(from_index: int)` | `Array` | Einträge ab `from_index` als Dictionaries `{ "date_text": String, "text": String, "location_index": int, "state_index": int, "turning_point": bool }`; `turning_point` (seit M11) markiert Einträge, die ein Wendepunkt geschrieben hat (Standardtext oder `chronik` der Option am selben Tag); die Zeitung zu einem Eintrag liefert `get_front_page` (seit M13b1) |
 | `get_checksum()` | `String` | Prüfsumme als 16-stellige Hexadezimalzahl |
 
 ### Diplomatie (seit M9, Schritt b3)
@@ -154,6 +154,8 @@ Schritt); sie stehen im Spielstand.
 | `get_yearbook(state_index: int)` | `Dictionary` | seit M13a4 (vertical_slice.md 4.3): `columns` (PackedStringArray: zwölf Kennzahlen, dann die Dimensionen), `measure_count` (12), `rows` (je Stichtag `{ date, year, date_text, values (PackedFloat64Array je Spalte) }`: Start, jeder 1. Januar, letzter Tag) |
 | `get_verdict()` | `Dictionary` | seit M13a4: `has_end`, `over` (Partie zu Ende), `active`, `end_date` (mit Ende), `end_date_text`, `start_date_text`, `turning_points` (je `{ date_text, title, state_name, option_text }`, eingetretene Wendepunkte in zeitlicher Folge), `wars` (je `{ attacker_name, defender_name, started_text, ended_text, winner (1, −1, 0), winner_name, transfers }`) |
 | `is_game_over()` | `bool` | seit M13a4: Das Szenario hat ein `ende`, und dieser letzte Tag ist gerechnet |
+| `get_front_page(chronicle_index: int, reader: int)` | `Dictionary` | seit M13b1 ([vertical_slice.md](vertical_slice.md) 5.2, chronik-skript.md 3.42): Titelseite der Zeitung zum Chronikeintrag für den Leser (Spielerstaat): `chronicle_index`, `occasion`, `weight` (1–3), `involved` (Leser beteiligt), `paper`, `leaning`, `issue`, `date_text`, `date_short`, `year`, `headline`, `subline`, `text`, `report` (Wortlaut des Eintrags), `miscellany` (Array von Texten); leer ohne Zeitung, Anlass oder mit Gewicht 0 |
+| `get_front_pages(reader: int, min_weight: int)` | `Array` | seit M13b1: alle Titelseiten der Partie ab Gewicht `min_weight` in zeitlicher Folge, wie `get_front_page` ohne `text`, `report` und `miscellany` (Jahrbuch) |
 | `get_game_settings()` | `Dictionary` | `active` (Welt mit KI); mit KI dazu `difficulties` (je `{ id, name, text, default }`), `difficulty_id`, `difficulty_name` (Stufe der Partie, sonst `standard_stufe`), `open` (offener Geschichtsverlauf), `editable` (noch am ersten Tag) |
 | `set_game_settings(difficulty_id: String, open: bool)` | `bool` | reiht den Befehl `Spieleinstellung` ein (`difficulty_id` leer = Standard); `false` ohne KI, nach dem ersten Tag oder bei unbekannter Stufe |
 

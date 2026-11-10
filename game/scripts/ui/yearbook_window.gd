@@ -3,9 +3,12 @@ extends PanelContainer
 ## Statistisches Jahrbuch (seit M13, Schritt a5a; vertical_slice.md 4.2 und 4.3): eine Kennzahl oder
 ## Dimension des Vermächtnisses je Stichtag als Liniendiagramm und Tabelle, für den Spielerstaat und bis zu
 ## drei Staaten zum Vergleich. Die Werte rechnet der Kern (Jahresreihen im Zustand, get_yearbook); das
-## Fenster zeigt sie nur. main.gd öffnet und schließt es über die Fensterverwaltung.
+## Fenster zeigt sie nur. main.gd öffnet und schließt es über die Fensterverwaltung. Seit M13b1 listet
+## „Zeitungen“ die Titelseiten der Partie; ein Klick öffnet eine.
 
 signal close_requested
+## Seit M13b1: Titelseite zum Chronikeintrag öffnen (Liste „Zeitungen“).
+signal newspaper_requested(chronicle_index: int)
 
 const WIDTH := 600.0
 const CHART_HEIGHT := 190.0
@@ -31,6 +34,11 @@ var _empty: Label = null
 var _range: Label = null
 ## Staaten der Vergleichsauswahl in der Reihenfolge der Einträge (Index des Staates).
 var _choices := PackedInt32Array()
+## Zeitungen der Partie (seit M13b1) statt Diagramm und Tabelle.
+var _papers_button: Button = null
+var _papers_scroll: ScrollContainer = null
+var _papers: VBoxContainer = null
+var _papers_empty: Label = null
 
 
 func _ready() -> void:
@@ -104,9 +112,36 @@ func shown_states() -> PackedInt32Array:
 	return result
 
 
+## Liste „Zeitungen“ zeigen oder verlassen (Tests).
+func show_papers(on: bool) -> void:
+	_papers_button.button_pressed = on
+	refresh()
+
+
+## Einträge der Liste „Zeitungen“: { chronicle_index, text } (Tests).
+func paper_entries() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for child in _papers.get_children():
+		if child is Button:
+			result.append({"chronicle_index": int(child.get_meta(&"chronicle_index", -1)), "text": (child as Button).text})
+	return result
+
+
 func refresh() -> void:
 	if not visible or _sim == null:
 		return
+	var papers := _papers_button.button_pressed
+	for node: Control in [_chart, _range, _scroll]:
+		node.visible = not papers
+	_measure.disabled = papers
+	for b in _compare_buttons:
+		b.disabled = papers
+	_papers_scroll.visible = papers
+	if papers:
+		_empty.visible = false
+		_fill_papers()
+		return
+	_papers_empty.visible = false
 	_series.clear()
 	var states := PackedInt32Array([_player])
 	for c in _compare:
@@ -174,7 +209,33 @@ func _build() -> void:
 		)
 		controls.add_child(b)
 		_compare_buttons.append(b)
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	controls.add_child(spacer)
+	_papers_button = Button.new()
+	_papers_button.name = "Papers"
+	_papers_button.text = "Zeitungen"
+	_papers_button.toggle_mode = true
+	_papers_button.focus_mode = Control.FOCUS_NONE
+	_papers_button.tooltip_text = "Die Titelseiten der Partie, die den eigenen Staat betrafen oder alle angingen"
+	_papers_button.toggled.connect(func(_on: bool) -> void: refresh())
+	controls.add_child(_papers_button)
 	box.add_child(controls)
+	_papers_empty = Label.new()
+	_papers_empty.text = "Noch keine Zeitung in dieser Partie."
+	_papers_empty.theme_type_variation = &"MutedLabel"
+	_papers_empty.visible = false
+	box.add_child(_papers_empty)
+	_papers_scroll = ScrollContainer.new()
+	_papers_scroll.name = "PaperList"
+	_papers_scroll.custom_minimum_size = Vector2(0, CHART_HEIGHT + CONTENT_HEIGHT)
+	_papers_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_papers_scroll.visible = false
+	_papers = VBoxContainer.new()
+	_papers.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_papers.add_theme_constant_override(&"separation", 2)
+	_papers_scroll.add_child(_papers)
+	box.add_child(_papers_scroll)
 
 	_empty = Label.new()
 	_empty.text = "Das Jahrbuch füllt sich mit den Jahresreihen (Start, jeder 1. Januar)."
@@ -252,6 +313,30 @@ func _years() -> PackedInt32Array:
 
 func _decimals() -> int:
 	return DECIMALS[_column] if _column < DECIMALS.size() else 0
+
+
+## Titelseiten der Partie, neueste zuerst: Gewicht 3, Gewicht 2 und 1, wenn der Spielerstaat beteiligt ist.
+func _fill_papers() -> void:
+	for child in _papers.get_children():
+		_papers.remove_child(child)
+		child.queue_free()
+	var pages := _sim.get_front_pages(_player, 1)
+	pages.reverse()
+	for page in pages:
+		if int(page.get("weight", 0)) < 3 and not bool(page.get("involved", false)):
+			continue
+		var b := Button.new()
+		b.flat = true
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.focus_mode = Control.FOCUS_NONE
+		b.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		b.text = "%s  %s – %s" % [page.get("date_short", ""), page.get("headline", ""), page.get("paper", "")]
+		b.tooltip_text = str(page.get("subline", ""))
+		var index := int(page.get("chronicle_index", -1))
+		b.set_meta(&"chronicle_index", index)
+		b.pressed.connect(func() -> void: newspaper_requested.emit(index))
+		_papers.add_child(b)
+	_papers_empty.visible = _papers.get_child_count() == 0
 
 
 func _fill() -> void:
