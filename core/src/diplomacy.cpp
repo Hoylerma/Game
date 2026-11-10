@@ -133,11 +133,22 @@ bool federal_state(const World& world, Index state) {
     if (in_range(world.left_federation, state) && world.left_federation[at(state)] != 0) {
         return false;
     }
+    // Seit M13a6 zuerst die Hauptstadt: Sie entscheidet fast immer, ohne alle Orte zu durchsuchen (das
+    // kostete 1848 ein Zehntel der Rechenzeit); gleiches Ergebnis wie die Suche.
+    const Index capital = in_range(world.states, state) ? world.states[at(state)].capital : kNone;
+    const Location* capital_loc =
+        in_range(world.locations, capital) && world.locations[at(capital)].owner == state
+            ? &world.locations[at(capital)]
+            : nullptr;
     if (federation_founded(world)) {
         // Seit M13a2: die Mitglieder des Bundes zur Laufzeit, solange sie Orte besitzen.
         return in_range(world.federation.members, state) && world.federation.members[at(state)] != 0 &&
-               std::any_of(world.locations.begin(), world.locations.end(),
-                           [&](const Location& loc) { return loc.owner == state; });
+               (capital_loc != nullptr ||
+                std::any_of(world.locations.begin(), world.locations.end(),
+                            [&](const Location& loc) { return loc.owner == state; }));
+    }
+    if (capital_loc != nullptr && capital_loc->federal) {
+        return true;
     }
     return in_range(world.states, state) &&
            std::any_of(world.locations.begin(), world.locations.end(),

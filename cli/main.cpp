@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <array>
 #include <chrono>
+#include <cmath>
 #include <cstdint>
 #include <cstdio>
 #include <exception>
@@ -87,6 +88,8 @@ Befehle:
   determinismus  Zwei Läufe mit gleichem Seed vergleichen (Prüfsumme nach jedem Jahr; Lauf B
                  mit einem Thread) und einen Lauf mit Seed+1 (Abweichung erwartet)
   lasttest       Lasttest: jeder Ort mit Daten, viele Bevölkerungsblöcke; Zeit je Spieljahr
+  leistung       Leistungstest: Spieljahre einer Partie mit allen Systemen (KI, Ereignisse, Krieg);
+                 Zeit je Spieljahr, Median, Anteil der KI; mit --grenze Exitcode 1 darüber (seit M13)
   wirtschaft     Wirtschaft im Überblick: Güter, Berufe, Haushalt der Staaten (nach dem
                  Einschwingen oder nach --jahre/--tage); Werkzeug der Kalibrierung
   bilanz         Balancing-Bericht: mehrere Läufe ohne Spielereingriff (Seeds ab --seed);
@@ -127,7 +130,7 @@ Optionen:
   --threads N    Rechnende Threads, 0 = alle Kerne (Standard: 0)
   --bloecke N    Lasttest: angestrebte Zahl der Bevölkerungsblöcke (Standard: 500000)
   --vergleich N  Lasttest: zweiter Lauf mit N Threads, Prüfsummen müssen gleich sein
-  --grenze S     Lasttest: Exitcode 1, wenn der Median je Spieljahr über S Sekunden liegt
+  --grenze S     lasttest, leistung: Exitcode 1, wenn der Median je Spieljahr über S Sekunden liegt
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --maerkte      Preise je Markt (nur wirtschaft)
@@ -3515,6 +3518,57 @@ std::optional<std::int64_t> peak_memory_kib() {
     return std::nullopt;
 }
 
+/// Leistungstest einer Partie (seit M13, Schritt a6; vertical_slice.md 3.6): das Lesezeichen mit allen
+/// Systemen, je Spieljahr (365 Tage) die Zeit und der Anteil der KI, der Median und die Grenze.
+int cmd_leistung(const Options& o, const fs::path& data_dir) {
+    const auto world = load(data_dir, o.scenario, false);
+    if (!world) {
+        return kExitDataError;
+    }
+    const std::int64_t years = o.years.value_or(kDefaultLoadTestYears);
+    uhrwerk::Simulation sim(*world, uhrwerk::SimConfig{o.seed, o.threads});
+    std::cout << "Leistungstest (vertical_slice.md, Abschnitt 3.6)\n"
+              << "Szenario:  " << sim.world().scenario.name << " (" << sim.world().scenario.id << "), Seed "
+              << o.seed << '\n'
+              << "Welt:      " << group_digits(std::to_string(sim.world().locations_with_data()))
+              << " Orte mit Daten, "
+              << plural(sim.world().pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << ", "
+              << plural(sim.world().states.size(), "Staat", "Staaten") << '\n'
+              << "Threads:   " << sim.threads() << '\n';
+    std::vector<double> times;
+    for (std::int64_t year = 1; year <= years; ++year) {
+        const uhrwerk::Date from = sim.world().date;
+        const double ai_before = sim.ai_seconds();
+        const auto t0 = std::chrono::steady_clock::now();
+        sim.step_days(365);
+        const double seconds = seconds_since(t0);
+        const double ai = sim.ai_seconds() - ai_before;
+        times.push_back(seconds);
+        std::cout << "Jahr " << year << ":    " << format_seconds(seconds) << "  ab "
+                  << uhrwerk::format_date(from) << "  KI "
+                  << format_fixed(
+                         Fixed::from_ratio(seconds > 0.0 ? std::llround(ai * 1000.0 / seconds) : 0, 10), 1)
+                  << " %  Prüfsumme " << hex16(sim.checksum()) << '\n';
+    }
+    std::vector<double> sorted = times;
+    std::sort(sorted.begin(), sorted.end());
+    const std::size_t mid = sorted.size() / 2;
+    const double median =
+        sorted.empty() ? 0.0 : (sorted.size() % 2 == 1 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2.0);
+    std::cout << "Median:    " << format_seconds(median) << " je Spieljahr (365 Tage)\n";
+    if (const auto memory = peak_memory_kib()) {
+        std::cout << "Speicher:  Spitze " << format_int((*memory + 512) / 1024) << " MB\n";
+    }
+    if (o.limit_seconds && median > *o.limit_seconds) {
+        std::cout << "FEHLER: Median über der Grenze von " << format_seconds(*o.limit_seconds) << '\n';
+        return kExitDataError;
+    }
+    if (o.limit_seconds) {
+        std::cout << "Grenze:    " << format_seconds(*o.limit_seconds) << " eingehalten\n";
+    }
+    return kExitOk;
+}
+
 int cmd_lasttest(const Options& o, const fs::path& data_dir) {
     const auto base = load(data_dir, o.scenario, true);
     if (!base) {
@@ -3639,6 +3693,8 @@ int run(int argc, char** argv) {
         } else if (o.command == "lasttest") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--bloecke",
                                  "--vergleich", "--grenze", "--speichern"});
+        } else if (o.command == "leistung") {
+            check_applicable(o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--grenze"});
         } else if (o.command == "wirtschaft") {
             check_applicable(
                 o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads", "--maerkte"});
@@ -3691,6 +3747,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "lasttest") {
             return cmd_lasttest(o, data_dir);
+        }
+        if (o.command == "leistung") {
+            return cmd_leistung(o, data_dir);
         }
         if (o.command == "wirtschaft") {
             return cmd_wirtschaft(o, data_dir);

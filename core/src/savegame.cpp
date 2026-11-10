@@ -1519,10 +1519,14 @@ ContentFingerprint content_fingerprint(const World& w) {
             }
             fixeds(h, region.leaning);
         }
+        // Verfassung und Wahlrecht eines Staates ändern Ereignisse (seit M11); sie stehen im Spielstand
+        // und zählen nicht mit (Durchspieltest M13a6: sonst passt ein Spielstand nach der oktroyierten
+        // Verfassung Preußens nicht mehr zu den Spieldaten).
         h.u64(w.states.size());
         for (const State& s : w.states) {
-            h.u64(static_cast<std::uint64_t>(s.constitution));
-            law(h, s.law);
+            h.u64(static_cast<std::uint64_t>(s.law.system));
+            h.flag(s.law.indirect);
+            h.fixed(s.law.census_threshold);
         }
         h.u64(w.electoral_districts.size());
         for (const ElectoralDistrict& d : w.electoral_districts) {

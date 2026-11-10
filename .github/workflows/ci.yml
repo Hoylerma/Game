@@ -280,6 +280,22 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
+      # Abnahme M13a6 (docs/technik/vertical_slice.md 3.6): Lesezeichen 1848 mit allen Systemen, Median
+      # höchstens 2 s je Spieljahr auf 4 Kernen. Die CI-Grenze von 3 s lässt Puffer für schwankende
+      # Runner; der Messwert steht in der Zusammenfassung.
+      - name: Leistungstest 1848 (drei Spieljahre)
+        run: |
+          set -o pipefail
+          ./build/release/cli/uhrwerk-cli leistung --daten data --szenario voelkerfruehling --jahre 3 --threads 4 \
+            --grenze 3 | tee "$RUNNER_TEMP/leistung.txt"
+          {
+            echo "### Leistungstest 1848 (Release, $(nproc) Kerne)"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/leistung.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
   balancing:
     name: Balancing (Linux, Release)
     runs-on: ubuntu-24.04
@@ -570,7 +586,7 @@ jobs:
   godot:
     name: Godot (Brücke, Tests, Screenshots)
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 75
     # Mit ausdrücklich gesetzter Shell läuft bash mit 'pipefail': Bricht Godot in
     # 'godot … | tee log' mit einem Fehlercode ab, schlägt auch der Schritt fehl.
     defaults:
@@ -706,6 +722,24 @@ jobs:
             exit 1
           fi
           grep "KLICK OK" "$RUNNER_TEMP/klick.log" | sed 's/^/Klicktest: /' >> "$GITHUB_STEP_SUMMARY"
+
+      # Abnahme M13a6: die Partie 1848–1871 als Preußen, Österreich, Bayern und Sachsen über die
+      # Oberfläche (Startbildschirm, Ereignisse, Wahlabende, alle Fenster, Speichern und Laden, Urteil).
+      - name: Durchspieltest 1848–1871 (game/tests/durchspiel_test.gd)
+        run: |
+          "$GODOT_BIN" --headless --path game --script res://tests/durchspiel_test.gd 2>&1 | tee "$RUNNER_TEMP/durchspiel.log"
+          grep -q "DURCHSPIEL OK" "$RUNNER_TEMP/durchspiel.log"
+          if grep -E "SCRIPT ERROR|Parse Error" "$RUNNER_TEMP/durchspiel.log"; then
+            echo "::error::Skriptfehler im Durchspieltest."
+            exit 1
+          fi
+          {
+            echo "### Durchspieltest 1848–1871"
+            echo
+            echo '```'
+            grep -E "^  [A-Z]{3}: |DURCHSPIEL" "$RUNNER_TEMP/durchspiel.log"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Screenshots der Hauptszene (Xvfb, OpenGL 3)
         run: |

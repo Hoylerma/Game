@@ -54,6 +54,16 @@ if(UHRWERK_BUILD_CLI)
     add_test(NAME determinismus_1848
         COMMAND uhrwerk-cli determinismus --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling
                 --jahre 2)
+    # Leistungstest 1848 (seit M13a6, vertical_slice.md 3.6): drei Spieljahre mit allen Systemen. Die Grenze
+    # von 2 s je Spieljahr (Median, 4 Kerne) gilt im Release-Build; im Debug-Build nur der Bericht.
+    if(CMAKE_BUILD_TYPE STREQUAL "Release")
+        add_test(NAME leistung_1848
+            COMMAND uhrwerk-cli leistung --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --jahre 3
+                    --threads 4 --grenze 2)
+    else()
+        add_test(NAME leistung_1848
+            COMMAND uhrwerk-cli leistung --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --jahre 1)
+    endif()
     # Lasttest im Kleinen (seit M4): gleiche Prüfsummen mit 3 Threads und mit einem Thread.
     add_test(NAME lasttest_threads
         COMMAND uhrwerk-cli lasttest --daten ${PROJECT_SOURCE_DIR}/data --bloecke 20000 --jahre 1
@@ -195,10 +205,11 @@ if(UHRWERK_BUILD_CLI)
         COMMAND uhrwerk-cli wiederholung ${partie}.einigkeit --daten ${PROJECT_SOURCE_DIR}/data)
     add_test(NAME spielstand_laden
         COMMAND uhrwerk-cli spielstand ${partie}.einigkeit --daten ${PROJECT_SOURCE_DIR}/data)
-    # Lesezeichen 1848 (seit M7): Verwaltung und Bundesgebiet stehen im Fingerabdruck; ein Jahr genügt.
+    # Lesezeichen 1848 (seit M7): Verwaltung und Bundesgebiet stehen im Fingerabdruck. Seit M13a6 zwei Jahre,
+    # der Speicherpunkt (März 1849) liegt nach der oktroyierten Verfassung Preußens (Dezember 1848, Ereignis).
     add_test(NAME speichertest_1848
         COMMAND uhrwerk-cli speichertest --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling
-                --jahre 1 --testbefehle 20 --punkte 1)
+                --jahre 2 --testbefehle 20 --punkte 1)
     set_tests_properties(protokoll_50_jahre PROPERTIES FIXTURES_SETUP partie_50_jahre)
     set_tests_properties(wiederholung_50_jahre wiederholung_spielstand spielstand_laden
         PROPERTIES FIXTURES_REQUIRED partie_50_jahre)

@@ -218,7 +218,7 @@ game/
 │   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9); Heeresfenster (army_panel.gd), Kriegsfenster (war_window.gd) und Schlachtberichte (battle_reports.gd, alle seit M10)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte)
-└── tests/                     Einheiten-, Rauch-, Klick- und Leistungstest, siehe tests/README.md
+└── tests/                     Einheiten-, Rauch-, Klick-, Leistungs- und Durchspieltest, siehe tests/README.md
 ```
 
 ### Spielstände (seit M6)

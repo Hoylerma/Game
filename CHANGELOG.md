@@ -13,6 +13,16 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Leistung und Durchspieltest (Schritt a6):** Ein Spieljahr 1848 mit allen Systemen braucht im Median
+  **1,5 s** statt 2,5 s (4 Kerne, Release). Drei Stellen sind schneller: die Frage nach dem Bundesgebiet,
+  die Festkommarechnung mit eingebauten 128-Bit-Zahlen und die Neigung der Wähler ohne neuen Speicher je
+  Aufruf. Alles bleibt bitgleich, 1648 auch. Neuer Befehl `uhrwerk-cli leistung` mit CTest und CI-Schritt.
+  Der neue **Durchspieltest** (`game/tests/durchspiel_test.gd`) spielt die Partie 1848–1871 als Preußen,
+  Österreich, Bayern und Sachsen über die Oberfläche durch: Startbildschirm, Ereignisse, Wahlabende, alle
+  Fenster, Speichern und Laden, Urteil. **Behoben:** Spielstände und Protokolle nach der oktroyierten
+  Verfassung Preußens (Dezember 1848) ließen sich nicht laden („passt nicht zu den Spieldaten (abweichend:
+  politik)“). Verfassung und Wahlrecht der Staaten zählen nicht mehr zum Fingerabdruck des Inhalts; ältere
+  Spielstände passen deshalb nicht mehr.
 - **Einstellungen, Pausenregeln, Chronik, Lexikon (Schritt a5d):** Ein Fenster **Einstellungen** (aus
   Startbildschirm und Spielmenü) speichert Bild, Ton, Spiel, Barrierefreiheit, Tasten und Sprache: unter
   anderem halbjährliche Spielstände, **Pausenregeln** (Krieg, Forderung, Wahl, Amtswechsel, Bundesgründung,

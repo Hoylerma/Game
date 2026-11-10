@@ -396,3 +396,43 @@ TEST_CASE("Fixed: Schnellweg der Multiplikation an der Grenze 2^32") {
         CHECK((raw(a) * raw(b)).raw() == reference(a, b));
     }
 }
+
+TEST_CASE("Fixed: eingebaute 128-Bit-Wege gleich den portablen (seit M13a6)") {
+    using uhrwerk::detail::U128;
+    // Portable Referenz der Multiplikation (wie mul_u64 ohne __int128).
+    const auto reference_mul = [](std::uint64_t a, std::uint64_t b) {
+        const std::uint64_t a_lo = a & 0xFFFFFFFFu, a_hi = a >> 32;
+        const std::uint64_t b_lo = b & 0xFFFFFFFFu, b_hi = b >> 32;
+        const std::uint64_t p0 = a_lo * b_lo;
+        const std::uint64_t p1 = a_lo * b_hi;
+        const std::uint64_t p2 = a_hi * b_lo;
+        const std::uint64_t p3 = a_hi * b_hi;
+        const std::uint64_t mid = (p0 >> 32) + (p1 & 0xFFFFFFFFu) + (p2 & 0xFFFFFFFFu);
+        return U128{p3 + (p1 >> 32) + (p2 >> 32) + (mid >> 32), (mid << 32) | (p0 & 0xFFFFFFFFu)};
+    };
+    uhrwerk::Pcg32 rng(20261110, uhrwerk::RngStream::Demografie);
+    const auto u64 = [&]() { return (static_cast<std::uint64_t>(rng.next()) << 32) | rng.next(); };
+    for (int i = 0; i < 20000; ++i) {
+        const std::uint64_t a = i % 3 == 0 ? u64() >> (i % 40) : u64();
+        const std::uint64_t b = i % 5 == 0 ? (u64() >> 33) + 1 : u64() | 1;
+        const U128 fast = uhrwerk::detail::mul_u64(a, b);
+        const U128 slow = reference_mul(a, b);
+        REQUIRE(fast.hi == slow.hi);
+        REQUIRE(fast.lo == slow.lo);
+        // Division 128/64 mit Quotient in 64 Bit gegen Knuth.
+        const U128 n{fast.hi % b, fast.lo};
+        std::uint64_t rem_fast = 0;
+        std::uint64_t rem_slow = 0;
+        const std::uint64_t q_fast = uhrwerk::detail::div_u128_by_u64(n, b, &rem_fast);
+        const std::uint64_t q_slow =
+            n.hi == 0 ? n.lo / b : uhrwerk::detail::div_u128_by_u64_knuth(n, b, &rem_slow);
+        if (n.hi == 0) {
+            rem_slow = n.lo % b;
+        }
+        REQUIRE(q_fast == q_slow);
+        REQUIRE(rem_fast == rem_slow);
+    }
+    // Zur Übersetzungszeit derselbe Weg wie zur Laufzeit.
+    static_assert((uhrwerk::Fixed::from_int(3) * uhrwerk::Fixed::from_ratio(1, 2)).raw() == 3 * 32768);
+    static_assert((uhrwerk::Fixed::from_int(7) / uhrwerk::Fixed::from_int(2)).raw() == 7 * 32768);
+}
