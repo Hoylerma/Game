@@ -1064,6 +1064,8 @@ func _after_load(new_client: bool = false) -> void:
 	_update_railways()
 	# Ein Spielstand kann offene Ereignisse mitbringen (die Zeit steht nach dem Laden ohnehin).
 	_check_open_events()
+	_mood_month = -1
+	_update_mood() # seit M13b2
 
 
 ## Neues Spiel (seit M7): lädt das Szenario frisch mit seinem Spielerstaat; die laufende Partie

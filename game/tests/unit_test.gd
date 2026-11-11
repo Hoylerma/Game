@@ -37,6 +37,7 @@ func _initialize() -> void:
 	_test_ticker_and_glossary()
 	_test_settings_and_lexicon()
 	_test_epoch_and_newspaper()
+	_test_audio_director()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -1015,3 +1016,47 @@ func _test_epoch_and_newspaper() -> void:
 	window.free()
 	_true(LaunchOptions.parse(PackedStringArray(["--zeitung"])).show_newspaper, "Startoption --zeitung")
 	_true(UserSettings.DEFAULTS.get("spiel/pause_zeitung", false) == true, "Pausenregel Zeitung an")
+
+
+## Musik und Klänge (seit M13b2, vertical_slice.md 5.3): Busse, Liste der Stücke, Stimmungen, Wechsel ohne
+## Wiederholung, Klänge. Ohne gerenderte Dateien (tools/klang/klang.py) prüft der Test nur die Stille.
+func _test_audio_director() -> void:
+	AudioDirector.ensure_buses()
+	_true(AudioServer.get_bus_index(AudioDirector.MUSIC_BUS) > 0 and AudioServer.get_bus_index(AudioDirector.SOUND_BUS) > 0, "Busse Musik und Klaenge")
+	var settings := UserSettings.new("user://unit_test_einstellungen_ton.cfg")
+	settings.set_value("ton/musik", 40)
+	settings.set_value("ton/musik_aus", true)
+	settings.apply(null)
+	var music := AudioServer.get_bus_index(AudioDirector.MUSIC_BUS)
+	_true(AudioServer.is_bus_mute(music) and absf(AudioServer.get_bus_volume_db(music) - linear_to_db(0.4)) < 0.01, "Lautstärke und „Musik aus“ auf dem Bus")
+	settings.set_value("ton/musik_aus", false)
+	settings.apply(null)
+	_true(not AudioServer.is_bus_mute(music), "Musik wieder an")
+	var director := AudioDirector.new()
+	director._ready() # außerhalb des Baums: Spieler und Liste, ohne Wiedergabe
+	if not director.has_music():
+		print("  (ohne gerenderte Musik: python3 tools/klang/klang.py)")
+		director.set_mood("krieg")
+		_true(director.current_piece().is_empty() and not director.play_sound("glocke"), "ohne Dateien still")
+		director.free()
+		return
+	for mood in AudioDirector.MOODS:
+		_true(not director.pieces_for(mood).is_empty(), "Musik für die Stimmung %s" % mood)
+	var peace := director.pieces_for("frieden")
+	var piece: Dictionary = director.pieces.get(peace[0], {})
+	_true(not str(piece.get("titel", "")).is_empty() and float(piece.get("dauer", 0.0)) > 30.0, "stuecke.cfg mit Titel und Dauer (%s)" % str(piece))
+	director.set_mood("frieden")
+	var first := director.current_piece()
+	_true(peace.has(first) and director.mood() == "frieden", "Frieden spielt ein Stück des Friedens (%s)" % first)
+	director.set_mood("frieden")
+	_true(director.current_piece() == first, "dieselbe Stimmung wechselt das Stück nicht")
+	director.set_mood("krieg")
+	_true(director.pieces_for("krieg").has(director.current_piece()), "Krieg blendet zu einem Stück des Krieges über")
+	director.set_mood("frieden")
+	_true(peace.size() < 2 or director.current_piece() != first, "ein neues Stück, nicht das zuletzt gespielte")
+	director.set_mood("unbekannt")
+	_true(director.mood() == "frieden", "unbekannte Stimmung ändert nichts")
+	for sound in AudioDirector.SOUNDS:
+		_true(director.play_sound(sound), "Klang %s" % sound)
+	_true(int(director.sounds_played.get("glocke", 0)) == 1 and not director.play_sound("pfeife"), "Zähler der Klänge, unbekannter Klang")
+	director.free()

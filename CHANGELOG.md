@@ -13,6 +13,15 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Musik und Klänge (Schritt b2):** Das Spiel hat **Musik**: sieben gemeinfreie Stücke der Zeit – Beethovens
+  Ode an die Freude und Für Elise, Haydns Kaiserlied, Silchers Loreley, Wilder Reiter und Soldatenmarsch aus
+  Schumanns Album für die Jugend (1848) und die Marseillaise –, als eigener Notentext mit einem eigenen
+  Synthesizer gespielt (`tools/klang`, ohne Aufnahmen und Samples). Die Musik folgt der Lage des eigenen
+  Staates (Frieden, Krise, Krieg, Revolution) und blendet bei einem Wechsel über. **Bedienklänge** der Epoche:
+  Gänsekiel für Befehle, Siegel für Verträge, Papier für Fenster, Glocke für Ereignisse, Trommel bei einer
+  Kriegserklärung, ab 1849 der Telegraf für Meldungen. Die Lautstärken in den Einstellungen wirken jetzt.
+  Das Rendern ist bitgleich über Rechner und numpy-Versionen; die Musikdateien sind nicht eingecheckt
+  (`python3 tools/klang/klang.py`).
 - **Epochenrahmen, Schriften, Zeitung (Schritt b1):** Das Spiel bringt seine **Schriften** mit (Source Serif 4,
   Playfair Display, Source Code Pro, UnifrakturMaguntia; SIL Open Font License) und rahmt seine Fenster mit
   Doppellinie und **Eckornamenten** aus eigenen Vektorgrafiken. Jedes Ereignis zeigt eine **Vignette** nach Art

@@ -43,6 +43,12 @@ fehlender `fluesse.png`, Ablehnung einer `definition.csv` vor M3), prüft daran
 `MapLabelLayout` (Bündelung zu Gebieten, pixelgewichteter Schwerpunkt, Ausweichen auf den
 nächsten Ort, Staats- und Kreisnamen) und löscht den Ordner wieder.
 
+Seit M13b1 prüft er Schriften, Ornamente, Vignetten, Theme und Zeitungsfenster, seit M13b2 den
+Klangregisseur (`AudioDirector`): Busse „Musik“ und „Klaenge“ mit Lautstärke und „Musik aus“ aus den
+Einstellungen, die Liste `stuecke.cfg`, Musik für jede Stimmung, Überblenden in eine andere Stimmung,
+kein Stück zweimal hintereinander und jeden Bedienklang. Ohne gerenderte Musik prüft er nur, dass das
+Spiel still bleibt.
+
 ```bash
 godot --headless --path game --script res://tests/unit_test.gd
 ```
@@ -250,6 +256,10 @@ Dazwischen prüft er:
     Platzhalter; ein echter Klick legt sie beiseite; „Zeitungen“ im Jahrbuch listet die Titelseiten, ein
     Klick öffnet die gewählte. In den übrigen Abschnitten legt der Test eine Zeitung beiseite wie ein
     Ereignis.
+16. **Musik und Klänge** (seit M13b2, als Bayern im Frühjahr 1848): Die Musik spielt ein Stück der
+    Stimmung, die die Lage des Staates ergibt (hier die Revolution); das Jahrbuch klingt nach Papier,
+    ein Steuerbefehl nach Gänsekiel, die Ereignisse bis dahin nach der Glocke. Ohne gerenderte Musik
+    (`tools/klang/klang.py`) meldet der Test nur die Stille.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd

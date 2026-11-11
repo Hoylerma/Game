@@ -1,0 +1,48 @@
+# Soldatenmarsch – Robert Schumann, Album für die Jugend op. 68 Nr. 2 (1848), gemeinfrei.
+# Tonhöhen und Dauern nach der Ausgabe Peters, geprüft am Notensatz des Mutopia-Projekts
+# (Philippe Hézaine, 2007). Satz für EINIGKEIT: rechte Hand im Blech, linke Hand im Klavier, dazu
+# eine eigene Trommelstimme.
+
+titel     = "Soldatenmarsch"
+komponist = "Robert Schumann"
+werk      = "Album für die Jugend op. 68 Nr. 2 (1848)"
+stimmung  = krieg
+tempo     = 116
+takt      = 2/4
+hall      = 0.2
+
+stimme oben    { instrument = blech    lautstaerke = 0.7 }
+stimme unten   { instrument = klavier  lautstaerke = 0.6 }
+stimme trommel { instrument = trommel  lautstaerke = 0.35 }
+
+teil a {
+    oben    = "[g4 h4]:8. [g4 c5]:16 [g4 d5]:8 r | [g4 e5] r [g4 d5] r | [fis4 c5] r [g4 h4] r | [fis4 a4] r g4 r |"
+    oben    = "[g4 h4]:8. [g4 c5]:16 [g4 d5]:8 r | [g4 e5] r [g4 d5] r | [e5 g5] r [d5 fis5] r | [cis5 e5] r d5 r |"
+    oben    = "[g4 h4]:8. [g4 c5]:16 [g4 d5]:8 r | [g4 e5] r [g4 d5] r | [fis4 c5] r [g4 h4] r | [fis4 a4] r g4 r |"
+    oben    = "[g4 h4]:8. [g4 c5]:16 [g4 d5]:8 r | [g4 e5] r [g4 d5] r | [e5 g5] r [d5 fis5] r | [cis5 e5] r d5 r |"
+    unten   = "g3:8. a3:16 h3:8 r | c4 r h3 r | a3 r g3 r | [d3 c4] r [g3 h3] r |"
+    unten   = "g3:8. a3:16 h3:8 r | c4 r h3 r | cis4 r d4 r | [a3 g4] r [d4 fis4] r |"
+    unten   = "g3:8. a3:16 h3:8 r | c4 r h3 r | a3 r g3 r | [d3 c4] r [g3 h3] r |"
+    unten   = "g3:8. a3:16 h3:8 r | c4 r h3 r | cis4 r d4 r | [a3 g4] r [d4 fis4] r |"
+    trommel = "g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 |"
+    trommel = "g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 |"
+    trommel = "g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 |"
+    trommel = "g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 |"
+}
+
+teil b {
+    oben    = "d4:8. e4:16 fis4:4 | e4 d4 | [fis4 e5]:8 r [g4 d5] r | [a4 c5] r [g4 h4] r |"
+    oben    = "[d4 fis4 a4]:8. e4:16 fis4:4 | e4 d4 | [a4 c5]:8 r [g4 h4] r | [fis4 a4] r [g4 h4] r |"
+    oben    = "[g4 h4]:8. [g4 c5]:16 [g4 d5]:8 r | [g4 e5] r [g4 d5] r | [fis4 c5] r [g4 h4] r | [fis4 a4] r g4 r |"
+    oben    = "c4:8. d4:16 e4:4 | d4 c4 | d4 [a4 d5 fis5]:8 r | [h4 d5 g5] r r:4 |"
+    unten   = "d3:8. e3:16 fis3:4 | e3 d3 | c4:8 r h3 r | [fis3 d4] r [g3 d4] r |"
+    unten   = "d3:8. e3:16 fis3:4 | e3 d3 | [fis3 d4]:8 r [g3 d4] r | [d3 d4] r [g3 d4] r |"
+    unten   = "g3:8. a3:16 h3:8 r | c4 r h3 r | a3 r g3 r | [d3 c4] r [g3 h3] r |"
+    unten   = "c3:8. d3:16 e3:4 | d3 c3 | d3 d4:8 r | g3 r r:4 |"
+    trommel = "g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 |"
+    trommel = "g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 |"
+    trommel = "g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 |"
+    trommel = "g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 | g3:8. g3:16 g3:8 g3 |"
+}
+
+form = "a b b a b"

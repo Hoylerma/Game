@@ -1,0 +1,88 @@
+# Kaiserlied „Gott erhalte Franz den Kaiser“ – Joseph Haydn (1797), gemeinfrei; seit 1841 auch die
+# Melodie zu Hoffmann von Fallerslebens „Lied der Deutschen“ („Einigkeit und Recht und Freiheit“).
+# Vierstimmiger Satz von Eusebius Mandyczewski (1857–1929, gemeinfrei) nach der Ausgabe Peters 1915,
+# geprüft am Notensatz des Mutopia-Projekts (Klaus Rettinghaus, CC BY 4.0). Für EINIGKEIT als
+# Streichquartett, beim zweiten Durchgang mit Holzbläsern in der Oberstimme.
+
+titel     = "Kaiserlied"
+komponist = "Joseph Haydn"
+werk      = "Gott erhalte Franz den Kaiser Hob. XXVIa:43 (1797)"
+stimmung  = frieden
+tempo     = 66
+takt      = 4/4
+hall      = 0.3
+
+stimme sopran { instrument = streicher  lautstaerke = 0.7 }
+stimme alt    { instrument = streicher  lautstaerke = 0.5 }
+stimme tenor  { instrument = streicher  lautstaerke = 0.5 }
+stimme bass   { instrument = streicher  lautstaerke = 0.6 }
+stimme holz   { instrument = holz       lautstaerke = 0.5 }
+
+teil a {
+    sopran = "g4:4. a4:8 | h4:4 a4 c5 h4 | a4:8 fis4 g4:4 e5 d5 | c5 h4 a4 h4:8 g4 |"
+    sopran = "d5:2 g4:4. a4:8 | h4:4 a4 c5 h4 | a4:8 fis4 g4:4 e5 d5 | c5 h4 a4 h4:8 g4 |"
+    sopran = "d5:2 a4:4 h4 | a4:8 fis4 d4:4 c5 h4 | a4:8 fis4 d4:4 d5 c5 | h4:4. h4:8 cis5:4 cis5:8 d5 |"
+    sopran = "d5:2 |"
+    alt    = "d4:4. fis4:8 | g4:4 fis4 a4 g4 | fis4:8 d4 d4:4 g4 g4 | fis4:8 a4 g4:4 a4 g4 |"
+    alt    = "fis4:2 d4:4. fis4:8 | g4:4 fis4 a4 g4 | fis4:8 d4 d4:4 g4 g4 | fis4:8 a4 g4:4 a4 g4 |"
+    alt    = "fis4:2 d4:4 d4 | d4 d4 a4 g4 | fis4:8 d4 d4:4 d4 e4:8 fis4 | g4:4. g4:8 g4:4 g4:8 fis4 |"
+    alt    = "fis4:2 |"
+    tenor  = "h3:4. d4:8 | d4:4 d4 d4 d4 | c4 h3 c4 d4 | d4 d4 e4 e4 |"
+    tenor  = "a3:2 h3:4. d4:8 | d4:4 d4 d4 d4 | c4 h3 c4 d4 | d4 d4 e4 e4 |"
+    tenor  = "a3:2 fis3:4 g3 | fis3:8 a3 fis3:4 d4 d4 | d4:8 a3 fis3:4 h3 a3 | g3:8 h3 h3 e4 e4:4. a3:8 |"
+    tenor  = "a3:2 |"
+    bass   = "g3:4. d3:8 | g3:4 d3 fis3 g3 | d3 g2 c4 h3 | a3:8 fis3 g3:4 c3 cis3 |"
+    bass   = "d3:2 g3:4. d3:8 | g3:4 d3 fis3 g3 | d3 g2 c4 h3 | a3:8 fis3 g3:4 c3 cis3 |"
+    bass   = "d3:2 d3:4 g3 | d3 d3 fis3 g3 | d3 d3 h2 c3:8 d3 | e3:4. e3:8 a3:4 a2 |"
+    bass   = "d3:2 |"
+}
+
+teil b {
+    sopran = "g5:4. fis5:8 | fis5 e5 d5:4 e5:4. d5:8 | d5 c5 h4:4 a4:4. h4:16 c5 | d5:8 e5 c5 a4 g4:4 a4:8 g4 |"
+    sopran = "g4:2 |"
+    alt    = "g4:4. g4:8 | g4:4 g4 g4:4. g4:8 | a4:4 g4 fis4:4. g4:16 a4 | g4:4. e4:8 d4:4 fis4 |"
+    alt    = "d4:2 |"
+    tenor  = "d4:4. d4:8 | c4:4 h3 c4:4. h3:8 | d4:4 d4 d4 d4 | d4 e4:8 c4 h3:4 c4 |"
+    tenor  = "h3:2 |"
+    bass   = "h3:4. h3:8 | c4:4 g3 c3:4. g3:8 | fis3:4 g3 d3 c3 | h2 c3 d3 d3 |"
+    bass   = "g2:2 |"
+}
+
+teil a2 {
+    sopran = "g4:4. a4:8 | h4:4 a4 c5 h4 | a4:8 fis4 g4:4 e5 d5 | c5 h4 a4 h4:8 g4 |"
+    sopran = "d5:2 g4:4. a4:8 | h4:4 a4 c5 h4 | a4:8 fis4 g4:4 e5 d5 | c5 h4 a4 h4:8 g4 |"
+    sopran = "d5:2 a4:4 h4 | a4:8 fis4 d4:4 c5 h4 | a4:8 fis4 d4:4 d5 c5 | h4:4. h4:8 cis5:4 cis5:8 d5 |"
+    sopran = "d5:2 |"
+    alt    = "d4:4. fis4:8 | g4:4 fis4 a4 g4 | fis4:8 d4 d4:4 g4 g4 | fis4:8 a4 g4:4 a4 g4 |"
+    alt    = "fis4:2 d4:4. fis4:8 | g4:4 fis4 a4 g4 | fis4:8 d4 d4:4 g4 g4 | fis4:8 a4 g4:4 a4 g4 |"
+    alt    = "fis4:2 d4:4 d4 | d4 d4 a4 g4 | fis4:8 d4 d4:4 d4 e4:8 fis4 | g4:4. g4:8 g4:4 g4:8 fis4 |"
+    alt    = "fis4:2 |"
+    tenor  = "h3:4. d4:8 | d4:4 d4 d4 d4 | c4 h3 c4 d4 | d4 d4 e4 e4 |"
+    tenor  = "a3:2 h3:4. d4:8 | d4:4 d4 d4 d4 | c4 h3 c4 d4 | d4 d4 e4 e4 |"
+    tenor  = "a3:2 fis3:4 g3 | fis3:8 a3 fis3:4 d4 d4 | d4:8 a3 fis3:4 h3 a3 | g3:8 h3 h3 e4 e4:4. a3:8 |"
+    tenor  = "a3:2 |"
+    bass   = "g3:4. d3:8 | g3:4 d3 fis3 g3 | d3 g2 c4 h3 | a3:8 fis3 g3:4 c3 cis3 |"
+    bass   = "d3:2 g3:4. d3:8 | g3:4 d3 fis3 g3 | d3 g2 c4 h3 | a3:8 fis3 g3:4 c3 cis3 |"
+    bass   = "d3:2 d3:4 g3 | d3 d3 fis3 g3 | d3 d3 h2 c3:8 d3 | e3:4. e3:8 a3:4 a2 |"
+    bass   = "d3:2 |"
+    holz   = "g4:4. a4:8 | h4:4 a4 c5 h4 | a4:8 fis4 g4:4 e5 d5 | c5 h4 a4 h4:8 g4 |"
+    holz   = "d5:2 g4:4. a4:8 | h4:4 a4 c5 h4 | a4:8 fis4 g4:4 e5 d5 | c5 h4 a4 h4:8 g4 |"
+    holz   = "d5:2 a4:4 h4 | a4:8 fis4 d4:4 c5 h4 | a4:8 fis4 d4:4 d5 c5 | h4:4. h4:8 cis5:4 cis5:8 d5 |"
+    holz   = "d5:2 |"
+}
+
+teil b2 {
+    lautstaerke = 1.1
+    sopran = "g5:4. fis5:8 | fis5 e5 d5:4 e5:4. d5:8 | d5 c5 h4:4 a4:4. h4:16 c5 | d5:8 e5 c5 a4 g4:4 a4:8 g4 |"
+    sopran = "g4:2 |"
+    alt    = "g4:4. g4:8 | g4:4 g4 g4:4. g4:8 | a4:4 g4 fis4:4. g4:16 a4 | g4:4. e4:8 d4:4 fis4 |"
+    alt    = "d4:2 |"
+    tenor  = "d4:4. d4:8 | c4:4 h3 c4:4. h3:8 | d4:4 d4 d4 d4 | d4 e4:8 c4 h3:4 c4 |"
+    tenor  = "h3:2 |"
+    bass   = "h3:4. h3:8 | c4:4 g3 c3:4. g3:8 | fis3:4 g3 d3 c3 | h2 c3 d3 d3 |"
+    bass   = "g2:2 |"
+    holz   = "g5:4. fis5:8 | fis5 e5 d5:4 e5:4. d5:8 | d5 c5 h4:4 a4:4. h4:16 c5 | d5:8 e5 c5 a4 g4:4 a4:8 g4 |"
+    holz   = "g4:2 |"
+}
+
+form = "a b b a2 b2 b2"

@@ -156,9 +156,11 @@ func apply(tree: SceneTree) -> void:
 	Accessibility.high_contrast = bool(get_value("zugang/kontrast"))
 	Accessibility.reduced_motion = bool(get_value("zugang/animationen_reduziert"))
 	Engine.max_fps = int(get_value("bild/bildrate"))
-	var master := AudioServer.get_bus_index(&"Master")
-	if master >= 0:
-		AudioServer.set_bus_volume_db(master, linear_to_db(maxf(float(get_value("ton/gesamt")) / 100.0, 0.0001)))
+	_set_bus(&"Master", float(get_value("ton/gesamt")), false)
+	# Musik und Klänge (seit M13b2) auf eigenen Bussen.
+	AudioDirector.ensure_buses()
+	_set_bus(AudioDirector.MUSIC_BUS, float(get_value("ton/musik")), bool(get_value("ton/musik_aus")))
+	_set_bus(AudioDirector.SOUND_BUS, float(get_value("ton/klaenge")), false)
 	_apply_keys()
 	_apply_theme(ThemeDB.get_project_theme())
 	if tree == null or DisplayServer.get_name() == "headless":
@@ -167,6 +169,15 @@ func apply(tree: SceneTree) -> void:
 	var mode := DisplayServer.WINDOW_MODE_FULLSCREEN if bool(get_value("bild/vollbild")) else DisplayServer.WINDOW_MODE_WINDOWED
 	if DisplayServer.window_get_mode() != mode:
 		DisplayServer.window_set_mode(mode)
+
+
+## Lautstärke eines Busses in Prozent; stumm schaltet ihn ab.
+static func _set_bus(bus: StringName, percent: float, mute: bool) -> void:
+	var index := AudioServer.get_bus_index(bus)
+	if index < 0:
+		return
+	AudioServer.set_bus_volume_db(index, linear_to_db(maxf(percent / 100.0, 0.0001)))
+	AudioServer.set_bus_mute(index, mute or percent <= 0.0)
 
 
 func _apply_keys() -> void:
