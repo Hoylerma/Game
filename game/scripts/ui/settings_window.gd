@@ -159,7 +159,7 @@ func _fill() -> void:
 			_slider("ton/musik", "Musik", 0, 100, 5, "%")
 			_slider("ton/klaenge", "Klänge", 0, 100, 5, "%")
 			_check("ton/musik_aus", "Musik aus")
-			_note("Musik und Klänge folgen mit Schritt b2; die Lautstärke gesamt wirkt schon.")
+			_note("Musik: gemeinfreie Werke der Zeit (Beethoven, Haydn, Silcher, Schumann, Rouget de Lisle), mit einem eigenen Synthesizer gespielt; sie folgt der Lage des Staates (Frieden, Krise, Krieg, Revolution).")
 		"spiel":
 			_options("spiel/autosave", "Automatischer Spielstand", ["aus", "jährlich (1. Januar)", "halbjährlich (1. Januar, 1. Juli)"], UserSettings.AUTOSAVE)
 			_check("spiel/kompass", "Historischer Kompass im Ereignisfenster")

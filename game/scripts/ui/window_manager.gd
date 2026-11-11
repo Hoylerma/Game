@@ -5,6 +5,9 @@ extends RefCounted
 ## höchstens eines offen. Escape schließt das zuletzt geöffnete. Ein Fenster braucht open(…), close() und
 ## is_open(); hat es fit_height(höhe), passt es seine Höhe dem Platz an.
 
+## Ein Fenster wird geöffnet (seit M13b2: Klang „Papier“).
+signal window_opened(window: Control)
+
 var _windows: Array[Control] = []
 ## Reihenfolge des Öffnens, das jüngste zuletzt.
 var _order: Array[Control] = []
@@ -27,6 +30,7 @@ func opening(window: Control) -> void:
 			other.call(&"close")
 	_order.erase(window)
 	_order.append(window)
+	window_opened.emit(window)
 
 
 ## Das offene Fenster oder null.

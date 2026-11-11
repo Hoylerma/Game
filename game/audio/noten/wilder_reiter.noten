@@ -1,0 +1,62 @@
+# Wilder Reiter – Robert Schumann, Album für die Jugend op. 68 Nr. 8 (1848), gemeinfrei.
+# Tonhöhen und Dauern nach der Ausgabe Peters, geprüft am Notensatz des Mutopia-Projekts
+# (Philippe Hézaine, 2007). Klavier wie im Original; beim zweiten Durchgang verdoppeln die
+# Streicher die Melodie.
+
+titel     = "Wilder Reiter"
+komponist = "Robert Schumann"
+werk      = "Album für die Jugend op. 68 Nr. 8 (1848)"
+stimmung  = krise
+tempo     = 168
+takt      = 6/8
+hall      = 0.22
+
+stimme rechts    { instrument = klavier    lautstaerke = 0.75 }
+stimme links     { instrument = klavier    lautstaerke = 0.6 }
+stimme streicher { instrument = streicher  lautstaerke = 0.4 }
+
+teil a {
+    rechts = "e4:8 | a4 e4 a4 c5 a4 c5 | e5 c5 f5 e5 c5 a4 | h4 gis4 c5 h4 gis4 e4 |"
+    rechts = "a4:8 e4 c5 h4 r e4 | a4 e4 a4 c5 a4 c5 | e5 c5 f5 e5 c5 a4 | h4 gis4 c5 h4 gis4 e4 |"
+    rechts = "a4:8 e4 gis4 a4 r |"
+    links  = "r:8 | [a3 c4] r r [a3 c4 e4] r r | [a3 c4 e4]:4 [a3 d4 f4]:8 [a3 c4 e4] r r | [e3 gis3 h3]:4 [e3 a3 c4]:8 [e3 gis3 h3] r r |"
+    links  = "[a3 c4]:8 r [a3 c4] [e3 gis3 h3] r r | [a3 c4] r r [a3 c4 e4] r r | [a3 c4 e4]:4 [a3 d4 f4]:8 [a3 c4 e4] r r | [e3 gis3 h3]:4 [e3 a3 c4]:8 [e3 gis3 h3] r r |"
+    links  = "[a3 c4]:8 r [e3 h3] [a3 c4] r |"
+}
+
+teil b {
+    rechts = "r:8 | [c4 f4 a4] r r [c4 f4 a4] r r | [f4 a4]:4 [f4 a4]:8 [f4 a4] r r | [e4 g4 c5]:4 [e4 g4 c5]:8 [e4 g4 c5] r r |"
+    rechts = "[f4 a4 c5]:8 a4 f4 [e4 g4] r r | [c4 f4 a4] r r [c4 f4 a4] r r | [f4 a4]:4 [f4 a4]:8 [f4 a4] r r | [e4 g4 c5]:4 [e4 g4 c5]:8 [e4 g4 c5] r r |"
+    rechts = "[c4 f4 a4]:8 r [c4 g4] f4 r |"
+    links  = "c3:8 | f3 c3 f3 a3 f3 a3 | c4 a3 d4 c4 a3 f3 | g3 e3 a3 g3 e3 c3 |"
+    links  = "f3:8 c3 a3 [c3 g3] r c3 | f3 c3 f3 a3 f3 a3 | c4 a3 d4 c4 a3 f3 | g3 e3 a3 g3 e3 c3 |"
+    links  = "f3:8 c3 e3 f3 r |"
+}
+
+teil a2 {
+    lautstaerke = 1.1
+    rechts    = "e4:8 | a4 e4 a4 c5 a4 c5 | e5 c5 f5 e5 c5 a4 | h4 gis4 c5 h4 gis4 e4 |"
+    rechts    = "a4:8 e4 c5 h4 r e4 | a4 e4 a4 c5 a4 c5 | e5 c5 f5 e5 c5 a4 | h4 gis4 c5 h4 gis4 e4 |"
+    rechts    = "a4:8 e4 gis4 a4 r |"
+    links     = "r:8 | [a3 c4] r r [a3 c4 e4] r r | [a3 c4 e4]:4 [a3 d4 f4]:8 [a3 c4 e4] r r | [e3 gis3 h3]:4 [e3 a3 c4]:8 [e3 gis3 h3] r r |"
+    links     = "[a3 c4]:8 r [a3 c4] [e3 gis3 h3] r r | [a3 c4] r r [a3 c4 e4] r r | [a3 c4 e4]:4 [a3 d4 f4]:8 [a3 c4 e4] r r | [e3 gis3 h3]:4 [e3 a3 c4]:8 [e3 gis3 h3] r r |"
+    links     = "[a3 c4]:8 r [e3 h3] [a3 c4] r |"
+    streicher = "e4:8 | a4 e4 a4 c5 a4 c5 | e5 c5 f5 e5 c5 a4 | h4 gis4 c5 h4 gis4 e4 |"
+    streicher = "a4:8 e4 c5 h4 r e4 | a4 e4 a4 c5 a4 c5 | e5 c5 f5 e5 c5 a4 | h4 gis4 c5 h4 gis4 e4 |"
+    streicher = "a4:8 e4 gis4 a4 r |"
+}
+
+teil b2 {
+    lautstaerke = 1.1
+    rechts    = "r:8 | [c4 f4 a4] r r [c4 f4 a4] r r | [f4 a4]:4 [f4 a4]:8 [f4 a4] r r | [e4 g4 c5]:4 [e4 g4 c5]:8 [e4 g4 c5] r r |"
+    rechts    = "[f4 a4 c5]:8 a4 f4 [e4 g4] r r | [c4 f4 a4] r r [c4 f4 a4] r r | [f4 a4]:4 [f4 a4]:8 [f4 a4] r r | [e4 g4 c5]:4 [e4 g4 c5]:8 [e4 g4 c5] r r |"
+    rechts    = "[c4 f4 a4]:8 r [c4 g4] f4 r |"
+    links     = "c3:8 | f3 c3 f3 a3 f3 a3 | c4 a3 d4 c4 a3 f3 | g3 e3 a3 g3 e3 c3 |"
+    links     = "f3:8 c3 a3 [c3 g3] r c3 | f3 c3 f3 a3 f3 a3 | c4 a3 d4 c4 a3 f3 | g3 e3 a3 g3 e3 c3 |"
+    links     = "f3:8 c3 e3 f3 r |"
+    streicher = "c3:8 | f3 c3 f3 a3 f3 a3 | c4 a3 d4 c4 a3 f3 | g3 e3 a3 g3 e3 c3 |"
+    streicher = "f3:8 c3 a3 [c3 g3] r c3 | f3 c3 f3 a3 f3 a3 | c4 a3 d4 c4 a3 f3 | g3 e3 a3 g3 e3 c3 |"
+    streicher = "f3:8 c3 e3 f3 r |"
+}
+
+form = "a a b a a2 a2 b2 a2"

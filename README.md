@@ -297,6 +297,18 @@ Neu erzeugt wird in dieser Reihenfolge: `geodaten.py geometrie` (Land, Seen, Fl�
 `orte.py` (`data/tabellen/orte.csv`, `kreise.csv`) → `archivar.py` → `kartengenerator.py`.
 Einzelheiten, Quellenangaben und Namensregeln: [tools/geodaten/README.md](tools/geodaten/README.md).
 
+**Musik und Klänge** (seit M13b2) – `tools/klang/` rendert die Stücke aus `game/audio/noten/*.noten`
+und die Bedienklänge mit einem eigenen Synthesizer nach `game/audio/musik/` und `game/audio/klaenge/`
+(rund 65 MB, nicht eingecheckt). Ohne diesen Schritt bleibt das Spiel still:
+
+```bash
+python3 tools/klang/klang.py                       # rendern (rund 30 s; Unverändertes wird übersprungen)
+python3 tools/klang/klang.py --pruefen             # bitgleich zu game/audio/pruefsummen.txt? (wie in der CI)
+python3 -m unittest discover -s tools/klang -v     # Tests des Werkzeugs
+```
+
+Notenformat, Synthesizer und Herkunft der Noten: [tools/klang/README.md](tools/klang/README.md).
+
 **5. Brücke bauen** – baut godot-cpp (beim ersten Mal je nach Rechner 5–15 Minuten) und legt die Bibliothek
 direkt im Godot-Projekt ab (`game/bin/libuhrwerk_bridge.so`, `uhrwerk_bridge.dll` bzw.
 `libuhrwerk_bridge.dylib`):

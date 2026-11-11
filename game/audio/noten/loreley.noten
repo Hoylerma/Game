@@ -1,0 +1,63 @@
+# Die Loreley („Ich weiß nicht, was soll es bedeuten“) – Friedrich Silcher (um 1837) nach Heinrich
+# Heine (1823), gemeinfrei. Melodie und Begleitung geprüft am Notensatz des Mutopia-Projekts
+# (Stan Sanderson, gemeinfrei). Satz für EINIGKEIT: Melodie in den Holzbläsern, dann in den
+# Streichern, Begleitung im Klavier.
+
+titel     = "Die Loreley"
+komponist = "Friedrich Silcher"
+werk      = "Volksweise nach Heinrich Heine (um 1837)"
+stimmung  = frieden
+tempo     = 80
+takt      = 6/8
+hall      = 0.3
+
+stimme melodie    { instrument = holz       lautstaerke = 0.75 }
+stimme streicher  { instrument = streicher  lautstaerke = 0.6 }
+stimme begleitung { instrument = klavier    lautstaerke = 0.5 }
+
+teil a {
+    melodie    = "a4:8 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4. g4:4 g4:8 | fis4:4 fis4:8 e4 d4 e4 |"
+    melodie    = "fis4:2 r:8 a4 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4. g4:4 g4:8 | fis4:4 fis4:8 a4 g4 e4 |"
+    melodie    = "d4:2 r:8 fis4 | e4:8. cis4:16 e4:8 a4 e4 a4 | cis5:4. h4:4 h4:8 | a4:4 a4:8 gis4 a4 h4 |"
+    melodie    = "a4:2~ a4:8 a4 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4 fis5:8 e5:4 e5:8 | d5:4 d5:8 cis5 h4 cis5 |"
+    melodie    = "d5:2 r:8 |"
+    begleitung = "r:8 | d3 fis3 a3 d3 g3 h3 | d3 fis3 a3 g2 h2 e3 | a2 d3 a3 a2 e3 cis3 |"
+    begleitung = "d3:8 fis3 a3 d3 fis3 a3 | d3 fis3 a3 d3 g3 h3 | d3 fis3 a3 g2 h2 e3 | a2 d3 a3 a2 e3 cis3 |"
+    begleitung = "[fis3 d3]:8 a2 d3 d2 r r | a2 e3 a3 cis3 a3 e3 | d3 fis3 h3 d3 fis3 d3 | e3 a3 e3 e3 h3 e3 |"
+    begleitung = "[e3 a2]:2. | d2:8 fis2 a2 d2 g2 h2 | d3 fis3 a3 g2 h2 g2 | a2 d3 fis3 a2 e3 a2 |"
+    begleitung = "d3:8 a2 fis2 d2 r |"
+}
+
+teil a2 {
+    streicher  = "a4:8 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4. g4:4 g4:8 | fis4:4 fis4:8 e4 d4 e4 |"
+    streicher  = "fis4:2 r:8 a4 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4. g4:4 g4:8 | fis4:4 fis4:8 a4 g4 e4 |"
+    streicher  = "d4:2 r:8 fis4 | e4:8. cis4:16 e4:8 a4 e4 a4 | cis5:4. h4:4 h4:8 | a4:4 a4:8 gis4 a4 h4 |"
+    streicher  = "a4:2~ a4:8 a4 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4 fis5:8 e5:4 e5:8 | d5:4 d5:8 cis5 h4 cis5 |"
+    streicher  = "d5:2 r:8 |"
+    begleitung = "r:8 | d3 fis3 a3 d3 g3 h3 | d3 fis3 a3 g2 h2 e3 | a2 d3 a3 a2 e3 cis3 |"
+    begleitung = "d3:8 fis3 a3 d3 fis3 a3 | d3 fis3 a3 d3 g3 h3 | d3 fis3 a3 g2 h2 e3 | a2 d3 a3 a2 e3 cis3 |"
+    begleitung = "[fis3 d3]:8 a2 d3 d2 r r | a2 e3 a3 cis3 a3 e3 | d3 fis3 h3 d3 fis3 d3 | e3 a3 e3 e3 h3 e3 |"
+    begleitung = "[e3 a2]:2. | d2:8 fis2 a2 d2 g2 h2 | d3 fis3 a3 g2 h2 g2 | a2 d3 fis3 a2 e3 a2 |"
+    begleitung = "d3:8 a2 fis2 d2 r |"
+}
+
+teil a3 {
+    lautstaerke = 1.05
+    melodie    = "a4:8 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4. g4:4 g4:8 | fis4:4 fis4:8 e4 d4 e4 |"
+    melodie    = "fis4:2 r:8 a4 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4. g4:4 g4:8 | fis4:4 fis4:8 a4 g4 e4 |"
+    melodie    = "d4:2 r:8 fis4 | e4:8. cis4:16 e4:8 a4 e4 a4 | cis5:4. h4:4 h4:8 | a4:4 a4:8 gis4 a4 h4 |"
+    melodie    = "a4:2~ a4:8 a4 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4 fis5:8 e5:4 e5:8 | d5:4 d5:8 cis5 h4 cis5 |"
+    melodie    = "d5:2 r:8 |"
+    streicher  = "a4:8 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4. g4:4 g4:8 | fis4:4 fis4:8 e4 d4 e4 |"
+    streicher  = "fis4:2 r:8 a4 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4. g4:4 g4:8 | fis4:4 fis4:8 a4 g4 e4 |"
+    streicher  = "d4:2 r:8 fis4 | e4:8. cis4:16 e4:8 a4 e4 a4 | cis5:4. h4:4 h4:8 | a4:4 a4:8 gis4 a4 h4 |"
+    streicher  = "a4:2~ a4:8 a4 | a4:8. h4:16 a4:8 d5 cis5 h4 | a4:4 fis5:8 e5:4 e5:8 | d5:4 d5:8 cis5 h4 cis5 |"
+    streicher  = "d5:2 r:8 |"
+    begleitung = "r:8 | d3 fis3 a3 d3 g3 h3 | d3 fis3 a3 g2 h2 e3 | a2 d3 a3 a2 e3 cis3 |"
+    begleitung = "d3:8 fis3 a3 d3 fis3 a3 | d3 fis3 a3 d3 g3 h3 | d3 fis3 a3 g2 h2 e3 | a2 d3 a3 a2 e3 cis3 |"
+    begleitung = "[fis3 d3]:8 a2 d3 d2 r r | a2 e3 a3 cis3 a3 e3 | d3 fis3 h3 d3 fis3 d3 | e3 a3 e3 e3 h3 e3 |"
+    begleitung = "[e3 a2]:2. | d2:8 fis2 a2 d2 g2 h2 | d3 fis3 a3 g2 h2 g2 | a2 d3 fis3 a2 e3 a2 |"
+    begleitung = "d3:8 a2 fis2 d2 r |"
+}
+
+form = "a a2 a3"

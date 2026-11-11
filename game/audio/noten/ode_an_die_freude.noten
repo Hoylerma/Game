@@ -1,0 +1,50 @@
+# Ode an die Freude – Hauptthema aus Beethovens 9. Sinfonie (1824), gemeinfrei.
+# Satz für EINIGKEIT: Melodie in den Holzbläsern, Akkorde im Klavier, Bass in den Streichern (D-Dur).
+
+titel     = "Ode an die Freude"
+komponist = "Ludwig van Beethoven"
+werk      = "9. Sinfonie d-Moll op. 125 (1824), 4. Satz, Hauptthema"
+stimmung  = frieden
+tempo     = 96
+takt      = 4/4
+hall      = 0.25
+
+stimme melodie  { instrument = holz       lautstaerke = 0.8 }
+stimme akkorde  { instrument = klavier    lautstaerke = 0.45 }
+stimme bass     { instrument = streicher  lautstaerke = 0.5 }
+
+teil a {
+    melodie = "fis5:4 fis5 g5 a5 | a5 g5 fis5 e5 | d5 d5 e5 fis5 | fis5:4. e5:8 e5:2 |"
+    melodie = "fis5:4 fis5 g5 a5 | a5 g5 fis5 e5 | d5 d5 e5 fis5 | e5:4. d5:8 d5:2 |"
+    akkorde = "[d4 fis4 a4]:2 [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] | [d4 fis4 a4] [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] |"
+    akkorde = "[d4 fis4 a4]:2 [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] | [d4 fis4 a4] [d4 fis4 a4] | [cis4 e4 a4] [d4 fis4 a4] |"
+    bass    = "d3:2 d3 | a2 a2 | d3 d3 | a2 a2 | d3 d3 | a2 a2 | d3 d3 | a2 d3 |"
+}
+
+teil b {
+    melodie = "e5:4 e5 fis5 d5 | e5 fis5:8 g5 fis5:4 d5 | e5 fis5:8 g5 fis5:4 e5 | d5 e5 a4:2 |"
+    melodie = "fis5:4 fis5 g5 a5 | a5 g5 fis5 e5 | d5 d5 e5 fis5 | e5:4. d5:8 d5:2 |"
+    akkorde = "[cis4 e4 a4]:2 [d4 fis4 a4] | [cis4 e4 a4] [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] | [d4 fis4 a4] [cis4 e4 g4] |"
+    akkorde = "[d4 fis4 a4]:2 [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] | [d4 fis4 a4] [d4 fis4 a4] | [cis4 e4 a4] [d4 fis4 a4] |"
+    bass    = "a2:2 d3 | a2 d3 | a2 a2 | d3 a2 | d3 d3 | a2 a2 | d3 d3 | a2 d3 |"
+}
+
+# Zweiter Durchgang mit den Streichern in der Melodie.
+stimme streicher { instrument = streicher lautstaerke = 0.55 }
+teil a2 {
+    lautstaerke = 1.1
+    streicher = "fis5:4 fis5 g5 a5 | a5 g5 fis5 e5 | d5 d5 e5 fis5 | fis5:4. e5:8 e5:2 |"
+    streicher = "fis5:4 fis5 g5 a5 | a5 g5 fis5 e5 | d5 d5 e5 fis5 | e5:4. d5:8 d5:2 |"
+    melodie = "a5:1 | e5 | fis5 | cis5 | a5 | e5 | fis5 | [e5 a5]:2 [d5 fis5] |"
+    akkorde = "[d4 fis4 a4]:4 [d4 fis4 a4] [d4 fis4 a4] [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] [cis4 e4 a4] [cis4 e4 a4] | [d4 fis4 a4] [d4 fis4 a4] [d4 fis4 a4] [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] [cis4 e4 a4] [cis4 e4 a4] |"
+    akkorde = "[d4 fis4 a4]:4 [d4 fis4 a4] [d4 fis4 a4] [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] [cis4 e4 a4] [cis4 e4 a4] | [d4 fis4 a4] [d4 fis4 a4] [d4 fis4 a4] [d4 fis4 a4] | [cis4 e4 a4] [cis4 e4 a4] [d4 fis4 a4]:2 |"
+    bass    = "d3:2 d3 | a2 a2 | d3 d3 | a2 a2 | d3 d3 | a2 a2 | d3 d3 | a2 d3 |"
+}
+
+teil schluss {
+    melodie = "d5:1 |"
+    akkorde = "[d4 fis4 a4]:1 |"
+    bass    = "d2:1 |"
+}
+
+form = "a b a2 b schluss"

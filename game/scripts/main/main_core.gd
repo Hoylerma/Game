@@ -140,6 +140,9 @@ const OVERVIEW_REFRESH_MS := 500
 ## Urteil der Geschichte (seit M13a4) und ob es nach dem Ende schon gezeigt wurde.
 var _verdict_window: VerdictWindow = null
 var _newspaper_window: NewspaperWindow = null # seit M13b1
+var _audio: AudioDirector = null # Musik und Klänge, seit M13b2
+var _mood_month := -1 # Monat der letzten Prüfung der Stimmung
+var _telegraph_day := -1000000 # Tag des letzten Telegrafenklangs
 var _speed_before_newspaper := 0
 var _newspaper_day := -1000000 # Tag der letzten Zeitung (höchstens eine im Monat, Gewicht 3 ausgenommen)
 var _verdict_shown := false
@@ -848,6 +851,7 @@ func _pull_chronicle() -> void:
 			_report_threats(entries)
 			_pause_for_entries(entries)
 			_check_newspapers(_chronicle_read, count)
+			_sounds_for_entries(entries)
 		_chronicle_read = count
 
 
@@ -1301,6 +1305,22 @@ func _pause_for_entries(entries: Array[Dictionary]) -> void:
 
 ## Platzhalter; main_windows.gd überschreibt ihn (Zeitung, seit M13b1).
 func _check_newspapers(_from: int, _to: int) -> void:
+	pass
+
+
+## Bedienklang (seit M13b2); ohne Klangregisseur still.
+func _play_sound(sound_id: String) -> void:
+	if _audio != null:
+		_audio.play_sound(sound_id)
+
+
+## Platzhalter; main.gd überschreibt ihn (Stimmung der Musik, seit M13b2).
+func _update_mood() -> void:
+	pass
+
+
+## Platzhalter; main.gd überschreibt ihn (Klänge zu neuen Chronikeinträgen, seit M13b2).
+func _sounds_for_entries(_entries: Array[Dictionary]) -> void:
 	pass
 
 

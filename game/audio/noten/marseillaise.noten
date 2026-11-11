@@ -1,0 +1,80 @@
+# La Marseillaise – Claude Joseph Rouget de Lisle (1792), gemeinfrei. Melodie nach dem Erstdruck
+# Bignon 1792, geprüft am Notensatz des Mutopia-Projekts (Coyau, gemeinfrei). Im Februar 1848 das
+# Lied der Pariser Revolution, das in den deutschen Staaten gesungen und verboten wurde.
+# Satz für EINIGKEIT: Melodie im Blech, dann mit Holzbläsern; Bass (Grundton und Quinte) und Trommel
+# sind eigene Zutaten.
+
+titel     = "La Marseillaise"
+komponist = "Claude Joseph Rouget de Lisle"
+werk      = "Chant de guerre pour l'armée du Rhin (1792)"
+stimmung  = revolution
+tempo     = 108
+takt      = 4/4
+hall      = 0.22
+
+stimme melodie { instrument = blech      lautstaerke = 0.75 }
+stimme holz    { instrument = holz       lautstaerke = 0.5 }
+stimme bass    { instrument = streicher  lautstaerke = 0.55 }
+stimme trommel { instrument = trommel    lautstaerke = 0.3 }
+
+teil auftakt {
+    melodie = "r:8 r:16 g4 e4:8. g4:16 |"
+}
+
+teil a {
+    melodie = "c5:4 c5 d5 d5 | g5:4. f5:8 e5 r:16 c5 e5:8. c5:16 | a4:4 f5:2 d5:8. h4:16 | c5:2 r:4 c5:8. d5:16 |"
+    melodie = "e5:4 e5 e5 f5:8. e5:16 | e5:4 d5:8 r r:4 d5:8. e5:16 | f5:4 f5 f5 g5:8. f5:16 | e5:2 r:4 g5:8. g5:16 |"
+    melodie = "g5:4 e5:8. c5:16 g5:4 e5:8. c5:16 | g4:2 r:8 r:16 g4 g4:8. g4:16 | h4:4. d5:8 f5:4. d5:8 | d5 c5 c5 r r:4 as4 |"
+    melodie = "g4:4 c5:8. c5:16 c5:4 h4:8. c5:16 | d5:2 r:4 d5 | es5:4. es5:8 es5 es5 f5 g5 | d5:2 r:4 es5:8 d5 |"
+    melodie = "c5:4 c5 es5 d5:8. c5:16 | c5:4 h4:8 r r:4 r:8 r:16 g5 | g5:2~ g5:8 e5 c5:8. c5:16 | d5:2 r:4 r:8 r:16 g5 |"
+    melodie = "g5:2~ g5:8 e5 c5:8. c5:16 | d5:2 r:4 g4 | c5:2 r:4 c5 | e5:2 r |"
+    melodie = "f5:2 g5:4 a5 | h4:2 r:4 r:8 r:16 a5 | g5:2~ g5:8 e5 f5 d5 | c5:2 |"
+    bass    = "c3:2 g2 | g2 c3 | f2 g2 | c3 g2 |"
+    bass    = "c3:2 g2 | g2 d3 | g2 d3 | c3 g2 |"
+    bass    = "c3:2 g2 | c3 g2 | g2 d3 | c3 c3 |"
+    bass    = "c3:2 c3 | g2 g2 | c3 c3 | g2 g2 |"
+    bass    = "c3:2 c3 | g2 g2 | c3 g2 | g2 d3 |"
+    bass    = "c3:2 g2 | g2 d3 | c3 g2 | c3 g2 |"
+    bass    = "f2:2 c3 | g2 d3 | c3 g2 | c3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3 |"
+}
+
+teil a2 {
+    lautstaerke = 1.05
+    melodie = "c5:4 c5 d5 d5 | g5:4. f5:8 e5 r:16 c5 e5:8. c5:16 | a4:4 f5:2 d5:8. h4:16 | c5:2 r:4 c5:8. d5:16 |"
+    melodie = "e5:4 e5 e5 f5:8. e5:16 | e5:4 d5:8 r r:4 d5:8. e5:16 | f5:4 f5 f5 g5:8. f5:16 | e5:2 r:4 g5:8. g5:16 |"
+    melodie = "g5:4 e5:8. c5:16 g5:4 e5:8. c5:16 | g4:2 r:8 r:16 g4 g4:8. g4:16 | h4:4. d5:8 f5:4. d5:8 | d5 c5 c5 r r:4 as4 |"
+    melodie = "g4:4 c5:8. c5:16 c5:4 h4:8. c5:16 | d5:2 r:4 d5 | es5:4. es5:8 es5 es5 f5 g5 | d5:2 r:4 es5:8 d5 |"
+    melodie = "c5:4 c5 es5 d5:8. c5:16 | c5:4 h4:8 r r:4 r:8 r:16 g5 | g5:2~ g5:8 e5 c5:8. c5:16 | d5:2 r:4 r:8 r:16 g5 |"
+    melodie = "g5:2~ g5:8 e5 c5:8. c5:16 | d5:2 r:4 g4 | c5:2 r:4 c5 | e5:2 r |"
+    melodie = "f5:2 g5:4 a5 | h4:2 r:4 r:8 r:16 a5 | g5:2~ g5:8 e5 f5 d5 | c5:2 |"
+    holz    = "c5:4 c5 d5 d5 | g5:4. f5:8 e5 r:16 c5 e5:8. c5:16 | a4:4 f5:2 d5:8. h4:16 | c5:2 r:4 c5:8. d5:16 |"
+    holz    = "e5:4 e5 e5 f5:8. e5:16 | e5:4 d5:8 r r:4 d5:8. e5:16 | f5:4 f5 f5 g5:8. f5:16 | e5:2 r:4 g5:8. g5:16 |"
+    holz    = "g5:4 e5:8. c5:16 g5:4 e5:8. c5:16 | g4:2 r:8 r:16 g4 g4:8. g4:16 | h4:4. d5:8 f5:4. d5:8 | d5 c5 c5 r r:4 as4 |"
+    holz    = "g4:4 c5:8. c5:16 c5:4 h4:8. c5:16 | d5:2 r:4 d5 | es5:4. es5:8 es5 es5 f5 g5 | d5:2 r:4 es5:8 d5 |"
+    holz    = "c5:4 c5 es5 d5:8. c5:16 | c5:4 h4:8 r r:4 r:8 r:16 g5 | g5:2~ g5:8 e5 c5:8. c5:16 | d5:2 r:4 r:8 r:16 g5 |"
+    holz    = "g5:2~ g5:8 e5 c5:8. c5:16 | d5:2 r:4 g4 | c5:2 r:4 c5 | e5:2 r |"
+    holz    = "f5:2 g5:4 a5 | h4:2 r:4 r:8 r:16 a5 | g5:2~ g5:8 e5 f5 d5 | c5:2 |"
+    bass    = "c3:2 g2 | g2 c3 | f2 g2 | c3 g2 |"
+    bass    = "c3:2 g2 | g2 d3 | g2 d3 | c3 g2 |"
+    bass    = "c3:2 g2 | c3 g2 | g2 d3 | c3 c3 |"
+    bass    = "c3:2 c3 | g2 g2 | c3 c3 | g2 g2 |"
+    bass    = "c3:2 c3 | g2 g2 | c3 g2 | g2 d3 |"
+    bass    = "c3:2 g2 | g2 d3 | c3 g2 | c3 g2 |"
+    bass    = "f2:2 c3 | g2 d3 | c3 g2 | c3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 |"
+    trommel = "g3:4 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3:8 g3 g3:4 g3 | g3 g3 |"
+}
+
+form = "auftakt a auftakt a2"

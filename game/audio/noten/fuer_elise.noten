@@ -1,0 +1,69 @@
+# Für Elise – Ludwig van Beethoven, Klavierstück a-Moll WoO 59 (1810), gemeinfrei.
+# Tonhöhen und Dauern nach der Ausgabe Breitkopf & Härtel 1888, geprüft am Notensatz des
+# Mutopia-Projekts (Stelios Samelis, gemeinfrei). Gekürzt auf den Hauptteil mit seinen beiden
+# Wiederholungen, ohne die Zwischenspiele; Klavier wie im Original.
+
+titel     = "Für Elise"
+komponist = "Ludwig van Beethoven"
+werk      = "Klavierstück a-Moll WoO 59 (1810), Hauptteil"
+stimmung  = krise
+tempo     = 66
+takt      = 3/8
+hall      = 0.3
+
+stimme rechts { instrument = klavier  lautstaerke = 0.75 }
+stimme links  { instrument = klavier  lautstaerke = 0.6 }
+
+teil auftakt {
+    rechts = "e5:16 dis5 |"
+    links  = "r:8 |"
+}
+
+# Thema (sieben Takte) mit dem Schluss, der zum Thema zurückführt …
+teil thema_w {
+    rechts = "e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 | h4:8 r:16 e4 gis4 h4 | c5:8 r:16 e4 e5 dis5 |"
+    rechts = "e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 | h4:8 r:16 e4 c5 h4 | a4:4 e5:16 dis5 |"
+    links  = "r:4. | a2:16 e3 a3 r r:8 | e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 |"
+    links  = "r:4. | a2:16 e3 a3 r r:8 | e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 |"
+}
+
+# … und mit dem Schluss, der in den zweiten Teil führt.
+teil thema_b {
+    rechts = "e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 | h4:8 r:16 e4 gis4 h4 | c5:8 r:16 e4 e5 dis5 |"
+    rechts = "e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 | h4:8 r:16 e4 c5 h4 | a4:8 r:16 h4 c5 d5 |"
+    links  = "r:4. | a2:16 e3 a3 r r:8 | e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 |"
+    links  = "r:4. | a2:16 e3 a3 r r:8 | e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 |"
+}
+
+# Zweiter Teil, zurück zu sich selbst …
+teil zweiter_w {
+    rechts = "e5:8. g4:16 f5 e5 | d5:8. f4:16 e5 d5 | c5:8. e4:16 d5 c5 | h4:8 r:16 e4 e5 r |"
+    rechts = "r:16 e5 e6 r r dis5 | e5:8 r:16 dis5 e5 dis5 | e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 |"
+    rechts = "h4:8 r:16 e4 gis4 h4 | c5:8 r:16 e4 e5 dis5 | e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 |"
+    rechts = "h4:8 r:16 e4 c5 h4 | a4:8 r:16 h4 c5 d5 |"
+    links  = "c3:16 g3 c4 r r:8 | g2:16 g3 h3 r r:8 | a2:16 e3 a3 r r:8 | e2:16 e3 e4 r r e4 |"
+    links  = "e5:16 r r dis5 e5 r | r:16 dis5 e5 r r:8 | r:4. | a2:16 e3 a3 r r:8 |"
+    links  = "e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 | r:4. | a2:16 e3 a3 r r:8 |"
+    links  = "e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 |"
+}
+
+# … und zurück zum Thema.
+teil zweiter_t {
+    rechts = "e5:8. g4:16 f5 e5 | d5:8. f4:16 e5 d5 | c5:8. e4:16 d5 c5 | h4:8 r:16 e4 e5 r |"
+    rechts = "r:16 e5 e6 r r dis5 | e5:8 r:16 dis5 e5 dis5 | e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 |"
+    rechts = "h4:8 r:16 e4 gis4 h4 | c5:8 r:16 e4 e5 dis5 | e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 |"
+    rechts = "h4:8 r:16 e4 c5 h4 | a4:4 e5:16 dis5 |"
+    links  = "c3:16 g3 c4 r r:8 | g2:16 g3 h3 r r:8 | a2:16 e3 a3 r r:8 | e2:16 e3 e4 r r e4 |"
+    links  = "e5:16 r r dis5 e5 r | r:16 dis5 e5 r r:8 | r:4. | a2:16 e3 a3 r r:8 |"
+    links  = "e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 | r:4. | a2:16 e3 a3 r r:8 |"
+    links  = "e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 |"
+}
+
+teil schluss {
+    rechts = "e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 | h4:8 r:16 e4 gis4 h4 | c5:8 r:16 e4 e5 dis5 |"
+    rechts = "e5:16 dis5 e5 h4 d5 c5 | a4:8 r:16 c4 e4 a4 | h4:8 r:16 e4 c5 h4 | a4:4. |"
+    links  = "r:4. | a2:16 e3 a3 r r:8 | e2:16 e3 gis3 r r:8 | a2:16 e3 a3 r r:8 |"
+    links  = "r:4. | a2:16 e3 a3 r r:8 | e2:16 e3 gis3 r r:8 | [a1 a2]:4. |"
+}
+
+form = "auftakt thema_w thema_b zweiter_w zweiter_t thema_w thema_b zweiter_w zweiter_t schluss"

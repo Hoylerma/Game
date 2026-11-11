@@ -583,6 +583,14 @@ jobs:
       - name: Historie 1849–1870 aktuell? (besitz.csv, bevoelkerung.csv)
         run: python3 tools/geodaten/historie_1849_1870.py --pruefen
 
+      # Seit M13b2: Musik und Bedienklänge aus eigenem Notentext und Synthesizer; die Prüfsummen müssen mit
+      # beiden numpy-Versionen gleich sein (game/audio/pruefsummen.txt).
+      - name: Tests von Klang (tools/klang)
+        run: python3 -m unittest discover -s tools/klang -v
+
+      - name: Musik bitgleich? (game/audio/pruefsummen.txt)
+        run: python3 tools/klang/klang.py --pruefen
+
   godot:
     name: Godot (Brücke, Tests, Screenshots)
     runs-on: ubuntu-24.04
@@ -683,6 +691,17 @@ jobs:
 
       - name: Godot-Version
         run: '"$GODOT_BIN" --version'
+
+      # Seit M13b2: Musik und Klänge sind nicht versioniert; klang.py rendert sie vor dem Import.
+      - name: Python für Klang einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Musik und Klänge rendern (tools/klang)
+        run: |
+          python3 -m pip install --disable-pip-version-check --no-input "numpy==2.5.3"
+          python3 tools/klang/klang.py
 
       - name: Projekt importieren (headless)
         run: |

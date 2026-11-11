@@ -123,6 +123,7 @@ func _run() -> void:
 	await _check_areas()
 	await _check_verdict()
 	await _check_newspaper()
+	await _check_audio()
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
 		print("KLICK OK %d/%d" % [all_levels, testable.size()])
@@ -875,6 +876,37 @@ func _check_newspaper() -> void:
 	_main.call("close_yearbook")
 	print("  Zeitung: %d von selbst erschienen, „%s“ im %s; Jahrbuch mit %d Zeitungen; Schriften und Rahmen der Epoche" % [
 		_newspapers_seen + (1 if opened else 0), page.get("headline", ""), page.get("paper", ""), entries.size()
+	])
+
+
+## Musik und Klänge (seit M13b2, vertical_slice.md 5.3) in der Partie ab 1848 (als Bayern): Die Stimmung folgt
+## der Lage des Staates, Fenster, Ereignisse und Befehle klingen. Ohne gerenderte Musik nur die Stille.
+func _check_audio() -> void:
+	var audio: AudioDirector = _main.call("audio_director")
+	if audio == null:
+		_fail("Kein Klangregisseur")
+		return
+	if not audio.has_music():
+		print("  Musik und Klänge: keine Dateien (tools/klang/klang.py), das Spiel bleibt still")
+		return
+	var mood := str(_main.call("mood_for_player"))
+	_main.call("_update_mood")
+	if audio.mood() != mood or not audio.pieces_for(mood).has(audio.current_piece()):
+		_fail("Musik: Stimmung %s, gespielt %s (%s)" % [mood, audio.current_piece(), audio.mood()])
+	var before := audio.sounds_played.duplicate()
+	_main.call("open_yearbook")
+	await _frames(1)
+	_main.call("close_yearbook")
+	var state_panel: StatePanel = _main.call("state_panel")
+	state_panel.tax_rate_requested.emit(0, 12)
+	await _frames(1)
+	for sound in ["papier", "gaensekiel"]:
+		if int(audio.sounds_played.get(sound, 0)) <= int(before.get(sound, 0)):
+			_fail("Klang %s nicht gespielt (%s)" % [sound, str(audio.sounds_played)])
+	if int(audio.sounds_played.get("glocke", 0)) == 0:
+		_fail("Kein Ereignis mit Glocke bis hierher (%s)" % str(audio.sounds_played))
+	print("  Musik und Klänge: Stimmung %s, „%s“; Klänge %s" % [
+		audio.mood(), audio.pieces.get(audio.current_piece(), {}).get("titel", ""), str(audio.sounds_played)
 	])
 
 

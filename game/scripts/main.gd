@@ -30,6 +30,7 @@ func _ready() -> void:
 	_build_settings()
 	_build_verdict()
 	_build_newspaper()
+	_build_audio()
 	_build_start_screen()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
@@ -83,6 +84,7 @@ func _ready() -> void:
 	_fit_camera()
 	_apply_launch_view()
 	view_is_ready = true
+	_update_mood() # Musik von Anfang an (seit M13b2)
 	if _wants_start_screen():
 		open_start_screen()
 	view_ready.emit()
@@ -224,6 +226,10 @@ func _after_time_passed() -> void:
 	if hovered >= 0:
 		_on_location_hovered(hovered)
 	_check_open_events()
+	# Stimmung der Musik einmal im Monat (seit M13b2).
+	if month != _mood_month:
+		_mood_month = month
+		_update_mood()
 # --- Bereiche und Jahrbuch (seit M13a5a, vertical_slice.md 4.1–4.3) ---------------------
 
 
@@ -522,6 +528,112 @@ func _pause_for_entries(entries: Array[Dictionary]) -> void:
 	if not reason.is_empty():
 		_set_speed(0)
 		_top_bar.show_notice("Pause: " + reason)
+
+
+# --- Musik und Klänge (seit M13b2, vertical_slice.md 5.3) --------------------------------
+
+## Journalstufen der Revolution, in denen die Musik „revolution“ spielt (journale/revolution.chron).
+const REVOLUTION_STAGES: PackedStringArray = [
+	"maerz", "vorparlament", "nationalversammlung", "verfassungswerk", "kaiserkrone", "kampagne",
+]
+
+
+func _build_audio() -> void:
+	_audio = AudioDirector.new()
+	add_child(_audio)
+	_audio.piece_started.connect(
+		func(id: String) -> void:
+			var piece: Dictionary = _audio.pieces.get(id, {})
+			print("EINIGKEIT: Musik %s (%s, %s)" % [piece.get("titel", id), piece.get("komponist", ""), _audio.mood()])
+	)
+	# Befehle: Gänsekiel; Verträge und Frieden: Siegel; Fenster, Zeitung: Papier; Ereignis: Glocke.
+	for sig: Signal in [
+		_state_panel.tax_rate_requested, _state_panel.customs_change_requested, _state_panel.mobilization_requested,
+		_diplomacy_window.envoy_requested, _diplomacy_window.demand_requested, _diplomacy_window.motion_requested,
+		_diplomacy_window.war_requested, _play_bar.manoeuvre_requested, _war_window.goal_requested,
+		_location_panel.campaign_requested, _event_window.option_chosen, _army_panel.staff_requested,
+	]:
+		_sound_on(sig, "gaensekiel")
+	for sig: Signal in [_diplomacy_window.treaty_requested, _war_window.peace_requested]:
+		_sound_on(sig, "siegel")
+	_windows.window_opened.connect(_play_sound.bind("papier").unbind(1))
+	for window: Control in [_newspaper_window, _event_window]:
+		var sound := "papier" if window == _newspaper_window else "glocke"
+		window.visibility_changed.connect(
+			func() -> void:
+				if window.visible:
+					_play_sound(sound)
+		)
+
+
+## Klang zu einem Signal; dessen Argumente fallen weg.
+func _sound_on(sig: Signal, sound: String) -> void:
+	var argc := 0
+	for info: Dictionary in sig.get_object().get_signal_list():
+		if StringName(info.get("name", "")) == sig.get_name():
+			argc = (info.get("args", []) as Array).size()
+	sig.connect(_play_sound.bind(sound).unbind(argc))
+
+
+## Klangregisseur (Zugriff für Tests).
+func audio_director() -> AudioDirector:
+	return _audio
+
+
+## Stimmung aus der Lage des Spielerstaates: Krieg vor Revolution (eigener Aufstand oder Journal in einer
+## revolutionären Stufe) vor Krise (Stufe 2 oder 3 eines Spiels mit dem Spielerstaat) vor Frieden.
+func _update_mood() -> void:
+	if _audio == null or _sim == null:
+		return
+	_audio.set_mood(mood_for_player())
+
+
+func mood_for_player() -> String:
+	if _player < 0:
+		return "frieden"
+	for war in _sim.get_wars():
+		if int(war.get("player_side", 0)) != 0:
+			return "krieg"
+	if not (_sim.get_state_events(_player).get("revolt", {}) as Dictionary).is_empty():
+		return "revolution"
+	for journal in _sim.get_journals():
+		if (
+			str(journal.get("id", "")) == "revolution" and bool(journal.get("started", false))
+			and not bool(journal.get("finished", false)) and REVOLUTION_STAGES.has(str(journal.get("stage_id", "")))
+		):
+			return "revolution"
+	for play in _sim.get_diplomatic_plays():
+		var involved := int(play.get("demander_index", -1)) == _player or int(play.get("target_index", -1)) == _player
+		if involved and int(play.get("stage", 1)) >= 2:
+			return "krise"
+	return "frieden"
+
+
+## Neue Chronikeinträge: Trommel bei einer Kriegserklärung mit dem Spielerstaat, Siegel bei seinem Frieden
+## oder Bündnis, sonst ab 1849 höchstens einmal die Woche der Telegraf für eine Meldung, die ihn betrifft.
+func _sounds_for_entries(entries: Array[Dictionary]) -> void:
+	if _audio == null or _player < 0 or entries.is_empty():
+		return
+	var own := str(_sim.get_state(_player).get("short_name", ""))
+	if own.is_empty():
+		return
+	var news := false
+	for entry in entries:
+		var text := str(entry.get("text", ""))
+		if not text.contains(own):
+			news = news or int(entry.get("state_index", -1)) < 0
+			continue
+		if text.contains(" den Krieg") and text.contains(" erklärt "):
+			_play_sound("trommel")
+			return
+		if text.begins_with("Frieden zwischen") or text.contains(" schließen ein Bündnis"):
+			_play_sound("siegel")
+			return
+		news = true
+	var today := ElectionTally.day_number(_sim.get_date())
+	if news and int(_sim.get_date().get("year", 0)) >= 1849 and today - _telegraph_day >= 7:
+		_telegraph_day = today
+		_play_sound("telegraf")
 
 
 # --- Leisten und Tooltips (seit M13a5c, vertical_slice.md 4.1 und 4.3) -------------------

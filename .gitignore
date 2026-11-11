@@ -10,6 +10,9 @@ compile_commands.json
 # Importcache und Editor-Zustand werden lokal erzeugt.
 /game/.godot/
 /game/export_presets.cfg
+# Musik und Bedienklänge (seit M13b2): von tools/klang/klang.py erzeugt, nicht versioniert.
+/game/audio/musik/
+/game/audio/klaenge/
 # Kompilierte GDExtension-Bibliotheken werden vom Build in game/bin/ kopiert.
 /game/bin/*.so
 /game/bin/*.dll
