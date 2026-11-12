@@ -13,6 +13,12 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Onboarding (Schritt b3):** Die **Geschichtsstunde „März 1848 in Berlin“** führt als Preußen in vierzehn
+  Schritten durch das Spiel – von der Karte über Steuern, Kabinett, Diplomatie und Zollverein bis zu den
+  Barrikaden in Berlin, der Wahl zur Nationalversammlung und dem Speichern. Jeder Schritt nennt eine
+  Aufgabe und erkennt, wenn sie erledigt ist; die Zeit läuft nur, wo es nötig ist, ein goldener Rahmen zeigt
+  den Weg. Beim ersten Öffnen erklärt ein **Hinweis** jedes Fenster in zwei, drei Sätzen (abschaltbar). Nach
+  dem Laden fasst **„Was ist passiert?“** die wichtigsten Nachrichten des letzten Jahres zusammen.
 - **Musik und Klänge (Schritt b2):** Das Spiel hat **Musik**: sieben gemeinfreie Stücke der Zeit – Beethovens
   Ode an die Freude und Für Elise, Haydns Kaiserlied, Silchers Loreley, Wilder Reiter und Soldatenmarsch aus
   Schumanns Album für die Jugend (1848) und die Marseillaise –, als eigener Notentext mit einem eigenen

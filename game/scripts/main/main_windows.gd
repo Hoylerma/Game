@@ -1028,6 +1028,7 @@ func load_game_file(path: String) -> bool:
 	close_game_menu(false)
 	_set_speed(0)
 	_top_bar.show_notice("Geladen: %s (%s)" % [path.get_file().get_basename(), _sim.get_date_text()])
+	_after_loading_save() # „Was ist passiert?“ (seit M13b3)
 	print("EINIGKEIT: Spielstand geladen: %s, Prüfsumme %s" % [path, _sim.get_checksum()])
 	return true
 
@@ -1161,6 +1162,7 @@ func _autosave() -> void:
 
 func _report_save(error: String, success: String) -> void:
 	if error.is_empty():
+		_tutorial_note("speichern")
 		_top_bar.show_notice(success)
 		if _game_menu.is_open():
 			_game_menu.show_status(success + ".")

@@ -32,6 +32,7 @@ func _ready() -> void:
 	_build_newspaper()
 	_build_audio()
 	_build_start_screen()
+	_build_onboarding()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
@@ -91,6 +92,10 @@ func _ready() -> void:
 	if _options.wants_screenshot():
 		_run_screenshot()
 func _process(delta: float) -> void:
+	# Geschichtsstunde (seit M13b3): die Aufgabe des Schritts prüfen, auch bei angehaltener Zeit.
+	if _tutorial != null and _tutorial.is_active() and not _tutorial.is_done():
+		if _tutorial_check(_tutorial.current_step().check):
+			_tutorial.mark_done()
 	if _sim == null or _speed == 0:
 		return
 	_day_accumulator += delta * SPEED_DAYS_PER_SECOND[_speed]
@@ -528,6 +533,236 @@ func _pause_for_entries(entries: Array[Dictionary]) -> void:
 	if not reason.is_empty():
 		_set_speed(0)
 		_top_bar.show_notice("Pause: " + reason)
+
+
+# --- Onboarding (seit M13b3, vertical_slice.md 5.4) -----------------------------------------
+
+const LESSON_PATH := "res://tutorial/maerz_1848.tres"
+
+
+func _build_onboarding() -> void:
+	var root: Control = $UI/Root
+	_recap_window = RecapWindow.new()
+	root.add_child(_recap_window)
+	root.move_child(_recap_window, _top_bar.get_index())
+	_recap_window.close_requested.connect(
+		func() -> void:
+			_recap_window.close()
+			_sync_area_bar()
+	)
+	_recap_window.resized.connect(_place_diplomacy)
+	_windows.add(_recap_window)
+	_tutorial_highlight = TutorialHighlight.new()
+	root.add_child(_tutorial_highlight)
+	_tutorial_highlight.visible = false
+	_tutorial_highlight.target = func() -> Control:
+		var step := _tutorial.current_step()
+		return tutorial_target(step.target) if step != null else null
+	_tutorial = TutorialPanel.new()
+	root.add_child(_tutorial)
+	_tutorial.step_entered.connect(_on_tutorial_step)
+	_tutorial.closed.connect(_on_tutorial_closed)
+	_tutorial.lexicon_requested.connect(func(article: String) -> void: open_lexicon(article))
+	_tutorial.resized.connect(_place_tutorial)
+	_hint_card = HintCard.new()
+	root.add_child(_hint_card)
+	_hint_card.resized.connect(_place_hint)
+	_hint_card.disable_requested.connect(
+		func() -> void:
+			_settings.set_value("spiel/hinweise", false)
+			_settings.save_file()
+			_top_bar.show_notice("Hinweise abgeschaltet (Einstellungen, Spiel)")
+	)
+	# Hinweise beim ersten Öffnen: Fenster der Fensterverwaltung und die übrigen Fenster der Partie.
+	_windows.window_opened.connect(func(window: Control) -> void: _offer_hint(str(window.name)))
+	for window: Control in [_event_window, _newspaper_window, _election_night, _verdict_window]:
+		window.visibility_changed.connect(
+			func() -> void:
+				if window.visible:
+					_offer_hint(str(window.name))
+		)
+	_area_bar.area_requested.connect(
+		func(area: StringName) -> void:
+			_tutorial_note("bereich:" + str(area))
+			if area == &"haushalt":
+				_offer_hint("Haushalt")
+			elif area == &"zollunion":
+				_offer_hint("Zollunion")
+	)
+	_start_screen.lesson_requested.connect(func() -> void: start_lesson())
+	# Handlungen, die Schritte der Geschichtsstunde prüfen.
+	_state_panel.tax_rate_requested.connect(func(_k: int, _p: int) -> void: _tutorial_note("steuern"))
+	_diplomacy_window.envoy_requested.connect(
+		func(_t: int, send: bool) -> void:
+			if send:
+				_tutorial_note("gesandter")
+	)
+	_event_window.option_chosen.connect(func(_e: int, _o: int) -> void: _tutorial_note("ereignis"))
+	get_viewport().size_changed.connect(_place_tutorial)
+
+
+## Geschichtsstunde (Tests).
+func tutorial_panel() -> TutorialPanel:
+	return _tutorial
+
+
+func hint_card() -> HintCard:
+	return _hint_card
+
+
+func recap_window() -> RecapWindow:
+	return _recap_window
+
+
+## Startet die Geschichtsstunde „März 1848 in Berlin“: neues Spiel als Preußen, Stufe Lehrling, Kompass an;
+## from_step > 0 springt zu einem Schritt (Screenshots). false, wenn das Lesezeichen nicht lädt.
+func start_lesson(from_step: int = 0) -> bool:
+	var lesson := load(LESSON_PATH) as TutorialLesson
+	if lesson == null or not lesson.problems().is_empty():
+		_top_bar.show_notice("Die Geschichtsstunde fehlt oder ist fehlerhaft")
+		return false
+	if _start_screen.is_open():
+		_start_screen.close()
+	var errors := start_new_game(lesson.scenario, lesson.state, true)
+	if not errors.is_empty():
+		return false
+	if bool(_sim.get_game_settings().get("active", false)):
+		_sim.set_game_settings(lesson.difficulty, false)
+	_event_window.set_compass(true)
+	_hint_card.dismiss()
+	focus_capital()
+	_set_map_mode(MapModes.MAP_POLITICAL)
+	_set_speed(0)
+	_tutorial.start(lesson)
+	for _i in clampi(from_step, 0, lesson.steps.size() - 1):
+		_tutorial.mark_done()
+		_tutorial.advance()
+	print("EINIGKEIT: Geschichtsstunde „%s“ beginnt" % lesson.title)
+	return true
+
+
+func _on_tutorial_step(step: TutorialStep) -> void:
+	_tutorial_flags.clear()
+	_tutorial_base = {
+		"map_mode": _map_mode, "elections": _sim.get_election_count() if _sim != null else 0,
+	}
+	if not step.time:
+		_set_speed(0)
+	_tutorial_highlight.visible = not step.target.is_empty()
+	_place_tutorial()
+	_place_tutorial.call_deferred()
+
+
+func _on_tutorial_closed(completed: bool) -> void:
+	_tutorial_highlight.visible = false
+	_tutorial_flags.clear()
+	_top_bar.show_notice(
+		"Die Geschichtsstunde ist zu Ende – die Partie gehört Ihnen." if completed
+		else "Geschichtsstunde beendet; die Partie läuft weiter."
+	)
+
+
+func _tutorial_blocks_time() -> bool:
+	if _tutorial == null or not _tutorial.is_active():
+		return false
+	var step := _tutorial.current_step()
+	return step != null and not step.time
+
+
+## Ist die Aufgabe des Schritts erledigt? (Prüfungen aus TutorialStep.CHECKS)
+func _tutorial_check(check: String) -> bool:
+	match check:
+		"weiter":
+			return true
+		"kartenmodus":
+			return _map_mode != int(_tutorial_base.get("map_mode", _map_mode))
+		"ort":
+			return _selected >= 0
+		"haushalt":
+			return _state_panel.is_budget_visible() or _tutorial_flags.has("bereich:haushalt")
+		"steuern":
+			return _tutorial_flags.has("steuern")
+		"kabinett":
+			return area_window(&"kabinett").is_open()
+		"gesandter":
+			return _tutorial_flags.has("gesandter")
+		"zollunion":
+			return _state_panel.is_customs_visible() or _tutorial_flags.has("bereich:zollunion")
+		"diplomatie":
+			return _diplomacy_window.is_open()
+		"tempo":
+			return _speed > 0
+		"ereignis":
+			return _tutorial_flags.has("ereignis")
+		"wahl":
+			return _election_night.is_open() or _sim.get_election_count() > int(_tutorial_base.get("elections", 0))
+		"journal":
+			return _journal_window.is_open()
+		"speichern":
+			return _tutorial_flags.has("speichern")
+	return false
+
+
+## Element, das ein Schritt hervorhebt (TutorialStep.TARGETS), oder null.
+func tutorial_target(target_name: String) -> Control:
+	if target_name.begins_with("bereich:"):
+		return _area_bar.button(StringName(target_name.trim_prefix("bereich:")))
+	match target_name:
+		"kartenmodi":
+			return _mode_bar
+		"staatsuebersicht":
+			return _state_panel
+		"steuern":
+			var row := _state_panel.find_child("Tax0", true, false) as Control
+			return row.get_parent() as Control if row != null else _state_panel
+		"tempo":
+			return _top_bar.find_child("SpeedButtons", true, false) as Control
+		"menue":
+			return _top_bar.find_child("GameMenuButton", true, false) as Control
+		"uebersicht":
+			return _overview
+	return null
+
+
+## Rechts oben unter der oberen Leiste, über der Übersicht.
+func _place_tutorial() -> void:
+	if _tutorial == null or not _tutorial.visible:
+		return
+	var area := get_viewport().get_visible_rect().size
+	_tutorial.size = _tutorial.get_combined_minimum_size()
+	_tutorial.position = Vector2(area.x - _tutorial.size.x - 12.0, _left_column.offset_top)
+
+
+## Hinweis unten rechts über der Legende.
+func _place_hint() -> void:
+	if _hint_card == null or not _hint_card.visible:
+		return
+	var area := get_viewport().get_visible_rect().size
+	_hint_card.size = _hint_card.get_combined_minimum_size()
+	_hint_card.position = Vector2(area.x - _hint_card.size.x - 12.0, area.y - _hint_card.size.y - 120.0)
+
+
+## Hinweis beim ersten Öffnen, wenn die Einstellung an ist und keine Geschichtsstunde läuft.
+func _offer_hint(key: String) -> void:
+	if _hint_card == null or _settings == null or not bool(_settings.get_value("spiel/hinweise")):
+		return
+	if _tutorial.is_active() or _options.wants_screenshot():
+		return
+	if _hint_card.offer(key):
+		_place_hint()
+		_place_hint.call_deferred()
+
+
+## Nach dem Laden eines Spielstands: „Was ist passiert?“ mit den wichtigsten Nachrichten des letzten Jahres.
+func _after_loading_save() -> void:
+	if _settings != null and not bool(_settings.get_value("spiel/rueckblick")):
+		return
+	if RecapWindow.collect(_sim, _player).is_empty():
+		return
+	_windows.opening(_recap_window)
+	_recap_window.open(_sim, _player)
+	_place_diplomacy()
+	_sync_area_bar()
 
 
 # --- Musik und Klänge (seit M13b2, vertical_slice.md 5.3) --------------------------------

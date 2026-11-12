@@ -163,7 +163,8 @@ func _fill() -> void:
 		"spiel":
 			_options("spiel/autosave", "Automatischer Spielstand", ["aus", "jährlich (1. Januar)", "halbjährlich (1. Januar, 1. Juli)"], UserSettings.AUTOSAVE)
 			_check("spiel/kompass", "Historischer Kompass im Ereignisfenster")
-			_check("spiel/hinweise", "Hinweise beim ersten Öffnen eines Fensters (ab b3)")
+			_check("spiel/hinweise", "Hinweise beim ersten Öffnen eines Fensters")
+			_check("spiel/rueckblick", "„Was ist passiert?“ nach dem Laden eines Spielstands")
 			_heading("AUTOMATISCHE PAUSE")
 			_note("Ein Ereignis des Spielerstaates hält die Zeit immer an.")
 			for rule: Array in UserSettings.PAUSE_RULES:

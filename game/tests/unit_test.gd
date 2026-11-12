@@ -38,6 +38,7 @@ func _initialize() -> void:
 	_test_settings_and_lexicon()
 	_test_epoch_and_newspaper()
 	_test_audio_director()
+	_test_onboarding()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -1060,3 +1061,80 @@ func _test_audio_director() -> void:
 		_true(director.play_sound(sound), "Klang %s" % sound)
 	_true(int(director.sounds_played.get("glocke", 0)) == 1 and not director.play_sound("pfeife"), "Zähler der Klänge, unbekannter Klang")
 	director.free()
+
+
+## Onboarding (seit M13b3, vertical_slice.md 5.4): die Geschichtsstunde als Daten, ihr Panel, Hinweise beim
+## ersten Öffnen und „Was ist passiert?“.
+func _test_onboarding() -> void:
+	var lesson := load("res://tutorial/maerz_1848.tres") as TutorialLesson
+	_true(lesson != null and lesson.problems().is_empty(), "Geschichtsstunde ohne Fehler (%s)" % (", ".join(lesson.problems()) if lesson != null else "fehlt"))
+	if lesson == null:
+		return
+	_true(lesson.state == "PRU" and lesson.scenario == "voelkerfruehling" and lesson.steps.size() >= 12, "März 1848 in Berlin, %d Schritte" % lesson.steps.size())
+	var checks := {}
+	var lexicon := Lexicon.load_dir(UhrwerkPaths.data_dir().path_join("lexikon"))
+	for step in lesson.steps:
+		checks[step.check] = true
+		if not step.lexicon.is_empty():
+			_true(lexicon.articles.has(step.lexicon), "Lexikonartikel „%s“ zu Schritt %s" % [step.lexicon, step.id])
+	for needed in ["kartenmodus", "haushalt", "steuern", "ereignis", "kabinett", "gesandter", "zollunion", "wahl", "journal", "speichern", "tempo"]:
+		_true(checks.has(needed), "Schritt mit Prüfung %s" % needed)
+	var broken := TutorialLesson.new()
+	var bad := TutorialStep.new()
+	bad.id = "x"
+	bad.title = "X"
+	bad.text = "x"
+	bad.check = "fliegen"
+	bad.target = "mond"
+	broken.steps = [bad, bad]
+	var problems := "\n".join(broken.problems())
+	_true(problems.contains("unbekannte Prüfung „fliegen“") and problems.contains("unbekanntes Ziel „mond“") and problems.contains("doppelt") and problems.contains("Aufgabe fehlt"), "Fehler der Daten erkannt")
+
+	var panel := TutorialPanel.new()
+	panel._ready()
+	var entered: Array[String] = []
+	var finished: Array[bool] = []
+	panel.step_entered.connect(func(step: TutorialStep) -> void: entered.append(step.id))
+	panel.closed.connect(func(completed: bool) -> void: finished.append(completed))
+	panel.start(lesson)
+	_true(panel.is_active() and entered == ["karte"] and panel.panel_text().contains("Schritt 1 von %d" % lesson.steps.size()), "Panel beginnt mit Schritt 1")
+	_true(panel.button("Next").disabled and not panel.advance(), "Weiter erst nach der Aufgabe")
+	panel.mark_done()
+	_true(not panel.button("Next").disabled and panel.panel_text().contains("✓"), "erledigt mit Haken")
+	panel.advance()
+	_true(panel.step_index() == 1 and not panel.is_done(), "nächster Schritt offen")
+	while panel.is_active():
+		panel.mark_done()
+		panel.advance()
+	_true(finished == [true] and entered.size() == lesson.steps.size(), "alle Schritte bis zum Ende")
+	panel.start(lesson)
+	panel.button("End").pressed.emit()
+	_true(finished == [true, false] and not panel.is_active(), "Beenden bricht ab")
+	panel.free()
+
+	var hint := HintCard.new()
+	hint.seen_path = "user://unit_test_hinweise.cfg"
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(hint.seen_path))
+	hint._ready()
+	for key in ["CabinetWindow", "LawsWindow", "GroupsWindow", "ParliamentWindow", "SocietyWindow", "EconomyWindow",
+			"ChronicleWindow", "DiplomacyWindow", "WarWindow", "JournalWindow", "YearbookWindow", "LexiconWindow",
+			"EventWindow", "NewspaperWindow", "ElectionNight", "VerdictWindow", "RecapWindow", "Haushalt", "Zollunion"]:
+		_true(hint.has_hint(key), "Hinweis für %s" % key)
+	_true(hint.offer("DiplomacyWindow") and hint.visible and hint.current_key() == "DiplomacyWindow", "Hinweis beim ersten Öffnen")
+	hint.dismiss()
+	_true(not hint.offer("DiplomacyWindow") and hint.was_seen("DiplomacyWindow"), "kein zweites Mal")
+	var again := HintCard.new()
+	again.seen_path = hint.seen_path
+	again._ready()
+	_true(again.was_seen("DiplomacyWindow") and not again.offer("DiplomacyWindow"), "gesehen bleibt gesehen (Datei)")
+	again.reset_seen()
+	_true(again.offer("DiplomacyWindow"), "zurückgesetzt zeigt er wieder")
+	_true(not hint.offer("Gibtsnicht"), "ohne Text kein Hinweis")
+	hint.free()
+	again.free()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("user://unit_test_hinweise.cfg"))
+	_true(RecapWindow._day("05.04.1849") - RecapWindow._day("05.04.1848") == 365, "Tagesnummer aus dem Datum")
+	var o := LaunchOptions.parse(PackedStringArray(["--geschichtsstunde=4"]))
+	_true(o.lesson_step == 4 and LaunchOptions.parse(PackedStringArray(["--geschichtsstunde"])).lesson_step == 1, "Startoption --geschichtsstunde")
+	_true(not LaunchOptions.parse(PackedStringArray(["--geschichtsstunde=0"])).problems.is_empty(), "Schritt 0 abgelehnt")
+	_true(UserSettings.DEFAULTS.get("spiel/rueckblick", false) == true, "Einstellung Rückblick an")

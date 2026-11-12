@@ -28,6 +28,8 @@ extends RefCounted
 ##   --journal              Journalfenster öffnen (seit M11)
 ##   --jahrbuch             Statistisches Jahrbuch öffnen (seit M13a5a)
 ##   --zeitung              die jüngste Titelseite für den Spielerstaat öffnen (seit M13b1)
+##   --geschichtsstunde[=n] Geschichtsstunde starten, bei Schritt n (seit M13b3)
+##   --rueckblick           „Was ist passiert?“ öffnen wie nach dem Laden (seit M13b3)
 ##   --bereich=<bereich>    Fenster eines Bereichs öffnen: kabinett, gesetze, gruppen, parlament,
 ##                          gesellschaft, wirtschaft (seit M13a5b), chronik, lexikon (seit M13a5d)
 ##   --einstellungen[=<r>]  Fenster Einstellungen öffnen, Reiter bild, ton, spiel, zugang, tasten, sprache
@@ -77,6 +79,10 @@ var show_journal := false
 var show_yearbook := false
 ## Jüngste Titelseite der Zeitung öffnen (seit M13b1).
 var show_newspaper := false
+## Geschichtsstunde ab diesem Schritt (1 = erster), 0: keine (seit M13b3).
+var lesson_step := 0
+## „Was ist passiert?“ vor dem Screenshot (seit M13b3).
+var show_recap := false
 ## Fenster eines Bereichs (seit M13a5b), leer: keines.
 var area := ""
 ## Einstellungen (seit M13a5d): Reiter oder −1; Farben für Farbsehschwäche nur für diesen Start.
@@ -215,6 +221,18 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.color_blind = true
 				else:
 					options.problems.append("--farbsehschwaeche erwartet keinen Wert, nicht „%s“." % value)
+			"--rueckblick":
+				if value.is_empty():
+					options.show_recap = true
+				else:
+					options.problems.append("--rueckblick erwartet keinen Wert, nicht „%s“." % value)
+			"--geschichtsstunde":
+				if value.is_empty():
+					options.lesson_step = 1
+				elif value.is_valid_int() and value.to_int() >= 1:
+					options.lesson_step = value.to_int()
+				else:
+					options.problems.append("--geschichtsstunde erwartet eine Schrittnummer ab 1, nicht „%s“." % value)
 			"--zeitung":
 				if value.is_empty():
 					options.show_newspaper = true

@@ -41,6 +41,7 @@ const DEFAULTS := {
 	"spiel/autosave": "jaehrlich",
 	"spiel/kompass": true,
 	"spiel/hinweise": true,
+	"spiel/rueckblick": true,
 	"spiel/pause_krieg": true,
 	"spiel/pause_forderung": true,
 	"spiel/pause_wahl": true,

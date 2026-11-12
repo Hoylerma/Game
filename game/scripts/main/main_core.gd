@@ -141,6 +141,13 @@ const OVERVIEW_REFRESH_MS := 500
 var _verdict_window: VerdictWindow = null
 var _newspaper_window: NewspaperWindow = null # seit M13b1
 var _audio: AudioDirector = null # Musik und Klänge, seit M13b2
+# Onboarding (seit M13b3): Geschichtsstunde, Hinweise, „Was ist passiert?“.
+var _tutorial: TutorialPanel = null
+var _tutorial_highlight: TutorialHighlight = null
+var _hint_card: HintCard = null
+var _recap_window: RecapWindow = null
+var _tutorial_flags := {}
+var _tutorial_base := {}
 var _mood_month := -1 # Monat der letzten Prüfung der Stimmung
 var _telegraph_day := -1000000 # Tag des letzten Telegrafenklangs
 var _speed_before_newspaper := 0
@@ -999,6 +1006,10 @@ func _set_speed(speed: int) -> void:
 		_top_bar.show_unavailable()
 		return
 	_speed = clampi(speed, 0, SPEED_DAYS_PER_SECOND.size() - 1)
+	if _speed > 0 and _tutorial_blocks_time():
+		# Geschichtsstunde (seit M13b3): Die Zeit läuft nur, wenn der Schritt es verlangt.
+		_speed = 0
+		_top_bar.show_notice("Die Geschichtsstunde wartet: erst die Aufgabe des Schritts")
 	if _speed > 0 and _event_window != null and _event_window.is_open():
 		# Die Zeit steht, bis das Ereignis entschieden ist (ereignisse.md 3.6); danach dieses Tempo.
 		_speed_before_event = _speed
@@ -1220,6 +1231,10 @@ func _run_screenshot() -> void:
 		open_journal()
 	if _options.show_yearbook:
 		open_yearbook()
+	if _options.show_recap:
+		_after_loading_save()
+	if _options.lesson_step > 0:
+		start_lesson(_options.lesson_step - 1)
 	if _options.show_newspaper:
 		var pages := _sim.get_front_pages(_player, 2)
 		for i in range(pages.size() - 1, -1, -1):
@@ -1312,6 +1327,26 @@ func _check_newspapers(_from: int, _to: int) -> void:
 func _play_sound(sound_id: String) -> void:
 	if _audio != null:
 		_audio.play_sound(sound_id)
+
+
+## Platzhalter; main.gd überschreibt ihn (Geschichtsstunde, seit M13b3): hält ein Schritt die Zeit an?
+func _tutorial_blocks_time() -> bool:
+	return false
+
+
+## Geschichtsstunde: eine Handlung ist geschehen (z. B. "speichern").
+func _tutorial_note(flag: String) -> void:
+	_tutorial_flags[flag] = true
+
+
+## Platzhalter; main.gd überschreibt ihn (Geschichtsstunde, seit M13b3).
+func start_lesson(_from_step: int = 0) -> bool:
+	return false
+
+
+## Platzhalter; main.gd überschreibt ihn („Was ist passiert?“ nach dem Laden, seit M13b3).
+func _after_loading_save() -> void:
+	pass
 
 
 ## Platzhalter; main.gd überschreibt ihn (Stimmung der Musik, seit M13b2).
