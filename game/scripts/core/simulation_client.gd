@@ -756,7 +756,8 @@ func get_intentions(state_index: int) -> Dictionary:
 
 
 ## Letzte Entscheidungen der KI für den Staat, neueste zuerst (höchstens limit, 0 = alle aus dem
-## Protokoll): je { date_text, kind, text, target_index, utility, reasons, reasons_text }.
+## Protokoll): je { date_text, kind, text, target_index, utility, reasons, reasons_text, seit M13b4 reason_keys:
+## je { key, state_index, state_name, value } – Schlüssel mit Werten für AiReasons }.
 func get_ai_decisions(state_index: int, limit: int) -> Array[Dictionary]:
 	return _as_dictionaries(_native.call(&"get_ai_decisions", state_index, limit))
 

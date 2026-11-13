@@ -46,7 +46,7 @@ func _fill() -> void:
 			var unrest := float(option.get("unrest", 0.0))
 			_line(
 				("● " if current else "○ ") + str(option.get("name", "")) + (" (in Kraft)" if current else ""),
-				"Unruhe %s" % GermanFormat.signed_number(unrest) if unrest != 0.0 else "",
+				"Unruhe %s" % Format.signed_number(unrest) if unrest != 0.0 else "",
 				"Beitrag zum Zielwert der Unruhe",
 				UiPalette.NEGATIVE if unrest > 0.0 else Color.TRANSPARENT
 			)
@@ -54,7 +54,7 @@ func _fill() -> void:
 			var contra := PackedStringArray()
 			for wish: Dictionary in option.get("wishes", []):
 				var value := float(wish.get("value", 0.0))
-				var text := "%s %s" % [str(wish.get("group", "")), GermanFormat.signed_number(value)]
+				var text := "%s %s" % [str(wish.get("group", "")), Format.signed_number(value)]
 				if value > 0.0:
 					pro.append(text)
 				elif value < 0.0:

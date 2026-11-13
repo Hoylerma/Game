@@ -93,6 +93,7 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--zeitung` | die jüngste Titelseite der Zeitung für den Spielerstaat öffnen (seit M13b1; ab 1848) |
 | `--geschichtsstunde[=n]` | die Geschichtsstunde „März 1848 in Berlin“ starten, ab Schritt n (seit M13b3) |
 | `--rueckblick` | „Was ist passiert?“ öffnen wie nach dem Laden eines Spielstands (seit M13b3) |
+| `--sprache=de\|en\|pseudo` | Sprache nur für diesen Start, ohne sie zu speichern; `pseudo` ist das Pseudo-Locale für Tests (Texte 40 % länger, mit Akzenten, seit M13b4) |
 | `--bereich=<bereich>` | Fenster eines Bereichs vor dem Screenshot öffnen: `kabinett`, `gesetze`, `gruppen`, `parlament`, `gesellschaft`, `wirtschaft` (seit M13a5b), `chronik`, `lexikon` (seit M13a5d) |
 | `--einstellungen[=<reiter>]` | Fenster Einstellungen öffnen, Reiter `bild` (Standard), `ton`, `spiel`, `zugang`, `tasten`, `sprache` (seit M13a5d) |
 | `--farbsehschwaeche` | Farben für Rot-Grün-Schwäche für diesen Start, ohne die Einstellung zu speichern (seit M13a5d) |
@@ -131,6 +132,7 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Lexikon (Bereichsleiste) | seit M13a5d: Artikel aus `data/lexikon` mit Suche und Verweisen; ein Klick auf einen unterstrichenen Begriff in einem Tooltip öffnet ihn |
 | Wendepunkt | seit M13a5d: Ereignisse mit `wendepunkt = ja` erscheinen breiter mit großem Titel, die Karte dunkelt dahinter ab; seit M13b1 zeigt jedes Ereignis eine Vignette nach Art (Revolution, Krieg, Diplomatie, Wirtschaft, Hof) |
 | Zeitung | seit M13b1, ab 1848: Bei einer wichtigen Nachricht (Gründung eines Bundes, Wendepunkte, die deutsche Frage; Krieg, Frieden, Wahlen, Thronwechsel und Erhebungen, wenn sie den eigenen Staat betreffen; höchstens eine solche im Monat) erscheint die Titelseite eines erfundenen Blattes der eigenen Gegend: Kopf in Fraktur, Schlagzeile und Unterzeile, Leitartikel mit Drahtbericht und Vermischtes. Die Zeit hält an, ein Klick legt sie beiseite. Pausenregel „Zeitung“ in den Einstellungen; alle Zeitungen der Partie unter „Zeitungen“ im Jahrbuch |
+| Sprache | seit M13b4, Einstellungen „Sprache“: Deutsch oder English. Auf Englisch sind Startbildschirm, Spielmenü und Einstellungen übersetzt, dazu Zahlen und Daten („1,234.5“, „1 March 1848“) und die Gründe der KI; das Übrige bleibt vorerst deutsch, Inhalt und Kern (Ereignisse, Chronik, Namen) ebenso. Übersetzungen in `locale/` (gettext, Deutsch als Quellsprache) |
 | Geschichtsstunde | seit M13b3, Hauptmenü „Geschichtsstunde“: „März 1848 in Berlin“ als Preußen in vierzehn Schritten – Karte, Orte, Staatsübersicht und Haushalt, Steuern, Kabinett, Diplomatie mit einem Gesandten, Zollverein, Krisen, Tempo, ein Ereignis mit Kompass (Barrikaden in Berlin), die Wahl zur Nationalversammlung, Journale, Speichern. Jeder Schritt nennt eine Aufgabe und prüft sie; „Weiter“ geht erst danach. Die Zeit läuft nur, wo der Schritt es verlangt; ein goldener Rahmen zeigt, wohin zu klicken ist; „Im Lexikon“ öffnet den passenden Artikel; „Beenden“ lässt frei weiterspielen. Die Schritte stehen als Daten in `tutorial/maerz_1848.tres` |
 | Hinweise | seit M13b3: beim ersten Öffnen jedes Fensters zwei, drei Sätze rechts unten (`tutorial/hinweise.cfg`); „Verstanden“ oder „Keine Hinweise mehr“, abschaltbar in den Einstellungen (Spiel). Welche gezeigt sind, steht in `user://hinweise.cfg` |
 | Was ist passiert? | seit M13b3: nach dem Laden eines Spielstands die wichtigsten Nachrichten des letzten Jahres (was die Zeitung auf die Titelseite brächte), höchstens zehn; abschaltbar in den Einstellungen |
@@ -191,6 +193,8 @@ game/
 │                              SVG: Ecke, Trenner, Vignetten revolution, krieg, diplomatie, wirtschaft, hof)
 ├── audio/                     seit M13b2 (vertical_slice.md 5.3): noten/*.noten (Notentext der sieben Stücke),
 │                              pruefsummen.txt; musik/ und klaenge/ erzeugt tools/klang/klang.py (nicht versioniert)
+├── locale/                    seit M13b4: einigkeit.pot (Vorlage), de.po, en.po – erzeugt und gepflegt von
+│                              tools/sprache/sprache.py; Deutsch ist die Quellsprache
 ├── tutorial/                  seit M13b3: maerz_1848.tres (Geschichtsstunde, TutorialLesson mit TutorialStep),
 │                              hinweise.cfg (Hinweise beim ersten Öffnen je Fenster)
 ├── bin/uhrwerk.gdextension    Beschreibung der GDExtension (Bibliotheken je Plattform)
@@ -213,7 +217,7 @@ game/
 │   │   ├── map_data.gd            MapData: provinzen.png, fluesse.png, definition.csv
 │   │   ├── map_config.gd          MapConfig: karte.chron (Ausschnitt, Projektion)
 │   │   ├── map_modes.gd           MapModes: Kartenmodi, Namen, Tasten
-│   │   ├── german_format.gd       GermanFormat: Tausenderpunkt, Dezimalkomma, Einheiten
+│   │   ├── format.gd              Format: Zahlen und Daten je Sprache (bis M13b3 GermanFormat)
 │   │   ├── save_slots.gd          SaveSlots: Ordner, Dateinamen und Liste der Spielstände, Autosave (seit M6)
 │   │   ├── election_tally.gd      ElectionTally: Meldereihenfolge, Hochrechnung, Halbrund (seit M8)
 │   │   ├── user_settings.gd       UserSettings: Einstellungen in user://einstellungen.cfg (seit M13a5d)
@@ -231,7 +235,7 @@ game/
 │   │   ├── map_label_layout.gd    MapLabelLayout: Namenspunkte von Staaten und Kreisen
 │   │   ├── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
 │   │   └── army_layer.gd          ArmyLayer: Heeresmarken, Wege, Schlachten, Belagerungen (seit M10)
-│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9); Heeresfenster (army_panel.gd), Kriegsfenster (war_window.gd) und Schlachtberichte (battle_reports.gd, alle seit M10); Epochenrahmen mit Schriften, Rahmen und Vignetten (epoch_theme.gd) und Zeitung (newspaper_window.gd, beide seit M13b1); Musik und Bedienklänge (audio_director.gd, seit M13b2); Geschichtsstunde (tutorial_panel.gd, tutorial_highlight.gd), Hinweise (hint_card.gd) und „Was ist passiert?“ (windows/recap_window.gd, alle seit M13b3)
+│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9); Heeresfenster (army_panel.gd), Kriegsfenster (war_window.gd) und Schlachtberichte (battle_reports.gd, alle seit M10); Epochenrahmen mit Schriften, Rahmen und Vignetten (epoch_theme.gd) und Zeitung (newspaper_window.gd, beide seit M13b1); Musik und Bedienklänge (audio_director.gd, seit M13b2); Sprache (core/translation_.gd, core/format.gd, core/ai_reasons.gd, seit M13b4); Geschichtsstunde (tutorial_panel.gd, tutorial_highlight.gd), Hinweise (hint_card.gd) und „Was ist passiert?“ (windows/recap_window.gd, alle seit M13b3)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte); die Schriften setzt seit M13b1 EpochTheme
 └── tests/                     Einheiten-, Rauch-, Klick-, Leistungs- und Durchspieltest, siehe tests/README.md

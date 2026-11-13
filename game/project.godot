@@ -224,6 +224,12 @@ schnellladen={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://locale/de.po", "res://locale/en.po")
+locale/fallback="de"
+pseudolocalization/expansion_ratio=0.4
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

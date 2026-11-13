@@ -128,12 +128,12 @@ func capture_key(action: String, physical_keycode: int) -> bool:
 		return false
 	var other := _settings.action_with_key(physical_keycode, action)
 	if not other.is_empty():
-		_status.text = "Die Taste %s gehört schon zu „%s“." % [OS.get_keycode_string(physical_keycode), _action_label(other)]
+		_status.text = tr("Die Taste {taste} gehört schon zu „{aktion}“.").format({"taste": OS.get_keycode_string(physical_keycode), "aktion": tr(_action_label(other))})
 		_fill()
 		return false
 	_settings.set_key(action, physical_keycode)
 	_commit()
-	_status.text = "%s: %s" % [_action_label(action), OS.get_keycode_string(physical_keycode)]
+	_status.text = "%s: %s" % [tr(_action_label(action)), OS.get_keycode_string(physical_keycode)]
 	_fill()
 	return true
 
@@ -179,8 +179,8 @@ func _fill() -> void:
 			for action: Array in UserSettings.ACTIONS:
 				_key_row(str(action[0]), str(action[1]))
 		"sprache":
-			_options("sprache/sprache", "Sprache", ["Deutsch"], ["de"])
-			_note("Englisch erscheint, sobald die Übersetzung vollständig ist (Schritt b4).")
+			_options("sprache/sprache", "Sprache", ["Deutsch", "English"], ["de", "en"])
+			_note("Englisch: Startbildschirm, Spielmenü und Einstellungen; das Übrige bleibt vorerst deutsch.")
 
 
 func _row(caption: String) -> HBoxContainer:
@@ -214,6 +214,7 @@ func _check(key: String, caption: String) -> void:
 	var box := CheckBox.new()
 	box.name = key.replace("/", "_")
 	box.text = caption
+	box.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART # längere Übersetzungen umbrechen (seit M13b4)
 	box.focus_mode = Control.FOCUS_NONE
 	box.button_pressed = bool(_settings.get_value(key))
 	box.toggled.connect(
@@ -275,7 +276,7 @@ func _key_row(action: String, caption: String) -> void:
 	b.pressed.connect(
 		func() -> void:
 			_listening = action
-			_status.text = "Neue Taste für „%s“ drücken (Escape bricht ab)." % caption
+			_status.text = tr("Neue Taste für „{aktion}“ drücken (Escape bricht ab).").format({"aktion": tr(caption)})
 			_fill()
 	)
 	row.add_child(b)

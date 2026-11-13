@@ -16,6 +16,7 @@
 #include <array>
 #include <cstdint>
 #include <doctest/doctest.h>
+#include <set>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -867,4 +868,17 @@ TEST_CASE("Spieleinstellung: Ladefehler der Stufen") {
         CAPTURE(issues);
         CHECK(issues.find(cases[i].second) != std::string::npos);
     }
+}
+
+TEST_CASE("KI: Kennungen der Faktoren für übersetzbare Gründe (seit M13b4)") {
+    std::set<std::string_view> ids;
+    for (std::size_t f = 0; f < uhrwerk::kAiFactors; ++f) {
+        const std::string_view id = uhrwerk::ai_factor_id(static_cast<uhrwerk::AiFactor>(f));
+        CAPTURE(f);
+        CHECK_FALSE(id.empty());
+        CHECK(std::all_of(id.begin(), id.end(), [](char c) { return (c >= 'a' && c <= 'z') || c == '_'; }));
+        CHECK(ids.insert(id).second);
+    }
+    CHECK(uhrwerk::ai_factor_id(uhrwerk::AiFactor::Strength) == "staerke");
+    CHECK(uhrwerk::ai_factor_id(uhrwerk::AiFactor::Weariness) == "kriegsmuedigkeit");
 }

@@ -237,7 +237,7 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	# Zollgebiet (seit M9): Union oder Besitzer, mit dem Tarif an seiner Grenze.
 	var zone := str(location.get("customs_zone_name", ""))
 	_customs.text = "%s (Zoll %s)" % [
-		zone, GermanFormat.percent(roundi(float(location.get("customs_tariff_percent", 0.0))))
+		zone, Format.percent(roundi(float(location.get("customs_tariff_percent", 0.0))))
 	]
 	_customs_caption.visible = show_customs and has_data and not zone.is_empty()
 	_customs.visible = _customs_caption.visible
@@ -246,20 +246,20 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_rail.text = ", ".join(lines)
 	_rail_caption.visible = not lines.is_empty()
 	_rail.visible = not lines.is_empty()
-	_terrain.text = GermanFormat.humanize(str(location.get("terrain", "")))
+	_terrain.text = Format.humanize(str(location.get("terrain", "")))
 	_no_data_note.visible = not has_data
 	for node in _data_only:
 		node.visible = has_data
-	_population.text = GermanFormat.integer(int(location.get("population", 0)))
-	_area.text = GermanFormat.area(float(location.get("area_km2", 0.0)))
-	_density.text = GermanFormat.density(float(location.get("density", 0.0)))
-	_production.text = GermanFormat.money(float(location.get("production_month", 0.0)))
-	_taxes.text = GermanFormat.money(float(location.get("taxes_month", 0.0)))
+	_population.text = Format.integer(int(location.get("population", 0)))
+	_area.text = Format.area(float(location.get("area_km2", 0.0)))
+	_density.text = Format.density(float(location.get("density", 0.0)))
+	_production.text = Format.money(float(location.get("production_month", 0.0)))
+	_taxes.text = Format.money(float(location.get("taxes_month", 0.0)))
 	var devastation := int(location.get("devastation_percent", 0))
 	_devastation_bar.value = devastation
-	_devastation.text = GermanFormat.percent(devastation)
+	_devastation.text = Format.percent(devastation)
 	_show_economy(location)
-	_majority.text = "Mehrheit: %s" % GermanFormat.humanize(
+	_majority.text = "Mehrheit: %s" % Format.humanize(
 		str(location.get("majority_confession", ""))
 	)
 	var confessions: Dictionary = location.get("confessions", {})
@@ -267,10 +267,10 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_majority_culture.text = "Mehrheit: %s" % str(location.get("majority_culture", "–"))
 	var cultures: Dictionary = location.get("cultures", {})
 	_show_shares(_cultures, cultures, culture_colors)
-	_living_standard.text = "%s von 100" % GermanFormat.number(
+	_living_standard.text = "%s von 100" % Format.number(
 		float(location.get("living_standard", 0.0))
 	)
-	_literacy.text = GermanFormat.percent(float(location.get("literacy_percent", 0.0)))
+	_literacy.text = Format.percent(float(location.get("literacy_percent", 0.0)))
 	_show_ages(location)
 	_show_balance(location.get("balance_previous", {}))
 	_show_election(location.get("wahl", {}))
@@ -298,7 +298,7 @@ func show_campaign(district: int, campaign: Dictionary, currents: Array[Dictiona
 	if seats > 1:
 		name_text += " (%d Sitze)" % seats
 	_add_fact(_campaign_facts, "Wahlkreis", name_text)
-	_campaign_poll_caption.text = "STIMMUNGSBERICHT (± %s PUNKTE)" % GermanFormat.number(
+	_campaign_poll_caption.text = "STIMMUNGSBERICHT (± %s PUNKTE)" % Format.number(
 		float(campaign.get("poll_error", 0.0)), 0
 	)
 	_campaign_note.visible = bool(campaign.get("boycott", false))
@@ -312,9 +312,9 @@ func show_campaign(district: int, campaign: Dictionary, currents: Array[Dictiona
 	_show_shares(_campaign_poll, shares, colors)
 	_campaign_levels.text = "%s: Mobilisierung +%s, Vereine +%s, Flugblätter %s" % [
 		party_name,
-		GermanFormat.percent(roundi(float(campaign.get("mobilization", 0.0)) * 100.0)),
-		GermanFormat.percent(roundi(float(campaign.get("club", 0.0)) * 100.0)),
-		GermanFormat.number(float(campaign.get("persuasion", 0.0)), 2),
+		Format.percent(roundi(float(campaign.get("mobilization", 0.0)) * 100.0)),
+		Format.percent(roundi(float(campaign.get("club", 0.0)) * 100.0)),
+		Format.number(float(campaign.get("persuasion", 0.0)), 2),
 	]
 	var actions: Array = campaign.get("actions", [])
 	for i in _campaign_buttons.size():
@@ -322,7 +322,7 @@ func show_campaign(district: int, campaign: Dictionary, currents: Array[Dictiona
 		var action: Dictionary = actions[i] if i < actions.size() else {}
 		button.visible = not action.is_empty()
 		button.text = "%s – %s" % [
-			str(action.get("name", "")), GermanFormat.money(float(action.get("cost", 0.0)))
+			str(action.get("name", "")), Format.money(float(action.get("cost", 0.0)))
 		]
 		button.disabled = not bool(action.get("allowed", false))
 		button.tooltip_text = (
@@ -409,8 +409,8 @@ func _show_election(election: Dictionary) -> void:
 	if bool(election.get("runoff", false)):
 		winner += " (Stichwahl)"
 	_add_fact(grid, "Gewählt", winner)
-	_add_fact(grid, "Berechtigte", GermanFormat.integer(int(election.get("electorate", 0))))
-	_add_fact(grid, "Beteiligung", GermanFormat.percent(float(election.get("turnout_percent", 0.0)), 1))
+	_add_fact(grid, "Berechtigte", Format.integer(int(election.get("electorate", 0))))
+	_add_fact(grid, "Beteiligung", Format.percent(float(election.get("turnout_percent", 0.0)), 1))
 	var shares_box := VBoxContainer.new()
 	_election_box.add_child(shares_box)
 	_show_shares(shares_box, election.get("shares", {}), election.get("colors", {}))
@@ -422,7 +422,7 @@ func _show_shares(container: VBoxContainer, shares: Dictionary, colors: Dictiona
 	var names: Array = shares.keys()
 	names.sort_custom(func(a: Variant, b: Variant) -> bool: return float(shares[a]) > float(shares[b]))
 	for share_name: Variant in names:
-		var text := GermanFormat.humanize(str(share_name))
+		var text := Format.humanize(str(share_name))
 		var color: Color = colors.get(str(share_name), UiPalette.BAR_NEUTRAL)
 		container.add_child(_share_row(text, float(shares[share_name]), color))
 
@@ -440,7 +440,7 @@ func _show_economy(location: Dictionary) -> void:
 	var development := float(location.get("development_percent", 0.0))
 	if development > 0.05:
 		_add_fact(
-			facts, "Landesausbau", "+%s Tragfähigkeit" % GermanFormat.percent(development, 1)
+			facts, "Landesausbau", "+%s Tragfähigkeit" % Format.percent(development, 1)
 		)
 	_economy.add_child(facts)
 
@@ -455,13 +455,13 @@ func _show_economy(location: Dictionary) -> void:
 			name_label.theme_type_variation = &"MutedLabel"
 			name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			grid.add_child(name_label)
-			grid.add_child(_right(GermanFormat.money(float(row.get("income_year", 0.0)))))
-			var coverage := _right(GermanFormat.percent(float(row.get("coverage_percent", 0.0))))
+			grid.add_child(_right(Format.money(float(row.get("income_year", 0.0)))))
+			var coverage := _right(Format.percent(float(row.get("coverage_percent", 0.0))))
 			coverage.custom_minimum_size = Vector2(52, 0)
 			var food := float(row.get("food_percent", 100.0))
 			if food < 90.0:
 				coverage.add_theme_color_override(&"font_color", UiPalette.NEGATIVE)
-				coverage.tooltip_text = "Grundnahrung nur zu %s gedeckt" % GermanFormat.percent(food)
+				coverage.tooltip_text = "Grundnahrung nur zu %s gedeckt" % Format.percent(food)
 				coverage.mouse_filter = Control.MOUSE_FILTER_PASS
 			grid.add_child(coverage)
 		_economy.add_child(grid)
@@ -475,7 +475,7 @@ func _show_economy(location: Dictionary) -> void:
 			_add_fact(
 				grid,
 				"%s (%s)" % [str(row.get("name", "")), str(row.get("profession", ""))],
-				GermanFormat.integer(int(row.get("people", 0)))
+				Format.integer(int(row.get("people", 0)))
 			)
 		_economy.add_child(grid)
 
@@ -497,8 +497,8 @@ func _show_economy(location: Dictionary) -> void:
 			name_label.theme_type_variation = &"MutedLabel"
 			name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			grid.add_child(name_label)
-			grid.add_child(_right(GermanFormat.number(float(row.get("supply", 0.0)), 1)))
-			var factor := _right("×" + GermanFormat.number(float(row.get("price_factor", 0.0)), 2))
+			grid.add_child(_right(Format.number(float(row.get("supply", 0.0)), 1)))
+			var factor := _right("×" + Format.number(float(row.get("price_factor", 0.0)), 2))
 			factor.custom_minimum_size = Vector2(52, 0)
 			grid.add_child(factor)
 		_economy.add_child(grid)
@@ -548,8 +548,8 @@ func _show_balance(balance: Dictionary) -> void:
 		var value := int(balance.get(field[0], 0))
 		if value == 0 and str(field[0]) == "plague_deaths":
 			continue
-		_add_fact(_balance, str(field[1]), GermanFormat.signed_number(value * int(field[2])))
-	_add_fact(_balance, "Veränderung", GermanFormat.signed_number(change))
+		_add_fact(_balance, str(field[1]), Format.signed_number(value * int(field[2])))
+	_add_fact(_balance, "Veränderung", Format.signed_number(change))
 
 
 func _add_fact(grid: GridContainer, caption: String, value: String) -> void:
@@ -588,7 +588,7 @@ func _share_row(text: String, share: float, color: Color) -> HBoxContainer:
 	bar.add_theme_stylebox_override(&"fill", fill)
 	row.add_child(bar)
 	var value := Label.new()
-	value.text = GermanFormat.percent(share, 1)
+	value.text = Format.percent(share, 1)
 	value.custom_minimum_size = Vector2(62, 0)
 	value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	row.add_child(value)

@@ -7,6 +7,7 @@
 | `klick_test.gd` – Klickerkennung für jeden Ort | ja | nein | `KLICK OK n/n` |
 | `leistung_test.gd` – Bildzeiten beim Schwenken und Zoomen | ja | ja (z. B. xvfb) | Tabelle und `LEISTUNG OK` |
 | `durchspiel_test.gd` – Partie 1848–1871 über die Oberfläche | ja | nein | je Staat eine Zeile und `DURCHSPIEL OK n/n` |
+| `sprache_test.gd` – Pseudo-Locale und Englisch ohne abgeschnittene Beschriftung | ja | nein | `SPRACHE OK (n Beschriftungen geprüft)` |
 
 `godot` steht für Godot 4.4.1, z. B. `tools/godot/Godot_v4.4.1-stable_linux.x86_64`. Alle Tests
 laufen im `--script`-Modus und brauchen einen vorherigen Import, damit Godot die Klassennamen
@@ -22,7 +23,7 @@ bricht im `--script`-Modus nur die betroffene Funktion ab; die Ausgabe sollte de
 
 ## Einheitentests (`unit_test.gd`)
 
-Prüft ohne Simulation: deutsche Zahlenformate (`GermanFormat`), Kommandozeilenoptionen
+Prüft ohne Simulation: deutsche Zahlenformate (`Format`), Kommandozeilenoptionen
 (`LaunchOptions`, auch `--zoom` und `--kartenmodus=5`), das Lesen von `karte.chron` und die
 Projektion (`MapConfig`, das M1-Feld `kueste` wird ignoriert), die Pfadauflösung
 (`UhrwerkPaths`), Legenden (`LegendData`: Verlaufsschätzung, Eintrag „Keine Daten“ mit
@@ -50,7 +51,9 @@ kein Stück zweimal hintereinander und jeden Bedienklang. Ohne gerenderte Musik 
 Spiel still bleibt. Seit M13b3 die Geschichtsstunde als Daten (keine unbekannte Prüfung oder Ziel, jeder
 Lexikonartikel vorhanden, nötige Prüfungen da, Fehler erkannt), ihr Panel (Weiter erst nach der Aufgabe,
 bis zum Ende, Beenden), die Hinweise (Text für jedes Fenster, einmal je Fenster, gemerkt in einer Datei,
-zurücksetzbar), „Was ist passiert?“ und die Startoptionen.
+zurücksetzbar), „Was ist passiert?“ und die Startoptionen. Seit M13b4 `Format` je Sprache (Zahlen und
+Daten auf Englisch), die geladenen Übersetzungen, das Pseudo-Locale, die Gründe der KI aus Schlüssel und
+Werten (`AiReasons`, auch auf Englisch) und `--sprache`.
 
 ```bash
 godot --headless --path game --script res://tests/unit_test.gd
@@ -359,6 +362,23 @@ nicht mehr zu den Spieldaten.
 ```bash
 godot --headless --path game --script res://tests/durchspiel_test.gd
 godot --headless --path game --script res://tests/durchspiel_test.gd -- --staaten=PRU,BAD
+```
+
+## Sprachtest (`sprache_test.gd`)
+
+Seit M13b4 ([vertical_slice.md](../../docs/technik/vertical_slice.md), Abschnitt 6): Der Test schaltet
+auf das Pseudo-Locale (jeder übersetzte Text 40 % länger, mit Akzenten und Klammern) und dann auf
+Englisch und geht jedes Mal Startbildschirm (Menü, Lesezeichen, Staat, Spieleinstellungen), Spielmenü
+und alle sechs Reiter der Einstellungen durch. Jedes Fenster muss ganz im Bild liegen, und jede
+sichtbare Beschriftung ohne Zeilenumbruch (Label, Button, CheckBox, OptionButton) muss Platz für ihren
+angezeigten Text haben – gemessen mit Schrift, Größe, Rändern, Pfeil und Häkchen des Themes.
+Absichtlich gekürzte Einträge (Auslassungspunkte) zählen nicht. Dazu Stichproben der englischen Texte,
+benannte Platzhalter, Zahlen und Daten, und zurück auf Deutsch. Der Test fand beim Einführen drei zu
+enge Stellen (Geschichtsverlauf, Bildrate, ein langes Häkchen); seitdem brechen Häkchen um und der
+Geschichtsverlauf steht kurz mit einer Erklärung darunter.
+
+```bash
+godot --headless --path game --script res://tests/sprache_test.gd
 ```
 
 ## Start ohne Erweiterung

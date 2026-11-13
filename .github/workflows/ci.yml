@@ -591,6 +591,13 @@ jobs:
       - name: Musik bitgleich? (game/audio/pruefsummen.txt)
         run: python3 tools/klang/klang.py --pruefen
 
+      # Seit M13b4: Übersetzungen der Oberfläche (game/locale) aktuell, Englisch für Start, Menü, Einstellungen.
+      - name: Tests von Sprache (tools/sprache)
+        run: python3 -m unittest discover -s tools/sprache -v
+
+      - name: Übersetzungen aktuell? (game/locale)
+        run: python3 tools/sprache/sprache.py --pruefen
+
   godot:
     name: Godot (Brücke, Tests, Screenshots)
     runs-on: ubuntu-24.04
@@ -742,6 +749,16 @@ jobs:
           fi
           grep "KLICK OK" "$RUNNER_TEMP/klick.log" | sed 's/^/Klicktest: /' >> "$GITHUB_STEP_SUMMARY"
 
+      # Seit M13b4: Pseudo-Locale (Texte 40 % länger) und Englisch – keine Beschriftung abgeschnitten.
+      - name: Sprachtest (game/tests/sprache_test.gd)
+        run: |
+          "$GODOT_BIN" --headless --path game --script res://tests/sprache_test.gd 2>&1 | tee "$RUNNER_TEMP/sprache.log"
+          grep -q "SPRACHE OK" "$RUNNER_TEMP/sprache.log"
+          if grep -E "SCRIPT ERROR|Parse Error" "$RUNNER_TEMP/sprache.log"; then
+            echo "::error::Skriptfehler im Sprachtest."
+            exit 1
+          fi
+
       # Abnahme M13a6: die Partie 1848–1871 als Preußen, Österreich, Bayern und Sachsen über die
       # Oberfläche (Startbildschirm, Ereignisse, Wahlabende, alle Fenster, Speichern und Laden, Urteil).
       - name: Durchspieltest 1848–1871 (game/tests/durchspiel_test.gd)
@@ -840,6 +857,13 @@ jobs:
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_rueckblick.png" --szenario=voelkerfruehling --staat=BAV --tage=420 --rueckblick \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Startbildschirm auf Englisch und mit Pseudo-Locale (seit M13b4)
+          for sprache in en pseudo; do
+            xvfb-run -a -s "-screen 0 1600x900x24" \
+              "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+              -- --screenshot="$PWD/artefakte/einigkeit_start_$sprache.png" --startbildschirm --sprache=$sprache \
+              2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          done
           # Journalfenster (seit M11): die deutsche Frage im Juni 1848
           xvfb-run -a -s "-screen 0 1600x900x24" \
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \

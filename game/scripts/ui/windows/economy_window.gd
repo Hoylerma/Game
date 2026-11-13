@@ -16,9 +16,9 @@ func _fill() -> void:
 	var economy := _sim.get_state_economy(_player)
 	if economy.is_empty():
 		return
-	_line("Erzeugung je Monat", GermanFormat.money(float(economy.get("production_month", 0.0))))
-	_line("Steuern je Monat", GermanFormat.money(float(economy.get("taxes_month", 0.0))))
-	_line("Zollgebiet", "%s, Tarif %s" % [str(economy.get("customs_zone_name", "")), GermanFormat.percent(float(economy.get("customs_tariff_percent", 0.0)), 1)])
+	_line("Erzeugung je Monat", Format.money(float(economy.get("production_month", 0.0))))
+	_line("Steuern je Monat", Format.money(float(economy.get("taxes_month", 0.0))))
+	_line("Zollgebiet", "%s, Tarif %s" % [str(economy.get("customs_zone_name", "")), Format.percent(float(economy.get("customs_tariff_percent", 0.0)), 1)])
 	var markets := PackedStringArray()
 	for m: Dictionary in economy.get("markets", []):
 		markets.append("%s (%d)" % [str(m.get("name", "")), int(m.get("locations", 0))])
@@ -31,8 +31,8 @@ func _fill() -> void:
 		_line(
 			str(good.get("name", "")),
 			"%s · %s · %s (×%s)" % [
-				GermanFormat.number(float(good.get("supply", 0.0))), GermanFormat.number(float(good.get("demand", 0.0))),
-				GermanFormat.number(float(good.get("price", 0.0)), 2), GermanFormat.number(factor, 2),
+				Format.number(float(good.get("supply", 0.0))), Format.number(float(good.get("demand", 0.0))),
+				Format.number(float(good.get("price", 0.0)), 2), Format.number(factor, 2),
 			],
 			"Preis nach Umsatz über die Märkte des Staates; ×: zum Basispreis",
 			UiPalette.NEGATIVE if factor > 1.25 else (UiPalette.POSITIVE if factor < 0.8 else Color.TRANSPARENT)
@@ -44,4 +44,4 @@ func _fill() -> void:
 		total += int(b.get("people", 0))
 	for b: Dictionary in economy.get("businesses", []):
 		var people := int(b.get("people", 0))
-		_bar("%s (%s)" % [str(b.get("name", "")), str(b.get("profession", ""))], float(people) / maxf(total, 1.0), UiPalette.GOLD, GermanFormat.integer(people))
+		_bar("%s (%s)" % [str(b.get("name", "")), str(b.get("profession", ""))], float(people) / maxf(total, 1.0), UiPalette.GOLD, Format.integer(people))

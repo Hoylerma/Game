@@ -86,6 +86,7 @@ var _difficulty_select: OptionButton = null
 var _difficulty_ids := PackedStringArray()
 var _difficulty_text: Label = null
 var _course_select: OptionButton = null
+var _course_text: Label = null
 var _compass_toggle: CheckBox = null
 var _settings_note: Label = null
 var _start_button: Button = null
@@ -109,8 +110,8 @@ func open_menu(newest_save: String = "", has_saves: bool = false) -> void:
 	_newest_save = newest_save
 	_continue_button.disabled = newest_save.is_empty()
 	_continue_button.tooltip_text = (
-		"Den jüngsten Spielstand laden: %s" % newest_save.get_file().get_basename()
-		if not newest_save.is_empty() else "Noch kein Spielstand vorhanden"
+		tr("Den jüngsten Spielstand laden: {name}").format({"name": newest_save.get_file().get_basename()})
+		if not newest_save.is_empty() else tr("Noch kein Spielstand vorhanden")
 	)
 	_load_menu_button.disabled = not has_saves
 	visible = true
@@ -163,7 +164,7 @@ func show_scenarios(scenarios: Array[Dictionary]) -> void:
 ## Staaten des geladenen Lesezeichens: je { tag, name, recommended, difficulty, text }; die empfohlenen
 ## als Knöpfe, alle übrigen in einer Liste.
 func show_states(scenario_name: String, states: Array[Dictionary], default_tag: String) -> void:
-	_state_title.text = "STAAT WÄHLEN – %s" % scenario_name.to_upper()
+	_state_title.text = tr("STAAT WÄHLEN – {lesezeichen}").format({"lesezeichen": scenario_name.to_upper()})
 	for child in _recommended_box.get_children():
 		_recommended_box.remove_child(child)
 		child.queue_free()
@@ -179,7 +180,7 @@ func show_states(scenario_name: String, states: Array[Dictionary], default_tag: 
 			button.toggle_mode = true
 			button.button_group = _state_group
 			button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-			button.text = "%s  ·  %s" % [str(state.get("name", tag)), str(state.get("difficulty", ""))]
+			button.text = "%s  ·  %s" % [str(state.get("name", tag)), _difficulty_word(str(state.get("difficulty", "")))]
 			button.tooltip_text = str(state.get("text", ""))
 			button.toggled.connect(func(pressed: bool) -> void:
 				if pressed:
@@ -191,7 +192,7 @@ func show_states(scenario_name: String, states: Array[Dictionary], default_tag: 
 			note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			_recommended_box.add_child(note)
 		else:
-			_all_states.add_item("%s (nicht abgestimmt)" % str(state.get("name", tag)))
+			_all_states.add_item(tr("{staat} (nicht abgestimmt)").format({"staat": str(state.get("name", tag))}))
 			_all_tags.append(tag)
 	_selected_state = ""
 	_state_next.disabled = true
@@ -202,7 +203,7 @@ func show_states(scenario_name: String, states: Array[Dictionary], default_tag: 
 
 ## Spieleinstellungen aus SimulationClient.get_game_settings; ohne KI (1648) nur der Hinweis.
 func show_settings(state_name: String, settings: Dictionary) -> void:
-	_settings_title.text = "SPIELEINSTELLUNGEN – %s" % state_name.to_upper()
+	_settings_title.text = tr("SPIELEINSTELLUNGEN – {staat}").format({"staat": state_name.to_upper()})
 	_difficulty_select.clear()
 	_difficulty_ids = PackedStringArray()
 	var active := bool(settings.get("active", false))
@@ -216,6 +217,7 @@ func show_settings(state_name: String, settings: Dictionary) -> void:
 	_difficulty_select.disabled = not active or _difficulty_ids.is_empty()
 	_course_select.disabled = not active
 	_course_select.select(1 if bool(settings.get("open", false)) else 0)
+	_update_course_text()
 	if not _difficulty_ids.is_empty():
 		_difficulty_select.select(chosen)
 	_update_difficulty_text()
@@ -246,10 +248,10 @@ func show_saves(saves: Array[Dictionary]) -> void:
 		button.text = "%s – %s, %s" % [
 			str(save.get("name", "")), str(info.get("player_name", "")), str(info.get("date_text", ""))
 		]
-		button.tooltip_text = "Gespeichert %s" % SaveSlots.format_modified(int(save.get("modified", 0)))
+		button.tooltip_text = tr("Gespeichert {zeit}").format({"zeit": SaveSlots.format_modified(int(save.get("modified", 0)))})
 		if not bool(info.get("ok", true)):
 			button.disabled = true
-			button.tooltip_text = "Nicht lesbar: %s" % str(info.get("reason", ""))
+			button.tooltip_text = tr("Nicht lesbar: {grund}").format({"grund": str(info.get("reason", ""))})
 		var path := str(save.get("path", ""))
 		button.toggled.connect(func(pressed: bool) -> void:
 			if pressed:
@@ -280,7 +282,7 @@ func select_scenario(id: String) -> bool:
 
 func confirm_scenario() -> void:
 	if not _selected_scenario.is_empty():
-		show_status("Lade %s …" % _selected_scenario)
+		show_status(tr("Lade {lesezeichen} …").format({"lesezeichen": _selected_scenario}))
 		scenario_chosen.emit(_selected_scenario)
 
 
@@ -314,6 +316,7 @@ func choose_difficulty(id: String) -> bool:
 
 func set_open_course(open: bool) -> void:
 	_course_select.select(1 if open else 0)
+	_update_course_text()
 
 
 func start_game() -> void:
@@ -484,9 +487,16 @@ func _build_settings() -> VBoxContainer:
 	_course_select = OptionButton.new()
 	_course_select.name = "Course"
 	_course_select.focus_mode = Control.FOCUS_NONE
-	_course_select.add_item("Historisch – die Staaten verfolgen ihre Ziele in den historischen Zeitfenstern")
-	_course_select.add_item("Offen – Ziele ohne Zeitfenster und mit halbem Gewicht; freiere Geschichte")
+	_course_select.add_item("Historisch")
+	_course_select.add_item("Offen")
+	_course_select.item_selected.connect(func(_index: int) -> void: _update_course_text())
 	page_box.add_child(_course_select)
+	# Erklärung unter der Auswahl (seit M13b4: umbrechend, damit längere Übersetzungen Platz haben).
+	_course_text = Label.new()
+	_course_text.name = "CourseText"
+	_course_text.theme_type_variation = &"CaptionLabel"
+	_course_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	page_box.add_child(_course_text)
 	_compass_toggle = CheckBox.new()
 	_compass_toggle.name = "Compass"
 	_compass_toggle.text = "Historischer Kompass in Ereignissen (◆ zeigt die historische Wahl)"
@@ -576,7 +586,7 @@ func _add_scenario_button(scenario: Dictionary, prototype: bool) -> void:
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	button.text = "%s  ·  %s%s" % [
 		str(scenario.get("name", id)), str(scenario.get("date_text", "")),
-		"  ·  Technikprototyp (Testregion)" if prototype else ""
+		"  ·  " + tr("Technikprototyp (Testregion)") if prototype else ""
 	]
 	button.toggled.connect(func(pressed: bool) -> void:
 		if pressed:
@@ -585,6 +595,26 @@ func _add_scenario_button(scenario: Dictionary, prototype: bool) -> void:
 			_scenario_next.disabled = false)
 	_scenario_list.add_child(button)
 	_scenario_ids.append(id)
+
+
+## Erklärung des gewählten Geschichtsverlaufs.
+func _update_course_text() -> void:
+	_course_text.text = (
+		"Die Staaten verfolgen ihre Ziele in den historischen Zeitfenstern." if _course_select.selected != 1
+		else "Ziele ohne Zeitfenster und mit halbem Gewicht; eine freiere Geschichte."
+	)
+
+
+## Schwierigkeit eines empfohlenen Staates, übersetzt (seit M13b4).
+func _difficulty_word(word: String) -> String:
+	match word:
+		"leicht":
+			return tr("leicht")
+		"mittel":
+			return tr("mittel")
+		"schwer":
+			return tr("schwer")
+	return word
 
 
 func _pick_state(tag: String, from_list: bool) -> void:

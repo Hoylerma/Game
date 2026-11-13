@@ -459,6 +459,8 @@ func _build_settings() -> void:
 	if _options.color_blind:
 		_settings.set_value("zugang/farbsehschwaeche", true) # nur für diesen Start, ohne zu speichern
 	_settings.apply(get_tree())
+	if not _options.language.is_empty():
+		Translation_.use(_options.language) # nur für diesen Start, ohne zu speichern
 	_settings.changed.connect(_on_setting_changed)
 	_settings_window = SettingsWindow.new()
 	$UI.add_child(_settings_window)

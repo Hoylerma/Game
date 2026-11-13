@@ -61,13 +61,13 @@ func show_army(army: Dictionary, state_name: String, location_name: String, dest
 	var commander := str(army.get("commander", ""))
 	_line("Befehlshaber", "%s (Führung %s)" % [
 		commander if not commander.is_empty() else "ohne Namen",
-		GermanFormat.number(float(army.get("leadership", 1.0)), 2),
+		Format.number(float(army.get("leadership", 1.0)), 2),
 	])
 	_line("Stärke", "%s Mann, %s Geschütze" % [
-		GermanFormat.integer(int(army.get("soldiers", 0))), GermanFormat.integer(int(army.get("guns", 0)))
+		Format.integer(int(army.get("soldiers", 0))), Format.integer(int(army.get("guns", 0)))
 	])
 	var morale := float(army.get("morale", 0.0))
-	_line("Moral", GermanFormat.percent(morale * 100.0))
+	_line("Moral", Format.percent(morale * 100.0))
 	_morale_bar.value = morale * 100.0
 	var supplied := bool(army.get("supplied", true))
 	_line("Versorgung", "versorgt" if supplied else "abgeschnitten (Verluste und Moral sinken)", not supplied)
@@ -75,7 +75,7 @@ func show_army(army: Dictionary, state_name: String, location_name: String, dest
 	if not destination_name.is_empty():
 		var leg := "auf der Bahn" if bool(army.get("on_rail", false)) else "zu Fuß"
 		var text := "%s (%s, noch %s Tage im Abschnitt)" % [
-			destination_name, leg, GermanFormat.number(float(army.get("days_left", 0.0)), 1)
+			destination_name, leg, Format.number(float(army.get("days_left", 0.0)), 1)
 		]
 		if not arrival_text.is_empty():
 			text += ", Ankunft %s" % arrival_text

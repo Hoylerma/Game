@@ -34,7 +34,7 @@ var _zoom := 1.0
 static func strength_text(soldiers: int) -> String:
 	if soldiers < 1000:
 		return "<1"
-	return GermanFormat.integer(roundi(soldiers / 1000.0))
+	return Format.integer(roundi(soldiers / 1000.0))
 
 
 ## Heere übernehmen: armies wie get_armies, positions je Heer (Weltpunkt seines Ortes),

@@ -70,7 +70,7 @@ func _fill() -> void:
 		_line("Nächste Wahl", str(parliament.get("election_date_text", "")))
 	var election_index := int(parliament.get("election_index", -1))
 	if election_index < 0:
-		_line("Sitze", GermanFormat.integer(int(parliament.get("seats", 0))))
+		_line("Sitze", Format.integer(int(parliament.get("seats", 0))))
 		_paragraph("Noch nicht gewählt.", true)
 	else:
 		var election := _sim.get_election(election_index)
@@ -87,8 +87,8 @@ func _fill() -> void:
 		var seated := int(election.get("seated", 0))
 		for g in groups:
 			if int(g.get("seats", 0)) > 0:
-				_bar(str(g.get("name", "")), float(g.get("seats", 0)) / maxf(seated, 1.0), g.get("color", INDEPENDENT_COLOR), GermanFormat.integer(int(g.get("seats", 0))))
-		_line("Besetzt", "%s von %s Sitzen" % [GermanFormat.integer(seated), GermanFormat.integer(int(parliament.get("seats", 0)))])
+				_bar(str(g.get("name", "")), float(g.get("seats", 0)) / maxf(seated, 1.0), g.get("color", INDEPENDENT_COLOR), Format.integer(int(g.get("seats", 0))))
+		_line("Besetzt", "%s von %s Sitzen" % [Format.integer(seated), Format.integer(int(parliament.get("seats", 0)))])
 	var votes := _sim.get_votes().filter(func(v: Dictionary) -> bool: return int(v.get("parliament_index", -1)) == _chosen)
 	if not votes.is_empty():
 		_gap()

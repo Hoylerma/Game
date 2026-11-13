@@ -1438,7 +1438,7 @@ func _check_party_mode(sim: SimulationClient) -> void:
 			party_panel.visible, state_panel.visible, sim.get_player_current()
 		])
 	print("  Parteienmodus: Rolle im Menü, Versammlung in Mannheim (%s → %s Taler), zurück zum Staat" % [
-		GermanFormat.integer(roundi(funds)), GermanFormat.integer(roundi(float(party.get("funds", 0.0))))
+		Format.integer(roundi(funds)), Format.integer(roundi(float(party.get("funds", 0.0))))
 	])
 
 

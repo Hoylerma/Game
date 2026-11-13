@@ -15,7 +15,7 @@ var _count := 0
 
 func _initialize() -> void:
 	print("EINIGKEIT – Einheitentests der Godot-Seite")
-	_test_german_format()
+	_test_format()
 	_test_launch_options()
 	_test_map_config()
 	_test_paths()
@@ -39,6 +39,7 @@ func _initialize() -> void:
 	_test_epoch_and_newspaper()
 	_test_audio_director()
 	_test_onboarding()
+	_test_language()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -49,34 +50,46 @@ func _initialize() -> void:
 		quit(1)
 
 
-func _test_german_format() -> void:
-	_equal(GermanFormat.integer(0), "0", "integer 0")
-	_equal(GermanFormat.integer(999), "999", "integer 999")
-	_equal(GermanFormat.integer(1000), "1.000", "integer 1000")
-	_equal(GermanFormat.integer(1234567), "1.234.567", "integer 1234567")
-	_equal(GermanFormat.integer(-75300), "−75.300", "integer negativ")
-	_equal(GermanFormat.number(1234.56, 1), "1.234,6", "number mit Nachkommastelle")
-	_equal(GermanFormat.number(0.04, 1), "0,0", "number gerundet")
-	_equal(GermanFormat.number(-0.04, 1), "0,0", "number ohne negatives Null")
-	_equal(GermanFormat.number(-2.5, 2), "−2,50", "number negativ")
-	_equal(GermanFormat.number(999.96, 1), "1.000,0", "number Übertrag")
-	_equal(GermanFormat.signed_number(8339.4), "+8.339", "signed positiv")
-	_equal(GermanFormat.signed_number(-9667.0), "−9.667", "signed negativ")
-	_equal(GermanFormat.signed_number(0.2), "0", "signed null ohne Vorzeichen")
-	_equal(GermanFormat.money(23000.0), "23.000" + NBSP + "Taler", "money")
-	_equal(GermanFormat.percent(12), "12" + NBSP + "%", "percent")
-	_equal(GermanFormat.percent(12.5, 1), "12,5" + NBSP + "%", "percent mit Nachkommastelle")
-	_equal(GermanFormat.area(150.0), "150" + NBSP + "km²", "area")
-	_equal(GermanFormat.density(82.34), "82,3" + NBSP + "Einw./km²", "density")
+func _test_format() -> void:
+	_equal(Format.integer(0), "0", "integer 0")
+	_equal(Format.integer(999), "999", "integer 999")
+	_equal(Format.integer(1000), "1.000", "integer 1000")
+	_equal(Format.integer(1234567), "1.234.567", "integer 1234567")
+	_equal(Format.integer(-75300), "−75.300", "integer negativ")
+	_equal(Format.number(1234.56, 1), "1.234,6", "number mit Nachkommastelle")
+	_equal(Format.number(0.04, 1), "0,0", "number gerundet")
+	_equal(Format.number(-0.04, 1), "0,0", "number ohne negatives Null")
+	_equal(Format.number(-2.5, 2), "−2,50", "number negativ")
+	_equal(Format.number(999.96, 1), "1.000,0", "number Übertrag")
+	_equal(Format.signed_number(8339.4), "+8.339", "signed positiv")
+	_equal(Format.signed_number(-9667.0), "−9.667", "signed negativ")
+	_equal(Format.signed_number(0.2), "0", "signed null ohne Vorzeichen")
+	_equal(Format.money(23000.0), "23.000" + NBSP + "Taler", "money")
+	_equal(Format.percent(12), "12" + NBSP + "%", "percent")
+	_equal(Format.percent(12.5, 1), "12,5" + NBSP + "%", "percent mit Nachkommastelle")
+	_equal(Format.area(150.0), "150" + NBSP + "km²", "area")
+	_equal(Format.density(82.34), "82,3" + NBSP + "Einw./km²", "density")
 	_equal(
-		GermanFormat.government("staendisches_fuerstentum"),
+		Format.government("staendisches_fuerstentum"),
 		"Ständisches Fürstentum",
 		"Regierungsform bekannt"
 	)
-	_equal(GermanFormat.government("neue_form"), "Neue Form", "Regierungsform unbekannt")
-	_equal(GermanFormat.humanize("flussaue"), "Flussaue", "humanize Bezeichner")
-	_equal(GermanFormat.humanize("Hügelland"), "Hügelland", "humanize Name bleibt")
-	_equal(GermanFormat.humanize(""), "–", "humanize leer")
+	_equal(Format.government("neue_form"), "Neue Form", "Regierungsform unbekannt")
+	_equal(Format.humanize("flussaue"), "Flussaue", "humanize Bezeichner")
+	_equal(Format.humanize("Hügelland"), "Hügelland", "humanize Name bleibt")
+	_equal(Format.humanize(""), "–", "humanize leer")
+	# Seit M13b4: Regeln je Sprache.
+	_equal(Format.date(1, 3, 1848), "1. März 1848", "Datum deutsch")
+	_equal(Format.date_of({"day": 18, "month": 3, "year": 1848}), "18. März 1848", "Datum aus Dictionary")
+	Format.set_locale("en")
+	_equal(Format.integer(1234567), "1,234,567", "integer englisch")
+	_equal(Format.number(1234.56, 1), "1,234.6", "number englisch")
+	_equal(Format.density(82.34), "82.3" + NBSP + "inh./km²", "density englisch")
+	_equal(Format.date(1, 3, 1848), "1 March 1848", "Datum englisch")
+	_equal(Format.money(23000.0), "23,000" + NBSP + "Taler", "Taler bleiben Taler")
+	Format.set_locale("fr")
+	_equal(Format.integer(1000), "1.000", "unbekannte Sprache: deutsch")
+	Format.set_locale("de")
 
 
 func _test_launch_options() -> void:
@@ -1138,3 +1151,26 @@ func _test_onboarding() -> void:
 	_true(o.lesson_step == 4 and LaunchOptions.parse(PackedStringArray(["--geschichtsstunde"])).lesson_step == 1, "Startoption --geschichtsstunde")
 	_true(not LaunchOptions.parse(PackedStringArray(["--geschichtsstunde=0"])).problems.is_empty(), "Schritt 0 abgelehnt")
 	_true(UserSettings.DEFAULTS.get("spiel/rueckblick", false) == true, "Einstellung Rückblick an")
+
+
+## Sprache (seit M13b4, vertical_slice.md 6): Übersetzungen, Pseudo-Locale, Gründe der KI als Schlüssel mit Werten.
+func _test_language() -> void:
+	var loaded := TranslationServer.get_loaded_locales()
+	_true(loaded.has("en") and loaded.has("de"), "Übersetzungen de und en geladen (%s)" % str(loaded))
+	Translation_.use("en")
+	_true(TranslationServer.translate("Neues Spiel") == "New game" and Format.locale == "en", "Englisch: Neues Spiel → New game")
+	_true(TranslationServer.translate("Spielbare Staaten: {staaten}").format({"staaten": "BAV"}) == "Playable states: BAV", "benannte Platzhalter")
+	_true(TranslationServer.translate("Eine Zeile, die es nicht gibt") == "Eine Zeile, die es nicht gibt", "ohne Übersetzung bleibt Deutsch")
+	_true(AiReasons.text({"key": "staerke", "state_name": "Austria", "value": -12}) == "Strength against Austria −12", "Grund der KI auf Englisch")
+	Translation_.use("pseudo")
+	var pseudo := TranslationServer.translate("Neues Spiel")
+	_true(Translation_.is_pseudo() and pseudo.length() >= int("Neues Spiel".length() * 1.4) and pseudo.begins_with("["), "Pseudo-Locale: länger, in Klammern (%s)" % pseudo)
+	Translation_.use("de")
+	_true(not Translation_.is_pseudo() and TranslationServer.translate("Neues Spiel") == "Neues Spiel" and Format.locale == "de", "zurück auf Deutsch")
+	_true(AiReasons.text({"key": "staerke", "state_name": "Österreich", "value": 12}) == "Stärke gegen Österreich +12", "Grund der KI wie im Kern")
+	_true(AiReasons.text({"key": "agenda", "state_name": "", "value": 30}) == "Agenda +30", "Agenda ohne Staat")
+	_true(AiReasons.text({"key": "neu", "state_name": "Bayern", "value": 3}) == "Bayern +3", "unbekannter Schlüssel")
+	_true(AiReasons.of({"reason_keys": [{"key": "defizit", "value": 5}, {"key": "nachbar", "state_name": "Sachsen", "value": 2}]}) == "Defizit +5, Nachbar Sachsen +2", "mehrere Gründe")
+	_true(AiReasons.of({"reasons_text": "fertig"}) == "fertig", "ohne Schlüssel der Text des Kerns")
+	var o := LaunchOptions.parse(PackedStringArray(["--sprache=pseudo"]))
+	_true(o.language == "pseudo" and not LaunchOptions.parse(PackedStringArray(["--sprache=fr"])).problems.is_empty(), "Startoption --sprache")

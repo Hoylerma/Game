@@ -30,6 +30,7 @@ extends RefCounted
 ##   --zeitung              die jüngste Titelseite für den Spielerstaat öffnen (seit M13b1)
 ##   --geschichtsstunde[=n] Geschichtsstunde starten, bei Schritt n (seit M13b3)
 ##   --rueckblick           „Was ist passiert?“ öffnen wie nach dem Laden (seit M13b3)
+##   --sprache=de|en|pseudo Sprache nur für diesen Start; pseudo: Pseudo-Locale (Texte 40 % länger, seit M13b4)
 ##   --bereich=<bereich>    Fenster eines Bereichs öffnen: kabinett, gesetze, gruppen, parlament,
 ##                          gesellschaft, wirtschaft (seit M13a5b), chronik, lexikon (seit M13a5d)
 ##   --einstellungen[=<r>]  Fenster Einstellungen öffnen, Reiter bild, ton, spiel, zugang, tasten, sprache
@@ -83,6 +84,8 @@ var show_newspaper := false
 var lesson_step := 0
 ## „Was ist passiert?“ vor dem Screenshot (seit M13b3).
 var show_recap := false
+## Sprache nur für diesen Start: "de", "en", "pseudo" oder leer (Einstellung) (seit M13b4).
+var language := ""
 ## Fenster eines Bereichs (seit M13a5b), leer: keines.
 var area := ""
 ## Einstellungen (seit M13a5d): Reiter oder −1; Farben für Farbsehschwäche nur für diesen Start.
@@ -221,6 +224,11 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.color_blind = true
 				else:
 					options.problems.append("--farbsehschwaeche erwartet keinen Wert, nicht „%s“." % value)
+			"--sprache":
+				if ["de", "en", "pseudo"].has(value):
+					options.language = value
+				else:
+					options.problems.append("--sprache erwartet de, en oder pseudo, nicht „%s“." % value)
 			"--rueckblick":
 				if value.is_empty():
 					options.show_recap = true

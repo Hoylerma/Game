@@ -21,28 +21,28 @@ var unreported: Callable = Callable()
 func detail(location: Dictionary) -> String:
 	var kreis_name := str(location.get("kreis_name", ""))
 	var kreis_text := "Kreis %s" % kreis_name if not kreis_name.is_empty() else "ohne Kreis"
-	var terrain := GermanFormat.humanize(str(location.get("terrain", "")))
+	var terrain := Format.humanize(str(location.get("terrain", "")))
 	var first := str(location.get("owner_name", ""))
 	var second := kreis_text
 	if not bool(location.get("has_data", true)):
 		first = "Keine Daten"
-		second = GermanFormat.area(float(location.get("area_km2", 0.0)))
+		second = Format.area(float(location.get("area_km2", 0.0)))
 	match mode:
 		MapModes.MAP_KREISE:
 			return kreis_text
 		MapModes.MAP_TERRAIN:
 			second = terrain
 		MapModes.MAP_DENSITY when bool(location.get("has_data", true)):
-			second = GermanFormat.density(float(location.get("density", 0.0)))
+			second = Format.density(float(location.get("density", 0.0)))
 		MapModes.MAP_CONFESSION when bool(location.get("has_data", true)):
-			second = GermanFormat.humanize(str(location.get("majority_confession", "")))
+			second = Format.humanize(str(location.get("majority_confession", "")))
 		MapModes.MAP_DEVASTATION when bool(location.get("has_data", true)):
-			second = "%s verwüstet" % GermanFormat.percent(
+			second = "%s verwüstet" % Format.percent(
 				int(location.get("devastation_percent", 0))
 			)
 		MapModes.MAP_WIRTSCHAFT when bool(location.get("has_data", true)):
 			second = "%s %s je Einwohner und Jahr" % [
-				GermanFormat.number(float(location.get("production_per_capita", 0.0)), 1), currency
+				Format.number(float(location.get("production_per_capita", 0.0)), 1), currency
 			]
 		MapModes.MAP_MAERKTE:
 			var market := str(location.get("market_name", ""))
@@ -61,7 +61,7 @@ func detail(location: Dictionary) -> String:
 		MapModes.MAP_ZOLLGEBIETE when bool(location.get("has_data", true)):
 			second = "Zollgebiet %s, Zoll %s" % [
 				str(location.get("customs_zone_name", "–")),
-				GermanFormat.percent(float(location.get("customs_tariff_percent", 0.0)))
+				Format.percent(float(location.get("customs_tariff_percent", 0.0)))
 			]
 		MapModes.MAP_BEZIEHUNGEN when bool(location.get("has_data", true)):
 			second = relation(int(location.get("owner_index", -1)))
@@ -90,7 +90,7 @@ func war(sim_index: int, owner: int) -> String:
 			count += 1
 	if count > 0:
 		parts.append("%s Heer%s mit %s Soldaten" % [
-			GermanFormat.integer(count), "" if count == 1 else "e", GermanFormat.integer(soldiers)
+			Format.integer(count), "" if count == 1 else "e", Format.integer(soldiers)
 		])
 	return ", ".join(parts)
 
@@ -116,8 +116,8 @@ func relation(owner: int) -> String:
 	for entry in sim.get_relations(player):
 		if int(entry.get("index", -1)) == owner:
 			var text := "Beziehung %s (Ziel %s)" % [
-				GermanFormat.signed_number(roundi(float(entry.get("relation", 0.0)))),
-				GermanFormat.signed_number(roundi(float(entry.get("target", 0.0)))),
+				Format.signed_number(roundi(float(entry.get("relation", 0.0)))),
+				Format.signed_number(roundi(float(entry.get("target", 0.0)))),
 			]
 			if bool(entry.get("allied", false)):
 				text += ", Bündnis"
@@ -142,7 +142,7 @@ func election(location: Dictionary) -> String:
 		return text + " · Boykott"
 	var winner := str(election.get("winner_short_name", election.get("winner_name", "")))
 	var shares: Dictionary = election.get("shares", {})
-	text += " · %s %s" % [winner, GermanFormat.percent(roundi(float(shares.get(winner, 0.0))))]
+	text += " · %s %s" % [winner, Format.percent(roundi(float(shares.get(winner, 0.0))))]
 	if bool(election.get("runoff", false)):
 		text += " im ersten Wahlgang, Sieg in der Stichwahl"
 	return text
