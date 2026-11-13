@@ -47,7 +47,10 @@ Seit M13b1 prüft er Schriften, Ornamente, Vignetten, Theme und Zeitungsfenster,
 Klangregisseur (`AudioDirector`): Busse „Musik“ und „Klaenge“ mit Lautstärke und „Musik aus“ aus den
 Einstellungen, die Liste `stuecke.cfg`, Musik für jede Stimmung, Überblenden in eine andere Stimmung,
 kein Stück zweimal hintereinander und jeden Bedienklang. Ohne gerenderte Musik prüft er nur, dass das
-Spiel still bleibt.
+Spiel still bleibt. Seit M13b3 die Geschichtsstunde als Daten (keine unbekannte Prüfung oder Ziel, jeder
+Lexikonartikel vorhanden, nötige Prüfungen da, Fehler erkannt), ihr Panel (Weiter erst nach der Aufgabe,
+bis zum Ende, Beenden), die Hinweise (Text für jedes Fenster, einmal je Fenster, gemerkt in einer Datei,
+zurücksetzbar), „Was ist passiert?“ und die Startoptionen.
 
 ```bash
 godot --headless --path game --script res://tests/unit_test.gd
@@ -260,6 +263,14 @@ Dazwischen prüft er:
     Stimmung, die die Lage des Staates ergibt (hier die Revolution); das Jahrbuch klingt nach Papier,
     ein Steuerbefehl nach Gänsekiel, die Ereignisse bis dahin nach der Glocke. Ohne gerenderte Musik
     (`tools/klang/klang.py`) meldet der Test nur die Stille.
+17. **Geschichtsstunde** (seit M13b3, Abnahme b3, ganz am Ende): „Geschichtsstunde“ im Hauptmenü startet
+    „März 1848 in Berlin“ als Preußen am 1. März 1848. Der Test geht jeden Schritt durch: In Schritten
+    ohne Zeit bleibt ein Tempo wirkungslos, „Weiter“ ist vor der Aufgabe gesperrt, jedes genannte Ziel
+    existiert; die Aufgabe erledigt er über die Bedienung (Kartenmodus, Berlin, Haushalt, Steuerregler,
+    Kabinett, Gesandter nach Österreich, Zollunion, Tempo, das Ereignis im Ereignisfenster, Zeit bis zum
+    Wahlabend, Taste J, F5), danach muss die Geschichtsstunde sie erkannt haben. Dann zeigt die
+    Diplomatie ihren Hinweis beim ersten Öffnen und beim zweiten nicht mehr, und F9 lädt den Spielstand
+    der Geschichtsstunde mit „Was ist passiert?“. Hinweise ruhen sonst während des ganzen Tests.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd

@@ -91,6 +91,8 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--journal` | Journalfenster vor dem Screenshot öffnen (seit M11; ab 1848) |
 | `--jahrbuch` | Statistisches Jahrbuch vor dem Screenshot öffnen (seit M13a5a; ab 1848, mit `--tage` über einen 1. Januar) |
 | `--zeitung` | die jüngste Titelseite der Zeitung für den Spielerstaat öffnen (seit M13b1; ab 1848) |
+| `--geschichtsstunde[=n]` | die Geschichtsstunde „März 1848 in Berlin“ starten, ab Schritt n (seit M13b3) |
+| `--rueckblick` | „Was ist passiert?“ öffnen wie nach dem Laden eines Spielstands (seit M13b3) |
 | `--bereich=<bereich>` | Fenster eines Bereichs vor dem Screenshot öffnen: `kabinett`, `gesetze`, `gruppen`, `parlament`, `gesellschaft`, `wirtschaft` (seit M13a5b), `chronik`, `lexikon` (seit M13a5d) |
 | `--einstellungen[=<reiter>]` | Fenster Einstellungen öffnen, Reiter `bild` (Standard), `ton`, `spiel`, `zugang`, `tasten`, `sprache` (seit M13a5d) |
 | `--farbsehschwaeche` | Farben für Rot-Grün-Schwäche für diesen Start, ohne die Einstellung zu speichern (seit M13a5d) |
@@ -129,6 +131,9 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Lexikon (Bereichsleiste) | seit M13a5d: Artikel aus `data/lexikon` mit Suche und Verweisen; ein Klick auf einen unterstrichenen Begriff in einem Tooltip öffnet ihn |
 | Wendepunkt | seit M13a5d: Ereignisse mit `wendepunkt = ja` erscheinen breiter mit großem Titel, die Karte dunkelt dahinter ab; seit M13b1 zeigt jedes Ereignis eine Vignette nach Art (Revolution, Krieg, Diplomatie, Wirtschaft, Hof) |
 | Zeitung | seit M13b1, ab 1848: Bei einer wichtigen Nachricht (Gründung eines Bundes, Wendepunkte, die deutsche Frage; Krieg, Frieden, Wahlen, Thronwechsel und Erhebungen, wenn sie den eigenen Staat betreffen; höchstens eine solche im Monat) erscheint die Titelseite eines erfundenen Blattes der eigenen Gegend: Kopf in Fraktur, Schlagzeile und Unterzeile, Leitartikel mit Drahtbericht und Vermischtes. Die Zeit hält an, ein Klick legt sie beiseite. Pausenregel „Zeitung“ in den Einstellungen; alle Zeitungen der Partie unter „Zeitungen“ im Jahrbuch |
+| Geschichtsstunde | seit M13b3, Hauptmenü „Geschichtsstunde“: „März 1848 in Berlin“ als Preußen in vierzehn Schritten – Karte, Orte, Staatsübersicht und Haushalt, Steuern, Kabinett, Diplomatie mit einem Gesandten, Zollverein, Krisen, Tempo, ein Ereignis mit Kompass (Barrikaden in Berlin), die Wahl zur Nationalversammlung, Journale, Speichern. Jeder Schritt nennt eine Aufgabe und prüft sie; „Weiter“ geht erst danach. Die Zeit läuft nur, wo der Schritt es verlangt; ein goldener Rahmen zeigt, wohin zu klicken ist; „Im Lexikon“ öffnet den passenden Artikel; „Beenden“ lässt frei weiterspielen. Die Schritte stehen als Daten in `tutorial/maerz_1848.tres` |
+| Hinweise | seit M13b3: beim ersten Öffnen jedes Fensters zwei, drei Sätze rechts unten (`tutorial/hinweise.cfg`); „Verstanden“ oder „Keine Hinweise mehr“, abschaltbar in den Einstellungen (Spiel). Welche gezeigt sind, steht in `user://hinweise.cfg` |
+| Was ist passiert? | seit M13b3: nach dem Laden eines Spielstands die wichtigsten Nachrichten des letzten Jahres (was die Zeitung auf die Titelseite brächte), höchstens zehn; abschaltbar in den Einstellungen |
 | Musik und Klänge | seit M13b2: sieben gemeinfreie Stücke der Zeit (Beethoven: Ode an die Freude, Für Elise; Haydn: Kaiserlied; Silcher: Loreley; Schumann: Wilder Reiter, Soldatenmarsch aus dem Album für die Jugend von 1848; Rouget de Lisle: Marseillaise), mit einem eigenen Synthesizer gespielt. Die Musik folgt der Lage des eigenen Staates – Frieden, Krise (Stufe 2 oder 3 einer Forderung), Krieg, Revolution (eigener Aufstand oder die Revolution 1848/49) – und blendet bei einem Wechsel über; zwischen zwei Stücken liegt eine Pause. Bedienklänge: Gänsekiel (Befehl), Siegel (Vertrag, Frieden), Papier (Fenster, Zeitung), Glocke (Ereignis), Trommel (Kriegserklärung mit dem eigenen Staat), Telegraf (ab 1849 eine Meldung, höchstens einmal die Woche). Lautstärken in den Einstellungen. Ohne `python3 tools/klang/klang.py` bleibt das Spiel still |
 | Epochenrahmen | seit M13b1: eingebettete Schriften (Source Serif 4 für Text und Zahlen, Playfair Display für Überschriften, Source Code Pro für Tabellen, UnifrakturMaguntia für den Zeitungskopf; alle SIL Open Font License), Fenster mit Doppellinie und Eckornamenten |
 | Ticker | seit M13a5c über der Leiste der Kartenmodi: das Neueste aus der Chronik (Wendepunkte zuerst und rot, sonst Einträge des Spielerstaates und der Welt), alle vier Sekunden der nächste; ein Klick fährt den Ort an. Die Chronik selbst ist über die Bereichsleiste ein- und auszublenden und zu Beginn ausgeblendet |
@@ -186,6 +191,8 @@ game/
 │                              SVG: Ecke, Trenner, Vignetten revolution, krieg, diplomatie, wirtschaft, hof)
 ├── audio/                     seit M13b2 (vertical_slice.md 5.3): noten/*.noten (Notentext der sieben Stücke),
 │                              pruefsummen.txt; musik/ und klaenge/ erzeugt tools/klang/klang.py (nicht versioniert)
+├── tutorial/                  seit M13b3: maerz_1848.tres (Geschichtsstunde, TutorialLesson mit TutorialStep),
+│                              hinweise.cfg (Hinweise beim ersten Öffnen je Fenster)
 ├── bin/uhrwerk.gdextension    Beschreibung der GDExtension (Bibliotheken je Plattform)
 ├── scenes/
 │   ├── main.tscn              Hauptszene: Karte + Oberfläche (CanvasLayer)
@@ -224,7 +231,7 @@ game/
 │   │   ├── map_label_layout.gd    MapLabelLayout: Namenspunkte von Staaten und Kreisen
 │   │   ├── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
 │   │   └── army_layer.gd          ArmyLayer: Heeresmarken, Wege, Schlachten, Belagerungen (seit M10)
-│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9); Heeresfenster (army_panel.gd), Kriegsfenster (war_window.gd) und Schlachtberichte (battle_reports.gd, alle seit M10); Epochenrahmen mit Schriften, Rahmen und Vignetten (epoch_theme.gd) und Zeitung (newspaper_window.gd, beide seit M13b1); Musik und Bedienklänge (audio_director.gd, seit M13b2)
+│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9); Heeresfenster (army_panel.gd), Kriegsfenster (war_window.gd) und Schlachtberichte (battle_reports.gd, alle seit M10); Epochenrahmen mit Schriften, Rahmen und Vignetten (epoch_theme.gd) und Zeitung (newspaper_window.gd, beide seit M13b1); Musik und Bedienklänge (audio_director.gd, seit M13b2); Geschichtsstunde (tutorial_panel.gd, tutorial_highlight.gd), Hinweise (hint_card.gd) und „Was ist passiert?“ (windows/recap_window.gd, alle seit M13b3)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte); die Schriften setzt seit M13b1 EpochTheme
 └── tests/                     Einheiten-, Rauch-, Klick-, Leistungs- und Durchspieltest, siehe tests/README.md

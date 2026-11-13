@@ -1,0 +1,182 @@
+[gd_resource type="Resource" script_class="TutorialLesson" load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/tutorial_lesson.gd" id="1_0glik"]
+[ext_resource type="Script" path="res://scripts/core/tutorial_step.gd" id="2_6m7mq"]
+
+[sub_resource type="Resource" id="Resource_qfv8g"]
+script = ExtResource("2_6m7mq")
+id = "karte"
+title = "Die Karte"
+text = "In der Mitte liegt der Deutsche Bund von 1848 mit seinen Königreichen, Herzogtümern, Fürstentümern und freien Städten. Ziehen Sie die Karte mit der rechten Maustaste, das Mausrad zoomt. Die Leiste unten wechselt die Kartenmodi: Bevölkerungsdichte, Konfessionen, Märkte, Wahlen und vieles mehr."
+task = "Wählen Sie unten einen anderen Kartenmodus, etwa „Dichte“."
+check = "kartenmodus"
+time = false
+target = "kartenmodi"
+lexicon = ""
+done_text = "Jeder Modus erklärt sich in seiner Legende rechts unten."
+
+[sub_resource type="Resource" id="Resource_7j6sw"]
+script = ExtResource("2_6m7mq")
+id = "ort"
+title = "Orte und Kreise"
+text = "Jede Fläche ist ein Ort mit seinen Einwohnern, Berufen, seinem Markt und seiner Stimmung. Ein Linksklick zeigt die Ortsinfo rechts, Escape schließt sie."
+task = "Klicken Sie auf einen Ort, am besten auf Ihre Hauptstadt Berlin."
+check = "ort"
+time = false
+target = ""
+lexicon = "kreis"
+done_text = "Die Ortsinfo nennt auch den Wahlkreis, in dem der Ort wählt."
+
+[sub_resource type="Resource" id="Resource_8g07x"]
+script = ExtResource("2_6m7mq")
+id = "staat"
+title = "Staatsübersicht und Kasse"
+text = "Links steht die Staatsübersicht Preußens: Herrscher, Minister, Einnahmen und Ausgaben. Oben zeigt die Leiste Kasse und Saldo, die Legitimität, die Verwaltung und Ihr Vermächtnis. Wer mehr ausgibt, als er einnimmt, macht Schulden."
+task = "Öffnen Sie in der Bereichsleiste den Haushalt."
+check = "haushalt"
+time = false
+target = "bereich:haushalt"
+lexicon = "saldo"
+done_text = "Der Haushalt zeigt jede Steuer und jeden Posten einzeln."
+
+[sub_resource type="Resource" id="Resource_4xqjh"]
+script = ExtResource("2_6m7mq")
+id = "steuern"
+title = "Steuern"
+text = "Preußen nimmt Kontribution (eine Grundsteuer), Akzise (auf Waren) und Zölle ein. Höhere Sätze füllen die Kasse, verteuern aber die Waren und bremsen das Wachstum – und im März 1848 ist die Stimmung ohnehin gereizt."
+task = "Bewegen Sie einen der Steuerregler in der Staatsübersicht."
+check = "steuern"
+time = false
+target = "steuern"
+lexicon = "akzise"
+done_text = "Der neue Satz gilt ab dem nächsten Tag."
+
+[sub_resource type="Resource" id="Resource_013bo"]
+script = ExtResource("2_6m7mq")
+id = "kabinett"
+title = "Kabinett und Hof"
+text = "Regieren heißt in dieser Zeit: ein König und seine Minister. Ihre Eigenschaften und Neigungen prägen, was Preußen will – auch, wenn Sie die Entscheidungen treffen."
+task = "Öffnen Sie das Fenster „Kabinett“ in der Bereichsleiste."
+check = "kabinett"
+time = false
+target = "bereich:kabinett"
+lexicon = ""
+done_text = "Wer ausscheidet, steht später unter den früheren Amtsinhabern."
+
+[sub_resource type="Resource" id="Resource_3xy5v"]
+script = ExtResource("2_6m7mq")
+id = "diplomatie"
+title = "Diplomatie"
+text = "Ohne Gesandten erfahren Sie wenig über einen Hof, und Verträge kommen schwer zustande. Im Fenster „Diplomatie“ wählen Sie links einen Staat und rechts eine Handlung."
+task = "Öffnen Sie die Diplomatie und entsenden Sie einen Gesandten, etwa nach Österreich."
+check = "gesandter"
+time = false
+target = "bereich:diplomatie"
+lexicon = "deutscher_bund"
+done_text = "Der Gesandte reist ab dem nächsten Tag."
+
+[sub_resource type="Resource" id="Resource_n5whd"]
+script = ExtResource("2_6m7mq")
+id = "zollverein"
+title = "Der Zollverein"
+text = "Seit 1834 führt Preußen den Zollverein: ein gemeinsames Zollgebiet fast aller Staaten nördlich der Alpen, ohne Österreich. Wer dazugehört, handelt ohne Schlagbäume – und hängt an Preußen."
+task = "Öffnen Sie den Bereich „Zollunion“."
+check = "zollunion"
+time = false
+target = "bereich:zollunion"
+lexicon = "zollverein"
+done_text = "Ein- und Austritte wirken erst mit dem nächsten Jahr."
+
+[sub_resource type="Resource" id="Resource_ts40b"]
+script = ExtResource("2_6m7mq")
+id = "krise"
+title = "Krisen und Forderungen"
+text = "Staaten fordern voneinander: einen Beitritt, ein Gebiet, die Führung im Bund. Eine Forderung ist eine Krise in drei Stufen – Protest, Mobilmachung, Ultimatum. Sie steht dann über der Karte in der Krisenleiste; dort geben Sie nach, verhandeln oder bleiben hart. Rechts oben, wo jetzt die Geschichtsstunde steht, zeigt die Übersicht alles, was gerade läuft."
+task = ""
+check = "weiter"
+time = false
+target = ""
+lexicon = ""
+done_text = ""
+
+[sub_resource type="Resource" id="Resource_6xrad"]
+script = ExtResource("2_6m7mq")
+id = "tempo"
+title = "Die Zeit"
+text = "Oben rechts steuern Sie die Zeit: Pause und fünf Geschwindigkeiten, mit der Leertaste halten Sie an. Ereignisse und wichtige Nachrichten halten die Zeit von selbst an."
+task = "Lassen Sie die Zeit laufen (Taste 1 bis 5 oder oben rechts)."
+check = "tempo"
+time = true
+target = "tempo"
+lexicon = ""
+done_text = "Der März 1848 nimmt seinen Lauf."
+
+[sub_resource type="Resource" id="Resource_w1dux"]
+script = ExtResource("2_6m7mq")
+id = "ereignis"
+title = "Ein Ereignis"
+text = "Am 18. März erreicht die Revolution Berlin. Ein Ereignis zeigt, was geschieht, und bietet Ihnen Wege an; jeder nennt seine Folgen. Der historische Kompass ◆ markiert, wie es wirklich kam – Sie müssen ihm nicht folgen."
+task = "Lassen Sie die Zeit bis zum Ereignis laufen und wählen Sie einen Weg."
+check = "ereignis"
+time = true
+target = ""
+lexicon = "kompass"
+done_text = "Ihre Wahl gilt ab dem nächsten Tag; die Chronik hält sie fest."
+
+[sub_resource type="Resource" id="Resource_0sq70"]
+script = ExtResource("2_6m7mq")
+id = "wahl"
+title = "Die Wahl zur Nationalversammlung"
+text = "Im Frühjahr 1848 wählen die Männer des Deutschen Bundes die Nationalversammlung in der Frankfurter Paulskirche. Am Wahlabend laufen die Ergebnisse Wahlkreis um Wahlkreis ein."
+task = "Lassen Sie die Zeit bis zum Wahltag laufen."
+check = "wahl"
+time = true
+target = "tempo"
+lexicon = "nationalversammlung"
+done_text = "Den Wahlabend schließen Sie mit „Schließen“; im Spielmenü steht er unter „Letzte Wahl“."
+
+[sub_resource type="Resource" id="Resource_jwb3q"]
+script = ExtResource("2_6m7mq")
+id = "journal"
+title = "Journale"
+text = "Journale verfolgen die großen Fragen der Zeit über Jahre: die Revolution und die deutsche Frage. Jede Stufe nennt Ziele; ihr Ausgang entscheidet, wie die Geschichte über Sie urteilt."
+task = "Öffnen Sie die Journale (Taste J oder Bereichsleiste)."
+check = "journal"
+time = false
+target = "bereich:journale"
+lexicon = "einigkeit"
+done_text = "Am Ende der Partie, im Juli 1871, fällt die Geschichte ihr Urteil."
+
+[sub_resource type="Resource" id="Resource_1ngsw"]
+script = ExtResource("2_6m7mq")
+id = "speichern"
+title = "Speichern"
+text = "Das Spielmenü (Taste F10 oder „Menü“) speichert und lädt Spielstände. F5 speichert schnell, F9 lädt den Schnellspeicher. Am 1. Januar legt das Spiel selbst einen Spielstand an."
+task = "Speichern Sie: Taste F5 oder im Spielmenü."
+check = "speichern"
+time = false
+target = "menue"
+lexicon = ""
+done_text = "Nach dem Laden zeigt „Was ist passiert?“ die wichtigsten Nachrichten der letzten Zeit."
+
+[sub_resource type="Resource" id="Resource_2ktms"]
+script = ExtResource("2_6m7mq")
+id = "ende"
+title = "Ihre Geschichte"
+text = "Das war die Geschichtsstunde. Die Revolution hat erst begonnen: Ob Preußen die Kaiserkrone annimmt, mit Österreich bricht oder den Deutschen Bund erneuert, entscheiden Sie. Das Lexikon (Bereichsleiste) erklärt jeden Begriff, unterstrichene Wörter in den Tooltips führen dorthin."
+task = ""
+check = "weiter"
+time = false
+target = ""
+lexicon = "vermaechtnis"
+done_text = ""
+
+[resource]
+script = ExtResource("1_0glik")
+id = "maerz_1848"
+title = "März 1848 in Berlin"
+intro = "Am 1. März 1848 sind Sie König Friedrich Wilhelm IV. von Preußen. In Paris ist die Monarchie gestürzt, in den deutschen Staaten fordern Bürger Pressefreiheit, Geschworenengerichte und ein deutsches Parlament. Diese Geschichtsstunde führt Sie in vierzehn Schritten durch das Spiel. Die Zeit läuft nur, wenn ein Schritt es verlangt."
+scenario = "voelkerfruehling"
+state = "PRU"
+difficulty = "lehrling"
+steps = Array[ExtResource("2_6m7mq")]([SubResource("Resource_qfv8g"), SubResource("Resource_7j6sw"), SubResource("Resource_8g07x"), SubResource("Resource_4xqjh"), SubResource("Resource_013bo"), SubResource("Resource_3xy5v"), SubResource("Resource_n5whd"), SubResource("Resource_ts40b"), SubResource("Resource_6xrad"), SubResource("Resource_w1dux"), SubResource("Resource_0sq70"), SubResource("Resource_jwb3q"), SubResource("Resource_1ngsw"), SubResource("Resource_2ktms")])

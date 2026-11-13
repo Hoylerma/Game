@@ -54,6 +54,7 @@ func _run() -> void:
 	root.add_child(_main)
 	if not bool(_main.get("view_is_ready")):
 		await _main.view_ready
+	_quiet_hints()
 	_view = _main.call("map_view")
 	var sim: SimulationClient = _main.call("simulation")
 	if not _view.has_map() or sim == null:
@@ -124,6 +125,7 @@ func _run() -> void:
 	await _check_verdict()
 	await _check_newspaper()
 	await _check_audio()
+	await _check_onboarding()
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
 		print("KLICK OK %d/%d" % [all_levels, testable.size()])
@@ -682,6 +684,7 @@ func _check_settings_chronicle_lexicon() -> void:
 	settings.reset_group("tasten")
 	settings.reset_group("spiel")
 	settings.apply(_main.get_tree())
+	_quiet_hints()
 	_main.call("close_settings")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	# Chronik als Fenster mit Filter.
@@ -908,6 +911,135 @@ func _check_audio() -> void:
 	print("  Musik und Klänge: Stimmung %s, „%s“; Klänge %s" % [
 		audio.mood(), audio.pieces.get(audio.current_piece(), {}).get("titel", ""), str(audio.sounds_played)
 	])
+
+
+## Hinweise beim ersten Öffnen ruhen im Test (seit M13b3), außer in _check_onboarding; die gesehenen stehen
+## in einer eigenen Datei.
+func _quiet_hints() -> void:
+	(_main.call("settings") as UserSettings).set_value("spiel/hinweise", false)
+	var hint: HintCard = _main.call("hint_card")
+	if hint != null:
+		hint.dismiss()
+		hint.use_seen_file("user://klick_test_hinweise.cfg")
+
+
+## Onboarding (seit M13b3, vertical_slice.md 5.4; Abnahme b3: Klicktest durch die Geschichtsstunde): Start über
+## das Hauptmenü, jeder Schritt mit seiner Aufgabe über die Bedienung, die Zeit nur, wo der Schritt es erlaubt;
+## dann ein Hinweis beim ersten Öffnen (und nur dann) und „Was ist passiert?“ nach dem Laden.
+func _check_onboarding() -> void:
+	var tutorial: TutorialPanel = _main.call("tutorial_panel")
+	var start: StartScreen = _main.call("start_screen")
+	var dir := "user://klick_test_spielstaende"
+	_clear_saves(dir)
+	_main.set("save_dir", dir)
+	_main.call("open_start_screen")
+	await _frames(1)
+	var lesson_button := start.menu_button("Lesson")
+	if lesson_button == null or lesson_button.disabled:
+		_fail("Geschichtsstunde: Knopf im Hauptmenü fehlt oder ist gesperrt")
+		return
+	lesson_button.emit_signal("pressed")
+	await _frames(2)
+	var sim: SimulationClient = _main.call("simulation")
+	var player := str(sim.get_state(sim.get_player_state_index()).get("tag", ""))
+	if not tutorial.is_active() or player != "PRU" or start.is_open() or sim.get_date_text() != "1. März 1848":
+		_fail("Geschichtsstunde: aktiv %s, Staat %s, %s" % [tutorial.is_active(), player, sim.get_date_text()])
+		return
+	var total := tutorial.step_count()
+	var walked := PackedStringArray()
+	for _guard in total + 2:
+		if not tutorial.is_active():
+			break
+		var step := tutorial.current_step()
+		if not step.time:
+			_main.call("set_speed", 3)
+			if int(_main.call("speed")) != 0:
+				_fail("Geschichtsstunde: Zeit läuft im Schritt „%s“" % step.id)
+				_main.call("set_speed", 0)
+		if step.check != "weiter" and not tutorial.button("Next").disabled:
+			_fail("Geschichtsstunde: „Weiter“ vor der Aufgabe im Schritt „%s“" % step.id)
+		if not step.target.is_empty() and _main.call("tutorial_target", step.target) == null:
+			_fail("Geschichtsstunde: Ziel „%s“ fehlt" % step.target)
+		await _do_lesson_step(step, sim)
+		await _frames(2)
+		if not tutorial.is_done():
+			_fail("Geschichtsstunde: Aufgabe „%s“ nicht erkannt (%s)" % [step.id, sim.get_date_text()])
+			tutorial.mark_done()
+		walked.append(step.id)
+		_main.call("set_speed", 0)
+		tutorial.button("Next").emit_signal("pressed")
+		await _frames(1)
+	if tutorial.is_active() or walked.size() != total:
+		_fail("Geschichtsstunde: %d von %d Schritten (%s)" % [walked.size(), total, ", ".join(walked)])
+	var date := sim.get_date_text()
+	# Hinweise beim ersten Öffnen: einmal je Fenster.
+	var settings: UserSettings = _main.call("settings")
+	var hint: HintCard = _main.call("hint_card")
+	hint.reset_seen()
+	settings.set_value("spiel/hinweise", true)
+	_main.call("open_diplomacy")
+	await _frames(1)
+	var first := hint.current_key()
+	hint.dismiss()
+	_main.call("close_diplomacy")
+	_main.call("open_diplomacy")
+	await _frames(1)
+	if first != "DiplomacyWindow" or hint.visible:
+		_fail("Hinweis: beim ersten Öffnen „%s“, beim zweiten sichtbar %s" % [first, hint.visible])
+	_main.call("close_diplomacy")
+	_quiet_hints()
+	# „Was ist passiert?“: F9 lädt den Spielstand aus dem Schritt „Speichern“.
+	await _key(KEY_F9)
+	await _frames(2)
+	var recap: RecapWindow = _main.call("recap_window")
+	var news := recap.entries()
+	if not recap.is_open() or news.is_empty() or news.size() > RecapWindow.LIMIT:
+		_fail("Was ist passiert?: offen %s, %d Einträge" % [recap.is_open(), news.size()])
+	else:
+		recap.close_requested.emit()
+	_clear_saves(dir)
+	print("  Geschichtsstunde: %d Schritte (%s) bis %s; Hinweis beim ersten Öffnen; „Was ist passiert?“ mit %d Nachrichten, zuerst „%s“" % [
+		walked.size(), ", ".join(walked), date, news.size(), news[0].get("headline", "") if not news.is_empty() else ""
+	])
+
+
+## Die Aufgabe eines Schritts über die Bedienung erledigen.
+func _do_lesson_step(step: TutorialStep, sim: SimulationClient) -> void:
+	var bar: AreaBar = _main.call("area_bar")
+	match step.check:
+		"kartenmodus":
+			(_main.get("_mode_bar") as MapModeBar).mode_selected.emit(MapModes.MAP_DENSITY)
+		"ort":
+			_main.call("_select_location", sim.get_location_index("berlin_coelln"))
+		"haushalt", "kabinett", "zollunion":
+			bar.button(StringName("haushalt" if step.check == "haushalt" else step.check)).emit_signal("pressed")
+		"steuern":
+			(_main.call("state_panel") as StatePanel).tax_rate_requested.emit(1, 6)
+		"gesandter":
+			bar.button(&"diplomatie").emit_signal("pressed")
+			await _frames(1)
+			var window: DiplomacyWindow = _main.call("diplomacy_window")
+			window.select_state(sim.get_state_index("AUT"))
+			await _frames(1)
+			(window.find_child("Action_envoy_send", true, false) as Button).emit_signal("pressed")
+		"tempo":
+			_main.call("set_speed", 5)
+		"ereignis", "wahl":
+			var tutorial: TutorialPanel = _main.call("tutorial_panel")
+			var night: ElectionNight = _main.call("election_night")
+			_main.call("set_speed", 5)
+			for _frame in 4000:
+				if tutorial.is_done():
+					break
+				if _answer_events() > 0:
+					_main.call("set_speed", 5)
+				await process_frame
+			if night.is_open():
+				_main.call("_close_election_night", false)
+		"journal":
+			await _key(KEY_J)
+		"speichern":
+			await _key(KEY_F5)
 
 
 func _check_new_game() -> void:

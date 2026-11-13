@@ -17,6 +17,8 @@ signal load_requested(path: String)
 signal quit_requested
 ## Knopf „Einstellungen“ (seit M13a5d).
 signal settings_requested
+## „Geschichtsstunde“ im Hauptmenü (seit M13b3).
+signal lesson_requested
 ## Sichtbarkeit geändert (main.gd blendet die Leisten des Spiels dahinter aus).
 signal shown_changed(open: bool)
 
@@ -416,9 +418,8 @@ func _build_menu() -> VBoxContainer:
 	page_box.add_child(_continue_button)
 	_load_menu_button = _menu_button("Laden …", "Load", func() -> void: _show_page(Page.LOAD))
 	page_box.add_child(_load_menu_button)
-	var lesson := _menu_button("Geschichtsstunde", "Lesson", func() -> void: pass)
-	lesson.disabled = true
-	lesson.tooltip_text = "„März 1848 in Berlin“ folgt mit Schritt b3 (vertical_slice.md 5.4)"
+	var lesson := _menu_button("Geschichtsstunde", "Lesson", func() -> void: lesson_requested.emit())
+	lesson.tooltip_text = "„März 1848 in Berlin“: als Preußen in vierzehn Schritten durch das Spiel"
 	page_box.add_child(lesson)
 	var settings := _menu_button("Einstellungen", "Settings", func() -> void: settings_requested.emit())
 	settings.tooltip_text = "Bild, Ton, Spiel, Barrierefreiheit, Tasten und Sprache"

@@ -831,6 +831,15 @@ jobs:
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_zeitung.png" --szenario=voelkerfruehling --staat=PRU --tage=400 --zeitung \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Geschichtsstunde, Schritt 3 mit hervorgehobenem Haushalt, und „Was ist passiert?“ (seit M13b3)
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_geschichtsstunde.png" --geschichtsstunde=3 \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_rueckblick.png" --szenario=voelkerfruehling --staat=BAV --tage=420 --rueckblick \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
           # Journalfenster (seit M11): die deutsche Frage im Juni 1848
           xvfb-run -a -s "-screen 0 1600x900x24" \
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
