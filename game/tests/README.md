@@ -140,6 +140,13 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
     mit Rivale, aktiven Zielen und sechs Neigungen (`get_intentions`), Preußen als Spielerstaat
     meldet `player`; nach den ersten Monatsersten hat ein Staat eine Entscheidung mit Gründen
     (`get_ai_decisions`), der Spielerstaat keine
+  - **Bereiche und Vermächtnis 1848** (seit M13a4 und a5b): Gesellschaft (Einwohner, Orte, Berufe),
+    Wirtschaft (Güter, Betriebe, Zollverein), Gesetze (drei Gruppen, je eine Option in Kraft),
+    Abstimmungen und frühere Amtsinhaber, Vermächtnis mit fünf Dimensionen samt Satz
+  - **Rückmeldung** (seit M13b5, Messwerte seit b6): `FrameMeter` fasst Bildraten zu Median und
+    5-%-Perzentil zusammen; `FeedbackReport` legt ein ZIP mit `info.txt`, `messwerte.json` (Format,
+    Prüfsumme, Bildrate, Spieltage), Notiz und einem ladbaren Spielstand gleicher Prüfsumme an, ohne
+    die Partie zu ändern und ohne den Benutzerordner im Klartext
 
 Am Ende steht `SMOKE OK` (Exitcode 0) oder `SMOKE FEHLGESCHLAGEN` mit allen Fehlern (Exitcode 1).
 
