@@ -89,7 +89,9 @@ func _ready() -> void:
 	if _wants_start_screen():
 		open_start_screen()
 	view_ready.emit()
-	if _options.wants_screenshot():
+	if _options.smoke_test:
+		_run_smoke_test()
+	elif _options.wants_screenshot():
 		_run_screenshot()
 func _process(delta: float) -> void:
 	# Geschichtsstunde (seit M13b3): die Aufgabe des Schritts prüfen, auch bei angehaltener Zeit.
@@ -535,6 +537,37 @@ func _pause_for_entries(entries: Array[Dictionary]) -> void:
 	if not reason.is_empty():
 		_set_speed(0)
 		_top_bar.show_notice("Pause: " + reason)
+
+
+# --- Auslieferung (seit M13b5, vertical_slice.md 7) --------------------------------------------
+
+
+## Rückmeldung (Spielmenü): ZIP in user://rueckmeldungen; der Pfad steht in der Statuszeile.
+func write_feedback(note: String) -> Dictionary:
+	var result := FeedbackReport.write(_sim, _player, note)
+	var error := str(result.get("error", ""))
+	if error.is_empty():
+		var text := tr("Rückmeldung gespeichert: {pfad} – bitte diese Datei schicken; es wurde nichts versandt.")
+		_game_menu.show_status(text.format({"pfad": result["path"]}))
+	else:
+		_game_menu.show_status(error, true)
+	return result
+
+
+## --rauchtest: Wie uhrwerk-cli lauf ohne Spieler rechnen (keine Ereignisse warten auf eine Wahl), die
+## Prüfsumme ausgeben und beenden. Exitcode 1 ohne Simulation oder Karte.
+func _run_smoke_test() -> void:
+	if _sim == null or not _map_view.has_map():
+		printerr("EINIGKEIT: Rauchtest fehlgeschlagen: Simulation oder Karte nicht geladen (Daten: %s)" % _data_dir)
+		get_tree().quit(1)
+		return
+	_sim.set_event_player(-1)
+	_sim.advance_days(maxi(_options.days, 0))
+	print("EINIGKEIT: Rauchtest %s %s Version %s Prüfsumme %s" % [
+		str(_sim.get_scenario().get("id", "")), _sim.get_date_text(), ProjectSettings.get_setting("application/config/version"),
+		_sim.get_checksum(),
+	])
+	get_tree().quit(0)
 
 
 # --- Onboarding (seit M13b3, vertical_slice.md 5.4) -----------------------------------------

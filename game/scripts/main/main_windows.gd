@@ -606,7 +606,7 @@ func _sync_event_player() -> void:
 	if _sim == null:
 		return
 	var wanted := _player if _player_current < 0 else -1
-	if _options.wants_screenshot() and not _options.show_events:
+	if (_options.wants_screenshot() and not _options.show_events) or _options.smoke_test:
 		wanted = -1
 	if _sim.get_event_player() != wanted:
 		_sim.set_event_player(wanted)

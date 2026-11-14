@@ -1698,6 +1698,40 @@ func _check_savegames(sim: SimulationClient, player: int) -> void:
 		"Angaben zu einer fremden Datei: %s" % str(bad_info)
 	)
 	_remove_dir(dir)
+	_check_feedback(sim, player)
+
+
+## Rückmeldung (seit M13b5): ZIP mit Info, Notiz und ladbarem Spielstand, ohne die Partie zu ändern.
+func _check_feedback(sim: SimulationClient, player: int) -> void:
+	var dir := OS.get_user_data_dir().path_join("smoke_test_rueckmeldungen")
+	_remove_dir(dir)
+	var before := sim.get_checksum()
+	var result := FeedbackReport.write(sim, player, "Rauchtest: Notiz", dir)
+	var files: PackedStringArray = result.get("files", PackedStringArray())
+	if not _check(
+		str(result.get("error", "x")).is_empty() and FileAccess.file_exists(str(result.get("path", "")))
+		and files.has("info.txt") and files.has("notiz.txt") and files.has("spielstand.einigkeit"),
+		"Rückmeldung angelegt: %s" % ", ".join(files),
+		"Rückmeldung: %s" % str(result)
+	):
+		return
+	var zip := ZIPReader.new()
+	zip.open(str(result["path"]))
+	var info := zip.read_file("info.txt").get_string_from_utf8()
+	var note := zip.read_file("notiz.txt").get_string_from_utf8()
+	var save := dir.path_join("aus_rueckmeldung.einigkeit")
+	var file := FileAccess.open(save, FileAccess.WRITE)
+	file.store_buffer(zip.read_file("spielstand.einigkeit"))
+	file.close()
+	zip.close()
+	var save_info := sim.get_save_info(save)
+	_check(
+		info.contains("Prüfsumme: " + before) and info.contains("Version: ") and note.begins_with("Rauchtest: Notiz")
+		and str(save_info.get("checksum", "")) == before and sim.get_checksum() == before,
+		"Rückmeldung: Angaben, Notiz und Spielstand (Prüfsumme %s) stimmen" % before,
+		"Rückmeldung: Inhalt passt nicht (%s / %s)" % [info.replace("\n", " | "), str(save_info)]
+	)
+	_remove_dir(dir)
 
 
 func _remove_dir(dir: String) -> void:

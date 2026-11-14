@@ -65,6 +65,10 @@ Projektordner `game/`:
 UHRWERK_DATEN=/tmp/meine-daten godot --path game
 ```
 
+In einer exportierten Fassung (Paket, seit M13b5) liegt `data/` neben der Programmdatei, auf macOS in
+`EINIGKEIT.app/Contents/Resources/data`; `UhrwerkPaths` nimmt diesen Ordner, wenn es ihn gibt.
+Pakete bauen: [tools/paket/README.md](../tools/paket/README.md).
+
 ### Screenshots von der Kommandozeile
 
 Optionen stehen nach `--` (Benutzerargumente):
@@ -94,6 +98,7 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--geschichtsstunde[=n]` | die Geschichtsstunde „März 1848 in Berlin“ starten, ab Schritt n (seit M13b3) |
 | `--rueckblick` | „Was ist passiert?“ öffnen wie nach dem Laden eines Spielstands (seit M13b3) |
 | `--sprache=de\|en\|pseudo` | Sprache nur für diesen Start, ohne sie zu speichern; `pseudo` ist das Pseudo-Locale für Tests (Texte 40 % länger, mit Akzenten, seit M13b4) |
+| `--rauchtest` | Paketrauchtest (seit M13b5): ohne Fenster `--tage` Tage rechnen (ohne Ereignisspieler, wie `uhrwerk-cli lauf`), Version und Prüfsumme ausgeben und beenden; Exitcode 1 ohne Daten oder Karte |
 | `--bereich=<bereich>` | Fenster eines Bereichs vor dem Screenshot öffnen: `kabinett`, `gesetze`, `gruppen`, `parlament`, `gesellschaft`, `wirtschaft` (seit M13a5b), `chronik`, `lexikon` (seit M13a5d) |
 | `--einstellungen[=<reiter>]` | Fenster Einstellungen öffnen, Reiter `bild` (Standard), `ton`, `spiel`, `zugang`, `tasten`, `sprache` (seit M13a5d) |
 | `--farbsehschwaeche` | Farben für Rot-Grün-Schwäche für diesen Start, ohne die Einstellung zu speichern (seit M13a5d) |
@@ -257,6 +262,11 @@ Menü. Am **1. Januar** speichert das Spiel automatisch; `autosave_1` ist der ne
 letzten bleiben. Nach dem Laden steht die Zeit, die Auswahl ist aufgehoben, und Grenzen, Namen,
 Panels, Legende und Chronik zeigen den geladenen Stand. Rückmeldungen („Schnellgespeichert“,
 „Geladen: …“) erscheinen drei Sekunden lang unter dem Datum.
+
+Seit M13b5 legt die Zeile **Rückmeldung** im Spielmenü („Bericht anlegen“, mit einer Notiz) ein ZIP in
+`user://rueckmeldungen/` an: Spielstand, Notiz, `info.txt` (Version, System, Szenario, Prüfsumme),
+`godot.log` und die Einstellungen (`scripts/core/feedback_report.gd`). Es wird nichts versandt; der
+Pfad steht in der Statuszeile des Menüs.
 
 ### Simulation
 

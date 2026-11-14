@@ -4,7 +4,9 @@
 #   Kern (Linux)        GCC und Clang: Build mit Warnungen als Fehler, Tests, Prüfsummen nach 100 Jahren
 #                       und des Lasttests, Prüfwert eines Spielstands nach 100 Jahren (seit M6)
 #   Kern (Windows)      MSVC mit denselben Presets: Portabilität des Kerns
-#   Determinismus       vergleicht die Prüfsummen und den Prüfwert des Spielstands von GCC, Clang und MSVC
+#   Kern (macOS)        Apple Clang (arm64) mit denselben Presets (seit M13b5)
+#   Determinismus       vergleicht die Prüfsummen und den Prüfwert des Spielstands von GCC, Clang, MSVC
+#                       und Apple Clang
 #                       (müssen bitgleich sein: jede Plattform liest die Spielstände der anderen)
 #   Lasttest            Release-Build, 500.000 Bevölkerungsblöcke, Zeit je Spieljahr (seit M4), Größe
 #                       sowie Schreib- und Ladezeit des Spielstands (seit M6)
@@ -13,6 +15,8 @@
 #                       sind data/history/ und data/karte/ aktuell?
 #   Godot               GDExtension bauen, Einheiten-, Rauch- und Klicktest headless,
 #                       Screenshots der Hauptszene als Artefakt
+#
+# Pakete für Linux, Windows und macOS baut und prüft pakete.yml (seit M13b5).
 #
 # Lokal nachstellen: siehe README.md, Abschnitt „Entwicklung“.
 
@@ -197,9 +201,76 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  kern-macos:
+    name: Kern (macOS, Apple Clang)
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: Quelltext auschecken
+        uses: actions/checkout@v4
+
+      - name: Ninja installieren (falls nötig)
+        run: |
+          command -v ninja > /dev/null || brew install ninja
+          ninja --version
+
+      - name: Werkzeuge anzeigen
+        run: |
+          cmake --version
+          clang++ --version
+
+      - name: Konfigurieren (Preset dev)
+        run: cmake --preset dev -DCMAKE_CXX_COMPILER=clang++
+
+      - name: Bauen
+        run: cmake --build --preset dev
+
+      - name: Testen
+        run: ctest --preset dev
+
+      - name: Prüfsummen festhalten (${{ env.PRUEFSUMME_JAHRE }} Jahre, Lasttest)
+        run: |
+          ./build/dev/cli/uhrwerk-cli lauf --daten data --jahre "$PRUEFSUMME_JAHRE" --speichern "$RUNNER_TEMP/lauf.einigkeit" \
+            | tee "$RUNNER_TEMP/lauf.txt"
+          summe=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$summe" ]; then
+            echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
+            exit 1
+          fi
+          ./build/dev/cli/uhrwerk-cli lauf --daten data --szenario voelkerfruehling --jahre "$PRUEFSUMME_JAHRE_1848" \
+            | tee "$RUNNER_TEMP/lauf1848.txt"
+          summe1848=$(tr -d '\r' < "$RUNNER_TEMP/lauf1848.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$summe1848" ]; then
+            echo "::error::Keine Prüfsumme im Lauf des Lesezeichens 1848 gefunden."
+            exit 1
+          fi
+          ./build/dev/cli/uhrwerk-cli lasttest --daten data --bloecke "$LASTTEST_BLOECKE" --jahre "$LASTTEST_JAHRE" \
+            | tee "$RUNNER_TEMP/lasttest.txt"
+          last=$(tr -d '\r' < "$RUNNER_TEMP/lasttest.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$last" ]; then
+            echo "::error::Keine Prüfsumme in der Ausgabe des Lasttests gefunden."
+            exit 1
+          fi
+          wert=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E '^Prüfwert: +[0-9a-f]{16}' | grep -oE '[0-9a-f]{16}' | head -n 1 || true)
+          if [ -z "$wert" ]; then
+            echo "::error::Kein Prüfwert des Spielstands in der Ausgabe von uhrwerk-cli gefunden."
+            exit 1
+          fi
+          mkdir -p pruefsumme
+          printf 'lauf %s\nlauf1848 %s\nlasttest %s\nspielstand %s\n' "$summe" "$summe1848" "$last" "$wert" > pruefsumme/macos-clang.txt
+          echo "Prüfsummen (macOS, Apple Clang): lauf \`$summe\`, 1848 \`$summe1848\`, lasttest \`$last\`, Spielstand \`$wert\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Prüfsumme hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: pruefsumme-macos-clang
+          path: pruefsumme/
+          if-no-files-found: error
+          retention-days: 7
+
   determinismus:
-    name: Determinismus (GCC, Clang, MSVC)
-    needs: [kern-linux, kern-windows]
+    name: Determinismus (GCC, Clang, MSVC, Apple Clang)
+    needs: [kern-linux, kern-windows, kern-macos]
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -229,8 +300,8 @@ jobs:
               echo "| $(basename "$datei" .txt) | \`$lauf\` | \`$lauf1848\` | \`$last\` | \`$wert\` |"
             done
           } | tee -a "$GITHUB_STEP_SUMMARY"
-          if [ "${#dateien[@]}" -ne 3 ]; then
-            echo "::error::Erwartet werden 3 Prüfsummendateien (GCC, Clang, MSVC), gefunden: ${#dateien[@]}."
+          if [ "${#dateien[@]}" -ne 4 ]; then
+            echo "::error::Erwartet werden 4 Prüfsummendateien (GCC, Clang, MSVC, Apple Clang), gefunden: ${#dateien[@]}."
             exit 1
           fi
           for datei in "${dateien[@]:1}"; do
@@ -592,6 +663,9 @@ jobs:
         run: python3 tools/klang/klang.py --pruefen
 
       # Seit M13b4: Übersetzungen der Oberfläche (game/locale) aktuell, Englisch für Start, Menü, Einstellungen.
+      - name: Tests von Paket (tools/paket)
+        run: python3 -m unittest discover -s tools/paket -v
+
       - name: Tests von Sprache (tools/sprache)
         run: python3 -m unittest discover -s tools/sprache -v
 

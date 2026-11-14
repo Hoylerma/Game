@@ -160,6 +160,70 @@ msgstr ""
 msgid ", %d Sitze"
 msgstr ""
 
+#: scripts/core/feedback_report.gd:22
+msgid "Ordner %s lässt sich nicht anlegen."
+msgstr ""
+
+#: scripts/core/feedback_report.gd:27
+msgid "%s lässt sich nicht schreiben."
+msgstr ""
+
+#: scripts/core/feedback_report.gd:47
+msgid "Version: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:48
+msgid "Godot: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:49
+msgid "System: %s %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:50
+msgid "Prozessor: %s (%d Kerne)"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:51
+msgid "Grafik: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:51
+msgid "Grafik: keine (headless)"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:52
+msgid "Bildschirm: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:53
+msgid "Sprache: %s (System %s)"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:54
+msgid "Zeit: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:55
+msgid "Daten: %s (%s)"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:57
+msgid "Szenario: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:58
+msgid "Spieldatum: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:59
+msgid "Spieler: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:60
+msgid "Prüfsumme: %s"
+msgstr ""
+
 #: scripts/core/format.gd:12
 msgid "Taler"
 msgstr ""
@@ -348,115 +412,119 @@ msgstr ""
 msgid "Geltung: Stärke des Heeres im Vergleich, Bündnisse, gewonnene und verlorene Kriege, Präsidium im Bund, Bevölkerung."
 msgstr ""
 
-#: scripts/core/launch_options.gd:124
+#: scripts/core/launch_options.gd:128
 msgid "--screenshot braucht einen Pfad (--screenshot=/pfad/bild.png)."
 msgstr ""
 
-#: scripts/core/launch_options.gd:133
+#: scripts/core/launch_options.gd:137
 msgid "--tage erwartet eine nicht negative Ganzzahl, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:140
+#: scripts/core/launch_options.gd:144
 msgid "--kartenmodus erwartet 0 bis %d, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:148
+#: scripts/core/launch_options.gd:152
 msgid "--zoom erwartet eine positive Zahl (z. B. --zoom=4), nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:154
+#: scripts/core/launch_options.gd:158
 msgid "--haushalt erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:159
+#: scripts/core/launch_options.gd:163
 msgid "--verfassung erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:164
+#: scripts/core/launch_options.gd:168
 msgid "--zollunion erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:171
+#: scripts/core/launch_options.gd:175
 msgid "--diplomatie erwartet staaten, bund oder frage, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:178
+#: scripts/core/launch_options.gd:182
 msgid "--krieg erwartet kriege oder heere, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:183
+#: scripts/core/launch_options.gd:187
 msgid "--heer erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:188
+#: scripts/core/launch_options.gd:192
 msgid "--spielmenue erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:191
+#: scripts/core/launch_options.gd:195
 msgid "--partei braucht eine Strömung (--partei=liberale)."
 msgstr ""
 
-#: scripts/core/launch_options.gd:198
+#: scripts/core/launch_options.gd:202
 msgid "--wahlabend erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:203
+#: scripts/core/launch_options.gd:207
 msgid "--ereignis erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:208
+#: scripts/core/launch_options.gd:212
 msgid "--journal erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:214
+#: scripts/core/launch_options.gd:218
 msgid "--bereich erwartet %s, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:221
+#: scripts/core/launch_options.gd:225
 msgid "--einstellungen erwartet %s, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:226
+#: scripts/core/launch_options.gd:230
 msgid "--farbsehschwaeche erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:231
+#: scripts/core/launch_options.gd:235
+msgid "--rauchtest erwartet keinen Wert, nicht „%s“."
+msgstr ""
+
+#: scripts/core/launch_options.gd:240
 msgid "--sprache erwartet de, en oder pseudo, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:236
+#: scripts/core/launch_options.gd:245
 msgid "--rueckblick erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:243
+#: scripts/core/launch_options.gd:252
 msgid "--geschichtsstunde erwartet eine Schrittnummer ab 1, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:248
+#: scripts/core/launch_options.gd:257
 msgid "--zeitung erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:253
+#: scripts/core/launch_options.gd:262
 msgid "--jahrbuch erwartet keinen Wert, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:260
+#: scripts/core/launch_options.gd:269
 msgid "--startbildschirm erwartet menue, lesezeichen oder einstellungen, nicht „%s“."
 msgstr ""
 
-#: scripts/core/launch_options.gd:265
+#: scripts/core/launch_options.gd:274
 msgid "--szenario braucht eine Kennung (--szenario=voelkerfruehling)."
 msgstr ""
 
-#: scripts/core/launch_options.gd:271
+#: scripts/core/launch_options.gd:280
 msgid "--staat braucht einen Staatstag (--staat=BAV)."
 msgstr ""
 
-#: scripts/core/launch_options.gd:276
+#: scripts/core/launch_options.gd:285
 msgid "--ort braucht eine Ort-Kennung (--ort=berlin_coelln)."
 msgstr ""
 
-#: scripts/core/launch_options.gd:280
+#: scripts/core/launch_options.gd:289
 msgid "Unbekannte Option „%s“ wird ignoriert."
 msgstr ""
 
@@ -718,7 +786,7 @@ msgstr ""
 msgid "Bundesgebiet, das gilt (Deutscher Bund oder ein neuer Bund): Präsidialmacht kräftig, Mitglieder blass; seit 1848"
 msgstr ""
 
-#: scripts/core/pause_rules.gd:11 scripts/main/main_core.gd:903 scripts/main.gd:863 scripts/ui/windows/recap_window.gd:58
+#: scripts/core/pause_rules.gd:11 scripts/main/main_core.gd:903 scripts/main.gd:896 scripts/ui/windows/recap_window.gd:58
 msgid " den Krieg"
 msgstr ""
 
@@ -726,7 +794,7 @@ msgstr ""
 msgid " fordert von %s "
 msgstr ""
 
-#: scripts/core/pause_rules.gd:15 scripts/main.gd:866 scripts/ui/windows/recap_window.gd:58
+#: scripts/core/pause_rules.gd:15 scripts/main.gd:899 scripts/ui/windows/recap_window.gd:58
 msgid "Frieden zwischen"
 msgstr ""
 
@@ -770,11 +838,15 @@ msgstr ""
 msgid ": Aufgabe fehlt"
 msgstr ""
 
-#: scripts/core/uhrwerk_paths.gd:47
+#: scripts/core/uhrwerk_paths.gd:65
 msgid "Umgebungsvariable %s"
 msgstr ""
 
-#: scripts/core/uhrwerk_paths.gd:48
+#: scripts/core/uhrwerk_paths.gd:67
+msgid "neben der Programmdatei"
+msgstr ""
+
+#: scripts/core/uhrwerk_paths.gd:68
 msgid "Standard (%s)"
 msgstr ""
 
@@ -990,7 +1062,7 @@ msgstr ""
 msgid "Grundwert %+d"
 msgstr ""
 
-#: scripts/main/legend_view.gd:14 scripts/main.gd:168
+#: scripts/main/legend_view.gd:14 scripts/main.gd:170
 msgid "Ohne Simulation liegen keine Daten vor."
 msgstr ""
 
@@ -1247,15 +1319,15 @@ msgstr ""
 msgid "Der Antrag wurde nicht angenommen."
 msgstr ""
 
-#: scripts/main/main_core.gd:1260
+#: scripts/main/main_core.gd:1261
 msgid "kein Bild. Ohne Bildschirm z. B. mit xvfb-run starten."
 msgstr ""
 
-#: scripts/main/main_core.gd:1289
+#: scripts/main/main_core.gd:1290
 msgid "ohne Simulation"
 msgstr ""
 
-#: scripts/main/main_core.gd:1291
+#: scripts/main/main_core.gd:1292
 msgid "%s, Prüfsumme %s"
 msgstr ""
 
@@ -1623,39 +1695,43 @@ msgstr ""
 msgid " im ersten Wahlgang, Sieg in der Stichwahl"
 msgstr ""
 
-#: scripts/main.gd:205
+#: scripts/main.gd:207
 msgid "Wahl: %s (Spielmenü „Letzte Wahl“)"
 msgstr ""
 
-#: scripts/main.gd:537
+#: scripts/main.gd:539
 msgid "Pause: "
 msgstr ""
 
-#: scripts/main.gd:576
+#: scripts/main.gd:550
+msgid "Rückmeldung gespeichert: {pfad} – bitte diese Datei schicken; es wurde nichts versandt."
+msgstr ""
+
+#: scripts/main.gd:609
 msgid "Hinweise abgeschaltet (Einstellungen, Spiel)"
 msgstr ""
 
-#: scripts/main.gd:590 scripts/ui/area_bar.gd:18 tutorial/hinweise.cfg:73
+#: scripts/main.gd:623 scripts/ui/area_bar.gd:18 tutorial/hinweise.cfg:73
 msgid "Haushalt"
 msgstr ""
 
-#: scripts/main.gd:592 scripts/ui/area_bar.gd:19 tutorial/hinweise.cfg:77
+#: scripts/main.gd:625 scripts/ui/area_bar.gd:19 tutorial/hinweise.cfg:77
 msgid "Zollunion"
 msgstr ""
 
-#: scripts/main.gd:624
+#: scripts/main.gd:657
 msgid "Die Geschichtsstunde fehlt oder ist fehlerhaft"
 msgstr ""
 
-#: scripts/main.gd:662
+#: scripts/main.gd:695
 msgid "Die Geschichtsstunde ist zu Ende – die Partie gehört Ihnen."
 msgstr ""
 
-#: scripts/main.gd:663
+#: scripts/main.gd:696
 msgid "Geschichtsstunde beendet; die Partie läuft weiter."
 msgstr ""
 
-#: scripts/main.gd:866
+#: scripts/main.gd:899
 msgid " schließen ein Bündnis"
 msgstr ""
 
@@ -2397,131 +2473,147 @@ msgstr ""
 msgid "ohne unmittelbare Folgen"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:108
+#: scripts/ui/game_menu.gd:111
 msgid "Spielbare Staaten: {staaten}"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:119
+#: scripts/ui/game_menu.gd:122
 msgid "Staat: {name}"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:121
+#: scripts/ui/game_menu.gd:124
 msgid "Partei: {name}"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:237
+#: scripts/ui/game_menu.gd:240
 msgid "SPIELMENÜ"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:241 scripts/ui/start_screen.gd:417
+#: scripts/ui/game_menu.gd:244 scripts/ui/start_screen.gd:417
 msgid "Neues Spiel"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:248
+#: scripts/ui/game_menu.gd:251
 msgid "Lesezeichen; den Staat wählt danach „Diesen Staat spielen“ in der Ortsinfo"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:251 scripts/ui/game_menu.gd:442
+#: scripts/ui/game_menu.gd:254 scripts/ui/game_menu.gd:474
 msgid "Starten"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:255
+#: scripts/ui/game_menu.gd:258
 msgid "Rolle in dieser Partie"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:261
+#: scripts/ui/game_menu.gd:264
 msgid "Den Staat führen oder als Partei (Strömung) Wahlkampf führen; nach der Wahl die Fraktion"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:266 scripts/ui/game_menu.gd:275 tutorial/maerz_1848.tres:153
+#: scripts/ui/game_menu.gd:269 scripts/ui/game_menu.gd:278 tutorial/maerz_1848.tres:153
 msgid "Speichern"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:270
+#: scripts/ui/game_menu.gd:273
 msgid "Name des Spielstands"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:279 scripts/ui/game_menu.gd:295 scripts/ui/start_screen.gd:526
+#: scripts/ui/game_menu.gd:282 scripts/ui/game_menu.gd:298 scripts/ui/start_screen.gd:526
 msgid "Laden"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:289 scripts/ui/start_screen.gd:262
+#: scripts/ui/game_menu.gd:292 scripts/ui/start_screen.gd:262
 msgid "Noch keine Spielstände."
 msgstr ""
 
-#: scripts/ui/game_menu.gd:297
+#: scripts/ui/game_menu.gd:300
 msgid "Schnellspeichern (F5)"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:298
+#: scripts/ui/game_menu.gd:301
 msgid "Schnellladen (F9)"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:300
+#: scripts/ui/game_menu.gd:303
 msgid "Letzte Wahl"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:301
+#: scripts/ui/game_menu.gd:304
 msgid "Wahlabend der letzten Wahl mit dem ganzen Ergebnis"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:304 tutorial/hinweise.cfg:53
+#: scripts/ui/game_menu.gd:307 tutorial/hinweise.cfg:53
 msgid "Ereignisse"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:306
+#: scripts/ui/game_menu.gd:309
 msgid "Bisherige Ereignisse mit der gewählten Option; Journale"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:309
+#: scripts/ui/game_menu.gd:312
 msgid "Urteil"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:311
+#: scripts/ui/game_menu.gd:314
 msgid "Urteil der Geschichte am Ende der Partie"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:314 scripts/ui/start_screen.gd:427
+#: scripts/ui/game_menu.gd:317 scripts/ui/start_screen.gd:427
 msgid "Einstellungen"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:316 scripts/ui/start_screen.gd:428
+#: scripts/ui/game_menu.gd:319 scripts/ui/start_screen.gd:428
 msgid "Bild, Ton, Spiel, Barrierefreiheit, Tasten und Sprache"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:321
+#: scripts/ui/game_menu.gd:324
 msgid "Weiterspielen (F10)"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:381
+#: scripts/ui/game_menu.gd:327
+msgid "Rückmeldung"
+msgstr ""
+
+#: scripts/ui/game_menu.gd:333
+msgid "Was ist aufgefallen?"
+msgstr ""
+
+#: scripts/ui/game_menu.gd:337
+msgid "Bericht anlegen"
+msgstr ""
+
+#: scripts/ui/game_menu.gd:340
+msgid "Legt ein ZIP mit Spielstand, Notiz und Protokoll auf diesem Rechner an; es wird nichts versandt"
+msgstr ""
+
+#: scripts/ui/game_menu.gd:402
 msgid "nicht lesbar"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:393
+#: scripts/ui/game_menu.gd:414
 msgid "Spielstand aus „{lesezeichen}“ ({datum}); Laden wechselt das Lesezeichen"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:398
+#: scripts/ui/game_menu.gd:419
 msgid "Spielstand lässt sich nicht laden."
 msgstr ""
 
-#: scripts/ui/game_menu.gd:400
+#: scripts/ui/game_menu.gd:421
 msgid "Spielstand von {datum}, Prüfsumme {pruefsumme}"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:416
+#: scripts/ui/game_menu.gd:437
 msgid "Bitte einen Namen für den Spielstand eingeben."
 msgstr ""
 
-#: scripts/ui/game_menu.gd:420
+#: scripts/ui/game_menu.gd:441
 msgid "„{name}“ ist für Schnellspeicher und automatische Spielstände reserviert."
 msgstr ""
 
-#: scripts/ui/game_menu.gd:432
+#: scripts/ui/game_menu.gd:464
 msgid "Wirklich starten"
 msgstr ""
 
-#: scripts/ui/game_menu.gd:433
+#: scripts/ui/game_menu.gd:465
 msgid "Noch einmal klicken: Die laufende Partie endet ohne Speichern."
 msgstr ""
 

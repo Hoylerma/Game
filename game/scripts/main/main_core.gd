@@ -1192,6 +1192,7 @@ func _build_game_menu() -> void:
 	)
 	_game_menu.events_requested.connect(open_event_log)
 	_game_menu.role_selected.connect(set_party)
+	_game_menu.feedback_requested.connect(func(note: String) -> void: write_feedback(note))
 
 
 # --- Screenshot ----------------------------------------------------------------
@@ -1467,6 +1468,11 @@ func quick_save() -> void:
 ## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.
 func save_game_as(file_name: String) -> String:
 	return ""
+
+
+## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.
+func write_feedback(note: String) -> Dictionary:
+	return {}
 
 
 ## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.
