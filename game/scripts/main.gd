@@ -7,6 +7,8 @@ extends "res://scripts/main/main_windows.gd"
 
 # --- Ablauf ------------------------------------------------------------------
 
+var _frame_meter: FrameMeter = null
+
 
 func _ready() -> void:
 	_options = LaunchOptions.from_command_line()
@@ -33,6 +35,8 @@ func _ready() -> void:
 	_build_audio()
 	_build_start_screen()
 	_build_onboarding()
+	_frame_meter = FrameMeter.new() # Bildrate für die Rückmeldung (seit M13b6)
+	add_child(_frame_meter)
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
@@ -544,7 +548,8 @@ func _pause_for_entries(entries: Array[Dictionary]) -> void:
 
 ## Rückmeldung (Spielmenü): ZIP in user://rueckmeldungen; der Pfad steht in der Statuszeile.
 func write_feedback(note: String) -> Dictionary:
-	var result := FeedbackReport.write(_sim, _player, note)
+	var frames := _frame_meter.summary() if _frame_meter != null else {}
+	var result := FeedbackReport.write(_sim, _player, note, FeedbackReport.DIR, frames)
 	var error := str(result.get("error", ""))
 	if error.is_empty():
 		var text := tr("Rückmeldung gespeichert: {pfad} – bitte diese Datei schicken; es wurde nichts versandt.")

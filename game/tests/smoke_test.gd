@@ -1706,7 +1706,18 @@ func _check_feedback(sim: SimulationClient, player: int) -> void:
 	var dir := OS.get_user_data_dir().path_join("smoke_test_rueckmeldungen")
 	_remove_dir(dir)
 	var before := sim.get_checksum()
-	var result := FeedbackReport.write(sim, player, "Rauchtest: Notiz", dir)
+	var meter := FrameMeter.new()
+	for fps: float in [60.0, 58.0, 30.0, 61.0, 59.0]:
+		meter.add_sample(fps)
+	var frames := meter.summary()
+	meter.free()
+	_check(
+		is_equal_approx(float(frames["median"]), 59.0) and is_equal_approx(float(frames["p5"]), 30.0)
+		and int(frames["seconds"]) == 5,
+		"Bildrate: Median %s, 5 %% %s" % [frames["median"], frames["p5"]],
+		"Bildrate falsch zusammengefasst: %s" % str(frames)
+	)
+	var result := FeedbackReport.write(sim, player, "Rauchtest: Notiz", dir, frames)
 	var files: PackedStringArray = result.get("files", PackedStringArray())
 	if not _check(
 		str(result.get("error", "x")).is_empty() and FileAccess.file_exists(str(result.get("path", "")))
@@ -1719,6 +1730,7 @@ func _check_feedback(sim: SimulationClient, player: int) -> void:
 	zip.open(str(result["path"]))
 	var info := zip.read_file("info.txt").get_string_from_utf8()
 	var note := zip.read_file("notiz.txt").get_string_from_utf8()
+	var values: Variant = JSON.parse_string(zip.read_file("messwerte.json").get_string_from_utf8())
 	var save := dir.path_join("aus_rueckmeldung.einigkeit")
 	var file := FileAccess.open(save, FileAccess.WRITE)
 	file.store_buffer(zip.read_file("spielstand.einigkeit"))
@@ -1727,8 +1739,11 @@ func _check_feedback(sim: SimulationClient, player: int) -> void:
 	var save_info := sim.get_save_info(save)
 	_check(
 		info.contains("Prüfsumme: " + before) and info.contains("Version: ") and note.begins_with("Rauchtest: Notiz")
-		and str(save_info.get("checksum", "")) == before and sim.get_checksum() == before,
-		"Rückmeldung: Angaben, Notiz und Spielstand (Prüfsumme %s) stimmen" % before,
+		and str(save_info.get("checksum", "")) == before and sim.get_checksum() == before
+		and values is Dictionary and int(values.get("format", 0)) == FeedbackReport.FORMAT
+		and str(values.get("pruefsumme", "")) == before and is_equal_approx(float(values.get("bildrate_median", 0)), 59.0)
+		and int(values.get("spieltage", -1)) == sim.get_days_elapsed() and not info.contains(OS.get_environment("HOME") + "/"),
+		"Rückmeldung: Angaben, Messwerte, Notiz und Spielstand (Prüfsumme %s) stimmen, ohne Benutzerordner" % before,
 		"Rückmeldung: Inhalt passt nicht (%s / %s)" % [info.replace("\n", " | "), str(save_info)]
 	)
 	_remove_dir(dir)
