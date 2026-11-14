@@ -160,68 +160,112 @@ msgstr ""
 msgid ", %d Sitze"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:22
+#: scripts/core/feedback_report.gd:31
 msgid "Ordner %s lässt sich nicht anlegen."
 msgstr ""
 
-#: scripts/core/feedback_report.gd:27
+#: scripts/core/feedback_report.gd:36
 msgid "%s lässt sich nicht schreiben."
 msgstr ""
 
-#: scripts/core/feedback_report.gd:47
-msgid "Version: %s"
+#: scripts/core/feedback_report.gd:63
+msgid "%s (%d Kerne)"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:48
-msgid "Godot: %s"
+#: scripts/core/feedback_report.gd:64
+msgid "keine (headless)"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:49
-msgid "System: %s %s"
+#: scripts/core/feedback_report.gd:100
+msgid "Version"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:50
-msgid "Prozessor: %s (%d Kerne)"
+#: scripts/core/feedback_report.gd:100
+msgid "Godot"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:51
-msgid "Grafik: %s"
+#: scripts/core/feedback_report.gd:100
+msgid "System"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:51
-msgid "Grafik: keine (headless)"
+#: scripts/core/feedback_report.gd:100
+msgid "Prozessor"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:52
-msgid "Bildschirm: %s"
+#: scripts/core/feedback_report.gd:101
+msgid "Grafik"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:53
-msgid "Sprache: %s (System %s)"
+#: scripts/core/feedback_report.gd:101
+msgid "Grafikkarte"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:54
-msgid "Zeit: %s"
+#: scripts/core/feedback_report.gd:101
+msgid "Bildschirm"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:55
-msgid "Daten: %s (%s)"
+#: scripts/core/feedback_report.gd:101
+msgid "Fenster"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:57
-msgid "Szenario: %s"
+#: scripts/core/feedback_report.gd:102 scripts/ui/settings_window.gd:10 scripts/ui/settings_window.gd:182
+msgid "Sprache"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:58
-msgid "Spieldatum: %s"
+#: scripts/core/feedback_report.gd:102
+msgid "Zeit"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:59
-msgid "Spieler: %s"
+#: scripts/core/feedback_report.gd:102
+msgid "Daten"
 msgstr ""
 
-#: scripts/core/feedback_report.gd:60
-msgid "Prüfsumme: %s"
+#: scripts/core/feedback_report.gd:102
+msgid "Szenario"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:103
+msgid "Spieldatum"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:103
+msgid "Spieler"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:103
+msgid "Stufe"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:103
+msgid "Verlauf"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:104
+msgid "Prüfsumme"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:109
+msgid "Vollbild: %s, Bildratenlimit: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:112
+msgid "Bildrate: Median %s, 5 %% %s, Minimum %s (über %d s)"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:116
+msgid "Sitzung: %d min"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:118
+msgid "Partie beendet: %s"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:126
+msgid "USERPROFILE"
+msgstr ""
+
+#: scripts/core/feedback_report.gd:126
+msgid "HOME"
 msgstr ""
 
 #: scripts/core/format.gd:12
@@ -786,7 +830,7 @@ msgstr ""
 msgid "Bundesgebiet, das gilt (Deutscher Bund oder ein neuer Bund): Präsidialmacht kräftig, Mitglieder blass; seit 1848"
 msgstr ""
 
-#: scripts/core/pause_rules.gd:11 scripts/main/main_core.gd:903 scripts/main.gd:896 scripts/ui/windows/recap_window.gd:58
+#: scripts/core/pause_rules.gd:11 scripts/main/main_core.gd:903 scripts/main.gd:901 scripts/ui/windows/recap_window.gd:58
 msgid " den Krieg"
 msgstr ""
 
@@ -794,7 +838,7 @@ msgstr ""
 msgid " fordert von %s "
 msgstr ""
 
-#: scripts/core/pause_rules.gd:15 scripts/main.gd:899 scripts/ui/windows/recap_window.gd:58
+#: scripts/core/pause_rules.gd:15 scripts/main.gd:904 scripts/ui/windows/recap_window.gd:58
 msgid "Frieden zwischen"
 msgstr ""
 
@@ -1062,7 +1106,7 @@ msgstr ""
 msgid "Grundwert %+d"
 msgstr ""
 
-#: scripts/main/legend_view.gd:14 scripts/main.gd:170
+#: scripts/main/legend_view.gd:14 scripts/main.gd:174
 msgid "Ohne Simulation liegen keine Daten vor."
 msgstr ""
 
@@ -1695,43 +1739,43 @@ msgstr ""
 msgid " im ersten Wahlgang, Sieg in der Stichwahl"
 msgstr ""
 
-#: scripts/main.gd:207
+#: scripts/main.gd:211
 msgid "Wahl: %s (Spielmenü „Letzte Wahl“)"
 msgstr ""
 
-#: scripts/main.gd:539
+#: scripts/main.gd:543
 msgid "Pause: "
 msgstr ""
 
-#: scripts/main.gd:550
+#: scripts/main.gd:555
 msgid "Rückmeldung gespeichert: {pfad} – bitte diese Datei schicken; es wurde nichts versandt."
 msgstr ""
 
-#: scripts/main.gd:609
+#: scripts/main.gd:614
 msgid "Hinweise abgeschaltet (Einstellungen, Spiel)"
 msgstr ""
 
-#: scripts/main.gd:623 scripts/ui/area_bar.gd:18 tutorial/hinweise.cfg:73
+#: scripts/main.gd:628 scripts/ui/area_bar.gd:18 tutorial/hinweise.cfg:73
 msgid "Haushalt"
 msgstr ""
 
-#: scripts/main.gd:625 scripts/ui/area_bar.gd:19 tutorial/hinweise.cfg:77
+#: scripts/main.gd:630 scripts/ui/area_bar.gd:19 tutorial/hinweise.cfg:77
 msgid "Zollunion"
 msgstr ""
 
-#: scripts/main.gd:657
+#: scripts/main.gd:662
 msgid "Die Geschichtsstunde fehlt oder ist fehlerhaft"
 msgstr ""
 
-#: scripts/main.gd:695
+#: scripts/main.gd:700
 msgid "Die Geschichtsstunde ist zu Ende – die Partie gehört Ihnen."
 msgstr ""
 
-#: scripts/main.gd:696
+#: scripts/main.gd:701
 msgid "Geschichtsstunde beendet; die Partie läuft weiter."
 msgstr ""
 
-#: scripts/main.gd:899
+#: scripts/main.gd:904
 msgid " schließen ein Bündnis"
 msgstr ""
 
@@ -3359,10 +3403,6 @@ msgstr ""
 
 #: scripts/ui/settings_window.gd:10
 msgid "Tasten"
-msgstr ""
-
-#: scripts/ui/settings_window.gd:10 scripts/ui/settings_window.gd:182
-msgid "Sprache"
 msgstr ""
 
 #: scripts/ui/settings_window.gd:31

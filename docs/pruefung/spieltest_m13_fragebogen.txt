@@ -1,0 +1,66 @@
+# EINIGKEIT – Fragebogen zum Spieltest M13 (Vertical Slice 1848–1871)
+#
+# Bitte nach dem Spielen ausfüllen: die Antwort jeweils hinter den Doppelpunkt schreiben. Längere
+# Antworten dürfen in den folgenden Zeilen weitergehen, wenn diese mit Leerzeichen beginnen.
+# Zeilen mit # sind Erklärungen. Leer gelassene Fragen sind in Ordnung.
+#
+# Skalen:  [1-5]  1 = trifft gar nicht zu, 2 = eher nicht, 3 = teils, 4 = eher, 5 = trifft voll zu
+#          [0-3]  wie bei der Frage angegeben
+#          [ja/nein], [Zahl], [Text]
+#
+# Die Datei bitte als  <Kennung>_fragebogen.txt  speichern (z. B. T03_fragebogen.txt) und zusammen mit
+# dem Rückmeldungs-ZIP aus dem Spiel schicken. Bitte keinen Namen und keine Kontaktdaten eintragen.
+
+kennung [Text] Kennung (von der Spielleitung, z. B. T03):
+datum [Text] Datum des Tests:
+
+# ─── A  Zur Person (ohne Namen) ───────────────────────────────────────────────
+A1 [0-3] Erfahrung mit Strategiespielen (0 keine, 1 wenig, 2 einige, 3 viel):
+A2 [0-3] Erfahrung mit Paradox-artigen Spielen wie Victoria oder Europa Universalis (0 keine … 3 viel):
+A3 [0-3] Interesse an deutscher Geschichte des 19. Jahrhunderts (0 keines … 3 großes):
+A4 [Text] Betriebssystem und Rechner (z. B. Windows 11, Laptop mit Grafikkarte):
+
+# ─── B  Einstieg ──────────────────────────────────────────────────────────────
+B1 [ja/nein] Ich habe die Geschichtsstunde „März 1848 in Berlin“ gespielt:
+B2 [1-5] Nach der Geschichtsstunde wusste ich, was ich im Spiel tun kann:
+B3 [1-5] Die Hinweise beim ersten Öffnen eines Fensters waren hilfreich:
+B4 [1-5] Installation und Start des Spiels waren einfach:
+B5 [Text] Wo bist du am Anfang hängen geblieben?:
+
+# ─── C  Verständnis und Bedienung ─────────────────────────────────────────────
+C1 [1-5] Ich wusste meistens, was in meinem Staat gerade vor sich geht:
+C2 [1-5] Ich habe verstanden, warum sich Werte (Kasse, Legitimität, Unruhe) verändert haben:
+C3 [1-5] Ich habe die Fenster und Informationen gefunden, die ich gesucht habe:
+C4 [1-5] Die Tooltips haben mir Zusammenhänge erklärt:
+C5 [1-5] Die Karte und ihre Kartenmodi waren gut lesbar:
+C6 [1-5] Das Tempo des Spiels (Geschwindigkeit, Pausen bei Ereignissen) passte:
+C7 [Text] Was war am verwirrendsten?:
+
+# ─── D  Spielerlebnis ─────────────────────────────────────────────────────────
+D1 [1-5] Meine Entscheidungen hatten spürbare Folgen:
+D2 [1-5] Die Ereignisse waren interessant und gut geschrieben:
+D3 [1-5] Wahlen und Parlamente waren spannend:
+D4 [1-5] Diplomatie und Krieg waren verständlich:
+D5 [1-5] Das Spiel hat sich wie die Zeit 1848–1871 angefühlt:
+D6 [1-5] Grafik, Schrift und Rahmen passen zur Epoche:
+D7 [1-5] Musik und Klänge passen zum Spiel:
+D8 [1-5] Das Urteil der Geschichte am Ende war nachvollziehbar (leer lassen, wenn nicht erreicht):
+D9 [1-5] Ich würde gern weiterspielen:
+D10 [0-10] Wie wahrscheinlich empfiehlst du das Spiel weiter (0 gar nicht … 10 sicher)?:
+
+# ─── E  Geschichte und Verantwortung ──────────────────────────────────────────
+E1 [1-5] Die Darstellung der Geschichte wirkte sorgfältig und fair:
+E2 [1-5] Ich habe etwas über die Zeit gelernt:
+E3 [Text] Ist dir etwas historisch Falsches oder Unangemessenes aufgefallen?:
+
+# ─── F  Technik ───────────────────────────────────────────────────────────────
+F1 [1-5] Das Spiel lief flüssig:
+F2 [ja/nein] Das Spiel ist abgestürzt oder hing:
+F3 [Text] Wenn ja: wann und wobei?:
+F4 [Text] Fehler, Tippfehler, abgeschnittene Texte, falsche Anzeigen:
+
+# ─── G  Zum Schluss ───────────────────────────────────────────────────────────
+G1 [Text] Was hat dir am besten gefallen?:
+G2 [Text] Was sollte als Erstes besser werden?:
+G3 [Text] Was hat dir gefehlt?:
+G4 [Text] Sonst noch etwas?:

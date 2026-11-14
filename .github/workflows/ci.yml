@@ -666,6 +666,9 @@ jobs:
       - name: Tests von Paket (tools/paket)
         run: python3 -m unittest discover -s tools/paket -v
 
+      - name: Tests der Spieltest-Auswertung (tools/spieltest)
+        run: python3 -m unittest discover -s tools/spieltest -v
+
       - name: Tests von Sprache (tools/sprache)
         run: python3 -m unittest discover -s tools/sprache -v
 

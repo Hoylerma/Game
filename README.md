@@ -182,7 +182,7 @@ Multiplayer und Modding-Werkzeuge. Was sich ändert, steht im [Änderungsprotoko
 | [`bridge/`](bridge/) | GDExtension-Brücke zwischen Uhrwerk und Godot | `core`, `third_party/godot-cpp` |
 | [`game/`](game/) | Godot-4-Projekt (Szenen, Skripte, Shader, Oberfläche) | `bridge` |
 | [`data/`](data/) | Spielinhalte: Tabellen (`tabellen/*.csv`), daraus erzeugtes **Chronik-Skript** (`*.chron`), Karte (`karte/`) | – |
-| [`tools/`](tools/) | Hilfswerkzeuge: [Archivar](tools/archivar/README.md) (Datenpipeline), [Geodaten](tools/geodaten/README.md) (Quellen, Geometrie, Orte des Kernraums), [Kartengenerator](tools/kartengenerator/README.md), [Klang](tools/klang/README.md), Sprache (`tools/sprache`), [Paket](tools/paket/README.md) | Python 3.10+; Geodaten und Kartengenerator mit numpy |
+| [`tools/`](tools/) | Hilfswerkzeuge: [Archivar](tools/archivar/README.md) (Datenpipeline), [Geodaten](tools/geodaten/README.md) (Quellen, Geometrie, Orte des Kernraums), [Kartengenerator](tools/kartengenerator/README.md), [Klang](tools/klang/README.md), Sprache (`tools/sprache`), [Paket](tools/paket/README.md), [Spieltest](tools/spieltest/README.md) | Python 3.10+; Geodaten und Kartengenerator mit numpy |
 | [`docs/`](docs/) | Game Design Document, technische Dokumentation in [`docs/technik/`](docs/technik/) | – |
 | `third_party/` | Fremdbibliotheken als Git-Submodule (godot-cpp 4.4.1) | – |
 
@@ -332,6 +332,15 @@ cmake --build --preset bridge                                               # da
 ```
 
 Mehr dazu (Windows-Installer, DMG, Rückmeldungen): [tools/paket/README.md](tools/paket/README.md).
+
+**Spieltest** (seit M13b6) – Leitfaden, Fragebogen und Ergebnisvorlage liegen in
+[docs/pruefung/](docs/pruefung/spieltest_m13.md); die Auswertung fasst Fragebögen und Rückmeldungen
+aus dem Ordner `spieltest/` (nicht versioniert) zusammen:
+
+```bash
+python3 tools/spieltest/auswertung.py --eingang spieltest --bericht docs/pruefung/spieltest_m13_ergebnisse.md
+python3 -m unittest discover -s tools/spieltest -v
+```
 
 **5. Brücke bauen** – baut godot-cpp (beim ersten Mal je nach Rechner 5–15 Minuten) und legt die Bibliothek
 direkt im Godot-Projekt ab (`game/bin/libuhrwerk_bridge.so`, `uhrwerk_bridge.dll` bzw.

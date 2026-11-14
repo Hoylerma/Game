@@ -40,3 +40,7 @@ __pycache__/
 *.swp
 .DS_Store
 Thumbs.db
+
+# Rohdaten des Spieltests (seit M13b6): Fragebögen, Rückmeldungen, Spielstände, Protokolle. Eingecheckt
+# wird nur die Auswertung (docs/pruefung/spieltest_m13_ergebnisse.md).
+/spieltest/

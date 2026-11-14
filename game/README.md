@@ -267,6 +267,9 @@ Seit M13b5 legt die Zeile **Rückmeldung** im Spielmenü („Bericht anlegen“,
 `user://rueckmeldungen/` an: Spielstand, Notiz, `info.txt` (Version, System, Szenario, Prüfsumme),
 `godot.log` und die Einstellungen (`scripts/core/feedback_report.gd`). Es wird nichts versandt; der
 Pfad steht in der Statuszeile des Menüs.
+Seit M13b6 misst `FrameMeter` (`scripts/core/frame_meter.gd`) die Bildrate über die Sitzung; die
+Rückmeldung legt sie mit den übrigen Angaben als `messwerte.json` bei (Auswertung des Spieltests:
+[tools/spieltest/README.md](../tools/spieltest/README.md)).
 
 ### Simulation
 

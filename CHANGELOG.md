@@ -13,6 +13,12 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Spieltest vorbereitet (Schritt b6):** Leitfaden für den Spieltest mit externen Testern
+  (`docs/pruefung/spieltest_m13.md`: Ablauf, zehn Aufgaben, Beobachtungsbogen, Datenschutz), ein
+  ausfüllbarer **Fragebogen** mit 37 Fragen und eine **Ergebnisvorlage**. Die Rückmeldung aus dem Spiel
+  misst jetzt die **Bildrate** über die Sitzung und legt die Angaben maschinenlesbar bei; Pfade zum
+  Benutzerordner stehen dort als „~“. `tools/spieltest/auswertung.py` fasst Fragebögen und Rückmeldungen
+  zu Tabellen zusammen. Den Test selbst führen Menschen durch.
 - **Auslieferung (Schritt b5):** EINIGKEIT lässt sich als **Paket** für Linux (tar.gz), Windows (ZIP und
   Installer) und macOS (DMG) bauen – von Hand mit `tools/paket/paket.py` oder im neuen Workflow
   `pakete.yml` (manuell und bei Tags `v*`). Die Spieldaten liegen neben dem Programm; ein **Paketrauchtest**
