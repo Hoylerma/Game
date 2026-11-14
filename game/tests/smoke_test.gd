@@ -339,7 +339,7 @@ func _check_area_data_1848(sim: SimulationClient) -> void:
 	_check(
 		int(society.get("population", 0)) > 15_000_000 and absf(shares - 100.0) < 0.5
 		and absi(ages - int(society.get("population", 0))) <= 4 and not (society.get("professions", []) as Array).is_empty(),
-		"Gesellschaft Preußens: %s Einwohner, %d Orte" % [GermanFormat.integer(int(society.get("population", 0))), int(society.get("locations", 0))],
+		"Gesellschaft Preußens: %s Einwohner, %d Orte" % [Format.integer(int(society.get("population", 0))), int(society.get("locations", 0))],
 		"Gesellschaft Preußens: %s" % str(society).left(300)
 	)
 	var economy := sim.get_state_economy(prussia)
@@ -1071,7 +1071,7 @@ func _check_party_1848(sim: SimulationClient, currents: Array[Dictionary]) -> in
 		and not bool(party.get("held", true)) and int(party.get("campaign_districts", -1)) == 0
 		and sim.get_party(-1).is_empty() and sim.get_party(currents.size()).is_empty(),
 		"Partei %s: %s Taler Mittel, Wahl %s" % [
-			party.get("name"), GermanFormat.integer(roundi(funds)), party.get("election_date_text")
+			party.get("name"), Format.integer(roundi(funds)), party.get("election_date_text")
 		],
 		"Partei: %s" % str(party)
 	)
@@ -1107,7 +1107,7 @@ func _check_party_1848(sim: SimulationClient, currents: Array[Dictionary]) -> in
 		is_equal_approx(float(party.get("funds", 0.0)), funds - rally_cost)
 		and int(party.get("campaign_districts", 0)) == 1 and float(campaign.get("mobilization", 0.0)) > 0.0,
 		"Wahlkampf am nächsten Tag: Mittel %s, Mobilisierung %s" % [
-			GermanFormat.integer(roundi(float(party.get("funds", 0.0)))), campaign.get("mobilization")
+			Format.integer(roundi(float(party.get("funds", 0.0)))), campaign.get("mobilization")
 		],
 		"Wahlkampf am nächsten Tag: %s, %s" % [str(party), str(campaign)]
 	)
@@ -1128,7 +1128,7 @@ func _check_party_1848(sim: SimulationClient, currents: Array[Dictionary]) -> in
 		affordable >= 1 and accepted == affordable and not club_allowed
 		and is_equal_approx(reserved, affordable * club_cost),
 		"Verplante Mittel: %d Vereine angenommen, der nächste abgelehnt (%s Taler verplant)" % [
-			accepted, GermanFormat.integer(roundi(reserved))
+			accepted, Format.integer(roundi(reserved))
 		],
 		"Verplante Mittel: %d von %d angenommen, erlaubt %s, verplant %s" % [
 			accepted, affordable, club_allowed, reserved
@@ -1242,7 +1242,7 @@ func _check_counts(sim: SimulationClient) -> void:
 		state_population > 0 and state_locations > 0,
 		(
 			"Spielerstaat %s: %s Einwohner in %d Orten"
-			% [str(state.get("tag", "")), GermanFormat.integer(state_population), state_locations]
+			% [str(state.get("tag", "")), Format.integer(state_population), state_locations]
 		),
 		"Spielerstaat ohne Bevölkerung oder Orte"
 	)
@@ -1264,7 +1264,7 @@ func _check_counts(sim: SimulationClient) -> void:
 		total_population > 0 and total_area > 0.0,
 		(
 			"Orte: %s Einwohner auf %s km²"
-			% [GermanFormat.integer(total_population), GermanFormat.number(total_area)]
+			% [Format.integer(total_population), Format.number(total_area)]
 		),
 		"Orte ohne Bevölkerung oder Fläche"
 	)
@@ -1486,7 +1486,7 @@ func _check_economy(sim: SimulationClient, player: int) -> void:
 		tax_sum += float(amount)
 	_check(
 		taxes.size() == 3 and absf(tax_sum - float(state.get("income_month", 0.0))) < 0.01,
-		"Haushalt: Steuern je Art ergeben die Einnahmen (%s)" % GermanFormat.money(tax_sum),
+		"Haushalt: Steuern je Art ergeben die Einnahmen (%s)" % Format.money(tax_sum),
 		"Steuern je Art %s passen nicht zu den Einnahmen %s" % [
 			str(taxes), str(state.get("income_month", 0.0))
 		]
@@ -1497,7 +1497,7 @@ func _check_economy(sim: SimulationClient, player: int) -> void:
 	_check(
 		absf(expenses - float(state.get("expenses_month", 0.0))) < 0.01
 		and int(state.get("soldiers", 0)) > 0,
-		"Haushalt: Posten ergeben die Ausgaben, %s Soldaten" % GermanFormat.integer(
+		"Haushalt: Posten ergeben die Ausgaben, %s Soldaten" % Format.integer(
 			int(state.get("soldiers", 0))
 		),
 		"Posten %s passen nicht zu den Ausgaben %s" % [
@@ -1562,7 +1562,7 @@ func _check_after_simulation(sim: SimulationClient, player: int) -> void:
 		income > 0.0 and expenses > 0.0,
 		(
 			"Einnahmen %s, Ausgaben %s je Monat"
-			% [GermanFormat.money(income), GermanFormat.money(expenses)]
+			% [Format.money(income), Format.money(expenses)]
 		),
 		"nach einem Jahr keine Einnahmen oder Ausgaben"
 	)
@@ -1571,7 +1571,7 @@ func _check_after_simulation(sim: SimulationClient, player: int) -> void:
 		production += float(sim.get_location(index).get("production_month", 0.0))
 	_check(
 		production > 0.0,
-		"Produktion aller Orte %s je Monat" % GermanFormat.money(production),
+		"Produktion aller Orte %s je Monat" % Format.money(production),
 		"keine Produktion"
 	)
 
@@ -1797,8 +1797,8 @@ func _check_map_pixels(map: MapData) -> void:
 		(
 			"Flächenarten: %s Kernraum-Land, %s Meer, %s Binnengewässer, %s Ausland"
 			% [
-				GermanFormat.integer(areas[0]), GermanFormat.integer(areas[1]),
-				GermanFormat.integer(areas[2]), GermanFormat.integer(areas[3])
+				Format.integer(areas[0]), Format.integer(areas[1]),
+				Format.integer(areas[2]), Format.integer(areas[3])
 			]
 		),
 		"%d Pixel mit Blaukanal > 3 (Flächenart 0..3)" % bad_area
@@ -1832,7 +1832,7 @@ func _check_map_pixels(map: MapData) -> void:
 		without.is_empty(),
 		(
 			"jeder Ort hat Kartenfläche (%s Pixel Kernraum-Land ohne Ort)"
-			% GermanFormat.integer(land_without)
+			% Format.integer(land_without)
 		),
 		"Orte ohne Pixel in provinzen.png: " + ", ".join(without)
 	)

@@ -430,13 +430,13 @@ func _fill_states() -> void:
 	var player_state := _sim.get_state(_player)
 	_summary.text = "%s: Gesandte %s von %s (Kosten %s je Monat, je Gesandtem %s der Einnahmen)." % [
 		str(player_state.get("short_name", "")),
-		GermanFormat.integer(int(overview.get("envoy_count", 0))),
-		GermanFormat.integer(int(overview.get("envoy_capacity", 0))),
-		GermanFormat.money(float(overview.get("envoy_cost_month", 0.0))),
-		GermanFormat.percent(float(overview.get("envoy_cost_percent", 0.0)), 1),
+		Format.integer(int(overview.get("envoy_count", 0))),
+		Format.integer(int(overview.get("envoy_capacity", 0))),
+		Format.money(float(overview.get("envoy_cost_month", 0.0))),
+		Format.percent(float(overview.get("envoy_cost_percent", 0.0)), 1),
 	]
 	if bool(overview.get("mobilized", false)):
-		_summary.text += " Das Heer ist mobilgemacht (Kosten × %s)." % GermanFormat.number(
+		_summary.text += " Das Heer ist mobilgemacht (Kosten × %s)." % Format.number(
 			float(overview.get("army_cost_factor", 1.0)), 1
 		)
 	var sorted := _relations.duplicate()
@@ -457,7 +457,7 @@ func _fill_states() -> void:
 		(parts[1] as ColorRect).color = LegendData.relation_color(float(entry.get("relation", 0.0)))
 		(parts[2] as Button).text = "%s   %s%s" % [
 			str(entry.get("short_name", "")),
-			GermanFormat.signed_number(roundi(float(entry.get("relation", 0.0)))),
+			Format.signed_number(roundi(float(entry.get("relation", 0.0)))),
 			_markers(entry),
 		]
 	if (_selected < 0 or _entry_of(_selected).is_empty()) and not sorted.is_empty():
@@ -546,21 +546,21 @@ func _fill_detail() -> void:
 	var overview := _sim.get_diplomacy(_player)
 	_detail_title.text = "%s – Beziehung %s (Zielwert %s)" % [
 		str(entry.get("name", "")),
-		GermanFormat.signed_number(roundi(float(entry.get("relation", 0.0)))),
-		GermanFormat.signed_number(roundi(float(entry.get("target", 0.0)))),
+		Format.signed_number(roundi(float(entry.get("relation", 0.0)))),
+		Format.signed_number(roundi(float(entry.get("target", 0.0)))),
 	]
 	var facts := PackedStringArray()
 	var union_name := str(entry.get("customs_union_name", ""))
 	facts.append("Zollunion: %s" % (union_name if not union_name.is_empty() else "keine"))
 	if int(entry.get("plenum_votes", 0)) > 0:
-		facts.append("Stimmen im Plenum: %s" % GermanFormat.integer(int(entry.get("plenum_votes", 0))))
+		facts.append("Stimmen im Plenum: %s" % Format.integer(int(entry.get("plenum_votes", 0))))
 	facts.append_array(_marker_list(entry))
 	_detail_info.text = " · ".join(facts) + "\n" + (
 		"Bei einer Krise auf unserer Seite: %s; auf der Gegenseite: %s (Soldaten %s gegen %s)." % [
 			_names_text(actions.get("own_side", PackedStringArray())),
 			_names_text(actions.get("other_side", PackedStringArray())),
-			GermanFormat.integer(int(actions.get("own_strength", 0))),
-			GermanFormat.integer(int(actions.get("other_strength", 0))),
+			Format.integer(int(actions.get("own_strength", 0))),
+			Format.integer(int(actions.get("other_strength", 0))),
 		]
 	)
 	_fill_ai(entry)
@@ -620,7 +620,7 @@ func _fill_ai(entry: Dictionary) -> void:
 		line.name = "Decision%d" % shown
 		line.text = "%s: %s – Warum?" % [str(d.get("date_text", "")), str(d.get("text", ""))]
 		line.mouse_filter = Control.MOUSE_FILTER_PASS
-		line.tooltip_text = "Gründe: " + str(d.get("reasons_text", ""))
+		line.tooltip_text = "Gründe: " + AiReasons.of(d)
 		_decisions.add_child(line)
 		shown += 1
 
@@ -639,7 +639,7 @@ func _names_text(names: PackedStringArray) -> String:
 	if names.is_empty():
 		return "niemand"
 	if names.size() > 6:
-		return "%s und %s weitere" % [", ".join(names.slice(0, 5)), GermanFormat.integer(names.size() - 5)]
+		return "%s und %s weitere" % [", ".join(names.slice(0, 5)), Format.integer(names.size() - 5)]
 	return ", ".join(names)
 
 
@@ -652,23 +652,23 @@ func _action_tooltip(
 			return (
 				"Ein Gesandter verbessert die Beziehung um 5 je Monat (bis 60 über den Zielwert) und kostet "
 				+ "%s der Monatseinnahmen. Frei: %s von %s." % [
-					GermanFormat.percent(float(overview.get("envoy_cost_percent", 0.0)), 1),
-					GermanFormat.integer(
+					Format.percent(float(overview.get("envoy_cost_percent", 0.0)), 1),
+					Format.integer(
 						int(overview.get("envoy_capacity", 0)) - int(overview.get("envoy_count", 0))
 					),
-					GermanFormat.integer(int(overview.get("envoy_capacity", 0))),
+					Format.integer(int(overview.get("envoy_capacity", 0))),
 				]
 			)
 		"alliance":
 			if decision == "abgelehnt":
 				return "%s lehnt ab: ein Bündnis erst ab Beziehung %s und nicht mit dem Verbündeten eines Gegners." % [
-					state_name, GermanFormat.signed_number(float(overview.get("alliance_min", 100.0)))
+					state_name, Format.signed_number(float(overview.get("alliance_min", 100.0)))
 				]
 			return "Bündnis (gegenseitig): Zielwert +40; Verbündete stehen in Krisen auf derselben Seite."
 		"guarantee":
 			if decision == "abgelehnt":
 				return "%s lehnt ab: eine Garantie erst ab Beziehung %s." % [
-					state_name, GermanFormat.signed_number(float(overview.get("guarantee_min", 50.0)))
+					state_name, Format.signed_number(float(overview.get("guarantee_min", 50.0)))
 				]
 			return "Garantie: Wir schützen %s; Zielwert +20, in Krisen auf seiner Seite." % state_name
 		"demand_leadership":
@@ -707,10 +707,10 @@ func _on_action(action: Array) -> void:
 				% str((_action_buttons[str(action[0])] as Button).text).trim_prefix("Fordern: ")
 				+ "Auf unserer Seite: %s (%s Soldaten); bei %s: %s (%s Soldaten)." % [
 					_names_text(actions.get("own_side", PackedStringArray())),
-					GermanFormat.integer(int(actions.get("own_strength", 0))),
+					Format.integer(int(actions.get("own_strength", 0))),
 					str(entry.get("short_name", "")),
 					_names_text(actions.get("other_side", PackedStringArray())),
-					GermanFormat.integer(int(actions.get("other_strength", 0))),
+					Format.integer(int(actions.get("other_strength", 0))),
 				]
 			)
 			_question_box.visible = true
@@ -727,7 +727,7 @@ func _ask_war() -> void:
 	_war_goal.clear()
 	for goal: Dictionary in goals:
 		_war_goal.add_item("%s (Kosten %s)" % [
-			str(goal.get("text", "")), GermanFormat.integer(roundi(float(goal.get("cost", 0.0))))
+			str(goal.get("text", "")), Format.integer(roundi(float(goal.get("cost", 0.0))))
 		], int(goal.get("code", 0)))
 	_war_goal.select(0)
 	_war_question.text = (
@@ -735,9 +735,9 @@ func _ask_war() -> void:
 		% [
 			str(_entry_of(_selected).get("short_name", "")),
 			_names_text(_state_names(sides.get("attackers", PackedInt32Array()))),
-			GermanFormat.integer(int(sides.get("attacker_soldiers", 0))),
+			Format.integer(int(sides.get("attacker_soldiers", 0))),
 			_names_text(_state_names(sides.get("defenders", PackedInt32Array()))),
-			GermanFormat.integer(int(sides.get("defender_soldiers", 0))),
+			Format.integer(int(sides.get("defender_soldiers", 0))),
 		]
 		+ "Alle Beteiligten machen mobil; der Frieden setzt das Ziel durch, wenn unsere Kriegspunkte seine Kosten erreichen."
 	)
@@ -787,8 +787,8 @@ func _fill_diet() -> void:
 		str(_diet.get("name", "")),
 		str(_diet.get("seat_name", "–")),
 		str(_diet.get("presidency_name", "–")),
-		GermanFormat.integer(int(_diet.get("plenum_total", 0))),
-		GermanFormat.integer((_diet.get("council", []) as Array).size()),
+		Format.integer(int(_diet.get("plenum_total", 0))),
+		Format.integer((_diet.get("council", []) as Array).size()),
 	]
 	# Ruht die Versammlung (seit M11, ereignisse.md 5.2), gibt es weder Anträge noch Abstimmungen.
 	var suspended := bool(_diet.get("suspended", false))
@@ -838,8 +838,8 @@ func _fill_diet() -> void:
 		if decision == "angenommen":
 			var council := bool(preview.get("council_body", false))
 			text += " · Prognose %s von %s Stimmen" % [
-				GermanFormat.integer(int(preview.get("council_yes" if council else "plenum_yes", 0))),
-				GermanFormat.integer(int(preview.get("council_total" if council else "plenum_total", 0))),
+				Format.integer(int(preview.get("council_yes" if council else "plenum_yes", 0))),
+				Format.integer(int(preview.get("council_total" if council else "plenum_total", 0))),
 			]
 		button.text = text
 		button.tooltip_text = (
@@ -861,8 +861,8 @@ func _fill_diet() -> void:
 			str(r.get("applicant_name", "")),
 			str(r.get("text", "")),
 			"angenommen" if bool(r.get("accepted", false)) else "abgelehnt",
-			GermanFormat.integer(int(r.get("council_yes" if council else "plenum_yes", 0))),
-			GermanFormat.integer(int(r.get("council_total" if council else "plenum_total", 0))),
+			Format.integer(int(r.get("council_yes" if council else "plenum_yes", 0))),
+			Format.integer(int(r.get("council_total" if council else "plenum_total", 0))),
 		]
 		_results.add_child(label)
 	if results.is_empty():
@@ -915,29 +915,29 @@ func _fill_question() -> void:
 		_question_line("Lage", "ohne Deutschen Bund keine deutsche Frage")
 		return
 	_question_line(
-		"Bevölkerung des Bundes", "%s Einwohner" % GermanFormat.integer(int(q.get("federal_population", 0)))
+		"Bevölkerung des Bundes", "%s Einwohner" % Format.integer(int(q.get("federal_population", 0)))
 	)
 	if not str(q.get("customs_union_name", "")).is_empty():
 		_question_line(
 			"Im %s" % str(q.get("customs_union_name", "")),
-			GermanFormat.percent(float(q.get("customs_union_percent", 0.0)), 1)
+			Format.percent(float(q.get("customs_union_percent", 0.0)), 1)
 		)
 	_question_line("Lager Preußen", "%s (%s Staaten)" % [
-		GermanFormat.percent(float(q.get("prussia_percent", 0.0)), 1), int(q.get("prussia_states", 0))
+		Format.percent(float(q.get("prussia_percent", 0.0)), 1), int(q.get("prussia_states", 0))
 	])
 	_question_line("Lager Österreich", "%s (%s Staaten)" % [
-		GermanFormat.percent(float(q.get("austria_percent", 0.0)), 1), int(q.get("austria_states", 0))
+		Format.percent(float(q.get("austria_percent", 0.0)), 1), int(q.get("austria_states", 0))
 	])
 	_question_line("Unentschieden", "%s (%s Staaten)" % [
-		GermanFormat.percent(float(q.get("undecided_percent", 0.0)), 1), int(q.get("undecided_states", 0))
+		Format.percent(float(q.get("undecided_percent", 0.0)), 1), int(q.get("undecided_states", 0))
 	])
 	_question_line("Bundesreform", "%s Anträge, %s angenommen" % [
-		GermanFormat.integer(int(q.get("reform_attempts", 0))), GermanFormat.integer(int(q.get("reform_accepted", 0)))
+		Format.integer(int(q.get("reform_attempts", 0))), Format.integer(int(q.get("reform_accepted", 0)))
 	])
 	_question_line("Führung im Bund", "Preußen %s, Österreich %s, Kompromisse %s" % [
-		GermanFormat.integer(int(q.get("leadership_prussia", 0))),
-		GermanFormat.integer(int(q.get("leadership_austria", 0))),
-		GermanFormat.integer(int(q.get("leadership_compromises", 0))),
+		Format.integer(int(q.get("leadership_prussia", 0))),
+		Format.integer(int(q.get("leadership_austria", 0))),
+		Format.integer(int(q.get("leadership_compromises", 0))),
 	])
 	var caption := _label(&"CaptionLabel", false)
 	caption.text = "BÜNDNISSE UND GARANTIEN"

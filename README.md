@@ -309,6 +309,16 @@ python3 -m unittest discover -s tools/klang -v     # Tests des Werkzeugs
 
 Notenformat, Synthesizer und Herkunft der Noten: [tools/klang/README.md](tools/klang/README.md).
 
+**Übersetzungen** (seit M13b4) – `tools/sprache/` sammelt die Texte der Oberfläche (Deutsch ist die
+Quellsprache) nach `game/locale/einigkeit.pot` und pflegt `de.po` und `en.po` (nur Standardbibliothek):
+
+```bash
+python3 tools/sprache/sprache.py                   # Vorlage und .po-Dateien aktualisieren
+python3 tools/sprache/sprache.py --pruefen         # aktuell und Englisch für Start, Menü, Einstellungen da? (CI)
+python3 tools/sprache/sprache.py --fehlend         # was noch ohne englische Übersetzung ist
+python3 -m unittest discover -s tools/sprache -v   # Tests des Werkzeugs
+```
+
 **5. Brücke bauen** – baut godot-cpp (beim ersten Mal je nach Rechner 5–15 Minuten) und legt die Bibliothek
 direkt im Godot-Projekt ab (`game/bin/libuhrwerk_bridge.so`, `uhrwerk_bridge.dll` bzw.
 `libuhrwerk_bridge.dylib`):

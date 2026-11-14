@@ -354,7 +354,7 @@ func _fill() -> void:
 		_add_cell(str((rows[r] as Dictionary).get("date_text", "")))
 		for s in _series:
 			var values := _values(s)
-			_add_cell(GermanFormat.number(values[r], _decimals()) if r < values.size() else "–")
+			_add_cell(Format.number(values[r], _decimals()) if r < values.size() else "–")
 	var low := INF
 	var high := -INF
 	for s in _series:
@@ -363,8 +363,8 @@ func _fill() -> void:
 			high = maxf(high, v)
 	_range.text = (
 		"%s: %s bis %s" % [
-			_columns[_column] if _column < _columns.size() else "", GermanFormat.number(low, _decimals()),
-			GermanFormat.number(high, _decimals()),
+			_columns[_column] if _column < _columns.size() else "", Format.number(low, _decimals()),
+			Format.number(high, _decimals()),
 		]
 		if low <= high else ""
 	)
@@ -411,7 +411,7 @@ func _draw_chart() -> void:
 	for v: float in [high, low]:
 		var y := area.position.y + area.size.y * (1.0 - (v - low) / (high - low))
 		_chart.draw_string(
-			font, Vector2(margin.x, y + 4.0), GermanFormat.number(v, _decimals()), HORIZONTAL_ALIGNMENT_RIGHT,
+			font, Vector2(margin.x, y + 4.0), Format.number(v, _decimals()), HORIZONTAL_ALIGNMENT_RIGHT,
 			label_width - 6.0, font_size, UiPalette.INK_SOFT
 		)
 	var years := _years()

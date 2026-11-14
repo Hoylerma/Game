@@ -80,7 +80,7 @@ static func no_data_entry(count: int) -> Dictionary:
 
 ## "1 Ort" bzw. "1.234 Orte".
 static func count_text(count: int) -> String:
-	return "1 Ort" if count == 1 else "%s Orte" % GermanFormat.integer(count)
+	return "1 Ort" if count == 1 else "%s Orte" % Format.integer(count)
 
 
 ## Kategorien eines Kartenmodus (Name aus dem Ortsfeld field) mit Anzahl der Orte;
@@ -103,7 +103,7 @@ static func category_entries(
 			raw = catalog.terrains[index]
 		else:
 			raw = str(sim.get_location(index).get(field, ""))
-		var category := GermanFormat.humanize(raw)
+		var category := Format.humanize(raw)
 		if not by_name.has(category):
 			by_name[category] = {"color": colors[index], "count": 0}
 			order.append(category)
@@ -225,7 +225,7 @@ static func admin_entries(
 		var parts := (lowest_of[top_unit] as Dictionary).size()
 		var detail := "%s (%s) – %s" % [
 			str(info.get("name", "")),
-			GermanFormat.humanize(str(info.get("kind", ""))),
+			Format.humanize(str(info.get("kind", ""))),
 			count_text(int(count_of[top_unit])),
 		]
 		if parts > 1:
@@ -339,8 +339,8 @@ static func election_entries(sim: SimulationClient, revealing: bool = false) -> 
 			"text": "Wahlkreise",
 			"detail": "%s: %s Wahlkreise, %s Sitze; Wahl am %s" % [
 				parliament_name,
-				GermanFormat.integer(int(parliament.get("district_count", 0))),
-				GermanFormat.integer(int(parliament.get("seats", 0))),
+				Format.integer(int(parliament.get("district_count", 0))),
+				Format.integer(int(parliament.get("seats", 0))),
 				str(parliament.get("election_date_text", "")),
 			],
 		})
@@ -368,7 +368,7 @@ static func election_entries(sim: SimulationClient, revealing: bool = false) -> 
 				"color": currents[c].get("color", UiPalette.BAR_NEUTRAL),
 				"text": str(currents[c].get("short_name", currents[c].get("name", ""))),
 				"detail": "%s: %s Sitze (%s); hell bei knappem Sieg" % [
-					str(currents[c].get("name", "")), GermanFormat.integer(seats[c]), parliament_name
+					str(currents[c].get("name", "")), Format.integer(seats[c]), parliament_name
 				],
 			})
 		var empty := int(election.get("boycott_seats", 0))
@@ -376,7 +376,7 @@ static func election_entries(sim: SimulationClient, revealing: bool = false) -> 
 			entries.append({
 				"color": ELECTION_BOYCOTT,
 				"text": "Boykott",
-				"detail": "%s Sitze leer" % GermanFormat.integer(empty),
+				"detail": "%s Sitze leer" % Format.integer(empty),
 			})
 	if outside > 0:
 		entries.append({
@@ -491,8 +491,8 @@ static func customs_entries(sim: SimulationClient) -> Array[Dictionary]:
 			"text": "%s (%s)" % [str(union.get("name", "")), states_text(members)],
 			"detail": "Leitung %s, Vereinstarif %s – %s Einwohner" % [
 				str(union.get("leader_name", "–")),
-				GermanFormat.percent(float(union.get("tariff_percent", 0.0))),
-				GermanFormat.integer(int(union.get("population", 0))),
+				Format.percent(float(union.get("tariff_percent", 0.0))),
+				Format.integer(int(union.get("population", 0))),
 			],
 		})
 	var alone := 0
@@ -694,4 +694,4 @@ static func federation_entries(sim: SimulationClient) -> Array[Dictionary]:
 
 
 static func states_text(count: int) -> String:
-	return "1 Staat" if count == 1 else "%s Staaten" % GermanFormat.integer(count)
+	return "1 Staat" if count == 1 else "%s Staaten" % Format.integer(count)

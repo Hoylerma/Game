@@ -239,6 +239,15 @@ Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index 
 
 // ─── Gründe und Protokoll (Abschnitt 5) ─────────────────────────────────────
 
+std::string_view ai_factor_id(AiFactor factor) {
+    static constexpr std::array<std::string_view, kAiFactors> ids = {
+        "defizit",     "schuldenquote", "ueberschuss",  "unruhe",          "sparsamkeit", "reform",
+        "risiko",      "bedrohung",     "mobil",        "frieden",         "agenda",      "rivale",
+        "beziehung",   "staerke",       "nachbar",      "verbuendet",      "expansion",   "legitimitaet",
+        "vermittlung", "buendnisse",    "kriegspunkte", "kriegsmuedigkeit"};
+    return ids[static_cast<std::size_t>(factor)];
+}
+
 std::string ai_reason_text(const World& world, const AiReason& reason) {
     static constexpr std::array<std::string_view, kAiFactors> names = {
         "Defizit",      "Schuldenquote",   "Überschuss",   "Unruhe",         "Sparsamkeit", "Reform",

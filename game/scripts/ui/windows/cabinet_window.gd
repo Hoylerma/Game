@@ -29,7 +29,7 @@ func _fill() -> void:
 			_bar(VALUE_NAMES[key], float(values.get(key, 0)) / 10.0, UiPalette.GOLD, "%d von 10" % int(values.get(key, 0)))
 		var traits := PackedStringArray(person.get("traits", []))
 		_line("Eigenschaften", ", ".join(traits) if not traits.is_empty() else "keine")
-		_line("Anteil an den Neigungen", GermanFormat.percent(float(person.get("weight", 0.0)) * 100.0))
+		_line("Anteil an den Neigungen", Format.percent(float(person.get("weight", 0.0)) * 100.0))
 		var source := str(person.get("source", ""))
 		if not source.is_empty():
 			_paragraph("Quelle: %s" % source, true)
@@ -44,7 +44,7 @@ func _fill() -> void:
 		for k in keys.size():
 			var value := float(inclinations.get(keys[k], 0.0))
 			_signed_bar(
-				str(names[k]), value, 2.0, GermanFormat.signed_number(value, 1),
+				str(names[k]), value, 2.0, Format.signed_number(value, 1),
 				"−2 bis +2: Staatspersönlichkeit und Eigenschaften im Amt"
 			)
 		_gap()

@@ -28,8 +28,8 @@ static func show(
 			var density_labels := PackedStringArray(
 				[
 					"0",
-					GermanFormat.number(scale_max * 0.5),
-					"≥ " + GermanFormat.number(scale_max),
+					Format.number(scale_max * 0.5),
+					"≥ " + Format.number(scale_max),
 				]
 			)
 			legend.show_gradient(
@@ -51,7 +51,7 @@ static func show(
 			legend.show_swatches(title, terrains)
 		MapModes.MAP_DEVASTATION:
 			var devastation_labels := PackedStringArray(
-				[GermanFormat.percent(0), GermanFormat.percent(50), GermanFormat.percent(100)]
+				[Format.percent(0), Format.percent(50), Format.percent(100)]
 			)
 			legend.show_gradient(
 				title,
@@ -87,7 +87,7 @@ static func show(
 					+ "trennen die Kreise, ihre Namen erscheinen beim Hineinzoomen."
 				)
 				% [
-					GermanFormat.integer(kreis_count),
+					Format.integer(kreis_count),
 					LegendData.count_text(catalog.places_in_kreisen())
 				]
 			)
@@ -99,8 +99,8 @@ static func show(
 			var economy_labels := PackedStringArray(
 				[
 					"0",
-					GermanFormat.number(economy_max * 0.5),
-					"≥ " + GermanFormat.number(economy_max),
+					Format.number(economy_max * 0.5),
+					"≥ " + Format.number(economy_max),
 				]
 			)
 			legend.show_gradient(

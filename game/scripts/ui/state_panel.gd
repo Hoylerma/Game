@@ -171,29 +171,29 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	if not member.is_empty():
 		_short.text += " · " + ", ".join(member)
 	_ruler.text = str(state.get("ruler", "–"))
-	_government.text = GermanFormat.government(str(state.get("government", "")))
+	_government.text = Format.government(str(state.get("government", "")))
 	_capital.text = capital_name if not capital_name.is_empty() else "–"
-	_locations.text = GermanFormat.integer(int(state.get("location_count", 0)))
+	_locations.text = Format.integer(int(state.get("location_count", 0)))
 	var population := int(state.get("population", 0))
-	_population.text = GermanFormat.integer(population)
+	_population.text = Format.integer(population)
 	_population.mouse_filter = Control.MOUSE_FILTER_PASS
 	_population.tooltip_text = _population_tooltip(state, population)
 	var treasury := float(state.get("treasury", 0.0))
-	_treasury.text = GermanFormat.money(treasury)
+	_treasury.text = Format.money(treasury)
 	_treasury.add_theme_color_override(
 		&"font_color", UiPalette.NEGATIVE if treasury < 0.0 else UiPalette.INK
 	)
 	var income := float(state.get("income_month", 0.0))
 	var expenses := float(state.get("expenses_month", 0.0))
-	_income.text = GermanFormat.signed_money(income)
-	_expenses.text = GermanFormat.signed_money(-expenses)
+	_income.text = Format.signed_money(income)
+	_expenses.text = Format.signed_money(-expenses)
 	var balance := income - expenses
-	_balance.text = GermanFormat.signed_money(balance)
+	_balance.text = Format.signed_money(balance)
 	_balance.add_theme_color_override(
 		&"font_color", UiPalette.NEGATIVE if balance < 0.0 else UiPalette.POSITIVE
 	)
 	var debt := float(state.get("debt", 0.0))
-	_debt.text = GermanFormat.money(debt)
+	_debt.text = Format.money(debt)
 	_debt.add_theme_color_override(
 		&"font_color", UiPalette.NEGATIVE if debt > 0.0 else UiPalette.INK
 	)
@@ -489,7 +489,7 @@ func _show_rate(kind: int, percent: int) -> void:
 	_updating = true
 	_sliders[kind].value = percent
 	_updating = false
-	_values[kind].text = GermanFormat.percent(percent) if percent >= 0 else "–"
+	_values[kind].text = Format.percent(percent) if percent >= 0 else "–"
 
 
 func _update_hint() -> void:
@@ -497,7 +497,7 @@ func _update_hint() -> void:
 		if _pending[kind] >= 0 and _pending[kind] != _state_rates[kind]:
 			_tax_hint.text = (
 				"Neue %s gilt ab dem nächsten Tag (bisher %s)."
-				% [TAX_NAMES[kind], GermanFormat.percent(_state_rates[kind])]
+				% [TAX_NAMES[kind], Format.percent(_state_rates[kind])]
 			)
 			return
 	# Beantragter Wechsel der Zollunion (seit M9).
@@ -512,7 +512,7 @@ func _on_slider_changed(value: float, kind: int) -> void:
 	if _updating:
 		return
 	if _dragging == kind:
-		_values[kind].text = GermanFormat.percent(roundi(value))
+		_values[kind].text = Format.percent(roundi(value))
 		return
 	_request(kind, roundi(value))
 
@@ -694,7 +694,7 @@ func _update_government(state: Dictionary) -> void:
 	var names: Array = intentions.get("inclination_names", [])
 	var inclinations: Dictionary = intentions.get("inclinations", {})
 	for k in keys.size():
-		parts.append("%s %s" % [str(names[k]), GermanFormat.signed_number(float(inclinations.get(keys[k], 0.0)), 1)])
+		parts.append("%s %s" % [str(names[k]), Format.signed_number(float(inclinations.get(keys[k], 0.0)), 1)])
 	var personality := str(intentions.get("personality", ""))
 	_government_inclinations.text = (
 		("Neigungen (%s): " % personality if not personality.is_empty() else "Neigungen: ") + " · ".join(parts)
@@ -760,7 +760,7 @@ func _fill_politics() -> bool:
 	var franchise := str(politics.get("franchise", "–"))
 	var threshold := float(politics.get("census_threshold", 0.0))
 	if threshold > 0.0:
-		franchise += " (ab %s Steuern im Jahr)" % GermanFormat.money(threshold)
+		franchise += " (ab %s Steuern im Jahr)" % Format.money(threshold)
 	_politics_line("Wahlrecht (Landtag)", franchise)
 	if bool(politics.get("elected", false)):
 		var system := "absolute Mehrheit, Stichwahl" if bool(politics.get("runoff", true)) else "relative Mehrheit"
@@ -809,13 +809,13 @@ func _fill_politics() -> bool:
 		row.add_child(label)
 		var values := Label.new()
 		values.text = "%s · %s" % [
-			GermanFormat.percent(float(group.get("share_percent", 0.0)), 1),
-			GermanFormat.percent(float(group.get("influence_percent", 0.0)), 1),
+			Format.percent(float(group.get("share_percent", 0.0)), 1),
+			Format.percent(float(group.get("influence_percent", 0.0)), 1),
 		]
 		var name := str(group.get("name", ""))
 		if approval.has(name):
 			# Zustimmung −10 … +10 (seit M11, ereignisse.md Abschnitt 4.2).
-			values.text += " · %s" % GermanFormat.signed_number(roundi(float(approval[name])))
+			values.text += " · %s" % Format.signed_number(roundi(float(approval[name])))
 			values.tooltip_text = "Anteil · Einfluss · Zustimmung zur Regierung (−10 bis +10)"
 
 		values.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -912,11 +912,11 @@ func _update_military(state: Dictionary) -> void:
 		_mobilization_sent = -1
 	var in_war := bool(state.get("in_war", false))
 	_military_info.text = "Heer: %s Mann · %s%s" % [
-		GermanFormat.integer(int(state.get("soldiers_under_arms", 0))),
+		Format.integer(int(state.get("soldiers_under_arms", 0))),
 		str(state.get("mobilization_text", "")),
 		" · im Krieg" if in_war else "",
 	]
-	_military_info.tooltip_text = "Soldaten unter Waffen; Friedensstärke %s" % GermanFormat.integer(
+	_military_info.tooltip_text = "Soldaten unter Waffen; Friedensstärke %s" % Format.integer(
 		int(state.get("peace_strength", 0))
 	)
 	var wants_mobilized := mobilized if _mobilization_sent < 0 else _mobilization_sent == 1
@@ -1078,7 +1078,7 @@ func _fill_customs() -> void:
 	for child in _customs_grid.get_children():
 		_customs_grid.remove_child(child)
 		child.queue_free()
-	var tariff := GermanFormat.percent(roundi(float(state.get("customs_tariff_percent", 0.0))))
+	var tariff := Format.percent(roundi(float(state.get("customs_tariff_percent", 0.0))))
 	if current >= 0 and current < unions.size():
 		var union: Dictionary = unions[current]
 		var leader := str(union.get("leader_name", ""))
@@ -1092,7 +1092,7 @@ func _fill_customs() -> void:
 		_customs_line("Zoll", "%s, Tarif der Union" % tariff)
 		_customs_line(
 			"Anteil an der Vereinskasse",
-			GermanFormat.signed_money(float(state.get("customs_income", 0.0))) + " je Monat"
+			Format.signed_money(float(state.get("customs_income", 0.0))) + " je Monat"
 		)
 	else:
 		_customs_line("Zollgebiet", "eigenes")
@@ -1157,9 +1157,9 @@ func _fill_customs_row(index: int, union: Dictionary, current: int, requested: i
 	(row.find_child("Values", true, false) as Label).text = (
 		"aufgelöst" if dissolved
 		else "%s · %s · %s" % [
-			GermanFormat.integer(int(union.get("member_count", 0))),
-			GermanFormat.percent(roundi(float(union.get("tariff_percent", 0.0)))),
-			GermanFormat.money(float(union.get("revenue_month", 0.0))),
+			Format.integer(int(union.get("member_count", 0))),
+			Format.percent(roundi(float(union.get("tariff_percent", 0.0)))),
+			Format.money(float(union.get("revenue_month", 0.0))),
 		]
 	)
 	var action := row.find_child("CustomsAction%d" % index, true, false) as Button
@@ -1233,7 +1233,7 @@ func _question_text(preview: Dictionary, decision: String, target: int) -> Strin
 		var unions: Array = customs_source.call() if customs_source.is_valid() else []
 		var tariff := float((unions[target] as Dictionary).get("tariff_percent", 0.0)) if target < unions.size() else 0.0
 		text += " Danach gilt der Tarif der Union (%s), und %s erhält einen Anteil an der Vereinskasse." % [
-			GermanFormat.percent(roundi(tariff)), state_name
+			Format.percent(roundi(tariff)), state_name
 		]
 	return text
 
@@ -1295,26 +1295,26 @@ func _fill_budget() -> void:
 		var amount := float(taxes[kind]) if kind < taxes.size() else 0.0
 		income += amount
 		var rate := int(rates[kind]) if kind < rates.size() else 0
-		var caption := "%s (%s)" % [TAX_NAMES[kind], GermanFormat.percent(rate)]
+		var caption := "%s (%s)" % [TAX_NAMES[kind], Format.percent(rate)]
 		# Mitglieder einer Zollunion erhalten ihren Anteil an der Vereinskasse (seit M9).
 		if kind == SimulationClient.TAX_ZOLL and bool(state.get("customs_locked", false)):
-			caption = "Zoll (Vereinskasse, Tarif %s)" % GermanFormat.percent(
+			caption = "Zoll (Vereinskasse, Tarif %s)" % Format.percent(
 				roundi(float(state.get("customs_tariff_percent", 0.0)))
 			)
-		_budget_line(caption, GermanFormat.signed_money(amount))
+		_budget_line(caption, Format.signed_money(amount))
 	# Überschuss des Hinterlands außerhalb der Karte (seit dem Review M10; Frankreich, Dänemark).
 	var hinterland := float(state.get("hinterland_month", 0.0))
 	if hinterland > 0.0:
 		income += hinterland
-		_budget_line("Hinterland (Überschuss)", GermanFormat.signed_money(hinterland))
-	_budget_line("Summe", GermanFormat.signed_money(income))
+		_budget_line("Hinterland (Überschuss)", Format.signed_money(hinterland))
+	_budget_line("Summe", Format.signed_money(income))
 	var soldiers := int(state.get("soldiers", 0))
 	var interest_percent := float(state.get("interest_percent", 0.0))
 	var items: Array = [
 		["Hof", "court_month"],
 		["Verwaltung", "administration_month"],
-		["Heer (%s Soldaten)" % GermanFormat.integer(soldiers), "army_month"],
-		["Zinsen (%s)" % GermanFormat.percent(interest_percent, 1), "interest_month"],
+		["Heer (%s Soldaten)" % Format.integer(soldiers), "army_month"],
+		["Zinsen (%s)" % Format.percent(interest_percent, 1), "interest_month"],
 		["Bauten (Landesausbau)", "building_month"],
 	]
 	# Gesandte (seit M9, Schritt b1): eigener Posten, nur mit Diplomatie.
@@ -1325,20 +1325,20 @@ func _fill_budget() -> void:
 	for item: Array in items:
 		var amount := float(state.get(str(item[1]), 0.0))
 		expenses += amount
-		_budget_line(str(item[0]), GermanFormat.signed_money(-amount))
-	_budget_line("Summe", GermanFormat.signed_money(-expenses))
+		_budget_line(str(item[0]), Format.signed_money(-amount))
+	_budget_line("Summe", Format.signed_money(-expenses))
 	_budget_line("Stand", "", true)
-	_budget_line("Saldo", GermanFormat.signed_money(income - expenses))
-	_budget_line("Schatz", GermanFormat.money(float(state.get("treasury", 0.0))))
-	_budget_line("Schulden", GermanFormat.money(float(state.get("debt", 0.0))))
+	_budget_line("Saldo", Format.signed_money(income - expenses))
+	_budget_line("Schatz", Format.money(float(state.get("treasury", 0.0))))
+	_budget_line("Schulden", Format.money(float(state.get("debt", 0.0))))
 	_budget_line(
-		"Jahreseinnahmen (gleitend)", GermanFormat.money(float(state.get("yearly_income", 0.0)))
+		"Jahreseinnahmen (gleitend)", Format.money(float(state.get("yearly_income", 0.0)))
 	)
 	var bankruptcies := int(state.get("bankruptcies", 0))
-	var bankrupt_text := GermanFormat.integer(bankruptcies)
+	var bankrupt_text := Format.integer(bankruptcies)
 	var premium := int(state.get("premium_months", 0))
 	if premium > 0:
-		bankrupt_text += " (Zinsaufschlag noch %s Monate)" % GermanFormat.integer(premium)
+		bankrupt_text += " (Zinsaufschlag noch %s Monate)" % Format.integer(premium)
 	_budget_line("Staatsbankrotte", bankrupt_text)
 
 
@@ -1359,7 +1359,7 @@ static func _population_tooltip(state: Dictionary, population: int) -> String:
 	var lines := PackedStringArray()
 	lines.append(
 		"Lebensstandard: %s von 100"
-		% GermanFormat.number(float(state.get("living_standard", 0.0)))
+		% Format.number(float(state.get("living_standard", 0.0)))
 	)
 	var balance: Dictionary = state.get("balance_previous", {})
 	var births := int(balance.get("births", 0))
@@ -1371,10 +1371,10 @@ static func _population_tooltip(state: Dictionary, population: int) -> String:
 	var emigrated := int(balance.get("emigrated", 0))
 	var change := natural + migration - emigrated
 	lines.append("Vorjahr: %s Einwohner (%s)" % [
-		GermanFormat.signed_number(change),
-		GermanFormat.signed_number(100.0 * change / population, 1) + " %"
+		Format.signed_number(change),
+		Format.signed_number(100.0 * change / population, 1) + " %"
 	])
-	lines.append("  Geburten minus Sterbefälle: %s" % GermanFormat.signed_number(natural))
-	lines.append("  Wanderung zwischen Orten: %s" % GermanFormat.signed_number(migration))
-	lines.append("  Auswanderung: %s" % GermanFormat.signed_number(-emigrated))
+	lines.append("  Geburten minus Sterbefälle: %s" % Format.signed_number(natural))
+	lines.append("  Wanderung zwischen Orten: %s" % Format.signed_number(migration))
+	lines.append("  Auswanderung: %s" % Format.signed_number(-emigrated))
 	return "\n".join(lines)

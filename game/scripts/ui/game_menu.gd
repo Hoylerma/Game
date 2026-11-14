@@ -105,7 +105,7 @@ func show_scenarios(scenarios: Array[Dictionary], current: String) -> void:
 		_scenario_select.add_item("%s (%s)" % [str(scenario.get("name", id)), str(scenario.get("date_text", ""))])
 		_scenario_select.set_item_tooltip(
 			_scenario_select.item_count - 1,
-			"Spielbare Staaten: %s" % ", ".join(scenario.get("playable", PackedStringArray()))
+			tr("Spielbare Staaten: {staaten}").format({"staaten": ", ".join(scenario.get("playable", PackedStringArray()))})
 		)
 		_scenario_ids.append(id)
 		if id == current:
@@ -116,9 +116,9 @@ func show_scenarios(scenarios: Array[Dictionary], current: String) -> void:
 ## Strömungen bleibt die Zeile verborgen.
 func show_roles(state_name: String, currents: Array[Dictionary], current: int) -> void:
 	_role_select.clear()
-	_role_select.add_item("Staat: %s" % state_name)
+	_role_select.add_item(tr("Staat: {name}").format({"name": state_name}))
 	for entry in currents:
-		_role_select.add_item("Partei: %s" % str(entry.get("name", "")))
+		_role_select.add_item(tr("Partei: {name}").format({"name": str(entry.get("name", ""))}))
 	_role_select.select(current + 1 if current >= 0 and current < currents.size() else 0)
 	_role_caption.visible = not currents.is_empty()
 	_role_select.visible = not currents.is_empty()
@@ -378,7 +378,7 @@ func _save_entry(save: Dictionary) -> Button:
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	button.theme_type_variation = &"FlatButton"
 	button.set_meta(&"save_name", str(save.get("name", "")))
-	var detail := str(info.get("reason", "nicht lesbar"))
+	var detail := str(info.get("reason", tr("nicht lesbar")))
 	if bool(info.get("ok", false)):
 		detail = "%s · %s" % [str(info.get("date_text", "")), str(info.get("player_name", ""))]
 	button.text = "%s — %s · %s" % [
@@ -390,16 +390,16 @@ func _save_entry(save: Dictionary) -> Button:
 	# übernimmt das Laden (seit M7).
 	var scenario := str(info.get("scenario", ""))
 	if bool(info.get("ok", false)) and not _current_scenario.is_empty() and scenario != _current_scenario:
-		button.tooltip_text = "Spielstand aus „%s“ (%s); Laden wechselt das Lesezeichen" % [
-			str(_scenario_names.get(scenario, scenario)), str(info.get("date_text", ""))
-		]
+		button.tooltip_text = tr("Spielstand aus „{lesezeichen}“ ({datum}); Laden wechselt das Lesezeichen").format({
+			"lesezeichen": str(_scenario_names.get(scenario, scenario)), "datum": str(info.get("date_text", ""))
+		})
 	elif not bool(info.get("compatible", false)):
 		button.disabled = true
-		button.tooltip_text = str(info.get("reason", "Spielstand lässt sich nicht laden."))
+		button.tooltip_text = str(info.get("reason", tr("Spielstand lässt sich nicht laden.")))
 	else:
-		button.tooltip_text = "Spielstand von %s, Prüfsumme %s" % [
-			str(info.get("date_text", "")), str(info.get("checksum", ""))
-		]
+		button.tooltip_text = tr("Spielstand von {datum}, Prüfsumme {pruefsumme}").format({
+			"datum": str(info.get("date_text", "")), "pruefsumme": str(info.get("checksum", ""))
+		})
 	button.toggled.connect(_on_entry_toggled.bind(str(save.get("path", ""))))
 	return button
 
@@ -413,11 +413,11 @@ func _on_entry_toggled(pressed: bool, path: String) -> void:
 func _on_save_pressed() -> void:
 	var file_name := SaveSlots.sanitize(_name_edit.text)
 	if file_name.is_empty():
-		show_status("Bitte einen Namen für den Spielstand eingeben.", true)
+		show_status(tr("Bitte einen Namen für den Spielstand eingeben."), true)
 		return
 	if SaveSlots.is_reserved(file_name):
 		show_status(
-			"„%s“ ist für Schnellspeicher und automatische Spielstände reserviert." % file_name, true
+			tr("„{name}“ ist für Schnellspeicher und automatische Spielstände reserviert.").format({"name": file_name}), true
 		)
 		return
 	save_requested.emit(file_name)

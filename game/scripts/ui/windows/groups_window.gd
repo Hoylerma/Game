@@ -31,9 +31,9 @@ func _fill() -> void:
 				var current := bool(option.get("current", false))
 				var text := ""
 				if value > 0.0 and not current:
-					text = "fordert %s (%s)" % [str(option.get("name", "")), GermanFormat.signed_number(value)]
+					text = "fordert %s (%s)" % [str(option.get("name", "")), Format.signed_number(value)]
 				elif value < 0.0 and current:
-					text = "lehnt %s ab (%s)" % [str(option.get("name", "")), GermanFormat.signed_number(value)]
+					text = "lehnt %s ab (%s)" % [str(option.get("name", "")), Format.signed_number(value)]
 				if not text.is_empty():
 					var name := str(wish.get("group", ""))
 					if not demands.has(name):
@@ -44,10 +44,10 @@ func _fill() -> void:
 		var name := str(group.get("name", ""))
 		var color: Color = group.get("color", UiPalette.BAR_NEUTRAL)
 		_heading(name.to_upper())
-		_bar("Anteil", float(group.get("share_percent", 0.0)) / 100.0, color, GermanFormat.percent(float(group.get("share_percent", 0.0)), 1), "Mitglieder unter den Einwohnern ab 15 Jahren")
-		_bar("Einfluss", float(group.get("influence_percent", 0.0)) / 100.0, color, GermanFormat.percent(float(group.get("influence_percent", 0.0)), 1), "Anteil der Mitglieder am Einkommen")
+		_bar("Anteil", float(group.get("share_percent", 0.0)) / 100.0, color, Format.percent(float(group.get("share_percent", 0.0)), 1), "Mitglieder unter den Einwohnern ab 15 Jahren")
+		_bar("Einfluss", float(group.get("influence_percent", 0.0)) / 100.0, color, Format.percent(float(group.get("influence_percent", 0.0)), 1), "Anteil der Mitglieder am Einkommen")
 		if approval.has(name):
 			var value := float(approval[name])
-			_signed_bar("Zustimmung", value, 10.0, GermanFormat.signed_number(roundi(value)), "Zustimmung zur Regierung, −10 bis +10")
+			_signed_bar("Zustimmung", value, 10.0, Format.signed_number(roundi(value)), "Zustimmung zur Regierung, −10 bis +10")
 		for text: String in demands.get(name, PackedStringArray()):
 			_paragraph(text, true)

@@ -117,9 +117,9 @@ func _fill() -> void:
 		else:
 			b.mouse_default_cursor_shape = Control.CURSOR_ARROW
 		_content.add_child(b)
-	_title.text = "CHRONIK (%s von %s Einträgen)" % [GermanFormat.integer(matching), GermanFormat.integer(entries.size())]
+	_title.text = "CHRONIK (%s von %s Einträgen)" % [Format.integer(matching), Format.integer(entries.size())]
 	if matching > shown:
-		_paragraph("… %s weitere; der Filter grenzt ein." % GermanFormat.integer(matching - shown), true)
+		_paragraph("… %s weitere; der Filter grenzt ein." % Format.integer(matching - shown), true)
 	if matching == 0:
 		_paragraph("Keine Einträge zu diesem Filter.", true)
 

@@ -333,7 +333,7 @@ func _fill_wars() -> void:
 		_summary.text = "Kein Krieg. Eine Kriegserklärung geht über das Fenster „Diplomatie“ (Reiter Staaten)."
 	else:
 		_summary.text = "%s Krieg%s, %s mit uns." % [
-			GermanFormat.integer(_wars.size()), "" if _wars.size() == 1 else "e", GermanFormat.integer(own)
+			Format.integer(_wars.size()), "" if _wars.size() == 1 else "e", Format.integer(own)
 		]
 	while _war_rows.get_child_count() < _wars.size():
 		var button := Button.new()
@@ -425,7 +425,7 @@ func _fill_detail() -> void:
 	var goals: Array = [[], []]
 	for goal: Dictionary in war.get("goals", []):
 		(goals[0 if bool(goal.get("attacker", false)) else 1] as Array).append(
-			"%s (%s)" % [str(goal.get("text", "")), GermanFormat.integer(roundi(float(goal.get("cost", 0.0))))]
+			"%s (%s)" % [str(goal.get("text", "")), Format.integer(roundi(float(goal.get("cost", 0.0))))]
 		)
 	for k in 2:
 		var texts := PackedStringArray(goals[k] as Array)
@@ -435,16 +435,16 @@ func _fill_detail() -> void:
 		var score := float(war.get(prefix + "_score", 0.0))
 		var cost := float(war.get(prefix + "_cost", 0.0))
 		_side_label("Kriegspunkte %s von %s · Müdigkeit %s" % [
-			GermanFormat.integer(roundi(score)), GermanFormat.integer(roundi(cost)),
-			GermanFormat.integer(roundi(float(war.get(prefix + "_weariness", 0.0)))),
+			Format.integer(roundi(score)), Format.integer(roundi(cost)),
+			Format.integer(roundi(float(war.get(prefix + "_weariness", 0.0)))),
 		], false)
 		_score_bars[k].value = 100.0 * clampf(score / cost, 0.0, 1.0) if cost > 0.0 else (100.0 if score > 0.0 else 0.0)
 	for k in 2:
-		_side_label("Verluste %s" % GermanFormat.integer(int(war.get(("attacker" if k == 0 else "defender") + "_losses", 0))), false)
+		_side_label("Verluste %s" % Format.integer(int(war.get(("attacker" if k == 0 else "defender") + "_losses", 0))), false)
 	_war_facts.text = (
 		"Schlachten: %s. Eine Seite setzt ihre Ziele durch, wenn ihre Kriegspunkte deren Kosten erreichen "
 		+ "oder die Müdigkeit des Gegners so hoch steigt; Müdigkeit wächst mit Verlusten, Besetzung und Dauer (bis 100)."
-	) % GermanFormat.integer(int(war.get("battles", 0)))
+	) % Format.integer(int(war.get("battles", 0)))
 	_peace_box.visible = side != 0
 	var leads := bool(war.get("player_leads", false))
 	if side != 0:
@@ -503,7 +503,7 @@ func _fill_goal_options(war: Dictionary) -> void:
 	for option: Dictionary in options:
 		var code := int(option.get("code", 0))
 		_goal_choice.add_item(
-			"%s (Kosten %s)" % [str(option.get("text", "")), GermanFormat.integer(roundi(float(option.get("cost", 0.0))))],
+			"%s (Kosten %s)" % [str(option.get("text", "")), Format.integer(roundi(float(option.get("cost", 0.0))))],
 			code
 		)
 	if _goal_choice.item_count > 0:
@@ -535,8 +535,8 @@ func _fill_armies() -> void:
 		_army_summary.text = "In diesem Szenario gibt es keine Heere."
 	else:
 		_army_summary.text = "%s Soldaten unter Waffen (Friedensstärke %s) · %s." % [
-			GermanFormat.integer(int(state.get("soldiers_under_arms", 0))),
-			GermanFormat.integer(int(state.get("peace_strength", 0))),
+			Format.integer(int(state.get("soldiers_under_arms", 0))),
+			Format.integer(int(state.get("peace_strength", 0))),
 			str(state.get("mobilization_text", "")),
 		]
 	# Feldheere zuerst, dann Garnisonen, je nach Stärke.
@@ -570,8 +570,8 @@ func _fill_armies() -> void:
 		button.text = "%s%s · %s Mann · Moral %s · %s · %s%s" % [
 			"(G) " if bool(army.get("staff", false)) else "",
 			str(army.get("name", "")),
-			GermanFormat.integer(int(army.get("soldiers", 0))),
-			GermanFormat.percent(float(army.get("morale", 0.0)) * 100.0),
+			Format.integer(int(army.get("soldiers", 0))),
+			Format.percent(float(army.get("morale", 0.0)) * 100.0),
 			str(army.get("status_text", "")),
 			where,
 			"" if bool(army.get("supplied", true)) else " · abgeschnitten",

@@ -12,6 +12,7 @@
 #include "uhrwerk/world.hpp"
 
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace uhrwerk {
@@ -73,6 +74,8 @@ Fixed ai_option_factor(const World& world, const EventOption& option, Index stat
 
 /// Text eines Grundes, z. B. „Defizit +34“ oder „Bedrohung durch Österreich +12“.
 std::string ai_reason_text(const World& world, const AiReason& reason);
+/// Kennung eines Faktors für übersetzbare Texte (seit M13b4, vertical_slice.md 6): "defizit", "staerke" …
+std::string_view ai_factor_id(AiFactor factor);
 
 /// Text einer Entscheidung, z. B. „erhöht die Akzise auf 7 %“.
 std::string ai_decision_text(const World& world, const AiDecision& decision);

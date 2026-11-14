@@ -562,7 +562,7 @@ func _on_location_right_clicked(sim_index: int) -> void:
 		_map_view.set_route_preview(-1, PackedInt32Array())
 		_top_bar.show_notice("%s marschiert nach %s: %s Tage, Ankunft %s" % [
 			str(army.get("name", "")), _location_name(sim_index),
-			GermanFormat.number(float(preview.get("days", 0.0)), 1), str(preview.get("arrival_text", "")),
+			Format.number(float(preview.get("days", 0.0)), 1), str(preview.get("arrival_text", "")),
 		])
 	else:
 		_top_bar.show_notice("%s: kein Weg nach %s" % [str(army.get("name", "")), _location_name(sim_index)])
@@ -869,7 +869,7 @@ func _ai_reasons(state: int, target: int, kind: int) -> String:
 		return ""
 	for decision in _sim.get_ai_decisions(state, 20):
 		if int(decision.get("kind", -1)) == kind and int(decision.get("target_index", -1)) == target:
-			return str(decision.get("reasons_text", ""))
+			return AiReasons.of(decision)
 	return ""
 
 
@@ -1129,7 +1129,7 @@ func _march_preview(sim_index: int) -> String:
 		return "%s: kein Weg" % str(army.get("name", ""))
 	_map_view.set_route_preview(int(army.get("location_index", -1)), preview.get("path", PackedInt32Array()))
 	return "Rechtsklick: %s marschiert hierher, %s Tage (Ankunft %s)" % [
-		str(army.get("name", "")), GermanFormat.number(float(preview.get("days", 0.0)), 1),
+		str(army.get("name", "")), Format.number(float(preview.get("days", 0.0)), 1),
 		str(preview.get("arrival_text", "")),
 	]
 
@@ -1155,7 +1155,7 @@ func _on_tax_rate_requested(kind: int, percent: int) -> void:
 		return
 	if not _sim.set_tax_percent(_player, kind, percent):
 		_state_panel.reject_pending(
-			kind, "Der Satz %s wurde nicht angenommen." % GermanFormat.percent(percent)
+			kind, "Der Satz %s wurde nicht angenommen." % Format.percent(percent)
 		)
 
 

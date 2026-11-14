@@ -55,7 +55,7 @@ func _update_header() -> void:
 	elif _total == 1:
 		_count.text = "1 Eintrag"
 	else:
-		_count.text = "%s Einträge" % GermanFormat.integer(_total)
+		_count.text = "%s Einträge" % Format.integer(_total)
 
 
 func _create_item(entry: Dictionary) -> Control:

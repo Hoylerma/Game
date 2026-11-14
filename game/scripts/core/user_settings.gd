@@ -157,6 +157,8 @@ func apply(tree: SceneTree) -> void:
 	Accessibility.high_contrast = bool(get_value("zugang/kontrast"))
 	Accessibility.reduced_motion = bool(get_value("zugang/animationen_reduziert"))
 	Engine.max_fps = int(get_value("bild/bildrate"))
+	# Sprache (seit M13b4): Übersetzungen (game/locale) und Zahlen und Daten (Format).
+	Translation_.use(str(get_value("sprache/sprache")))
 	_set_bus(&"Master", float(get_value("ton/gesamt")), false)
 	# Musik und Klänge (seit M13b2) auf eigenen Bussen.
 	AudioDirector.ensure_buses()

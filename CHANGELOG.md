@@ -13,6 +13,11 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Lokalisierung (Schritt b4):** Das Spiel ist **übersetzbar** (gettext, Deutsch als Quellsprache, Vorlage
+  und Kataloge in `game/locale`, gepflegt von `tools/sprache/sprache.py`). Startbildschirm, Spielmenü und
+  Einstellungen gibt es auf **Englisch**, ebenso Zahlen, Daten und die Gründe der KI; die Sprache wählen die
+  Einstellungen. Ein Test mit **Pseudo-Locale** (alle Texte 40 % länger) stellt sicher, dass keine
+  Beschriftung abgeschnitten wird. `GermanFormat` heißt jetzt `Format` und kennt Regeln je Sprache.
 - **Onboarding (Schritt b3):** Die **Geschichtsstunde „März 1848 in Berlin“** führt als Preußen in vierzehn
   Schritten durch das Spiel – von der Karte über Steuern, Kabinett, Diplomatie und Zollverein bis zu den
   Barrikaden in Berlin, der Wahl zur Nationalversammlung und dem Speichern. Jeder Schritt nennt eine

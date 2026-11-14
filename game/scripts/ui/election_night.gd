@@ -194,10 +194,10 @@ func _refresh() -> void:
 	_tally = ElectionTally.tally(_election, _reported, _by_faction, _groups.size())
 	var total := district_count()
 	var status := "%s von %s Wahlkreisen gemeldet" % [
-		GermanFormat.integer(_reported), GermanFormat.integer(total)
+		Format.integer(_reported), Format.integer(total)
 	]
 	if int(_tally.get("empty", 0)) > 0:
-		status += " · %s Sitze leer (Boykott)" % GermanFormat.integer(int(_tally["empty"]))
+		status += " · %s Sitze leer (Boykott)" % Format.integer(int(_tally["empty"]))
 	if is_complete():
 		var counts: PackedInt32Array = _tally.get("counts", PackedInt32Array())
 		var best := 0
@@ -206,15 +206,15 @@ func _refresh() -> void:
 			if counts[g] > counts[best]:
 				best = g
 		status = "Alle %s Wahlkreise gemeldet: %s von %s Sitzen besetzt" % [
-			GermanFormat.integer(total),
-			GermanFormat.integer(int(_tally.get("seated", 0))),
-			GermanFormat.integer(int(_parliament.get("seats", 0))),
+			Format.integer(total),
+			Format.integer(int(_tally.get("seated", 0))),
+			Format.integer(int(_parliament.get("seats", 0))),
 		]
 		if not counts.is_empty() and counts[best] > 0:
 			status += "; stärkste %s: %s mit %s Sitzen" % [
 				"Fraktion" if _by_faction else "Strömung",
 				str(_groups[best].get("name", "")),
-				GermanFormat.integer(counts[best]),
+				Format.integer(counts[best]),
 			]
 	_status.text = status
 	_update_bars()
@@ -367,12 +367,12 @@ func _update_bars() -> void:
 		if g >= counts.size():
 			continue
 		if is_complete() or _reported == 0:
-			value.text = GermanFormat.integer(counts[g])
+			value.text = Format.integer(counts[g])
 		else:
 			value.text = "%s (≈ %s ± %s)" % [
-				GermanFormat.integer(counts[g]),
-				GermanFormat.integer(roundi(projection[g])),
-				GermanFormat.integer(roundi(band[g])),
+				Format.integer(counts[g]),
+				Format.integer(roundi(projection[g])),
+				Format.integer(roundi(band[g])),
 			]
 		(row.get_meta(&"bar") as Control).queue_redraw()
 

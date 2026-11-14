@@ -1,15 +1,25 @@
-class_name GermanFormat
+class_name Format
 extends RefCounted
-## Zahlen- und Textformatierung nach deutscher Schreibweise.
+## Zahlen- und Textformatierung je Sprache (seit M13b4, vertical_slice.md 6; vorher Format).
 ##
-## Tausenderpunkt, Dezimalkomma, geschütztes Leerzeichen vor Einheiten.
-## Gleitkommazahlen kommen hier nur zur Anzeige vor (Werte aus der Brücke).
+## Deutsch: Tausenderpunkt, Dezimalkomma, „1. März 1848“; Englisch: Tausenderkomma, Dezimalpunkt,
+## „1 March 1848“. Geschütztes Leerzeichen vor Einheiten; Währungen bleiben historisch (Taler).
+## Gleitkommazahlen kommen hier nur zur Anzeige vor (Werte aus der Brücke). Die Sprache setzt
+## UserSettings.apply (Einstellung „sprache/sprache“).
 
-const THOUSANDS_SEPARATOR := "."
-const DECIMAL_SEPARATOR := ","
 const MINUS := "−"
 const NBSP := "\u00A0"
 const CURRENCY := "Taler"
+const LOCALES: PackedStringArray = ["de", "en"]
+const _MONTHS := {
+	"de": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober",
+		"November", "Dezember"],
+	"en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+		"November", "December"],
+}
+
+## Sprache der Zahlen und Daten: "de" oder "en".
+static var locale := "de"
 
 const _GOVERNMENT_NAMES := {
 	"staendisches_fuerstentum": "Ständisches Fürstentum",
@@ -25,14 +35,39 @@ const _GOVERNMENT_NAMES := {
 }
 
 
-## Ganzzahl mit Tausenderpunkt: 1234567 → "1.234.567".
+## Sprache setzen; unbekannte bleiben bei Deutsch.
+static func set_locale(code: String) -> void:
+	locale = code if LOCALES.has(code) else "de"
+
+
+static func thousands_separator() -> String:
+	return "," if locale == "en" else "."
+
+
+static func decimal_separator() -> String:
+	return "." if locale == "en" else ","
+
+
+## Datum in Worten: „1. März 1848“ bzw. „1 March 1848“.
+static func date(day: int, month: int, year: int) -> String:
+	var months: Array = _MONTHS.get(locale, _MONTHS["de"])
+	var name := str(months[clampi(month, 1, 12) - 1])
+	return ("%d %s %d" if locale == "en" else "%d. %s %d") % [day, name, year]
+
+
+## Datum aus einem Dictionary { year, month, day } (wie SimulationClient.get_date).
+static func date_of(value: Dictionary) -> String:
+	return date(int(value.get("day", 1)), int(value.get("month", 1)), int(value.get("year", 0)))
+
+
+## Ganzzahl mit Tausendertrennzeichen: 1234567 → "1.234.567" (en: "1,234,567").
 static func integer(value: int) -> String:
 	var digits := str(absi(value))
 	var grouped := ""
 	var count := 0
 	for i in range(digits.length() - 1, -1, -1):
 		if count > 0 and count % 3 == 0:
-			grouped = THOUSANDS_SEPARATOR + grouped
+			grouped = thousands_separator() + grouped
 		grouped = digits[i] + grouped
 		count += 1
 	return (MINUS if value < 0 else "") + grouped
@@ -51,7 +86,7 @@ static func number(value: float, decimals: int = 0) -> String:
 	var text := integer(whole)
 	if decimals > 0:
 		var fraction := str(scaled - whole * factor).lpad(decimals, "0")
-		text += DECIMAL_SEPARATOR + fraction
+		text += decimal_separator() + fraction
 	if value < 0.0 and scaled != 0:
 		text = MINUS + text
 	return text
@@ -85,16 +120,16 @@ static func area(value_km2: float) -> String:
 	return number(value_km2) + NBSP + "km²"
 
 
-## Bevölkerungsdichte: "82,3 Einw./km²".
+## Bevölkerungsdichte: "82,3 Einw./km²" (en: "82.3 inh./km²").
 static func density(value: float) -> String:
-	return number(value, 1) + NBSP + "Einw./km²"
+	return number(value, 1) + NBSP + ("inh./km²" if locale == "en" else "Einw./km²")
 
 
 ## Regierungsform aus dem Bezeichner der Daten:
 ## "staendisches_fuerstentum" → "Ständisches Fürstentum".
 static func government(identifier: String) -> String:
 	if _GOVERNMENT_NAMES.has(identifier):
-		return _GOVERNMENT_NAMES[identifier]
+		return TranslationServer.translate(_GOVERNMENT_NAMES[identifier])
 	return humanize(identifier)
 
 

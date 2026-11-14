@@ -57,11 +57,11 @@ func show_state(state: Dictionary) -> void:
 	_coat.shield_color = state.get("color", UiPalette.INK_FAINT)
 	_state_name.text = str(state.get("name", "–"))
 	_state_detail.text = "%s · %s" % [
-		str(state.get("ruler", "–")), GermanFormat.government(str(state.get("government", "")))
+		str(state.get("ruler", "–")), Format.government(str(state.get("government", "")))
 	]
 	var treasury := float(state.get("treasury", 0.0))
 	var saldo := float(state.get("income_month", 0.0)) - float(state.get("expenses_month", 0.0))
-	_cash.text = "%s · %s" % [GermanFormat.money(treasury), GermanFormat.signed_number(roundi(saldo))]
+	_cash.text = "%s · %s" % [Format.money(treasury), Format.signed_number(roundi(saldo))]
 	_cash.add_theme_color_override(&"font_color", UiPalette.NEGATIVE if treasury < 0.0 or saldo < 0.0 else UiPalette.INK)
 
 
@@ -71,11 +71,11 @@ func show_overview(overview: Dictionary, legacy: Dictionary) -> void:
 		return
 	if bool(overview.get("events", false)):
 		var value := float(overview.get("legitimacy", 0.0))
-		_legitimacy.text = GermanFormat.signed_number(value, 1)
+		_legitimacy.text = Format.signed_number(value, 1)
 		_legitimacy.add_theme_color_override(&"font_color", UiPalette.POSITIVE if value > 0.5 else (UiPalette.NEGATIVE if value < -0.5 else UiPalette.INK))
 	else:
 		_legitimacy.text = "–"
-	_administration.text = "%s Orte" % GermanFormat.integer(int(overview.get("locations", 0)))
+	_administration.text = "%s Orte" % Format.integer(int(overview.get("locations", 0)))
 	var parts := PackedStringArray()
 	for dimension: Dictionary in legacy.get("dimensions", []):
 		parts.append("%s%d" % [str(dimension.get("name", "")).left(1), roundi(float(dimension.get("value", 0.0)))])

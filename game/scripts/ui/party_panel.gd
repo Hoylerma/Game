@@ -37,11 +37,11 @@ func show_party(party: Dictionary) -> void:
 	_swatch.color = party.get("color", UiPalette.BAR_NEUTRAL)
 	_name.text = str(party.get("name", "–"))
 	_clear(_facts)
-	_add_fact(_facts, "Mittel", GermanFormat.money(float(party.get("funds", 0.0))))
+	_add_fact(_facts, "Mittel", Format.money(float(party.get("funds", 0.0))))
 	var reserved := float(party.get("reserved", 0.0))
 	if reserved > 0.0:
-		_add_fact(_facts, "Verplant", "%s (ab morgen)" % GermanFormat.money(reserved))
-	_add_fact(_facts, "Spenden", "+%s im Monat" % GermanFormat.money(float(party.get("donations", 0.0))))
+		_add_fact(_facts, "Verplant", "%s (ab morgen)" % Format.money(reserved))
+	_add_fact(_facts, "Spenden", "+%s im Monat" % Format.money(float(party.get("donations", 0.0))))
 	var open := bool(party.get("open", false))
 	var held := bool(party.get("held", false))
 	if open:
@@ -52,7 +52,7 @@ func show_party(party: Dictionary) -> void:
 			_facts,
 			"Wahlkampf",
 			"noch in keinem Wahlkreis" if districts == 0
-			else ("in 1 Wahlkreis" if districts == 1 else "in %s Wahlkreisen" % GermanFormat.integer(districts))
+			else ("in 1 Wahlkreis" if districts == 1 else "in %s Wahlkreisen" % Format.integer(districts))
 		)
 	_clear(_result)
 	_result_caption.visible = held
@@ -73,9 +73,9 @@ func show_party(party: Dictionary) -> void:
 			_result,
 			"Sitze",
 			"%s von %s (%s)" % [
-				GermanFormat.integer(seats),
-				GermanFormat.integer(seated),
-				GermanFormat.percent(100.0 * seats / seated if seated > 0 else 0.0, 1),
+				Format.integer(seats),
+				Format.integer(seated),
+				Format.percent(100.0 * seats / seated if seated > 0 else 0.0, 1),
 			]
 		)
 		var faction := str(party.get("faction_name", ""))

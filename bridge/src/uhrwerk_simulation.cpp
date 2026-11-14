@@ -4275,13 +4275,23 @@ Array UhrwerkSimulation::get_ai_decisions(std::int64_t state_index, std::int64_t
         entry["target_index"] = it->target;
         entry["utility"] = it->utility.to_double();
         Array reasons;
+        Array keyed; // seit M13b4: Schlüssel mit Werten für übersetzbare Texte
         std::string why;
         for (std::size_t r = 0; r < it->reason_count; ++r) {
-            const std::string text = uhrwerk::ai_reason_text(*w, it->reasons[r]);
+            const uhrwerk::AiReason& reason = it->reasons[r];
+            const std::string text = uhrwerk::ai_reason_text(*w, reason);
             reasons.append(to_godot(text));
             why += (r > 0 ? ", " : "") + text;
+            Dictionary key;
+            key["key"] = to_godot(std::string(uhrwerk::ai_factor_id(reason.factor)));
+            key["state_index"] = reason.other;
+            key["state_name"] =
+                valid_index(w->states, reason.other) ? short_name(*w, reason.other) : String();
+            key["value"] = reason.value.round();
+            keyed.append(key);
         }
         entry["reasons"] = reasons;
+        entry["reason_keys"] = keyed;
         entry["reasons_text"] = to_godot(why);
         result.append(entry);
     }

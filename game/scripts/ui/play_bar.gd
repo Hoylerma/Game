@@ -62,10 +62,10 @@ func show_plays(plays: Array[Dictionary], player: int) -> void:
 	]
 	_sides.text = "%s: %s Soldaten%s  ·  %s: %s Soldaten%s" % [
 		str(play.get("demander_name", "")),
-		GermanFormat.integer(int(play.get("demander_strength", 0))),
+		Format.integer(int(play.get("demander_strength", 0))),
 		_supporters(play.get("demander_side", PackedStringArray())),
 		str(play.get("target_name", "")),
-		GermanFormat.integer(int(play.get("target_strength", 0))),
+		Format.integer(int(play.get("target_strength", 0))),
 		_supporters(play.get("target_side", PackedStringArray())),
 	]
 	var own := player == demander or player == target

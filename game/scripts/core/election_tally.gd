@@ -217,7 +217,7 @@ static func telegram(district: Dictionary, currents: Array[Dictionary]) -> Strin
 	var text := "%s: %s %s" % [
 		place,
 		str(currents[winner].get("short_name", currents[winner].get("name", "–"))),
-		GermanFormat.percent(roundi(float(district.get("winner_share", 0.0)) * 100.0)),
+		Format.percent(roundi(float(district.get("winner_share", 0.0)) * 100.0)),
 	]
 	if bool(district.get("runoff", false)):
 		text += " nach Stichwahl"
