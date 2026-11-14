@@ -5,6 +5,9 @@ extends RefCounted
 ## Die Spieldaten liegen nicht im Godot-Projekt, sondern im Repository unter
 ## data/. Statische Hilfsklasse, damit sie auch im --script-Modus (Tests)
 ## ohne Szenenbaum funktioniert.
+##
+## In einer exportierten Fassung (seit M13b5, vertical_slice.md 7) liegt data/ neben der Programmdatei,
+## auf macOS in EINIGKEIT.app/Contents/Resources/data.
 
 ## Umgebungsvariable, die den Datenordner überschreibt.
 const ENV_DATA_DIR := "UHRWERK_DATEN"
@@ -21,7 +24,22 @@ static func data_dir() -> String:
 	var from_env := OS.get_environment(ENV_DATA_DIR).strip_edges()
 	if not from_env.is_empty():
 		return _normalize(from_env)
+	var packaged := packaged_data_dir()
+	if not packaged.is_empty():
+		return packaged
 	return _normalize(ProjectSettings.globalize_path(DEFAULT_DATA_DIR))
+
+
+## Datenordner einer exportierten Fassung; leer im Editor oder ohne Ordner neben dem Programm.
+static func packaged_data_dir() -> String:
+	if OS.has_feature("editor"):
+		return ""
+	var exe_dir := OS.get_executable_path().get_base_dir()
+	for candidate in [exe_dir.path_join("data"), exe_dir.path_join("../Resources/data")]:
+		var path := _normalize(candidate)
+		if DirAccess.dir_exists_absolute(path):
+			return path
+	return ""
 
 
 ## Ordner mit den Kartendateien (provinzen.png, definition.csv, karte.chron).
@@ -45,6 +63,8 @@ static func map_config_path() -> String:
 static func data_dir_origin() -> String:
 	if not OS.get_environment(ENV_DATA_DIR).strip_edges().is_empty():
 		return "Umgebungsvariable %s" % ENV_DATA_DIR
+	if not packaged_data_dir().is_empty():
+		return "neben der Programmdatei"
 	return "Standard (%s)" % DEFAULT_DATA_DIR
 
 

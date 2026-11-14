@@ -1,0 +1,222 @@
+# Pakete von EINIGKEIT (seit M13b5, docs/technik/vertical_slice.md 7).
+#
+# Je System: Brücke als Release bauen, uhrwerk-cli bauen, Musik rendern, Godot-Projekt exportieren,
+# packen (tools/paket/paket.py) und das Paket prüfen (Paketrauchtest: das gepackte Programm rechnet
+# ohne Fenster beide Szenarien 30 Tage und muss dieselbe Prüfsumme liefern wie uhrwerk-cli).
+#
+#   Linux    einigkeit-<version>-linux-x86_64.tar.gz
+#   Windows  einigkeit-<version>-windows-x86_64.zip und …-setup.exe (Inno Setup)
+#   macOS    einigkeit-<version>-macos.dmg (universal, ad hoc signiert, nicht notarisiert)
+#
+# Läuft von Hand (Actions → Pakete → Run workflow) und bei Tags v*; die Pakete liegen als Artefakte
+# am Lauf. Bei einem Tag muss er zur Version in game/project.godot passen.
+
+name: Pakete
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: 4.4.1-stable
+  GODOT_TEMPLATES: 4.4.1.stable
+  NUMPY_VERSION: 2.5.3
+  # Windows: Ausgaben von Python mit Umlauten nicht in cp1252 schreiben.
+  PYTHONUTF8: 1
+
+jobs:
+  paket:
+    name: Paket (${{ matrix.system }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - system: linux
+            runner: ubuntu-24.04
+            godot_zip: Godot_v4.4.1-stable_linux.x86_64.zip
+            godot_bin: Godot_v4.4.1-stable_linux.x86_64
+            vorlagen: linux_release.x86_64
+            programm: einigkeit-linux-x86_64/einigkeit.x86_64
+          - system: windows
+            runner: windows-latest
+            godot_zip: Godot_v4.4.1-stable_win64.exe.zip
+            godot_bin: Godot_v4.4.1-stable_win64_console.exe
+            vorlagen: windows_release_x86_64.exe windows_release_x86_64_console.exe
+            programm: einigkeit-windows-x86_64/einigkeit.exe
+          - system: macos
+            runner: macos-latest
+            godot_zip: Godot_v4.4.1-stable_macos.universal.zip
+            godot_bin: Godot.app/Contents/MacOS/Godot
+            vorlagen: macos.zip
+            programm: einigkeit-macos/EINIGKEIT.app
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Quelltext mit Submodulen auschecken
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Version bestimmen
+        id: version
+        run: |
+          version=$(sed -nE 's/^config\/version="([^"]+)"/\1/p' game/project.godot)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Version $version"
+          if [[ "$GITHUB_REF" == refs/tags/v* && "${GITHUB_REF#refs/tags/v}" != "$version" ]]; then
+            echo "::error::Tag ${GITHUB_REF#refs/tags/} passt nicht zur Version $version in game/project.godot."
+            exit 1
+          fi
+
+      - name: Ninja installieren (Linux, macOS)
+        if: matrix.system != 'windows'
+        run: |
+          if ! command -v ninja > /dev/null; then
+            if [ "$RUNNER_OS" = "macOS" ]; then brew install ninja; else sudo apt-get update && sudo apt-get install -y ninja-build; fi
+          fi
+          ninja --version
+
+      - name: MSVC-Umgebung einrichten (Windows)
+        if: matrix.system == 'windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      # Unter Windows in PowerShell: In Git Bash verdeckt /usr/bin/link den Linker von MSVC.
+      - name: Brücke (Release) und uhrwerk-cli bauen (Windows)
+        if: matrix.system == 'windows'
+        shell: pwsh
+        run: |
+          cmake --preset bridge-release -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          cmake --build --preset bridge-release
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          cmake --preset release -DCMAKE_CXX_COMPILER=cl -DCMAKE_C_COMPILER=cl
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          cmake --build --preset release --target uhrwerk-cli
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          Get-ChildItem game/bin
+
+      - name: Brücke (Release) und uhrwerk-cli bauen (Linux, macOS)
+        if: matrix.system != 'windows'
+        run: |
+          extra=()
+          # macOS: eine Bibliothek für Apple Silicon und Intel, wie die Exportvorlage (universal).
+          if [ "$RUNNER_OS" = "macOS" ]; then extra=(-DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"); fi
+          cmake --preset bridge-release "${extra[@]}"
+          cmake --build --preset bridge-release
+          cmake --preset release
+          cmake --build --preset release --target uhrwerk-cli
+          ls -l game/bin
+          if [ "$RUNNER_OS" = "macOS" ]; then lipo -info game/bin/libuhrwerk_bridge.dylib; fi
+
+      - name: Godot und Exportvorlagen aus dem Cache holen
+        id: godot-cache
+        uses: actions/cache@v4
+        with:
+          path: tools/godot
+          key: godot-${{ env.GODOT_VERSION }}-${{ matrix.system }}-mit-vorlagen
+
+      # Die Prüfsummen stehen in SHA512-SUMS.txt des Releases; die Vorlagen kommen aus dem
+      # Gesamtarchiv (rund 1 GB), behalten werden nur die des Systems.
+      - name: Godot ${{ env.GODOT_VERSION }} und Exportvorlagen herunterladen
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        run: |
+          basis="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}"
+          mkdir -p tools/godot/vorlagen "$RUNNER_TEMP/dl"
+          curl -fsSL --retry 3 --retry-delay 5 -o "$RUNNER_TEMP/dl/SHA512-SUMS.txt" "$basis/SHA512-SUMS.txt"
+          tpz="Godot_v${GODOT_VERSION}_export_templates.tpz"
+          for datei in "${{ matrix.godot_zip }}" "$tpz"; do
+            curl -fsSL --retry 3 --retry-delay 5 -o "$RUNNER_TEMP/dl/$datei" "$basis/$datei"
+            summe=$(grep " $datei\$" "$RUNNER_TEMP/dl/SHA512-SUMS.txt" | cut -d' ' -f1)
+            if [ -z "$summe" ]; then echo "::error::Keine Prüfsumme für $datei."; exit 1; fi
+            echo "$summe  $RUNNER_TEMP/dl/$datei" > "$RUNNER_TEMP/dl/pruef.txt"
+            if command -v sha512sum > /dev/null; then sha512sum -c "$RUNNER_TEMP/dl/pruef.txt"; else shasum -a 512 -c "$RUNNER_TEMP/dl/pruef.txt"; fi
+          done
+          unzip -q -o "$RUNNER_TEMP/dl/${{ matrix.godot_zip }}" -d tools/godot
+          for vorlage in ${{ matrix.vorlagen }} version.txt; do
+            unzip -q -o -j "$RUNNER_TEMP/dl/$tpz" "templates/$vorlage" -d tools/godot/vorlagen
+          done
+          ls -l tools/godot tools/godot/vorlagen
+
+      - name: Exportvorlagen einrichten
+        run: |
+          case "$RUNNER_OS" in
+            Linux) ziel="$HOME/.local/share/godot/export_templates/$GODOT_TEMPLATES" ;;
+            Windows) ziel="$APPDATA/Godot/export_templates/$GODOT_TEMPLATES" ;;
+            macOS) ziel="$HOME/Library/Application Support/Godot/export_templates/$GODOT_TEMPLATES" ;;
+          esac
+          mkdir -p "$ziel"
+          cp tools/godot/vorlagen/* "$ziel/"
+          chmod +x "tools/godot/${{ matrix.godot_bin }}"
+          "tools/godot/${{ matrix.godot_bin }}" --version
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Musik und Klänge rendern (tools/klang)
+        run: |
+          python3 -m pip install --disable-pip-version-check --no-input "numpy==${NUMPY_VERSION}"
+          python3 tools/klang/klang.py
+
+      - name: Paket bauen (tools/paket)
+        run: python3 tools/paket/paket.py bauen --system ${{ matrix.system }} --godot "tools/godot/${{ matrix.godot_bin }}" --ausgabe build/pakete
+
+      - name: Paketrauchtest
+        run: |
+          cli=build/release/cli/uhrwerk-cli
+          [ "$RUNNER_OS" = "Windows" ] && cli="$cli.exe"
+          programm="build/pakete/$(echo '${{ matrix.programm }}' | sed "s/^einigkeit-/einigkeit-${{ steps.version.outputs.version }}-/")"
+          python3 tools/paket/paket.py rauchtest --programm "$programm" --cli "$cli" | tee "$RUNNER_TEMP/rauchtest.txt"
+          grep -q "PAKETRAUCHTEST OK" "$RUNNER_TEMP/rauchtest.txt"
+          {
+            echo "### Paket ${{ matrix.system }} ${{ steps.version.outputs.version }}"
+            echo '```'
+            grep -E "ok|FEHLER|PAKETRAUCHTEST" "$RUNNER_TEMP/rauchtest.txt"
+            echo '```'
+            ls -l build/pakete
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Installer bauen (Windows, Inno Setup)
+        if: matrix.system == 'windows'
+        shell: pwsh
+        run: |
+          if (-not (Get-Command iscc -ErrorAction SilentlyContinue)) {
+            $inno = "${env:ProgramFiles(x86)}\Inno Setup 6"
+            if (-not (Test-Path "$inno\ISCC.exe")) {
+              choco install innosetup --yes --no-progress
+              if ($LASTEXITCODE -ne 0) { exit 1 }
+            }
+            $env:PATH = "$inno;$env:PATH"
+          }
+          $version = "${{ steps.version.outputs.version }}"
+          $quelle = Resolve-Path "build/pakete/einigkeit-$version-windows-x86_64"
+          $ausgabe = Resolve-Path "build/pakete"
+          iscc /Q "/DVersion=$version" "/DQuelle=$quelle" "/DAusgabe=$ausgabe" tools/paket/einigkeit.iss
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          Get-ChildItem build/pakete
+
+      - name: Paket hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: einigkeit-${{ steps.version.outputs.version }}-${{ matrix.system }}
+          path: |
+            build/pakete/*.tar.gz
+            build/pakete/*.zip
+            build/pakete/*.dmg
+            build/pakete/*-setup.exe
+          if-no-files-found: error
+          retention-days: 30

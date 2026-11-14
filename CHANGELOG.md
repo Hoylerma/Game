@@ -13,6 +13,13 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Auslieferung (Schritt b5):** EINIGKEIT lässt sich als **Paket** für Linux (tar.gz), Windows (ZIP und
+  Installer) und macOS (DMG) bauen – von Hand mit `tools/paket/paket.py` oder im neuen Workflow
+  `pakete.yml` (manuell und bei Tags `v*`). Die Spieldaten liegen neben dem Programm; ein **Paketrauchtest**
+  startet jedes Paket ohne Fenster und vergleicht die Prüfsumme nach 30 Tagen mit `uhrwerk-cli`. Jedes
+  Paket enthält `DRITTANBIETER.txt` mit den Lizenzen von Godot, godot-cpp, zstd und den Schriften. Im
+  Spielmenü legt **„Rückmeldung“** ein ZIP mit Spielstand, Notiz und Protokoll an (es wird nichts
+  versandt). Neuer CI-Job für den Kern unter macOS; Version 0.13.0.
 - **Lokalisierung (Schritt b4):** Das Spiel ist **übersetzbar** (gettext, Deutsch als Quellsprache, Vorlage
   und Kataloge in `game/locale`, gepflegt von `tools/sprache/sprache.py`). Startbildschirm, Spielmenü und
   Einstellungen gibt es auf **Englisch**, ebenso Zahlen, Daten und die Gründe der KI; die Sprache wählen die

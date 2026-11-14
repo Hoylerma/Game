@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(Einigkeit
-    VERSION 0.1.0
+    VERSION 0.13.0
     DESCRIPTION "EINIGKEIT – Grand Strategy über deutsche Geschichte von 1648 bis heute"
     LANGUAGES C CXX) # C nur für zstd (Kompression der Spielstände, seit M6)
 

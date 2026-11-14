@@ -9,7 +9,7 @@ compile_commands.json
 # ── Godot ──────────────────────────────────────────────────
 # Importcache und Editor-Zustand werden lokal erzeugt.
 /game/.godot/
-/game/export_presets.cfg
+# export_presets.cfg ist seit M13b5 eingecheckt (Pakete, vertical_slice.md 7); Exporte landen in build/.
 # Musik und Bedienklänge (seit M13b2): von tools/klang/klang.py erzeugt, nicht versioniert.
 /game/audio/musik/
 /game/audio/klaenge/

@@ -31,6 +31,8 @@ extends RefCounted
 ##   --geschichtsstunde[=n] Geschichtsstunde starten, bei Schritt n (seit M13b3)
 ##   --rueckblick           „Was ist passiert?“ öffnen wie nach dem Laden (seit M13b3)
 ##   --sprache=de|en|pseudo Sprache nur für diesen Start; pseudo: Pseudo-Locale (Texte 40 % länger, seit M13b4)
+##   --rauchtest            Paketrauchtest (seit M13b5): --tage rechnen ohne Ereignisspieler, Prüfsumme
+##                          ausgeben und beenden; läuft auch ohne Grafikausgabe
 ##   --bereich=<bereich>    Fenster eines Bereichs öffnen: kabinett, gesetze, gruppen, parlament,
 ##                          gesellschaft, wirtschaft (seit M13a5b), chronik, lexikon (seit M13a5d)
 ##   --einstellungen[=<r>]  Fenster Einstellungen öffnen, Reiter bild, ton, spiel, zugang, tasten, sprache
@@ -86,6 +88,8 @@ var lesson_step := 0
 var show_recap := false
 ## Sprache nur für diesen Start: "de", "en", "pseudo" oder leer (Einstellung) (seit M13b4).
 var language := ""
+## Paketrauchtest (seit M13b5): rechnen, Prüfsumme ausgeben, beenden.
+var smoke_test := false
 ## Fenster eines Bereichs (seit M13a5b), leer: keines.
 var area := ""
 ## Einstellungen (seit M13a5d): Reiter oder −1; Farben für Farbsehschwäche nur für diesen Start.
@@ -224,6 +228,11 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.color_blind = true
 				else:
 					options.problems.append("--farbsehschwaeche erwartet keinen Wert, nicht „%s“." % value)
+			"--rauchtest":
+				if value.is_empty():
+					options.smoke_test = true
+				else:
+					options.problems.append("--rauchtest erwartet keinen Wert, nicht „%s“." % value)
 			"--sprache":
 				if ["de", "en", "pseudo"].has(value):
 					options.language = value

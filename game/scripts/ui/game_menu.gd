@@ -20,6 +20,8 @@ signal events_requested
 signal verdict_requested
 ## Einstellungen (seit M13a5d).
 signal settings_requested
+## Rückmeldung anlegen (seit M13b5): ZIP mit Spielstand, Notiz und Protokoll, nichts wird versandt.
+signal feedback_requested(note: String)
 ## Rolle gewählt (seit M8): Index der Strömung im Parteienmodus, -1 = Staat.
 signal role_selected(current: int)
 
@@ -47,6 +49,7 @@ var _role_select: OptionButton = null
 ## „Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet.
 var _confirm_new_game := false
 var _group := ButtonGroup.new()
+var _feedback_edit: LineEdit = null
 var _selected_path := ""
 
 
@@ -321,6 +324,24 @@ func _build() -> void:
 	row.add_child(_button("Weiterspielen (F10)", func() -> void: close_requested.emit()))
 	box.add_child(row)
 
+	box.add_child(_caption("Rückmeldung"))
+	var feedback_row := HBoxContainer.new()
+	feedback_row.add_theme_constant_override(&"separation", 6)
+	_feedback_edit = LineEdit.new()
+	_feedback_edit.name = "FeedbackEdit"
+	_feedback_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_feedback_edit.placeholder_text = "Was ist aufgefallen?"
+	_feedback_edit.max_length = 2000
+	_style_line_edit(_feedback_edit)
+	feedback_row.add_child(_feedback_edit)
+	var feedback_button := _button("Bericht anlegen", _on_feedback_pressed)
+	feedback_button.name = "FeedbackButton"
+	feedback_button.tooltip_text = (
+		"Legt ein ZIP mit Spielstand, Notiz und Protokoll auf diesem Rechner an; es wird nichts versandt"
+	)
+	feedback_row.add_child(feedback_button)
+	box.add_child(feedback_row)
+
 	_status = Label.new()
 	_status.theme_type_variation = &"CaptionLabel"
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -421,6 +442,17 @@ func _on_save_pressed() -> void:
 		)
 		return
 	save_requested.emit(file_name)
+
+
+func _on_feedback_pressed() -> void:
+	feedback_requested.emit(_feedback_edit.text)
+	_feedback_edit.text = ""
+
+
+## Rückmeldung mit Notiz anlegen (Tests).
+func request_feedback(note: String) -> void:
+	_feedback_edit.text = note
+	_on_feedback_pressed()
 
 
 func _on_new_game_pressed() -> void:

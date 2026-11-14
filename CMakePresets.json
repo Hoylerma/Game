@@ -35,12 +35,24 @@
         "UHRWERK_BUILD_TESTS": "OFF",
         "GODOTCPP_TARGET": "template_debug"
       }
+    },
+    {
+      "name": "bridge-release",
+      "displayName": "GDExtension für die Pakete (seit M13b5: Release, template_release)",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "UHRWERK_BUILD_BRIDGE": "ON",
+        "UHRWERK_BUILD_TESTS": "OFF",
+        "GODOTCPP_TARGET": "template_release"
+      }
     }
   ],
   "buildPresets": [
     { "name": "dev", "configurePreset": "dev" },
     { "name": "release", "configurePreset": "release" },
-    { "name": "bridge", "configurePreset": "bridge", "targets": ["uhrwerk_bridge"] }
+    { "name": "bridge", "configurePreset": "bridge", "targets": ["uhrwerk_bridge"] },
+    { "name": "bridge-release", "configurePreset": "bridge-release", "targets": ["uhrwerk_bridge"] }
   ],
   "testPresets": [
     {

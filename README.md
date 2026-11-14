@@ -166,7 +166,7 @@ nicht.
 | Kartengenerator (`tools/kartengenerator/`) | erzeugt Ort-ID-Bild mit Flächenart (4096 × 3329 Pixel), Flussebene, Zuordnungstabelle und (seit M10) die Nachbarschaft der Orte mit gekreuzten Flüssen aus Geometrie und Orten (Python mit numpy, 13–21 s); 89 Tests |
 | Brücke (`bridge/`) | GDExtension mit der Klasse `UhrwerkSimulation` |
 | Godot-Prototyp (`game/`) | Großkarte des Kernraums mit achtzehn Kartenmodi (u. a. Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung, Eisenbahnen, Wahlen, Zollgebiete, Beziehungen, Krieg, Unruhe und Bund), Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit drei Steuerreglern und Haushaltsfenster, Ortsinfo mit Wirtschaft, Kulturen, Altersaufbau und Bevölkerungsbilanz, Chronik, Legende, Spielmenü mit Speichern und Laden, F5/F9, Autosave; neues Spiel mit Wahl des Lesezeichens (1648 oder 1848) und Staatswahl; seit M8 Wahlabend, Parteienmodus und „Verfassung und Gruppen“ in der Staatsinfo; seit M9 Fenster „Zollunion“ mit Beitritt und Austritt, Fenster „Diplomatie“ (Staaten, Bundesversammlung, Deutsche Frage) und Krisenleiste; seit M10 Heere auf der Karte mit Auswahl und Marschbefehl per Rechtsklick, Heeres- und Kriegsfenster mit Friedensangeboten, Kriegserklärung, Mobilmachung im Staatspanel und Schlachtberichte; seit M11 Ereignisfenster mit historischem Kompass, Journalfenster, Gesetze, Zustimmung und Unruhe in der Staatsinfo; seit M13 Startbildschirm mit Lesezeichen, empfohlenen Staaten, Schwierigkeit und Geschichtsverlauf sowie der Kartenmodus „Bund“; seit M12 Herrscher, Minister und Neigungen in der Staatsinfo, Absichten und „Warum?“ der KI im Diplomatiefenster, Hinweise bei Kriegserklärungen und Forderungen an den Spieler; Einheitentest (322 Prüfungen), Rauchtest, Klicktest (4.542 von 4.542 Orten in drei Zoomstufen, Namen und Panels, Wirtschaft, Spielstände, Wahlabend, Parteienmodus, Zollunion, Diplomatie mit Absichten der KI, Ereignisse, Krieg) |
-| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich (100 Jahre, Lasttest und Prüfwert eines Spielstands), Lasttest mit 500.000 Blöcken (Release), Balancing-Bericht (16 Seeds, 100 Jahre; 1848 mit 8 Seeds, 30 Jahre), Wahllabor 1848/49, KI-Labor 1848–1871 mit 16 Partien (100 Partien im Workflow `ki-partien.yml`, manuell und wöchentlich), Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots |
+| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), macOS (Apple Clang, seit M13b5), Prüfsummenvergleich (100 Jahre, Lasttest und Prüfwert eines Spielstands), Lasttest mit 500.000 Blöcken (Release), Balancing-Bericht (16 Seeds, 100 Jahre; 1848 mit 8 Seeds, 30 Jahre), Wahllabor 1848/49, KI-Labor 1848–1871 mit 16 Partien (100 Partien im Workflow `ki-partien.yml`, manuell und wöchentlich), Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots; Pakete für Linux, Windows und macOS mit Paketrauchtest (`pakete.yml`, manuell und bei Tags) |
 
 Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – historische Daten für den
 übrigen Kernraum um 1648, Gesetzgebung und Regierungsbildung außerhalb der Ereignisse, KI,
@@ -182,7 +182,7 @@ Multiplayer und Modding-Werkzeuge. Was sich ändert, steht im [Änderungsprotoko
 | [`bridge/`](bridge/) | GDExtension-Brücke zwischen Uhrwerk und Godot | `core`, `third_party/godot-cpp` |
 | [`game/`](game/) | Godot-4-Projekt (Szenen, Skripte, Shader, Oberfläche) | `bridge` |
 | [`data/`](data/) | Spielinhalte: Tabellen (`tabellen/*.csv`), daraus erzeugtes **Chronik-Skript** (`*.chron`), Karte (`karte/`) | – |
-| [`tools/`](tools/) | Hilfswerkzeuge: [Archivar](tools/archivar/README.md) (Datenpipeline), [Geodaten](tools/geodaten/README.md) (Quellen, Geometrie, Orte des Kernraums), [Kartengenerator](tools/kartengenerator/README.md) | Python 3.10+; Geodaten und Kartengenerator mit numpy |
+| [`tools/`](tools/) | Hilfswerkzeuge: [Archivar](tools/archivar/README.md) (Datenpipeline), [Geodaten](tools/geodaten/README.md) (Quellen, Geometrie, Orte des Kernraums), [Kartengenerator](tools/kartengenerator/README.md), [Klang](tools/klang/README.md), Sprache (`tools/sprache`), [Paket](tools/paket/README.md) | Python 3.10+; Geodaten und Kartengenerator mit numpy |
 | [`docs/`](docs/) | Game Design Document, technische Dokumentation in [`docs/technik/`](docs/technik/) | – |
 | `third_party/` | Fremdbibliotheken als Git-Submodule (godot-cpp 4.4.1) | – |
 
@@ -318,6 +318,20 @@ python3 tools/sprache/sprache.py --pruefen         # aktuell und Englisch für S
 python3 tools/sprache/sprache.py --fehlend         # was noch ohne englische Übersetzung ist
 python3 -m unittest discover -s tools/sprache -v   # Tests des Werkzeugs
 ```
+
+**Pakete** (seit M13b5) – `tools/paket/` exportiert das Spiel mit `game/export_presets.cfg` und packt es
+mit `data/`, `DRITTANBIETER.txt` und `LIESMICH.txt` (Godot-Exportvorlagen 4.4.1 nötig; den Workflow
+`pakete.yml` für alle drei Systeme startet man unter Actions → Pakete oder mit einem Tag `v*`):
+
+```bash
+cmake --preset bridge-release && cmake --build --preset bridge-release     # Brücke als Release
+python3 tools/paket/paket.py bauen --system linux --godot tools/godot/Godot_v4.4.1-stable_linux.x86_64
+python3 tools/paket/paket.py rauchtest --cli build/release/cli/uhrwerk-cli \
+    --programm build/pakete/einigkeit-0.13.0-linux-x86_64/einigkeit.x86_64  # Prüfsumme wie uhrwerk-cli?
+cmake --build --preset bridge                                               # danach wieder die Debug-Brücke
+```
+
+Mehr dazu (Windows-Installer, DMG, Rückmeldungen): [tools/paket/README.md](tools/paket/README.md).
 
 **5. Brücke bauen** – baut godot-cpp (beim ersten Mal je nach Rechner 5–15 Minuten) und legt die Bibliothek
 direkt im Godot-Projekt ab (`game/bin/libuhrwerk_bridge.so`, `uhrwerk_bridge.dll` bzw.
