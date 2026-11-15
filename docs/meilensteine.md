@@ -25,10 +25,12 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | **fertig** (Fachprüfung der Quellen und Werte offen, siehe unten) |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | **fertig** (Fachprüfung der Personen und Agenden offen, siehe unten) |
-| M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | in Arbeit |
+| M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | **technisch fertig** (Spieltest mit externen Testern offen; CI auf GitHub läuft zurzeit nicht, siehe unten) |
 
 Phase 1 endet mit M6 (Ziel der Roadmap: „Technikprototyp“). Phase 2 endet mit M13 (Ziel:
-„Spielbare Epoche III 1848–1871“).
+„Spielbare Epoche III 1848–1871“). Mit M13 ist die Phase 2 technisch abgeschlossen; offen sind die Arbeiten,
+die nur Menschen leisten können: der Spieltest aus M13 und die Fachprüfung der Daten und Werte aus
+M7–M13.
 
 ---
 
@@ -905,3 +907,74 @@ Abschnitt 13).
 - Eine Partie 1848–1871 lässt sich vollständig ohne Fehler spielen
 - Spieltest mit externen Testern; Rückmeldungen dokumentiert
 - Leistungsziele aus M3 und M4 gelten auch mit allen Systemen
+
+**Ergebnis**
+- **Vertrag** in [technik/vertical_slice.md](technik/vertical_slice.md) mit dem Stand je Schritt. Umgesetzt
+  in zwei Teilen: M13a (die Partie mit Anfang und Ende, Hauptbildschirm, Leistung) und M13b
+  (Präsentation, Onboarding, Lokalisierung, Auslieferung, Spieltest, Review).
+- **Start und Einstellungen:** Startbildschirm mit Hauptmenü, neues Spiel in drei Schritten (Lesezeichen
+  1848 und drei Kriegslesezeichen, 1648 unter „Weitere“; Preußen, Österreich, Bayern und Sachsen
+  empfohlen; Schwierigkeit Lehrling, Geselle, Meister als Parameter der KI-Planer; Geschichtsverlauf
+  historisch oder offen). **Spielstand Format 7** mit Spieleinstellungen, Bünden, Wahlterminen,
+  Jahresreihen und früheren Amtszeiten.
+- **Die Partie:** Bünde entstehen zur Laufzeit aus Vorlagen (Norddeutscher Bund, Reich der Paulskirche,
+  großdeutsches Reich, Deutsches Reich 1871) mit Bundesgebiet, Bundespflicht und Kartenmodus „Bund“;
+  Wahlen gehen bis 1871 weiter (Preußisches Abgeordnetenhaus zu den historischen Terminen, Reichstag
+  eines gegründeten Bundes); das **Vermächtnis** (Einigkeit, Recht, Freiheit, Wohlstand, Geltung) wird
+  aus dem Zustand gemessen; am 1. Juli 1871 fällt das **Urteil der Geschichte** mit Wendepunkten und
+  Chronik als HTML, danach Weiterspielen oder Hauptmenü.
+- **Hauptbildschirm nach Kapitel 22:** obere Leiste, Bereichsleiste, Staatsübersicht, rechte Übersicht,
+  Ticker mit den Kartenmodi; Fenster Kabinett und Hof, Gesetze, Parlament, Interessengruppen,
+  Gesellschaft, Wirtschaft, Statistisches Jahrbuch, Chronik, Lexikon; verschachtelte Tooltips,
+  Pausenregeln, Einstellungen mit Barrierefreiheit und Tastenbelegung.
+- **Präsentation:** Epochenrahmen mit eigenen Ornamenten, vier eingebettete Schriften (OFL),
+  Vignetten, die **Zeitung** zu wichtigen Nachrichten; **Musik** aus sieben gemeinfreien Stücken als
+  eigener Notentext mit eigenem Synthesizer, sechs Bedienklänge, Stimmung nach der Lage des Staates.
+- **Onboarding:** Geschichtsstunde „März 1848 in Berlin“ in vierzehn Schritten, Hinweise beim ersten
+  Öffnen von 19 Fenstern, „Was ist passiert?“ nach dem Laden.
+- **Lokalisierung:** gettext mit Deutsch als Quellsprache (1.304 Texte), Englisch für Startbildschirm,
+  Spielmenü und Einstellungen, Zahlen und Daten je Sprache, Pseudo-Locale-Test.
+- **Auslieferung:** Version 0.13.0; Pakete für Linux (tar.gz), Windows (Installer und ZIP) und macOS
+  (DMG, universal, ad hoc signiert) mit `DRITTANBIETER.txt`, Workflow `pakete.yml` mit Paketrauchtest;
+  Kern-Job unter macOS, Determinismus über vier Plattformen; Rückmeldung im Spiel mit Bildrate.
+- **Spieltest vorbereitet:** Leitfaden, Fragebogen, Auswertung und Ergebnisvorlage in
+  [pruefung/spieltest_m13.md](pruefung/spieltest_m13.md).
+- **Leistung:** Profil 1848 und Optimierung (128-Bit-Festkomma, Hauptstadt zuerst, wiederverwendete
+  Speicher); Spieljahr 1848 im Median 1,2 s auf vier Kernen (Ziel 2 s).
+- **1648 unverändert:** Die Prüfsumme nach 100 Jahren bleibt `5db13a66d63e6079`.
+- **Tests:** 267 Testfälle (vorher 253), 46 CTests (neu u. a. `leistung_1848`, `zeitung_1848`,
+  `ki_1848_lehrling`, `ki_1848_meister_offen`); Godot: Einheitentest
+  (517 Prüfungen), Rauchtest, Klicktest mit Startbildschirm, allen Fenstern, Zeitung, Musik und
+  Geschichtsstunde, **Durchspieltest** über vier Staaten bis 1871, **Sprachtest** (Pseudo und Englisch);
+  Python-Tests für Klang, Sprache, Paket und Spieltest.
+- **Review M13** über Kern, Brücke und Godot, Daten, Werkzeuge und Doku (Schritt b7, Abschnitt 13 im
+  Vertrag): die ganze CTest-Suite (45 Tests ohne den Zeittest, darunter alle Labore 1848, die
+  Speichertests 1848 und 1866 und die KI-Labore je Stufe) unter ASan/UBSan ohne Befund; Durchspieltest über
+  vier Staaten, Leistung 1848, Lasttest und Bildzeiten neu gemessen. Ergänzt ist die Beschreibung des
+  Rauchtests (Bereiche, Vermächtnis, Rückmeldung) in `game/tests/README.md`.
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| Eine Partie 1848–1871 lässt sich vollständig ohne Fehler spielen | erfüllt: Durchspieltest über die Oberfläche als Preußen, Österreich, Bayern und Sachsen bis zum Urteil am 1. Juli 1871 (je rund 62 s, 24–42 beantwortete Ereignisse, 11–13 Wahlabende, 276 geöffnete Fenster, Speichern und Laden alle fünf Jahre mit gleicher Prüfsumme), ohne Skriptfehler; Linux-Paket mit Paketrauchtest beider Szenarien gleich `uhrwerk-cli`. Die Partie „von Hand in jeder Paketfassung“ steht mit dem Spieltest aus |
+| Spieltest mit externen Testern; Rückmeldungen dokumentiert | **offen** (Entscheidung 18): vorbereitet sind Leitfaden, Fragebogen, Rückmeldefunktion mit Messwerten, Auswertung und Ergebnisvorlage ([pruefung/spieltest_m13_ergebnisse.md](pruefung/spieltest_m13_ergebnisse.md)); durchführen müssen ihn mindestens fünf Menschen ohne Projektwissen |
+| Leistungsziele aus M3 und M4 gelten auch mit allen Systemen | erfüllt für den Kern: Spieljahr 1848 im Median 1,2 s auf vier Kernen (Grenze 2 s, `uhrwerk-cli leistung`), Lasttest mit 500.000 Blöcken im Median 0,63 s je Spieljahr (Grenze 3 s, gleiche Prüfsummen mit einem Thread); Bildzeiten mit llvmpipe als Wache (`leistung_test.gd`): 1 bis 10 % über dem Stand aus M10 (Median 32–62 ms je Bild, Grenze der Wache 10 %). **Offen:** 60 Bilder/s auf einem Mittelklasse-Rechner mit Grafikkarte, gemessen im Spieltest (die Rückmeldung misst sie) |
+
+**Bekannte Grenzen**
+- **Spieltest offen:** Ohne ihn ist der Meilenstein nur technisch fertig; Befunde aus dem Test kommen als
+  eigener Schritt nach.
+- **CI auf GitHub:** Seit M13a5d brechen die Läufe nach wenigen Sekunden ab (Konto bzw. Abrechnung,
+  nicht der Code). Alle Prüfungen liefen lokal unter Linux; der Kern unter MSVC und Apple Clang, die
+  Determinismusprüfung über vier Plattformen sowie die Pakete für Windows und macOS (`pakete.yml`) sind
+  bisher **nicht gelaufen**.
+- **Bildrate auf echter Hardware** nicht gemessen (die Arbeitsumgebung hat keine Grafikkarte).
+- **Englisch** nur für Startbildschirm, Spielmenü, Einstellungen, Zahlen, Daten und Gründe der KI (179
+  von 1.304 Texten); Ereignisse, Journale, Lexikon und Chronik sind deutsch.
+- **Präsentation in Grundfassung:** keine Porträts und Ereignisbilder (Entscheidung 12), sieben
+  Musikstücke aus dem eigenen Synthesizer statt Aufnahmen.
+- **Auslieferung ohne Signatur:** Windows nicht signiert, macOS ad hoc signiert und nicht notarisiert;
+  keine automatischen Updates.
+- **Fachprüfung offen:** Vermächtnisformeln, Vorlagen der Bünde, Wahltermine und Zeitungstexte sind
+  Spielwerte bzw. ungeprüft wie die Daten aus M7–M12.
+- **Alte Spielstände:** Spielstände aus M12 laden nicht (Format 7).

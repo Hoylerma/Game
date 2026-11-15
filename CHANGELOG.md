@@ -13,6 +13,11 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Review und Abschluss (Schritt b7):** Review über Kern, Brücke und Godot, Daten, Werkzeuge und Doku;
+  alle CTests laufen unter ASan/UBSan ohne Befund. Abnahme: Die Partie 1848–1871 lässt sich als Preußen,
+  Österreich, Bayern und Sachsen ohne Fehler bis zum Urteil spielen, ein Spieljahr 1848 dauert im Median
+  1,2 s. **M13 ist technisch fertig** und damit die Phase 2; offen sind der Spieltest mit externen Testern
+  und die Bildrate auf echter Hardware.
 - **Spieltest vorbereitet (Schritt b6):** Leitfaden für den Spieltest mit externen Testern
   (`docs/pruefung/spieltest_m13.md`: Ablauf, zehn Aufgaben, Beobachtungsbogen, Datenschutz), ein
   ausfüllbarer **Fragebogen** mit 37 Fragen und eine **Ergebnisvorlage**. Die Rückmeldung aus dem Spiel

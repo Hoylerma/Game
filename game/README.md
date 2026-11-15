@@ -452,3 +452,7 @@ Grenzen, die Körnung kommt aus einem bilinearen statt zwei trilinearen Zugriffe
 - Die Panels der Oberfläche (Theme aus M1) haben weiche Schatten; mit Software-Rendering
   kosten sie spürbar Zeit.
 - Mehr als 65.534 Kartenindizes passen nicht in R + G (Vertrag der Karte).
+- Englisch gibt es nur für Startbildschirm, Spielmenü, Einstellungen, Zahlen, Daten und die Gründe der
+  KI; Ereignisse, Journale, Lexikon und Chronik sind deutsch (seit M13b4).
+- Keine Porträts und Ereignisbilder (Entscheidung 12 in vertical_slice.md); die Musik kommt aus dem
+  eigenen Synthesizer.
