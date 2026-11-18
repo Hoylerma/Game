@@ -25,7 +25,7 @@ func _initialize() -> void:
 	_test_map_modes()
 	_test_railway_layer()
 	_test_army_layer()
-	_test_battle_reports()
+	_test_message_cards()
 	_test_map_detail()
 	_test_map_data_and_layout()
 	_test_location_catalog()
@@ -35,7 +35,7 @@ func _initialize() -> void:
 	_test_event_window()
 	_test_chronicle_export()
 	_test_window_manager()
-	_test_ticker_and_glossary()
+	_test_glossary()
 	_test_settings_and_lexicon()
 	_test_epoch_and_newspaper()
 	_test_audio_director()
@@ -416,25 +416,59 @@ func _test_railway_layer() -> void:
 
 ## Heere auf der Karte (seit M10, Schritt b3): Stärke in Tausend, Garnisonen nur auf Wunsch,
 ## Auswahl per Weltpunkt.
-## Schlachtberichte (seit M10, Schritt b3): höchstens MAX_REPORTS, die älteste weicht; × entfernt.
-func _test_battle_reports() -> void:
-	var reports := BattleReports.new()
-	root.add_child(reports)
-	_true(not reports.visible and reports.report_count() == 0, "ohne Meldung unsichtbar")
-	for i in BattleReports.MAX_REPORTS + 1:
-		reports.add_report("Sieg bei Ort %d" % i, "Schlacht bei Ort %d" % i, i, true)
-	_equal(reports.report_count(), BattleReports.MAX_REPORTS, "höchstens MAX_REPORTS Meldungen")
+## Meldekarten (seit M14a3; Schlachtberichte seit M10b3): höchstens MAX_CARDS, die älteste gewöhnliche
+## weicht, wichtige bleiben; Art aus Anlass oder Text; Klick meldet den Ort und legt weg, × legt weg.
+func _test_message_cards() -> void:
+	var stack := MessageStack.new()
+	root.add_child(stack)
+	_true(not stack.visible and stack.card_count() == 0, "ohne Meldung unsichtbar")
+	for i in MessageStack.MAX_CARDS + 1:
+		stack.add_report("Sieg bei Ort %d" % i, "Schlacht bei Ort %d" % i, i, true, "1.1.1866")
+	_equal(stack.card_count(), MessageStack.MAX_CARDS, "höchstens MAX_CARDS Karten")
 	_true(
-		not reports.reports_text().contains("Ort 0") and reports.reports_text().contains("Ort 3"),
-		"die älteste Meldung weicht"
+		not stack.cards_text().contains("Ort 0") and stack.cards_text().contains("Ort 3"),
+		"die älteste Karte weicht"
 	)
+	_true(stack.cards_text().contains("1.1.1866 · " + TranslationServer.translate("Schlacht")), "Kopf mit Datum und Art (%s)" % stack.cards_text())
 	var shown: Array[int] = [-1] # Lambdas fangen Werte ein, ein Array teilen sie
-	reports.location_requested.connect(func(index: int) -> void: shown[0] = index)
-	(reports.get_child(0).find_child("Show", true, false) as Button).pressed.emit()
-	_equal(shown[0], 1, "„Zeigen“ meldet den Ort der Schlacht")
-	reports.clear()
-	_true(not reports.visible and reports.report_count() == 0, "nach clear leer und unsichtbar")
-	reports.free()
+	stack.location_requested.connect(func(index: int) -> void: shown[0] = index)
+	stack.activate(0)
+	_equal(shown[0], 1, "Klick meldet den Ort der Schlacht")
+	_equal(stack.card_count(), MessageStack.MAX_CARDS - 1, "Klick legt die Karte weg")
+	stack.dismiss(0)
+	_equal(stack.card_count(), MessageStack.MAX_CARDS - 2, "× legt die Karte weg")
+	stack.clear()
+	_true(not stack.visible and stack.card_count() == 0, "nach clear leer und unsichtbar")
+	# Wendepunkte und wichtige Meldungen bleiben, gewöhnliche weichen zuerst.
+	var entries: Array[Dictionary] = [
+		{"date_text": "1848", "text": "Wendepunkt", "turning_point": true},
+		{"date_text": "1848", "text": "Preußen erklärt Dänemark den Krieg.", "occasion": "krieg", "important": true},
+	]
+	for i in 4:
+		entries.append({"date_text": "1848", "text": "Eintrag %d" % i})
+	stack.push(entries)
+	_equal(stack.card_count(), MessageStack.MAX_CARDS, "Stapel begrenzt")
+	_true(stack.kind_of(0) == &"wendepunkt" and stack.is_sticky(0), "Wendepunkt bleibt (%s)" % stack.kind_of(0))
+	_true(stack.kind_of(1) == &"krieg" and stack.is_sticky(1), "eigener Krieg bleibt")
+	_true(stack.cards_text().contains("Eintrag 3") and not stack.cards_text().contains("Eintrag 2"), "gewöhnliche weichen")
+	stack.age(MessageStack.SHOW_SECONDS + 1.0)
+	_equal(stack.card_count(), 2, "gewöhnliche Karte geht nach SHOW_SECONDS, wichtige bleiben")
+	stack.free()
+	var kinds := {
+		"Wahltag – Abgeordnetenhaus: 350 von 350 Sitzen besetzt; stärkste Strömung: Liberale mit 120 Sitzen.": &"wahl",
+		"Frieden zwischen Preußen und Dänemark ohne Gewinner.": &"vertrag",
+		"Baden: Erhebung gegen die Regierung": &"aufstand",
+		"Schlacht bei Sadowa: Preußen schlägt Österreich; 9.000 Gefallene.": &"schlacht",
+		"Hannover und Kurhessen schließen ein Bündnis.": &"vertrag",
+		"Preußen ist mobil: 356.023 Soldaten unter Waffen.": &"krieg",
+		"Der Bundestag beschließt Wahlen – Die Wahlen werden vorbereitet": &"wahl",
+		"Der König von Sachsen stirbt.": &"chronik",
+	}
+	for text: String in kinds:
+		_true(MessageStack.kind_for("", text) == kinds[text], "Art aus dem Text: %s → %s" % [text, MessageStack.kind_for("", text)])
+	_true(MessageStack.kind_for("thron_koenig", "x") == &"thron", "Art aus dem Anlass")
+	for kind: StringName in MessageStack.KINDS:
+		_true(Icons.exists(MessageStack.KINDS[kind][0]), "Symbol der Art %s" % kind)
 
 
 func _test_army_layer() -> void:
@@ -951,19 +985,8 @@ func _test_window_manager() -> void:
 	b.free()
 
 
-## Ticker und Glossar (seit M13a5c): Wendepunkte zuerst, Begrenzung, Verweise.
-func _test_ticker_and_glossary() -> void:
-	var ticker := TickerBar.new()
-	var entries: Array[Dictionary] = []
-	for i in 20:
-		entries.append({"date_text": "1848", "text": "Eintrag %d" % i, "turning_point": i == 15})
-	ticker.push(entries)
-	_true(ticker.shown_text().contains("WENDEPUNKT · Eintrag 15"), "Ticker zeigt den Wendepunkt zuerst (%s)" % ticker.shown_text())
-	_true(ticker.get("_queue").size() <= TickerBar.QUEUE_LIMIT, "Ticker begrenzt die Warteschlange")
-	_true(str((ticker.get("_queue") as Array)[0].get("text", "")) == "Eintrag 0", "danach die übrigen in Folge")
-	ticker.clear()
-	_true(ticker.shown_text() == "–", "Ticker geleert")
-	ticker.free()
+## Glossar (seit M13a5c; der Ticker wich in M14a3 den Meldekarten).
+func _test_glossary() -> void:
 	_true(Glossary.link("akzise", "Akzise") == "[url=begriff:akzise]Akzise[/url]", "Verweis im Tooltip")
 	_true(Glossary.text("akzise").begins_with("Akzise:") and Glossary.text("gibt_es_nicht").is_empty(), "Glossar")
 	_true(AreaWindow.sorted_shares({"a": 10.0, "b": 50.0, "c": 40.0}, 2) == [["b", 50.0], ["c", 40.0], ["übrige", 10.0]], "Anteile sortiert mit Rest")

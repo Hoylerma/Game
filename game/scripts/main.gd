@@ -79,8 +79,8 @@ func _ready() -> void:
 	_map_labels.location_diameter = _map_view.location_diameter()
 	_map_labels.set_covering_controls([
 		_top_bar, _state_panel, _party_panel, _chronicle_panel, _location_panel, _legend, _mode_bar,
-		_election_night, _diplomacy_window, _play_bar, _army_panel, _war_window, _battle_reports,
-		_event_window, _journal_window, _area_bar, _yearbook_window, _overview, _ticker,
+		_election_night, _diplomacy_window, _play_bar, _army_panel, _war_window, _messages,
+		_event_window, _journal_window, _area_bar, _yearbook_window, _overview,
 	])
 	_update_place_labels()
 	_update_owners()
@@ -339,9 +339,8 @@ func _fit_mode_bar() -> void:
 		_mode_bar.set_rows(2)
 	var height := _mode_bar.get_combined_minimum_size().y
 	_mode_bar_area.offset_top = -12.0 - maxf(height, 52.0)
-	_place_ticker.call_deferred()
 	_place_diplomacy.call_deferred()
-	_place_reports.call_deferred()
+	_place_messages.call_deferred()
 
 
 ## Fenster eines Bereichs (Tests): kabinett, gesetze, gruppen, parlament, gesellschaft, wirtschaft.
@@ -836,7 +835,9 @@ func _place_tutorial() -> void:
 ## Flächen, die die Geschichtsstunde nicht verdecken darf (auch für den Klicktest).
 func tutorial_occupied_rects() -> Array[Rect2]:
 	var result: Array[Rect2] = []
-	var controls: Array[Control] = [_area_bar, _windows.open_window(), _event_window, _newspaper_window, _play_bar]
+	var controls: Array[Control] = [
+		_area_bar, _windows.open_window(), _event_window, _newspaper_window, _play_bar, _messages
+	]
 	for column: Control in [_left_column, _right_column]:
 		for child in column.get_children():
 			if child is Control and (child as Control).name != &"Spacer":
@@ -1028,18 +1029,7 @@ func _build_bars() -> void:
 	_right_column.add_child(_overview)
 	_right_column.move_child(_overview, _location_panel.get_index() + 1)
 	_overview.entry_requested.connect(_on_overview_entry)
-	_ticker = TickerBar.new()
-	root.add_child(_ticker)
-	root.move_child(_ticker, _top_bar.get_index())
-	_ticker.location_requested.connect(func(location: int) -> void: _select_location(location, true))
-	_ticker.resized.connect(_place_ticker)
-	# Seit M14a1 nur mit Meldung sichtbar: Fenster und Schlachtberichte reichen sonst bis zu den Kartenmodi.
-	_ticker.visibility_changed.connect(
-		func() -> void:
-			_place_diplomacy.call_deferred()
-			_place_reports.call_deferred()
-	)
-	# Die Chronik ist über die Bereichsleiste erreichbar; der Ticker zeigt das Neueste.
+	# Die Chronik ist über die Bereichsleiste erreichbar; das Neueste zeigen die Meldekarten (seit M14a3).
 	_chronicle_panel.visible = false
 	_tooltips = TooltipLayer.new()
 	$UI.add_child(_tooltips)
@@ -1091,13 +1081,9 @@ func close_lexicon_window() -> void:
 	_sync_area_bar()
 
 
-## Rechte Übersicht, Ticker und Tooltips (Tests).
+## Rechte Übersicht und Tooltips (Tests).
 func overview_panel() -> OverviewPanel:
 	return _overview
-
-
-func ticker() -> TickerBar:
-	return _ticker
 
 
 func tooltip_layer() -> TooltipLayer:
@@ -1108,23 +1094,9 @@ func bar_tooltips() -> BarTooltips:
 	return _bar_tooltips
 
 
-## Untere Kante für Fenster: über dem Ticker (sonst über der Leiste der Kartenmodi).
+## Untere Kante für Fenster: über der Leiste der Kartenmodi (bis M14a3 über dem Ticker).
 func _bottom_of_map_area() -> float:
-	if _ticker != null and _ticker.visible:
-		return _ticker.position.y - 8.0
 	return _mode_bar_area.position.y - 8.0
-
-
-## Ticker über der Leiste der Kartenmodi, so breit wie der Platz zwischen den Spalten.
-func _place_ticker() -> void:
-	if _ticker == null:
-		return
-	var left := _map_area_left() + 4.0
-	var right := _right_column.get_global_rect().position.x - 12.0
-	var height := _ticker.get_combined_minimum_size().y
-	_ticker.size = Vector2(maxf(right - left, 100.0), height)
-	_ticker.position = Vector2(left, _mode_bar_area.get_global_rect().position.y - height - 4.0)
-	_place_diplomacy.call_deferred()
 
 
 ## Obere Leiste und rechte Übersicht höchstens zweimal je Sekunde.

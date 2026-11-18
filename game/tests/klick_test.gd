@@ -780,13 +780,66 @@ func _check_bars() -> void:
 		if windows.open_window() != _main.call("journal_window"):
 			_fail("Übersicht: Klick auf das Journal öffnet es nicht")
 		_main.call("close_journal")
-	var ticker: TickerBar = _main.call("ticker")
-	ticker.push([{"date_text": "01.01.1849", "text": "Probe für den Ticker", "turning_point": true, "location_index": -1}] as Array[Dictionary])
-	await _frames(1)
+	await _check_message_cards()
 	await _check_settings_chronicle_lexicon()
 	print("  Leisten: Kasse %s, Vermächtnis %s; Übersicht %d Einträge; Tooltips verschachtelt" % [
 		top.field_text(&"kasse"), top.field_text(&"vermaechtnis"), texts.size()
 	])
+
+
+## Schlachtbericht unter den Meldekarten (Titel „Sieg/Niederlage bei …“)?
+func _has_battle_report(stack: MessageStack) -> bool:
+	for i in stack.card_count():
+		var title := stack.card(i).find_child("Title", true, false) as Label
+		if stack.kind_of(i) == &"schlacht" and title != null and title.visible:
+			return true
+	return false
+
+
+## Meldekarten (seit M14a3, europa_und_oberflaeche.md 5): unten rechts über der Karte, nicht unter der
+## rechten Spalte oder den Kartenmodi; Symbol und Kopf; Klick fährt den Ort an und legt die Karte weg;
+## Wendepunkte bleiben, gewöhnliche gehen von selbst; × legt weg.
+func _check_message_cards() -> void:
+	var stack: MessageStack = _main.call("messages")
+	var sim: SimulationClient = _main.call("simulation")
+	stack.clear()
+	var capital := int(sim.get_state(int(_main.get("_player"))).get("capital_index", 0))
+	stack.push([
+		{"date_text": "01.01.1849", "text": "Probe: Wendepunkt", "turning_point": true, "location_index": -1},
+		{"date_text": "01.01.1849", "text": "Probe: Hannover und Kurhessen schließen ein Bündnis.", "location_index": capital},
+	] as Array[Dictionary])
+	await _frames(2)
+	var rect := stack.get_global_rect()
+	var right_column := (_main.get("_right_column") as Control).get_global_rect()
+	var modes := (_main.get("_mode_bar_area") as Control).get_global_rect()
+	if not stack.visible or stack.card_count() != 2:
+		_fail("Meldekarten: zwei Karten erwartet, %d sichtbar %s" % [stack.card_count(), stack.visible])
+	elif rect.end.x > right_column.position.x or rect.end.y > modes.position.y or rect.size.x < MessageStack.MIN_WIDTH:
+		_fail("Meldekarten liegen nicht über der Karte: %s (rechte Spalte %s, Kartenmodi %s)" % [rect, right_column, modes])
+	var icon := stack.card(0).find_child("Icon", true, false) as TextureRect
+	if icon == null or icon.texture == null or stack.kind_of(0) != &"wendepunkt" or stack.kind_of(1) != &"vertrag":
+		_fail("Meldekarten ohne Symbol oder mit falscher Art (%s, %s)" % [stack.kind_of(0), stack.kind_of(1)])
+	if not stack.cards_text().contains("01.01.1849 · " + TranslationServer.translate("Wendepunkt")):
+		_fail("Meldekarte ohne Kopf: %s" % stack.cards_text())
+	# Klick auf die Karte mit Ort: Ort ausgewählt, Karte weg.
+	var body := stack.card(1).find_child("Body", true, false) as Control
+	await _click(body.get_global_rect().get_center())
+	await _frames(1)
+	if int(_main.call("selected_location")) != capital or stack.card_count() != 1:
+		_fail("Klick auf die Meldekarte: Ort %d statt %d, %d Karten" % [
+			int(_main.call("selected_location")), capital, stack.card_count()
+		])
+	# Gewöhnliche Karten gehen von selbst, der Wendepunkt bleibt; × legt ihn weg.
+	stack.push([{"date_text": "02.01.1849", "text": "Probe: gewöhnlich", "location_index": -1}] as Array[Dictionary])
+	stack.age(MessageStack.SHOW_SECONDS + 1.0)
+	if stack.card_count() != 1 or stack.kind_of(0) != &"wendepunkt":
+		_fail("Meldekarten: gewöhnliche Karte bleibt oder Wendepunkt geht (%d)" % stack.card_count())
+	(stack.card(0).find_child("Close", true, false) as Button).pressed.emit()
+	await _frames(1)
+	if stack.card_count() != 0 or stack.visible:
+		_fail("× legt die Meldekarte nicht weg")
+	_main.call("select_location", -1)
+	print("  Meldekarten: Stapel %s, Klick fährt den Ort an, Wendepunkt bleibt" % rect)
 
 
 ## Urteil der Geschichte (seit M13a4) in der Partie ab 1848: Inhalt, Export der Chronik, Weiterspielen,
@@ -983,7 +1036,7 @@ func _ui_coverage() -> float:
 	var screen := root.get_visible_rect()
 	var controls: Array[Control] = [
 		_main.get("_top_bar"), _main.call("area_bar"), _main.get("_left_column"), _main.get("_mode_bar"),
-		_main.call("ticker"), _main.get("_play_bar"),
+		_main.get("_play_bar"),
 	]
 	for child in (_main.get("_right_column") as Control).get_children():
 		if child is Control and (child as Control).name != &"Spacer":
@@ -1344,14 +1397,15 @@ func _check_war_ui(menu: GameMenu) -> void:
 		_fail("Escape schließt das Kriegsfenster nicht")
 	_main.call("select_army", -1)
 	# Schlachtbericht: Tage bis zur ersten Schlacht mit einem preußischen Heer.
-	var reports: BattleReports = _main.call("battle_reports")
+	var reports: MessageStack = _main.call("messages")
+	reports.clear()
 	var days := 0
-	while reports.report_count() == 0 and days < 60:
+	while not _has_battle_report(reports) and days < 60:
 		sim.advance_days(1)
 		_main.call("_after_time_passed")
 		days += 1
-	var report := reports.reports_text()
-	if reports.report_count() == 0 or not report.contains(" bei ") or not report.contains("Schlacht bei"):
+	var report := reports.cards_text()
+	if not _has_battle_report(reports) or not report.contains(" bei ") or not report.contains("Schlacht bei"):
 		_fail("Kein Schlachtbericht in %d Tagen („%s“)" % [days, report])
 	# Kriegserklärung aus dem Fenster „Diplomatie“: Rückfrage mit Seiten und Ziel, Krieg am nächsten Tag.
 	var enemy := -1

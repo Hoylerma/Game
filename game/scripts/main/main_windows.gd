@@ -92,7 +92,7 @@ func _place_diplomacy() -> void:
 	# offen); das Ereignisfenster mittig.
 	_windows.place(left, top, _bottom_of_map_area())
 	_place_event_window()
-	_place_reports()
+	_place_messages()
 
 
 ## Krisenleiste und offenes Fenster neu füllen (nach jedem Tag; das Fenster höchstens einmal je Sekunde).
@@ -182,13 +182,13 @@ func _build_war() -> void:
 		focus_army(army_id)
 	)
 	_war_window.resized.connect(_place_diplomacy)
-	_battle_reports = BattleReports.new()
-	root.add_child(_battle_reports)
-	root.move_child(_battle_reports, _top_bar.get_index())
-	_battle_reports.minimum_size_changed.connect(_place_reports.call_deferred)
-	_war_window.visibility_changed.connect(_place_reports.call_deferred)
-	_diplomacy_window.visibility_changed.connect(_place_reports.call_deferred)
-	_battle_reports.location_requested.connect(func(index: int) -> void: _select_location(index, true))
+	_messages = MessageStack.new()
+	root.add_child(_messages)
+	root.move_child(_messages, _top_bar.get_index())
+	_messages.minimum_size_changed.connect(_place_messages.call_deferred)
+	_war_window.visibility_changed.connect(_place_messages.call_deferred)
+	_diplomacy_window.visibility_changed.connect(_place_messages.call_deferred)
+	_messages.location_requested.connect(func(index: int) -> void: _select_location(index, true))
 	_state_panel.mobilization_requested.connect(_on_mobilization_requested)
 	_state_panel.war_window_requested.connect(toggle_war_window)
 	_diplomacy_window.war_requested.connect(_on_war_requested)
@@ -198,8 +198,9 @@ func war_window() -> WarWindow:
 	return _war_window
 
 
-func battle_reports() -> BattleReports:
-	return _battle_reports
+## Meldekarten (seit M14a3; Tests).
+func messages() -> MessageStack:
+	return _messages
 
 
 ## Kriegsfenster öffnen (Reiter 0 Kriege, 1 Heere); nur in Szenarien mit Heeren, nicht im
@@ -237,19 +238,19 @@ func focus_army(army_id: int) -> void:
 
 ## Schlachtberichte unten rechts über der Karte, links der rechten Spalte und über der Leiste der
 ## Kartenmodi; neben einem offenen Fenster (Krieg, Diplomatie) so schmal wie nötig.
-func _place_reports() -> void:
-	if _battle_reports == null:
+func _place_messages() -> void:
+	if _messages == null:
 		return
 	var right := _right_column.get_global_rect().position.x - 12.0
 	var left := _map_area_left() + 4.0
 	for window: Control in _windows.windows():
 		if window != null and window.visible:
 			left = maxf(left, window.position.x + window.size.x + 8.0)
-	var width := clampf(right - left, BattleReports.MIN_WIDTH, BattleReports.MAX_WIDTH)
-	_battle_reports.custom_minimum_size.x = width
-	var size := _battle_reports.get_combined_minimum_size()
-	_battle_reports.size = size
-	_battle_reports.position = Vector2(right - size.x, _mode_bar_area.position.y - size.y - 8.0)
+	var width := clampf(right - left, MessageStack.MIN_WIDTH, MessageStack.MAX_WIDTH)
+	_messages.custom_minimum_size.x = width
+	var size := _messages.get_combined_minimum_size()
+	_messages.size = size
+	_messages.position = Vector2(right - size.x, _mode_bar_area.position.y - size.y - 8.0)
 
 
 ## Stärkstes eigenes Feldheer auswählen (Screenshot mit --heer).
@@ -331,13 +332,13 @@ func _build_start_screen() -> void:
 			_left_column.visible = false
 			if _area_bar != null:
 				_area_bar.visible = false
-			if _ticker != null:
-				_ticker.visible = false
+			if _messages != null:
+				_messages.visible = false
 		else:
 			if _area_bar != null:
 				_area_bar.visible = _state_panel.visible
-			if _ticker != null:
-				_ticker.visible = _ticker.has_message()
+			if _messages != null:
+				_messages.visible = _messages.card_count() > 0
 			_apply_state_drawer())
 	_start_screen.settings_requested.connect(open_settings)
 
@@ -1069,7 +1070,7 @@ func _after_load(new_client: bool = false) -> void:
 	close_journal()
 	_close_event_window(false)
 	select_army(-1)
-	_battle_reports.clear()
+	_messages.clear()
 	_previous_armies.clear()
 	_player_gone_noticed = false
 	_player = _sim.get_player_state_index()
@@ -1144,7 +1145,7 @@ func play_state(state_index: int) -> void:
 	close_war_window()
 	_close_event_window(false)
 	select_army(-1)
-	_battle_reports.clear()
+	_messages.clear()
 	_player_gone_noticed = false
 	_sync_event_player()
 	_refresh_all()

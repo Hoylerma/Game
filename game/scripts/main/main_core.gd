@@ -108,11 +108,10 @@ var _control := PackedInt32Array()
 var _tooltip_index := -1
 var _play_bar: PlayBar = null
 ## Heere des Vortags (Schlachtberichte: Stand vor der Schlacht), Heeresfenster in der rechten Spalte,
-## Kriegsfenster und Schlachtberichte unten rechts über der Karte (seit M10, Schritt b3).
+## Kriegsfenster (seit M10, Schritt b3); Schlachtberichte seit M14a3 als Meldekarten.
 var _previous_armies: Array[Dictionary] = []
 var _army_panel: ArmyPanel = null
 var _war_window: WarWindow = null
-var _battle_reports: BattleReports = null
 ## Der Spielerstaat ist untergegangen oder hat die Karte verlassen (Hinweis einmal, Review M10).
 var _player_gone_noticed := false
 ## Ereignisse und Journale (seit M11, Schritt b4, ereignisse.md Abschnitt 9).
@@ -131,9 +130,10 @@ var _yearbook_window: YearbookWindow = null
 var _area_windows: Dictionary = {}
 var _areas_cache: Dictionary = {}
 var _areas_player := -2
-## Leisten nach Kapitel 22 (seit M13a5c): rechte Übersicht, Ticker, verschachtelte Tooltips.
+## Leisten nach Kapitel 22 (seit M13a5c): rechte Übersicht, verschachtelte Tooltips.
 var _overview: OverviewPanel = null
-var _ticker: TickerBar = null
+## Meldekarten (seit M14a3, europa_und_oberflaeche.md 5): statt Ticker und Schlachtberichten.
+var _messages: MessageStack = null
 var _tooltips: TooltipLayer = null
 var _bar_tooltips: BarTooltips = null
 var _overview_filled_at := -100000
@@ -843,20 +843,13 @@ func _pull_chronicle() -> void:
 	if count < _chronicle_read:
 		_chronicle_panel.clear()
 		_chronicle_read = 0
-		if _ticker != null:
-			_ticker.clear()
+		if _messages != null:
+			_messages.clear()
 	if count > _chronicle_read:
 		var entries := _sim.get_chronicle(_chronicle_read)
 		_chronicle_panel.add_entries(entries)
-		# Ticker (seit M13a5c): Wendepunkte, Einträge des Spielerstaates und der Welt; beim Laden nur die
-		# letzten drei davon.
-		if _ticker != null:
-			var relevant := entries.filter(
-				func(e: Dictionary) -> bool:
-					var who := int(e.get("state_index", -1))
-					return bool(e.get("turning_point", false)) or who == _player or who < 0
-			)
-			_ticker.push(relevant if _chronicle_read > 0 else relevant.slice(maxi(relevant.size() - 3, 0)))
+		if _messages != null:
+			_push_messages(entries, _chronicle_read)
 		# Ein neues Spiel liest die ganze Chronik: nur Schlachten aus dem laufenden Spiel melden.
 		if _chronicle_read > 0:
 			_report_battles(entries)
@@ -865,6 +858,31 @@ func _pull_chronicle() -> void:
 			_check_newspapers(_chronicle_read, count)
 			_sounds_for_entries(entries)
 		_chronicle_read = count
+
+
+## Meldekarten (seit M14a3; vorher Ticker seit M13a5c): Wendepunkte, Einträge des Spielerstaates und der
+## Welt; beim Laden nur die letzten drei davon. Schlachten mit eigenen Heeren meldet _report_battles. Die
+## Art kommt aus dem Anlass der Zeitung; Krieg und Frieden des Spielerstaates bleiben liegen.
+func _push_messages(entries: Array[Dictionary], first_index: int) -> void:
+	var own := str(_sim.get_state(_player).get("short_name", "")) if _player >= 0 else ""
+	var relevant: Array[Dictionary] = []
+	for i in entries.size():
+		var entry := entries[i]
+		var who := int(entry.get("state_index", -1))
+		if not (bool(entry.get("turning_point", false)) or (who == _player and _player >= 0) or who < 0):
+			continue
+		if first_index > 0 and _is_own_battle(entry):
+			continue
+		var item := entry.duplicate()
+		item["occasion"] = str(_sim.get_front_page(first_index + i, _player).get("occasion", ""))
+		var kind := MessageStack.kind_for(str(item["occasion"]), str(entry.get("text", "")))
+		item["important"] = (
+			_player_current < 0 and not own.is_empty() and (kind == &"krieg" or kind == &"vertrag")
+			and str(entry.get("text", "")).contains(own) and str(item["occasion"]) != "mobil"
+			and not str(entry.get("text", "")).contains(" mobil")
+		)
+		relevant.append(item)
+	_messages.push(relevant if first_index > 0 else relevant.slice(maxi(relevant.size() - 3, 0)))
 
 
 ## Gründe der letzten Entscheidung der KI von state gegen target der Art kind (SimulationClient.AI_*,
@@ -918,23 +936,27 @@ func _report_battles(entries: Array[Dictionary]) -> void:
 	if _player_current >= 0:
 		return
 	for entry in entries:
-		var text := str(entry.get("text", ""))
-		if not text.begins_with("Schlacht bei "):
+		if not _is_own_battle(entry):
 			continue
 		var location := int(entry.get("location_index", -1))
-		var involved := false
-		for army in _previous_armies + _armies:
-			if int(army.get("state_index", -1)) == _player and int(army.get("location_index", -1)) == location:
-				involved = true
-				break
-		if not involved:
-			continue
 		var victor := int(entry.get("state_index", -1))
 		var victory := victor == _player or not _is_enemy(victor)
-		_battle_reports.add_report(
-			"%s bei %s" % ["Sieg" if victory else "Niederlage", _location_name(location)],
-			"%s · %s" % [str(entry.get("date_text", "")), text], location, victory
-		)
+		if _messages != null:
+			_messages.add_report(
+				"%s bei %s" % ["Sieg" if victory else "Niederlage", _location_name(location)],
+				str(entry.get("text", "")), location, victory, str(entry.get("date_text", ""))
+			)
+
+
+## Schlacht, in der ein eigenes Heer stand (am Vortag oder heute am Ort)?
+func _is_own_battle(entry: Dictionary) -> bool:
+	if _player_current >= 0 or _player < 0 or not str(entry.get("text", "")).begins_with("Schlacht bei "):
+		return false
+	var location := int(entry.get("location_index", -1))
+	for army in _previous_armies + _armies:
+		if int(army.get("state_index", -1)) == _player and int(army.get("location_index", -1)) == location:
+			return true
+	return false
 
 
 ## Steht state in einem Krieg auf der Gegenseite des Spielerstaates?
@@ -1097,7 +1119,7 @@ func _on_viewport_size_changed() -> void:
 		_fit_location_panel.call_deferred()
 	_fit_mode_bar.call_deferred()
 	_place_diplomacy.call_deferred()
-	_place_reports.call_deferred()
+	_place_messages.call_deferred()
 
 
 func _on_location_clicked(sim_index: int) -> void:
@@ -1376,7 +1398,7 @@ func _place_diplomacy() -> void:
 
 
 ## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.
-func _place_reports() -> void:
+func _place_messages() -> void:
 	pass
 
 
@@ -1535,7 +1557,7 @@ func _apply_state_drawer() -> void:
 	if _area_bar != null:
 		_area_bar.set_drawer_open(_state_drawer_open and _state_panel.visible)
 	_place_diplomacy()
-	_place_reports()
+	_place_messages()
 
 
 ## Platzhalter; die Hauptszene (main_windows.gd) überschreibt ihn: Startbildschirm oder Wahlabend offen.

@@ -13,6 +13,11 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/europa_und_oberflaeche.md](docs/technik/europa_und_oberflaeche.md), Entscheidungen 1–8 wie
 empfohlen freigegeben; Stand je Schritt in Abschnitt 9 dort.
 
+- **Meldungen als Karten (Schritt a3):** Statt der Tickerzeile und der Schlachtberichte erscheinen
+  Meldungen als kleine Karten unten rechts über der Karte, mit einem Symbol für Krieg, Vertrag, Wahl,
+  Aufstand, Schlacht, Bund, Thron, Zollverein oder Wendepunkt. Ein Klick fährt den Ort an, × legt sie weg;
+  gewöhnliche Meldungen gehen nach 12 Sekunden, Wendepunkte und Krieg oder Frieden des eigenen Staates
+  bleiben liegen, bis man sie wegklickt. Höchstens drei Karten zugleich.
 - **Symbole (Schritt a2):** Eigene Symbole im Stil der Epoche ersetzen die Textknöpfe: Die Bereichsleiste
   zeigt Krone, Gesetzblatt, Halbrund, Waage, Säbel und mehr, mit Zählern für laufende Kriege und Krisen;
   die 18 Kartenmodi passen als eine Reihe Symbole in vier Gruppen unter die Karte. Die obere Leiste zeigt
