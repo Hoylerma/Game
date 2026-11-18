@@ -8,6 +8,8 @@ extends PanelContainer
 signal speed_selected(speed: int)
 ## Knopf „Menü“ gedrückt (seit M6: Spielmenü mit Speichern und Laden).
 signal menu_requested
+## Klick auf Wappen oder Staatsnamen: Staatsübersicht öffnen oder schließen (seit M14a1).
+signal state_requested
 
 ## Dauer einer kurzen Meldung unter dem Datum (z. B. „Schnellgespeichert“).
 const NOTICE_SECONDS := 3.0
@@ -48,8 +50,20 @@ func _ready() -> void:
 		button.focus_mode = Control.FOCUS_NONE
 		button.pressed.connect(_on_speed_button_pressed.bind(speed))
 	_menu_button.pressed.connect(func() -> void: menu_requested.emit())
+	for control: Control in [_coat, _state_name.get_parent() as Control]:
+		control.mouse_filter = Control.MOUSE_FILTER_STOP
+		control.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		control.tooltip_text = tr("Staatsübersicht öffnen oder schließen")
+		control.gui_input.connect(_on_state_input)
 	_build_saldo()
 	show_unavailable()
+
+
+func _on_state_input(event: InputEvent) -> void:
+	var button := event as InputEventMouseButton
+	if button != null and button.pressed and button.button_index == MOUSE_BUTTON_LEFT:
+		state_requested.emit()
+		accept_event()
 
 
 ## Kasse und Saldo nebeneinander, damit jeder Wert seine Farbe bekommt.

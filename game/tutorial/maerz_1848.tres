@@ -13,7 +13,7 @@ check = "kartenmodus"
 time = false
 target = "kartenmodi"
 lexicon = ""
-done_text = "Jeder Modus erklärt sich in seiner Legende rechts unten."
+done_text = "Jeder Modus erklärt sich in seiner Legende rechts unten; ein Klick auf „Legende“ klappt sie auf und zu."
 
 [sub_resource type="Resource" id="Resource_7j6sw"]
 script = ExtResource("2_6m7mq")
@@ -31,7 +31,7 @@ done_text = "Die Ortsinfo nennt auch den Wahlkreis, in dem der Ort wählt."
 script = ExtResource("2_6m7mq")
 id = "staat"
 title = "Staatsübersicht und Kasse"
-text = "Links steht die Staatsübersicht Preußens: Herrscher, Minister, Einnahmen und Ausgaben. Oben zeigt die Leiste Kasse und Saldo, die Legitimität, die Verwaltung und Ihr Vermächtnis. Wer mehr ausgibt, als er einnimmt, macht Schulden."
+text = "Die Staatsübersicht Preußens öffnet sich mit „Staat“ ganz oben in der Bereichsleiste links oder mit einem Klick auf das Wappen: Herrscher, Minister, Einnahmen und Ausgaben. Oben zeigt die Leiste Kasse und Saldo, die Legitimität, die Verwaltung und Ihr Vermächtnis. Wer mehr ausgibt, als er einnimmt, macht Schulden."
 task = "Öffnen Sie in der Bereichsleiste den Haushalt."
 check = "haushalt"
 time = false

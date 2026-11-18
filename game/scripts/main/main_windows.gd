@@ -62,8 +62,9 @@ func toggle_diplomacy() -> void:
 		open_diplomacy()
 
 
-## Krisenleiste mittig unter der oberen Leiste, das Fenster rechts neben der linken Spalte darunter
-## und über der Leiste der Kartenmodi (die Staatenliste wird bei Bedarf kürzer).
+## Bereichsleiste am linken Rand, rechts daneben die Schublade der Staatsübersicht (seit M14a1), dann
+## die Fenster; die Krisenleiste mittig unter der oberen Leiste, die Fenster darunter und über der Leiste
+## der Kartenmodi (die Staatenliste wird bei Bedarf kürzer).
 func _place_diplomacy() -> void:
 	if _diplomacy_window == null:
 		return
@@ -72,13 +73,18 @@ func _place_diplomacy() -> void:
 	var bar_size := _play_bar.get_combined_minimum_size()
 	_play_bar.size = bar_size
 	_play_bar.position = Vector2(roundf((area.x - bar_size.x) * 0.5), top)
-	var left := _left_column.offset_right + 12.0
-	# Bereichsleiste (seit M13a5a) senkrecht neben der linken Spalte; die Fenster öffnen rechts daneben.
+	var column_left := 12.0
 	if _area_bar != null and _area_bar.visible:
 		var area_size := _area_bar.get_combined_minimum_size()
 		_area_bar.size = area_size
-		_area_bar.position = Vector2(_left_column.offset_right + 8.0, top)
-		left = _area_bar.position.x + area_size.x + 8.0
+		_area_bar.position = Vector2(12.0, top)
+		column_left = _area_bar.position.x + area_size.x + 8.0
+	# Geschlossene Schublade links außerhalb des Bildes (seit M14a1, siehe _apply_state_drawer).
+	if not _left_column_shown():
+		column_left = -LEFT_COLUMN_WIDTH - 40.0
+	_left_column.offset_left = column_left
+	_left_column.offset_right = column_left + LEFT_COLUMN_WIDTH
+	var left := _map_area_left()
 	if _play_bar.visible:
 		_play_bar.position.x = maxf(_play_bar.position.x, left)
 		top += bar_size.y + 8.0
@@ -235,7 +241,7 @@ func _place_reports() -> void:
 	if _battle_reports == null:
 		return
 	var right := _right_column.get_global_rect().position.x - 12.0
-	var left := _left_column.offset_right + 12.0
+	var left := _map_area_left() + 4.0
 	for window: Control in _windows.windows():
 		if window != null and window.visible:
 			left = maxf(left, window.position.x + window.size.x + 8.0)
@@ -315,10 +321,24 @@ func _build_start_screen() -> void:
 	_start_screen.load_requested.connect(_on_start_load)
 	_start_screen.quit_requested.connect(func() -> void: get_tree().quit())
 	# Hinter dem Startbildschirm nur die Karte: Leisten und Panels der Partie ruhen.
+	# Schublade und Ticker danach wie vorher (seit M14a1: die Schublade ist beim Start zu, der Ticker nur mit
+	# einer Meldung zu sehen).
 	_start_screen.shown_changed.connect(func(open: bool) -> void:
-		for control: Control in [_top_bar, _left_column, _right_column, _mode_bar_area, _map_labels, _area_bar, _ticker]:
+		for control: Control in [_top_bar, _right_column, _mode_bar_area, _map_labels]:
 			if control != null:
-				control.visible = not open)
+				control.visible = not open
+		if open:
+			_left_column.visible = false
+			if _area_bar != null:
+				_area_bar.visible = false
+			if _ticker != null:
+				_ticker.visible = false
+		else:
+			if _area_bar != null:
+				_area_bar.visible = _state_panel.visible
+			if _ticker != null:
+				_ticker.visible = _ticker.has_message()
+			_apply_state_drawer())
 	_start_screen.settings_requested.connect(open_settings)
 
 
@@ -503,6 +523,7 @@ func _apply_role() -> void:
 	_state_panel.visible = not party
 	if _area_bar != null:
 		_area_bar.visible = not party
+	_apply_state_drawer()
 	if party:
 		_state_panel.hide_popups()
 		_windows.close_all()
@@ -870,6 +891,8 @@ func _open_election_night(index: int, complete: bool) -> void:
 		if by_location[i] >= 0:
 			_election_ranks[i] = _election_night.rank_of_district(by_location[i])
 	_left_column.visible = false
+	if _area_bar != null:
+		_area_bar.visible = false
 	_state_panel.hide_popups()
 	close_diplomacy()
 	close_war_window()
@@ -894,7 +917,9 @@ func _on_election_progress(reported: int) -> void:
 func _close_election_night(resume: bool = true) -> void:
 	_election_night.close()
 	_election_reported = -1
-	_left_column.visible = true
+	if _area_bar != null:
+		_area_bar.visible = _state_panel.visible
+	_apply_state_drawer()
 	_refresh_map()
 	_rebuild_legend()
 	if resume:
@@ -1209,3 +1234,9 @@ func _sync_area_bar() -> void:
 ## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.
 func settings() -> UserSettings:
 	return null
+
+
+## Startbildschirm oder Wahlabend verbergen die linke Spalte ganz (seit M14a1).
+func _left_column_hidden_by_overlay() -> bool:
+	return (_start_screen != null and _start_screen.is_open()) or (_election_night != null and _election_night.is_open())
+

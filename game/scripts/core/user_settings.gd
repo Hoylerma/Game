@@ -54,6 +54,8 @@ const DEFAULTS := {
 	"zugang/animationen_reduziert": false,
 	"zugang/schrift": 100,
 	"sprache/sprache": "de",
+	# Seit M14a1: Legende eingeklappt (ein Klick auf ihren Kopf ändert es; kein Eintrag im Fenster).
+	"anzeige/legende_zu": true,
 }
 
 var path := PATH

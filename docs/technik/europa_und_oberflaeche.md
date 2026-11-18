@@ -1,7 +1,7 @@
 # Europa und Oberfläche (Meilenstein M14)
 
-> **Status: Entwurf zur Freigabe** – Entscheidungen 1–8 mit Empfehlung (Abschnitt 7); Umsetzung erst nach
-> Freigabe. Anlass ist die erste Rückmeldung aus dem Spiel (18.11.2026). Grundlage sind
+> **Status: verbindlich** – Entscheidungen 1–8 wie empfohlen freigegeben (18.11.2026, Abschnitt 7);
+> Umsetzung läuft, Stand in Abschnitt 9. Anlass ist die erste Rückmeldung aus dem Spiel (18.11.2026). Grundlage sind
 > [22 UI/UX, Grafik, Audio](../22_ui_ux_grafik_audio.md), [05 Karte und Geographie](../05_karte_und_geographie.md),
 > der Vertrag von M13 ([vertical_slice.md](vertical_slice.md)) und die Werkzeuge der Karte
 > ([tools/geodaten](../../tools/geodaten/README.md), [tools/kartengenerator](../../tools/kartengenerator/README.md)).
@@ -153,4 +153,5 @@ nicht Vorlage für Aussehen, Grafiken oder Anordnung im Einzelnen.
 
 | Schritt | Stand |
 |---|---|
-| – | Entwurf; Rückmeldungen 1–3 sofort behoben (18.11.2026) |
+| – | Rückmeldungen 1–3 sofort behoben; Entscheidungen 1–8 wie empfohlen freigegeben (18.11.2026); Umsetzung beginnt mit a1 |
+| a1 | **erledigt:** Die **Staatsübersicht ist eine Schublade**: beim Start zu; sie öffnet mit „Staat“ ganz oben in der Bereichsleiste, mit einem Klick auf Wappen oder Staatsnamen in der oberen Leiste und mit Haushalt, Zollunion oder Verfassung (Signal `popup_opening` der Staatsübersicht); ein zweiter Klick oder Esc schließt sie (Esc nach Fenstern und Auswahl). Geschlossen liegt sie links außerhalb des Bildes statt unsichtbar zu sein: Eine unsichtbare Spalte ordnet Godot nicht an, und ihre umbrochenen Texte waren beim ersten Öffnen für ein Bild über 8.000 Pixel hoch (das Haushaltsfenster sprang so an den oberen Rand). Im Parteienmodus steht dort immer das Parteipanel. Die **Bereichsleiste** sitzt am linken Rand, Schublade und Fenster öffnen daneben; alle Stellen, die bisher die feste linke Spalte als Kartenrand annahmen (Fenster, Schlachtberichte, Ticker, Kamera, Geschichtsstunde), nutzen `_map_area_left()`. Die **Legende** klappt mit einem Klick auf ihren Kopf auf und zu, zu Beginn zu, gemerkt in `anzeige/legende_zu`; der Schritt der Kartenmodi in der Geschichtsstunde klappt sie auf. Der **Ticker** erscheint nur mit einer Meldung (12 s nach der letzten verschwindet er). Geschichtsstunde: Texte zur Schublade, Schritte an der Staatsübersicht öffnen sie. **Test „Karte frei“** im Klicktest: Ohne offenes Fenster verdecken die Leisten 13 % des Bildes (Grenze 20 %; vorher nach Augenmaß rund die Hälfte); dazu Schublade über Bereich, Wappen, Haushalt und Esc. Abweichung: Übersicht rechts war schon einklappbar, die Kartenmodi bleiben bis a2 Textknöpfe |

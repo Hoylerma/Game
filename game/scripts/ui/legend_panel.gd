@@ -1,6 +1,10 @@
 class_name LegendPanel
 extends PanelContainer
-## Legende des aktiven Kartenmodus: Farbfelder oder Farbverlauf.
+## Legende des aktiven Kartenmodus: Farbfelder oder Farbverlauf. Seit M14a1 einklappbar: Ein Klick auf den
+## Kopf zeigt nur noch den Namen des Kartenmodus (die Einstellung merkt sich die Hauptszene).
+
+## Ein- oder ausgeklappt (Klick auf den Kopf).
+signal collapsed_changed(collapsed: bool)
 
 const SWATCH_SIZE := Vector2(16, 12)
 ## Ab dieser Zahl von Einträgen zweispaltig.
@@ -14,8 +18,42 @@ static var _hatch_texture: ImageTexture = null
 ## Inhalt der aktuellen Anzeige; gleicher Inhalt wird nicht neu aufgebaut.
 var _shown: Array = []
 
+var _collapsed := false
+
 @onready var _title: Label = %Title
 @onready var _body: VBoxContainer = %Body
+@onready var _header: Label = $Content/Header
+
+
+func _ready() -> void:
+	for label: Label in [_header, _title]:
+		label.mouse_filter = Control.MOUSE_FILTER_STOP
+		label.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		label.tooltip_text = tr("Legende auf- oder zuklappen")
+		label.gui_input.connect(_on_header_input)
+	_show_header()
+
+
+func is_collapsed() -> bool:
+	return _collapsed
+
+
+func set_collapsed(collapsed: bool) -> void:
+	_collapsed = collapsed
+	_body.visible = not collapsed
+	_show_header()
+
+
+func _show_header() -> void:
+	_header.text = tr("LEGENDE") + (" ▸" if _collapsed else " ▾")
+
+
+func _on_header_input(event: InputEvent) -> void:
+	var button := event as InputEventMouseButton
+	if button != null and button.pressed and button.button_index == MOUSE_BUTTON_LEFT:
+		set_collapsed(not _collapsed)
+		collapsed_changed.emit(_collapsed)
+		accept_event()
 
 
 ## Farbfelder; entries: Dictionaries { "color": Color, "text": String, "detail": String,

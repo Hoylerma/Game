@@ -1,14 +1,15 @@
 class_name AreaBar
 extends PanelContainer
 ## Bereiche des Spielerstaates (seit M13, Schritt a5a, Fenster der Bereiche seit a5b; vertical_slice.md 4.1): eine senkrechte Leiste
-## kleiner Knöpfe rechts neben der linken Spalte (in der Spalte selbst ist neben dem Staatspanel kein
-## Platz); die Fenster der Bereiche öffnen rechts daneben. Ein Klick öffnet das Fenster des Bereichs (main.gd). Bereiche ohne Inhalt im
+## kleiner Knöpfe am linken Rand (seit M14a1; vorher rechts neben der Staatsübersicht); die Schublade der
+## Staatsübersicht („Staat“) und die Fenster der Bereiche öffnen rechts daneben. Ein Klick öffnet das Fenster des Bereichs (main.gd). Bereiche ohne Inhalt im
 ## Lesezeichen (Zollunion, Diplomatie, Krieg, Journale, Jahrbuch) sind ausgeblendet.
 
 signal area_requested(area: StringName)
 
 ## Bereiche in der Reihenfolge der Leiste: Kennung, Aufschrift, Tooltip.
 const AREAS: Array[Array] = [
+	[&"staat", "Staat", "Staatsübersicht: Herrscher, Kasse, Steuern, Heer (auch ein Klick aufs Wappen oben links)"],
 	[&"kabinett", "Kabinett", "Kabinett und Hof: Herrscher, Minister, Neigungen, frühere Amtsinhaber"],
 	[&"gesetze", "Gesetze", "Verfassung, Wahlrecht und Gesetze mit den Wünschen der Gruppen"],
 	[&"gruppen", "Gruppen", "Interessengruppen: Anteil, Einfluss, Zustimmung, Forderungen"],
@@ -62,10 +63,16 @@ func set_available(areas: Dictionary) -> void:
 			b.visible = bool(areas[id])
 
 
-## Der Bereich, dessen Fenster offen ist, erscheint gedrückt (leer: keiner).
+## Der Bereich, dessen Fenster offen ist, erscheint gedrückt (leer: keiner); „Staat“ zeigt die Schublade
+## der Staatsübersicht (set_drawer_open), die neben einem Fenster offen sein kann.
 func set_active(area: StringName) -> void:
 	for id: Variant in _buttons:
-		(_buttons[id] as Button).set_pressed_no_signal(id == area)
+		if id != &"staat":
+			(_buttons[id] as Button).set_pressed_no_signal(id == area)
+
+
+func set_drawer_open(open: bool) -> void:
+	(_buttons[&"staat"] as Button).set_pressed_no_signal(open)
 
 
 ## Sichtbare Bereiche (Tests).

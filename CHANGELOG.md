@@ -8,6 +8,17 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M14 – Europa und Oberfläche
+
+Vertrag: [technik/europa_und_oberflaeche.md](docs/technik/europa_und_oberflaeche.md), Entscheidungen 1–8 wie
+empfohlen freigegeben; Stand je Schritt in Abschnitt 9 dort.
+
+- **Die Karte ist frei (Schritt a1):** Die Staatsübersicht ist jetzt eine Schublade, die beim Start zu ist
+  und sich mit „Staat“ in der Bereichsleiste, einem Klick aufs Wappen oder mit dem Haushalt öffnet; Esc
+  schließt sie. Die Bereichsleiste sitzt am linken Rand, die Legende lässt sich einklappen, und der Ticker
+  erscheint nur, wenn es etwas zu melden gibt. Ohne offenes Fenster bedecken die Leisten nur noch 13 %
+  des Bildes; ein neuer Test hält das unter 20 %.
+
 ### Erste Rückmeldung aus dem Spiel (18.11.2026)
 
 - **Geschichtsstunde verdeckt nichts mehr:** Das Panel sucht sich einen freien Platz über der Karte statt

@@ -9,6 +9,9 @@ extends PanelContainer
 ## erst beim Loslassen hinaus – sonst würde jeder Zwischenschritt als eigener Befehl (und
 ## Chronikeintrag) ausgeführt.
 
+## Vor einem Fenster neben dem Panel (Haushalt, Verfassung, Zollunion): Die Hauptszene öffnet die Schublade
+## der Staatsübersicht (seit M14a1, europa_und_oberflaeche.md 5).
+signal popup_opening
 ## Neuer Satz in Prozent für eine Steuerart (SimulationClient.TAX_*) gewünscht.
 signal tax_rate_requested(kind: int, percent: int)
 ## Wechsel der Zollunion gewünscht (seit M9): Index der Union, -1 für den Austritt. Die Union, der
@@ -337,12 +340,18 @@ func reject_pending(kind: int, message: String) -> void:
 	_tax_hint.text = message
 
 
+## Lage für ein Fenster neben dem Panel; die Schublade öffnet sich zuerst (seit M14a1).
+func _popup_anchor() -> Rect2:
+	popup_opening.emit()
+	return get_global_rect()
+
+
 ## Haushaltsfenster neben dem Panel öffnen.
 func show_budget() -> void:
 	if _state.is_empty():
 		return
 	_fill_budget()
-	var rect := get_global_rect()
+	var rect := _popup_anchor()
 	_budget_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(330, 0)))
 
 
@@ -350,7 +359,7 @@ func show_budget() -> void:
 func show_politics() -> void:
 	if _state.is_empty() or not _politics_button.visible or not _fill_politics():
 		return
-	var rect := get_global_rect()
+	var rect := _popup_anchor()
 	_politics_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(360, 0)))
 
 
@@ -363,7 +372,7 @@ func show_customs() -> void:
 	if _customs_sent == NO_CUSTOMS_CHOICE:
 		_customs_note.text = ""
 	_fill_customs()
-	var rect := get_global_rect()
+	var rect := _popup_anchor()
 	_customs_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(380, 0)))
 
 

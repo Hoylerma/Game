@@ -21,6 +21,7 @@ func _ready() -> void:
 	_top_bar.configure_speeds(SPEED_DAYS_PER_SECOND)
 	_top_bar.speed_selected.connect(_set_speed)
 	_top_bar.menu_requested.connect(toggle_game_menu)
+	_top_bar.state_requested.connect(func() -> void: open_area(&"staat"))
 	_build_game_menu()
 	_build_election_night()
 	_build_party_panel()
@@ -38,6 +39,13 @@ func _ready() -> void:
 	_frame_meter = FrameMeter.new() # Bildrate für die Rückmeldung (seit M13b6)
 	add_child(_frame_meter)
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
+	# Seit M14a1: Die Staatsübersicht ist eine Schublade, beim Start zu; ihre Fenster öffnen sie.
+	_state_panel.popup_opening.connect(
+		func() -> void:
+			if not _state_drawer_open:
+				set_state_drawer(true)
+	)
+	_apply_state_drawer()
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
 	_state_panel.events_source = func() -> Dictionary:
@@ -148,7 +156,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_yearbook()
 		get_viewport().set_input_as_handled()
 		return
-	# Escape schließt das zuletzt geöffnete Fenster eines Bereichs (seit M13a5a).
+	# Escape schließt das zuletzt geöffnete Fenster eines Bereichs (seit M13a5a), hebt dann die Auswahl auf
+	# (Heer, Ort) und schließt zuletzt die Schublade der Staatsübersicht (seit M14a1).
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _windows.close_top():
 		_sync_area_bar()
 		get_viewport().set_input_as_handled()
@@ -159,6 +168,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _selected >= 0:
 		_select_location(-1)
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _state_drawer_open and _state_panel.visible:
+		set_state_drawer(false)
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed(&"kamera_uebersicht", false, true):
@@ -357,6 +370,9 @@ func open_area(area: StringName) -> void:
 		toggle_area_window(area)
 		return
 	match area:
+		&"staat":
+			if _sim != null and _state_panel.visible:
+				toggle_state_drawer()
 		&"haushalt":
 			_state_panel.show_budget()
 		&"zollunion":
@@ -434,6 +450,7 @@ func _sync_area_bar() -> void:
 	_area_bar.set_active(area)
 	if open == _lexicon_window:
 		_area_bar.set_active(&"lexikon")
+	_area_bar.set_drawer_open(_state_drawer_open and _state_panel.visible)
 
 
 func open_yearbook() -> void:
@@ -471,6 +488,14 @@ func _build_settings() -> void:
 	if not _options.language.is_empty():
 		Translation_.use(_options.language) # nur für diesen Start, ohne zu speichern
 	_settings.changed.connect(_on_setting_changed)
+	# Legende ein- oder ausgeklappt wie zuletzt (seit M14a1).
+	_legend.set_collapsed(bool(_settings.get_value("anzeige/legende_zu")))
+	_legend.collapsed_changed.connect(
+		func(collapsed: bool) -> void:
+			_settings.set_value("anzeige/legende_zu", collapsed)
+			_settings.save_file()
+			_fit_location_panel.call_deferred()
+	)
 	_settings_window = SettingsWindow.new()
 	$UI.add_child(_settings_window)
 	_settings_window.close_requested.connect(close_settings)
@@ -691,6 +716,11 @@ func _on_tutorial_step(step: TutorialStep) -> void:
 	}
 	if not step.time:
 		_set_speed(0)
+	# Schritte an der Staatsübersicht öffnen ihre Schublade, der Schritt der Kartenmodi die Legende (seit M14a1).
+	if step.target in ["steuern", "staatsuebersicht"] and not _state_drawer_open:
+		set_state_drawer(true)
+	if step.target == "kartenmodi" and _legend.is_collapsed():
+		_legend.set_collapsed(false)
 	_tutorial_highlight.visible = not step.target.is_empty()
 	_place_tutorial()
 	_place_tutorial.call_deferred()
@@ -828,9 +858,7 @@ func _tutorial_candidates(size: Vector2) -> Array[Vector2]:
 	var top := _left_column.offset_top
 	if _play_bar != null and _play_bar.visible:
 		top = _play_bar.get_global_rect().end.y + 8.0
-	var left := _left_column.get_global_rect().end.x + 8.0
-	if _area_bar != null and _area_bar.visible:
-		left = _area_bar.get_global_rect().end.x + 8.0
+	var left := _map_area_left()
 	var right := _right_column.get_global_rect().position.x - 8.0
 	var bottom := _bottom_of_map_area()
 	return [
@@ -1005,6 +1033,12 @@ func _build_bars() -> void:
 	root.move_child(_ticker, _top_bar.get_index())
 	_ticker.location_requested.connect(func(location: int) -> void: _select_location(location, true))
 	_ticker.resized.connect(_place_ticker)
+	# Seit M14a1 nur mit Meldung sichtbar: Fenster und Schlachtberichte reichen sonst bis zu den Kartenmodi.
+	_ticker.visibility_changed.connect(
+		func() -> void:
+			_place_diplomacy.call_deferred()
+			_place_reports.call_deferred()
+	)
 	# Die Chronik ist über die Bereichsleiste erreichbar; der Ticker zeigt das Neueste.
 	_chronicle_panel.visible = false
 	_tooltips = TooltipLayer.new()
@@ -1083,7 +1117,7 @@ func _bottom_of_map_area() -> float:
 func _place_ticker() -> void:
 	if _ticker == null:
 		return
-	var left := _left_column.offset_right + 12.0
+	var left := _map_area_left() + 4.0
 	var right := _right_column.get_global_rect().position.x - 12.0
 	var height := _ticker.get_combined_minimum_size().y
 	_ticker.size = Vector2(maxf(right - left, 100.0), height)
