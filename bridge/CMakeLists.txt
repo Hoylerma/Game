@@ -27,9 +27,17 @@ if(MSVC)
 endif()
 
 # Ausgabe direkt in das Godot-Projekt; $<1:…> verhindert Unterordner je Konfiguration.
+# Die Release-Fassung für die Pakete (template_release, Preset bridge-release) heißt
+# uhrwerk_bridge.release, damit sie die Debug-Fassung für Editor und Tests nicht überschreibt
+# (uhrwerk.gdextension: *.release zeigt darauf; seit dem 18.11.2026).
 set(UHRWERK_GAME_BIN "${PROJECT_SOURCE_DIR}/game/bin")
+if(GODOTCPP_TARGET STREQUAL "template_release")
+    set(UHRWERK_BRIDGE_NAME "uhrwerk_bridge.release")
+else()
+    set(UHRWERK_BRIDGE_NAME "uhrwerk_bridge")
+endif()
 set_target_properties(uhrwerk_bridge PROPERTIES
-    OUTPUT_NAME "uhrwerk_bridge"
+    OUTPUT_NAME "${UHRWERK_BRIDGE_NAME}"
     LIBRARY_OUTPUT_DIRECTORY "$<1:${UHRWERK_GAME_BIN}>"
     RUNTIME_OUTPUT_DIRECTORY "$<1:${UHRWERK_GAME_BIN}>"
     CXX_VISIBILITY_PRESET hidden

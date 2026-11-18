@@ -2,6 +2,14 @@
 
 Dieses Dokument beschreibt, wie im Repository gearbeitet wird: Struktur, Branches, Commits, Code-Stil und Daten.
 
+## Lizenz von Beiträgen
+
+Das Projekt steht unter der [PolyForm Noncommercial License 1.0.0](LICENSE.md); kommerzielle Rechte
+behält der Rechteinhaber. Bitte vor einem größeren Beitrag ein Issue öffnen: Ob und unter welchen
+Bedingungen Beiträge Dritter aufgenommen werden (etwa mit einer Vereinbarung über die Rechte daran),
+wird vorher geklärt. Neue Bestandteile Dritter brauchen eine Lizenz, die die Weitergabe auch in den
+Paketen erlaubt, und einen Eintrag in `DRITTANBIETER.txt` (`tools/paket/paket.py`).
+
 ## Repository-Struktur
 
 | Ordner | Inhalt | Abhängigkeiten |

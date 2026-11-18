@@ -964,10 +964,12 @@ Abschnitt 13).
 **Bekannte Grenzen**
 - **Spieltest offen:** Ohne ihn ist der Meilenstein nur technisch fertig; Befunde aus dem Test kommen als
   eigener Schritt nach.
-- **CI auf GitHub:** Seit M13a5d brechen die Läufe nach wenigen Sekunden ab (Konto bzw. Abrechnung,
-  nicht der Code). Alle Prüfungen liefen lokal unter Linux; der Kern unter MSVC und Apple Clang, die
-  Determinismusprüfung über vier Plattformen sowie die Pakete für Windows und macOS (`pakete.yml`) sind
-  bisher **nicht gelaufen**.
+- **CI auf GitHub:** Seit dem 22. Oktober 2026 (M9) bekommen die Läufe keinen Runner mehr und brechen
+  nach wenigen Sekunden ab: Das Freikontingent an Actions-Minuten des privaten Repositorys ist
+  aufgebraucht (nicht der Code). Alle Prüfungen von M9 bis M13 liefen lokal unter Linux; der Kern unter
+  MSVC und Apple Clang, die Determinismusprüfung über vier Plattformen sowie die Pakete für Windows und
+  macOS (`pakete.yml`) sind bisher **nicht gelaufen**. Seit dem 18.11.2026 läuft die CI sparsamer
+  (schneller Umfang je Pull Request, voller Umfang zweimal im Monat und von Hand, siehe `ci.yml`).
 - **Bildrate auf echter Hardware** nicht gemessen (die Arbeitsumgebung hat keine Grafikkarte).
 - **Englisch** nur für Startbildschirm, Spielmenü, Einstellungen, Zahlen, Daten und Gründe der KI (179
   von 1.304 Texten); Ereignisse, Journale, Lexikon und Chronik sind deutsch.

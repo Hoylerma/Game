@@ -14,8 +14,8 @@ Godot-Projekt spielbare Pakete für Linux, Windows und macOS und prüft sie.
 
 | System | Ergebnis in `build/pakete/` | Inhalt |
 |---|---|---|
-| Linux x86_64 | `einigkeit-<version>-linux-x86_64.tar.gz` | `einigkeit.x86_64`, `einigkeit.pck`, `libuhrwerk_bridge.so`, `data/`, Texte |
-| Windows x86_64 | `…-windows-x86_64.zip`, `…-windows-x86_64-setup.exe` | `einigkeit.exe`, `einigkeit.console.exe`, `.pck`, `uhrwerk_bridge.dll`, `data/`, Texte |
+| Linux x86_64 | `einigkeit-<version>-linux-x86_64.tar.gz` | `einigkeit.x86_64`, `einigkeit.pck`, `libuhrwerk_bridge.release.so`, `data/`, Texte (`LIESMICH.txt`, `DRITTANBIETER.txt`, `LICENSE.md`) |
+| Windows x86_64 | `…-windows-x86_64.zip`, `…-windows-x86_64-setup.exe` | `einigkeit.exe`, `einigkeit.console.exe`, `.pck`, `uhrwerk_bridge.release.dll`, `data/`, Texte |
 | macOS (universal) | `einigkeit-<version>-macos.dmg` | `EINIGKEIT.app` (Daten in `Contents/Resources/data`), Texte |
 
 Die Exportvorlagen stehen in `game/export_presets.cfg` (Release, `.pck` neben dem Programm; `tests/` und
@@ -38,8 +38,10 @@ python3 tools/klang/klang.py
 python3 tools/paket/paket.py bauen --system linux --godot tools/godot/Godot_v4.4.1-stable_linux.x86_64
 ```
 
-`bridge-release` schreibt dieselbe Datei in `game/bin/` wie das Preset `bridge`; für Editor und Tests
-danach wieder `cmake --build --preset bridge`. Den Windows-Installer baut Inno Setup aus dem
+`bridge-release` schreibt `game/bin/libuhrwerk_bridge.release.so` (`uhrwerk_bridge.release.dll`,
+`libuhrwerk_bridge.release.dylib`) neben die Debug-Fassung des Presets `bridge`; `uhrwerk.gdextension`
+nimmt sie für Release-Exporte, Editor und Tests bleiben bei der Debug-Fassung. (Bis zum 18.11.2026
+schrieben beide dieselbe Datei; nach einem Debug-Build konnte so die Debug-Fassung in ein Paket geraten.) Den Windows-Installer baut Inno Setup aus dem
 Paketordner:
 
 ```bat
@@ -74,7 +76,10 @@ Installer. Die Pakete hängen 30 Tage als Artefakte am Lauf.
 `paket.py` erzeugt sie bei jedem Bau (`paket.py drittanbieter --godot …` gibt sie nur aus): die Lizenz
 der Godot-Engine mit allen ihren Bestandteilen (von Godot selbst ausgegeben), godot-cpp (MIT), zstd
 (BSD, aus dem Build-Ordner), die vier Schriften (SIL Open Font License, aus `game/assets/schriften`)
-und die Herkunft der Musik. EINIGKEIT selbst hat vorerst keine eigene Lizenz.
+die Herkunft der Musik und die Namensnennung der Geodaten (GeoNames, CC BY 4.0; Natural Earth;
+Terrain Tiles), gelesen aus `tools/geodaten/quellen.json` (ohne die nur für die Vorschau genutzten
+Quellen). EINIGKEIT selbst steht unter der PolyForm Noncommercial License 1.0.0; `LICENSE.md` liegt
+jedem Paket bei, der Windows-Installer zeigt sie vor der Installation.
 
 ## Rückmeldung
 

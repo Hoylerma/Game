@@ -33,6 +33,7 @@ Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern
 UninstallDisplayIcon={app}\einigkeit.exe
+LicenseFile={#Quelle}\LICENSE.md
 InfoBeforeFile={#Quelle}\LIESMICH.txt
 
 [Languages]

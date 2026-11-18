@@ -71,6 +71,22 @@ class Texte(unittest.TestCase):
             self.assertIn("DRITTANBIETER.txt", text)
             self.assertIn("Rückmeldung", text)
 
+    def test_geodaten_mit_namensnennung(self) -> None:
+        text = paket.geodaten_hinweise()
+        self.assertIn("GeoNames (https://www.geonames.org)", text)
+        self.assertIn("CC BY 4.0", text)
+        self.assertIn("Made with Natural Earth", text)
+        self.assertIn("Terrain Tiles", text)
+        self.assertIn("verändert", text)
+        self.assertNotIn("boundary lines", text)  # nur Vorschau, nicht im Spiel
+        self.assertTrue(all(len(z) <= 78 for z in text.splitlines()))
+
+    def test_lizenz_polyform_mit_hinweis(self) -> None:
+        text = paket.LIZENZ.read_text(encoding="utf-8")
+        self.assertTrue(text.startswith("Required Notice: Copyright"))
+        self.assertIn("# PolyForm Noncommercial License 1.0.0", text)
+        self.assertIn("PolyForm Noncommercial", paket.liesmich("linux", "1.2.3"))
+
     def test_schriftlizenzen_vorhanden(self) -> None:
         schriften = {p.stem for p in (paket.SPIEL / "assets" / "schriften").glob("*.ttf")}
         lizenzen = {p.stem.removeprefix("OFL_") for p in (paket.SPIEL / "assets" / "schriften").glob("OFL_*.txt")}

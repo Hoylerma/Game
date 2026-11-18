@@ -28,6 +28,7 @@ Exitcodes: 0 = Erfolg, 1 = Rauchtest weicht ab, 2 = Fehler.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import platform
 import re
@@ -35,6 +36,7 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import textwrap
 import time
 import zipfile
 from collections.abc import Sequence
@@ -46,12 +48,14 @@ SPIEL = REPO / "game"
 DATEN = REPO / "data"
 
 SYSTEME = {
-    # system: (Vorlage in export_presets.cfg, Programmdatei im Paketordner, Bibliothek der Brücke)
-    "linux": ("Linux", "einigkeit.x86_64", "libuhrwerk_bridge.so"),
-    "windows": ("Windows", "einigkeit.exe", "uhrwerk_bridge.dll"),
-    "macos": ("macOS", "Einigkeit.zip", "libuhrwerk_bridge.dylib"),
+    # system: (Vorlage in export_presets.cfg, Programmdatei im Paketordner, Release-Bibliothek der Brücke)
+    "linux": ("Linux", "einigkeit.x86_64", "libuhrwerk_bridge.release.so"),
+    "windows": ("Windows", "einigkeit.exe", "uhrwerk_bridge.release.dll"),
+    "macos": ("macOS", "Einigkeit.zip", "libuhrwerk_bridge.release.dylib"),
 }
 SZENARIEN = ("westfaelischer_frieden", "voelkerfruehling")
+GEODATEN = REPO / "tools" / "geodaten" / "quellen.json"
+LIZENZ = REPO / "LICENSE.md"
 MARKE = "=== LIZENZEN ==="
 
 
@@ -89,25 +93,67 @@ def zstd_lizenz() -> str:
     raise PaketFehler("Lizenz von zstd nicht gefunden (build/*/_deps/zstd-src/LICENSE; erst die Brücke bauen)")
 
 
+def geodaten_hinweise() -> str:
+    """Namensnennung der Geodaten, aus denen Karte und Orte entstanden sind (tools/geodaten/quellen.json).
+
+    Quellen der Gruppe „referenz“ dienen nur der Vorschau und stecken nicht im Spiel.
+    """
+    manifest = json.loads(GEODATEN.read_text(encoding="utf-8"))
+    natural_earth: list[str] = []
+    ne_kopf = ""
+    absaetze: list[str] = []
+    for q in manifest["quellen"]:
+        if q["gruppe"] == "referenz":
+            continue
+        treffer = re.match(r"^(Made with Natural Earth\..*?) \((Version [^,]+), (.+)\)$", q["quellenangabe"])
+        if treffer:
+            ne_kopf = f"{treffer[1]} ({treffer[2]}; {q['lizenz']})"
+            natural_earth.append(treffer[3])
+        else:
+            absaetze.append(f"{q['quellenangabe']}\nLizenz: {q['lizenz']}")
+    if natural_earth:
+        absaetze.insert(0, f"{ne_kopf}\nVerwendet: {', '.join(natural_earth)}.")
+    kacheln = manifest.get("kacheln")
+    if kacheln:
+        absaetze.append(f"{kacheln['quellenangabe']}\nLizenz: {kacheln['lizenz']}")
+    vorspann = textwrap.fill(
+        "Küsten, Seen, Flüsse, Höhen sowie Lage und Namen der Orte (data/karte, data/tabellen/orte.csv, "
+        "kreise.csv) hat EINIGKEIT aus den folgenden Quellen erzeugt (tools/geodaten). Die Daten wurden "
+        "verändert: zugeschnitten, ausgewählt, vereinfacht, zu Orten und Kreisen zusammengefasst und um "
+        "historische Namen ergänzt.",
+        78,
+    )
+    umbrochen = [
+        "\n".join(textwrap.fill(zeile, 78) for zeile in a.replace("siehe quellenangabe", "siehe oben").splitlines())
+        for a in absaetze
+    ]
+    return vorspann + "\n\n" + "\n\n".join(umbrochen)
+
+
 def drittanbieter(godot: Path) -> str:
     teile = [
         "EINIGKEIT – Bestandteile von Dritten",
         "=" * 37,
         "",
-        "EINIGKEIT enthält die folgenden Programme, Bibliotheken und Schriften anderer Urheber.",
-        "Ihre Lizenzen stehen vollständig in dieser Datei.",
+        "EINIGKEIT selbst steht unter der PolyForm Noncommercial License 1.0.0 (LICENSE.md): Nutzung,",
+        "Veränderung und Weitergabe sind für nicht kommerzielle Zwecke erlaubt. Die folgenden Programme,",
+        "Bibliotheken, Schriften und Daten anderer Urheber behalten ihre eigenen Lizenzen; sie stehen",
+        "vollständig in dieser Datei.",
         "",
         "  Godot Engine                 MIT (mit den Bestandteilen der Engine, siehe unten)",
         "  godot-cpp                    MIT",
         "  zstd 1.5.6                   BSD (Kompression der Spielstände)",
         "  Source Serif 4, Source Code Pro, Playfair Display, UnifrakturMaguntia",
         "                               SIL Open Font License 1.1",
+        "  GeoNames                     CC BY 4.0 (Orte und Ortsnamen)",
+        "  Natural Earth                gemeinfrei (Küsten, Seen, Flüsse)",
+        "  Terrain Tiles                Namensnennung der Höhenquellen (Gelände)",
         "",
         "Die Musikstücke (Beethoven, Haydn, Silcher, Schumann, Rouget de Lisle) sind gemeinfrei; Satz und",
         "Klang erzeugt EINIGKEIT selbst (tools/klang). Abgeglichen wurden sie an Notensätzen des",
         "Mutopia-Projekts (www.mutopiaproject.org) von Stelios Samelis, Stan Sanderson, Coyau und",
         "Philippe Hézaine; das Kaiserlied am Satz von Klaus Rettinghaus (Creative Commons BY 4.0).",
-        "Karten und Daten stammen aus dem Projekt.",
+        "Die historischen Daten (Staaten, Besitz, Bevölkerung, Ereignisse) stammen aus dem Projekt.",
         "",
     ]
 
@@ -117,6 +163,7 @@ def drittanbieter(godot: Path) -> str:
     abschnitt("Godot Engine", godot_lizenzen(godot))
     abschnitt("godot-cpp", (REPO / "third_party" / "godot-cpp" / "LICENSE.md").read_text(encoding="utf-8"))
     abschnitt("zstd", zstd_lizenz())
+    abschnitt("Geodaten: GeoNames, Natural Earth, Terrain Tiles", geodaten_hinweise())
     for ofl in sorted((SPIEL / "assets" / "schriften").glob("OFL_*.txt")):
         abschnitt(f"Schrift {ofl.stem.removeprefix('OFL_')}", ofl.read_text(encoding="utf-8"))
     return "\n".join(teile)
@@ -143,7 +190,8 @@ Rückmeldung: Spielmenü (Esc) → Rückmeldung → „Bericht anlegen“ legt e
 (Spielstand, Notiz, Protokoll). Es wird nichts versandt; bitte die Datei selbst schicken.
 
 Der Ordner data/ gehört zum Spiel und muss neben dem Programm liegen (macOS: in der App).
-Lizenzen der enthaltenen Bestandteile: DRITTANBIETER.txt.
+Lizenz: PolyForm Noncommercial 1.0.0 (LICENSE.md) – nicht kommerzielle Nutzung erlaubt.
+Lizenzen der enthaltenen Bestandteile von Dritten: DRITTANBIETER.txt.
 """
 
 
@@ -153,7 +201,7 @@ Lizenzen der enthaltenen Bestandteile: DRITTANBIETER.txt.
 def exportieren(godot: Path, system: str, ziel: Path) -> Path:
     vorlage, datei, bibliothek = SYSTEME[system]
     if not (SPIEL / "bin" / bibliothek).is_file():
-        raise PaketFehler(f"game/bin/{bibliothek} fehlt (cmake --build --preset bridge-release)")
+        raise PaketFehler(f"game/bin/{bibliothek} fehlt (cmake --preset bridge-release && cmake --build --preset bridge-release)")
     if not (SPIEL / "audio" / "musik" / "stuecke.cfg").is_file():
         raise PaketFehler("Musik fehlt (python3 tools/klang/klang.py)")
     erg = _lauf([godot, "--headless", "--path", SPIEL, "--import"], capture_output=True)
@@ -182,7 +230,11 @@ def bauen(system: str, godot: Path, ausgabe: Path) -> Path:
         shutil.rmtree(ordner)
     print(f"Paket {name}")
     programm = exportieren(godot, system, ordner)
-    texte = {"DRITTANBIETER.txt": drittanbieter(godot), "LIESMICH.txt": liesmich(system, ver)}
+    texte = {
+        "DRITTANBIETER.txt": drittanbieter(godot),
+        "LIESMICH.txt": liesmich(system, ver),
+        "LICENSE.md": LIZENZ.read_text(encoding="utf-8"),
+    }
 
     if system == "macos":
         with zipfile.ZipFile(programm) as z:

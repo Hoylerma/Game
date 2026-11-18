@@ -223,5 +223,5 @@ Abschnitt 5).
 ## Bibliothek und Einbindung
 
 - CMake-Ziel `uhrwerk_bridge` (Shared Library), Einstiegspunkt `uhrwerk_library_init`.
-- Ausgabe nach `game/bin/` mit den Namen `libuhrwerk_bridge.so` (Linux), `uhrwerk_bridge.dll` (Windows), `libuhrwerk_bridge.dylib` (macOS).
+- Ausgabe nach `game/bin/` mit den Namen `libuhrwerk_bridge.so` (Linux), `uhrwerk_bridge.dll` (Windows), `libuhrwerk_bridge.dylib` (macOS); die Release-Fassung für die Pakete (Preset `bridge-release`, `template_release`) heißt seit dem 18.11.2026 `libuhrwerk_bridge.release.so` usw. und steht in `uhrwerk.gdextension` unter `*.release`.
 - Beschreibung in `game/bin/uhrwerk.gdextension`, `compatibility_minimum = "4.4"`.

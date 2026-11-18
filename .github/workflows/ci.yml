@@ -18,14 +18,43 @@
 #
 # Pakete für Linux, Windows und macOS baut und prüft pakete.yml (seit M13b5).
 #
+# Umfang (seit dem 18.11.2026, um Actions-Minuten des privaten Repositorys zu sparen):
+#   schnell  bei Pull Requests und Pushes auf main: Kern unter Linux (GCC, Clang) ohne die langen
+#            CTests, Formatierung, Python-Werkzeuge, Godot mit Einheiten-, Rauch- und Sprachtest
+#            (rund 20 abgerechnete Minuten je Lauf)
+#   voll     am 1. und 15. jedes Monats auf main und von Hand (Actions → Prüfungen → Run workflow):
+#            zusätzlich Windows, macOS, Determinismus, Lasttest, Balancing und Labore, die langen
+#            CTests, Klick- und Durchspieltest, Screenshots. Vor dem Abschluss eines Meilensteins
+#            von Hand starten. macOS-Minuten zählen zehnfach, Windows doppelt.
+# Reine Doku-Änderungen (docs/, *.md) lösen keinen Lauf aus.
+#
 # Lokal nachstellen: siehe README.md, Abschnitt „Entwicklung“.
 
 name: Prüfungen
 
 on:
   push:
+    branches: [main]
+    paths-ignore: # reine Doku und andere Workflows
+      - 'docs/**'
+      - '**/*.md'
+      - '.github/workflows/pakete.yml'
+      - '.github/workflows/ki-partien.yml'
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - '.github/workflows/pakete.yml'
+      - '.github/workflows/ki-partien.yml'
+  schedule:
+    - cron: '23 2 1,15 * *' # am 1. und 15. um 2:23 UTC: voller Umfang auf main
   workflow_dispatch:
+    inputs:
+      umfang:
+        description: 'Umfang der Prüfungen'
+        type: choice
+        options: [voll, schnell]
+        default: voll
 
 # Minimale Rechte: Die Jobs lesen nur den Quelltext.
 permissions:
@@ -37,6 +66,10 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  # Voller Umfang (siehe oben): planmäßig oder von Hand mit „voll“.
+  VOLL: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.umfang != 'schnell') }}
+  # Im schnellen Umfang ausgelassene CTests (je 10–20 s im Debug-Build, zusammen gut eine Minute).
+  LANGSAME_TESTS: '^(determinismus_1848|zeitung_1848|speichertest_koeniggraetz|speichertest_1848|zoll_1848|lasttest_threads)$'
   # Jahre für den plattformübergreifenden Prüfsummenvergleich.
   PRUEFSUMME_JAHRE: 100
   PRUEFSUMME_JAHRE_1848: 2 # Lesezeichen 1848 (seit M7): rund 2 s je Spieljahr im Debug-Build
@@ -81,9 +114,15 @@ jobs:
         run: cmake --build --preset dev
 
       - name: Testen
-        run: ctest --preset dev
+        run: |
+          if [ "$VOLL" = "true" ]; then
+            ctest --preset dev
+          else
+            ctest --preset dev -E "$LANGSAME_TESTS"
+          fi
 
       - name: Prüfsummen festhalten (${{ env.PRUEFSUMME_JAHRE }} Jahre, Lasttest)
+        if: env.VOLL == 'true'
         run: |
           ./build/dev/cli/uhrwerk-cli lauf --daten data --jahre "$PRUEFSUMME_JAHRE" --speichern "$RUNNER_TEMP/lauf.einigkeit" \
             | tee "$RUNNER_TEMP/lauf.txt"
@@ -116,6 +155,7 @@ jobs:
           echo "Prüfsummen (Linux, ${{ matrix.compiler }}): lauf \`$summe\`, 1848 \`$summe1848\`, lasttest \`$last\`, Spielstand \`$wert\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prüfsumme hochladen
+        if: env.VOLL == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: pruefsumme-linux-${{ matrix.compiler }}
@@ -125,6 +165,7 @@ jobs:
 
   kern-windows:
     name: Kern (Windows, MSVC)
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.umfang != 'schnell') # nur im vollen Umfang
     runs-on: windows-latest
     timeout-minutes: 30
     steps:
@@ -203,6 +244,7 @@ jobs:
 
   kern-macos:
     name: Kern (macOS, Apple Clang)
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.umfang != 'schnell') # nur im vollen Umfang
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
@@ -271,6 +313,7 @@ jobs:
   determinismus:
     name: Determinismus (GCC, Clang, MSVC, Apple Clang)
     needs: [kern-linux, kern-windows, kern-macos]
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.umfang != 'schnell') # nur im vollen Umfang
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -314,6 +357,7 @@ jobs:
 
   lasttest:
     name: Lasttest (Linux, Release)
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.umfang != 'schnell') # nur im vollen Umfang
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -369,6 +413,7 @@ jobs:
 
   balancing:
     name: Balancing (Linux, Release)
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.umfang != 'schnell') # nur im vollen Umfang
     runs-on: ubuntu-24.04
     timeout-minutes: 50
     steps:
@@ -817,6 +862,7 @@ jobs:
 
       # Abnahme M3: Jeder Ort der Karte wird bei drei Zoomstufen richtig erkannt.
       - name: Klicktest (game/tests/klick_test.gd)
+        if: env.VOLL == 'true'
         run: |
           "$GODOT_BIN" --headless --path game --script res://tests/klick_test.gd 2>&1 | tee "$RUNNER_TEMP/klick.log"
           grep -q "KLICK OK" "$RUNNER_TEMP/klick.log"
@@ -839,6 +885,7 @@ jobs:
       # Abnahme M13a6: die Partie 1848–1871 als Preußen, Österreich, Bayern und Sachsen über die
       # Oberfläche (Startbildschirm, Ereignisse, Wahlabende, alle Fenster, Speichern und Laden, Urteil).
       - name: Durchspieltest 1848–1871 (game/tests/durchspiel_test.gd)
+        if: env.VOLL == 'true'
         run: |
           "$GODOT_BIN" --headless --path game --script res://tests/durchspiel_test.gd 2>&1 | tee "$RUNNER_TEMP/durchspiel.log"
           grep -q "DURCHSPIEL OK" "$RUNNER_TEMP/durchspiel.log"
@@ -855,6 +902,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Screenshots der Hauptszene (Xvfb, OpenGL 3)
+        if: env.VOLL == 'true'
         run: |
           mkdir -p artefakte
           # Übersicht im Kartenmodus „Politisch“ mit Ortsinfo Berlin-Cölln
@@ -988,7 +1036,7 @@ jobs:
           fi
 
       - name: Screenshots hochladen
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && env.VOLL == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: screenshots-hauptszene
