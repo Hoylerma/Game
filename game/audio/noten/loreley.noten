@@ -6,8 +6,8 @@
 titel     = "Die Loreley"
 komponist = "Friedrich Silcher"
 werk      = "Volksweise nach Heinrich Heine (um 1837)"
-stimmung  = frieden
-tempo     = 80
+stimmung  = "frieden krise"
+tempo     = 72
 takt      = 6/8
 hall      = 0.3
 

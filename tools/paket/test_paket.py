@@ -8,7 +8,9 @@ from __future__ import annotations
 import configparser
 import re
 import sys
+import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 HIER = Path(__file__).resolve().parent
@@ -92,6 +94,36 @@ class Texte(unittest.TestCase):
         lizenzen = {p.stem.removeprefix("OFL_") for p in (paket.SPIEL / "assets" / "schriften").glob("OFL_*.txt")}
         for schrift in schriften:
             self.assertIn(schrift.split("-")[0], lizenzen)
+
+
+class Export(unittest.TestCase):
+    def test_fehlende_debug_bruecke_ist_harmlos(self) -> None:
+        ausgabe = (
+            "savepack: end\n"
+            'ERROR: Condition "!FileAccess::exists(path)" is true. Returning: ERR_FILE_NOT_FOUND\n'
+            "   at: open_dynamic_library (drivers/unix/os_unix.cpp:893)\n"
+            "ERROR: GDExtension dynamic library not found: 'res://bin/uhrwerk.gdextension'.\n"
+            "ERROR: Error loading extension: 'res://bin/uhrwerk.gdextension'.\n"
+        )
+        self.assertEqual(paket.exportfehler(ausgabe), [])
+
+    def test_andere_fehler_zaehlen(self) -> None:
+        ausgabe = "ERROR: Cannot export project with preset \"macOS\" due to configuration errors:\nSCRIPT ERROR: x\n"
+        self.assertEqual(len(paket.exportfehler(ausgabe)), 2)
+
+    def test_bibliothek_im_export(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            ordner = Path(tmp)
+            programm = ordner / "einigkeit.x86_64"
+            programm.write_bytes(b"")
+            self.assertFalse(paket.bibliothek_im_export(programm, "libuhrwerk_bridge.release.so"))
+            (ordner / "libuhrwerk_bridge.release.so").write_bytes(b"")
+            self.assertTrue(paket.bibliothek_im_export(programm, "libuhrwerk_bridge.release.so"))
+            app = ordner / "Einigkeit.zip"
+            with zipfile.ZipFile(app, "w") as z:
+                z.writestr("EINIGKEIT.app/Contents/Frameworks/libuhrwerk_bridge.release.dylib", b"")
+            self.assertTrue(paket.bibliothek_im_export(app, "libuhrwerk_bridge.release.dylib"))
+            self.assertFalse(paket.bibliothek_im_export(app, "libuhrwerk_bridge.dylib"))
 
 
 class Rauchtest(unittest.TestCase):

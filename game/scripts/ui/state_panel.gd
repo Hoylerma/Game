@@ -9,6 +9,9 @@ extends PanelContainer
 ## erst beim Loslassen hinaus – sonst würde jeder Zwischenschritt als eigener Befehl (und
 ## Chronikeintrag) ausgeführt.
 
+## Vor einem Fenster neben dem Panel (Haushalt, Verfassung, Zollunion): Die Hauptszene öffnet die Schublade
+## der Staatsübersicht (seit M14a1, europa_und_oberflaeche.md 5).
+signal popup_opening
 ## Neuer Satz in Prozent für eine Steuerart (SimulationClient.TAX_*) gewünscht.
 signal tax_rate_requested(kind: int, percent: int)
 ## Wechsel der Zollunion gewünscht (seit M9): Index der Union, -1 für den Austritt. Die Union, der
@@ -180,18 +183,16 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	_population.tooltip_text = _population_tooltip(state, population)
 	var treasury := float(state.get("treasury", 0.0))
 	_treasury.text = Format.money(treasury)
-	_treasury.add_theme_color_override(
-		&"font_color", UiPalette.NEGATIVE if treasury < 0.0 else UiPalette.INK
-	)
+	_treasury.add_theme_color_override(&"font_color", UiPalette.amount_color(treasury))
 	var income := float(state.get("income_month", 0.0))
 	var expenses := float(state.get("expenses_month", 0.0))
 	_income.text = Format.signed_money(income)
+	_income.add_theme_color_override(&"font_color", UiPalette.amount_color(income))
 	_expenses.text = Format.signed_money(-expenses)
+	_expenses.add_theme_color_override(&"font_color", UiPalette.amount_color(-expenses))
 	var balance := income - expenses
 	_balance.text = Format.signed_money(balance)
-	_balance.add_theme_color_override(
-		&"font_color", UiPalette.NEGATIVE if balance < 0.0 else UiPalette.POSITIVE
-	)
+	_balance.add_theme_color_override(&"font_color", UiPalette.amount_color(balance))
 	var debt := float(state.get("debt", 0.0))
 	_debt.text = Format.money(debt)
 	_debt.add_theme_color_override(
@@ -339,12 +340,18 @@ func reject_pending(kind: int, message: String) -> void:
 	_tax_hint.text = message
 
 
+## Lage für ein Fenster neben dem Panel; die Schublade öffnet sich zuerst (seit M14a1).
+func _popup_anchor() -> Rect2:
+	popup_opening.emit()
+	return get_global_rect()
+
+
 ## Haushaltsfenster neben dem Panel öffnen.
 func show_budget() -> void:
 	if _state.is_empty():
 		return
 	_fill_budget()
-	var rect := get_global_rect()
+	var rect := _popup_anchor()
 	_budget_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(330, 0)))
 
 
@@ -352,7 +359,7 @@ func show_budget() -> void:
 func show_politics() -> void:
 	if _state.is_empty() or not _politics_button.visible or not _fill_politics():
 		return
-	var rect := get_global_rect()
+	var rect := _popup_anchor()
 	_politics_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(360, 0)))
 
 
@@ -365,7 +372,7 @@ func show_customs() -> void:
 	if _customs_sent == NO_CUSTOMS_CHOICE:
 		_customs_note.text = ""
 	_fill_customs()
-	var rect := get_global_rect()
+	var rect := _popup_anchor()
 	_customs_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(380, 0)))
 
 
@@ -1301,13 +1308,13 @@ func _fill_budget() -> void:
 			caption = "Zoll (Vereinskasse, Tarif %s)" % Format.percent(
 				roundi(float(state.get("customs_tariff_percent", 0.0)))
 			)
-		_budget_line(caption, Format.signed_money(amount))
+		_budget_line(caption, Format.signed_money(amount), false, amount)
 	# Überschuss des Hinterlands außerhalb der Karte (seit dem Review M10; Frankreich, Dänemark).
 	var hinterland := float(state.get("hinterland_month", 0.0))
 	if hinterland > 0.0:
 		income += hinterland
-		_budget_line("Hinterland (Überschuss)", Format.signed_money(hinterland))
-	_budget_line("Summe", Format.signed_money(income))
+		_budget_line("Hinterland (Überschuss)", Format.signed_money(hinterland), false, hinterland)
+	_budget_line("Summe", Format.signed_money(income), false, income)
 	var soldiers := int(state.get("soldiers", 0))
 	var interest_percent := float(state.get("interest_percent", 0.0))
 	var items: Array = [
@@ -1325,12 +1332,14 @@ func _fill_budget() -> void:
 	for item: Array in items:
 		var amount := float(state.get(str(item[1]), 0.0))
 		expenses += amount
-		_budget_line(str(item[0]), Format.signed_money(-amount))
-	_budget_line("Summe", Format.signed_money(-expenses))
+		_budget_line(str(item[0]), Format.signed_money(-amount), false, -amount)
+	_budget_line("Summe", Format.signed_money(-expenses), false, -expenses)
 	_budget_line("Stand", "", true)
-	_budget_line("Saldo", Format.signed_money(income - expenses))
-	_budget_line("Schatz", Format.money(float(state.get("treasury", 0.0))))
-	_budget_line("Schulden", Format.money(float(state.get("debt", 0.0))))
+	_budget_line("Saldo", Format.signed_money(income - expenses), false, income - expenses)
+	var treasury := float(state.get("treasury", 0.0))
+	_budget_line("Schatz", Format.money(treasury), false, treasury)
+	var debt := float(state.get("debt", 0.0))
+	_budget_line("Schulden", Format.money(debt), false, -debt)
 	_budget_line(
 		"Jahreseinnahmen (gleitend)", Format.money(float(state.get("yearly_income", 0.0)))
 	)
@@ -1342,7 +1351,8 @@ func _fill_budget() -> void:
 	_budget_line("Staatsbankrotte", bankrupt_text)
 
 
-func _budget_line(caption: String, value: String, header: bool = false) -> void:
+## amount: Betrag für die Farbe (seit dem Spieltest 11/2026: grün oder rot; NAN = Tinte).
+func _budget_line(caption: String, value: String, header: bool = false, amount: float = NAN) -> void:
 	var left := Label.new()
 	left.text = caption
 	left.theme_type_variation = &"HeaderLabel" if header else &"MutedLabel"
@@ -1350,6 +1360,8 @@ func _budget_line(caption: String, value: String, header: bool = false) -> void:
 	right.text = value
 	right.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if not is_nan(amount):
+		right.add_theme_color_override(&"font_color", UiPalette.amount_color(amount))
 	_budget_grid.add_child(left)
 	_budget_grid.add_child(right)
 

@@ -8,6 +8,40 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M14 – Europa und Oberfläche
+
+Vertrag: [technik/europa_und_oberflaeche.md](docs/technik/europa_und_oberflaeche.md), Entscheidungen 1–8 wie
+empfohlen freigegeben; Stand je Schritt in Abschnitt 9 dort.
+
+- **Symbole (Schritt a2):** Eigene Symbole im Stil der Epoche ersetzen die Textknöpfe: Die Bereichsleiste
+  zeigt Krone, Gesetzblatt, Halbrund, Waage, Säbel und mehr, mit Zählern für laufende Kriege und Krisen;
+  die 18 Kartenmodi passen als eine Reihe Symbole in vier Gruppen unter die Karte. Die obere Leiste zeigt
+  je Kennzahl ein Symbol und neu die Unruhe, die Bevölkerung und das Heer; Legitimität, Unruhe und
+  Bevölkerung zeigen ihre Veränderung seit dem Monatsanfang mit Pfeil und Farbe.
+- **Die Karte ist frei (Schritt a1):** Die Staatsübersicht ist jetzt eine Schublade, die beim Start zu ist
+  und sich mit „Staat“ in der Bereichsleiste, einem Klick aufs Wappen oder mit dem Haushalt öffnet; Esc
+  schließt sie. Die Bereichsleiste sitzt am linken Rand, die Legende lässt sich einklappen, und der Ticker
+  erscheint nur, wenn es etwas zu melden gibt. Ohne offenes Fenster bedecken die Leisten nur noch 13 %
+  des Bildes; ein neuer Test hält das unter 20 %.
+
+### Erste Rückmeldung aus dem Spiel (18.11.2026)
+
+- **Geschichtsstunde verdeckt nichts mehr:** Das Panel sucht sich einen freien Platz über der Karte statt
+  oben rechts, wo die Ortsinfo aufgeht; wird es nirgends ganz frei, zeigt es nur Titel und Aufgabe. Mit
+  der Maus lässt es sich verschieben. Der Klicktest prüft in jedem Schritt, dass Ortsinfo, Übersicht,
+  Legende und Staatsübersicht frei bleiben.
+- **Entspanntere Musik:** Die Stimmung „Revolution“ gilt nur bei einem Aufstand im eigenen Staat; vorher
+  lief im ersten Spieljahr fast nur die Marseillaise. Für Elise, Loreley und Kaiserlied spielen auch in
+  Krisen, der Wilde Reiter im Krieg. Langsamere Tempi, leiseres und weicheres Blech, leisere Trommeln,
+  Pausen von 20–45 statt 6–16 Sekunden zwischen den Stücken, Musik ab Werk auf 55 % statt 70 %. Ein Stück
+  kann jetzt zu mehreren Stimmungen gehören (`stimmung = "frieden krise"`).
+- **Geld in Farbe:** Kasse und Saldo in der oberen Leiste, Einnahmen, Ausgaben und Saldo in der
+  Staatsübersicht und jede Zeile des Haushalts erscheinen grün (Gewinn) oder rot (Verlust); bei
+  Rot-Grün-Schwäche wird Grün zu Blau.
+- **Plan für Europa und eine neue Oberfläche:** Entwurf für M14 in
+  `docs/technik/europa_und_oberflaeche.md` (Karte von ganz Europa um 1848, lebendigeres Kartenbild,
+  übersichtlicher Bildschirm), zur Freigabe.
+
 ### Lizenz, Namensnennung der Geodaten, sparsamere CI
 
 - **Lizenz:** EINIGKEIT steht unter der **PolyForm Noncommercial License 1.0.0** (`LICENSE.md`): nutzen,
@@ -22,6 +56,10 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
   Durchspieltest laufen am 1. und 15. jedes Monats und von Hand. Reine Doku-Änderungen lösen keinen Lauf
   aus, die 100 KI-Partien laufen monatlich statt wöchentlich. Grund: Das Freikontingent an
   Actions-Minuten des privaten Repositorys war seit dem 22. Oktober aufgebraucht.
+- **Pakete auf allen drei Systemen:** Der Workflow `pakete.yml` lief zum ersten Mal und baut die Pakete
+  für Linux, Windows (mit Installer) und macOS; der Paketrauchtest ist auf allen drei Systemen grün.
+  Behoben dafür: `paket.py` wertete die Meldung des Editors über die fehlende Debug-Brücke als
+  Exportfehler und prüft jetzt stattdessen, dass die Release-Brücke im Export liegt.
 - **Release-Brücke mit eigenem Namen:** `bridge-release` schreibt jetzt `libuhrwerk_bridge.release.so`
   (bzw. `.dll`, `.dylib`) statt dieselbe Datei wie die Debug-Brücke zu überschreiben. Vorher konnte nach
   einem Debug-Build die Debug-Fassung in ein Paket geraten; das Paket stürzte dann beim Start ab.

@@ -7,13 +7,13 @@ titel     = "Soldatenmarsch"
 komponist = "Robert Schumann"
 werk      = "Album für die Jugend op. 68 Nr. 2 (1848)"
 stimmung  = krieg
-tempo     = 116
+tempo     = 104
 takt      = 2/4
-hall      = 0.2
+hall      = 0.3
 
-stimme oben    { instrument = blech    lautstaerke = 0.7 }
+stimme oben    { instrument = blech    lautstaerke = 0.5 }
 stimme unten   { instrument = klavier  lautstaerke = 0.6 }
-stimme trommel { instrument = trommel  lautstaerke = 0.35 }
+stimme trommel { instrument = trommel  lautstaerke = 0.2 }
 
 teil a {
     oben    = "[g4 h4]:8. [g4 c5]:16 [g4 d5]:8 r | [g4 e5] r [g4 d5] r | [fis4 c5] r [g4 h4] r | [fis4 a4] r g4 r |"

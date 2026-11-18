@@ -33,6 +33,9 @@ const MAIN_SCENE := "res://scenes/main.tscn"
 ## Stichproben mit echten Klicks je Zoomstufe.
 const EVENT_SAMPLES_PER_LEVEL := 40
 const MAX_REPORTED := 20
+## Seit M14a1: Anteil des Bildes, den Leisten und Panels ohne offenes Fenster höchstens verdecken
+## (europa_und_oberflaeche.md 6; gemessen 13 %, vor M14 nach Augenmaß rund die Hälfte).
+const FREE_MAP_LIMIT := 0.20
 
 var _main: Node = null
 var _view: MapView = null
@@ -121,6 +124,7 @@ func _run() -> void:
 	await _check_save_ui(sim)
 	await _check_new_game()
 	await _check_start_screen_flow()
+	await _check_free_map()
 	await _check_areas()
 	await _check_verdict()
 	await _check_newspaper()
@@ -749,6 +753,18 @@ func _check_bars() -> void:
 	layer.show_for(top.field(&"legitimitaet"), texts_source.legitimacy)
 	if not layer.text_of(0).contains("Unruhe") or not layer.text_of(0).contains("Zustimmung der Gruppen"):
 		_fail("Tooltip Legitimität ohne Ursachen der Unruhe: „%s“" % layer.text_of(0).replace("\n", " / "))
+	# Seit M14a2: Symbole statt Überschriften, dazu Unruhe, Bevölkerung (mit der Verwaltung) und Heer.
+	for key: StringName in [&"kasse", &"legitimitaet", &"unruhe", &"bevoelkerung", &"heer", &"vermaechtnis"]:
+		var metric := top.field(key)
+		var icon := metric.get_node_or_null("Icon") as TextureRect if metric != null else null
+		if metric == null or not metric.is_visible_in_tree() or icon == null or icon.texture == null or top.field_text(key) == "–":
+			_fail("Obere Leiste: Kennzahl %s ohne Symbol oder Wert („%s“)" % [key, top.field_text(key)])
+	for pair: Array in [[&"unruhe", texts_source.unrest, "Ziel"], [&"bevoelkerung", texts_source.population, "Einwohner"], [&"heer", texts_source.army, "Kosten"]]:
+		layer.show_for(top.field(pair[0]), pair[1])
+		if not layer.text_of(0).contains(str(pair[2])):
+			_fail("Tooltip %s: „%s“" % [pair[0], layer.text_of(0).replace("\n", " / ")])
+	if not top.get_global_rect().encloses(top.field(&"vermaechtnis").get_global_rect()) or top.get_global_rect().size.x > _main.get_viewport().get_visible_rect().size.x + 1.0:
+		_fail("Obere Leiste breiter als das Bild (%s)" % top.get_global_rect())
 	layer.hide_all()
 	var texts := overview.entry_texts()
 	var journal := -1
@@ -923,6 +939,92 @@ func _quiet_hints() -> void:
 		hint.use_seen_file("user://klick_test_hinweise.cfg")
 
 
+## Karte frei (seit M14a1, europa_und_oberflaeche.md 5): Ohne offenes Fenster verdecken Leisten und Panels
+## höchstens FREE_MAP_LIMIT des Bildes; die Staatsübersicht ist eine Schublade (Bereich „Staat“, Wappen in der
+## oberen Leiste, Esc schließt sie), Haushalt und Zollunion öffnen sie mit.
+func _check_free_map() -> void:
+	var screen := root.get_visible_rect()
+	(_main.call("window_manager") as WindowManager).close_all()
+	_main.call("set_state_drawer", false)
+	_main.call("select_location", -1)
+	await _frames(2)
+	var panel: StatePanel = _main.call("state_panel")
+	if bool(_main.call("is_state_drawer_open")) or screen.intersects(panel.get_global_rect()):
+		_fail("Schublade: geschlossen und doch im Bild %s" % panel.get_global_rect())
+	var covered := _ui_coverage()
+	if covered > FREE_MAP_LIMIT:
+		_fail("Karte frei: Leisten verdecken %.1f %% des Bildes (höchstens %.0f %%)" % [100.0 * covered, 100.0 * FREE_MAP_LIMIT])
+	var bar: AreaBar = _main.call("area_bar")
+	bar.button(&"staat").emit_signal("pressed")
+	await _frames(2)
+	var opened := bool(_main.call("is_state_drawer_open")) and screen.encloses(panel.get_global_rect())
+	await _key(KEY_ESCAPE)
+	await _frames(2)
+	var closed := not bool(_main.call("is_state_drawer_open")) and not screen.intersects(panel.get_global_rect())
+	var top: TopBar = _main.get("_top_bar")
+	top.state_requested.emit()
+	await _frames(1)
+	var by_coat := bool(_main.call("is_state_drawer_open"))
+	_main.call("set_state_drawer", false)
+	bar.button(&"haushalt").emit_signal("pressed")
+	await _frames(2)
+	var budget := bool(_main.call("is_state_drawer_open")) and panel.is_budget_visible()
+	_main.call("set_state_drawer", false)
+	await _frames(1)
+	if not opened or not closed or not by_coat or not budget or panel.is_budget_visible():
+		_fail("Schublade: Bereich öffnet %s, Esc schließt %s, Wappen öffnet %s, Haushalt mit Schublade %s" % [
+			opened, closed, by_coat, budget
+		])
+	print("  Karte frei: Leisten verdecken %.1f %% des Bildes; Schublade über Bereich, Wappen, Haushalt, Esc" % (100.0 * covered))
+
+
+## Anteil des Bildes unter sichtbaren Leisten und Panels (Raster mit 8 Pixeln).
+func _ui_coverage() -> float:
+	var screen := root.get_visible_rect()
+	var controls: Array[Control] = [
+		_main.get("_top_bar"), _main.call("area_bar"), _main.get("_left_column"), _main.get("_mode_bar"),
+		_main.call("ticker"), _main.get("_play_bar"),
+	]
+	for child in (_main.get("_right_column") as Control).get_children():
+		if child is Control and (child as Control).name != &"Spacer":
+			controls.append(child as Control)
+	var rects: Array[Rect2] = []
+	for control in controls:
+		if control != null and control.is_visible_in_tree():
+			var cut := control.get_global_rect().intersection(screen)
+			if cut.has_area():
+				rects.append(cut)
+	var covered := 0
+	var total := 0
+	for y in range(0, int(screen.size.y), 8):
+		for x in range(0, int(screen.size.x), 8):
+			total += 1
+			var point := Vector2(x + 4, y + 4)
+			for rect in rects:
+				if rect.has_point(point):
+					covered += 1
+					break
+	return float(covered) / maxf(total, 1.0)
+
+
+## Spieltest 11/2026: Das Panel der Geschichtsstunde verdeckt weder Ortsinfo, Übersicht und Legende noch die
+## Staatsübersicht; ein offenes Fenster höchstens am Rand (nur wenn sonst kein Platz ist, dann kompakt).
+func _check_tutorial_free(tutorial: TutorialPanel, step_id: String) -> void:
+	var rect := tutorial.get_global_rect()
+	var panels: Array[Control] = [
+		_main.call("location_panel"), _main.call("overview_panel"), _main.call("state_panel"),
+		_main.find_child("LegendPanel", true, false) as Control,
+	]
+	for panel in panels:
+		if panel != null and panel.is_visible_in_tree() and rect.intersects(panel.get_global_rect()):
+			_fail("Geschichtsstunde „%s“: Panel %s verdeckt %s %s" % [step_id, rect, panel.name, panel.get_global_rect()])
+	var window: Control = (_main.call("window_manager") as WindowManager).open_window()
+	if window != null and window.is_visible_in_tree():
+		var cut := rect.intersection(window.get_global_rect())
+		if cut.has_area() and (cut.size.y > 8.0 and cut.size.x > 8.0):
+			_fail("Geschichtsstunde „%s“: Panel %s verdeckt das Fenster %s" % [step_id, rect, window.name])
+
+
 ## Onboarding (seit M13b3, vertical_slice.md 5.4; Abnahme b3: Klicktest durch die Geschichtsstunde): Start über
 ## das Hauptmenü, jeder Schritt mit seiner Aufgabe über die Bedienung, die Zeit nur, wo der Schritt es erlaubt;
 ## dann ein Hinweis beim ersten Öffnen (und nur dann) und „Was ist passiert?“ nach dem Laden.
@@ -962,6 +1064,7 @@ func _check_onboarding() -> void:
 			_fail("Geschichtsstunde: Ziel „%s“ fehlt" % step.target)
 		await _do_lesson_step(step, sim)
 		await _frames(2)
+		_check_tutorial_free(tutorial, step.id)
 		if not tutorial.is_done():
 			_fail("Geschichtsstunde: Aufgabe „%s“ nicht erkannt (%s)" % [step.id, sim.get_date_text()])
 			tutorial.mark_done()
@@ -1164,6 +1267,11 @@ func _check_war_ui(menu: GameMenu) -> void:
 		])
 		return
 	var player := sim.get_player_state_index()
+	# Seit M14a2: Die Bereichsleiste zählt die Kriege des Spielerstaates am Symbol „Militär“.
+	_main.call("_refresh_bars", true)
+	var bar: AreaBar = _main.call("area_bar")
+	if bar.badge(&"militaer") < 1:
+		_fail("Königgrätz: kein Zähler am Bereich Militär (%d)" % bar.badge(&"militaer"))
 	var army_id := -1
 	for army in sim.get_armies(player):
 		if str(army.get("name", "")) == "I. Armee":
@@ -1854,12 +1962,21 @@ func _check_events_ui(sim: SimulationClient) -> void:
 	_answer_events()
 	_main.call("set_speed", 5)
 	var paper: NewspaperWindow = _main.call("newspaper_window")
-	for _frame in 3000:
-		if window.is_open():
+	# Seit M14a1 bis zu einem Spieldatum statt einer festen Zahl von Bildern: Ohne Last laufen die Bilder so
+	# schnell, dass 3.000 Bilder nur gut ein halbes Spieljahr waren (Test schlug je nach Rechner fehl).
+	var limit := ElectionTally.day_number({"year": 1850, "month": 1, "day": 1})
+	var night: ElectionNight = _main.call("election_night")
+	for _frame in 200000:
+		if window.is_open() or ElectionTally.day_number(sim.get_date()) >= limit:
 			break
 		if paper.is_open(): # seit M13b1: die Zeitung hält die Zeit an
 			_newspapers_seen += 1
 			_main.call("close_newspaper")
+			_main.call("set_speed", 5)
+		if night.is_open(): # ein Wahlabend (etwa die Zweite Kammer 1849) hält die Zeit ebenfalls an
+			_main.call("_close_election_night", false)
+			_main.call("set_speed", 5)
+		elif int(_main.call("speed")) == 0: # Pausenregeln (Krieg, Forderung …)
 			_main.call("set_speed", 5)
 		await process_frame
 	if not window.is_open():

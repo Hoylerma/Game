@@ -121,6 +121,11 @@ var _journal_window: JournalWindow = null
 ## Fensterverwaltung, Bereichsleiste und Jahrbuch (seit M13a5a, vertical_slice.md 4.1–4.3).
 var _windows := WindowManager.new()
 var _area_bar: AreaBar = null
+## Schublade der Staatsübersicht (seit M14a1, europa_und_oberflaeche.md 5): beim Start zu, öffnet über den
+## Bereich „Staat“, das Wappen in der oberen Leiste oder ein Fenster der Staatsübersicht.
+var _state_drawer_open := false
+## Breite der linken Spalte (Schublade), wie in der Szene.
+const LEFT_COLUMN_WIDTH := 340.0
 var _yearbook_window: YearbookWindow = null
 ## Fenster der Bereiche (seit M13a5b), nach Bereich.
 var _area_windows: Dictionary = {}
@@ -956,7 +961,7 @@ func _rebuild_legend() -> void:
 
 func _fit_camera() -> void:
 	var viewport_rect := get_viewport().get_visible_rect()
-	var left := _left_column.get_global_rect().end.x + 8.0
+	var left := _map_area_left()
 	var right := _right_column.get_global_rect().position.x - 8.0
 	var top := _top_bar.get_global_rect().end.y + 8.0
 	var bottom := _mode_bar_area.get_global_rect().position.y - 4.0
@@ -1483,3 +1488,57 @@ func set_party(current: int) -> void:
 ## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.
 func start_new_game(scenario_id: String, state_tag: String = "", quiet: bool = false) -> String:
 	return ""
+
+
+# --- Schublade der Staatsübersicht (seit M14a1, europa_und_oberflaeche.md 5) ------------------
+
+
+## Linker Rand der freien Karte: rechts der Bereichsleiste und, wenn offen, der Schublade.
+func _map_area_left() -> float:
+	var left := 12.0
+	if _area_bar != null and _area_bar.visible:
+		left = _area_bar.get_global_rect().end.x + 8.0
+	if _left_column.visible and _left_column_shown():
+		left = maxf(left, _left_column.get_global_rect().end.x + 8.0)
+	return left
+
+
+## Steht die linke Spalte im Bild (offene Schublade oder Parteipanel)?
+func _left_column_shown() -> bool:
+	return _state_drawer_open or not _state_panel.visible
+
+
+func is_state_drawer_open() -> bool:
+	return _state_drawer_open
+
+
+## Öffnet oder schließt die Schublade; im Parteienmodus steht dort immer das Parteipanel.
+func set_state_drawer(open: bool) -> void:
+	_state_drawer_open = open
+	if not open:
+		_state_panel.hide_popups()
+	_apply_state_drawer()
+
+
+func toggle_state_drawer() -> void:
+	set_state_drawer(not _state_drawer_open)
+
+
+## Lage der linken Spalte aus Schublade und Rolle; danach alles neu anordnen. Geschlossen liegt die Spalte
+## links außerhalb des Bildes, bleibt aber angeordnet: Eine unsichtbare Spalte ordnet Godot nicht an, und
+## ihre umbrochenen Texte wären beim ersten Öffnen für ein Bild riesig hoch.
+func _apply_state_drawer() -> void:
+	if _left_column_hidden_by_overlay():
+		_left_column.visible = false
+	else:
+		_left_column.visible = true
+	if _area_bar != null:
+		_area_bar.set_drawer_open(_state_drawer_open and _state_panel.visible)
+	_place_diplomacy()
+	_place_reports()
+
+
+## Platzhalter; die Hauptszene (main_windows.gd) überschreibt ihn: Startbildschirm oder Wahlabend offen.
+func _left_column_hidden_by_overlay() -> bool:
+	return false
+

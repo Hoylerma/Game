@@ -92,6 +92,10 @@ class NotenTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as ordner:
             s = noten.lies(schreibe(Path(ordner), KLEIN))
         self.assertEqual((s.name, s.titel, s.stimmung, s.tempo, s.takt), ("probe", "Probe", "frieden", 120.0, F(1)))
+        with tempfile.TemporaryDirectory() as ordner:
+            text = KLEIN.replace("stimmung  = frieden", 'stimmung  = "frieden, krise"')
+            mehrere = noten.lies(schreibe(Path(ordner), text))
+        self.assertEqual((mehrere.stimmung, mehrere.stimmungen), ("frieden krise", ("frieden", "krise")))
         self.assertEqual(s.stimmen["bass"].lautstaerke, 0.7)
         self.assertEqual(s.form, ["a", "a"])
         self.assertEqual(s.dauer_ganze(), F(2))
@@ -100,6 +104,8 @@ class NotenTest(unittest.TestCase):
     def test_fehler_im_stueck(self) -> None:
         faelle = [
             (KLEIN.replace('stimmung  = frieden', 'stimmung  = heiter'), "Stimmung 'heiter' unbekannt"),
+            (KLEIN.replace('stimmung  = frieden', 'stimmung  = "frieden heiter"'), "Stimmung 'heiter' unbekannt"),
+            (KLEIN.replace('stimmung  = frieden', 'stimmung  = "krise krise"'), "Stimmung doppelt"),
             (KLEIN.replace("instrument = klavier", "instrument = orgel"), "Instrument 'orgel' unbekannt"),
             (KLEIN.replace('bass    = "a2:1 |"', 'bass    = "a2:2 |"'), "Stimme bass ist 8 Sechzehntel lang"),
             (KLEIN.replace('form = "a a"', 'form = "a b"'), "Form nennt unbekannten Teil 'b'"),
@@ -118,8 +124,11 @@ class NotenTest(unittest.TestCase):
     def test_stuecke_des_spiels(self) -> None:
         alle = klang.stuecke(klang.NOTEN)
         self.assertGreaterEqual(len(alle), 6)
-        stimmungen = {s.stimmung for s in alle}
+        stimmungen = {st for s in alle for st in s.stimmungen}
         self.assertEqual(stimmungen, set(noten.STIMMUNGEN))
+        # Spieltest 11/2026: jede Stimmung mit mindestens zwei Stücken außer der Revolution.
+        for stimmung in ("frieden", "krise", "krieg"):
+            self.assertGreaterEqual(sum(stimmung in s.stimmungen for s in alle), 2, stimmung)
         for s in alle:
             with self.subTest(stueck=s.name):
                 self.assertTrue(s.titel and s.komponist and s.werk)

@@ -3,6 +3,10 @@ extends PanelContainer
 ## Geschichtsstunde (seit M13b3, vertical_slice.md 5.4): zeigt den Schritt mit Anleitung und Aufgabe. Die
 ## Hauptszene prüft die Aufgabe (mark_done); „Weiter“ geht erst danach. Ein Schritt zum Lesen („weiter“)
 ## ist sofort erledigt.
+##
+## Seit dem Spieltest (11/2026): Die Hauptszene sucht dem Panel einen freien Platz über der Karte; findet
+## sie keinen, zeigt es kompakt nur Titel und Aufgabe (set_compact). Mit der Maus lässt es sich
+## verschieben (moved_by_user), dann bleibt es dort bis zum nächsten Start.
 
 signal step_entered(step: TutorialStep)
 signal lexicon_requested(article: String)
@@ -22,6 +26,11 @@ var _task: Label = null
 var _lexicon: Button = null
 var _next: Button = null
 var _end: Button = null
+## Von Hand verschoben: Die Hauptszene stellt es nicht mehr selbst hin.
+var moved_by_user := false
+var _compact := false
+var _dragging := false
+var _drag_offset := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -29,6 +38,8 @@ func _ready() -> void:
 	custom_minimum_size = Vector2(WIDTH, 0)
 	visible = false
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	mouse_default_cursor_shape = Control.CURSOR_MOVE
+	tooltip_text = tr("Mit der Maus verschieben")
 	_build()
 	EpochTheme.frame(self)
 
@@ -36,8 +47,46 @@ func _ready() -> void:
 func start(lesson: TutorialLesson) -> void:
 	_lesson = lesson
 	_index = -1
+	moved_by_user = false
+	set_compact(false)
 	visible = true
 	_enter(0)
+
+
+## Kompakt: nur Kopf, Titel, Aufgabe und Knöpfe (die Anleitung ist ausgeblendet).
+func set_compact(compact: bool) -> void:
+	_compact = compact
+	if _text != null:
+		_text.visible = not compact
+
+
+func is_compact() -> bool:
+	return _compact
+
+
+## Größe des Panels in voller oder kompakter Form, ohne umzuschalten.
+func size_for(compact: bool) -> Vector2:
+	var result := get_combined_minimum_size()
+	if compact == _compact or _text == null:
+		return result
+	var separation := float((_text.get_parent() as Control).get_theme_constant(&"separation"))
+	var text_height := _text.get_combined_minimum_size().y + separation
+	result.y += -text_height if compact else text_height
+	return result
+
+
+func _gui_input(event: InputEvent) -> void:
+	var button := event as InputEventMouseButton
+	if button != null and button.button_index == MOUSE_BUTTON_LEFT:
+		_dragging = button.pressed
+		_drag_offset = button.global_position - global_position
+		accept_event()
+	elif event is InputEventMouseMotion and _dragging:
+		var area := get_viewport_rect().size
+		var target := (event as InputEventMouseMotion).global_position - _drag_offset
+		position = target.clamp(Vector2.ZERO, (area - size).max(Vector2.ZERO))
+		moved_by_user = true
+		accept_event()
 
 
 func is_active() -> bool:

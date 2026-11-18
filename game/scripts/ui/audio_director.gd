@@ -15,15 +15,17 @@ const MOODS: PackedStringArray = ["frieden", "krise", "krieg", "revolution"]
 const SOUNDS: PackedStringArray = ["gaensekiel", "siegel", "papier", "glocke", "trommel", "telegraf"]
 const MUSIC_BUS := &"Musik"
 const SOUND_BUS := &"Klaenge"
-## Überblendung bei einem Wechsel der Stimmung (Sekunden) und Pause zwischen zwei Stücken.
-const FADE_SECONDS := 3.0
-const PAUSE_MIN := 6.0
-const PAUSE_MAX := 16.0
+## Überblendung bei einem Wechsel der Stimmung (Sekunden) und Pause zwischen zwei Stücken (seit dem
+## Spieltest 11/2026 länger: 20–45 statt 6–16 Sekunden, die Musik soll entspannter sein).
+const FADE_SECONDS := 4.0
+const PAUSE_MIN := 20.0
+const PAUSE_MAX := 45.0
 const SILENT_DB := -60.0
 ## Höchstens so viele Klänge zugleich.
 const SOUND_VOICES := 4
 
-## Stücke: Kennung → { titel, komponist, werk, stimmung, dauer }.
+## Stücke: Kennung → { titel, komponist, werk, stimmung, dauer }; stimmung kann mehrere Stimmungen durch
+## Leerzeichen getrennt nennen (seit dem Spieltest 11/2026).
 var pieces := {}
 ## Gespielte Klänge je Kennung (Tests).
 var sounds_played := {}
@@ -87,7 +89,7 @@ func current_piece() -> String:
 func pieces_for(mood_id: String) -> PackedStringArray:
 	var result := PackedStringArray()
 	for id: String in pieces:
-		if str((pieces[id] as Dictionary).get("stimmung", "")) == mood_id:
+		if str((pieces[id] as Dictionary).get("stimmung", "")).split(" ", false).has(mood_id):
 			result.append(id)
 	result.sort()
 	return result

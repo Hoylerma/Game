@@ -141,13 +141,14 @@ def _blech(f: float, halten: int, laut: float, saat: int) -> np.ndarray:
     hell = 0.35 + 0.65 * np.minimum(t / 0.06, 1.0)  # Ansatz: erst dunkel, dann voll
     klang = np.zeros(n)
     faktor = np.ones(n)  # hell^(k−1), höchstens hell³, durch Multiplikation (kein np.power)
-    for k in range(1, 11):
+    # Seit dem Spieltest 11/2026 weicher: sieben statt zehn Teiltöne, längerer Ansatz.
+    for k in range(1, 8):
         if k * f > 0.45 * RATE:
             break
         klang += (1.0 / k) * faktor * sinus(k * f * t)
         if k < 4:
             faktor = faktor * hell
-    return klang * _rampe(n, int(0.03 * RATE), nach) * laut * 0.8
+    return klang * _rampe(n, int(0.05 * RATE), nach) * laut * 0.7
 
 
 _PAUKE = ((1.0, 1.0), (1.5, 0.6), (1.99, 0.4), (2.44, 0.25))

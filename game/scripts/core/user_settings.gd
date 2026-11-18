@@ -35,7 +35,7 @@ const DEFAULTS := {
 	"bild/oberflaeche": 100,
 	"bild/bildrate": 0,
 	"ton/gesamt": 80,
-	"ton/musik": 70,
+	"ton/musik": 55, # seit dem Spieltest 11/2026 (vorher 70)
 	"ton/klaenge": 80,
 	"ton/musik_aus": false,
 	"spiel/autosave": "jaehrlich",
@@ -54,6 +54,8 @@ const DEFAULTS := {
 	"zugang/animationen_reduziert": false,
 	"zugang/schrift": 100,
 	"sprache/sprache": "de",
+	# Seit M14a1: Legende eingeklappt (ein Klick auf ihren Kopf ändert es; kein Eintrag im Fenster).
+	"anzeige/legende_zu": true,
 }
 
 var path := PATH

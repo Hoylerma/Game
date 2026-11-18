@@ -21,6 +21,7 @@ func _ready() -> void:
 	_top_bar.configure_speeds(SPEED_DAYS_PER_SECOND)
 	_top_bar.speed_selected.connect(_set_speed)
 	_top_bar.menu_requested.connect(toggle_game_menu)
+	_top_bar.state_requested.connect(func() -> void: open_area(&"staat"))
 	_build_game_menu()
 	_build_election_night()
 	_build_party_panel()
@@ -38,6 +39,13 @@ func _ready() -> void:
 	_frame_meter = FrameMeter.new() # Bildrate für die Rückmeldung (seit M13b6)
 	add_child(_frame_meter)
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
+	# Seit M14a1: Die Staatsübersicht ist eine Schublade, beim Start zu; ihre Fenster öffnen sie.
+	_state_panel.popup_opening.connect(
+		func() -> void:
+			if not _state_drawer_open:
+				set_state_drawer(true)
+	)
+	_apply_state_drawer()
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
 	_state_panel.events_source = func() -> Dictionary:
@@ -102,6 +110,9 @@ func _process(delta: float) -> void:
 	if _tutorial != null and _tutorial.is_active() and not _tutorial.is_done():
 		if _tutorial_check(_tutorial.current_step().check):
 			_tutorial.mark_done()
+	# Freien Platz halten, wenn Ortsinfo oder Fenster auf- und zugehen (seit dem Spieltest 11/2026).
+	if _tutorial != null and _tutorial.visible:
+		_place_tutorial()
 	if _sim == null or _speed == 0:
 		return
 	_day_accumulator += delta * SPEED_DAYS_PER_SECOND[_speed]
@@ -145,7 +156,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_yearbook()
 		get_viewport().set_input_as_handled()
 		return
-	# Escape schließt das zuletzt geöffnete Fenster eines Bereichs (seit M13a5a).
+	# Escape schließt das zuletzt geöffnete Fenster eines Bereichs (seit M13a5a), hebt dann die Auswahl auf
+	# (Heer, Ort) und schließt zuletzt die Schublade der Staatsübersicht (seit M14a1).
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _windows.close_top():
 		_sync_area_bar()
 		get_viewport().set_input_as_handled()
@@ -156,6 +168,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _selected >= 0:
 		_select_location(-1)
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _state_drawer_open and _state_panel.visible:
+		set_state_drawer(false)
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed(&"kamera_uebersicht", false, true):
@@ -354,6 +370,9 @@ func open_area(area: StringName) -> void:
 		toggle_area_window(area)
 		return
 	match area:
+		&"staat":
+			if _sim != null and _state_panel.visible:
+				toggle_state_drawer()
 		&"haushalt":
 			_state_panel.show_budget()
 		&"zollunion":
@@ -431,6 +450,7 @@ func _sync_area_bar() -> void:
 	_area_bar.set_active(area)
 	if open == _lexicon_window:
 		_area_bar.set_active(&"lexikon")
+	_area_bar.set_drawer_open(_state_drawer_open and _state_panel.visible)
 
 
 func open_yearbook() -> void:
@@ -468,6 +488,14 @@ func _build_settings() -> void:
 	if not _options.language.is_empty():
 		Translation_.use(_options.language) # nur für diesen Start, ohne zu speichern
 	_settings.changed.connect(_on_setting_changed)
+	# Legende ein- oder ausgeklappt wie zuletzt (seit M14a1).
+	_legend.set_collapsed(bool(_settings.get_value("anzeige/legende_zu")))
+	_legend.collapsed_changed.connect(
+		func(collapsed: bool) -> void:
+			_settings.set_value("anzeige/legende_zu", collapsed)
+			_settings.save_file()
+			_fit_location_panel.call_deferred()
+	)
 	_settings_window = SettingsWindow.new()
 	$UI.add_child(_settings_window)
 	_settings_window.close_requested.connect(close_settings)
@@ -688,6 +716,11 @@ func _on_tutorial_step(step: TutorialStep) -> void:
 	}
 	if not step.time:
 		_set_speed(0)
+	# Schritte an der Staatsübersicht öffnen ihre Schublade, der Schritt der Kartenmodi die Legende (seit M14a1).
+	if step.target in ["steuern", "staatsuebersicht"] and not _state_drawer_open:
+		set_state_drawer(true)
+	if step.target == "kartenmodi" and _legend.is_collapsed():
+		_legend.set_collapsed(false)
 	_tutorial_highlight.visible = not step.target.is_empty()
 	_place_tutorial()
 	_place_tutorial.call_deferred()
@@ -764,13 +797,85 @@ func tutorial_target(target_name: String) -> Control:
 	return null
 
 
-## Rechts oben unter der oberen Leiste, über der Übersicht.
+## Platz der Geschichtsstunde (seit dem Spieltest 11/2026; vorher fest rechts oben, wo die Ortsinfo
+## aufgeht): die erste freie Stelle über der Karte – unten rechts, oben rechts, rechts oben in der Spalte,
+## unten links, oben links –, an der das Panel weder Ortsinfo, Übersicht und Legende noch die
+## Staatsübersicht, offene Fenster oder das Ziel des Schritts verdeckt. Ist keine Stelle frei, erscheint
+## es kompakt (Titel und Aufgabe); sonst an der Stelle mit der kleinsten Überdeckung. Von Hand
+## verschoben bleibt es, wo es ist (nur im Bild gehalten).
 func _place_tutorial() -> void:
 	if _tutorial == null or not _tutorial.visible:
 		return
-	var area := get_viewport().get_visible_rect().size
-	_tutorial.size = _tutorial.get_combined_minimum_size()
-	_tutorial.position = Vector2(area.x - _tutorial.size.x - 12.0, _left_column.offset_top)
+	var view := get_viewport().get_visible_rect()
+	if _tutorial.moved_by_user:
+		_tutorial.size = _tutorial.get_combined_minimum_size()
+		_tutorial.position = _tutorial.position.clamp(view.position, (view.end - _tutorial.size).max(view.position))
+		return
+	var occupied := tutorial_occupied_rects()
+	var best_position := Vector2.ZERO
+	var best_compact := true
+	var best_overlap := INF
+	for compact: bool in [false, true]:
+		var size := _tutorial.size_for(compact)
+		for candidate in _tutorial_candidates(size):
+			var overlap := _overlap_area(Rect2(candidate, size), occupied)
+			if overlap < best_overlap:
+				best_overlap = overlap
+				best_position = candidate
+				best_compact = compact
+			if overlap <= 0.0:
+				break
+		if best_overlap <= 0.0:
+			break
+	if _tutorial.is_compact() != best_compact:
+		_tutorial.set_compact(best_compact)
+	_tutorial.size = _tutorial.size_for(best_compact)
+	_tutorial.position = best_position.round()
+
+
+## Flächen, die die Geschichtsstunde nicht verdecken darf (auch für den Klicktest).
+func tutorial_occupied_rects() -> Array[Rect2]:
+	var result: Array[Rect2] = []
+	var controls: Array[Control] = [_area_bar, _windows.open_window(), _event_window, _newspaper_window, _play_bar]
+	for column: Control in [_left_column, _right_column]:
+		for child in column.get_children():
+			if child is Control and (child as Control).name != &"Spacer":
+				controls.append(child as Control)
+	var step := _tutorial.current_step() if _tutorial != null else null
+	if step != null:
+		var target := tutorial_target(step.target)
+		if target != null and target != _map_view:
+			controls.append(target)
+	for control in controls:
+		if control != null and control.is_visible_in_tree():
+			result.append(control.get_global_rect())
+	return result
+
+
+## Mögliche Plätze über der Karte, in der Reihenfolge des Vorzugs.
+func _tutorial_candidates(size: Vector2) -> Array[Vector2]:
+	var view := get_viewport().get_visible_rect()
+	var top := _left_column.offset_top
+	if _play_bar != null and _play_bar.visible:
+		top = _play_bar.get_global_rect().end.y + 8.0
+	var left := _map_area_left()
+	var right := _right_column.get_global_rect().position.x - 8.0
+	var bottom := _bottom_of_map_area()
+	return [
+		Vector2(right - size.x, bottom - size.y),
+		Vector2(right - size.x, top),
+		Vector2(view.end.x - size.x - 12.0, top),
+		Vector2(left, bottom - size.y),
+		Vector2(left, top),
+	]
+
+
+static func _overlap_area(rect: Rect2, occupied: Array[Rect2]) -> float:
+	var total := 0.0
+	for other in occupied:
+		var cut := rect.intersection(other.grow(4.0))
+		total += cut.get_area() if cut.has_area() else 0.0
+	return total
 
 
 ## Hinweis unten rechts über der Legende.
@@ -855,8 +960,9 @@ func audio_director() -> AudioDirector:
 	return _audio
 
 
-## Stimmung aus der Lage des Spielerstaates: Krieg vor Revolution (eigener Aufstand oder Journal in einer
-## revolutionären Stufe) vor Krise (Stufe 2 oder 3 eines Spiels mit dem Spielerstaat) vor Frieden.
+## Stimmung aus der Lage des Spielerstaates: Krieg vor Revolution (Aufstand im eigenen Staat) vor Krise
+## (Journal der Revolution in einer revolutionären Stufe, Stufe 2 oder 3 eines Spiels mit dem Spielerstaat)
+## vor Frieden. Bis zum Spieltest 11/2026 zählte das Journal als Revolution.
 func _update_mood() -> void:
 	if _audio == null or _sim == null:
 		return
@@ -871,12 +977,14 @@ func mood_for_player() -> String:
 			return "krieg"
 	if not (_sim.get_state_events(_player).get("revolt", {}) as Dictionary).is_empty():
 		return "revolution"
+	# Seit dem Spieltest 11/2026: Läuft die Revolution nur im Journal (ohne Aufstand im eigenen Staat), ist
+	# die Stimmung „krise“ – vorher spielte das ganze erste Jahr nur die Marseillaise.
 	for journal in _sim.get_journals():
 		if (
 			str(journal.get("id", "")) == "revolution" and bool(journal.get("started", false))
 			and not bool(journal.get("finished", false)) and REVOLUTION_STAGES.has(str(journal.get("stage_id", "")))
 		):
-			return "revolution"
+			return "krise"
 	for play in _sim.get_diplomatic_plays():
 		var involved := int(play.get("demander_index", -1)) == _player or int(play.get("target_index", -1)) == _player
 		if involved and int(play.get("stage", 1)) >= 2:
@@ -925,6 +1033,12 @@ func _build_bars() -> void:
 	root.move_child(_ticker, _top_bar.get_index())
 	_ticker.location_requested.connect(func(location: int) -> void: _select_location(location, true))
 	_ticker.resized.connect(_place_ticker)
+	# Seit M14a1 nur mit Meldung sichtbar: Fenster und Schlachtberichte reichen sonst bis zu den Kartenmodi.
+	_ticker.visibility_changed.connect(
+		func() -> void:
+			_place_diplomacy.call_deferred()
+			_place_reports.call_deferred()
+	)
 	# Die Chronik ist über die Bereichsleiste erreichbar; der Ticker zeigt das Neueste.
 	_chronicle_panel.visible = false
 	_tooltips = TooltipLayer.new()
@@ -951,7 +1065,9 @@ func _build_bars() -> void:
 	_bar_tooltips.location_name = _location_name
 	_tooltips.attach(_top_bar.field(&"kasse"), _bar_tooltips.cash)
 	_tooltips.attach(_top_bar.field(&"legitimitaet"), _bar_tooltips.legitimacy)
-	_tooltips.attach(_top_bar.field(&"verwaltung"), _bar_tooltips.administration)
+	_tooltips.attach(_top_bar.field(&"unruhe"), _bar_tooltips.unrest)
+	_tooltips.attach(_top_bar.field(&"bevoelkerung"), _bar_tooltips.population)
+	_tooltips.attach(_top_bar.field(&"heer"), _bar_tooltips.army)
 	_tooltips.attach(_top_bar.field(&"vermaechtnis"), _bar_tooltips.legacy, _bar_tooltips.legacy_link)
 
 
@@ -1003,7 +1119,7 @@ func _bottom_of_map_area() -> float:
 func _place_ticker() -> void:
 	if _ticker == null:
 		return
-	var left := _left_column.offset_right + 12.0
+	var left := _map_area_left() + 4.0
 	var right := _right_column.get_global_rect().position.x - 12.0
 	var height := _ticker.get_combined_minimum_size().y
 	_ticker.size = Vector2(maxf(right - left, 100.0), height)
@@ -1018,13 +1134,32 @@ func _refresh_bars(force: bool = false) -> void:
 	if not force and Time.get_ticks_msec() - _overview_filled_at < OVERVIEW_REFRESH_MS:
 		return
 	_overview_filled_at = Time.get_ticks_msec()
+	var date := _sim.get_date()
+	_top_bar.begin_month(int(date.get("year", 0)) * 12 + int(date.get("month", 1)))
 	_top_bar.show_overview(_sim.get_state_overview(_player), _sim.get_legacy(_player))
+	_update_area_badges()
 	if _player_current >= 0:
 		_overview.show_entries([] as Array[Dictionary])
 		return
 	_overview.show_entries(OverviewPanel.collect(_sim, _player, str(_sim.get_state(_player).get("tag", ""))))
 	if _location_panel.visible:
 		_overview.visible = false
+
+
+## Zähler der Bereichsleiste (seit M14a2): Kriege des Spielerstaates, Krisen, an denen er beteiligt ist.
+func _update_area_badges() -> void:
+	if _area_bar == null or _sim == null:
+		return
+	var wars := 0
+	for war in _sim.get_wars():
+		if int(war.get("player_side", 0)) != 0:
+			wars += 1
+	var crises := 0
+	for play in _sim.get_diplomatic_plays():
+		if int(play.get("demander_index", -1)) == _player or int(play.get("target_index", -1)) == _player:
+			crises += 1
+	_area_bar.set_badge(&"militaer", wars)
+	_area_bar.set_badge(&"diplomatie", crises)
 
 
 func _on_overview_entry(kind: StringName, value: int) -> void:

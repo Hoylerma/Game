@@ -3,20 +3,32 @@ extends PanelContainer
 ## Leiste der Kartenmodi (Tasten Q W E R T Z U I O P Ü + Ä Ö #). Die Knöpfe zeigen Kurznamen; Taste und
 ## Erklärung stehen im Tooltip. Seit M5 schmalere Knöpfe ohne Titel „Karte“, seit M7 mit zwölf
 ## Modi noch schmaler, seit M8 mit dreizehn in kleinerer Schrift, seit M9 mit fünfzehn noch kleiner,
-## damit die Leiste bei 1.600 Pixeln Fensterbreite zwischen die Spalten passt.
+## damit die Leiste bei 1.600 Pixeln Fensterbreite zwischen die Spalten passt. Seit M14a2 eine Reihe Symbole
+## in vier Gruppen (Politik, Gesellschaft, Wirtschaft, Land und Krieg); Name, Erklärung und Taste im Tooltip.
 
 ## Kartenmodus gewählt (MapModes).
 signal mode_selected(mode: int)
 
-## Innenabstand links und rechts je Knopf (Theme: 10).
-const BUTTON_MARGIN := 2.0
 ## Abstand zwischen den Knöpfen (seit M9 mit fünfzehn Modi).
 const BUTTON_SEPARATION := 1
-## Schriftgröße der Knöpfe (Theme: 14; seit M9 mit fünfzehn Modi 12).
-const BUTTON_FONT_SIZE := 12
-const BUTTON_STYLES: Array[StringName] = [
-	&"normal", &"hover", &"pressed", &"hover_pressed", &"disabled"
+
+## Gruppen der Leiste in der Reihenfolge der Anzeige (Kartenmodi aus MapModes). Bewusst untypisiert: Eine
+## Konstante vom Typ Array[PackedInt32Array] aus Array-Literalen liefert in Godot 4.4 leere Gruppen (size() 0).
+const GROUPS: Array = [
+	[MapModes.MAP_POLITICAL, MapModes.MAP_BUND, MapModes.MAP_BEZIEHUNGEN, MapModes.MAP_WAHLEN,
+		MapModes.MAP_VERWALTUNG, MapModes.MAP_KREISE],
+	[MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION, MapModes.MAP_KULTUR, MapModes.MAP_LEBENSSTANDARD,
+		MapModes.MAP_UNRUHE],
+	[MapModes.MAP_WIRTSCHAFT, MapModes.MAP_MAERKTE, MapModes.MAP_ZOLLGEBIETE, MapModes.MAP_EISENBAHNEN],
+	[MapModes.MAP_TERRAIN, MapModes.MAP_DEVASTATION, MapModes.MAP_KRIEG],
 ]
+## Symbol je Kartenmodus (Index wie MapModes).
+const ICONS: Array[StringName] = [
+	&"politisch", &"dichte", &"konfession", &"gelaende", &"verwuestung", &"kreise", &"lebensstandard",
+	&"kultur", &"wirtschaft", &"maerkte", &"verwaltung", &"bahn", &"wahlen", &"zollunion", &"beziehung",
+	&"militaer", &"unruhe", &"bund",
+]
+const ICON_SIZE := 22.0
 
 var _buttons: Array[Button] = []
 var _rows: Array[HBoxContainer] = []
@@ -31,21 +43,23 @@ func _ready() -> void:
 	var group := ButtonGroup.new()
 	group.allow_unpress = false
 	var first := _add_row()
-	for mode in MapModes.COUNT:
-		var button := Button.new()
-		button.text = MapModes.SHORT_NAMES[mode]
-		button.tooltip_text = "%s: %s (Taste %s)" % [
-			MapModes.NAMES[mode], MapModes.DESCRIPTIONS[mode], MapModes.KEY_HINTS[mode]
-		]
-		button.toggle_mode = true
-		button.button_group = group
-		button.focus_mode = Control.FOCUS_NONE
-		button.custom_minimum_size = Vector2(0, 32)
-		button.add_theme_font_size_override(&"font_size", BUTTON_FONT_SIZE)
-		button.pressed.connect(_on_button_pressed.bind(mode))
-		first.add_child(button)
-		_compact(button)
-		_buttons.append(button)
+	_buttons.resize(MapModes.COUNT)
+	for g in GROUPS.size():
+		if g > 0:
+			var gap := VSeparator.new()
+			gap.custom_minimum_size = Vector2(10, 0)
+			first.add_child(gap)
+		for mode in GROUPS[g]:
+			var tooltip := "%s: %s (Taste %s)" % [
+				MapModes.NAMES[mode], MapModes.DESCRIPTIONS[mode], MapModes.KEY_HINTS[mode]
+			]
+			var button := Icons.icon_button(ICONS[mode], tooltip, ICON_SIZE)
+			button.name = "Mode_%d" % mode
+			button.toggle_mode = true
+			button.button_group = group
+			button.pressed.connect(_on_button_pressed.bind(mode))
+			first.add_child(button)
+			_buttons[mode] = button
 
 
 func _add_row() -> HBoxContainer:
@@ -57,21 +71,14 @@ func _add_row() -> HBoxContainer:
 	return row
 
 
-## Knöpfe auf rows Reihen verteilen (1 oder 2), gleich viele je Reihe.
-func set_rows(rows: int) -> void:
-	rows = clampi(rows, 1, 2)
-	if rows == _row_count:
-		return
-	_row_count = rows
-	while _rows.size() < rows:
-		_add_row()
-	var per_row := ceili(float(_buttons.size()) / float(rows))
-	for i in _buttons.size():
-		var target := _rows[mini(floori(float(i) / float(per_row)), rows - 1)]
-		if _buttons[i].get_parent() != target:
-			_buttons[i].reparent(target)
-	for r in _rows.size():
-		_rows[r].visible = r < rows
+## Seit M14a2 passen die Symbole immer in eine Reihe; rows bleibt für die Hauptszene erhalten.
+func set_rows(_rows_wanted: int) -> void:
+	_row_count = 1
+
+
+## Knopf eines Kartenmodus (Tests).
+func button(mode: int) -> Button:
+	return _buttons[mode] if mode >= 0 and mode < _buttons.size() else null
 
 
 func row_count() -> int:
@@ -86,15 +93,3 @@ func show_mode(mode: int) -> void:
 
 func _on_button_pressed(mode: int) -> void:
 	mode_selected.emit(mode)
-
-
-## Schmalere Knöpfe: Stile des Themes mit kleinerem Innenabstand links und rechts.
-static func _compact(button: Button) -> void:
-	for style_name in BUTTON_STYLES:
-		var style := button.get_theme_stylebox(style_name)
-		if style == null:
-			continue
-		var compact := style.duplicate() as StyleBox
-		compact.content_margin_left = BUTTON_MARGIN
-		compact.content_margin_right = BUTTON_MARGIN
-		button.add_theme_stylebox_override(style_name, compact)

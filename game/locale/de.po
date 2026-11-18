@@ -140,7 +140,7 @@ msgstr ""
 msgid "Ausgang"
 msgstr ""
 
-#: scripts/core/chronicle_export.gd:119 scripts/main/bar_tooltips.gd:75 scripts/ui/verdict_window.gd:204
+#: scripts/core/chronicle_export.gd:119 scripts/main/bar_tooltips.gd:118 scripts/ui/top_bar.gd:110 scripts/ui/verdict_window.gd:204
 msgid "Vermächtnis"
 msgstr ""
 
@@ -390,6 +390,14 @@ msgstr ""
 
 #: scripts/core/format.gd:34
 msgid "Stadtrepublik"
+msgstr ""
+
+#: scripts/core/format.gd:81
+msgid "Mio."
+msgstr ""
+
+#: scripts/core/format.gd:83
+msgid "Tsd."
 msgstr ""
 
 #: scripts/core/glossary.gd:8
@@ -706,7 +714,7 @@ msgstr ""
 msgid "Märkte"
 msgstr ""
 
-#: scripts/core/map_modes.gd:38 scripts/core/map_modes.gd:61 scripts/main/bar_tooltips.gd:35 scripts/ui/state_panel.gd:1315 scenes/ui/location_panel.tscn:112
+#: scripts/core/map_modes.gd:38 scripts/core/map_modes.gd:61 scripts/main/bar_tooltips.gd:36 scripts/ui/state_panel.gd:1322 scenes/ui/location_panel.tscn:112
 msgid "Verwaltung"
 msgstr ""
 
@@ -730,7 +738,7 @@ msgstr ""
 msgid "Krieg"
 msgstr ""
 
-#: scripts/core/map_modes.gd:44 scripts/core/map_modes.gd:67 scripts/main/bar_tooltips.gd:52 scripts/ui/state_panel.gd:781 scripts/ui/windows/laws_window.gd:33
+#: scripts/core/map_modes.gd:44 scripts/core/map_modes.gd:67 scripts/main/bar_tooltips.gd:53 scripts/main/bar_tooltips.gd:77 scripts/ui/state_panel.gd:788 scripts/ui/top_bar.gd:100 (+1)
 msgid "Unruhe"
 msgstr ""
 
@@ -742,7 +750,7 @@ msgstr ""
 msgid "Dichte"
 msgstr ""
 
-#: scripts/core/map_modes.gd:59 scripts/ui/area_bar.gd:17 tutorial/hinweise.cfg:25
+#: scripts/core/map_modes.gd:59 scripts/ui/area_bar.gd:20 tutorial/hinweise.cfg:25
 msgid "Wirtschaft"
 msgstr ""
 
@@ -750,7 +758,7 @@ msgstr ""
 msgid "Bahn"
 msgstr ""
 
-#: scripts/core/map_modes.gd:64 scripts/main/bar_tooltips.gd:23 scripts/ui/state_panel.gd:27 scripts/ui/state_panel.gd:1092 scripts/ui/state_panel.gd:1099
+#: scripts/core/map_modes.gd:64 scripts/main/bar_tooltips.gd:24 scripts/ui/state_panel.gd:30 scripts/ui/state_panel.gd:1099 scripts/ui/state_panel.gd:1106
 msgid "Zoll"
 msgstr ""
 
@@ -830,15 +838,15 @@ msgstr ""
 msgid "Bundesgebiet, das gilt (Deutscher Bund oder ein neuer Bund): Präsidialmacht kräftig, Mitglieder blass; seit 1848"
 msgstr ""
 
-#: scripts/core/pause_rules.gd:11 scripts/main/main_core.gd:903 scripts/main.gd:901 scripts/ui/windows/recap_window.gd:58
+#: scripts/core/pause_rules.gd:11 scripts/main/main_core.gd:908 scripts/main.gd:1009 scripts/ui/windows/recap_window.gd:58
 msgid " den Krieg"
 msgstr ""
 
-#: scripts/core/pause_rules.gd:13 scripts/main/main_core.gd:892
+#: scripts/core/pause_rules.gd:13 scripts/main/main_core.gd:897
 msgid " fordert von %s "
 msgstr ""
 
-#: scripts/core/pause_rules.gd:15 scripts/main.gd:904 scripts/ui/windows/recap_window.gd:58
+#: scripts/core/pause_rules.gd:15 scripts/main.gd:1012 scripts/ui/windows/recap_window.gd:58
 msgid "Frieden zwischen"
 msgstr ""
 
@@ -970,11 +978,11 @@ msgstr ""
 msgid "Hauptstadt"
 msgstr ""
 
-#: scripts/core/user_settings.gd:25 scripts/ui/area_bar.gd:22 tutorial/maerz_1848.tres:141 tutorial/hinweise.cfg:41
+#: scripts/core/user_settings.gd:25 scripts/ui/area_bar.gd:25 tutorial/maerz_1848.tres:141 tutorial/hinweise.cfg:41
 msgid "Journale"
 msgstr ""
 
-#: scripts/core/user_settings.gd:25 scripts/ui/area_bar.gd:23
+#: scripts/core/user_settings.gd:25 scripts/ui/area_bar.gd:26
 msgid "Jahrbuch"
 msgstr ""
 
@@ -1006,79 +1014,79 @@ msgstr ""
 msgid "Schnellladen"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:23 scripts/ui/state_panel.gd:27
+#: scripts/main/bar_tooltips.gd:24 scripts/ui/state_panel.gd:30
 msgid "Kontribution"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:23 scripts/ui/state_panel.gd:27
+#: scripts/main/bar_tooltips.gd:24 scripts/ui/state_panel.gd:30
 msgid "Akzise"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:24
+#: scripts/main/bar_tooltips.gd:25
 msgid "[b]Kasse des Vormonats[/b]"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:24
+#: scripts/main/bar_tooltips.gd:25
 msgid "Einnahmen:"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:32
+#: scripts/main/bar_tooltips.gd:33
 msgid "  Hinterland %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:33
+#: scripts/main/bar_tooltips.gd:34
 msgid "Ausgaben:"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35 scripts/ui/state_panel.gd:1314
+#: scripts/main/bar_tooltips.gd:36 scripts/ui/state_panel.gd:1321
 msgid "Hof"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35
+#: scripts/main/bar_tooltips.gd:36 scripts/ui/top_bar.gd:100
 msgid "Heer"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35
+#: scripts/main/bar_tooltips.gd:36
 msgid "Zinsen"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35
+#: scripts/main/bar_tooltips.gd:36
 msgid "Bauten"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35 scripts/ui/state_panel.gd:1322
+#: scripts/main/bar_tooltips.gd:36 scripts/ui/state_panel.gd:1329
 msgid "Gesandte"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:40 scripts/ui/state_panel.gd:1331
+#: scripts/main/bar_tooltips.gd:41 scripts/ui/state_panel.gd:1338
 msgid "Saldo"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:41
+#: scripts/main/bar_tooltips.gd:42
 msgid "Schatz %s · %s %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:41 scripts/ui/state_panel.gd:1333 scenes/ui/state_panel.tscn:189
+#: scripts/main/bar_tooltips.gd:42 scripts/ui/state_panel.gd:1342 scenes/ui/state_panel.tscn:189
 msgid "Schulden"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:48
+#: scripts/main/bar_tooltips.gd:49
 msgid "Ohne Ereignisse gibt es weder Zustimmung noch Unruhe."
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:49
+#: scripts/main/bar_tooltips.gd:50
 msgid "[b]%s[/b] (Zustimmung der Gruppen im Mittel)"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:49
+#: scripts/main/bar_tooltips.gd:50 scripts/ui/top_bar.gd:95
 msgid "Legitimität"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:52
+#: scripts/main/bar_tooltips.gd:53
 msgid "%s %d, Ziel %d:"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:63
+#: scripts/main/bar_tooltips.gd:64
 msgid ""
 "[b]Verwaltung[/b]\n"
 "%s Orte in %s %s\n"
@@ -1086,27 +1094,75 @@ msgid ""
 "Hauptstadt: %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:65
+#: scripts/main/bar_tooltips.gd:66
 msgid "Kreisen"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:74
-msgid "Dieses Lesezeichen kennt kein Vermächtnis."
-msgstr ""
-
 #: scripts/main/bar_tooltips.gd:75
-msgid "[b]%s[/b] – Faktoren beim Überfahren einer Dimension"
+msgid "Ohne Ereignisse gibt es keine Unruhe."
 msgstr ""
 
 #: scripts/main/bar_tooltips.gd:77
+msgid "[b]%s[/b] %d, Ziel %d"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:78
+msgid "Ab 30 droht ein Aufstand; die Unruhe wandert jeden Monat ein Stück zu ihrem Ziel."
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:85
+msgid "[b]Aufstand im Land![/b]"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:92
+msgid ""
+"[b]Bevölkerung[/b]\n"
+"%s Einwohner\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:102
+msgid "%s Mann unter Waffen (Friedensstärke %s)"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:105
+msgid "Lage: %s%s"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:105 scripts/ui/state_panel.gd:924
+msgid " · im Krieg"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:107
+msgid "%s Mann (Promille der Einwohner)"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:108
+msgid "Kosten %s im Monat"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:109
+msgid "Mobilmachung und Krieg: Staatsübersicht und Bereich „Militär“."
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:117
+msgid "Dieses Lesezeichen kennt kein Vermächtnis."
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:118
+msgid "[b]%s[/b] – Faktoren beim Überfahren einer Dimension"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:120
 msgid "[url=vermaechtnis:%s]%s[/url] %d – %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:93 scripts/ui/verdict_window.gd:234
+#: scripts/main/bar_tooltips.gd:136 scripts/ui/verdict_window.gd:234
 msgid "Grundwert %+d"
 msgstr ""
 
-#: scripts/main/legend_view.gd:14 scripts/main.gd:174
+#: scripts/main/legend_view.gd:14 scripts/main.gd:190
 msgid "Ohne Simulation liegen keine Daten vor."
 msgstr ""
 
@@ -1176,454 +1232,454 @@ msgid ""
 "cmake --build --preset bridge"
 msgstr ""
 
-#: scripts/main/main_core.gd:255
+#: scripts/main/main_core.gd:260
 msgid "Karte nicht verfügbar"
 msgstr ""
 
-#: scripts/main/main_core.gd:257
+#: scripts/main/main_core.gd:262
 msgid "Die Kartenansicht braucht das Ort-ID-Bild provinzen.png und die Zuordnung definition.csv. Beide erzeugt der Kartengenerator aus den Ortsdaten. Die übrige Oberfläche funktioniert auch ohne Karte."
 msgstr ""
 
-#: scripts/main/main_core.gd:271
+#: scripts/main/main_core.gd:276
 msgid "(erwartet game/%s). Bauen im Repository-Hauptordner mit: "
 msgstr ""
 
-#: scripts/main/main_core.gd:272
+#: scripts/main/main_core.gd:277
 msgid "cmake --preset bridge && cmake --build --preset bridge"
 msgstr ""
 
-#: scripts/main/main_core.gd:275 scripts/main/main_core.gd:299
+#: scripts/main/main_core.gd:280 scripts/main/main_core.gd:304
 msgid "Simulationskern nicht geladen"
 msgstr ""
 
-#: scripts/main/main_core.gd:277
+#: scripts/main/main_core.gd:282
 msgid "Die GDExtension „uhrwerk_bridge“ fehlt oder konnte nicht geladen werden. Ohne sie läuft keine Simulation; Leisten und Karte bleiben ohne Daten. Baue die Erweiterung im Repository-Hauptordner und starte das Spiel danach neu."
 msgstr ""
 
-#: scripts/main/main_core.gd:281
+#: scripts/main/main_core.gd:286
 msgid ""
 "Erwartet: game/%s\n"
 "\n"
 "%s"
 msgstr ""
 
-#: scripts/main/main_core.gd:288
+#: scripts/main/main_core.gd:293
 msgid "Erweiterung passt nicht zur Oberfläche"
 msgstr ""
 
-#: scripts/main/main_core.gd:290
+#: scripts/main/main_core.gd:295
 msgid "Die geladene GDExtension stellt nicht alle Methoden der Brücken-Schnittstelle bereit (docs/technik/bridge-api.md). Bitte die Erweiterung neu bauen."
 msgstr ""
 
-#: scripts/main/main_core.gd:293
+#: scripts/main/main_core.gd:298
 msgid ""
 "Fehlende Methoden:\n"
 "\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:300
+#: scripts/main/main_core.gd:305
 msgid "Die Klasse UhrwerkSimulation konnte nicht erzeugt werden."
 msgstr ""
 
-#: scripts/main/main_core.gd:312
+#: scripts/main/main_core.gd:317
 msgid "Szenario nicht geladen"
 msgstr ""
 
-#: scripts/main/main_core.gd:313
+#: scripts/main/main_core.gd:318
 msgid "--szenario=%s ließ sich nicht laden; es gilt das Standardszenario."
 msgstr ""
 
-#: scripts/main/main_core.gd:321
+#: scripts/main/main_core.gd:326
 msgid "Spieldaten konnten nicht geladen werden"
 msgstr ""
 
-#: scripts/main/main_core.gd:323
+#: scripts/main/main_core.gd:328
 msgid ""
 "Datenordner: %s\n"
 "Herkunft: %s\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:325
+#: scripts/main/main_core.gd:330
 msgid "Einen anderen Ordner wählt die Umgebungsvariable %s."
 msgstr ""
 
-#: scripts/main/main_core.gd:329
+#: scripts/main/main_core.gd:334
 msgid "Unbekannter Fehler beim Laden."
 msgstr ""
 
-#: scripts/main/main_core.gd:340
+#: scripts/main/main_core.gd:345
 msgid "Unbekannter Staat"
 msgstr ""
 
-#: scripts/main/main_core.gd:341
+#: scripts/main/main_core.gd:346
 msgid "--staat=%s besteht im Szenario nicht; Ihr spielt den vorgesehenen Staat."
 msgstr ""
 
-#: scripts/main/main_core.gd:376
+#: scripts/main/main_core.gd:381
 msgid ""
 "Kartenorte ohne Spieldaten: %s\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:378
+#: scripts/main/main_core.gd:383
 msgid ""
 "Orte ohne Kartenfläche: %s\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:379
+#: scripts/main/main_core.gd:384
 msgid ""
 "\n"
 "Karte neu erzeugen:\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:382
+#: scripts/main/main_core.gd:387
 msgid "Karte passt nicht zu den Spieldaten"
 msgstr ""
 
-#: scripts/main/main_core.gd:383
+#: scripts/main/main_core.gd:388
 msgid "Einige Orte der Karte und der Spieldaten lassen sich nicht zuordnen."
 msgstr ""
 
-#: scripts/main/main_core.gd:392
+#: scripts/main/main_core.gd:397
 msgid "%s … und %d weitere"
 msgstr ""
 
-#: scripts/main/main_core.gd:531
+#: scripts/main/main_core.gd:536
 msgid "%s hat keine Orte mehr"
 msgstr ""
 
-#: scripts/main/main_core.gd:532
+#: scripts/main/main_core.gd:537
 msgid "Der Staat hat im Frieden alle Orte auf der Karte verloren. Die Partie läuft weiter: Ein Klick auf einen Ort und „Diesen Staat spielen“ in der Ortsinfo übernimmt einen anderen Staat."
 msgstr ""
 
-#: scripts/main/main_core.gd:563
+#: scripts/main/main_core.gd:568
 msgid "%s marschiert nach %s: %s Tage, Ankunft %s"
 msgstr ""
 
-#: scripts/main/main_core.gd:568
+#: scripts/main/main_core.gd:573
 msgid "%s: kein Weg nach %s"
 msgstr ""
 
-#: scripts/main/main_core.gd:637 scripts/main/main_core.gd:637 scripts/main/map_tooltip_text.gd:9
+#: scripts/main/main_core.gd:642 scripts/main/main_core.gd:642 scripts/main/map_tooltip_text.gd:9
 msgid "Reichstaler"
 msgstr ""
 
-#: scripts/main/main_core.gd:890
+#: scripts/main/main_core.gd:895
 msgid " erklärt %s den Krieg"
 msgstr ""
 
-#: scripts/main/main_core.gd:899
+#: scripts/main/main_core.gd:904
 msgid " (Protest)"
 msgstr ""
 
-#: scripts/main/main_core.gd:901
+#: scripts/main/main_core.gd:906
 msgid " den Krieg."
 msgstr ""
 
-#: scripts/main/main_core.gd:906
+#: scripts/main/main_core.gd:911
 msgid " – Gründe: "
 msgstr ""
 
-#: scripts/main/main_core.gd:917
+#: scripts/main/main_core.gd:922
 msgid "Schlacht bei "
 msgstr ""
 
-#: scripts/main/main_core.gd:930
+#: scripts/main/main_core.gd:935
 msgid "%s bei %s"
 msgstr ""
 
-#: scripts/main/main_core.gd:930
+#: scripts/main/main_core.gd:935
 msgid "Sieg"
 msgstr ""
 
-#: scripts/main/main_core.gd:930
+#: scripts/main/main_core.gd:935
 msgid "Niederlage"
 msgstr ""
 
-#: scripts/main/main_core.gd:1012
+#: scripts/main/main_core.gd:1017
 msgid "Die Geschichtsstunde wartet: erst die Aufgabe des Schritts"
 msgstr ""
 
-#: scripts/main/main_core.gd:1017
+#: scripts/main/main_core.gd:1022
 msgid "Erst das Ereignis entscheiden"
 msgstr ""
 
-#: scripts/main/main_core.gd:1129
+#: scripts/main/main_core.gd:1134
 msgid "%s: kein Weg"
 msgstr ""
 
-#: scripts/main/main_core.gd:1131
+#: scripts/main/main_core.gd:1136
 msgid "Rechtsklick: %s marschiert hierher, %s Tage (Ankunft %s)"
 msgstr ""
 
-#: scripts/main/main_core.gd:1158
+#: scripts/main/main_core.gd:1163
 msgid "Der Satz %s wurde nicht angenommen."
 msgstr ""
 
-#: scripts/main/main_core.gd:1167
+#: scripts/main/main_core.gd:1172
 msgid "Der Antrag wurde nicht angenommen."
 msgstr ""
 
-#: scripts/main/main_core.gd:1261
+#: scripts/main/main_core.gd:1266
 msgid "kein Bild. Ohne Bildschirm z. B. mit xvfb-run starten."
 msgstr ""
 
-#: scripts/main/main_core.gd:1290
+#: scripts/main/main_core.gd:1295
 msgid "ohne Simulation"
 msgstr ""
 
-#: scripts/main/main_core.gd:1292
+#: scripts/main/main_core.gd:1297
 msgid "%s, Prüfsumme %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:103
+#: scripts/main/main_windows.gd:109
 msgid "Gesandter nach %s entsandt"
 msgstr ""
 
-#: scripts/main/main_windows.gd:103
+#: scripts/main/main_windows.gd:109
 msgid "Gesandter aus %s abberufen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:104 scripts/main/main_windows.gd:119
+#: scripts/main/main_windows.gd:110 scripts/main/main_windows.gd:125
 msgid " (ab dem nächsten Tag)."
 msgstr ""
 
-#: scripts/main/main_windows.gd:107
+#: scripts/main/main_windows.gd:113
 msgid "Nicht möglich: kein Gesandter frei oder keiner in %s."
 msgstr ""
 
-#: scripts/main/main_windows.gd:113
+#: scripts/main/main_windows.gd:119
 msgid "Bündnis mit %s geschlossen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:114
+#: scripts/main/main_windows.gd:120
 msgid "Garantie für %s gegeben"
 msgstr ""
 
-#: scripts/main/main_windows.gd:115
+#: scripts/main/main_windows.gd:121
 msgid "Bündnis mit %s gekündigt"
 msgstr ""
 
-#: scripts/main/main_windows.gd:116
+#: scripts/main/main_windows.gd:122
 msgid "Garantie für %s gekündigt"
 msgstr ""
 
-#: scripts/main/main_windows.gd:121
+#: scripts/main/main_windows.gd:127
 msgid "%s lehnt ab oder der Vertrag ist nicht möglich."
 msgstr ""
 
-#: scripts/main/main_windows.gd:127
+#: scripts/main/main_windows.gd:133
 msgid "Forderung an %s gestellt: Die Krise beginnt am nächsten Tag."
 msgstr ""
 
-#: scripts/main/main_windows.gd:129
+#: scripts/main/main_windows.gd:135
 msgid "Die Forderung an %s ist zur Zeit nicht möglich."
 msgstr ""
 
-#: scripts/main/main_windows.gd:136
+#: scripts/main/main_windows.gd:142
 msgid "Antrag gestellt: %s; abgestimmt wird am nächsten Monatsersten."
 msgstr ""
 
-#: scripts/main/main_windows.gd:139
+#: scripts/main/main_windows.gd:145
 msgid "Der Antrag ist zur Zeit nicht möglich (schon ein Antrag offen?)."
 msgstr ""
 
-#: scripts/main/main_windows.gd:144
+#: scripts/main/main_windows.gd:150
 msgid "Wir geben nach"
 msgstr ""
 
-#: scripts/main/main_windows.gd:145
+#: scripts/main/main_windows.gd:151
 msgid "Wir bieten Vermittlung an"
 msgstr ""
 
-#: scripts/main/main_windows.gd:146
+#: scripts/main/main_windows.gd:152
 msgid "Wir eskalieren am Ende der Stufe"
 msgstr ""
 
-#: scripts/main/main_windows.gd:149
+#: scripts/main/main_windows.gd:155
 msgid "%s (ab dem nächsten Tag)."
 msgstr ""
 
-#: scripts/main/main_windows.gd:151
+#: scripts/main/main_windows.gd:157
 msgid "Dieses Manöver ist zur Zeit nicht möglich."
 msgstr ""
 
-#: scripts/main/main_windows.gd:262
+#: scripts/main/main_windows.gd:268
 msgid "Das Heer steht schon so"
 msgstr ""
 
-#: scripts/main/main_windows.gd:268
+#: scripts/main/main_windows.gd:274
 msgid "Mobilmachung befohlen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:268
+#: scripts/main/main_windows.gd:274
 msgid "Abrüstung befohlen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:268
+#: scripts/main/main_windows.gd:274
 msgid " (ab dem nächsten Tag)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:271
+#: scripts/main/main_windows.gd:277
 msgid "Mobilmachung nicht möglich."
 msgstr ""
 
-#: scripts/main/main_windows.gd:271
+#: scripts/main/main_windows.gd:277
 msgid "Abrüstung nicht möglich (im Krieg oder schon im Frieden)."
 msgstr ""
 
-#: scripts/main/main_windows.gd:279
+#: scripts/main/main_windows.gd:285
 msgid "Kriegserklärung an %s: Der Krieg beginnt am nächsten Tag."
 msgstr ""
 
-#: scripts/main/main_windows.gd:281
+#: scripts/main/main_windows.gd:287
 msgid "Eine Kriegserklärung an %s ist zur Zeit nicht möglich."
 msgstr ""
 
-#: scripts/main/main_windows.gd:287
+#: scripts/main/main_windows.gd:293
 msgid "Friedensangebot gesandt: %s Antwort am nächsten Tag."
 msgstr ""
 
-#: scripts/main/main_windows.gd:289
+#: scripts/main/main_windows.gd:295
 msgid "Dieses Friedensangebot ist zur Zeit nicht möglich."
 msgstr ""
 
-#: scripts/main/main_windows.gd:294
+#: scripts/main/main_windows.gd:300
 msgid "Neues Kriegsziel gestellt (ab dem nächsten Tag)."
 msgstr ""
 
-#: scripts/main/main_windows.gd:296
+#: scripts/main/main_windows.gd:302
 msgid "Dieses Kriegsziel ist nicht möglich."
 msgstr ""
 
-#: scripts/main/main_windows.gd:370
+#: scripts/main/main_windows.gd:390
 msgid "Das Lesezeichen ließ sich nicht laden: "
 msgstr ""
 
-#: scripts/main/main_windows.gd:386
+#: scripts/main/main_windows.gd:406
 msgid "Hervorgehobener Staat des Lesezeichens"
 msgstr ""
 
-#: scripts/main/main_windows.gd:433
+#: scripts/main/main_windows.gd:453
 msgid "Neues Spiel: %s, %s%s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:435
+#: scripts/main/main_windows.gd:455
 msgid ", Stufe %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:440
+#: scripts/main/main_windows.gd:460
 msgid "Standard"
 msgstr ""
 
-#: scripts/main/main_windows.gd:450
+#: scripts/main/main_windows.gd:470
 msgid "Der Spielstand ließ sich nicht laden."
 msgstr ""
 
-#: scripts/main/main_windows.gd:494
+#: scripts/main/main_windows.gd:514
 msgid "Ihr spielt jetzt die Partei %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:496
+#: scripts/main/main_windows.gd:516
 msgid "Ihr spielt wieder %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:525
+#: scripts/main/main_windows.gd:546
 msgid "%s im Wahlkreis %s angesetzt (ab dem nächsten Tag)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:530
+#: scripts/main/main_windows.gd:551
 msgid "%s nicht möglich: Mittel reichen nicht oder die Wahl ist vorbei"
 msgstr ""
 
-#: scripts/main/main_windows.gd:639
+#: scripts/main/main_windows.gd:660
 msgid "Diese Wahl ist nicht möglich"
 msgstr ""
 
-#: scripts/main/main_windows.gd:644
+#: scripts/main/main_windows.gd:665
 msgid "%s: %s (ab dem nächsten Tag)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:719
+#: scripts/main/main_windows.gd:740
 msgid "Die Chronik konnte nicht geschrieben werden."
 msgstr ""
 
-#: scripts/main/main_windows.gd:721
+#: scripts/main/main_windows.gd:742
 msgid "Chronik gespeichert: %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:996 scripts/main/main_windows.gd:1076
+#: scripts/main/main_windows.gd:1021 scripts/main/main_windows.gd:1101
 msgid "Keine Simulation geladen."
 msgstr ""
 
-#: scripts/main/main_windows.gd:998
+#: scripts/main/main_windows.gd:1023
 msgid "Gespeichert als „%s“"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1005
+#: scripts/main/main_windows.gd:1030
 msgid "Schnellgespeichert"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1013
+#: scripts/main/main_windows.gd:1038
 msgid "Noch kein Schnellspeicher vorhanden (F5 legt ihn an)."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1030
+#: scripts/main/main_windows.gd:1055
 msgid "Geladen: %s (%s)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1078
+#: scripts/main/main_windows.gd:1103
 msgid "Kein Simulationskern."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1095
+#: scripts/main/main_windows.gd:1120
 msgid "Neues Spiel: %s (%s)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1099
+#: scripts/main/main_windows.gd:1124
 msgid "Neues Spiel: %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1101
+#: scripts/main/main_windows.gd:1126
 msgid "Hervorgehobene Staaten: %s. Jeden anderen Staat übernimmt der Knopf "
 msgstr ""
 
-#: scripts/main/main_windows.gd:1103
+#: scripts/main/main_windows.gd:1128
 msgid "„Diesen Staat spielen“ in der Ortsinfo."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1127
+#: scripts/main/main_windows.gd:1152
 msgid "Ihr spielt jetzt %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1157
+#: scripts/main/main_windows.gd:1182
 msgid "Automatisch gespeichert (%s)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1160
+#: scripts/main/main_windows.gd:1185
 msgid "Automatischer Spielstand fehlgeschlagen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1176
+#: scripts/main/main_windows.gd:1201
 msgid "Speichern fehlgeschlagen: "
 msgstr ""
 
-#: scripts/main/main_windows.gd:1178
+#: scripts/main/main_windows.gd:1203
 msgid "Speichern fehlgeschlagen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1178
+#: scripts/main/main_windows.gd:1203
 msgid "Der Spielstand wurde nicht geschrieben."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1184
+#: scripts/main/main_windows.gd:1209
 msgid "Laden fehlgeschlagen: "
 msgstr ""
 
-#: scripts/main/main_windows.gd:1187
+#: scripts/main/main_windows.gd:1212
 msgid "Spielstand nicht geladen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1187
+#: scripts/main/main_windows.gd:1212
 msgid "Die laufende Partie geht unverändert weiter."
 msgstr ""
 
@@ -1691,7 +1747,7 @@ msgstr ""
 msgid ", %s seit %s"
 msgstr ""
 
-#: scripts/main/map_tooltip_text.gd:109 scripts/ui/state_panel.gd:787
+#: scripts/main/map_tooltip_text.gd:109 scripts/ui/state_panel.gd:794
 msgid "Aufstand"
 msgstr ""
 
@@ -1739,43 +1795,43 @@ msgstr ""
 msgid " im ersten Wahlgang, Sieg in der Stichwahl"
 msgstr ""
 
-#: scripts/main.gd:211
+#: scripts/main.gd:227
 msgid "Wahl: %s (Spielmenü „Letzte Wahl“)"
 msgstr ""
 
-#: scripts/main.gd:543
+#: scripts/main.gd:571
 msgid "Pause: "
 msgstr ""
 
-#: scripts/main.gd:555
+#: scripts/main.gd:583
 msgid "Rückmeldung gespeichert: {pfad} – bitte diese Datei schicken; es wurde nichts versandt."
 msgstr ""
 
-#: scripts/main.gd:614
+#: scripts/main.gd:642
 msgid "Hinweise abgeschaltet (Einstellungen, Spiel)"
 msgstr ""
 
-#: scripts/main.gd:628 scripts/ui/area_bar.gd:18 tutorial/hinweise.cfg:73
+#: scripts/main.gd:656 scripts/ui/area_bar.gd:21 tutorial/hinweise.cfg:73
 msgid "Haushalt"
 msgstr ""
 
-#: scripts/main.gd:630 scripts/ui/area_bar.gd:19 tutorial/hinweise.cfg:77
+#: scripts/main.gd:658 scripts/ui/area_bar.gd:22 tutorial/hinweise.cfg:77
 msgid "Zollunion"
 msgstr ""
 
-#: scripts/main.gd:662
+#: scripts/main.gd:690
 msgid "Die Geschichtsstunde fehlt oder ist fehlerhaft"
 msgstr ""
 
-#: scripts/main.gd:700
+#: scripts/main.gd:733
 msgid "Die Geschichtsstunde ist zu Ende – die Partie gehört Ihnen."
 msgstr ""
 
-#: scripts/main.gd:701
+#: scripts/main.gd:734
 msgid "Geschichtsstunde beendet; die Partie läuft weiter."
 msgstr ""
 
-#: scripts/main.gd:904
+#: scripts/main.gd:1012
 msgid " schließen ein Bündnis"
 msgstr ""
 
@@ -1807,95 +1863,103 @@ msgstr ""
 msgid "Times New Roman"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:12
-msgid "Kabinett"
-msgstr ""
-
-#: scripts/ui/area_bar.gd:12
-msgid "Kabinett und Hof: Herrscher, Minister, Neigungen, frühere Amtsinhaber"
-msgstr ""
-
-#: scripts/ui/area_bar.gd:13 tutorial/hinweise.cfg:9
-msgid "Gesetze"
-msgstr ""
-
-#: scripts/ui/area_bar.gd:13
-msgid "Verfassung, Wahlrecht und Gesetze mit den Wünschen der Gruppen"
+#: scripts/ui/area_bar.gd:14
+msgid "Staat"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:14
-msgid "Gruppen"
-msgstr ""
-
-#: scripts/ui/area_bar.gd:14
-msgid "Interessengruppen: Anteil, Einfluss, Zustimmung, Forderungen"
-msgstr ""
-
-#: scripts/ui/area_bar.gd:15 scripts/ui/location_panel.gd:392 tutorial/hinweise.cfg:17
-msgid "Parlament"
+msgid "Staatsübersicht: Herrscher, Kasse, Steuern, Heer (auch ein Klick aufs Wappen oben links)"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:15
-msgid "Plenarsaal: letzte Wahl nach Fraktionen, nächste Wahl, Abstimmungen"
+msgid "Kabinett"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:16 tutorial/hinweise.cfg:21
-msgid "Gesellschaft"
+#: scripts/ui/area_bar.gd:15
+msgid "Kabinett und Hof: Herrscher, Minister, Neigungen, frühere Amtsinhaber"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:16 tutorial/hinweise.cfg:9
+msgid "Gesetze"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:16
-msgid "Bevölkerung: Alter, Kulturen, Konfessionen, Berufe, Wanderung"
+msgid "Verfassung, Wahlrecht und Gesetze mit den Wünschen der Gruppen"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:17
-msgid "Güter, Preise, Betriebe, Märkte und Zollgebiet"
+msgid "Gruppen"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:17
+msgid "Interessengruppen: Anteil, Einfluss, Zustimmung, Forderungen"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:18 scripts/ui/location_panel.gd:392 tutorial/hinweise.cfg:17
+msgid "Parlament"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:18
-msgid "Einnahmen und Ausgaben im Einzelnen"
+msgid "Plenarsaal: letzte Wahl nach Fraktionen, nächste Wahl, Abstimmungen"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:19 tutorial/hinweise.cfg:21
+msgid "Gesellschaft"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:19
-msgid "Zollunionen und Wechsel zum 1. Januar"
-msgstr ""
-
-#: scripts/ui/area_bar.gd:20 scripts/ui/windows/cabinet_window.gd:7 tutorial/maerz_1848.tres:69 tutorial/hinweise.cfg:33
-msgid "Diplomatie"
+msgid "Bevölkerung: Alter, Kulturen, Konfessionen, Berufe, Wanderung"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:20
-msgid "Beziehungen, Bündnisse, Bundesversammlung und deutsche Frage"
+msgid "Güter, Preise, Betriebe, Märkte und Zollgebiet"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:21
-msgid "Militär"
-msgstr ""
-
-#: scripts/ui/area_bar.gd:21
-msgid "Kriege, Heere und Frieden"
+msgid "Einnahmen und Ausgaben im Einzelnen"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:22
-msgid "Revolution und deutsche Frage (J)"
+msgid "Zollunionen und Wechsel zum 1. Januar"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:23 scripts/ui/windows/cabinet_window.gd:7 tutorial/maerz_1848.tres:69 tutorial/hinweise.cfg:33
+msgid "Diplomatie"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:23
-msgid "Statistisches Jahrbuch: Kennzahlen und Vermächtnis je Jahr (B)"
-msgstr ""
-
-#: scripts/ui/area_bar.gd:24 tutorial/hinweise.cfg:29
-msgid "Chronik"
+msgid "Beziehungen, Bündnisse, Bundesversammlung und deutsche Frage"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:24
-msgid "Chronik der Partie mit Filter und Suche"
+msgid "Militär"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:25 tutorial/hinweise.cfg:49
-msgid "Lexikon"
+#: scripts/ui/area_bar.gd:24
+msgid "Kriege, Heere und Frieden"
 msgstr ""
 
 #: scripts/ui/area_bar.gd:25
+msgid "Revolution und deutsche Frage (J)"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:26
+msgid "Statistisches Jahrbuch: Kennzahlen und Vermächtnis je Jahr (B)"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:27 tutorial/hinweise.cfg:29
+msgid "Chronik"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:27
+msgid "Chronik der Partie mit Filter und Suche"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:28 tutorial/hinweise.cfg:49
+msgid "Lexikon"
+msgstr ""
+
+#: scripts/ui/area_bar.gd:28
 msgid "Begriffe der Epoche und des Spiels"
 msgstr ""
 
@@ -1975,7 +2039,7 @@ msgstr ""
 msgid "Das Heer folgt nur noch Euren Marschbefehlen."
 msgstr ""
 
-#: scripts/ui/army_panel.gd:93 scripts/ui/state_panel.gd:926
+#: scripts/ui/army_panel.gd:93 scripts/ui/state_panel.gd:933
 msgid "Befehl erteilt; wirksam ab dem nächsten Tag."
 msgstr ""
 
@@ -2087,7 +2151,7 @@ msgstr ""
 msgid "Fenster schließen"
 msgstr ""
 
-#: scripts/ui/diplomacy_window.gd:298 scripts/ui/diplomacy_window.gd:341 scripts/ui/state_panel.gd:1017
+#: scripts/ui/diplomacy_window.gd:298 scripts/ui/diplomacy_window.gd:341 scripts/ui/state_panel.gd:1024
 msgid "Abbrechen"
 msgstr ""
 
@@ -2417,7 +2481,7 @@ msgstr ""
 msgid "Wahl"
 msgstr ""
 
-#: scripts/ui/election_night.gd:106 scripts/ui/state_panel.gd:768 scripts/ui/windows/laws_window.gd:27 scripts/ui/windows/parliament_window.gd:68
+#: scripts/ui/election_night.gd:106 scripts/ui/state_panel.gd:775 scripts/ui/windows/laws_window.gd:27 scripts/ui/windows/parliament_window.gd:68
 msgid ", über Wahlmänner"
 msgstr ""
 
@@ -2749,7 +2813,7 @@ msgstr ""
 msgid "1 Ort"
 msgstr ""
 
-#: scripts/ui/legend_data.gd:83 scripts/ui/top_bar.gd:78
+#: scripts/ui/legend_data.gd:83 scripts/ui/top_bar.gd:271
 msgid "%s Orte"
 msgstr ""
 
@@ -2923,6 +2987,14 @@ msgstr ""
 
 #: scripts/ui/legend_data.gd:697
 msgid "%s Staaten"
+msgstr ""
+
+#: scripts/ui/legend_panel.gd:32
+msgid "Legende auf- oder zuklappen"
+msgstr ""
+
+#: scripts/ui/legend_panel.gd:48 scenes/ui/legend_panel.tscn:17
+msgid "LEGENDE"
 msgstr ""
 
 #: scripts/ui/location_panel.gd:14 scripts/ui/windows/society_window.gd:30
@@ -3121,7 +3193,7 @@ msgstr ""
 msgid "Veränderung"
 msgstr ""
 
-#: scripts/ui/map_mode_bar.gd:37
+#: scripts/ui/map_mode_bar.gd:53
 msgid "%s: %s (Taste %s)"
 msgstr ""
 
@@ -3649,7 +3721,7 @@ msgstr ""
 msgid "„März 1848 in Berlin“: als Preußen in vierzehn Schritten durch das Spiel"
 msgstr ""
 
-#: scripts/ui/start_screen.gd:430 scripts/ui/tutorial_panel.gd:171
+#: scripts/ui/start_screen.gd:430 scripts/ui/tutorial_panel.gd:220
 msgid "Beenden"
 msgstr ""
 
@@ -3737,79 +3809,79 @@ msgstr ""
 msgid "schwer"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:29
+#: scripts/ui/state_panel.gd:32
 msgid "Kontribution: direkte Steuer auf die Einkommen auf dem Land und auf Agrareinkommen in Städten"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:30
+#: scripts/ui/state_panel.gd:33
 msgid "Akzise: Verbrauchssteuer auf alle Käufe in Städten"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:31
+#: scripts/ui/state_panel.gd:34
 msgid "Zoll: Abgabe auf eingeführte Waren (nach ihrem Anteil am Angebot des Marktes)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:35
+#: scripts/ui/state_panel.gd:38
 msgid "Höhere Steuern füllen die Kasse, verteuern aber Waren und bremsen das Wachstum."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:167 scenes/ui/location_panel.tscn:127
+#: scripts/ui/state_panel.gd:170 scenes/ui/location_panel.tscn:127
 msgid "Deutscher Bund"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:217
+#: scripts/ui/state_panel.gd:218
 msgid "Zoll: Tarif der Zollunion (%s). Mitglieder erheben keinen eigenen Zoll; sie erhalten "
 msgstr ""
 
-#: scripts/ui/state_panel.gd:219
+#: scripts/ui/state_panel.gd:220
 msgid "einen Anteil an der Vereinskasse nach Einwohnern."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:245 scenes/ui/state_panel.tscn:42
+#: scripts/ui/state_panel.gd:246 scenes/ui/state_panel.tscn:42
 msgid "Kein Spielerstaat"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:257 scenes/ui/state_panel.tscn:217
+#: scripts/ui/state_panel.gd:258 scenes/ui/state_panel.tscn:217
 msgid "Ohne geladene Simulation nicht verfügbar."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:499
+#: scripts/ui/state_panel.gd:506
 msgid "Neue %s gilt ab dem nächsten Tag (bisher %s)."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:542
+#: scripts/ui/state_panel.gd:549
 msgid "HAUSHALT"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:550
+#: scripts/ui/state_panel.gd:557
 msgid "Beträge je Monat (Rechentag des Staates)."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:563
+#: scripts/ui/state_panel.gd:570
 msgid "Verfassung und Gruppen …"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:565
+#: scripts/ui/state_panel.gd:572
 msgid "Verfassung, Wahlrecht des Landtags und Interessengruppen des Staates"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:576
+#: scripts/ui/state_panel.gd:583
 msgid "VERFASSUNG UND GRUPPEN"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:584
+#: scripts/ui/state_panel.gd:591
 msgid "INTERESSENGRUPPEN (ANTEIL · EINFLUSS · ZUSTIMMUNG)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:592
+#: scripts/ui/state_panel.gd:599
 msgid "Anteil: Mitglieder unter den Einwohnern ab 15 Jahren. Einfluss: Anteil der Mitglieder am Einkommen. Ein Block kann mehreren Gruppen angehören."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:610
+#: scripts/ui/state_panel.gd:617
 msgid "Minister"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:665
+#: scripts/ui/state_panel.gd:672
 msgid ""
 "%s: %s\n"
 "Eigenschaften: %s\n"
@@ -3818,351 +3890,347 @@ msgid ""
 "Quelle: %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:700
+#: scripts/ui/state_panel.gd:707
 msgid "Neigungen (%s): "
 msgstr ""
 
-#: scripts/ui/state_panel.gd:700
+#: scripts/ui/state_panel.gd:707
 msgid "Neigungen: "
 msgstr ""
 
-#: scripts/ui/state_panel.gd:703
+#: scripts/ui/state_panel.gd:710
 msgid "Neigungen von −2 bis +2: Staatspersönlichkeit und die Eigenschaften von Herrscher und Minister nach ihrem Anteil. Sie lenken die Entscheidungen der Staaten ohne Spieler und die Wahl bei Ereignissen."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:723
+#: scripts/ui/state_panel.gd:730
 msgid "  Grundwert %+d"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:730
+#: scripts/ui/state_panel.gd:737
 msgid "Vermächtnis:  · "
 msgstr ""
 
-#: scripts/ui/state_panel.gd:759 scripts/ui/windows/laws_window.gd:21
+#: scripts/ui/state_panel.gd:766 scripts/ui/windows/laws_window.gd:21
 msgid "Verfassung"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:763
+#: scripts/ui/state_panel.gd:770
 msgid " (ab %s Steuern im Jahr)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:764
+#: scripts/ui/state_panel.gd:771
 msgid "Wahlrecht (Landtag)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:766
+#: scripts/ui/state_panel.gd:773
 msgid "absolute Mehrheit, Stichwahl"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:766 scripts/ui/windows/laws_window.gd:26
+#: scripts/ui/state_panel.gd:773 scripts/ui/windows/laws_window.gd:26
 msgid "relative Mehrheit"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:769 scripts/ui/windows/laws_window.gd:25
+#: scripts/ui/state_panel.gd:776 scripts/ui/windows/laws_window.gd:25
 msgid "Wahlsystem"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:781
+#: scripts/ui/state_panel.gd:788
 msgid "%d von 100 (Ziel %d)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:787
+#: scripts/ui/state_panel.gd:794
 msgid "%s seit %s%s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:789
+#: scripts/ui/state_panel.gd:796
 msgid ", Truppen aus %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:792
+#: scripts/ui/state_panel.gd:799
 msgid "Befristet"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:792
+#: scripts/ui/state_panel.gd:799
 msgid "%s, bis %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:819
+#: scripts/ui/state_panel.gd:826
 msgid "Anteil · Einfluss · Zustimmung zur Regierung (−10 bis +10)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:830
+#: scripts/ui/state_panel.gd:837
 msgid "Diplomatie …"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:833
+#: scripts/ui/state_panel.gd:840
 msgid "Beziehungen, Gesandte, Bündnisse und Garantien, Forderungen, die Bundesversammlung und die deutsche Frage"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:851
+#: scripts/ui/state_panel.gd:858
 msgid "Journale …"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:853
+#: scripts/ui/state_panel.gd:860
 msgid "Revolution 1848/49 und deutsche Frage: Stufe, Ziele, Weg und Ausgänge (J)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:893
+#: scripts/ui/state_panel.gd:900
 msgid "Krieg …"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:896
+#: scripts/ui/state_panel.gd:903
 msgid "Kriege mit Seiten, Zielen und Kriegspunkten, Friedensangebote; die eigenen Heere"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:914
+#: scripts/ui/state_panel.gd:921
 msgid "Heer: %s Mann · %s%s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:917
-msgid " · im Krieg"
-msgstr ""
-
-#: scripts/ui/state_panel.gd:919
+#: scripts/ui/state_panel.gd:926
 msgid "Soldaten unter Waffen; Friedensstärke %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:923
+#: scripts/ui/state_panel.gd:930
 msgid "Abrüsten"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:923 scripts/ui/state_panel.gd:938
+#: scripts/ui/state_panel.gd:930 scripts/ui/state_panel.gd:945
 msgid "Mobil machen"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:928
+#: scripts/ui/state_panel.gd:935
 msgid "Im Krieg rüstet das Heer nicht ab."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:930
+#: scripts/ui/state_panel.gd:937
 msgid "Das Heer kehrt nach und nach auf die Friedensstärke zurück und kostet wieder weniger."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:932
+#: scripts/ui/state_panel.gd:939
 msgid "Die Reserven rücken ein, die Garnisonen werden Feldheere; die Heereskosten steigen mit den Soldaten."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:965
+#: scripts/ui/state_panel.gd:972
 msgid "Zollunion …"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:967
+#: scripts/ui/state_panel.gd:974
 msgid "Zollunionen; Beitritt, Wechsel und Austritt zum nächsten 1. Januar"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:978
+#: scripts/ui/state_panel.gd:985
 msgid "ZOLLUNION"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:986
+#: scripts/ui/state_panel.gd:993
 msgid "UNIONEN (MITGLIEDER · TARIF · KASSE JE MONAT)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:994
+#: scripts/ui/state_panel.gd:1001
 msgid "Antrag zurückziehen …"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1012
+#: scripts/ui/state_panel.gd:1019
 msgid "Antrag stellen"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1035
+#: scripts/ui/state_panel.gd:1042
 msgid "Wechsel werden zum nächsten 1. Januar wirksam. Mitglieder erheben den Tarif der Union; die Vereinskasse wird nach Einwohnern verteilt. Über einen Beitritt entscheidet die Leitmacht; tritt sie aus, löst sich ihre Union auf."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1087 scripts/ui/state_panel.gd:1098 scripts/ui/windows/economy_window.gd:21 scenes/ui/location_panel.tscn:142
+#: scripts/ui/state_panel.gd:1094 scripts/ui/state_panel.gd:1105 scripts/ui/windows/economy_window.gd:21 scenes/ui/location_panel.tscn:142
 msgid "Zollgebiet"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1089
+#: scripts/ui/state_panel.gd:1096
 msgid "Leitmacht"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1089
+#: scripts/ui/state_panel.gd:1096
 msgid "Leitmacht "
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1092
+#: scripts/ui/state_panel.gd:1099
 msgid "%s, Tarif der Union"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1094
+#: scripts/ui/state_panel.gd:1101
 msgid "Anteil an der Vereinskasse"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1095
+#: scripts/ui/state_panel.gd:1102
 msgid " je Monat"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1099
+#: scripts/ui/state_panel.gd:1106
 msgid "%s, eigener Satz"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1101
+#: scripts/ui/state_panel.gd:1108
 msgid "Antrag"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1113
+#: scripts/ui/state_panel.gd:1120
 msgid "Verbindlich: Bundesbeschluss oder Ausgang einer Krise."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1116
+#: scripts/ui/state_panel.gd:1123
 msgid "Der Antrag geht mit dem nächsten Tag hinaus."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1153
+#: scripts/ui/state_panel.gd:1160
 msgid "%s (Leitmacht %s)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1170
+#: scripts/ui/state_panel.gd:1177
 msgid "Austreten …"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1170
+#: scripts/ui/state_panel.gd:1177
 msgid "Beitreten …"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1173
+#: scripts/ui/state_panel.gd:1180
 msgid "beantragt"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1175
+#: scripts/ui/state_panel.gd:1182
 msgid "%s lehnt ab"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1176
+#: scripts/ui/state_panel.gd:1183
 msgid "%s lässt %s nicht in den %s."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1180
+#: scripts/ui/state_panel.gd:1187
 msgid "aufgelöst"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1181
+#: scripts/ui/state_panel.gd:1188
 msgid "Einer aufgelösten Union kann nur ihre frühere Leitmacht wieder beitreten."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1218
+#: scripts/ui/state_panel.gd:1225
 msgid "Den Antrag zurückziehen? %s bleibt %s."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1219
+#: scripts/ui/state_panel.gd:1226
 msgid "ein eigenes Zollgebiet"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1223
+#: scripts/ui/state_panel.gd:1230
 msgid "%s tritt zum %s aus dem %s aus."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1225
+#: scripts/ui/state_panel.gd:1232
 msgid "%s tritt zum %s dem %s bei."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1227
+#: scripts/ui/state_panel.gd:1234
 msgid "%s verlässt zum %s den %s und tritt dem %s bei."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1229
+#: scripts/ui/state_panel.gd:1236
 msgid " Ohne seine Leitmacht löst sich der %s dann auf; seine Mitglieder werden eigene Zollgebiete."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1231
+#: scripts/ui/state_panel.gd:1238
 msgid " Danach erhebt %s wieder einen eigenen Zoll."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1235
+#: scripts/ui/state_panel.gd:1242
 msgid " Danach gilt der Tarif der Union (%s), und %s erhält einen Anteil an der Vereinskasse."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1266
+#: scripts/ui/state_panel.gd:1273
 msgid "Beitritt zum %s verbindlich, wirksam zum %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1269
+#: scripts/ui/state_panel.gd:1276
 msgid "Austritt aus dem %s beantragt, wirksam zum %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1270
+#: scripts/ui/state_panel.gd:1277
 msgid "Beitritt zum %s beantragt, wirksam zum %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1293
+#: scripts/ui/state_panel.gd:1300
 msgid "Einnahmen"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1301
+#: scripts/ui/state_panel.gd:1308
 msgid "Zoll (Vereinskasse, Tarif %s)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1309
+#: scripts/ui/state_panel.gd:1316
 msgid "Hinterland (Überschuss)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1310 scripts/ui/state_panel.gd:1329
+#: scripts/ui/state_panel.gd:1317 scripts/ui/state_panel.gd:1336
 msgid "Summe"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1316
+#: scripts/ui/state_panel.gd:1323
 msgid "Heer (%s Soldaten)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1317
+#: scripts/ui/state_panel.gd:1324
 msgid "Zinsen (%s)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1318
+#: scripts/ui/state_panel.gd:1325
 msgid "Bauten (Landesausbau)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1324
+#: scripts/ui/state_panel.gd:1331
 msgid "Ausgaben"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1330
+#: scripts/ui/state_panel.gd:1337
 msgid "Stand"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1332
+#: scripts/ui/state_panel.gd:1340
 msgid "Schatz"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1335
+#: scripts/ui/state_panel.gd:1344
 msgid "Jahreseinnahmen (gleitend)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1341
+#: scripts/ui/state_panel.gd:1350
 msgid " (Zinsaufschlag noch %s Monate)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1342
+#: scripts/ui/state_panel.gd:1351
 msgid "Staatsbankrotte"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1361
+#: scripts/ui/state_panel.gd:1373
 msgid "Lebensstandard: %s von 100"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1367
+#: scripts/ui/state_panel.gd:1379
 msgid "Bilanz des Vorjahres: noch kein volles Jahr gerechnet."
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1373
+#: scripts/ui/state_panel.gd:1385
 msgid "Vorjahr: %s Einwohner (%s)"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1377
+#: scripts/ui/state_panel.gd:1389
 msgid "  Geburten minus Sterbefälle: %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1378
+#: scripts/ui/state_panel.gd:1390
 msgid "  Wanderung zwischen Orten: %s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:1379
+#: scripts/ui/state_panel.gd:1391
 msgid "  Auswanderung: %s"
 msgstr ""
 
-#: scripts/ui/ticker_bar.gd:82 scripts/ui/windows/chronicle_window.gd:109
+#: scripts/ui/ticker_bar.gd:94 scripts/ui/windows/chronicle_window.gd:109
 msgid "WENDEPUNKT · "
 msgstr ""
 
@@ -4172,67 +4240,99 @@ msgid ""
 "[i]Klick: Lexikon[/i]"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:116 scenes/ui/top_bar.tscn:37
+#: scripts/ui/top_bar.gd:75
+msgid "Staatsübersicht öffnen oder schließen"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:93
+msgid "Kasse und Saldo"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:96
+msgid "Unrest"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:97
+msgid "Population"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:98
+msgid "Army"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:100
+msgid "Bevölkerung und Verwaltung"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:151
+msgid "Caption"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:310 scenes/ui/top_bar.tscn:37
 msgid "Keine Simulation"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:117 scenes/ui/top_bar.tscn:44
+#: scripts/ui/top_bar.gd:311 scenes/ui/top_bar.tscn:44
 msgid "Spielerstaat unbekannt"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:121 scenes/ui/top_bar.tscn:143
+#: scripts/ui/top_bar.gd:325 scenes/ui/top_bar.tscn:143
 msgid "Simulation nicht geladen"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:129 scenes/ui/top_bar.tscn:155
+#: scripts/ui/top_bar.gd:333 scenes/ui/top_bar.tscn:155
 msgid "Pause (Leertaste)"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:132
+#: scripts/ui/top_bar.gd:336
 msgid "Stufe %d: %d %s je Sekunde (Taste %d)"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:133
+#: scripts/ui/top_bar.gd:337
 msgid "Tag"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:133
+#: scripts/ui/top_bar.gd:337
 msgid "Tage"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:148
+#: scripts/ui/top_bar.gd:352
 msgid "Pausiert · Leertaste setzt fort"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:150
+#: scripts/ui/top_bar.gd:354
 msgid "Stufe %d · 1 Tag je Sekunde"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:152
+#: scripts/ui/top_bar.gd:356
 msgid "Stufe %d · %d Tage je Sekunde"
 msgstr ""
 
-#: scripts/ui/tutorial_panel.gd:104
+#: scripts/ui/tutorial_panel.gd:42
+msgid "Mit der Maus verschieben"
+msgstr ""
+
+#: scripts/ui/tutorial_panel.gd:153
 msgid "GESCHICHTSSTUNDE · %s · Schritt %d von %d"
 msgstr ""
 
-#: scripts/ui/tutorial_panel.gd:108
+#: scripts/ui/tutorial_panel.gd:157
 msgid "Zum Spiel"
 msgstr ""
 
-#: scripts/ui/tutorial_panel.gd:108
+#: scripts/ui/tutorial_panel.gd:157
 msgid "Weiter"
 msgstr ""
 
-#: scripts/ui/tutorial_panel.gd:122
+#: scripts/ui/tutorial_panel.gd:171
 msgid "Aufgabe: "
 msgstr ""
 
-#: scripts/ui/tutorial_panel.gd:162
+#: scripts/ui/tutorial_panel.gd:211
 msgid "Im Lexikon"
 msgstr ""
 
-#: scripts/ui/tutorial_panel.gd:173
+#: scripts/ui/tutorial_panel.gd:222
 msgid "Die Geschichtsstunde beenden und frei weiterspielen"
 msgstr ""
 
@@ -4792,10 +4892,6 @@ msgstr ""
 msgid "Noch keine Einträge. Die Chronik hält fest, was in der Partie geschieht – etwa Seuchen, die zum Jahreswechsel einen Ort treffen."
 msgstr ""
 
-#: scenes/ui/legend_panel.tscn:17
-msgid "LEGENDE"
-msgstr ""
-
 #: scenes/ui/location_panel.tscn:33
 msgid "ORT"
 msgstr ""
@@ -4961,7 +5057,7 @@ msgid "Wählen Sie unten einen anderen Kartenmodus, etwa „Dichte“."
 msgstr ""
 
 #: tutorial/maerz_1848.tres:16
-msgid "Jeder Modus erklärt sich in seiner Legende rechts unten."
+msgid "Jeder Modus erklärt sich in seiner Legende rechts unten; ein Klick auf „Legende“ klappt sie auf und zu."
 msgstr ""
 
 #: tutorial/maerz_1848.tres:21
@@ -4985,7 +5081,7 @@ msgid "Staatsübersicht und Kasse"
 msgstr ""
 
 #: tutorial/maerz_1848.tres:34
-msgid "Links steht die Staatsübersicht Preußens: Herrscher, Minister, Einnahmen und Ausgaben. Oben zeigt die Leiste Kasse und Saldo, die Legitimität, die Verwaltung und Ihr Vermächtnis. Wer mehr ausgibt, als er einnimmt, macht Schulden."
+msgid "Die Staatsübersicht Preußens öffnet sich mit „Staat“ ganz oben in der Bereichsleiste links oder mit einem Klick auf das Wappen: Herrscher, Minister, Einnahmen und Ausgaben. Oben zeigt die Leiste Kasse und Saldo, die Legitimität, die Verwaltung und Ihr Vermächtnis. Wer mehr ausgibt, als er einnimmt, macht Schulden."
 msgstr ""
 
 #: tutorial/maerz_1848.tres:35

@@ -6,7 +6,7 @@
 titel     = "Für Elise"
 komponist = "Ludwig van Beethoven"
 werk      = "Klavierstück a-Moll WoO 59 (1810), Hauptteil"
-stimmung  = krise
+stimmung  = "krise frieden"
 tempo     = 66
 takt      = 3/8
 hall      = 0.3
