@@ -139,7 +139,7 @@ msgstr ""
 msgid "Ausgang"
 msgstr ""
 
-#: scripts/core/chronicle_export.gd:119 scripts/main/bar_tooltips.gd:75 scripts/ui/verdict_window.gd:204
+#: scripts/core/chronicle_export.gd:119 scripts/main/bar_tooltips.gd:118 scripts/ui/top_bar.gd:110 scripts/ui/verdict_window.gd:204
 msgid "Vermächtnis"
 msgstr ""
 
@@ -389,6 +389,14 @@ msgstr ""
 
 #: scripts/core/format.gd:34
 msgid "Stadtrepublik"
+msgstr ""
+
+#: scripts/core/format.gd:81
+msgid "Mio."
+msgstr ""
+
+#: scripts/core/format.gd:83
+msgid "Tsd."
 msgstr ""
 
 #: scripts/core/glossary.gd:8
@@ -705,7 +713,7 @@ msgstr ""
 msgid "Märkte"
 msgstr ""
 
-#: scripts/core/map_modes.gd:38 scripts/core/map_modes.gd:61 scripts/main/bar_tooltips.gd:35 scripts/ui/state_panel.gd:1322 scenes/ui/location_panel.tscn:112
+#: scripts/core/map_modes.gd:38 scripts/core/map_modes.gd:61 scripts/main/bar_tooltips.gd:36 scripts/ui/state_panel.gd:1322 scenes/ui/location_panel.tscn:112
 msgid "Verwaltung"
 msgstr ""
 
@@ -729,7 +737,7 @@ msgstr ""
 msgid "Krieg"
 msgstr ""
 
-#: scripts/core/map_modes.gd:44 scripts/core/map_modes.gd:67 scripts/main/bar_tooltips.gd:52 scripts/ui/state_panel.gd:788 scripts/ui/windows/laws_window.gd:33
+#: scripts/core/map_modes.gd:44 scripts/core/map_modes.gd:67 scripts/main/bar_tooltips.gd:53 scripts/main/bar_tooltips.gd:77 scripts/ui/state_panel.gd:788 scripts/ui/top_bar.gd:100 (+1)
 msgid "Unruhe"
 msgstr ""
 
@@ -741,7 +749,7 @@ msgstr ""
 msgid "Dichte"
 msgstr ""
 
-#: scripts/core/map_modes.gd:59 scripts/ui/area_bar.gd:18 tutorial/hinweise.cfg:25
+#: scripts/core/map_modes.gd:59 scripts/ui/area_bar.gd:20 tutorial/hinweise.cfg:25
 msgid "Wirtschaft"
 msgstr ""
 
@@ -749,7 +757,7 @@ msgstr ""
 msgid "Bahn"
 msgstr ""
 
-#: scripts/core/map_modes.gd:64 scripts/main/bar_tooltips.gd:23 scripts/ui/state_panel.gd:30 scripts/ui/state_panel.gd:1099 scripts/ui/state_panel.gd:1106
+#: scripts/core/map_modes.gd:64 scripts/main/bar_tooltips.gd:24 scripts/ui/state_panel.gd:30 scripts/ui/state_panel.gd:1099 scripts/ui/state_panel.gd:1106
 msgid "Zoll"
 msgstr ""
 
@@ -969,11 +977,11 @@ msgstr ""
 msgid "Hauptstadt"
 msgstr ""
 
-#: scripts/core/user_settings.gd:25 scripts/ui/area_bar.gd:23 tutorial/maerz_1848.tres:141 tutorial/hinweise.cfg:41
+#: scripts/core/user_settings.gd:25 scripts/ui/area_bar.gd:25 tutorial/maerz_1848.tres:141 tutorial/hinweise.cfg:41
 msgid "Journale"
 msgstr ""
 
-#: scripts/core/user_settings.gd:25 scripts/ui/area_bar.gd:24
+#: scripts/core/user_settings.gd:25 scripts/ui/area_bar.gd:26
 msgid "Jahrbuch"
 msgstr ""
 
@@ -1005,79 +1013,79 @@ msgstr ""
 msgid "Schnellladen"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:23 scripts/ui/state_panel.gd:30
+#: scripts/main/bar_tooltips.gd:24 scripts/ui/state_panel.gd:30
 msgid "Kontribution"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:23 scripts/ui/state_panel.gd:30
+#: scripts/main/bar_tooltips.gd:24 scripts/ui/state_panel.gd:30
 msgid "Akzise"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:24
+#: scripts/main/bar_tooltips.gd:25
 msgid "[b]Kasse des Vormonats[/b]"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:24
+#: scripts/main/bar_tooltips.gd:25
 msgid "Einnahmen:"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:32
+#: scripts/main/bar_tooltips.gd:33
 msgid "  Hinterland %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:33
+#: scripts/main/bar_tooltips.gd:34
 msgid "Ausgaben:"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35 scripts/ui/state_panel.gd:1321
+#: scripts/main/bar_tooltips.gd:36 scripts/ui/state_panel.gd:1321
 msgid "Hof"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35
+#: scripts/main/bar_tooltips.gd:36 scripts/ui/top_bar.gd:100
 msgid "Heer"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35
+#: scripts/main/bar_tooltips.gd:36
 msgid "Zinsen"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35
+#: scripts/main/bar_tooltips.gd:36
 msgid "Bauten"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:35 scripts/ui/state_panel.gd:1329
+#: scripts/main/bar_tooltips.gd:36 scripts/ui/state_panel.gd:1329
 msgid "Gesandte"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:40 scripts/ui/state_panel.gd:1338
+#: scripts/main/bar_tooltips.gd:41 scripts/ui/state_panel.gd:1338
 msgid "Saldo"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:41
+#: scripts/main/bar_tooltips.gd:42
 msgid "Schatz %s · %s %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:41 scripts/ui/state_panel.gd:1342 scenes/ui/state_panel.tscn:189
+#: scripts/main/bar_tooltips.gd:42 scripts/ui/state_panel.gd:1342 scenes/ui/state_panel.tscn:189
 msgid "Schulden"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:48
+#: scripts/main/bar_tooltips.gd:49
 msgid "Ohne Ereignisse gibt es weder Zustimmung noch Unruhe."
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:49
+#: scripts/main/bar_tooltips.gd:50
 msgid "[b]%s[/b] (Zustimmung der Gruppen im Mittel)"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:49
+#: scripts/main/bar_tooltips.gd:50 scripts/ui/top_bar.gd:95
 msgid "Legitimität"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:52
+#: scripts/main/bar_tooltips.gd:53
 msgid "%s %d, Ziel %d:"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:63
+#: scripts/main/bar_tooltips.gd:64
 msgid ""
 "[b]Verwaltung[/b]\n"
 "%s Orte in %s %s\n"
@@ -1085,23 +1093,71 @@ msgid ""
 "Hauptstadt: %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:65
+#: scripts/main/bar_tooltips.gd:66
 msgid "Kreisen"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:74
-msgid "Dieses Lesezeichen kennt kein Vermächtnis."
-msgstr ""
-
 #: scripts/main/bar_tooltips.gd:75
-msgid "[b]%s[/b] – Faktoren beim Überfahren einer Dimension"
+msgid "Ohne Ereignisse gibt es keine Unruhe."
 msgstr ""
 
 #: scripts/main/bar_tooltips.gd:77
+msgid "[b]%s[/b] %d, Ziel %d"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:78
+msgid "Ab 30 droht ein Aufstand; die Unruhe wandert jeden Monat ein Stück zu ihrem Ziel."
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:85
+msgid "[b]Aufstand im Land![/b]"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:92
+msgid ""
+"[b]Bevölkerung[/b]\n"
+"%s Einwohner\n"
+"\n"
+"%s"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:102
+msgid "%s Mann unter Waffen (Friedensstärke %s)"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:105
+msgid "Lage: %s%s"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:105 scripts/ui/state_panel.gd:924
+msgid " · im Krieg"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:107
+msgid "%s Mann (Promille der Einwohner)"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:108
+msgid "Kosten %s im Monat"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:109
+msgid "Mobilmachung und Krieg: Staatsübersicht und Bereich „Militär“."
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:117
+msgid "Dieses Lesezeichen kennt kein Vermächtnis."
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:118
+msgid "[b]%s[/b] – Faktoren beim Überfahren einer Dimension"
+msgstr ""
+
+#: scripts/main/bar_tooltips.gd:120
 msgid "[url=vermaechtnis:%s]%s[/url] %d – %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:93 scripts/ui/verdict_window.gd:234
+#: scripts/main/bar_tooltips.gd:136 scripts/ui/verdict_window.gd:234
 msgid "Grundwert %+d"
 msgstr ""
 
@@ -1754,11 +1810,11 @@ msgstr ""
 msgid "Hinweise abgeschaltet (Einstellungen, Spiel)"
 msgstr ""
 
-#: scripts/main.gd:656 scripts/ui/area_bar.gd:19 tutorial/hinweise.cfg:73
+#: scripts/main.gd:656 scripts/ui/area_bar.gd:21 tutorial/hinweise.cfg:73
 msgid "Haushalt"
 msgstr ""
 
-#: scripts/main.gd:658 scripts/ui/area_bar.gd:20 tutorial/hinweise.cfg:77
+#: scripts/main.gd:658 scripts/ui/area_bar.gd:22 tutorial/hinweise.cfg:77
 msgid "Zollunion"
 msgstr ""
 
@@ -1806,103 +1862,103 @@ msgstr ""
 msgid "Times New Roman"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:12
+#: scripts/ui/area_bar.gd:14
 msgid "Staat"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:12
+#: scripts/ui/area_bar.gd:14
 msgid "Staatsübersicht: Herrscher, Kasse, Steuern, Heer (auch ein Klick aufs Wappen oben links)"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:13
+#: scripts/ui/area_bar.gd:15
 msgid "Kabinett"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:13
+#: scripts/ui/area_bar.gd:15
 msgid "Kabinett und Hof: Herrscher, Minister, Neigungen, frühere Amtsinhaber"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:14 tutorial/hinweise.cfg:9
+#: scripts/ui/area_bar.gd:16 tutorial/hinweise.cfg:9
 msgid "Gesetze"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:14
+#: scripts/ui/area_bar.gd:16
 msgid "Verfassung, Wahlrecht und Gesetze mit den Wünschen der Gruppen"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:15
+#: scripts/ui/area_bar.gd:17
 msgid "Gruppen"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:15
+#: scripts/ui/area_bar.gd:17
 msgid "Interessengruppen: Anteil, Einfluss, Zustimmung, Forderungen"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:16 scripts/ui/location_panel.gd:392 tutorial/hinweise.cfg:17
+#: scripts/ui/area_bar.gd:18 scripts/ui/location_panel.gd:392 tutorial/hinweise.cfg:17
 msgid "Parlament"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:16
+#: scripts/ui/area_bar.gd:18
 msgid "Plenarsaal: letzte Wahl nach Fraktionen, nächste Wahl, Abstimmungen"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:17 tutorial/hinweise.cfg:21
+#: scripts/ui/area_bar.gd:19 tutorial/hinweise.cfg:21
 msgid "Gesellschaft"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:17
+#: scripts/ui/area_bar.gd:19
 msgid "Bevölkerung: Alter, Kulturen, Konfessionen, Berufe, Wanderung"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:18
+#: scripts/ui/area_bar.gd:20
 msgid "Güter, Preise, Betriebe, Märkte und Zollgebiet"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:19
+#: scripts/ui/area_bar.gd:21
 msgid "Einnahmen und Ausgaben im Einzelnen"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:20
+#: scripts/ui/area_bar.gd:22
 msgid "Zollunionen und Wechsel zum 1. Januar"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:21 scripts/ui/windows/cabinet_window.gd:7 tutorial/maerz_1848.tres:69 tutorial/hinweise.cfg:33
+#: scripts/ui/area_bar.gd:23 scripts/ui/windows/cabinet_window.gd:7 tutorial/maerz_1848.tres:69 tutorial/hinweise.cfg:33
 msgid "Diplomatie"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:21
+#: scripts/ui/area_bar.gd:23
 msgid "Beziehungen, Bündnisse, Bundesversammlung und deutsche Frage"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:22
+#: scripts/ui/area_bar.gd:24
 msgid "Militär"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:22
+#: scripts/ui/area_bar.gd:24
 msgid "Kriege, Heere und Frieden"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:23
+#: scripts/ui/area_bar.gd:25
 msgid "Revolution und deutsche Frage (J)"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:24
+#: scripts/ui/area_bar.gd:26
 msgid "Statistisches Jahrbuch: Kennzahlen und Vermächtnis je Jahr (B)"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:25 tutorial/hinweise.cfg:29
+#: scripts/ui/area_bar.gd:27 tutorial/hinweise.cfg:29
 msgid "Chronik"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:25
+#: scripts/ui/area_bar.gd:27
 msgid "Chronik der Partie mit Filter und Suche"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:26 tutorial/hinweise.cfg:49
+#: scripts/ui/area_bar.gd:28 tutorial/hinweise.cfg:49
 msgid "Lexikon"
 msgstr ""
 
-#: scripts/ui/area_bar.gd:26
+#: scripts/ui/area_bar.gd:28
 msgid "Begriffe der Epoche und des Spiels"
 msgstr ""
 
@@ -2756,7 +2812,7 @@ msgstr ""
 msgid "1 Ort"
 msgstr ""
 
-#: scripts/ui/legend_data.gd:83 scripts/ui/top_bar.gd:117
+#: scripts/ui/legend_data.gd:83 scripts/ui/top_bar.gd:271
 msgid "%s Orte"
 msgstr ""
 
@@ -3136,7 +3192,7 @@ msgstr ""
 msgid "Veränderung"
 msgstr ""
 
-#: scripts/ui/map_mode_bar.gd:37
+#: scripts/ui/map_mode_bar.gd:53
 msgid "%s: %s (Taste %s)"
 msgstr ""
 
@@ -3929,10 +3985,6 @@ msgstr ""
 msgid "Heer: %s Mann · %s%s"
 msgstr ""
 
-#: scripts/ui/state_panel.gd:924
-msgid " · im Krieg"
-msgstr ""
-
 #: scripts/ui/state_panel.gd:926
 msgid "Soldaten unter Waffen; Friedensstärke %s"
 msgstr ""
@@ -4187,47 +4239,71 @@ msgid ""
 "[i]Klick: Lexikon[/i]"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:56
+#: scripts/ui/top_bar.gd:75
 msgid "Staatsübersicht öffnen oder schließen"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:155 scenes/ui/top_bar.tscn:37
+#: scripts/ui/top_bar.gd:93
+msgid "Kasse und Saldo"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:96
+msgid "Unrest"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:97
+msgid "Population"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:98
+msgid "Army"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:100
+msgid "Bevölkerung und Verwaltung"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:151
+msgid "Caption"
+msgstr ""
+
+#: scripts/ui/top_bar.gd:310 scenes/ui/top_bar.tscn:37
 msgid "Keine Simulation"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:156 scenes/ui/top_bar.tscn:44
+#: scripts/ui/top_bar.gd:311 scenes/ui/top_bar.tscn:44
 msgid "Spielerstaat unbekannt"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:164 scenes/ui/top_bar.tscn:143
+#: scripts/ui/top_bar.gd:325 scenes/ui/top_bar.tscn:143
 msgid "Simulation nicht geladen"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:172 scenes/ui/top_bar.tscn:155
+#: scripts/ui/top_bar.gd:333 scenes/ui/top_bar.tscn:155
 msgid "Pause (Leertaste)"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:175
+#: scripts/ui/top_bar.gd:336
 msgid "Stufe %d: %d %s je Sekunde (Taste %d)"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:176
+#: scripts/ui/top_bar.gd:337
 msgid "Tag"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:176
+#: scripts/ui/top_bar.gd:337
 msgid "Tage"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:191
+#: scripts/ui/top_bar.gd:352
 msgid "Pausiert · Leertaste setzt fort"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:193
+#: scripts/ui/top_bar.gd:354
 msgid "Stufe %d · 1 Tag je Sekunde"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:195
+#: scripts/ui/top_bar.gd:356
 msgid "Stufe %d · %d Tage je Sekunde"
 msgstr ""
 

@@ -753,6 +753,18 @@ func _check_bars() -> void:
 	layer.show_for(top.field(&"legitimitaet"), texts_source.legitimacy)
 	if not layer.text_of(0).contains("Unruhe") or not layer.text_of(0).contains("Zustimmung der Gruppen"):
 		_fail("Tooltip Legitimität ohne Ursachen der Unruhe: „%s“" % layer.text_of(0).replace("\n", " / "))
+	# Seit M14a2: Symbole statt Überschriften, dazu Unruhe, Bevölkerung (mit der Verwaltung) und Heer.
+	for key: StringName in [&"kasse", &"legitimitaet", &"unruhe", &"bevoelkerung", &"heer", &"vermaechtnis"]:
+		var metric := top.field(key)
+		var icon := metric.get_node_or_null("Icon") as TextureRect if metric != null else null
+		if metric == null or not metric.is_visible_in_tree() or icon == null or icon.texture == null or top.field_text(key) == "–":
+			_fail("Obere Leiste: Kennzahl %s ohne Symbol oder Wert („%s“)" % [key, top.field_text(key)])
+	for pair: Array in [[&"unruhe", texts_source.unrest, "Ziel"], [&"bevoelkerung", texts_source.population, "Einwohner"], [&"heer", texts_source.army, "Kosten"]]:
+		layer.show_for(top.field(pair[0]), pair[1])
+		if not layer.text_of(0).contains(str(pair[2])):
+			_fail("Tooltip %s: „%s“" % [pair[0], layer.text_of(0).replace("\n", " / ")])
+	if not top.get_global_rect().encloses(top.field(&"vermaechtnis").get_global_rect()) or top.get_global_rect().size.x > _main.get_viewport().get_visible_rect().size.x + 1.0:
+		_fail("Obere Leiste breiter als das Bild (%s)" % top.get_global_rect())
 	layer.hide_all()
 	var texts := overview.entry_texts()
 	var journal := -1
@@ -1255,6 +1267,11 @@ func _check_war_ui(menu: GameMenu) -> void:
 		])
 		return
 	var player := sim.get_player_state_index()
+	# Seit M14a2: Die Bereichsleiste zählt die Kriege des Spielerstaates am Symbol „Militär“.
+	_main.call("_refresh_bars", true)
+	var bar: AreaBar = _main.call("area_bar")
+	if bar.badge(&"militaer") < 1:
+		_fail("Königgrätz: kein Zähler am Bereich Militär (%d)" % bar.badge(&"militaer"))
 	var army_id := -1
 	for army in sim.get_armies(player):
 		if str(army.get("name", "")) == "I. Armee":

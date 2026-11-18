@@ -1,7 +1,8 @@
 class_name BarTooltips
 extends RefCounted
 ## Texte der verschachtelten Tooltips der oberen Leiste (seit M13a5c, seit a5d aus main.gd ausgelagert):
-## Kasse, Legitimität mit den Ursachen der Unruhe, Verwaltung, Vermächtnis und die zweite Stufe je Dimension.
+## Kasse, Legitimität mit den Ursachen der Unruhe, Verwaltung, Vermächtnis und die zweite Stufe je Dimension;
+## seit M14a2 auch Unruhe, Bevölkerung (mit der Verwaltung) und Heer.
 ## Simulation und Spielerstaat liefert main.gd über Funktionen, damit die Texte immer aktuell sind.
 
 var sim_source: Callable = Callable()
@@ -65,6 +66,48 @@ func administration() -> String:
 		Glossary.link("kreis", "Kreisen"), Format.integer(int(state.get("population", 0))),
 		location_name.call(int(state.get("capital_index", -1))),
 	]
+
+
+## Unruhe mit Ziel und Ursachen (seit M14a2).
+func unrest() -> String:
+	var events := sim().get_state_events(player())
+	if events.is_empty():
+		return "Ohne Ereignisse gibt es keine Unruhe."
+	var lines := PackedStringArray([
+		"[b]%s[/b] %d, Ziel %d" % [Glossary.link("unruhe", "Unruhe"), roundi(float(events.get("unrest", 0.0))), roundi(float(events.get("unrest_target", 0.0)))],
+		"Ab 30 droht ein Aufstand; die Unruhe wandert jeden Monat ein Stück zu ihrem Ziel.",
+	])
+	for cause: Dictionary in events.get("unrest_causes", []):
+		var value := float(cause.get("value", 0.0))
+		if absf(value) >= 0.5:
+			lines.append("  %s %s" % [str(cause.get("name", "")), Format.signed_number(roundi(value))])
+	if not (events.get("revolt", {}) as Dictionary).is_empty():
+		lines.append("[b]Aufstand im Land![/b]")
+	return "\n".join(lines)
+
+
+## Bevölkerung mit der Verwaltung (seit M14a2; die Verwaltung stand vorher als eigene Zahl in der Leiste).
+func population() -> String:
+	var state := sim().get_state(player())
+	return "[b]Bevölkerung[/b]\n%s Einwohner\n\n%s" % [
+		Format.integer(int(state.get("population", 0))), administration()
+	]
+
+
+## Heer: Soldaten, Friedensstärke, Mobilmachung, Kosten (seit M14a2).
+func army() -> String:
+	var state := sim().get_state(player())
+	var lines := PackedStringArray(["[b]Heer[/b]"])
+	if bool(state.get("military", false)):
+		lines.append("%s Mann unter Waffen (Friedensstärke %s)" % [
+			Format.integer(int(state.get("soldiers_under_arms", 0))), Format.integer(int(state.get("peace_strength", 0)))
+		])
+		lines.append("Lage: %s%s" % [str(state.get("mobilization_text", "")), " · im Krieg" if bool(state.get("in_war", false)) else ""])
+	else:
+		lines.append("%s Mann (Promille der Einwohner)" % Format.integer(int(state.get("soldiers", 0))))
+	lines.append("Kosten %s im Monat" % Format.money(float(state.get("army_month", 0.0))))
+	lines.append("Mobilmachung und Krieg: Staatsübersicht und Bereich „Militär“.")
+	return "\n".join(lines)
 
 
 func legacy() -> String:

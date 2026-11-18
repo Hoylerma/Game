@@ -1065,7 +1065,9 @@ func _build_bars() -> void:
 	_bar_tooltips.location_name = _location_name
 	_tooltips.attach(_top_bar.field(&"kasse"), _bar_tooltips.cash)
 	_tooltips.attach(_top_bar.field(&"legitimitaet"), _bar_tooltips.legitimacy)
-	_tooltips.attach(_top_bar.field(&"verwaltung"), _bar_tooltips.administration)
+	_tooltips.attach(_top_bar.field(&"unruhe"), _bar_tooltips.unrest)
+	_tooltips.attach(_top_bar.field(&"bevoelkerung"), _bar_tooltips.population)
+	_tooltips.attach(_top_bar.field(&"heer"), _bar_tooltips.army)
 	_tooltips.attach(_top_bar.field(&"vermaechtnis"), _bar_tooltips.legacy, _bar_tooltips.legacy_link)
 
 
@@ -1132,13 +1134,32 @@ func _refresh_bars(force: bool = false) -> void:
 	if not force and Time.get_ticks_msec() - _overview_filled_at < OVERVIEW_REFRESH_MS:
 		return
 	_overview_filled_at = Time.get_ticks_msec()
+	var date := _sim.get_date()
+	_top_bar.begin_month(int(date.get("year", 0)) * 12 + int(date.get("month", 1)))
 	_top_bar.show_overview(_sim.get_state_overview(_player), _sim.get_legacy(_player))
+	_update_area_badges()
 	if _player_current >= 0:
 		_overview.show_entries([] as Array[Dictionary])
 		return
 	_overview.show_entries(OverviewPanel.collect(_sim, _player, str(_sim.get_state(_player).get("tag", ""))))
 	if _location_panel.visible:
 		_overview.visible = false
+
+
+## Zähler der Bereichsleiste (seit M14a2): Kriege des Spielerstaates, Krisen, an denen er beteiligt ist.
+func _update_area_badges() -> void:
+	if _area_bar == null or _sim == null:
+		return
+	var wars := 0
+	for war in _sim.get_wars():
+		if int(war.get("player_side", 0)) != 0:
+			wars += 1
+	var crises := 0
+	for play in _sim.get_diplomatic_plays():
+		if int(play.get("demander_index", -1)) == _player or int(play.get("target_index", -1)) == _player:
+			crises += 1
+	_area_bar.set_badge(&"militaer", wars)
+	_area_bar.set_badge(&"diplomatie", crises)
 
 
 func _on_overview_entry(kind: StringName, value: int) -> void:

@@ -283,6 +283,9 @@ Dazwischen prüft er:
     der Geschichtsstunde mit „Was ist passiert?“. Hinweise ruhen sonst während des ganzen Tests.
     Seit dem Spieltest 11/2026 prüft er in jedem Schritt, dass das Panel der Geschichtsstunde Ortsinfo,
     Übersicht, Legende und Staatsübersicht nicht verdeckt und ein offenes Fenster höchstens am Rand.
+    Seit M14a2 prüft er die obere Leiste mit Symbolen: jede Kennzahl (Kasse, Legitimität, Unruhe,
+    Bevölkerung, Heer, Vermächtnis) mit Symbol und Wert, die Tooltips von Unruhe, Bevölkerung und Heer,
+    eine Leiste nicht breiter als das Bild; in Königgrätz den Zähler der Kriege am Bereich „Militär“.
 18. **Karte frei** (seit M14a1, europa_und_oberflaeche.md 5–6): Ohne offenes Fenster verdecken obere
     Leiste, Bereichsleiste, Übersicht, Legende, Kartenmodi, Ticker und Krisenleiste höchstens 20 % des
     Bildes (gemessen 13 %) (gemessen auf einem Raster von 8 Pixeln); die Staatsübersicht ist eine Schublade, die der

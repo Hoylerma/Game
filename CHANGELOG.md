@@ -13,6 +13,11 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/europa_und_oberflaeche.md](docs/technik/europa_und_oberflaeche.md), Entscheidungen 1–8 wie
 empfohlen freigegeben; Stand je Schritt in Abschnitt 9 dort.
 
+- **Symbole (Schritt a2):** Eigene Symbole im Stil der Epoche ersetzen die Textknöpfe: Die Bereichsleiste
+  zeigt Krone, Gesetzblatt, Halbrund, Waage, Säbel und mehr, mit Zählern für laufende Kriege und Krisen;
+  die 18 Kartenmodi passen als eine Reihe Symbole in vier Gruppen unter die Karte. Die obere Leiste zeigt
+  je Kennzahl ein Symbol und neu die Unruhe, die Bevölkerung und das Heer; Legitimität, Unruhe und
+  Bevölkerung zeigen ihre Veränderung seit dem Monatsanfang mit Pfeil und Farbe.
 - **Die Karte ist frei (Schritt a1):** Die Staatsübersicht ist jetzt eine Schublade, die beim Start zu ist
   und sich mit „Staat“ in der Bereichsleiste, einem Klick aufs Wappen oder mit dem Haushalt öffnet; Esc
   schließt sie. Die Bereichsleiste sitzt am linken Rand, die Legende lässt sich einklappen, und der Ticker

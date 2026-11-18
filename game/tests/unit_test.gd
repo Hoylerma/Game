@@ -17,6 +17,7 @@ func _initialize() -> void:
 	print("EINIGKEIT – Einheitentests der Godot-Seite")
 	_test_format()
 	_test_launch_options()
+	_test_icons()
 	_test_map_config()
 	_test_paths()
 	_test_legend_gradient()
@@ -81,7 +82,12 @@ func _test_format() -> void:
 	# Seit M13b4: Regeln je Sprache.
 	_equal(Format.date(1, 3, 1848), "1. März 1848", "Datum deutsch")
 	_equal(Format.date_of({"day": 18, "month": 3, "year": 1848}), "18. März 1848", "Datum aus Dictionary")
+	# Seit M14a2: kurze große Zahlen für die obere Leiste.
+	_equal(Format.compact(15_979_042.0), "15,98 Mio.", "compact Millionen")
+	_equal(Format.compact(250_400.0), "250 Tsd.", "compact Tausende")
+	_equal(Format.compact(12_345.0), "12.345", "compact darunter")
 	Format.set_locale("en")
+	_equal(Format.compact(15_979_042.0), "15.98 M", "compact englisch")
 	_equal(Format.integer(1234567), "1,234,567", "integer englisch")
 	_equal(Format.number(1234.56, 1), "1,234.6", "number englisch")
 	_equal(Format.density(82.34), "82.3" + NBSP + "inh./km²", "density englisch")
@@ -90,6 +96,37 @@ func _test_format() -> void:
 	Format.set_locale("fr")
 	_equal(Format.integer(1000), "1.000", "unbekannte Sprache: deutsch")
 	Format.set_locale("de")
+
+
+## Symbole (seit M14a2): jedes Symbol der Bereiche, Kartenmodi und Kennzahlen vorhanden und ladbar, in Größe
+## und Farbe gerendert (das Papier bleibt, die Tinte wechselt).
+func _test_icons() -> void:
+	var wanted := PackedStringArray()
+	for area: Array in AreaBar.AREAS:
+		wanted.append(str(area[0]))
+	for icon in MapModeBar.ICONS:
+		wanted.append(str(icon))
+	wanted.append_array(["kasse", "legitimitaet", "unruhe", "bevoelkerung", "heer", "vermaechtnis"])
+	var missing := PackedStringArray()
+	for icon in wanted:
+		if icon == "bevoelkerung":
+			continue # die Bevölkerung zeigt das Symbol der Gesellschaft
+		if not Icons.exists(StringName(icon)) or Icons.texture(StringName(icon), 24.0) == null:
+			missing.append(icon)
+	_true(missing.is_empty(), "alle Symbole vorhanden (%d), fehlend: %s" % [wanted.size(), ", ".join(missing)])
+	var texture := Icons.texture(&"kabinett", 24.0)
+	_true(texture != null and texture.get_width() == 48, "Symbol mit doppelter Auflösung (%s)" % str(texture.get_size() if texture != null else Vector2.ZERO))
+	_true(Icons.texture(&"kabinett", 24.0) == texture, "Symbole zwischengespeichert")
+	var paper := Icons.texture(&"kabinett", 24.0, UiPalette.PAPER)
+	_true(paper != null and paper != texture, "Symbol in anderer Tinte")
+	_true(Icons.texture(&"gibt_es_nicht") == null and not Icons.exists(&"gibt_es_nicht"), "unbekanntes Symbol: null")
+	var seen := PackedInt32Array()
+	for group in MapModeBar.GROUPS:
+		for mode in group:
+			seen.append(int(mode))
+	seen.sort()
+	var expected := PackedInt32Array(range(MapModes.COUNT))
+	_true(seen == expected and MapModeBar.ICONS.size() == MapModes.COUNT, "jeder Kartenmodus in genau einer Gruppe mit Symbol (%s)" % str(seen))
 
 
 func _test_launch_options() -> void:

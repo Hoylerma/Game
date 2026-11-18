@@ -73,6 +73,17 @@ static func integer(value: int) -> String:
 	return (MINUS if value < 0 else "") + grouped
 
 
+## Große Zahl kurz (seit M14a2, obere Leiste): ab einer Million „15,98 Mio.“ (en: "15.98 M"), ab
+## Hunderttausend „250 Tsd.“ (en: "250 k"), darunter mit Tausendertrennzeichen.
+static func compact(value: float) -> String:
+	var size := absf(value)
+	if size >= 1_000_000.0:
+		return "%s %s" % [number(value / 1_000_000.0, 2), "M" if locale == "en" else "Mio."]
+	if size >= 100_000.0:
+		return "%s %s" % [number(value / 1000.0, 0), "k" if locale == "en" else "Tsd."]
+	return integer(roundi(value))
+
+
 ## Zahl mit fester Anzahl Nachkommastellen: 1234.56 → "1.234,6" (decimals = 1).
 static func number(value: float, decimals: int = 0) -> String:
 	if is_nan(value) or is_inf(value):
