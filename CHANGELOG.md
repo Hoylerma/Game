@@ -29,6 +29,11 @@ empfohlen freigegeben; Stand je Schritt in Abschnitt 9 dort.
   erscheint nur, wenn es etwas zu melden gibt. Ohne offenes Fenster bedecken die Leisten nur noch 13 %
   des Bildes; ein neuer Test hält das unter 20 %.
 
+### Zweite Rückmeldung aus dem Spiel (18.11.2026)
+
+- **F11 schaltet das Vollbild** ein und aus, überall im Spiel; die Einstellung bleibt gespeichert und die
+  Taste lässt sich unter Einstellungen, Tasten neu belegen.
+
 ### Erste Rückmeldung aus dem Spiel (18.11.2026)
 
 - **Geschichtsstunde verdeckt nichts mehr:** Das Panel sucht sich einen freien Platz über der Karte statt

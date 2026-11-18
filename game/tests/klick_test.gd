@@ -685,6 +685,13 @@ func _check_settings_chronicle_lexicon() -> void:
 	if not yearbook.is_open():
 		_fail("Einstellungen: neue Taste G öffnet das Jahrbuch nicht")
 	_main.call("close_yearbook")
+	# F11 schaltet das Vollbild um (seit dem Spieltest 11/2026), auch bei offenem Fenster.
+	var full := bool(settings.get_value("bild/vollbild"))
+	await _key(KEY_F11)
+	var toggled := bool(settings.get_value("bild/vollbild")) != full
+	await _key(KEY_F11)
+	if not toggled or bool(settings.get_value("bild/vollbild")) != full:
+		_fail("F11 schaltet das Vollbild nicht um")
 	settings.reset_group("tasten")
 	settings.reset_group("spiel")
 	settings.apply(_main.get_tree())

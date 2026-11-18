@@ -179,6 +179,7 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Wahlkampf (Ortsinfo) | seit M8, im Parteienmodus für die nächste Wahl: Parlament und Wahlkreis, Stimmungsbericht (Schätzung mit ± 8 Punkten Fehler) und die Knöpfe Versammlung, Flugblätter und Verein gründen; Wirkung ab dem nächsten Tag, gesperrt, wenn die Mittel nach den schon angesetzten Aktionen nicht reichen ([docs/technik/politik.md](../docs/technik/politik.md), Abschnitt 9) |
 | F5 | Schnellspeichern (`schnellspeicher.einigkeit`) |
 | F9 | Schnellladen |
+| F11 | Vollbild ein und aus (seit dem Spieltest 11/2026; wirkt überall, auch im Spielmenü; belegbar unter Einstellungen, Tasten) |
 
 **Doppelbelegung von W:** W gehört sowohl zur Kamerasteuerung (WASD) als auch zum
 Kartenmodus „Bevölkerungsdichte“. Kurz getippt (unter 0,18 s) schaltet W den Kartenmodus um,

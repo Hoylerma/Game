@@ -133,6 +133,11 @@ func _process(delta: float) -> void:
 	_after_time_passed()
 	_maybe_autosave()
 func _unhandled_input(event: InputEvent) -> void:
+	# Vollbild (F11) überall, auch im Spielmenü und auf dem Startbildschirm.
+	if event.is_action_pressed(&"vollbild", false, true) and _settings != null:
+		_settings.toggle_fullscreen(get_tree())
+		get_viewport().set_input_as_handled()
+		return
 	if _handle_save_keys(event):
 		get_viewport().set_input_as_handled()
 		return
