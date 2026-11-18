@@ -177,12 +177,13 @@ static func is_extension_available() -> bool:
 	return ClassDB.class_exists(NATIVE_CLASS)
 
 
-## Erwarteter Dateiname der Bibliothek für dieses Betriebssystem.
+## Erwarteter Dateiname der Bibliothek für dieses Betriebssystem; in einer Release-Fassung (Paket) die
+## Fassung *.release aus dem Preset bridge-release (seit dem 18.11.2026).
 static func expected_library_file() -> String:
-	var os_name := OS.get_name()
-	if LIBRARY_NAMES.has(os_name):
-		return "bin/" + str(LIBRARY_NAMES[os_name])
-	return "bin/libuhrwerk_bridge.so"
+	var file := str(LIBRARY_NAMES.get(OS.get_name(), "libuhrwerk_bridge.so"))
+	if not OS.is_debug_build():
+		file = file.get_basename() + ".release." + file.get_extension()
+	return "bin/" + file
 
 
 ## Methoden der Schnittstelle, die die geladene Erweiterung nicht kennt.

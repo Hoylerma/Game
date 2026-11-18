@@ -10,7 +10,7 @@ name: KI-Partien
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 3 * * 1" # montags 3:17 UTC
+    - cron: "17 3 8 * *" # am 8. jedes Monats um 3:17 UTC (seit dem 18.11.2026, vorher wöchentlich)
 
 permissions:
   contents: read

@@ -463,7 +463,7 @@ kleindeutsch 55–75 % (historischer Modus). Die Korridore bis 1871 liegen darun
 neun Jahre früher endet und der Süden 1871 noch draußen sein darf.
 
 **CI:** je Push 16 Seeds gegen die Korridore (wie die übrigen Labore); die 100 Partien als eigener
-Workflow `ki-partien.yml` (manuell und wöchentlich), Bericht als Artefakt.
+Workflow `ki-partien.yml` (manuell und monatlich, bis November 2026 wöchentlich), Bericht als Artefakt.
 
 Präzisiert in Schritt a5 (`core/src/ai_lab.cpp`, Zieldatei: chronik-skript.md Abschnitt 3.40):
 

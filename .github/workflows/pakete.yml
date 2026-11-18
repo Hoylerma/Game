@@ -119,7 +119,7 @@ jobs:
           cmake --preset release
           cmake --build --preset release --target uhrwerk-cli
           ls -l game/bin
-          if [ "$RUNNER_OS" = "macOS" ]; then lipo -info game/bin/libuhrwerk_bridge.dylib; fi
+          if [ "$RUNNER_OS" = "macOS" ]; then lipo -info game/bin/libuhrwerk_bridge.release.dylib; fi
 
       - name: Godot und Exportvorlagen aus dem Cache holen
         id: godot-cache

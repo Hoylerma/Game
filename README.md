@@ -171,7 +171,7 @@ Pakete für Linux, Windows und macOS. Das ganze Spiel aus dem Design-Dokument is
 | Kartengenerator (`tools/kartengenerator/`) | erzeugt Ort-ID-Bild mit Flächenart (4096 × 3329 Pixel), Flussebene, Zuordnungstabelle und (seit M10) die Nachbarschaft der Orte mit gekreuzten Flüssen aus Geometrie und Orten (Python mit numpy, 13–21 s); 89 Tests |
 | Brücke (`bridge/`) | GDExtension mit der Klasse `UhrwerkSimulation` |
 | Godot-Prototyp (`game/`) | Großkarte des Kernraums mit achtzehn Kartenmodi (u. a. Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung, Eisenbahnen, Wahlen, Zollgebiete, Beziehungen, Krieg, Unruhe und Bund), Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit drei Steuerreglern und Haushaltsfenster, Ortsinfo mit Wirtschaft, Kulturen, Altersaufbau und Bevölkerungsbilanz, Chronik, Legende, Spielmenü mit Speichern und Laden, F5/F9, Autosave; neues Spiel mit Wahl des Lesezeichens (1648 oder 1848) und Staatswahl; seit M8 Wahlabend, Parteienmodus und „Verfassung und Gruppen“ in der Staatsinfo; seit M9 Fenster „Zollunion“ mit Beitritt und Austritt, Fenster „Diplomatie“ (Staaten, Bundesversammlung, Deutsche Frage) und Krisenleiste; seit M10 Heere auf der Karte mit Auswahl und Marschbefehl per Rechtsklick, Heeres- und Kriegsfenster mit Friedensangeboten, Kriegserklärung, Mobilmachung im Staatspanel und Schlachtberichte; seit M11 Ereignisfenster mit historischem Kompass, Journalfenster, Gesetze, Zustimmung und Unruhe in der Staatsinfo; seit M12 Herrscher, Minister und Neigungen in der Staatsinfo, Absichten und „Warum?“ der KI im Diplomatiefenster, Hinweise bei Kriegserklärungen und Forderungen an den Spieler; seit M13 Startbildschirm mit Lesezeichen, empfohlenen Staaten, Schwierigkeit und Geschichtsverlauf, Kartenmodus „Bund“, Hauptbildschirm nach Kapitel 22 (obere Leiste, Bereichsleiste, Übersicht, Ticker) mit den Fenstern Kabinett, Gesetze, Parlament, Gruppen, Gesellschaft, Wirtschaft, Jahrbuch, Chronik und Lexikon, Urteil der Geschichte, Einstellungen mit Barrierefreiheit, Epochenrahmen und Schriften, Zeitung, Musik und Klänge, Geschichtsstunde mit Hinweisen, Englisch und Rückmeldung; Einheitentest (517 Prüfungen), Rauchtest, Klicktest (4.542 von 4.542 Orten in drei Zoomstufen, Namen und Panels, Wirtschaft, Spielstände, Wahlabend, Parteienmodus, Zollunion, Diplomatie mit Absichten der KI, Ereignisse, Krieg, alle Fenster, Zeitung, Musik, Geschichtsstunde), Durchspieltest über vier Staaten bis 1871 und Sprachtest |
-| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), macOS (Apple Clang, seit M13b5), Prüfsummenvergleich (100 Jahre, Lasttest und Prüfwert eines Spielstands), Lasttest mit 500.000 Blöcken (Release), Balancing-Bericht (16 Seeds, 100 Jahre; 1848 mit 8 Seeds, 30 Jahre), Wahllabor 1848/49, KI-Labor 1848–1871 mit 16 Partien (100 Partien im Workflow `ki-partien.yml`, manuell und wöchentlich), Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots; Pakete für Linux, Windows und macOS mit Paketrauchtest (`pakete.yml`, manuell und bei Tags) |
+| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), macOS (Apple Clang, seit M13b5), Prüfsummenvergleich (100 Jahre, Lasttest und Prüfwert eines Spielstands), Lasttest mit 500.000 Blöcken (Release), Balancing-Bericht (16 Seeds, 100 Jahre; 1848 mit 8 Seeds, 30 Jahre), Wahllabor 1848/49, KI-Labor 1848–1871 mit 16 Partien (100 Partien im Workflow `ki-partien.yml`, manuell und monatlich), Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots; Pakete für Linux, Windows und macOS mit Paketrauchtest (`pakete.yml`, manuell und bei Tags); seit dem 18.11.2026 im schnellen Umfang je Pull Request, voll am 1. und 15. jedes Monats und von Hand |
 
 Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – historische Daten für den
 übrigen Kernraum um 1648, Gesetzgebung und Regierungsbildung außerhalb der Ereignisse, KI,
@@ -329,11 +329,10 @@ mit `data/`, `DRITTANBIETER.txt` und `LIESMICH.txt` (Godot-Exportvorlagen 4.4.1 
 `pakete.yml` für alle drei Systeme startet man unter Actions → Pakete oder mit einem Tag `v*`):
 
 ```bash
-cmake --preset bridge-release && cmake --build --preset bridge-release     # Brücke als Release
+cmake --preset bridge-release && cmake --build --preset bridge-release     # Brücke als Release (*.release)
 python3 tools/paket/paket.py bauen --system linux --godot tools/godot/Godot_v4.4.1-stable_linux.x86_64
 python3 tools/paket/paket.py rauchtest --cli build/release/cli/uhrwerk-cli \
     --programm build/pakete/einigkeit-0.13.0-linux-x86_64/einigkeit.x86_64  # Prüfsumme wie uhrwerk-cli?
-cmake --build --preset bridge                                               # danach wieder die Debug-Brücke
 ```
 
 Mehr dazu (Windows-Installer, DMG, Rückmeldungen): [tools/paket/README.md](tools/paket/README.md).
@@ -385,6 +384,21 @@ Leistungstest: [`game/README.md`](game/README.md), [`game/tests/README.md`](game
 clang-format-18 --dry-run --Werror $(git ls-files 'core/*.[ch]pp' 'cli/*.[ch]pp' 'tests/*.[ch]pp' 'bridge/*.[ch]pp' 'bridge/*.h')
 clang-format-18 -i <datei>                # Datei formatieren
 ```
+
+### Lizenz
+
+EINIGKEIT steht unter der **[PolyForm Noncommercial License 1.0.0](LICENSE.md)**: Ansehen, Nutzen,
+Verändern und Weitergeben sind für **nicht kommerzielle Zwecke** erlaubt (privat, Lernen, Forschung,
+Hobby, Schulen und gemeinnützige Einrichtungen). Jede kommerzielle Nutzung braucht eine eigene
+Erlaubnis des Rechteinhabers. Wer das Projekt weitergibt, muss den Lizenztext (oder seine URL) und die
+Zeile `Required Notice:` aus `LICENSE.md` mitgeben.
+
+Ausgenommen sind Bestandteile Dritter mit eigenen Lizenzen: godot-cpp (`third_party/`, MIT), die
+Schriften in `game/assets/schriften/` (SIL Open Font License, Lizenztexte daneben) sowie die aus
+GeoNames (CC BY 4.0), Natural Earth (gemeinfrei) und den Terrain Tiles abgeleiteten Karten- und
+Ortsdaten, deren Quellenangaben in [`tools/geodaten/quellen.json`](tools/geodaten/quellen.json)
+stehen. Die Pakete führen alle zusammen in `DRITTANBIETER.txt` auf
+([tools/paket/README.md](tools/paket/README.md)).
 
 ### Weiterlesen
 

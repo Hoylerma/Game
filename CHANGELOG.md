@@ -8,6 +8,24 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Lizenz, Namensnennung der Geodaten, sparsamere CI
+
+- **Lizenz:** EINIGKEIT steht unter der **PolyForm Noncommercial License 1.0.0** (`LICENSE.md`): nutzen,
+  verändern und weitergeben für nicht kommerzielle Zwecke; kommerzielle Nutzung nur mit Erlaubnis.
+  Bestandteile Dritter behalten ihre Lizenzen. Die Lizenz liegt jedem Paket bei, der Windows-Installer
+  zeigt sie an.
+- **Namensnennung der Geodaten:** `DRITTANBIETER.txt` nennt jetzt GeoNames (CC BY 4.0), Natural Earth und
+  die Quellen der Höhendaten (Terrain Tiles), aus denen Karte und Orte entstanden sind. Diese Angaben
+  fehlten in den Paketen aus M13b5.
+- **CI sparsamer:** Pull Requests und Pushes auf `main` prüfen im schnellen Umfang (Kern unter Linux,
+  Formatierung, Python, Godot-Einheiten-, Rauch- und Sprachtest); Windows, macOS, Labore, Klick- und
+  Durchspieltest laufen am 1. und 15. jedes Monats und von Hand. Reine Doku-Änderungen lösen keinen Lauf
+  aus, die 100 KI-Partien laufen monatlich statt wöchentlich. Grund: Das Freikontingent an
+  Actions-Minuten des privaten Repositorys war seit dem 22. Oktober aufgebraucht.
+- **Release-Brücke mit eigenem Namen:** `bridge-release` schreibt jetzt `libuhrwerk_bridge.release.so`
+  (bzw. `.dll`, `.dylib`) statt dieselbe Datei wie die Debug-Brücke zu überschreiben. Vorher konnte nach
+  einem Debug-Build die Debug-Fassung in ein Paket geraten; das Paket stürzte dann beim Start ab.
+
 ### Meilenstein M13 – Spielbarer Vertical Slice 1848–1871
 
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
