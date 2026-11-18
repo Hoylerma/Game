@@ -967,9 +967,11 @@ Abschnitt 13).
 - **CI auf GitHub:** Seit dem 22. Oktober 2026 (M9) bekommen die Läufe keinen Runner mehr und brechen
   nach wenigen Sekunden ab: Das Freikontingent an Actions-Minuten des privaten Repositorys ist
   aufgebraucht (nicht der Code). Alle Prüfungen von M9 bis M13 liefen lokal unter Linux; der Kern unter
-  MSVC und Apple Clang, die Determinismusprüfung über vier Plattformen sowie die Pakete für Windows und
-  macOS (`pakete.yml`) sind bisher **nicht gelaufen**. Seit dem 18.11.2026 läuft die CI sparsamer
-  (schneller Umfang je Pull Request, voller Umfang zweimal im Monat und von Hand, siehe `ci.yml`).
+  MSVC und Apple Clang und die Determinismusprüfung über vier Plattformen sind bisher **nicht gelaufen**.
+  Seit dem 18.11.2026 ist das Repository öffentlich und die CI sparsamer (schneller Umfang je Pull
+  Request, voller Umfang zweimal im Monat und von Hand, siehe `ci.yml`). Am selben Tag lief
+  `pakete.yml` zum ersten Mal: Pakete für Linux, Windows und macOS gebaut, der Paketrauchtest
+  (beide Szenarien, 30 Tage, Prüfsumme gleich `uhrwerk-cli`) auf allen drei Systemen grün.
 - **Bildrate auf echter Hardware** nicht gemessen (die Arbeitsumgebung hat keine Grafikkarte).
 - **Englisch** nur für Startbildschirm, Spielmenü, Einstellungen, Zahlen, Daten und Gründe der KI (179
   von 1.304 Texten); Ereignisse, Journale, Lexikon und Chronik sind deutsch.

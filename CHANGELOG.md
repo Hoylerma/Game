@@ -22,6 +22,10 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
   Durchspieltest laufen am 1. und 15. jedes Monats und von Hand. Reine Doku-Änderungen lösen keinen Lauf
   aus, die 100 KI-Partien laufen monatlich statt wöchentlich. Grund: Das Freikontingent an
   Actions-Minuten des privaten Repositorys war seit dem 22. Oktober aufgebraucht.
+- **Pakete auf allen drei Systemen:** Der Workflow `pakete.yml` lief zum ersten Mal und baut die Pakete
+  für Linux, Windows (mit Installer) und macOS; der Paketrauchtest ist auf allen drei Systemen grün.
+  Behoben dafür: `paket.py` wertete die Meldung des Editors über die fehlende Debug-Brücke als
+  Exportfehler und prüft jetzt stattdessen, dass die Release-Brücke im Export liegt.
 - **Release-Brücke mit eigenem Namen:** `bridge-release` schreibt jetzt `libuhrwerk_bridge.release.so`
   (bzw. `.dll`, `.dylib`) statt dieselbe Datei wie die Debug-Brücke zu überschreiben. Vorher konnte nach
   einem Debug-Build die Debug-Fassung in ein Paket geraten; das Paket stürzte dann beim Start ab.
