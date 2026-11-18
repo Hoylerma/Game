@@ -211,9 +211,35 @@ def exportieren(godot: Path, system: str, ziel: Path) -> Path:
     programm = ziel / datei
     erg = _lauf([godot, "--headless", "--path", SPIEL, "--export-release", vorlage, programm], capture_output=True)
     ausgabe = erg.stdout + erg.stderr
-    if erg.returncode != 0 or not programm.is_file() or "ERROR" in ausgabe:
-        raise PaketFehler(f"Export „{vorlage}“ fehlgeschlagen:\n{ausgabe[-4000:]}")
+    fehler = exportfehler(ausgabe)
+    if erg.returncode != 0 or not programm.is_file() or fehler:
+        raise PaketFehler(f"Export „{vorlage}“ fehlgeschlagen:\n" + ("\n".join(fehler) or ausgabe[-4000:]))
+    if not bibliothek_im_export(programm, bibliothek):
+        raise PaketFehler(f"Export „{vorlage}“ ohne die Brücke {bibliothek}")
     return programm
+
+
+# Meldungen des Editors, wenn nur die Release-Brücke gebaut ist (CI): Er lädt beim Start die
+# Debug-Fassung, die fehlt; der Release-Export braucht sie nicht (bibliothek_im_export prüft das).
+_HARMLOS = (
+    re.compile(r'Condition "!FileAccess::exists\(path\)" is true\. Returning: ERR_FILE_NOT_FOUND'),
+    re.compile(r"GDExtension dynamic library not found: 'res://bin/uhrwerk\.gdextension'"),
+    re.compile(r"Error loading extension: 'res://bin/uhrwerk\.gdextension'"),
+)
+
+
+def exportfehler(ausgabe: str) -> list[str]:
+    """Fehlerzeilen aus der Ausgabe des Exports, ohne die harmlosen Meldungen zur Debug-Brücke."""
+    zeilen = [z.strip() for z in ausgabe.splitlines() if z.lstrip().startswith(("ERROR:", "SCRIPT ERROR:"))]
+    return [z for z in zeilen if not any(m.search(z) for m in _HARMLOS)]
+
+
+def bibliothek_im_export(programm: Path, bibliothek: str) -> bool:
+    """Liegt die Release-Brücke im Export (neben dem Programm bzw. in der App im ZIP)?"""
+    if programm.suffix == ".zip":
+        with zipfile.ZipFile(programm) as z:
+            return any(n.endswith(f"/Contents/Frameworks/{bibliothek}") for n in z.namelist())
+    return (programm.parent / bibliothek).is_file()
 
 
 def kopiere_daten(ziel: Path) -> None:
