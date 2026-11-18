@@ -35,7 +35,7 @@ const DEFAULTS := {
 	"bild/oberflaeche": 100,
 	"bild/bildrate": 0,
 	"ton/gesamt": 80,
-	"ton/musik": 70,
+	"ton/musik": 55, # seit dem Spieltest 11/2026 (vorher 70)
 	"ton/klaenge": 80,
 	"ton/musik_aus": false,
 	"spiel/autosave": "jaehrlich",

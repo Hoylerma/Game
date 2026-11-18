@@ -46,7 +46,7 @@ blockweise (Blöcke der Verzögerungslänge), damit er ohne Python-Schleife je P
 titel     = "Ode an die Freude"              # Pflicht
 komponist = "Ludwig van Beethoven"           # Pflicht
 werk      = "9. Sinfonie d-Moll op. 125 (1824), 4. Satz, Hauptthema"
-stimmung  = frieden                          # Pflicht: frieden, krise, krieg, revolution
+stimmung  = frieden                          # Pflicht: frieden, krise, krieg, revolution; mehrere: "frieden krise"
 tempo     = 96                               # Pflicht: Viertel je Minute (20–300)
 takt      = 4/4                              # Pflicht
 hall      = 0.25                             # 0–1 (0,2)

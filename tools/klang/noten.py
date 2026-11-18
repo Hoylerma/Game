@@ -5,7 +5,7 @@ Ein Stück steht in game/audio/noten/<name>.noten, einem einfachen Textformat (R
     titel     = "Ode an die Freude"
     komponist = "Ludwig van Beethoven"
     werk      = "9. Sinfonie d-Moll op. 125 (1824), 4. Satz"
-    stimmung  = frieden                 # frieden, krise, krieg, revolution
+    stimmung  = frieden                 # frieden, krise, krieg, revolution; mehrere: "frieden krise"
     tempo     = 100                     # Viertel je Minute
     takt      = 4/4
     hall      = 0.25                    # optional, 0 … 1 (Standard 0,2)
@@ -88,6 +88,11 @@ class Stueck:
     form: list[str]
     quelle: Path | None = None
     meta: dict[str, str] = field(default_factory=dict)
+
+    @property
+    def stimmungen(self) -> tuple[str, ...]:
+        """Stimmungen des Stücks (das Feld stimmung kann mehrere enthalten, durch Leerzeichen getrennt)."""
+        return tuple(self.stimmung.split())
 
     def dauer_ganze(self) -> Fraction:
         return sum((self.teile[t].laenge for t in self.form), Fraction(0))
@@ -324,10 +329,15 @@ def lies(pfad: Path) -> Stueck:
     if unbekannt:
         schluessel = sorted(unbekannt)[0]
         raise NotenFehler(f"{datei}:{zeilen[schluessel]}: unbekanntes Feld {schluessel!r}")
-    if werte["stimmung"] not in STIMMUNGEN:
-        raise NotenFehler(
-            f"{datei}:{zeilen['stimmung']}: Stimmung {werte['stimmung']!r} unbekannt (erlaubt: {', '.join(STIMMUNGEN)})"
-        )
+    # Seit dem Spieltest 11/2026: ein Stück kann zu mehreren Stimmungen passen (stimmung = "frieden krise").
+    stimmungen = werte["stimmung"].replace(",", " ").split()
+    for stimmung in stimmungen or [""]:
+        if stimmung not in STIMMUNGEN:
+            raise NotenFehler(
+                f"{datei}:{zeilen['stimmung']}: Stimmung {stimmung!r} unbekannt (erlaubt: {', '.join(STIMMUNGEN)})"
+            )
+    if len(set(stimmungen)) != len(stimmungen):
+        raise NotenFehler(f"{datei}:{zeilen['stimmung']}: Stimmung doppelt")
     if not stimmen:
         raise NotenFehler(f"{datei}: keine Stimme (stimme <name> {{ instrument = … }})")
     takt = _bruch(werte["takt"], datei, zeilen["takt"])
@@ -378,7 +388,7 @@ def lies(pfad: Path) -> Stueck:
         titel=werte["titel"],
         komponist=werte["komponist"],
         werk=werte.get("werk", ""),
-        stimmung=werte["stimmung"],
+        stimmung=" ".join(stimmungen),
         tempo=tempo,
         takt=takt,
         hall=hall,

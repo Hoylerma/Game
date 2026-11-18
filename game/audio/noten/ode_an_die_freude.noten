@@ -5,7 +5,7 @@ titel     = "Ode an die Freude"
 komponist = "Ludwig van Beethoven"
 werk      = "9. Sinfonie d-Moll op. 125 (1824), 4. Satz, Hauptthema"
 stimmung  = frieden
-tempo     = 96
+tempo     = 84
 takt      = 4/4
 hall      = 0.25
 

@@ -923,6 +923,24 @@ func _quiet_hints() -> void:
 		hint.use_seen_file("user://klick_test_hinweise.cfg")
 
 
+## Spieltest 11/2026: Das Panel der Geschichtsstunde verdeckt weder Ortsinfo, Übersicht und Legende noch die
+## Staatsübersicht; ein offenes Fenster höchstens am Rand (nur wenn sonst kein Platz ist, dann kompakt).
+func _check_tutorial_free(tutorial: TutorialPanel, step_id: String) -> void:
+	var rect := tutorial.get_global_rect()
+	var panels: Array[Control] = [
+		_main.call("location_panel"), _main.call("overview_panel"), _main.call("state_panel"),
+		_main.find_child("LegendPanel", true, false) as Control,
+	]
+	for panel in panels:
+		if panel != null and panel.is_visible_in_tree() and rect.intersects(panel.get_global_rect()):
+			_fail("Geschichtsstunde „%s“: Panel %s verdeckt %s %s" % [step_id, rect, panel.name, panel.get_global_rect()])
+	var window: Control = (_main.call("window_manager") as WindowManager).open_window()
+	if window != null and window.is_visible_in_tree():
+		var cut := rect.intersection(window.get_global_rect())
+		if cut.has_area() and (cut.size.y > 8.0 and cut.size.x > 8.0):
+			_fail("Geschichtsstunde „%s“: Panel %s verdeckt das Fenster %s" % [step_id, rect, window.name])
+
+
 ## Onboarding (seit M13b3, vertical_slice.md 5.4; Abnahme b3: Klicktest durch die Geschichtsstunde): Start über
 ## das Hauptmenü, jeder Schritt mit seiner Aufgabe über die Bedienung, die Zeit nur, wo der Schritt es erlaubt;
 ## dann ein Hinweis beim ersten Öffnen (und nur dann) und „Was ist passiert?“ nach dem Laden.
@@ -962,6 +980,7 @@ func _check_onboarding() -> void:
 			_fail("Geschichtsstunde: Ziel „%s“ fehlt" % step.target)
 		await _do_lesson_step(step, sim)
 		await _frames(2)
+		_check_tutorial_free(tutorial, step.id)
 		if not tutorial.is_done():
 			_fail("Geschichtsstunde: Aufgabe „%s“ nicht erkannt (%s)" % [step.id, sim.get_date_text()])
 			tutorial.mark_done()

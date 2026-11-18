@@ -26,6 +26,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | **fertig** (Fachprüfung der Quellen und Werte offen, siehe unten) |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | **fertig** (Fachprüfung der Personen und Agenden offen, siehe unten) |
 | M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | **technisch fertig** (Spieltest mit externen Testern offen; CI auf GitHub läuft zurzeit nicht, siehe unten) |
+| M14 | Europa und Oberfläche (aus dem ersten Spieltest) | 3 – Early Access | M13 | Vertrag zur Freigabe: [technik/europa_und_oberflaeche.md](technik/europa_und_oberflaeche.md) |
 
 Phase 1 endet mit M6 (Ziel der Roadmap: „Technikprototyp“). Phase 2 endet mit M13 (Ziel:
 „Spielbare Epoche III 1848–1871“). Mit M13 ist die Phase 2 technisch abgeschlossen; offen sind die Arbeiten,

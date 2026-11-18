@@ -8,14 +8,14 @@ titel     = "La Marseillaise"
 komponist = "Claude Joseph Rouget de Lisle"
 werk      = "Chant de guerre pour l'armée du Rhin (1792)"
 stimmung  = revolution
-tempo     = 108
+tempo     = 96
 takt      = 4/4
-hall      = 0.22
+hall      = 0.32
 
-stimme melodie { instrument = blech      lautstaerke = 0.75 }
+stimme melodie { instrument = blech      lautstaerke = 0.55 }
 stimme holz    { instrument = holz       lautstaerke = 0.5 }
 stimme bass    { instrument = streicher  lautstaerke = 0.55 }
-stimme trommel { instrument = trommel    lautstaerke = 0.3 }
+stimme trommel { instrument = trommel    lautstaerke = 0.18 }
 
 teil auftakt {
     melodie = "r:8 r:16 g4 e4:8. g4:16 |"

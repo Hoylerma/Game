@@ -8,6 +8,24 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Erste Rückmeldung aus dem Spiel (18.11.2026)
+
+- **Geschichtsstunde verdeckt nichts mehr:** Das Panel sucht sich einen freien Platz über der Karte statt
+  oben rechts, wo die Ortsinfo aufgeht; wird es nirgends ganz frei, zeigt es nur Titel und Aufgabe. Mit
+  der Maus lässt es sich verschieben. Der Klicktest prüft in jedem Schritt, dass Ortsinfo, Übersicht,
+  Legende und Staatsübersicht frei bleiben.
+- **Entspanntere Musik:** Die Stimmung „Revolution“ gilt nur bei einem Aufstand im eigenen Staat; vorher
+  lief im ersten Spieljahr fast nur die Marseillaise. Für Elise, Loreley und Kaiserlied spielen auch in
+  Krisen, der Wilde Reiter im Krieg. Langsamere Tempi, leiseres und weicheres Blech, leisere Trommeln,
+  Pausen von 20–45 statt 6–16 Sekunden zwischen den Stücken, Musik ab Werk auf 55 % statt 70 %. Ein Stück
+  kann jetzt zu mehreren Stimmungen gehören (`stimmung = "frieden krise"`).
+- **Geld in Farbe:** Kasse und Saldo in der oberen Leiste, Einnahmen, Ausgaben und Saldo in der
+  Staatsübersicht und jede Zeile des Haushalts erscheinen grün (Gewinn) oder rot (Verlust); bei
+  Rot-Grün-Schwäche wird Grün zu Blau.
+- **Plan für Europa und eine neue Oberfläche:** Entwurf für M14 in
+  `docs/technik/europa_und_oberflaeche.md` (Karte von ganz Europa um 1848, lebendigeres Kartenbild,
+  übersichtlicher Bildschirm), zur Freigabe.
+
 ### Lizenz, Namensnennung der Geodaten, sparsamere CI
 
 - **Lizenz:** EINIGKEIT steht unter der **PolyForm Noncommercial License 1.0.0** (`LICENSE.md`): nutzen,

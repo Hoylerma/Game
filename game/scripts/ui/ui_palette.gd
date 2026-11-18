@@ -17,3 +17,13 @@ const GOLD := Color("b8892f")
 const POSITIVE := Color("2f6b3a")
 const NEGATIVE := Color("9a2d22")
 const BAR_NEUTRAL := Color("8a7558")
+
+
+## Farbe eines Geldbetrags (seit dem Spieltest 11/2026): Gewinn grün, Verlust rot, null in Tinte; bei
+## Rot-Grün-Schwäche wird Grün zu Blau (Accessibility). neutral: Farbe für null.
+static func amount_color(value: float, neutral: Color = INK) -> Color:
+	if value > 0.0:
+		return Accessibility.adjust(POSITIVE)
+	if value < 0.0:
+		return NEGATIVE
+	return neutral

@@ -102,6 +102,9 @@ func _process(delta: float) -> void:
 	if _tutorial != null and _tutorial.is_active() and not _tutorial.is_done():
 		if _tutorial_check(_tutorial.current_step().check):
 			_tutorial.mark_done()
+	# Freien Platz halten, wenn Ortsinfo oder Fenster auf- und zugehen (seit dem Spieltest 11/2026).
+	if _tutorial != null and _tutorial.visible:
+		_place_tutorial()
 	if _sim == null or _speed == 0:
 		return
 	_day_accumulator += delta * SPEED_DAYS_PER_SECOND[_speed]
@@ -764,13 +767,87 @@ func tutorial_target(target_name: String) -> Control:
 	return null
 
 
-## Rechts oben unter der oberen Leiste, über der Übersicht.
+## Platz der Geschichtsstunde (seit dem Spieltest 11/2026; vorher fest rechts oben, wo die Ortsinfo
+## aufgeht): die erste freie Stelle über der Karte – unten rechts, oben rechts, rechts oben in der Spalte,
+## unten links, oben links –, an der das Panel weder Ortsinfo, Übersicht und Legende noch die
+## Staatsübersicht, offene Fenster oder das Ziel des Schritts verdeckt. Ist keine Stelle frei, erscheint
+## es kompakt (Titel und Aufgabe); sonst an der Stelle mit der kleinsten Überdeckung. Von Hand
+## verschoben bleibt es, wo es ist (nur im Bild gehalten).
 func _place_tutorial() -> void:
 	if _tutorial == null or not _tutorial.visible:
 		return
-	var area := get_viewport().get_visible_rect().size
-	_tutorial.size = _tutorial.get_combined_minimum_size()
-	_tutorial.position = Vector2(area.x - _tutorial.size.x - 12.0, _left_column.offset_top)
+	var view := get_viewport().get_visible_rect()
+	if _tutorial.moved_by_user:
+		_tutorial.size = _tutorial.get_combined_minimum_size()
+		_tutorial.position = _tutorial.position.clamp(view.position, (view.end - _tutorial.size).max(view.position))
+		return
+	var occupied := tutorial_occupied_rects()
+	var best_position := Vector2.ZERO
+	var best_compact := true
+	var best_overlap := INF
+	for compact: bool in [false, true]:
+		var size := _tutorial.size_for(compact)
+		for candidate in _tutorial_candidates(size):
+			var overlap := _overlap_area(Rect2(candidate, size), occupied)
+			if overlap < best_overlap:
+				best_overlap = overlap
+				best_position = candidate
+				best_compact = compact
+			if overlap <= 0.0:
+				break
+		if best_overlap <= 0.0:
+			break
+	if _tutorial.is_compact() != best_compact:
+		_tutorial.set_compact(best_compact)
+	_tutorial.size = _tutorial.size_for(best_compact)
+	_tutorial.position = best_position.round()
+
+
+## Flächen, die die Geschichtsstunde nicht verdecken darf (auch für den Klicktest).
+func tutorial_occupied_rects() -> Array[Rect2]:
+	var result: Array[Rect2] = []
+	var controls: Array[Control] = [_area_bar, _windows.open_window(), _event_window, _newspaper_window, _play_bar]
+	for column: Control in [_left_column, _right_column]:
+		for child in column.get_children():
+			if child is Control and (child as Control).name != &"Spacer":
+				controls.append(child as Control)
+	var step := _tutorial.current_step() if _tutorial != null else null
+	if step != null:
+		var target := tutorial_target(step.target)
+		if target != null and target != _map_view:
+			controls.append(target)
+	for control in controls:
+		if control != null and control.is_visible_in_tree():
+			result.append(control.get_global_rect())
+	return result
+
+
+## Mögliche Plätze über der Karte, in der Reihenfolge des Vorzugs.
+func _tutorial_candidates(size: Vector2) -> Array[Vector2]:
+	var view := get_viewport().get_visible_rect()
+	var top := _left_column.offset_top
+	if _play_bar != null and _play_bar.visible:
+		top = _play_bar.get_global_rect().end.y + 8.0
+	var left := _left_column.get_global_rect().end.x + 8.0
+	if _area_bar != null and _area_bar.visible:
+		left = _area_bar.get_global_rect().end.x + 8.0
+	var right := _right_column.get_global_rect().position.x - 8.0
+	var bottom := _bottom_of_map_area()
+	return [
+		Vector2(right - size.x, bottom - size.y),
+		Vector2(right - size.x, top),
+		Vector2(view.end.x - size.x - 12.0, top),
+		Vector2(left, bottom - size.y),
+		Vector2(left, top),
+	]
+
+
+static func _overlap_area(rect: Rect2, occupied: Array[Rect2]) -> float:
+	var total := 0.0
+	for other in occupied:
+		var cut := rect.intersection(other.grow(4.0))
+		total += cut.get_area() if cut.has_area() else 0.0
+	return total
 
 
 ## Hinweis unten rechts über der Legende.
@@ -855,8 +932,9 @@ func audio_director() -> AudioDirector:
 	return _audio
 
 
-## Stimmung aus der Lage des Spielerstaates: Krieg vor Revolution (eigener Aufstand oder Journal in einer
-## revolutionären Stufe) vor Krise (Stufe 2 oder 3 eines Spiels mit dem Spielerstaat) vor Frieden.
+## Stimmung aus der Lage des Spielerstaates: Krieg vor Revolution (Aufstand im eigenen Staat) vor Krise
+## (Journal der Revolution in einer revolutionären Stufe, Stufe 2 oder 3 eines Spiels mit dem Spielerstaat)
+## vor Frieden. Bis zum Spieltest 11/2026 zählte das Journal als Revolution.
 func _update_mood() -> void:
 	if _audio == null or _sim == null:
 		return
@@ -871,12 +949,14 @@ func mood_for_player() -> String:
 			return "krieg"
 	if not (_sim.get_state_events(_player).get("revolt", {}) as Dictionary).is_empty():
 		return "revolution"
+	# Seit dem Spieltest 11/2026: Läuft die Revolution nur im Journal (ohne Aufstand im eigenen Staat), ist
+	# die Stimmung „krise“ – vorher spielte das ganze erste Jahr nur die Marseillaise.
 	for journal in _sim.get_journals():
 		if (
 			str(journal.get("id", "")) == "revolution" and bool(journal.get("started", false))
 			and not bool(journal.get("finished", false)) and REVOLUTION_STAGES.has(str(journal.get("stage_id", "")))
 		):
-			return "revolution"
+			return "krise"
 	for play in _sim.get_diplomatic_plays():
 		var involved := int(play.get("demander_index", -1)) == _player or int(play.get("target_index", -1)) == _player
 		if involved and int(play.get("stage", 1)) >= 2:

@@ -7,8 +7,8 @@
 titel     = "Kaiserlied"
 komponist = "Joseph Haydn"
 werk      = "Gott erhalte Franz den Kaiser Hob. XXVIa:43 (1797)"
-stimmung  = frieden
-tempo     = 66
+stimmung  = "frieden krise"
+tempo     = 60
 takt      = 4/4
 hall      = 0.3
 

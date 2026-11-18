@@ -20,6 +20,8 @@ var _notice_active := false
 @onready var _state_name: Label = %StateName
 @onready var _state_detail: Label = %StateDetail
 @onready var _cash: Label = %Cash
+## Saldo neben der Kasse (seit dem Spieltest 11/2026 eigene Farbe: grün oder rot).
+var _saldo: Label = null
 @onready var _legitimacy: Label = %Legitimacy
 @onready var _administration: Label = %Administration
 @onready var _legacy: Label = %Legacy
@@ -46,7 +48,28 @@ func _ready() -> void:
 		button.focus_mode = Control.FOCUS_NONE
 		button.pressed.connect(_on_speed_button_pressed.bind(speed))
 	_menu_button.pressed.connect(func() -> void: menu_requested.emit())
+	_build_saldo()
 	show_unavailable()
+
+
+## Kasse und Saldo nebeneinander, damit jeder Wert seine Farbe bekommt.
+func _build_saldo() -> void:
+	var box := _cash.get_parent()
+	var row := HBoxContainer.new()
+	row.name = "CashRow"
+	row.add_theme_constant_override(&"separation", 0)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(row)
+	box.move_child(row, _cash.get_index())
+	_cash.reparent(row)
+	var dot := Label.new()
+	dot.text = " · "
+	dot.theme_type_variation = &"ValueLabel"
+	row.add_child(dot)
+	_saldo = Label.new()
+	_saldo.name = "Saldo"
+	_saldo.theme_type_variation = &"ValueLabel"
+	row.add_child(_saldo)
 
 
 ## Kennzahlen des Spielerstaates (Dictionary aus get_state).
@@ -61,8 +84,10 @@ func show_state(state: Dictionary) -> void:
 	]
 	var treasury := float(state.get("treasury", 0.0))
 	var saldo := float(state.get("income_month", 0.0)) - float(state.get("expenses_month", 0.0))
-	_cash.text = "%s · %s" % [Format.money(treasury), Format.signed_number(roundi(saldo))]
-	_cash.add_theme_color_override(&"font_color", UiPalette.NEGATIVE if treasury < 0.0 or saldo < 0.0 else UiPalette.INK)
+	_cash.text = Format.money(treasury)
+	_cash.add_theme_color_override(&"font_color", UiPalette.amount_color(treasury))
+	_saldo.text = Format.signed_number(roundi(saldo))
+	_saldo.add_theme_color_override(&"font_color", UiPalette.amount_color(roundi(saldo)))
 
 
 ## Kennzahlen aus get_state_overview und get_legacy (seit M13a5c; main.gd höchstens zweimal je Sekunde).
@@ -86,7 +111,7 @@ func show_overview(overview: Dictionary, legacy: Dictionary) -> void:
 func field(key: StringName) -> Control:
 	match key:
 		&"kasse":
-			return _cash.get_parent() as Control
+			return _cash.get_parent().get_parent() as Control
 		&"legitimitaet":
 			return _legitimacy.get_parent() as Control
 		&"verwaltung":
@@ -100,7 +125,7 @@ func field(key: StringName) -> Control:
 func field_text(key: StringName) -> String:
 	match key:
 		&"kasse":
-			return _cash.text
+			return "%s · %s" % [_cash.text, _saldo.text]
 		&"legitimitaet":
 			return _legitimacy.text
 		&"verwaltung":
@@ -117,6 +142,10 @@ func show_unavailable() -> void:
 	_state_detail.text = "Spielerstaat unbekannt"
 	for label: Label in [_cash, _legitimacy, _administration, _legacy]:
 		label.text = "–"
+		label.remove_theme_color_override(&"font_color")
+	if _saldo != null:
+		_saldo.text = "–"
+		_saldo.remove_theme_color_override(&"font_color")
 	_date.text = "–"
 	_set_speed_line("Simulation nicht geladen")
 	for button in _speed_buttons:
