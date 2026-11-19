@@ -7,6 +7,7 @@
 #include "uhrwerk/ai.hpp"
 #include "uhrwerk/ai_lab.hpp"
 #include "uhrwerk/balance.hpp"
+#include "uhrwerk/buildings.hpp"
 #include "uhrwerk/customs_lab.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/diplomacy.hpp"
@@ -99,6 +100,9 @@ Befehle:
                  Einschwingen oder nach --jahre/--tage); Werkzeug der Kalibrierung
   bilanz         Balancing-Bericht: mehrere Läufe ohne Spielereingriff (Seeds ab --seed);
                  Haushalt, Preise, Bevölkerung und Lebensstandard gegen die Zielwerte
+  bauen          Baulabor (seit M15b2): Läufe ohne Spieler bis zum Ende des Szenarios (oder --jahre);
+                 Gebäude der KI je Staat und Art, Fabrikarbeiter und Leistung je Kopf am Start und am
+                 Ende, Vermögen, verfallene Stufen
   wahl           Wahllabor: eine Wahl über mehrere Seeds (bis zum Wahltag gerechnet); Sitze je
                  Strömung, Fraktion und Staat, Beteiligung, gegen die Wahlziele (seit M8)
   zoll           Zolllabor: je Seed Läufe ohne und mit dem Wechsel eines Staates in eine
@@ -1550,6 +1554,202 @@ int cmd_lauf(const Options& o, const fs::path& data_dir) {
 /// Wirtschaft im Überblick (seit M5, docs/technik/wirtschaft.md Abschnitt 4.9): Angebot und Nachfrage je
 /// Gut über alle Märkte, Einkommen und Lebensstandard je Beruf, Steuern je Staat – nach dem Einschwingen
 /// oder nach --jahre/--tage. Werkzeug der Kalibrierung.
+std::string format_quantiles(const uhrwerk::Quantiles& q, int decimals, const std::string& prefix);
+
+/// Baulabor (seit M15b2, docs/technik/bauen_und_anleitung.md Abschnitt 4): Was baut die KI, und
+/// industrialisieren Preußen und Sachsen? Je Seed ein Lauf ohne Spieler bis zum Ende des Szenarios.
+int cmd_bauen(const Options& o, const fs::path& data_dir) {
+    auto base = load(data_dir, o.scenario, true);
+    if (!base) {
+        return kExitDataError;
+    }
+    if (!base->building_rules.active) {
+        std::cerr << "Szenario " << o.scenario << " baut nicht (bauen = ja fehlt)\n";
+        return kExitUsageError;
+    }
+    const Date start = base->date;
+    const Date end = o.years ? add_years(start, *o.years)
+                             : (base->scenario.has_end ? base->scenario.end : add_years(start, 23));
+    const std::int64_t days = days_between(start, end);
+    const std::int64_t seeds = o.seeds.value_or(4);
+    const std::size_t states = base->states.size();
+    const std::size_t types = base->building_types.size();
+    const Index workers = base->find_profession("fabrikarbeiter");
+    struct Measure {
+        Fixed people;
+        Fixed workers;
+        Fixed production;
+    };
+    const auto measure = [&](const World& w) {
+        std::vector<Measure> out(states);
+        for (std::size_t li = 0; li < w.locations.size(); ++li) {
+            const uhrwerk::Location& loc = w.locations[li];
+            if (loc.owner < 0 || static_cast<std::size_t>(loc.owner) >= states || !loc.has_data()) {
+                continue;
+            }
+            Measure& m = out[static_cast<std::size_t>(loc.owner)];
+            m.people += w.location_population(static_cast<Index>(li));
+            m.production += w.economy[li].production;
+            for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+                if (w.pops[static_cast<std::size_t>(p)].profession == workers) {
+                    m.workers += w.pops[static_cast<std::size_t>(p)].size();
+                }
+            }
+        }
+        return out;
+    };
+    std::vector<std::vector<Fixed>> levels(states, std::vector<Fixed>()); // je Staat: Stufen je Lauf
+    std::vector<std::vector<std::vector<Fixed>>> by_type(states, std::vector<std::vector<Fixed>>(types));
+    std::vector<std::vector<Fixed>> worker_factor(states);
+    std::vector<std::vector<Fixed>> production_factor(states);
+    std::vector<std::vector<Fixed>> wealth(states);
+    std::vector<Fixed> decayed;
+    std::vector<Measure> first;
+    // Vorschläge zum Start für die zwei größten Staaten (Kalibrierung).
+    {
+        uhrwerk::Simulation sim(*base, uhrwerk::SimConfig{o.seed, o.threads});
+        sim.step_days(1);
+        const World& w = sim.world();
+        for (const char* tag : {"PRU", "SAX"}) {
+            const Index state = w.find_state(tag);
+            if (state == uhrwerk::kNone) {
+                continue;
+            }
+            std::cout
+                << "Vorschläge " << w.states[static_cast<std::size_t>(state)].short_name
+                << " zum Start, je Art das beste (Kosten, Einkommen und Steuern im Jahr, Nutzen je Taler):\n";
+            std::vector<bool> shown(w.building_types.size(), false);
+            for (const uhrwerk::BuildProposal& p : uhrwerk::build_proposals(w, state, 10'000)) {
+                if (shown[static_cast<std::size_t>(p.type)]) {
+                    continue; // je Art nur das beste Vorhaben
+                }
+                shown[static_cast<std::size_t>(p.type)] = true;
+                std::cout << "  " << pad_right(w.building_types[static_cast<std::size_t>(p.type)].name, 16)
+                          << pad_right(w.regions[static_cast<std::size_t>(p.region)].name, 26)
+                          << pad_left(format_fixed(p.cost, 0), 9)
+                          << pad_left(format_fixed(p.income_gain, 0), 9)
+                          << pad_left(format_fixed(p.tax_gain, 0), 8) << pad_left(format_fixed(p.score, 2), 7)
+                          << "  Plätze " << format_fixed(p.jobs, 0) << '\n';
+            }
+        }
+        std::cout << '\n';
+    }
+    const auto started = std::chrono::steady_clock::now();
+    for (std::int64_t run = 0; run < seeds; ++run) {
+        uhrwerk::Simulation sim(*base,
+                                uhrwerk::SimConfig{o.seed + static_cast<std::uint64_t>(run), o.threads});
+        sim.step_days(1); // Wirtschaft des ersten Tages
+        const std::vector<Measure> before = measure(sim.world());
+        if (run == 0) {
+            first = before;
+        }
+        sim.step_days(days - 1);
+        const World& w = sim.world();
+        const std::vector<Measure> after = measure(w);
+        std::vector<Fixed> total(states);
+        std::vector<std::vector<Fixed>> per_type(states, std::vector<Fixed>(types));
+        for (std::size_t r = 0; r < w.regions.size(); ++r) {
+            const Index owner = uhrwerk::region_owner(w, static_cast<Index>(r));
+            if (owner < 0 || static_cast<std::size_t>(owner) >= states) {
+                continue;
+            }
+            for (std::size_t t = 0; t < types; ++t) {
+                const Fixed level = Fixed::from_int(w.building_levels[r * types + t]);
+                total[static_cast<std::size_t>(owner)] += level;
+                per_type[static_cast<std::size_t>(owner)][t] += level;
+            }
+        }
+        std::int64_t decays = 0;
+        for (const uhrwerk::ChronicleEntry& e : w.chronicle) {
+            decays += e.text.find(" verfällt (Stufe ") != std::string::npos ? 1 : 0;
+        }
+        decayed.push_back(Fixed::from_int(decays));
+        if (run == 0) {
+            for (const char* tag : {"PRU", "SAX"}) {
+                const Index st = w.find_state(tag);
+                if (st != uhrwerk::kNone) {
+                    std::cout << "Lauf 1, " << tag << ": Fabrikarbeiter "
+                              << format_fixed(before[static_cast<std::size_t>(st)].workers, 0) << " → "
+                              << format_fixed(after[static_cast<std::size_t>(st)].workers, 0)
+                              << ", Einwohner "
+                              << format_fixed(before[static_cast<std::size_t>(st)].people, 0) << " → "
+                              << format_fixed(after[static_cast<std::size_t>(st)].people, 0) << '\n';
+                }
+            }
+        }
+        for (std::size_t s = 0; s < states; ++s) {
+            levels[s].push_back(total[s]);
+            for (std::size_t t = 0; t < types; ++t) {
+                by_type[s][t].push_back(per_type[s][t]);
+            }
+            if (before[s].workers > Fixed::zero()) {
+                worker_factor[s].push_back(after[s].workers / before[s].workers);
+            }
+            if (before[s].production > Fixed::zero() && before[s].people > Fixed::zero() &&
+                after[s].people > Fixed::zero()) {
+                production_factor[s].push_back((after[s].production / after[s].people) /
+                                               (before[s].production / before[s].people));
+            }
+            const uhrwerk::State& st = w.states[s];
+            if (st.yearly_income > Fixed::zero()) {
+                wealth[s].push_back((st.treasury - st.debt) / st.yearly_income);
+            }
+        }
+    }
+    const double seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - started).count();
+    std::cout << "Baulabor: " << base->scenario.name << " (" << o.scenario << "), "
+              << uhrwerk::format_date_long(start) << " bis " << uhrwerk::format_date_long(end) << '\n'
+              << "Läufe:     " << seeds << " (Seeds ab " << o.seed << "), ohne Spieler; Median (5 % … 95 %)\n"
+              << "Laufzeit:  "
+              << format_fixed(Fixed::from_ratio(static_cast<std::int64_t>(seconds * 1000), 1000), 1)
+              << " s\n\n";
+    // Die zehn größten Staaten am Start.
+    std::vector<std::size_t> order(states);
+    for (std::size_t s = 0; s < states; ++s) {
+        order[s] = s;
+    }
+    std::stable_sort(order.begin(), order.end(),
+                     [&](std::size_t a, std::size_t b) { return first[a].people > first[b].people; });
+    std::cout << "Staat                       Stufen         Fabrikarbeiter Ende÷Start   Leistung je Kopf "
+                 "Ende÷Start"
+                 "   Vermögen am Ende   meiste Stufen\n";
+    for (std::size_t k = 0; k < std::min<std::size_t>(10, states); ++k) {
+        const std::size_t s = order[k];
+        std::string top;
+        Fixed best;
+        for (std::size_t t = 0; t < types; ++t) {
+            const Fixed median = uhrwerk::quantile(by_type[s][t], 1, 2);
+            if (median > best) {
+                best = median;
+                top = base->building_types[t].name + " " + format_fixed(median, 0);
+            }
+        }
+        const auto q = [](const std::vector<Fixed>& v, int digits, const std::string& prefix = "") {
+            return v.empty() ? std::string("–") : format_quantiles(uhrwerk::quantiles(v), digits, prefix);
+        };
+        std::cout << pad_right(base->states[s].short_name + " (" + base->states[s].tag + ")", 28)
+                  << pad_right(q(levels[s], 0), 15) << pad_right(q(worker_factor[s], 2, "×"), 30)
+                  << pad_right(q(production_factor[s], 2, "×"), 30) << pad_right(q(wealth[s], 2), 19)
+                  << (top.empty() ? "–" : top) << '\n';
+    }
+    std::cout << "\nGebäude aller Staaten am Ende (Median der Stufen):";
+    for (std::size_t t = 0; t < types; ++t) {
+        std::vector<Fixed> all;
+        for (std::int64_t run = 0; run < seeds; ++run) {
+            Fixed sum;
+            for (std::size_t s = 0; s < states; ++s) {
+                sum += by_type[s][t][static_cast<std::size_t>(run)];
+            }
+            all.push_back(sum);
+        }
+        std::cout << (t == 0 ? " " : ", ") << base->building_types[t].name << ' '
+                  << format_fixed(uhrwerk::quantile(all, 1, 2), 0);
+    }
+    std::cout << "\nVerfallene Stufen je Lauf: " << format_quantiles(uhrwerk::quantiles(decayed), 0, "")
+              << '\n';
+    return kExitOk;
+}
+
 int cmd_wirtschaft(const Options& o, const fs::path& data_dir) {
     auto world = load(data_dir, o.scenario, true);
     if (!world) {
@@ -3816,6 +4016,8 @@ int run(int argc, char** argv) {
         } else if (o.command == "bilanz") {
             check_applicable(
                 o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--seeds", "--ziele"});
+        } else if (o.command == "bauen") {
+            check_applicable(o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--seeds"});
         } else if (o.command == "wahl") {
             check_applicable(o, {"--daten", "--szenario", "--seed", "--threads", "--seeds", "--ziele",
                                  "--parlament", "--wahlkreise"});
@@ -3877,6 +4079,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "wahl") {
             return cmd_wahl(o, data_dir);
+        }
+        if (o.command == "bauen") {
+            return cmd_bauen(o, data_dir);
         }
         if (o.command == "zoll") {
             return cmd_zoll(o, data_dir);

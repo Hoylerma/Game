@@ -164,6 +164,7 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
     // Bauen (seit M15b1): Stufen je Landesteil und Gebäudeart, Bauaufträge; nur wo gebaut wird.
     if (w.building_rules.active) {
         values(v, "gebaeudestufen", w.building_levels);
+        values(v, "angeworbene", w.building_staff); // seit b2
         list(v, "bauauftraege", w.build_orders, Extent::State, [&](auto& o) {
             v.field("staat", o.state);
             v.field("landesteil", o.region);

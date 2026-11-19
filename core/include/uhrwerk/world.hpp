@@ -127,6 +127,8 @@ struct BuildingType {
     Fixed jobs;                 // Arbeitsplätze je Stufe als Anteil der Einwohner des Landesteils
     Fixed development;          // Melioration: Landesausbau je Stufe in Talern je km²
     Fixed literacy;             // Volksschule: Ziel der Alphabetisierung je Stufe (Punkte, 0..1)
+    Fixed freight;              // Chaussee (seit b2): weniger Landfracht je Stufe in den Märkten (Anteil)
+    bool rail = false;          // Bahnstrecke (seit b2): geplante Strecken der Märkte fahren schon jetzt
     Fixed cost;                 // Taler je 1.000 Einwohner des Landesteils und Stufe
     std::int32_t months = 12;   // Bauzeit
     Fixed upkeep;               // Unterhalt je Jahr als Anteil der Baukosten
@@ -158,6 +160,11 @@ struct BuildingRules {
     Fixed recruit_rate;       // Anwerbung: Anteil der Quellberufe im Landesteil je Monat höchstens
     Fixed orders_base;        // Bauamt: gleichzeitige Aufträge je Staat …
     Fixed orders_per_million; // … plus so viele je Million Einwohner
+    // KI (seit b2): neue Raten zusammen höchstens dieser Anteil der Monatseinnahmen, und nur Vorhaben mit
+    // mindestens so viel Nutzen im Jahr je Taler Baukosten.
+    Fixed ai_share;
+    Fixed ai_min_score;
+    bool decay = false; // Verfall: Stufen, die weniger als ihren Unterhalt bringen, verfallen (1. Januar)
 };
 
 /// Markt (data/common/maerkte.chron, seit M5, Abschnitt 2.4): eine oder mehrere Landschaften.
@@ -1204,9 +1211,12 @@ struct World {
     // art], laufende Aufträge in der Reihenfolge ihres Eingangs. Abgeleitet (nicht im Zustand): Mehrertrag
     // je Ort und Betrieb [ort × betriebe + betrieb] und Ziel der Alphabetisierung je Ort.
     std::vector<std::int32_t> building_levels;
+    std::vector<Fixed> building_staff; // seit b2: Angeworbene je Landesteil und Art (wie building_levels)
     std::vector<BuildOrder> build_orders;
     std::vector<Fixed> building_yield;
     std::vector<Fixed> building_literacy;
+    std::vector<Fixed> market_road;               // seit b2: weniger Landfracht je Markt (Chaussee, Anteil)
+    std::vector<std::uint8_t> market_rail;        // seit b2: 1, wenn eine Bahnstrecke im Markt gebaut ist
     std::vector<MarketState> market_states;       // parallel zu markets
     std::vector<ElectionResult> elections;        // seit M8: abgehaltene Wahlen in zeitlicher Folge
     std::vector<CampaignState> campaign;          // seit M8 (b2): [wahlkreis × strömungen + strömung]

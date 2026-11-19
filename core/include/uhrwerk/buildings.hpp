@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <string>
+#include <vector>
 
 namespace uhrwerk {
 
@@ -49,5 +50,33 @@ Fixed run_buildings(World& world, Index state);
 
 /// Anwerbung am Monatsersten: Gebäude mit Arbeitsplätzen werben aus dem Quellberuf an (Zugänge).
 void recruit_workers(World& world);
+
+/// Vorhaben (seit M15b2, bauen_und_anleitung.md 3.1): erwartete Wirkung der nächsten Stufe nach dem Stand
+/// der Wirtschaft jetzt (Preise, Köpfe, Einkommen), in Talern im Jahr.
+struct BuildProposal {
+    Index region = kNone;
+    Index type = kNone;
+    std::int32_t level = 0;  // Stufe nach dem Bau
+    Fixed cost;              // Baukosten
+    std::int32_t months = 0; // Bauzeit
+    Fixed jobs;              // neue Arbeitsplätze (Köpfe)
+    Fixed income_gain;       // mehr Einkommen der Leute im Jahr
+    Fixed tax_gain;          // mehr Steuern im Jahr
+    Fixed literacy;          // Ziel der Alphabetisierung (Punkte)
+    Fixed upkeep;            // Unterhalt im Jahr
+    Fixed score;             // Nutzen im Jahr je Taler: (Einkommen + Steuern − Unterhalt) ÷ Kosten
+};
+
+/// Wirkung der nächsten Stufe; ohne Prüfung, ob der Staat bauen darf (build_problem).
+BuildProposal evaluate_building(const World& world, Index state, Index region, Index type);
+
+/// Die besten erlaubten Vorhaben eines Staates nach score, höchstens limit (gleicher score: Landesteil, Art).
+std::vector<BuildProposal> build_proposals(const World& world, Index state, std::size_t limit);
+
+/// KI (seit M15b2) am Monatsersten: Staaten ohne Spieler geben das beste bezahlbare Vorhaben in Auftrag.
+void run_ai_building(World& world);
+
+/// Verfall (seit M15b2) am 1. Januar: Stufen, die weniger einbringen als ihr Unterhalt, gehen verloren.
+void decay_buildings(World& world);
 
 } // namespace uhrwerk

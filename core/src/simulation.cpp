@@ -393,9 +393,16 @@ void Simulation::step_day() {
         ai_seconds_ += std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
     }
 
+    // 6g. Bauen der KI am Monatsersten (seit M15b2, bauen_und_anleitung.md 4): nach den Märkten des Tages,
+    //     wirksam sofort (der Auftrag zahlt ab dem nächsten Rechentag).
+    if (world_.building_rules.active && world_.date.day == 1) {
+        run_ai_building(world_);
+    }
+
     // 7. Jahreswechsel.
     if (new_year) {
         run_yearly();
+        decay_buildings(world_); // seit M15b2
     }
 
     // 7b. Letzter Tag der Partie (seit M13a4, vertical_slice.md 3.5): Jahresreihe und Chronik.

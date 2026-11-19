@@ -13,6 +13,13 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/bauen_und_anleitung.md](docs/technik/bauen_und_anleitung.md), Entscheidungen 1–7 wie
 empfohlen freigegeben; zuerst M15, dann der zweite Teil von M14 (Europa).
 
+- **Die KI baut, Vorschläge (Schritt b2):** Für jedes mögliche Vorhaben rechnet das Spiel aus, was es
+  bringt – mehr Einkommen für die Leute, mehr Steuern, neue Arbeitsplätze – und was es kostet. Staaten ohne
+  Spieler bauen danach selbst, wenn sie Überschuss haben: bis 1871 vor allem Spinnereien und
+  Maschinenfabriken, dazu Volksschulen, Meliorationen und Chausseen; die Zahl der Fabrikarbeiter wächst
+  in Preußen auf gut das Doppelte. Neu sind Chaussee (billigere Fracht) und Bahnstrecke (geplante Strecken
+  fahren früher); Gebäude, die weniger bringen als ihr Unterhalt, verfallen. Neues Labor `uhrwerk-cli
+  bauen`.
 - **Bauen im Kern (Schritt b1):** Staaten können in ihren Landesteilen (Provinz, Kronland, sonst Kreis)
   Gebäude in Auftrag geben: Mustergut, Melioration, Spinnerei, Maschinenfabrik, Zeche, Eisenhütte und
   Volksschule, je bis Stufe 5. Kosten und Arbeitsplätze richten sich nach den Einwohnern des Landesteils,

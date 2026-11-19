@@ -1468,7 +1468,9 @@ private:
                     continue;
                 }
                 rules_found = true;
-                Fields f(node, file.name, "bauregeln", issues_, {"anwerbung", "bauamt", "bauamt_je_mio"});
+                Fields f(
+                    node, file.name, "bauregeln", issues_,
+                    {"anwerbung", "bauamt", "bauamt_je_mio", "ki_anteil", "ki_mindestnutzen", "verfall"});
                 BuildingRules& r = world_.building_rules;
                 r.recruit_rate = f.fixed("anwerbung", between(fx(0), fx(1))).value_or(Fixed{});
                 r.orders_base = f.fixed("bauamt", between(fx(0), fx(100))).value_or(Fixed::one());
@@ -1476,6 +1478,13 @@ private:
                     f.has("bauamt_je_mio")
                         ? f.fixed("bauamt_je_mio", between(fx(0), fx(100))).value_or(Fixed{})
                         : Fixed{};
+                r.ai_share = f.has("ki_anteil")
+                                 ? f.fixed("ki_anteil", between(fx(0), fx(1))).value_or(Fixed{})
+                                 : Fixed{};
+                r.ai_min_score = f.has("ki_mindestnutzen")
+                                     ? f.fixed("ki_mindestnutzen", between(fx(0), fx(100))).value_or(Fixed{})
+                                     : Fixed{};
+                r.decay = f.has("verfall") && f.boolean("verfall").value_or(false);
                 continue;
             }
             if (node.key != "gebaeude") {
@@ -1489,8 +1498,8 @@ private:
             }
             check_id(file, node, "Gebäudekennung");
             Fields f(node, file.name, "gebaeude " + node.value, issues_,
-                     {"name", "betrieb", "ertrag", "beruf", "aus", "plaetze", "ausbau", "bildung", "kosten",
-                      "bauzeit", "unterhalt", "stufen", "ab"});
+                     {"name", "betrieb", "ertrag", "beruf", "aus", "plaetze", "ausbau", "bildung", "fracht",
+                      "bahn", "kosten", "bauzeit", "unterhalt", "stufen", "ab"});
             BuildingType b;
             b.id = node.value;
             b.name = f.has("name") ? f.text("name").value_or(node.value) : node.value;
@@ -1525,6 +1534,8 @@ private:
             b.jobs = optional_fixed("plaetze", fx(1));
             b.development = optional_fixed("ausbau", fx(1'000'000));
             b.literacy = optional_fixed("bildung", fx(1));
+            b.freight = optional_fixed("fracht", fx(1));
+            b.rail = f.has("bahn") && f.boolean("bahn").value_or(false);
             b.cost = f.fixed("kosten", between(fx(0), fx(1'000'000))).value_or(Fixed{});
             b.months = static_cast<std::int32_t>(f.integer("bauzeit", 1, 240).value_or(12));
             b.upkeep = optional_fixed("unterhalt", fx(1));

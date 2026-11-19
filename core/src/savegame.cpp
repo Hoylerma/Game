@@ -1368,6 +1368,9 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.fixed(w.building_rules.recruit_rate);
         h.fixed(w.building_rules.orders_base);
         h.fixed(w.building_rules.orders_per_million);
+        h.fixed(w.building_rules.ai_share); // seit b2
+        h.fixed(w.building_rules.ai_min_score);
+        h.flag(w.building_rules.decay);
         h.u64(w.building_types.size());
         for (const BuildingType& b : w.building_types) {
             h.text(b.id);
@@ -1378,6 +1381,8 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.fixed(b.jobs);
             h.fixed(b.development);
             h.fixed(b.literacy);
+            h.fixed(b.freight); // seit b2
+            h.flag(b.rail);
             h.fixed(b.cost);
             h.i64(b.months);
             h.fixed(b.upkeep);

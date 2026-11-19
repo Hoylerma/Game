@@ -487,8 +487,15 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
                             budget.interest - budget.diplomacy;
     const Fixed reserve = rules.reserve_years * (budget.court + budget.administration + budget.army) * twelve;
     Fixed automatic;
-    if (state.debt <= Fixed::zero() && available > reserve) {
+    const bool ai_builds = world.building_rules.active && state_index != world.event_player; // seit M15b2
+    if (!ai_builds && state.debt <= Fixed::zero() && available > reserve) {
         automatic = (available - reserve) * rules.building_share;
+    }
+    // Die KI baut selbst (seit M15b2); was sie über eine halbe Jahreseinnahme hinaus im Schatz hat, geht wie
+    // bisher in den Landesausbau, damit kein Staat Geld hortet, das sein Bauamt nicht verbauen kann.
+    const Fixed hoard = state.yearly_income / Fixed::from_int(2);
+    if (ai_builds && state.debt <= Fixed::zero() && state.treasury > hoard) {
+        automatic = (state.treasury - hoard) * rules.building_share;
     }
     budget.building = automatic;
     if (world.building_rules.active) {
@@ -647,7 +654,17 @@ void update_markets(World& world, const EconomyTopology& topology, const std::ve
             }
             const MarketState& sa = world.market_states[a];
             const MarketState& sb = world.market_states[b];
-            const Fixed freight = link.freight_on(world.date); // Bahnfracht ab der Verbindung (seit M7)
+            Fixed freight = link.freight_on(world.date); // Bahnfracht ab der Verbindung (seit M7)
+            // Bauen (seit M15b2): Bahnstrecke eröffnet geplante Strecken früher, Chaussee senkt die
+            // Landfracht.
+            if (!world.market_road.empty()) {
+                if (link.rail_from && world.date < *link.rail_from &&
+                    (world.market_rail[a] != 0 || world.market_rail[b] != 0)) {
+                    freight = link.rail_freight;
+                }
+                freight =
+                    freight * (one - (world.market_road[a] + world.market_road[b]) / Fixed::from_int(2));
+            }
             // Zoll wie zusätzliche Fracht (seit M9): Tarif des Gebiets, in dem gekauft wird.
             const Fixed into_b = customs ? customs_tariff(&sa, sb, tariffs) : Fixed{};
             const Fixed into_a = customs ? customs_tariff(&sb, sa, tariffs) : Fixed{};

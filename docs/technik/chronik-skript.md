@@ -1678,6 +1678,9 @@ bauregeln {
     anwerbung     = 0.02   # Pflicht: je Monat höchstens dieser Anteil des Quellberufs (passende Orte)
     bauamt        = 1      # Pflicht: gleichzeitige Aufträge je Staat …
     bauamt_je_mio = 0.5    # optional: … plus so viele je Million Einwohner (abgerundet)
+    ki_anteil        = 0.25 # optional (seit b2): KI-Raten zusammen höchstens dieser Anteil der Einnahmen …
+    ki_mindestnutzen = 0.2  # optional (seit b2): … nur Vorhaben mit so viel Nutzen im Jahr je Taler
+    verfall          = ja   # optional (seit b2): unrentable Stufen verfallen am 1. Januar
 }
 
 gebaeude spinnerei {
@@ -1689,6 +1692,8 @@ gebaeude spinnerei {
     plaetze   = 0.005           #   je Stufe als Anteil der Einwohner des Landesteils
     ausbau    = 20              # optional: Melioration, Landesausbau je Stufe in Talern je km²
     bildung   = 0.03            # optional: Volksschule, Ziel der Alphabetisierung je Stufe (Punkte)
+    fracht    = 0.05            # optional (seit b2): Chaussee, weniger Landfracht je Stufe in den Märkten
+    bahn      = ja              # optional (seit b2): Bahnstrecke, geplante Strecken fahren schon jetzt
     kosten    = 50              # Pflicht: Taler je 1.000 Einwohner des Landesteils und Stufe
     bauzeit   = 18              # Pflicht: Monate (Raten von kosten ÷ bauzeit je Monat)
     unterhalt = 0.03            # optional: je Jahr als Anteil der Kosten

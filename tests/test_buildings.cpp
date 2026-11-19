@@ -37,15 +37,6 @@ Index type_of(const World& w, const std::string& id) {
     return kNone;
 }
 
-Index region_of(const World& w, const std::string& id) {
-    for (std::size_t i = 0; i < w.regions.size(); ++i) {
-        if (w.regions[i].id == id) {
-            return static_cast<Index>(i);
-        }
-    }
-    return kNone;
-}
-
 Command build(Index state, Index region, Index type, CommandType kind = CommandType::Build) {
     Command c;
     c.type = kind;
@@ -114,6 +105,7 @@ TEST_CASE("Bauen: 1648 ohne Gebäude") {
 TEST_CASE("Bauen: Auftrag, Raten, Fertigstellung, Wirkung und Anwerbung") {
     World base = world_1848();
     const Index prussia = base.find_state("PRU");
+    base.event_player = prussia; // Spielerstaat: Die KI baut für ihn nicht (seit b2)
     const Index spinnerei = type_of(base, "spinnerei");
     REQUIRE(spinnerei != kNone);
     // Ein preußischer Landesteil mit Städten (die Spinnerei steht nur in Städten).
@@ -131,8 +123,13 @@ TEST_CASE("Bauen: Auftrag, Raten, Fertigstellung, Wirkung und Anwerbung") {
     const std::size_t chronicle = sim.world().chronicle.size();
     sim.submit(build(prussia, region, spinnerei));
     sim.step_day();
-    REQUIRE(sim.world().build_orders.size() == 1);
-    const uhrwerk::BuildOrder order = sim.world().build_orders.front();
+    REQUIRE(uhrwerk::orders_of(sim.world(), prussia) == 1);
+    uhrwerk::BuildOrder order;
+    for (const uhrwerk::BuildOrder& o : sim.world().build_orders) {
+        if (o.state == prussia) {
+            order = o;
+        }
+    }
     CHECK(order.months_left == base.building_types[static_cast<std::size_t>(spinnerei)].months);
     bool announced = false;
     for (std::size_t i = chronicle; i < sim.world().chronicle.size(); ++i) {
@@ -146,19 +143,20 @@ TEST_CASE("Bauen: Auftrag, Raten, Fertigstellung, Wirkung und Anwerbung") {
     SUBCASE("Abbrechen") {
         sim.submit(build(prussia, region, spinnerei, CommandType::CancelBuild));
         sim.step_day();
-        CHECK(sim.world().build_orders.empty());
+        CHECK(uhrwerk::orders_of(sim.world(), prussia) == 0);
     }
     SUBCASE("fertig nach der Bauzeit, mit Mehrertrag und Anwerbung") {
         const Index workers = base.building_types[static_cast<std::size_t>(spinnerei)].profession;
         const Fixed before = heads_in(sim.world(), region, workers);
         bool paid = false;
-        for (int day = 0; day < 31 * (order.months_left + 1) && !sim.world().build_orders.empty(); ++day) {
+        for (int day = 0; day < 31 * (order.months_left + 1) && uhrwerk::orders_of(sim.world(), prussia) > 0;
+             ++day) {
             sim.step_day();
             paid = paid || sim.world().states[static_cast<std::size_t>(prussia)].budget.building >=
                                order.monthly_cost;
         }
         CHECK(paid);
-        REQUIRE(sim.world().build_orders.empty());
+        REQUIRE(uhrwerk::orders_of(sim.world(), prussia) == 0);
         CHECK(uhrwerk::building_level(sim.world(), region, spinnerei) == 1);
         const std::size_t businesses = sim.world().businesses.size();
         const Index business = base.building_types[static_cast<std::size_t>(spinnerei)].business;
@@ -185,6 +183,7 @@ TEST_CASE("Bauen: Auftrag, Raten, Fertigstellung, Wirkung und Anwerbung") {
 TEST_CASE("Bauen: ungültige Aufträge") {
     World w = world_1848();
     const Index prussia = w.find_state("PRU");
+    w.event_player = prussia;
     const Index school = type_of(w, "volksschule");
     REQUIRE(school != kNone);
     Simulation sim(w);
@@ -205,7 +204,7 @@ TEST_CASE("Bauen: ungültige Aufträge") {
     sim.submit(build(prussia, 1'000'000, school));
     sim.submit(build(prussia, foreign, 99));
     sim.step_day();
-    CHECK(sim.world().build_orders.empty());
+    CHECK(uhrwerk::orders_of(sim.world(), prussia) == 0);
     // Bauamt: höchstens order_capacity Aufträge zugleich.
     const std::int32_t capacity = uhrwerk::order_capacity(sim.world(), prussia);
     CHECK(capacity >= 5);
@@ -221,4 +220,107 @@ TEST_CASE("Bauen: ungültige Aufträge") {
     REQUIRE(submitted > capacity);
     sim.step_day();
     CHECK(uhrwerk::orders_of(sim.world(), prussia) == capacity);
+}
+
+TEST_CASE("Bauen: Vorschläge nach Nutzen je Taler (seit b2)") {
+    World w = world_1848();
+    const Index prussia = w.find_state("PRU");
+    w.event_player = prussia;
+    Simulation sim(w);
+    sim.step_days(2); // Preise und Einkommen des ersten Monats
+    const std::vector<uhrwerk::BuildProposal> list = uhrwerk::build_proposals(sim.world(), prussia, 5);
+    REQUIRE(list.size() == 5);
+    for (std::size_t i = 1; i < list.size(); ++i) {
+        CHECK(list[i - 1].score >= list[i].score);
+    }
+    for (const uhrwerk::BuildProposal& p : list) {
+        CHECK(p.cost > Fixed::zero());
+        CHECK(p.income_gain > Fixed::zero());
+        CHECK(p.tax_gain > Fixed::zero());
+        CHECK(p.tax_gain < p.income_gain); // der Staat bekommt nur einen Teil
+        CHECK(uhrwerk::build_problem(sim.world(), prussia, p.region, p.type).empty());
+    }
+    // Eine Spinnerei bietet Arbeitsplätze, ein Mustergut nicht.
+    const Index spinnerei = type_of(w, "spinnerei");
+    const Index mustergut = type_of(w, "mustergut");
+    const Index region = list.front().region;
+    CHECK(uhrwerk::evaluate_building(sim.world(), prussia, region, mustergut).jobs == Fixed::zero());
+    const uhrwerk::BuildProposal mill = uhrwerk::evaluate_building(sim.world(), prussia, region, spinnerei);
+    if (uhrwerk::build_problem(sim.world(), prussia, region, spinnerei).empty()) {
+        CHECK(mill.jobs > Fixed::zero());
+    }
+}
+
+TEST_CASE("Bauen: Die KI baut, der Spielerstaat nicht (seit b2)") {
+    World w = world_1848();
+    const Index prussia = w.find_state("PRU");
+    w.event_player = prussia;
+    Simulation sim(w);
+    sim.step_days(31 * 6);
+    std::size_t others = 0;
+    for (const uhrwerk::BuildOrder& o : sim.world().build_orders) {
+        CHECK(o.state != prussia);
+        others += 1;
+    }
+    for (const uhrwerk::ChronicleEntry& e : sim.world().chronicle) {
+        others += e.text.find(" fertig (Stufe ") != std::string::npos ? 1 : 0;
+    }
+    CHECK(others > 0);
+    // Kein Staat baut sich über eine halbe Jahreseinnahme hinaus in Schulden (ohne Krieg in sechs Monaten).
+    for (const uhrwerk::BuildOrder& o : sim.world().build_orders) {
+        const uhrwerk::State& st = sim.world().states[static_cast<std::size_t>(o.state)];
+        CHECK(st.debt <= st.yearly_income);
+    }
+}
+
+TEST_CASE("Bauen: Chaussee senkt die Landfracht, Bahnstrecke eröffnet geplante Strecken (seit b2)") {
+    World w = world_1848();
+    w.event_player = w.find_state("PRU");
+    const Index chaussee = type_of(w, "chaussee");
+    const Index bahn = type_of(w, "bahnstrecke");
+    REQUIRE(chaussee != kNone);
+    REQUIRE(bahn != kNone);
+    Simulation sim(w);
+    World x = sim.world();
+    const Index region = x.location_region[static_cast<std::size_t>(x.regions.front().locations.front())];
+    const Index market = x.locations[static_cast<std::size_t>(x.regions.front().locations.front())].market;
+    REQUIRE(market != kNone);
+    CHECK(x.market_road[static_cast<std::size_t>(market)] == Fixed::zero());
+    x.building_levels[static_cast<std::size_t>(region) * x.building_types.size() +
+                      static_cast<std::size_t>(chaussee)] = 2;
+    x.building_levels[static_cast<std::size_t>(region) * x.building_types.size() +
+                      static_cast<std::size_t>(bahn)] = 1;
+    uhrwerk::rebuild_building_effects(x);
+    CHECK(x.market_road[static_cast<std::size_t>(market)] > Fixed::zero());
+    CHECK(x.market_road[static_cast<std::size_t>(market)] <= Fixed::from_ratio(1, 2));
+    CHECK(x.market_rail[static_cast<std::size_t>(market)] == 1);
+}
+
+TEST_CASE("Bauen: Verfall unrentabler Stufen am 1. Januar (seit b2)") {
+    World w = world_1848();
+    w.event_player = w.find_state("PRU");
+    const Index zeche = type_of(w, "zeche");
+    REQUIRE(zeche != kNone);
+    // Eine Zeche in einem Landesteil ohne Kohle: Sie bringt nichts und verfällt.
+    Index region = kNone;
+    for (std::size_t r = 0; r < w.regions.size() && region == kNone; ++r) {
+        if (uhrwerk::evaluate_building(w, uhrwerk::region_owner(w, static_cast<Index>(r)),
+                                       static_cast<Index>(r), zeche)
+                .income_gain == Fixed::zero()) {
+            region = static_cast<Index>(r);
+        }
+    }
+    REQUIRE(region != kNone);
+    Simulation sim(w);
+    World x = sim.world();
+    x.building_levels[static_cast<std::size_t>(region) * x.building_types.size() +
+                      static_cast<std::size_t>(zeche)] = 2;
+    uhrwerk::rebuild_building_effects(x);
+    uhrwerk::decay_buildings(x);
+    CHECK(uhrwerk::building_level(x, region, zeche) == 1);
+    bool told = false;
+    for (const uhrwerk::ChronicleEntry& e : x.chronicle) {
+        told = told || e.text.find("Zeche verfällt") != std::string::npos;
+    }
+    CHECK(told);
 }
