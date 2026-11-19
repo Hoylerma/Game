@@ -3532,7 +3532,8 @@ Dictionary UhrwerkSimulation::get_state_society(std::int64_t state_index) const 
                 bool any_food = false;
                 for (std::size_t nd = 0; nd < need_count; ++nd) {
                     const std::size_t c = slot * need_count + nd;
-                    const double value = c < w->location_coverage.size() ? w->location_coverage[c].to_double() : 1.0;
+                    const double value =
+                        c < w->location_coverage.size() ? w->location_coverage[c].to_double() : 1.0;
                     coverage += value;
                     if (w->needs[nd].hunger) {
                         food = any_food ? std::min(food, value) : value;
@@ -3540,7 +3541,8 @@ Dictionary UhrwerkSimulation::get_state_society(std::int64_t state_index) const 
                     }
                 }
                 coverage = need_count > 0 ? coverage / static_cast<double>(need_count) : 1.0;
-                const double income = slot < w->location_income.size() ? w->location_income[slot].to_double() * 12.0 : 0.0;
+                const double income =
+                    slot < w->location_income.size() ? w->location_income[slot].to_double() * 12.0 : 0.0;
                 if (st < kStrata) {
                     stratum_people[st] += n;
                     stratum_coverage[st] += coverage * n;
@@ -3552,7 +3554,8 @@ Dictionary UhrwerkSimulation::get_state_society(std::int64_t state_index) const 
                 place_food += food * n;
             }
             if (place_people > 0.0) {
-                places.push_back({static_cast<std::int64_t>(l), people_of(*w, static_cast<std::int64_t>(l)).living_standard,
+                places.push_back({static_cast<std::int64_t>(l),
+                                  people_of(*w, static_cast<std::int64_t>(l)).living_standard,
                                   place_food / place_people});
             }
         }

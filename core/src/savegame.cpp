@@ -1361,6 +1361,38 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.fixed(f);
         }
     });
+    // Bauen (seit M15b1): Gebäudearten, Regeln und Landesteile, nur wo gebaut wird (1648 bleibt gleich).
+    if (w.building_rules.active) {
+        Fnv h;
+        h.u64(p[7]);
+        h.fixed(w.building_rules.recruit_rate);
+        h.fixed(w.building_rules.orders_base);
+        h.fixed(w.building_rules.orders_per_million);
+        h.u64(w.building_types.size());
+        for (const BuildingType& b : w.building_types) {
+            h.text(b.id);
+            h.i64(b.business);
+            h.fixed(b.yield);
+            h.i64(b.profession);
+            h.i64(b.recruit_from);
+            h.fixed(b.jobs);
+            h.fixed(b.development);
+            h.fixed(b.literacy);
+            h.fixed(b.cost);
+            h.i64(b.months);
+            h.fixed(b.upkeep);
+            h.i64(b.max_level);
+            h.i64(b.since.year);
+            h.i64(b.since.month);
+            h.i64(b.since.day);
+        }
+        h.u64(w.regions.size());
+        for (const Region& r : w.regions) {
+            h.text(r.id);
+            h.u64(r.locations.size());
+        }
+        p[7] = h.value();
+    }
     p[8] = hash_list(w.markets, [](Fnv& h, const Market& m) {
         h.text(m.id);
         h.u64(m.landscapes.size());

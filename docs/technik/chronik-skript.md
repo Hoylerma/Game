@@ -373,6 +373,7 @@ szenario westfaelischer_frieden {
                                            # Tragfähigkeit aller Gelände (Standard 1)
     ende     = 1871.07.01                  # optional (seit M13a4): letzter Tag der Partie
     handel_eigenbedarf = ja                # optional (seit M15a2): Handel nach Eigenbedarf (Standard nein)
+    bauen    = ja                          # optional (seit M15b1): Gebäude bauen (Abschnitt 3.43)
 }
 ```
 
@@ -1664,6 +1665,44 @@ unter ihnen wechselt das Blatt je Ausgabe, und mit ihm die Richtung. **Beteiligt
 der Eintrag zu seinem Staat gehört, ein Staat des Musters seiner ist oder der Eintrag keinen Staat hat.
 Die Titelseite nennt außerdem Nummer (Tag im Jahr), den Wortlaut des Eintrags und als Vermischtes bis zu
 vier andere Einträge der vierzehn Tage davor, die keine eigene Titelseite (Gewicht 2 oder 3) haben.
+
+### 3.43 `common/gebaeude.chron` (seit M15b1)
+
+Gebäude und Regeln des Bauens ([bauen_und_anleitung.md](bauen_und_anleitung.md), Abschnitt 3). Die Datei
+darf fehlen; wirksam nur in Szenarien mit `bauen = ja` (Abschnitt 3.7). Gebaut wird in **Landesteilen**:
+der obersten Verwaltungseinheit eines Ortes (Abschnitt 3.16), sonst seinem Kreis, sonst dem Ort selbst. Die
+Landesteile entstehen beim Laden aus dem Inhalt und ändern sich nicht (auch nicht durch Eroberung).
+
+```text
+bauregeln {
+    anwerbung     = 0.02   # Pflicht: je Monat höchstens dieser Anteil des Quellberufs (passende Orte)
+    bauamt        = 1      # Pflicht: gleichzeitige Aufträge je Staat …
+    bauamt_je_mio = 0.5    # optional: … plus so viele je Million Einwohner (abgerundet)
+}
+
+gebaeude spinnerei {
+    name      = "Spinnerei"     # optional, sonst die Kennung
+    betrieb   = spinnerei       # optional: Betrieb, dessen Ertrag in den Orten des Landesteils steigt
+    ertrag    = 0.10            # optional: Mehrertrag je Stufe (Anteil)
+    beruf     = fabrikarbeiter  # optional, mit aus und plaetze: Arbeitsplätze für diesen Beruf
+    aus       = landarme        #   angeworben aus diesem Beruf (in Orten, die zum Betrieb passen)
+    plaetze   = 0.005           #   je Stufe als Anteil der Einwohner des Landesteils
+    ausbau    = 20              # optional: Melioration, Landesausbau je Stufe in Talern je km²
+    bildung   = 0.03            # optional: Volksschule, Ziel der Alphabetisierung je Stufe (Punkte)
+    kosten    = 50              # Pflicht: Taler je 1.000 Einwohner des Landesteils und Stufe
+    bauzeit   = 18              # Pflicht: Monate (Raten von kosten ÷ bauzeit je Monat)
+    unterhalt = 0.03            # optional: je Jahr als Anteil der Kosten
+    stufen    = 5               # optional: höchste Stufe (Standard 5)
+    ab        = 1850.01.01      # optional: erst ab diesem Tag zu bauen
+}
+```
+
+Verweist ein Gebäude auf einen Betrieb oder Beruf, den es zum Startdatum noch nicht gibt (`seit`,
+Abschnitt 3.18), gibt es das Gebäude in diesem Szenario nicht (so lädt 1648 dieselbe Datei). Im Kern:
+`BuildingType`, `BuildingRules`, `Region` (`uhrwerk/world.hpp`), Logik in `uhrwerk/buildings.hpp`.
+Befehle `Build` und `CancelBuild` (Landesteil als `target`, Gebäudeart als `value`). Zustand: Stufe je
+Landesteil und Art, Bauaufträge; im Spielstand und in der Prüfsumme nur mit `bauen = ja`, der Inhalt im
+Fingerabdruck unter `betriebe`.
 
 ## 4. Startzustand
 

@@ -57,6 +57,10 @@ Fixed literacy_target(const World& world, const Location& location, const PopBlo
         target = target * world.rules.literacy_city;
     }
     target = target * (Fixed::from_int(50) + living_standard) / Fixed::from_int(100);
+    // Volksschulen im Landesteil (seit M15b1, bauen_und_anleitung.md 3.2) heben das Ziel.
+    if (!world.building_literacy.empty() && in_range(world.location_region, pop.location)) {
+        target += world.building_literacy[static_cast<std::size_t>(pop.location)];
+    }
     return target.clamp(Fixed::zero(), Fixed::one());
 }
 

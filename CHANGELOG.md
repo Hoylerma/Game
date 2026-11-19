@@ -13,6 +13,12 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/bauen_und_anleitung.md](docs/technik/bauen_und_anleitung.md), Entscheidungen 1–7 wie
 empfohlen freigegeben; zuerst M15, dann der zweite Teil von M14 (Europa).
 
+- **Bauen im Kern (Schritt b1):** Staaten können in ihren Landesteilen (Provinz, Kronland, sonst Kreis)
+  Gebäude in Auftrag geben: Mustergut, Melioration, Spinnerei, Maschinenfabrik, Zeche, Eisenhütte und
+  Volksschule, je bis Stufe 5. Kosten und Arbeitsplätze richten sich nach den Einwohnern des Landesteils,
+  bezahlt wird in Monatsraten. Fertige Gebäude steigern den Ertrag ihres Betriebs, Spinnereien und
+  Maschinenfabriken werben Landarme als Fabrikarbeiter an, Volksschulen heben die Alphabetisierung. Noch
+  ohne Oberfläche (folgt in b3) und ohne bauende KI (b2).
 - **Kein Dauerhunger mehr (Schritt a2):** Ab 1848 hungerte ein großer Teil der Unterschicht, und es wurde
   mit den Jahren mehr – Preußen 1861 fast die Hälfte, Sachsen fast alle. Die Ursache war ein Fehler im
   Handel: Märkte führten die Einfuhr des Vormonats gleich wieder aus und pendelten so jeden Monat

@@ -71,6 +71,8 @@ enum class CommandType : std::uint8_t {
                    // keinen Wahlkampf (ki.md 6.4)
     GameSettings,  // seit M13 (a1): state = Stufe (kNone: standard_stufe), value = 1 offener Verlauf; nur am
                    // ersten Tag einer Partie und mit KI (vertical_slice.md 3.2)
+    Build,         // seit M15b1: state, target = Landesteil, value = Gebäudeart (bauen_und_anleitung.md 3)
+    CancelBuild,   // seit M15b1: state, target = Landesteil, value = Gebäudeart; Bezahltes ist verloren
 };
 
 struct Command {

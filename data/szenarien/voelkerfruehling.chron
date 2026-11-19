@@ -15,4 +15,5 @@ szenario voelkerfruehling {
     waehrung = "Taler"
     tragfaehigkeit_faktor = 2.5   # Agrartechnik 1848: Kartoffel, Klee, Agrarreformen (chronik-skript.md 3.7)
     handel_eigenbedarf = ja       # seit M15a2: Handel ohne Pendeln zwischen Ein- und Ausfuhr (wirtschaft.md 4.1)
+    bauen = ja                    # seit M15b1: Gebäude in Landesteilen (bauen_und_anleitung.md 3)
 }

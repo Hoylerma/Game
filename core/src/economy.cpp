@@ -1,5 +1,6 @@
 #include "uhrwerk/economy.hpp"
 
+#include "uhrwerk/buildings.hpp"
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/events.hpp"
@@ -479,12 +480,19 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
     const Fixed income = budget.income();
     budget.diplomacy = envoy_costs(world, state_index, income);
 
-    // Bauten: Überschuss über der Rücklage, nur ohne Schulden.
+    // Bauten: Überschuss über der Rücklage, nur ohne Schulden. Seit M15b1 kommen die Raten der Bauaufträge
+    // und der Unterhalt der Gebäude hinzu; den selbsttätigen Landesausbau ersetzen Melioration und Mustergut
+    // für die KI mit M15b2 und für den Spieler mit der Oberfläche in M15b3.
     const Fixed available = state.treasury + income - budget.court - budget.administration - budget.army -
                             budget.interest - budget.diplomacy;
     const Fixed reserve = rules.reserve_years * (budget.court + budget.administration + budget.army) * twelve;
+    Fixed automatic;
     if (state.debt <= Fixed::zero() && available > reserve) {
-        budget.building = (available - reserve) * rules.building_share;
+        automatic = (available - reserve) * rules.building_share;
+    }
+    budget.building = automatic;
+    if (world.building_rules.active) {
+        budget.building += run_buildings(world, state_index); // Raten der Bauaufträge und Unterhalt
     }
 
     // Kasse, Kredit und Tilgung.
@@ -498,16 +506,16 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
         state.treasury -= repay;
     }
 
-    // Landesausbau: die Bauten verteilen sich nach Fläche auf die Orte des Staates.
-    if (budget.building > Fixed::zero()) {
+    // Landesausbau: die Bauten verteilen sich nach Fläche auf die Orte des Staates (nur der selbsttätige
+    // Teil; Gebäude wirken über ihre Stufen).
+    if (automatic > Fixed::zero()) {
         Fixed area;
         for (const Index li : locations) {
             area += world.locations[at(li)].area_km2;
         }
         if (area > Fixed::zero() && world.location_development.size() == world.locations.size()) {
             for (const Index li : locations) {
-                world.location_development[at(li)] +=
-                    budget.building * world.locations[at(li)].area_km2 / area;
+                world.location_development[at(li)] += automatic * world.locations[at(li)].area_km2 / area;
             }
         }
     }
@@ -923,6 +931,10 @@ void run_location_economy(World& world, const EconomyTopology& topology, Index l
                     supplied = Fixed::min(supplied, market.buy_ratio[at(input.good)]);
                 }
                 Fixed unit = share * terrain_yield * factors.condition * supplied;
+                // Gebäude im Landesteil (seit M15b1): Mehrertrag dieses Betriebs.
+                if (!world.building_yield.empty()) {
+                    unit = unit * (one + world.building_yield[li * businesses + at(b)]);
+                }
                 if (business.agrarian) {
                     unit = unit * agrarian_factor;
                 }

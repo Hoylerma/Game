@@ -1330,6 +1330,12 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << location_data_split(w) << '\n'
               << "Kreise:       " << group_digits(std::to_string(w.districts.size())) << " "
               << location_district_split(w) << '\n'
+              << "Bauen:        "
+              << (w.building_rules.active
+                      ? plural(w.building_types.size(), "Gebäude", "Gebäude") + " in " +
+                            plural(w.regions.size(), "Landesteil", "Landesteilen") + " (seit M15b1)"
+                      : std::string("–"))
+              << '\n'
               << "Eisenbahnen:  " << railway_summary(w) << '\n'
               << "Politik:      " << politics_summary(w) << '\n'
               << "Zollunionen:  " << customs_summary(w) << '\n'
@@ -1751,8 +1757,8 @@ std::string describe_violation(const World& w, const uhrwerk::BalanceTargets& t,
                " im Median " + format_fixed(v.value, 1) + " (Ziel " +
                format_range(t.living_standard[subject % 3]) + ")";
     case BalanceCheck::Food:
-        return "Grundnahrung " + std::string(subject < kStrata.size() ? kStrata[subject] : "–") + " im Median " +
-               format_fixed(v.value, 1) + " % (Ziel " +
+        return "Grundnahrung " + std::string(subject < kStrata.size() ? kStrata[subject] : "–") +
+               " im Median " + format_fixed(v.value, 1) + " % (Ziel " +
                (t.food[subject % 3] ? format_range(*t.food[subject % 3]) : std::string("–")) + ")";
     }
     return "–";
@@ -1880,7 +1886,8 @@ int cmd_bilanz(const Options& o, const fs::path& data_dir) {
         for (std::size_t k = 0; k < 3; ++k) {
             std::cout << (k == 0 ? " " : "; ") << kStrata[k] << ' ';
             if (summary.food[k]) {
-                std::cout << format_quantiles(*summary.food[k], 1) << mark(BalanceCheck::Food, static_cast<Index>(k));
+                std::cout << format_quantiles(*summary.food[k], 1)
+                          << mark(BalanceCheck::Food, static_cast<Index>(k));
             } else {
                 std::cout << "–";
             }

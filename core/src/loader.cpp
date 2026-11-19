@@ -1,6 +1,7 @@
 #include "uhrwerk/loader.hpp"
 
 #include "event_loader.hpp"
+#include "uhrwerk/buildings.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/population.hpp"
 #include "uhrwerk/script.hpp"
@@ -653,6 +654,9 @@ public:
         process("common/beduerfnisse.chron", [&](const SourceFile& f) { load_needs(f); });
         process("common/betriebe.chron", [&](const SourceFile& f) { load_businesses(f); });
         process("common/maerkte.chron", [&](const SourceFile& f) { load_markets(f); });
+        // Bauen (seit M15b1, docs/technik/bauen_und_anleitung.md 3): Gebäudearten nach Berufen und Betrieben;
+        // die Datei darf fehlen. Wirksam nur in Szenarien mit bauen = ja.
+        process_optional("common/gebaeude.chron", [&](const SourceFile& f) { load_buildings(f); });
         // Gesetze (seit M11, docs/technik/ereignisse.md Abschnitt 4.1) vor den Interessengruppen, die sie
         // sich wünschen, und den Staaten, die sie haben; die Datei darf fehlen.
         process_optional("common/gesetze.chron", [&](const SourceFile& f) { load_laws(f); });
@@ -738,6 +742,9 @@ public:
         world_.date = selected->start;
         build_pops();
         initialize_population(world_);
+        // Landesteile (seit M15b1) aus Verwaltung, Kreisen und Orten mit Daten; Bauen nur mit bauen = ja.
+        build_regions(world_);
+        world_.building_rules.active = selected->building && !world_.building_types.empty();
         return std::move(world_);
     }
 
@@ -1448,6 +1455,101 @@ private:
         });
         if (world_.needs.empty()) {
             issues_.error(file.name, 0, "kein Bedürfnis definiert (erwartet: beduerfnis <kennung> { … })");
+        }
+    }
+
+    /// Gebäude (seit M15b1, chronik-skript.md Abschnitt 3.43): bauregeln { … } und gebaeude <kennung> { … }.
+    void load_buildings(const SourceFile& file) {
+        bool rules_found = false;
+        for (const ScriptNode& node : file.root.children) {
+            if (node.key == "bauregeln") {
+                if (!node.is_block || !node.value.empty() || rules_found) {
+                    issues_.error(file.name, node.line, "erwartet genau einen Block: bauregeln { … }");
+                    continue;
+                }
+                rules_found = true;
+                Fields f(node, file.name, "bauregeln", issues_, {"anwerbung", "bauamt", "bauamt_je_mio"});
+                BuildingRules& r = world_.building_rules;
+                r.recruit_rate = f.fixed("anwerbung", between(fx(0), fx(1))).value_or(Fixed{});
+                r.orders_base = f.fixed("bauamt", between(fx(0), fx(100))).value_or(Fixed::one());
+                r.orders_per_million =
+                    f.has("bauamt_je_mio")
+                        ? f.fixed("bauamt_je_mio", between(fx(0), fx(100))).value_or(Fixed{})
+                        : Fixed{};
+                continue;
+            }
+            if (node.key != "gebaeude") {
+                warn_unknown_top_level(file, node, "bauregeln { … } oder gebaeude <kennung> { … }");
+                continue;
+            }
+            if (!node.is_block || node.value.empty()) {
+                issues_.error(file.name, node.line,
+                              "ungültige Definition, erwartet: gebaeude <kennung> { … }");
+                continue;
+            }
+            check_id(file, node, "Gebäudekennung");
+            Fields f(node, file.name, "gebaeude " + node.value, issues_,
+                     {"name", "betrieb", "ertrag", "beruf", "aus", "plaetze", "ausbau", "bildung", "kosten",
+                      "bauzeit", "unterhalt", "stufen", "ab"});
+            BuildingType b;
+            b.id = node.value;
+            b.name = f.has("name") ? f.text("name").value_or(node.value) : node.value;
+            // Verweist ein Gebäude auf einen Betrieb oder Beruf, den es zum Start noch nicht gibt ('seit',
+            // etwa Fabrikarbeiter vor 1800), gibt es auch das Gebäude nicht.
+            bool later = false;
+            const auto reference = [&](std::string_view key, const auto& table, std::string_view what) {
+                Index result = kNone;
+                if (!f.has(key)) {
+                    return result;
+                }
+                if (const auto id = f.text(key)) {
+                    result = lookup(table, *id);
+                    const std::string kind = what == "Betrieb" ? "betrieb" : "beruf";
+                    if (result == kNone && later_.count(kind + ":" + *id) > 0) {
+                        later = true;
+                    } else if (result == kNone) {
+                        issues_.error(file.name, node.find(key)->line,
+                                      "unbekannt: " + std::string(what) + " " + quote(*id) + " in gebaeude " +
+                                          node.value);
+                    }
+                }
+                return result;
+            };
+            b.business = reference("betrieb", businesses_, "Betrieb");
+            b.profession = reference("beruf", professions_, "Beruf");
+            b.recruit_from = reference("aus", professions_, "Beruf");
+            const auto optional_fixed = [&](std::string_view key, Fixed hi) {
+                return f.has(key) ? f.fixed(key, between(fx(0), hi)).value_or(Fixed{}) : Fixed{};
+            };
+            b.yield = optional_fixed("ertrag", fx(10));
+            b.jobs = optional_fixed("plaetze", fx(1));
+            b.development = optional_fixed("ausbau", fx(1'000'000));
+            b.literacy = optional_fixed("bildung", fx(1));
+            b.cost = f.fixed("kosten", between(fx(0), fx(1'000'000))).value_or(Fixed{});
+            b.months = static_cast<std::int32_t>(f.integer("bauzeit", 1, 240).value_or(12));
+            b.upkeep = optional_fixed("unterhalt", fx(1));
+            b.max_level =
+                f.has("stufen") ? static_cast<std::int32_t>(f.integer("stufen", 1, 20).value_or(5)) : 5;
+            if (f.has("ab")) {
+                b.since = f.date("ab").value_or(Date{1, 1, 1});
+            } else {
+                b.since = Date{1, 1, 1};
+            }
+            if (later) {
+                continue;
+            }
+            if ((b.profession == kNone) != (b.recruit_from == kNone) ||
+                (b.profession != kNone && b.jobs <= Fixed{})) {
+                issues_.error(file.name, node.line,
+                              "gebaeude " + node.value + ": 'beruf', 'aus' und 'plaetze' gehören zusammen");
+            }
+            if (b.cost <= Fixed{}) {
+                issues_.error(file.name, node.line, "gebaeude " + node.value + ": 'kosten' fehlt oder ist 0");
+            }
+            const auto index = static_cast<Index>(world_.building_types.size());
+            if (register_id(buildings_, b.id, index, file.name, node.line, "Gebäude")) {
+                world_.building_types.push_back(std::move(b));
+            }
         }
     }
 
@@ -4610,7 +4712,7 @@ private:
         for_each_definition(file, "szenario", "szenario <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "szenario " + node.value, issues_,
                      {"name", "datum", "ende", "spieler", "spielbar", "waehrung", "tragfaehigkeit_faktor",
-                      "handel_eigenbedarf"});
+                      "handel_eigenbedarf", "bauen"});
             Scenario s;
             s.id = node.value;
             s.name = f.text("name").value_or("");
@@ -4638,6 +4740,10 @@ private:
             // Seit M15a2: Handel nach Eigenbedarf (wirtschaft.md 4.1).
             if (f.has("handel_eigenbedarf")) {
                 s.trade_own_needs = f.boolean("handel_eigenbedarf").value_or(false);
+            }
+            // Seit M15b1: Bauen (bauen_und_anleitung.md 3).
+            if (f.has("bauen")) {
+                s.building = f.boolean("bauen").value_or(false);
             }
             std::vector<PlayerRef> playable_refs;
             if (f.has("spielbar")) {
@@ -4994,6 +5100,7 @@ private:
     std::map<std::string, LaterDefinition, std::less<>> later_;
     std::vector<std::pair<std::string, ProfessionRef>> later_profession_refs_; // spätere Berufe (seit M7)
     bool in_later_ = false;                     // gerade wird eine spätere Definition gelesen
+    Registry buildings_;                        // seit M15b1
     Fixed capacity_factor_ = Fixed::one();      // tragfaehigkeit_faktor des gewählten Szenarios (seit M7)
     std::vector<AdminParentRef> admin_parents_; // parallel zu world_.admin_units
     Registry locations_;

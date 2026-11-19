@@ -14,4 +14,5 @@ szenario dueppel {
     waehrung = "Taler"
     tragfaehigkeit_faktor = 2.5   # wie 1848 (keine Hochrechnung, Entscheidung 14)
     handel_eigenbedarf = ja       # seit M15a2 wie 1848 (wirtschaft.md 4.1)
+    bauen = ja                    # seit M15b1: Gebäude in Landesteilen (bauen_und_anleitung.md 3)
 }

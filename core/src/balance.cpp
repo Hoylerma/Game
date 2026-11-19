@@ -6,8 +6,8 @@
 
 #include <algorithm>
 #include <array>
-#include <string_view>
 #include <initializer_list>
+#include <string_view>
 
 namespace uhrwerk {
 
@@ -87,7 +87,8 @@ BalanceTargetsResult targets_from(const ParseResult& parsed, const World& world,
         t.living_standard[2] = r.range(*b, "oben").value_or(ValueRange{});
     }
     // Seit M15a2: Deckung der Grundnahrung je Schicht in Prozent (optional, je Schicht).
-    if (const ScriptNode* b = root.find("grundnahrung") != nullptr ? r.block(root, "grundnahrung") : nullptr) {
+    if (const ScriptNode* b =
+            root.find("grundnahrung") != nullptr ? r.block(root, "grundnahrung") : nullptr) {
         r.only(*b, {"unten", "mittel", "oben"});
         const std::array<std::string_view, 3> keys = {"unten", "mittel", "oben"};
         for (std::size_t k = 0; k < 3; ++k) {

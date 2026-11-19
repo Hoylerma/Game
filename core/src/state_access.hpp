@@ -161,6 +161,18 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("ernte", m.harvest);
     });
 
+    // Bauen (seit M15b1): Stufen je Landesteil und Gebäudeart, Bauaufträge; nur wo gebaut wird.
+    if (w.building_rules.active) {
+        values(v, "gebaeudestufen", w.building_levels);
+        list(v, "bauauftraege", w.build_orders, Extent::State, [&](auto& o) {
+            v.field("staat", o.state);
+            v.field("landesteil", o.region);
+            v.field("art", o.type);
+            v.field("monate", o.months_left);
+            v.field("rate", o.monthly_cost);
+        });
+    }
+
     // Zollgebiete (seit M9): nur in Welten mit Zollunionen, damit die Prüfsumme der übrigen (1648) bleibt.
     if (!w.customs_unions.empty()) {
         list(v, "zollgebiete", w.states, Extent::Content, [&](auto& s) {
