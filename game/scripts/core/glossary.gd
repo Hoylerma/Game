@@ -14,6 +14,8 @@ const TERMS := {
 	"legitimitaet": "Legitimität: Zustimmung der Interessengruppen zur Regierung im Mittel, nach ihrem Anteil gewichtet (−10 bis +10). Sie dämpft die Unruhe.",
 	"zustimmung": "Zustimmung: Haltung einer Interessengruppe zur Regierung von −10 bis +10; sie folgt den Gesetzen, die die Gruppe wünscht oder ablehnt, und den Ereignissen.",
 	"unruhe": "Unruhe: 0 bis 100; sie nähert sich jeden Monat einem Zielwert aus Not, Teuerung, Verfassung, Zensur, der Unruhe der Nachbarn und der Zustimmung. Hohe Unruhe macht Aufstände wahrscheinlich.",
+	"lebensstandard": "Lebensstandard: 0 bis 100; er folgt dem Realeinkommen – was nach den Steuern vom Einkommen bleibt, geteilt durch die Preise der Waren, die eine Schicht braucht. Teuerung und hohe Steuern senken ihn, und mit ihm sinken Geburten und Lebenserwartung.",
+	"not": "In Not: Menschen, denen mehr als ein Viertel ihrer Grundnahrung fehlt (Getreide und was satt macht). Je größer die Lücke, desto mehr sterben – bei halber Deckung gut ein Drittel mehr als sonst.",
 	"kreis": "Kreis: untere Verwaltungseinheit (Landkreis, Amt, Bezirk); die Karte zeigt sie im Modus „Kreise“.",
 	"vermaechtnis": "Vermächtnis: wie die Geschichte den Staat beurteilt, in fünf Dimensionen von 0 bis 100; 1871 fließt es in das Urteil der Geschichte ein.",
 	"einigkeit": "Einigkeit: Platz des Staates in einer deutschen Ordnung – Bund oder Reich, Präsidium, Zollverein – abzüglich Unruhe und Aufständen.",

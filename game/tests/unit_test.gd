@@ -36,6 +36,7 @@ func _initialize() -> void:
 	_test_chronicle_export()
 	_test_window_manager()
 	_test_glossary()
+	_test_wellbeing()
 	_test_settings_and_lexicon()
 	_test_epoch_and_newspaper()
 	_test_audio_director()
@@ -1234,3 +1235,25 @@ func _test_language() -> void:
 	_true(AiReasons.of({"reasons_text": "fertig"}) == "fertig", "ohne Schlüssel der Text des Kerns")
 	var o := LaunchOptions.parse(PackedStringArray(["--sprache=pseudo"]))
 	_true(o.language == "pseudo" and not LaunchOptions.parse(PackedStringArray(["--sprache=fr"])).problems.is_empty(), "Startoption --sprache")
+
+
+## Wie geht es dem Volk? (Rückmeldung 11/2026): Urteil aus Not, Unterschicht und Unruhe, mit Gründen und Hinweisen.
+func _test_wellbeing() -> void:
+	var good := {
+		"population": 1000, "hungry": 0, "living_standard": 60.0,
+		"strata": [{"stratum": 0, "living_standard": 55.0, "food_percent": 98.0, "percent": 80.0}],
+	}
+	var verdict := Wellbeing.assess(good, 2.0)
+	_true(int(verdict["level"]) == Wellbeing.Level.GOOD and (verdict["tips"] as PackedStringArray).is_empty(), "satt und ruhig: gut")
+	var poor := good.duplicate(true)
+	poor["strata"][0]["living_standard"] = 40.0
+	verdict = Wellbeing.assess(poor, 2.0)
+	_true(int(verdict["level"]) == Wellbeing.Level.STRAINED and str(verdict["tips"]).contains("Kontribution"), "kärgliche Unterschicht: angespannt, Kontribution senken")
+	var hungry := good.duplicate(true)
+	hungry["hungry"] = 300
+	verdict = Wellbeing.assess(hungry, 2.0)
+	_true(int(verdict["level"]) == Wellbeing.Level.BAD and str(verdict["tips"]).contains("Akzise"), "30 % in Not: schlecht, Akzise senken")
+	_true(int(Wellbeing.assess(good, 35.0)["level"]) == Wellbeing.Level.BAD, "Unruhe 35: schlecht")
+	var text := Wellbeing.tooltip(hungry, 2.0)
+	_true(text.contains("Unterschicht") and text.contains("Warum") and text.contains("Was hilft") and text.contains(Wellbeing.TITLES[2]), "Tooltip mit Schichten, Gründen und Hinweisen")
+	_true(not Glossary.text("lebensstandard").is_empty() and not Glossary.text("not").is_empty(), "Glossar: Lebensstandard und Not")

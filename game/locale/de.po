@@ -437,30 +437,38 @@ msgid "Unruhe: 0 bis 100; sie nähert sich jeden Monat einem Zielwert aus Not, T
 msgstr ""
 
 #: scripts/core/glossary.gd:17
-msgid "Kreis: untere Verwaltungseinheit (Landkreis, Amt, Bezirk); die Karte zeigt sie im Modus „Kreise“."
+msgid "Lebensstandard: 0 bis 100; er folgt dem Realeinkommen – was nach den Steuern vom Einkommen bleibt, geteilt durch die Preise der Waren, die eine Schicht braucht. Teuerung und hohe Steuern senken ihn, und mit ihm sinken Geburten und Lebenserwartung."
 msgstr ""
 
 #: scripts/core/glossary.gd:18
-msgid "Vermächtnis: wie die Geschichte den Staat beurteilt, in fünf Dimensionen von 0 bis 100; 1871 fließt es in das Urteil der Geschichte ein."
+msgid "In Not: Menschen, denen mehr als ein Viertel ihrer Grundnahrung fehlt (Getreide und was satt macht). Je größer die Lücke, desto mehr sterben – bei halber Deckung gut ein Drittel mehr als sonst."
 msgstr ""
 
 #: scripts/core/glossary.gd:19
-msgid "Einigkeit: Platz des Staates in einer deutschen Ordnung – Bund oder Reich, Präsidium, Zollverein – abzüglich Unruhe und Aufständen."
+msgid "Kreis: untere Verwaltungseinheit (Landkreis, Amt, Bezirk); die Karte zeigt sie im Modus „Kreise“."
 msgstr ""
 
 #: scripts/core/glossary.gd:20
-msgid "Recht: Verfassung, Zustimmung der Gruppen und die Verlässlichkeit des Staates (ohne Bankrotte und Aufstände)."
+msgid "Vermächtnis: wie die Geschichte den Staat beurteilt, in fünf Dimensionen von 0 bis 100; 1871 fließt es in das Urteil der Geschichte ein."
 msgstr ""
 
 #: scripts/core/glossary.gd:21
-msgid "Freiheit: Presse, Vereine, Grundlasten und Wahlrecht, dazu die Wahlen der letzten zehn Jahre."
+msgid "Einigkeit: Platz des Staates in einer deutschen Ordnung – Bund oder Reich, Präsidium, Zollverein – abzüglich Unruhe und Aufständen."
 msgstr ""
 
 #: scripts/core/glossary.gd:22
-msgid "Wohlstand: Lebensstandard und Alphabetisierung, abzüglich Auswanderung und Schuldenquote."
+msgid "Recht: Verfassung, Zustimmung der Gruppen und die Verlässlichkeit des Staates (ohne Bankrotte und Aufstände)."
 msgstr ""
 
 #: scripts/core/glossary.gd:23
+msgid "Freiheit: Presse, Vereine, Grundlasten und Wahlrecht, dazu die Wahlen der letzten zehn Jahre."
+msgstr ""
+
+#: scripts/core/glossary.gd:24
+msgid "Wohlstand: Lebensstandard und Alphabetisierung, abzüglich Auswanderung und Schuldenquote."
+msgstr ""
+
+#: scripts/core/glossary.gd:25
 msgid "Geltung: Stärke des Heeres im Vergleich, Bündnisse, gewonnene und verlorene Kriege, Präsidium im Bund, Bevölkerung."
 msgstr ""
 
@@ -698,7 +706,7 @@ msgstr ""
 msgid "Kreise"
 msgstr ""
 
-#: scripts/core/map_modes.gd:34 scripts/core/map_modes.gd:57 scripts/ui/windows/society_window.gd:25 scenes/ui/location_panel.tscn:365
+#: scripts/core/map_modes.gd:34 scripts/core/map_modes.gd:57 scripts/core/wellbeing.gd:97 scripts/ui/windows/society_window.gd:27 scenes/ui/location_panel.tscn:365
 msgid "Lebensstandard"
 msgstr ""
 
@@ -1018,6 +1026,98 @@ msgstr ""
 msgid "Vollbild ein/aus"
 msgstr ""
 
+#: scripts/core/wellbeing.gd:10
+msgid "Unterschicht"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:10
+msgid "Mittelschicht"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:10
+msgid "Oberschicht"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:11
+msgid "Dem Volk geht es gut"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:11
+msgid "Die Lage ist angespannt"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:11
+msgid "Dem Volk geht es schlecht"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:38
+msgid "%s Menschen sind in Not: Ihnen fehlt mehr als ein Viertel der Grundnahrung, es sterben mehr."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:41
+msgid "Die Unterschicht deckt nur %s ihrer Grundnahrung."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:43
+msgid "Akzise senken: Sie verteuert Brot, Fleisch und Bier (Staatsübersicht, Steuern)."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:46
+msgid "Die Unterschicht lebt kärglich (Lebensstandard %s von 100)."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:47
+msgid "Kontribution senken: Den Leuten bleibt mehr vom Einkommen (Staatsübersicht, Steuern)."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:51
+msgid "Unruhe %s: Ein Aufstand droht."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:51
+msgid "Unruhe %s: Die Stimmung kippt."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:53
+msgid "Die Gründe der Unruhe stehen im Tooltip der Unruhe; Reformen und Zugeständnisse senken sie."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:55
+msgid "Alle Schichten sind satt, niemand ist in Not."
+msgstr ""
+
+#: scripts/core/wellbeing.gd:94
+msgid "[b]Bevölkerung[/b] %s Einwohner"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:95
+msgid "[color=#%s][b]● %s[/b][/color]"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:96
+msgid "%s %s von 100 (Mittel aller Einwohner) · %s: %s"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:98
+msgid "in Not"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:101
+msgid "[b]Je Schicht[/b] – Anteil · Lebensstandard · Grundnahrung · Einkommen im Jahr"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:108
+msgid "  %s %s · [color=#%s]%s[/color] · [color=#%s]%s[/color] · %s"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:120
+msgid "[b]Was hilft[/b]"
+msgstr ""
+
+#: scripts/core/wellbeing.gd:128
+msgid "Am schlechtesten lebt man in: %s (Kartenmodus Lebensstandard)"
+msgstr ""
+
 #: scripts/main/bar_tooltips.gd:24 scripts/ui/state_panel.gd:30
 msgid "Kontribution"
 msgstr ""
@@ -1116,14 +1216,6 @@ msgstr ""
 
 #: scripts/main/bar_tooltips.gd:85
 msgid "[b]Aufstand im Land![/b]"
-msgstr ""
-
-#: scripts/main/bar_tooltips.gd:92
-msgid ""
-"[b]Bevölkerung[/b]\n"
-"%s Einwohner\n"
-"\n"
-"%s"
 msgstr ""
 
 #: scripts/main/bar_tooltips.gd:102
@@ -2809,7 +2901,7 @@ msgstr ""
 msgid "1 Ort"
 msgstr ""
 
-#: scripts/ui/legend_data.gd:83 scripts/ui/top_bar.gd:271
+#: scripts/ui/legend_data.gd:83 scripts/ui/top_bar.gd:288
 msgid "%s Orte"
 msgstr ""
 
@@ -2993,15 +3085,15 @@ msgstr ""
 msgid "LEGENDE"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:14 scripts/ui/windows/society_window.gd:30
+#: scripts/ui/location_panel.gd:14 scripts/ui/windows/society_window.gd:32
 msgid "0–14 Jahre"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:15 scripts/ui/windows/society_window.gd:30
+#: scripts/ui/location_panel.gd:15 scripts/ui/windows/society_window.gd:32
 msgid "15–29 Jahre"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:16 scripts/ui/windows/society_window.gd:30
+#: scripts/ui/location_panel.gd:16 scripts/ui/windows/society_window.gd:32
 msgid "30–64 Jahre"
 msgstr ""
 
@@ -3009,27 +3101,27 @@ msgstr ""
 msgid "65 und älter"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:21 scripts/ui/windows/society_window.gd:48
+#: scripts/ui/location_panel.gd:21 scripts/ui/windows/society_window.gd:50
 msgid "Geburten"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:22 scripts/ui/windows/society_window.gd:48
+#: scripts/ui/location_panel.gd:22 scripts/ui/windows/society_window.gd:50
 msgid "Sterbefälle"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:23 scripts/ui/windows/society_window.gd:48
+#: scripts/ui/location_panel.gd:23 scripts/ui/windows/society_window.gd:50
 msgid "Seuchentote"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:24 scripts/ui/windows/society_window.gd:48
+#: scripts/ui/location_panel.gd:24 scripts/ui/windows/society_window.gd:50
 msgid "Zuzug"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:25 scripts/ui/windows/society_window.gd:48
+#: scripts/ui/location_panel.gd:25 scripts/ui/windows/society_window.gd:50
 msgid "Wegzug"
 msgstr ""
 
-#: scripts/ui/location_panel.gd:26 scripts/ui/windows/society_window.gd:48
+#: scripts/ui/location_panel.gd:26 scripts/ui/windows/society_window.gd:50
 msgid "Auswanderung"
 msgstr ""
 
@@ -4332,43 +4424,43 @@ msgstr ""
 msgid "Caption"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:310 scenes/ui/top_bar.tscn:37
+#: scripts/ui/top_bar.gd:327 scenes/ui/top_bar.tscn:37
 msgid "Keine Simulation"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:311 scenes/ui/top_bar.tscn:44
+#: scripts/ui/top_bar.gd:328 scenes/ui/top_bar.tscn:44
 msgid "Spielerstaat unbekannt"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:325 scenes/ui/top_bar.tscn:143
+#: scripts/ui/top_bar.gd:342 scenes/ui/top_bar.tscn:143
 msgid "Simulation nicht geladen"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:333 scenes/ui/top_bar.tscn:155
+#: scripts/ui/top_bar.gd:350 scenes/ui/top_bar.tscn:155
 msgid "Pause (Leertaste)"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:336
+#: scripts/ui/top_bar.gd:353
 msgid "Stufe %d: %d %s je Sekunde (Taste %d)"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:337
+#: scripts/ui/top_bar.gd:354
 msgid "Tag"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:337
+#: scripts/ui/top_bar.gd:354
 msgid "Tage"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:352
+#: scripts/ui/top_bar.gd:369
 msgid "Pausiert · Leertaste setzt fort"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:354
+#: scripts/ui/top_bar.gd:371
 msgid "Stufe %d · 1 Tag je Sekunde"
 msgstr ""
 
-#: scripts/ui/top_bar.gd:356
+#: scripts/ui/top_bar.gd:373
 msgid "Stufe %d · %d Tage je Sekunde"
 msgstr ""
 
@@ -4880,48 +4972,68 @@ msgstr ""
 msgid "Die wichtigsten Nachrichten des letzten Jahres bis %s:"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:11 scenes/ui/location_panel.tscn:354
+#: scripts/ui/windows/society_window.gd:12 scenes/ui/location_panel.tscn:354
 msgid "GESELLSCHAFT"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:23
+#: scripts/ui/windows/society_window.gd:25
 msgid "Einwohner"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:24
+#: scripts/ui/windows/society_window.gd:26
 msgid "Orte, davon Städte"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:25
+#: scripts/ui/windows/society_window.gd:27
 msgid "0 bis 100, nach Einwohnern gemittelt"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:26 scenes/ui/location_panel.tscn:379
+#: scripts/ui/windows/society_window.gd:28 scenes/ui/location_panel.tscn:379
 msgid "Alphabetisierung"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:28
+#: scripts/ui/windows/society_window.gd:30
 msgid "ALTERSAUFBAU"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:30
+#: scripts/ui/windows/society_window.gd:32
 msgid "65 Jahre und älter"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:34 scenes/ui/location_panel.tscn:334
+#: scripts/ui/windows/society_window.gd:36 scenes/ui/location_panel.tscn:334
 msgid "KULTUREN"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:38 scenes/ui/location_panel.tscn:310
+#: scripts/ui/windows/society_window.gd:40 scenes/ui/location_panel.tscn:310
 msgid "KONFESSIONEN"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:42
+#: scripts/ui/windows/society_window.gd:44
 msgid "BERUFE"
 msgstr ""
 
-#: scripts/ui/windows/society_window.gd:46
+#: scripts/ui/windows/society_window.gd:48
 msgid "VORJAHR"
+msgstr ""
+
+#: scripts/ui/windows/society_window.gd:59
+msgid "WIE GEHT ES DEM VOLK?"
+msgstr ""
+
+#: scripts/ui/windows/society_window.gd:72
+msgid "Lebensstandard %s von 100 · Grundnahrung %s gedeckt · alle Bedürfnisse %s · Einkommen %s im Jahr · in Not %s"
+msgstr ""
+
+#: scripts/ui/windows/society_window.gd:77
+msgid "In Not (Grundnahrung unter 75 %)"
+msgstr ""
+
+#: scripts/ui/windows/society_window.gd:80
+msgid "Was hilft:"
+msgstr ""
+
+#: scripts/ui/windows/society_window.gd:87
+msgid "Am schlechtesten lebt man in %s (Kartenmodus Lebensstandard)."
 msgstr ""
 
 #: scripts/ui/yearbook_window.gd:173

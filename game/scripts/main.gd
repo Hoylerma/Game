@@ -1105,6 +1105,15 @@ func _bottom_of_map_area() -> float:
 
 
 ## Obere Leiste und rechte Übersicht höchstens zweimal je Sekunde.
+## Urteil „Wie geht es dem Volk?“ des laufenden Monats (Wellbeing.Level) und sein Monat.
+var _wellbeing_month := -1
+var _wellbeing_level := 0
+
+
+func wellbeing_level() -> int:
+	return _wellbeing_level
+
+
 func _refresh_bars(force: bool = false) -> void:
 	if _sim == null or _overview == null:
 		return
@@ -1112,7 +1121,17 @@ func _refresh_bars(force: bool = false) -> void:
 		return
 	_overview_filled_at = Time.get_ticks_msec()
 	var date := _sim.get_date()
-	_top_bar.begin_month(int(date.get("year", 0)) * 12 + int(date.get("month", 1)))
+	var month := int(date.get("year", 0)) * 12 + int(date.get("month", 1))
+	_top_bar.begin_month(month)
+	# Wie geht es dem Volk? (Rückmeldung 11/2026): das Symbol der Bevölkerung in der Farbe des Urteils,
+	# einmal je Monat (die Summen über alle Orte sind nicht umsonst).
+	if month != _wellbeing_month or force:
+		_wellbeing_month = month
+		var verdict := Wellbeing.assess(
+			_sim.get_state_society(_player), float(_sim.get_state_events(_player).get("unrest", 0.0))
+		)
+		_wellbeing_level = int(verdict["level"])
+		_top_bar.set_icon_ink(&"bevoelkerung", Wellbeing.color_of(_wellbeing_level))
 	_top_bar.show_overview(_sim.get_state_overview(_player), _sim.get_legacy(_player))
 	_update_area_badges()
 	if _player_current >= 0:

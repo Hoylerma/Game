@@ -31,6 +31,12 @@ empfohlen freigegeben; Stand je Schritt in Abschnitt 9 dort.
 
 ### Zweite Rückmeldung aus dem Spiel (18.11.2026)
 
+- **Wie geht es meiner Bevölkerung?** Das Symbol der Bevölkerung in der oberen Leiste zeigt in Grün,
+  Gold oder Rot, wie es dem Volk geht. Sein Tooltip und das Fenster Gesellschaft sagen es in Worten
+  („Die Lage ist angespannt“), zeigen je Schicht Lebensstandard, Grundnahrung und Einkommen, nennen die
+  Gründe (Menschen in Not, kärgliche Unterschicht, Unruhe) und was hilft (Akzise oder Kontribution
+  senken), dazu die drei Orte, in denen man am schlechtesten lebt. Neue Lexikonartikel „Lebensstandard“
+  und „In Not“.
 - **F11 schaltet das Vollbild** ein und aus, überall im Spiel; die Einstellung bleibt gespeichert und die
   Taste lässt sich unter Einstellungen, Tasten neu belegen.
 

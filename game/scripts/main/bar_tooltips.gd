@@ -87,11 +87,11 @@ func unrest() -> String:
 
 
 ## Bevölkerung mit der Verwaltung (seit M14a2; die Verwaltung stand vorher als eigene Zahl in der Leiste).
+## Seit der Rückmeldung 11/2026 mit dem Urteil „Wie geht es dem Volk?“ (Wellbeing).
 func population() -> String:
-	var state := sim().get_state(player())
-	return "[b]Bevölkerung[/b]\n%s Einwohner\n\n%s" % [
-		Format.integer(int(state.get("population", 0))), administration()
-	]
+	var society := sim().get_state_society(player())
+	var unrest := float(sim().get_state_events(player()).get("unrest", 0.0))
+	return "%s\n\n%s" % [Wellbeing.tooltip(society, unrest), administration()]
 
 
 ## Heer: Soldaten, Friedensstärke, Mobilmachung, Kosten (seit M14a2).

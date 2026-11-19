@@ -14,6 +14,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <filesystem>
@@ -3478,12 +3479,83 @@ Dictionary UhrwerkSimulation::get_state_society(std::int64_t state_index) const 
     std::vector<uhrwerk::Fixed> professions(w->professions.size());
     std::int64_t locations = 0;
     std::int64_t cities = 0;
+    // Wohlergehen je Schicht (seit der Rückmeldung 11/2026): Köpfe, Lebensstandard, Bedarfsdeckung,
+    // Nahrung und Einkommen, gewichtet mit den Köpfen; in Not = Köpfe mit Nahrung unter 75 % (dort steigt die
+    // Sterblichkeit spürbar, wirtschaft.md 4.4).
+    constexpr std::size_t kStrata = 3;
+    std::array<double, kStrata> stratum_people{};
+    std::array<double, kStrata> stratum_living{};
+    std::array<double, kStrata> stratum_coverage{};
+    std::array<double, kStrata> stratum_food{};
+    std::array<double, kStrata> stratum_income{};
+    std::array<double, kStrata> stratum_hungry{};
+    struct Place {
+        std::int64_t index;
+        double living;
+        double food;
+    };
+    std::vector<Place> places;
+    const std::size_t profession_count = w->professions.size();
+    const std::size_t need_count = w->needs.size();
     for (std::size_t l = 0; l < w->locations.size(); ++l) {
         const uhrwerk::Location& loc = w->locations[l];
         if (loc.owner != state_index || !loc.has_data()) {
             continue;
         }
         ++locations;
+        for (uhrwerk::Index pi = loc.first_pop; pi < loc.first_pop + loc.pop_count; ++pi) {
+            if (!valid_index(w->pops, pi)) {
+                continue;
+            }
+            const uhrwerk::PopBlock& pop = at(w->pops, pi);
+            if (!valid_index(w->professions, pop.profession)) {
+                continue;
+            }
+            const auto st = static_cast<std::size_t>(at(w->professions, pop.profession).stratum);
+            if (st < kStrata) {
+                stratum_living[st] += pop.living_standard.to_double() * pop.size().to_double();
+            }
+        }
+        {
+            const std::vector<uhrwerk::Fixed> heads = people_by_profession(*w, static_cast<std::int64_t>(l));
+            double place_people = 0.0;
+            double place_food = 0.0;
+            for (std::size_t pr = 0; pr < profession_count; ++pr) {
+                const double n = heads[pr].to_double();
+                if (n <= 0.0) {
+                    continue;
+                }
+                const auto st = static_cast<std::size_t>(w->professions[pr].stratum);
+                const std::size_t slot = l * profession_count + pr;
+                double coverage = 0.0;
+                double food = 1.0;
+                bool any_food = false;
+                for (std::size_t nd = 0; nd < need_count; ++nd) {
+                    const std::size_t c = slot * need_count + nd;
+                    const double value = c < w->location_coverage.size() ? w->location_coverage[c].to_double() : 1.0;
+                    coverage += value;
+                    if (w->needs[nd].hunger) {
+                        food = any_food ? std::min(food, value) : value;
+                        any_food = true;
+                    }
+                }
+                coverage = need_count > 0 ? coverage / static_cast<double>(need_count) : 1.0;
+                const double income = slot < w->location_income.size() ? w->location_income[slot].to_double() * 12.0 : 0.0;
+                if (st < kStrata) {
+                    stratum_people[st] += n;
+                    stratum_coverage[st] += coverage * n;
+                    stratum_food[st] += food * n;
+                    stratum_income[st] += income * n;
+                    stratum_hungry[st] += food < 0.75 ? n : 0.0;
+                }
+                place_people += n;
+                place_food += food * n;
+            }
+            if (place_people > 0.0) {
+                places.push_back({static_cast<std::int64_t>(l), people_of(*w, static_cast<std::int64_t>(l)).living_standard,
+                                  place_food / place_people});
+            }
+        }
         cities += loc.is_city ? 1 : 0;
         const auto index = static_cast<std::int64_t>(l);
         const People people = people_of(*w, index);
@@ -3534,6 +3606,38 @@ Dictionary UhrwerkSimulation::get_state_society(std::int64_t state_index) const 
         rows.push_back(row);
     }
     result["professions"] = rows;
+    Array strata;
+    double hungry = 0.0;
+    for (std::size_t st = 0; st < kStrata; ++st) {
+        Dictionary row;
+        const double n = stratum_people[st];
+        row["stratum"] = static_cast<std::int64_t>(st);
+        row["people"] = static_cast<std::int64_t>(std::llround(n));
+        row["percent"] = total > 0.0 ? n * 100.0 / total : 0.0;
+        row["living_standard"] = n > 0.0 ? stratum_living[st] / n : 0.0;
+        row["coverage_percent"] = n > 0.0 ? stratum_coverage[st] * 100.0 / n : 0.0;
+        row["food_percent"] = n > 0.0 ? stratum_food[st] * 100.0 / n : 0.0;
+        row["income_year"] = n > 0.0 ? stratum_income[st] / n : 0.0;
+        row["hungry"] = static_cast<std::int64_t>(std::llround(stratum_hungry[st]));
+        hungry += stratum_hungry[st];
+        strata.push_back(row);
+    }
+    result["strata"] = strata;
+    result["hungry"] = static_cast<std::int64_t>(std::llround(hungry));
+    // Die drei Orte mit dem niedrigsten Lebensstandard (bei Gleichstand der kleinere Index).
+    std::sort(places.begin(), places.end(), [](const Place& a, const Place& b) {
+        return a.living != b.living ? a.living < b.living : a.index < b.index;
+    });
+    Array worst;
+    for (std::size_t i = 0; i < places.size() && i < 3; ++i) {
+        Dictionary row;
+        row["location_index"] = places[i].index;
+        row["name"] = to_godot(w->locations[static_cast<std::size_t>(places[i].index)].name);
+        row["living_standard"] = places[i].living;
+        row["food_percent"] = places[i].food * 100.0;
+        worst.push_back(row);
+    }
+    result["worst_locations"] = worst;
     return result;
 }
 

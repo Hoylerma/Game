@@ -201,6 +201,23 @@ func _show_changes() -> void:
 		label.add_theme_color_override(&"font_color", UiPalette.amount_color(1.0 if good else -1.0))
 
 
+## Symbol einer Kennzahl in einer anderen Tinte (seit der Rückmeldung 11/2026: die Bevölkerung in der Farbe
+## des Urteils „Wie geht es dem Volk?“).
+func set_icon_ink(key: StringName, ink: Color) -> void:
+	var metric := _metrics.get(key) as Control
+	var icon := metric.find_child("Icon", false, false) as TextureRect if metric != null else null
+	if icon != null:
+		icon.texture = Icons.texture(&"gesellschaft" if key == &"bevoelkerung" else key, ICON_SIZE, ink)
+		icon.set_meta(&"ink", ink)
+
+
+## Tinte des Symbols einer Kennzahl (Tests).
+func icon_ink(key: StringName) -> Color:
+	var metric := _metrics.get(key) as Control
+	var icon := metric.find_child("Icon", false, false) as TextureRect if metric != null else null
+	return icon.get_meta(&"ink", UiPalette.INK) if icon != null else UiPalette.INK
+
+
 ## Veränderung einer Kennzahl seit dem Monatsanfang (Tests).
 func change_of(key: StringName) -> float:
 	return float(_now.get(key, 0.0)) - float(_baseline.get(key, _now.get(key, 0.0)))

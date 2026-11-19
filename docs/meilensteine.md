@@ -27,6 +27,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | **fertig** (Fachprüfung der Personen und Agenden offen, siehe unten) |
 | M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | **technisch fertig** (Spieltest mit externen Testern offen; CI auf GitHub läuft zurzeit nicht, siehe unten) |
 | M14 | Europa und Oberfläche (aus dem ersten Spieltest) | 3 – Early Access | M13 | in Arbeit (Vertrag [technik/europa_und_oberflaeche.md](technik/europa_und_oberflaeche.md), Entscheidungen freigegeben) |
+| M15 | Bauen, Wirtschaft und Anleitung (aus dem zweiten Spieltest) | 3 – Early Access | M14a | Entwurf (Vertrag [technik/bauen_und_anleitung.md](technik/bauen_und_anleitung.md), Entscheidungen offen) |
 
 Phase 1 endet mit M6 (Ziel der Roadmap: „Technikprototyp“). Phase 2 endet mit M13 (Ziel:
 „Spielbare Epoche III 1848–1871“). Mit M13 ist die Phase 2 technisch abgeschlossen; offen sind die Arbeiten,

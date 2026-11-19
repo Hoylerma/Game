@@ -637,6 +637,15 @@ func _check_areas() -> void:
 			continue
 		if not window.window_text().contains(str(expected_text[area])):
 			_fail("Bereich %s ohne „%s“: %s" % [area, expected_text[area], window.window_text().left(200).replace("\n", " / ")])
+	# Wie geht es dem Volk? (Rückmeldung 11/2026): Urteil und Schichten im Fenster Gesellschaft, das Symbol
+	# der Bevölkerung in der Farbe des Urteils.
+	var society_text := (_main.call("area_window", &"gesellschaft") as AreaWindow).window_text()
+	if not society_text.contains("WIE GEHT ES DEM VOLK?") or not society_text.contains("Unterschicht") or not society_text.contains("●"):
+		_fail("Gesellschaft ohne „Wie geht es dem Volk?“: %s" % society_text.left(300).replace("\n", " / "))
+	var top_bar: TopBar = _main.get("_top_bar")
+	var level := int(_main.call("wellbeing_level"))
+	if top_bar.icon_ink(&"bevoelkerung") != Wellbeing.color_of(level):
+		_fail("Symbol der Bevölkerung nicht in der Farbe des Urteils (%s)" % Wellbeing.TITLES[level])
 	var parliament: ParliamentWindow = _main.call("area_window", &"parlament")
 	bar.button(&"parlament").emit_signal("pressed")
 	await _frames(1)
@@ -766,7 +775,7 @@ func _check_bars() -> void:
 		var icon := metric.get_node_or_null("Icon") as TextureRect if metric != null else null
 		if metric == null or not metric.is_visible_in_tree() or icon == null or icon.texture == null or top.field_text(key) == "–":
 			_fail("Obere Leiste: Kennzahl %s ohne Symbol oder Wert („%s“)" % [key, top.field_text(key)])
-	for pair: Array in [[&"unruhe", texts_source.unrest, "Ziel"], [&"bevoelkerung", texts_source.population, "Einwohner"], [&"heer", texts_source.army, "Kosten"]]:
+	for pair: Array in [[&"unruhe", texts_source.unrest, "Ziel"], [&"bevoelkerung", texts_source.population, "Je Schicht"], [&"heer", texts_source.army, "Kosten"]]:
 		layer.show_for(top.field(pair[0]), pair[1])
 		if not layer.text_of(0).contains(str(pair[2])):
 			_fail("Tooltip %s: „%s“" % [pair[0], layer.text_of(0).replace("\n", " / ")])
