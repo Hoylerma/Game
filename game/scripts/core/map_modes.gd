@@ -21,7 +21,8 @@ const MAP_BEZIEHUNGEN := 14
 const MAP_KRIEG := 15
 const MAP_UNRUHE := 16
 const MAP_BUND := 17
-const COUNT := 18
+const MAP_BAUEN := 18 # seit M15b3
+const COUNT := 19
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -43,6 +44,7 @@ const NAMES: PackedStringArray = [
 	"Krieg",
 	"Unruhe",
 	"Bund",
+	"Bauen",
 ]
 
 ## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 kurz gehalten,
@@ -66,6 +68,7 @@ const SHORT_NAMES: PackedStringArray = [
 	"Krieg",
 	"Unruhe",
 	"Bund",
+	"Bauen",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -88,6 +91,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Wer die Orte hält: besetzte Orte schraffiert in der Farbe des Besitzers, Fronten als Grenzen; seit 1848",
 	"Unruhe der Staaten von 0 (blass) bis 100 (rot), Staaten mit Aufstand violett; seit 1848",
 	"Bundesgebiet, das gilt (Deutscher Bund oder ein neuer Bund): Präsidialmacht kräftig, Mitglieder blass; seit 1848",
+	"Wo sich Bauen lohnt: Landesteile des eigenen Staates nach dem besten Vorhaben (blass wenig, grün viel), gold mit laufendem Bau; seit 1848",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -110,6 +114,7 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_krieg",
 	&"kartenmodus_unruhe",
 	&"kartenmodus_bund",
+	&"kartenmodus_bauen",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
@@ -118,7 +123,7 @@ const ACTIONS: Array[StringName] = [
 ## „'“, seit M8), „Ö“ die links neben Ä (englisch „;“, seit M9), „#“ die rechts neben Ä (englisch
 ## „\“, seit M9), „Y“ die links unten neben X (englisch „Z“, seit M10), „X“ (seit M11).
 const KEY_HINTS: PackedStringArray = [
-	"Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä", "Ö", "#", "Y", "X", "C"
+	"Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä", "Ö", "#", "Y", "X", "C", "V"
 ]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
@@ -141,6 +146,7 @@ const DATA_MODES: PackedInt32Array = [
 	MAP_KRIEG,
 	MAP_UNRUHE,
 	MAP_BUND,
+	MAP_BAUEN,
 ]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).

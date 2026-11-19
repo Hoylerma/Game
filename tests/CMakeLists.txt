@@ -31,6 +31,7 @@ add_executable(uhrwerk_tests
     test_military.cpp
     test_events.cpp
     test_ai.cpp
+    test_buildings.cpp
 )
 target_link_libraries(uhrwerk_tests PRIVATE uhrwerk::core doctest::doctest uhrwerk_warnings)
 target_compile_definitions(uhrwerk_tests PRIVATE
@@ -99,6 +100,11 @@ if(UHRWERK_BUILD_CLI)
     add_test(NAME zoll_1848
         COMMAND uhrwerk-cli zoll --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1
                 --jahre 1 --beitritt SLI:zollverein)
+    # Baulabor (seit M15b2): ein Lauf über fünf Jahre, die KI baut.
+    add_test(NAME bauen_1848
+        COMMAND uhrwerk-cli bauen --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1
+                --jahre 5)
+    set_tests_properties(bauen_1848 PROPERTIES PASS_REGULAR_EXPRESSION "Gebäude aller Staaten am Ende")
 
     # Kriegslabor (seit M10, docs/technik/militaer.md Abschnitt 6.3): drei Kriege auf der Fixture mit
     # Militärdaten (tests/daten_krieg über tests/daten) gegen ihre Kriegsziele über 16 Seeds; 1848 ein

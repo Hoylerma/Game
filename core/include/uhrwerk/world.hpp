@@ -114,6 +114,59 @@ struct BusinessType {
     std::vector<Fixed> terrain_factors; // Faktor auf das Gewicht je Geländetyp (Standard 1)
 };
 
+/// Gebäudeart (data/common/gebaeude.chron, seit M15b1, docs/technik/bauen_und_anleitung.md Abschnitt 3).
+/// Ein Gebäude steht mit einer Stufe in einem Landesteil; Kosten und Arbeitsplätze richten sich nach dessen
+/// Einwohnern, damit es in einer Provinz und in einem Kleinstaat gleich viel bewirkt.
+struct BuildingType {
+    std::string id;
+    std::string name;
+    Index business = kNone;     // Betrieb, dessen Ertrag in den Orten des Landesteils steigt
+    Fixed yield;                // Mehrertrag dieses Betriebs je Stufe (Anteil, z. B. 0,15)
+    Index profession = kNone;   // Arbeitsplätze für diesen Beruf (Anwerbung), kNone ohne
+    Index recruit_from = kNone; // angeworben aus diesem Beruf
+    Fixed jobs;                 // Arbeitsplätze je Stufe als Anteil der Einwohner des Landesteils
+    Fixed development;          // Melioration: Landesausbau je Stufe in Talern je km²
+    Fixed literacy;             // Volksschule: Ziel der Alphabetisierung je Stufe (Punkte, 0..1)
+    Fixed freight;              // Chaussee (seit b2): weniger Landfracht je Stufe in den Märkten (Anteil)
+    bool rail = false;          // Bahnstrecke (seit b2): geplante Strecken der Märkte fahren schon jetzt
+    Fixed cost;                 // Taler je 1.000 Einwohner des Landesteils und Stufe
+    std::int32_t months = 12;   // Bauzeit
+    Fixed upkeep;               // Unterhalt je Jahr als Anteil der Baukosten
+    std::int32_t max_level = 5;
+    Date since; // erst ab diesem Tag zu bauen
+};
+
+/// Landesteil (seit M15b1, bauen_und_anleitung.md 3.1): oberste Verwaltungseinheit (Provinz, Kronland,
+/// Regierungsbezirk ohne Provinz), sonst der Kreis, sonst der Ort; aus dem Inhalt, unveränderlich.
+struct Region {
+    std::string id; // „verwaltung:<kennung>“, „kreis:<kennung>“ oder „ort:<kennung>“
+    std::string name;
+    std::vector<Index> locations; // Orte mit Daten, aufsteigend
+    Fixed area_km2;
+};
+
+/// Bauauftrag (Zustand seit M15b1): ein Staat baut eine Stufe; bezahlt wird je Monat bis zur Fertigstellung.
+struct BuildOrder {
+    Index state = kNone;
+    Index region = kNone;
+    Index type = kNone;
+    std::int32_t months_left = 0;
+    Fixed monthly_cost; // Taler je Monat, beim Auftrag festgelegt
+};
+
+/// Regeln des Bauens (gebaeude.chron, Block bauregeln).
+struct BuildingRules {
+    bool active = false;      // Szenario mit bauen = ja und Gebäudearten
+    Fixed recruit_rate;       // Anwerbung: Anteil der Quellberufe im Landesteil je Monat höchstens
+    Fixed orders_base;        // Bauamt: gleichzeitige Aufträge je Staat …
+    Fixed orders_per_million; // … plus so viele je Million Einwohner
+    // KI (seit b2): neue Raten zusammen höchstens dieser Anteil der Monatseinnahmen, und nur Vorhaben mit
+    // mindestens so viel Nutzen im Jahr je Taler Baukosten.
+    Fixed ai_share;
+    Fixed ai_min_score;
+    bool decay = false; // Verfall: Stufen, die weniger als ihren Unterhalt bringen, verfallen (1. Januar)
+};
+
 /// Markt (data/common/maerkte.chron, seit M5, Abschnitt 2.4): eine oder mehrere Landschaften.
 struct Market {
     std::string id;
@@ -1060,6 +1113,12 @@ struct Scenario {
         Fixed::one();     // Faktor auf die Tragfähigkeit aller Gelände (Agrartechnik, seit M7)
     bool has_end = false; // seit M13a4: Ende der Partie (ende), danach Urteil der Geschichte
     Date end;
+    /// Seit M15a2 (bauen_und_anleitung.md 7, wirtschaft.md 4.1): Handel nach Eigenbedarf – ein Markt gibt
+    /// je Monat höchstens seinen eigenen Überschuss plus die Einfuhr des Vormonats ab und nimmt höchstens
+    /// seinen eigenen Mangel plus die Ausfuhr des Vormonats auf. Ohne (1648) wie bis M14.
+    bool trade_own_needs = false;
+    /// Seit M15b1 (bauen_und_anleitung.md 3): Bauen von Gebäuden in Landesteilen.
+    bool building = false;
 };
 
 /// Eintrag der Chronik (Geschichtsbuch der Partie).
@@ -1082,8 +1141,13 @@ struct World {
     std::vector<Good> goods;              // seit M5
     std::vector<Need> needs;              // seit M5, Reihenfolge = Rang beim Einkauf
     std::vector<BusinessType> businesses; // seit M5
-    std::vector<Market> markets;          // seit M5
-    std::vector<std::string> deposits;    // Vorkommen (Kennungen aus betriebe.chron), seit M5
+    // Bauen (seit M15b1, bauen_und_anleitung.md 3): Inhalt (Gebäudearten, Regeln, Landesteile) …
+    std::vector<BuildingType> building_types;
+    BuildingRules building_rules;
+    std::vector<Region> regions;
+    std::vector<Index> location_region; // Landesteil je Ort, kNone für Orte ohne Daten
+    std::vector<Market> markets;        // seit M5
+    std::vector<std::string> deposits;  // Vorkommen (Kennungen aus betriebe.chron), seit M5
     std::vector<State> states;
     std::vector<District> districts;
     std::vector<AdminUnit> admin_units;                 // seit M7
@@ -1142,7 +1206,17 @@ struct World {
     std::vector<Fixed> location_income; // Netto-Einkommen je Kopf und Monat: [ort × berufe + beruf]
     std::vector<Fixed>
         location_coverage; // Bedarfsdeckung 0..1: [(ort × berufe + beruf) × bedürfnisse + bedürfnis]
-    std::vector<Fixed> location_development;      // Landesausbau: verbaute Reichstaler je Ort (Abschnitt 4.6)
+    std::vector<Fixed> location_development; // Landesausbau: verbaute Reichstaler je Ort (Abschnitt 4.6)
+    // … und Zustand (nur mit building_rules.active): Stufe je Landesteil und Gebäudeart [landesteil × arten +
+    // art], laufende Aufträge in der Reihenfolge ihres Eingangs. Abgeleitet (nicht im Zustand): Mehrertrag
+    // je Ort und Betrieb [ort × betriebe + betrieb] und Ziel der Alphabetisierung je Ort.
+    std::vector<std::int32_t> building_levels;
+    std::vector<Fixed> building_staff; // seit b2: Angeworbene je Landesteil und Art (wie building_levels)
+    std::vector<BuildOrder> build_orders;
+    std::vector<Fixed> building_yield;
+    std::vector<Fixed> building_literacy;
+    std::vector<Fixed> market_road;               // seit b2: weniger Landfracht je Markt (Chaussee, Anteil)
+    std::vector<std::uint8_t> market_rail;        // seit b2: 1, wenn eine Bahnstrecke im Markt gebaut ist
     std::vector<MarketState> market_states;       // parallel zu markets
     std::vector<ElectionResult> elections;        // seit M8: abgehaltene Wahlen in zeitlicher Folge
     std::vector<CampaignState> campaign;          // seit M8 (b2): [wahlkreis × strömungen + strömung]

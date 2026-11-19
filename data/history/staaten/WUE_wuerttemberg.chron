@@ -18,9 +18,9 @@ staat WUE {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 134600
+        hofhaltung     = 110200
         heer           = 7
-        schulden       = 3029000
+        schulden       = 2480900
         zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = zensus

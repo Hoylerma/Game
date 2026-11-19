@@ -658,6 +658,39 @@ TEST_CASE("Wirtschaft: Handel zwischen Märkten und mit dem Weltmarkt") {
     CHECK(w.market_states[1].import_share[0] == Fixed::one()); // ohne eigenes Angebot diesen Monat
     CHECK(w.market_states[0].imports[0] == Fixed::zero());
 
+    SUBCASE("Handel nach Eigenbedarf (seit M15a2): Ausfuhr nur aus dem eigenen Überschuss") {
+        const auto trade = [&](bool own_needs, Fixed west_imports_before) {
+            World x = w;
+            x.scenario.trade_own_needs = own_needs;
+            const std::size_t goods = x.goods.size();
+            x.location_supply.assign(x.location_supply.size(), Fixed::zero());
+            x.location_demand.assign(x.location_demand.size(), Fixed::zero());
+            x.location_supply[0 * goods + 0] = Fixed::from_int(500); // West: 100 übrig
+            x.location_demand[0 * goods + 0] = Fixed::from_int(400);
+            x.location_supply[1 * goods + 0] = Fixed::from_int(300); // Ost: 600 fehlen
+            x.location_demand[1 * goods + 0] = Fixed::from_int(900);
+            x.market_states[0].supply[0] = Fixed::from_int(1000); // Vormonat mit Einfuhr
+            x.market_states[0].demand[0] = Fixed::from_int(600);
+            x.market_states[0].price[0] = Fixed::one();
+            x.market_states[0].imports[0] = west_imports_before;
+            x.market_states[0].exports[0] = Fixed::zero();
+            x.market_states[1].supply[0] = Fixed::from_int(300);
+            x.market_states[1].demand[0] = Fixed::from_int(900);
+            x.market_states[1].price[0] = Fixed::from_int(2);
+            x.market_states[1].imports[0] = Fixed::zero();
+            x.market_states[1].exports[0] = Fixed::zero();
+            uhrwerk::update_markets(x, topology, {});
+            return x.market_states[0].exports[0];
+        };
+        // Ohne (1648): bis 4/5 der Nachfrage im Osten, auch was West selbst braucht.
+        CHECK(trade(false, Fixed::zero()) == capped);
+        // Mit: nur der eigene Überschuss des Monats … (bis auf die Rundung der Kürzung im Festkomma)
+        const auto near = [](Fixed a, Fixed b) { return a - b < fx("0.02") && b - a < fx("0.02"); };
+        CHECK(near(trade(true, Fixed::zero()), Fixed::from_int(100)));
+        // … plus die Einfuhr des Vormonats (Durchgangshandel).
+        CHECK(near(trade(true, Fixed::from_int(50)), Fixed::from_int(150)));
+    }
+
     SUBCASE("Eisenbahn: Bahnfracht ab dem Tag der Verbindung (seit M7)") {
         World rail = w;
         rail.rules.freight_rail = Fixed::from_ratio(1, 30);

@@ -18,9 +18,9 @@ staat SRU {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 9900
+        hofhaltung     = 7200
         heer           = 6
-        schulden       = 66000
+        schulden       = 47700
         zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch

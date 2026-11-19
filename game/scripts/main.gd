@@ -79,8 +79,8 @@ func _ready() -> void:
 	_map_labels.location_diameter = _map_view.location_diameter()
 	_map_labels.set_covering_controls([
 		_top_bar, _state_panel, _party_panel, _chronicle_panel, _location_panel, _legend, _mode_bar,
-		_election_night, _diplomacy_window, _play_bar, _army_panel, _war_window, _battle_reports,
-		_event_window, _journal_window, _area_bar, _yearbook_window, _overview, _ticker,
+		_election_night, _diplomacy_window, _play_bar, _army_panel, _war_window, _messages,
+		_event_window, _journal_window, _area_bar, _yearbook_window, _overview,
 	])
 	_update_place_labels()
 	_update_owners()
@@ -115,6 +115,12 @@ func _process(delta: float) -> void:
 		_place_tutorial()
 	if _sim == null or _speed == 0:
 		return
+	# Nach dem Nachspiel (seit M15a1) steht die Zeit; das Urteil kommt wieder, ohne Weiterspielen.
+	if is_epilogue_over():
+		_set_speed(0)
+		if not _verdict_window.is_open():
+			open_verdict()
+		return
 	_day_accumulator += delta * SPEED_DAYS_PER_SECOND[_speed]
 	var days := floori(_day_accumulator)
 	if days < 1:
@@ -133,6 +139,11 @@ func _process(delta: float) -> void:
 	_after_time_passed()
 	_maybe_autosave()
 func _unhandled_input(event: InputEvent) -> void:
+	# Vollbild (F11) überall, auch im Spielmenü und auf dem Startbildschirm.
+	if event.is_action_pressed(&"vollbild", false, true) and _settings != null:
+		_settings.toggle_fullscreen(get_tree())
+		get_viewport().set_input_as_handled()
+		return
 	if _handle_save_keys(event):
 		get_viewport().set_input_as_handled()
 		return
@@ -281,7 +292,7 @@ func _build_areas() -> void:
 	for entry: Array in [
 		[&"kabinett", CabinetWindow.new()], [&"gesetze", LawsWindow.new()], [&"gruppen", GroupsWindow.new()],
 		[&"parlament", ParliamentWindow.new()], [&"gesellschaft", SocietyWindow.new()],
-		[&"wirtschaft", EconomyWindow.new()], [&"chronik", ChronicleWindow.new()],
+		[&"wirtschaft", EconomyWindow.new()], [&"chronik", ChronicleWindow.new()], [&"bauen", BuildWindow.new()],
 	]:
 		var window: AreaWindow = entry[1]
 		root.add_child(window)
@@ -297,6 +308,14 @@ func _build_areas() -> void:
 	(_area_windows[&"chronik"] as ChronicleWindow).location_requested.connect(
 		func(location: int) -> void: _select_location(location, true)
 	)
+	# Bauen (seit M15b3): Landesteil auf der Karte zeigen, Meldung zum Auftrag in der oberen Leiste.
+	var build := _area_windows[&"bauen"] as BuildWindow
+	build.location_requested.connect(
+		func(location: int) -> void:
+			if location >= 0:
+				_select_location(location, true)
+	)
+	build.order_changed.connect(func(text: String) -> void: _top_bar.show_notice(text))
 	# Lexikon (seit M13a5d): Artikel aus data/lexikon.
 	_lexicon = Lexicon.load_dir(UhrwerkPaths.data_dir().path_join("lexikon"))
 	for problem in _lexicon.problems:
@@ -339,9 +358,18 @@ func _fit_mode_bar() -> void:
 		_mode_bar.set_rows(2)
 	var height := _mode_bar.get_combined_minimum_size().y
 	_mode_bar_area.offset_top = -12.0 - maxf(height, 52.0)
-	_place_ticker.call_deferred()
 	_place_diplomacy.call_deferred()
-	_place_reports.call_deferred()
+	_place_messages.call_deferred()
+
+
+## Fenster „Bauen“ auf einem Landesteil öffnen (seit M15b3; Kartenmodus Bauen, Tests).
+func open_build_region(region: int) -> void:
+	var window := _area_windows.get(&"bauen") as BuildWindow
+	if window == null or _sim == null:
+		return
+	if not window.is_open():
+		toggle_area_window(&"bauen")
+	window.show_region(region)
 
 
 ## Fenster eines Bereichs (Tests): kabinett, gesetze, gruppen, parlament, gesellschaft, wirtschaft.
@@ -424,6 +452,7 @@ func _scenario_areas() -> Dictionary:
 		&"parlament": not _sim.get_parliaments().is_empty(),
 		&"gesellschaft": true,
 		&"wirtschaft": true,
+		&"bauen": bool(_sim.get_building_info().get("active", false)) and _player >= 0,
 		&"jahrbuch": bool(_sim.get_legacy(_player).get("active", false)),
 	}
 	return _areas_cache
@@ -836,7 +865,9 @@ func _place_tutorial() -> void:
 ## Flächen, die die Geschichtsstunde nicht verdecken darf (auch für den Klicktest).
 func tutorial_occupied_rects() -> Array[Rect2]:
 	var result: Array[Rect2] = []
-	var controls: Array[Control] = [_area_bar, _windows.open_window(), _event_window, _newspaper_window, _play_bar]
+	var controls: Array[Control] = [
+		_area_bar, _windows.open_window(), _event_window, _newspaper_window, _play_bar, _messages
+	]
 	for column: Control in [_left_column, _right_column]:
 		for child in column.get_children():
 			if child is Control and (child as Control).name != &"Spacer":
@@ -900,6 +931,10 @@ func _offer_hint(key: String) -> void:
 
 ## Nach dem Laden eines Spielstands: „Was ist passiert?“ mit den wichtigsten Nachrichten des letzten Jahres.
 func _after_loading_save() -> void:
+	# Spielstand nach dem Nachspiel (seit M15a1, etwa aus einer Partie bis 1973): gleich das Urteil.
+	if is_epilogue_over():
+		open_verdict()
+		return
 	if _settings != null and not bool(_settings.get_value("spiel/rueckblick")):
 		return
 	if RecapWindow.collect(_sim, _player).is_empty():
@@ -1028,18 +1063,7 @@ func _build_bars() -> void:
 	_right_column.add_child(_overview)
 	_right_column.move_child(_overview, _location_panel.get_index() + 1)
 	_overview.entry_requested.connect(_on_overview_entry)
-	_ticker = TickerBar.new()
-	root.add_child(_ticker)
-	root.move_child(_ticker, _top_bar.get_index())
-	_ticker.location_requested.connect(func(location: int) -> void: _select_location(location, true))
-	_ticker.resized.connect(_place_ticker)
-	# Seit M14a1 nur mit Meldung sichtbar: Fenster und Schlachtberichte reichen sonst bis zu den Kartenmodi.
-	_ticker.visibility_changed.connect(
-		func() -> void:
-			_place_diplomacy.call_deferred()
-			_place_reports.call_deferred()
-	)
-	# Die Chronik ist über die Bereichsleiste erreichbar; der Ticker zeigt das Neueste.
+	# Die Chronik ist über die Bereichsleiste erreichbar; das Neueste zeigen die Meldekarten (seit M14a3).
 	_chronicle_panel.visible = false
 	_tooltips = TooltipLayer.new()
 	$UI.add_child(_tooltips)
@@ -1091,13 +1115,9 @@ func close_lexicon_window() -> void:
 	_sync_area_bar()
 
 
-## Rechte Übersicht, Ticker und Tooltips (Tests).
+## Rechte Übersicht und Tooltips (Tests).
 func overview_panel() -> OverviewPanel:
 	return _overview
-
-
-func ticker() -> TickerBar:
-	return _ticker
 
 
 func tooltip_layer() -> TooltipLayer:
@@ -1108,26 +1128,21 @@ func bar_tooltips() -> BarTooltips:
 	return _bar_tooltips
 
 
-## Untere Kante für Fenster: über dem Ticker (sonst über der Leiste der Kartenmodi).
+## Untere Kante für Fenster: über der Leiste der Kartenmodi (bis M14a3 über dem Ticker).
 func _bottom_of_map_area() -> float:
-	if _ticker != null and _ticker.visible:
-		return _ticker.position.y - 8.0
 	return _mode_bar_area.position.y - 8.0
 
 
-## Ticker über der Leiste der Kartenmodi, so breit wie der Platz zwischen den Spalten.
-func _place_ticker() -> void:
-	if _ticker == null:
-		return
-	var left := _map_area_left() + 4.0
-	var right := _right_column.get_global_rect().position.x - 12.0
-	var height := _ticker.get_combined_minimum_size().y
-	_ticker.size = Vector2(maxf(right - left, 100.0), height)
-	_ticker.position = Vector2(left, _mode_bar_area.get_global_rect().position.y - height - 4.0)
-	_place_diplomacy.call_deferred()
-
-
 ## Obere Leiste und rechte Übersicht höchstens zweimal je Sekunde.
+## Urteil „Wie geht es dem Volk?“ des laufenden Monats (Wellbeing.Level) und sein Monat.
+var _wellbeing_month := -1
+var _wellbeing_level := 0
+
+
+func wellbeing_level() -> int:
+	return _wellbeing_level
+
+
 func _refresh_bars(force: bool = false) -> void:
 	if _sim == null or _overview == null:
 		return
@@ -1135,7 +1150,17 @@ func _refresh_bars(force: bool = false) -> void:
 		return
 	_overview_filled_at = Time.get_ticks_msec()
 	var date := _sim.get_date()
-	_top_bar.begin_month(int(date.get("year", 0)) * 12 + int(date.get("month", 1)))
+	var month := int(date.get("year", 0)) * 12 + int(date.get("month", 1))
+	_top_bar.begin_month(month)
+	# Wie geht es dem Volk? (Rückmeldung 11/2026): das Symbol der Bevölkerung in der Farbe des Urteils,
+	# einmal je Monat (die Summen über alle Orte sind nicht umsonst).
+	if month != _wellbeing_month or force:
+		_wellbeing_month = month
+		var verdict := Wellbeing.assess(
+			_sim.get_state_society(_player), float(_sim.get_state_events(_player).get("unrest", 0.0))
+		)
+		_wellbeing_level = int(verdict["level"])
+		_top_bar.set_icon_ink(&"bevoelkerung", Wellbeing.color_of(_wellbeing_level))
 	_top_bar.show_overview(_sim.get_state_overview(_player), _sim.get_legacy(_player))
 	_update_area_badges()
 	if _player_current >= 0:

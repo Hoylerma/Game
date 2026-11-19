@@ -8,11 +8,52 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M15 – Bauen, Wirtschaft und Anleitung
+
+Vertrag: [technik/bauen_und_anleitung.md](docs/technik/bauen_und_anleitung.md), Entscheidungen 1–7 wie
+empfohlen freigegeben; zuerst M15, dann der zweite Teil von M14 (Europa).
+
+- **Bauen im Spiel (Schritt b3):** Neuer Bereich „Bauen“: Er zeigt zuerst die fünf besten Vorhaben mit
+  Kosten und dem, was sie im Jahr bringen, und baut sie mit einem Klick. Darunter das Bauamt mit den
+  laufenden Bauten und die Landesteile mit ihren Gebäuden. Neuer Kartenmodus „Bauen“ (Taste V): Grün ist,
+  wo sich Bauen lohnt; ein Klick auf einen eigenen Ort öffnet seinen Landesteil. Fertige Bauten melden
+  sich als Karte. Der eigene Staat baut jetzt selbst, der automatische Landesausbau entfällt für ihn.
+- **Die KI baut, Vorschläge (Schritt b2):** Für jedes mögliche Vorhaben rechnet das Spiel aus, was es
+  bringt – mehr Einkommen für die Leute, mehr Steuern, neue Arbeitsplätze – und was es kostet. Staaten ohne
+  Spieler bauen danach selbst, wenn sie Überschuss haben: bis 1871 vor allem Spinnereien und
+  Maschinenfabriken, dazu Volksschulen, Meliorationen und Chausseen; die Zahl der Fabrikarbeiter wächst
+  in Preußen auf gut das Doppelte. Neu sind Chaussee (billigere Fracht) und Bahnstrecke (geplante Strecken
+  fahren früher); Gebäude, die weniger bringen als ihr Unterhalt, verfallen. Neues Labor `uhrwerk-cli
+  bauen`.
+- **Bauen im Kern (Schritt b1):** Staaten können in ihren Landesteilen (Provinz, Kronland, sonst Kreis)
+  Gebäude in Auftrag geben: Mustergut, Melioration, Spinnerei, Maschinenfabrik, Zeche, Eisenhütte und
+  Volksschule, je bis Stufe 5. Kosten und Arbeitsplätze richten sich nach den Einwohnern des Landesteils,
+  bezahlt wird in Monatsraten. Fertige Gebäude steigern den Ertrag ihres Betriebs, Spinnereien und
+  Maschinenfabriken werben Landarme als Fabrikarbeiter an, Volksschulen heben die Alphabetisierung. Noch
+  ohne Oberfläche (folgt in b3) und ohne bauende KI (b2).
+- **Kein Dauerhunger mehr (Schritt a2):** Ab 1848 hungerte ein großer Teil der Unterschicht, und es wurde
+  mit den Jahren mehr – Preußen 1861 fast die Hälfte, Sachsen fast alle. Die Ursache war ein Fehler im
+  Handel: Märkte führten die Einfuhr des Vormonats gleich wieder aus und pendelten so jeden Monat
+  zwischen Ein- und Ausfuhr, und in den Ausfuhrmonaten fehlte den eigenen Leuten das Brot. Jetzt führt ein
+  Markt nur aus, was er übrig hat. Die Grundnahrung ist zu rund 98 % gedeckt, die Preise liegen nahe der
+  Basis, und der Balancing-Bericht prüft die Grundnahrung. Das Szenario 1648 rechnet unverändert. Weil
+  das Pendeln auch über die Zollgrenzen ging, bringt der Zoll jetzt weniger ein (rund 0,5 % statt 3 % der
+  Einnahmen).
+- **Nachspiel bis 1880 (Schritt a1):** Nach dem Urteil der Geschichte geht es als „Nachspiel bis 1880“
+  weiter – freies Spiel ohne Ereignisse, Journale und Ziele, eine Meldekarte sagt es. Am 1. Januar 1881
+  endet die Partie endgültig. Vorher lief die Zeit ohne Ende, und 1973 stand die Welt noch auf dem
+  Stand von 1871.
+
 ### Meilenstein M14 – Europa und Oberfläche
 
 Vertrag: [technik/europa_und_oberflaeche.md](docs/technik/europa_und_oberflaeche.md), Entscheidungen 1–8 wie
 empfohlen freigegeben; Stand je Schritt in Abschnitt 9 dort.
 
+- **Meldungen als Karten (Schritt a3):** Statt der Tickerzeile und der Schlachtberichte erscheinen
+  Meldungen als kleine Karten unten rechts über der Karte, mit einem Symbol für Krieg, Vertrag, Wahl,
+  Aufstand, Schlacht, Bund, Thron, Zollverein oder Wendepunkt. Ein Klick fährt den Ort an, × legt sie weg;
+  gewöhnliche Meldungen gehen nach 12 Sekunden, Wendepunkte und Krieg oder Frieden des eigenen Staates
+  bleiben liegen, bis man sie wegklickt. Höchstens drei Karten zugleich.
 - **Symbole (Schritt a2):** Eigene Symbole im Stil der Epoche ersetzen die Textknöpfe: Die Bereichsleiste
   zeigt Krone, Gesetzblatt, Halbrund, Waage, Säbel und mehr, mit Zählern für laufende Kriege und Krisen;
   die 18 Kartenmodi passen als eine Reihe Symbole in vier Gruppen unter die Karte. Die obere Leiste zeigt
@@ -23,6 +64,17 @@ empfohlen freigegeben; Stand je Schritt in Abschnitt 9 dort.
   schließt sie. Die Bereichsleiste sitzt am linken Rand, die Legende lässt sich einklappen, und der Ticker
   erscheint nur, wenn es etwas zu melden gibt. Ohne offenes Fenster bedecken die Leisten nur noch 13 %
   des Bildes; ein neuer Test hält das unter 20 %.
+
+### Zweite Rückmeldung aus dem Spiel (18.11.2026)
+
+- **Wie geht es meiner Bevölkerung?** Das Symbol der Bevölkerung in der oberen Leiste zeigt in Grün,
+  Gold oder Rot, wie es dem Volk geht. Sein Tooltip und das Fenster Gesellschaft sagen es in Worten
+  („Die Lage ist angespannt“), zeigen je Schicht Lebensstandard, Grundnahrung und Einkommen, nennen die
+  Gründe (Menschen in Not, kärgliche Unterschicht, Unruhe) und was hilft (Akzise oder Kontribution
+  senken), dazu die drei Orte, in denen man am schlechtesten lebt. Neue Lexikonartikel „Lebensstandard“
+  und „In Not“.
+- **F11 schaltet das Vollbild** ein und aus, überall im Spiel; die Einstellung bleibt gespeichert und die
+  Taste lässt sich unter Einstellungen, Tasten neu belegen.
 
 ### Erste Rückmeldung aus dem Spiel (18.11.2026)
 

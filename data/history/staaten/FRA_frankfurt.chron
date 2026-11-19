@@ -15,9 +15,9 @@ staat FRA {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 1100
+        hofhaltung     = 900
         heer           = 4
-        schulden       = 28000
+        schulden       = 23000
         zollunion      = zollverein
         verfassung     = staendisch
         wahlrecht      = staendisch

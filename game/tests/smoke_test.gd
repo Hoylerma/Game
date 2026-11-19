@@ -107,7 +107,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 const CHRONICLE_FIELDS: PackedStringArray = [
 	"date_text", "text", "location_index", "state_index", "turning_point"
 ]
@@ -341,6 +341,25 @@ func _check_area_data_1848(sim: SimulationClient) -> void:
 		and absi(ages - int(society.get("population", 0))) <= 4 and not (society.get("professions", []) as Array).is_empty(),
 		"Gesellschaft Preußens: %s Einwohner, %d Orte" % [Format.integer(int(society.get("population", 0))), int(society.get("locations", 0))],
 		"Gesellschaft Preußens: %s" % str(society).left(300)
+	)
+	# Wohlergehen je Schicht (Rückmeldung 11/2026): drei Schichten, zusammen alle Einwohner, Werte im Rahmen.
+	var strata: Array = society.get("strata", [])
+	var heads := 0
+	var sane := strata.size() == 3
+	for row: Dictionary in strata:
+		heads += int(row.get("people", 0))
+		var living := float(row.get("living_standard", -1.0))
+		var food := float(row.get("food_percent", -1.0))
+		sane = sane and living >= 0.0 and living <= 100.0 and food >= 0.0 and food <= 100.0 and int(row.get("hungry", -1)) >= 0
+	var verdict := Wellbeing.assess(society, 0.0)
+	_check(
+		sane and absi(heads - int(society.get("population", 0))) <= 4 and (society.get("worst_locations", []) as Array).size() == 3
+		and int(society.get("hungry", -1)) >= 0,
+		"Wohlergehen Preußens: %s; Unterschicht Lebensstandard %s, Grundnahrung %s, in Not %s" % [
+			str(verdict["title"]), Format.number(float(strata[0].get("living_standard", 0.0)), 1) if sane else "?",
+			Format.percent(float(strata[0].get("food_percent", 0.0)), 0) if sane else "?", Format.integer(int(society.get("hungry", 0))),
+		],
+		"Wohlergehen Preußens: %s" % str(strata).left(300)
 	)
 	var economy := sim.get_state_economy(prussia)
 	var goods: Array = economy.get("goods", [])

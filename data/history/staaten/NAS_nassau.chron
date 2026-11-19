@@ -18,9 +18,9 @@ staat NAS {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 56900
+        hofhaltung     = 42600
         heer           = 6
-        schulden       = 379000
+        schulden       = 283600
         zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch

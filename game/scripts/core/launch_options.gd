@@ -4,7 +4,7 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..17>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
+##   --kartenmodus=<0..18>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
 ##                          8 Wirtschaft, 9 Märkte, 10 Verwaltung, 11 Eisenbahnen, 12 Wahlen,
 ##                          13 Zollgebiete, 14 Beziehungen, 15 Krieg, 16 Unruhe, 17 Bund)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
@@ -34,7 +34,7 @@ extends RefCounted
 ##   --rauchtest            Paketrauchtest (seit M13b5): --tage rechnen ohne Ereignisspieler, Prüfsumme
 ##                          ausgeben und beenden; läuft auch ohne Grafikausgabe
 ##   --bereich=<bereich>    Fenster eines Bereichs öffnen: kabinett, gesetze, gruppen, parlament,
-##                          gesellschaft, wirtschaft (seit M13a5b), chronik, lexikon (seit M13a5d)
+##                          gesellschaft, wirtschaft (seit M13a5b), chronik, lexikon (seit M13a5d), bauen (M15b3)
 ##   --einstellungen[=<r>]  Fenster Einstellungen öffnen, Reiter bild, ton, spiel, zugang, tasten, sprache
 ##   --farbsehschwaeche     Farben für Rot-Grün-Schwäche, ohne die Einstellung zu speichern (seit M13a5d)
 ##   --startbildschirm[=<seite>]  Startbildschirm vor dem Screenshot öffnen, Seite menue (Standard),
@@ -50,7 +50,7 @@ const WAR_TABS: PackedStringArray = ["kriege", "heere"]
 const SETTINGS_TABS: PackedStringArray = ["bild", "ton", "spiel", "zugang", "tasten", "sprache"]
 ## Bereiche für --bereich (seit M13a5b).
 const AREAS: PackedStringArray = [
-	"kabinett", "gesetze", "gruppen", "parlament", "gesellschaft", "wirtschaft", "chronik", "lexikon"
+	"kabinett", "gesetze", "gruppen", "parlament", "gesellschaft", "wirtschaft", "chronik", "lexikon", "bauen"
 ]
 
 var screenshot_path := ""

@@ -18,9 +18,9 @@ staat HOH {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 2300
+        hofhaltung     = 1900
         heer           = 6
-        schulden       = 15000
+        schulden       = 12100
         zollunion      = zollverein
         verfassung     = keine
         wahlrecht      = keines

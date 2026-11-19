@@ -18,9 +18,9 @@ staat SSH {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 8000
+        hofhaltung     = 6100
         heer           = 6
-        schulden       = 53000
+        schulden       = 40200
         zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch

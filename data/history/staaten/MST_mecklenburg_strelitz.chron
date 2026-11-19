@@ -18,9 +18,9 @@ staat MST {
         kontribution       = 0.10
         akzise             = 0.05
         zoll               = 0.03
-        hofhaltung         = 14900
+        hofhaltung         = 13100
         heer               = 6
-        schulden           = 100000
+        schulden           = 87700
         zollunion          = keine
         verfassung         = staendisch
         wahlrecht          = staendisch

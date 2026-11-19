@@ -9,13 +9,19 @@
 # Kalibrierung fest. Der Zoll bleibt mit rund 3 % der Einnahmen unter dem historischen Anteil (eher
 # 10–20 % bei den Zollvereinsstaaten, Wissensstand ohne Quellen): Das Modell kennt nur den Handel
 # zwischen seinen Märkten und wenig Einfuhr von Kolonial- und englischen Fabrikwaren.
+#
+# Seit M15a2 (Handel nach Eigenbedarf, wirtschaft.md 4.1) fällt der Anteil auf rund 0,5 %: Bis dahin
+# pendelte der Handel zwischen den Märkten von Monat zu Monat hin und her (Einfuhr wurde im Folgemonat
+# wieder ausgeführt), und dieses Pendeln über die Zollgrenzen trug den größten Teil des Zolls. Was jetzt
+# über die Grenzen geht, deckt echten Mangel. Die Ziele sind nachgezogen; die eigentliche Zollbasis, die
+# Einfuhr vom Weltmarkt bis ins Binnenland, ist offen (bauen_und_anleitung.md 7).
 
 anteil zollverein {
-    zoll = { 0.015 0.06 }    # Zoll ÷ Einnahmen der Mitglieder ohne Wechsel
+    zoll = { 0.003 0.06 }    # Zoll ÷ Einnahmen der Mitglieder ohne Wechsel (bis M15a2 ab 0,015)
 }
 
 anteil steuerverein {
-    zoll = { 0.02 0.08 }
+    zoll = { 0.008 0.08 }    # bis M15a2 ab 0,02
 }
 
 # Hannover tritt bei (historisch 1854, mit Vorabanteil): Der Steuerverein löst sich auf, der Handel
@@ -25,7 +31,7 @@ wechsel hannover {
     staat       = HAN
     union       = zollverein
     grenzhandel = { 1.1 3 }
-    zoll        = { 0.4 0.95 }
+    zoll        = { 0.3 0.95 }   # bis M15a2 ab 0,4
 }
 
 # Mecklenburg-Schwerin tritt bei (historisch 1868): Handel mit Preußen und Lübeck wächst stark, die
@@ -34,6 +40,6 @@ wechsel hannover {
 wechsel mecklenburg {
     staat       = MSC
     union       = zollverein
-    grenzhandel = { 1.2 4 }
-    zoll        = { 0.25 0.9 }
+    grenzhandel = { 0.9 4 }      # bis M15a2 ab 1,2: Mecklenburg hat Getreide über, aber seine Nachbarn kaum Mangel
+    zoll        = { 0.1 0.9 }    # bis M15a2 ab 0,25
 }

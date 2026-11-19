@@ -264,6 +264,18 @@ Basispreis *B_g*.
    die Weitergabe eingeführter Ware an den nächsten Markt. Jeder Markt gibt höchstens 4/5 seines
    Angebots des Vormonats ab und nimmt höchstens 4/5 seiner Nachfrage auf; darüber werden alle seine
    Ströme anteilig gekürzt (Ausfuhr und Einfuhr eines Paars bleiben bitgenau gleich).
+
+   **Handel nach Eigenbedarf (seit M15a2, Szenariofeld `handel_eigenbedarf`):** Zusätzlich gibt ein Markt
+   je Monat höchstens `max(0, A_g − N_g) + Einfuhr_Vormonat` ab und nimmt höchstens
+   `max(0, N_g − A_g) + Ausfuhr_Vormonat` auf (lokale Mengen dieses Monats). Ohne diese Grenzen zählte ein
+   Markt die Einfuhr des Vormonats als Angebot und führte sie wieder aus, und ein Markt mit viel Ausfuhr
+   galt als teuer und zog Einfuhr an: Der Handel pendelte im Zweimonatstakt durch das ganze Netz der
+   Märkte, Preise lagen beim 1,3- bis 1,6-fachen der Basis, und in den Ausfuhrmonaten bekamen die eigenen
+   Leute zu wenig Grundnahrung (1848 in Preußen 22 % in Not, 1861 45 %; in Sachsen 89 %). Mit den
+   Grenzen deckt die Unterschicht ihre Grundnahrung zu rund 98 %, die Preise liegen nahe der Basis, und
+   der Handel zwischen den Märkten deckt echten Mangel (Getreide 1848 rund 10.000 statt 5,9 Mio. Scheffel
+   im Monat). 1648 rechnet ohne und bleibt bitgleich; der Balancing-Bericht prüft seither für 1848 die
+   Grundnahrung der Unterschicht (Abschnitt 7).
    Mit dem Weltmarkt (nur Hafenmärkte) gilt dieselbe Formel mit `fracht = seefracht`, Weltpreis
    `W_g × B_g` und unbegrenzter Menge auf der Weltseite (statt `min(…)` das eigene Angebot bzw. die
    eigene Nachfrage). Ausfuhr zählt zur Nachfrage des Herkunftsmarktes, Einfuhr zum Angebot des
@@ -404,6 +416,12 @@ jetzt etwa einer in anderthalb Jahren.
 `ausbau_o += bauten × fläche_o / Σ fläche`; die Tragfähigkeit steigt um
 `ausbau_max × A / (A + ausbau_halb)` mit `A = ausbau_o / fläche_o` (Reichstaler je km², sättigend,
 höchstens `ausbau_max` = 30 %). Vorbild: Meliorationen und Kolonisten der Peuplierungspolitik.
+
+**Seit M15b1/b2 (Bauen, [bauen_und_anleitung.md](bauen_und_anleitung.md)):** Mit `bauen = ja` kommen zu
+den Bauten die Raten der Bauaufträge und der Unterhalt der Gebäude. Staaten ohne Spieler bauen selbst
+(KI am Monatsersten) und haben keinen selbsttätigen Landesausbau mehr; nur was sie über eine halbe
+Jahreseinnahme hinaus im Schatz haben, geht wie oben in den Landesausbau. Der Spielerstaat baut seit
+M15b3 selbst (Fenster „Bauen“) und hat mit dem Bauen keinen selbsttätigen Landesausbau mehr.
 
 **Staatsnachfrage:** Hof, Verwaltung und Heer kaufen mit ihrem Betrag nach den Warenkörben „oben“,
 „mittel“ und „unten“, die Bauten wie die Verwaltung (Korb „mittel“; im Entwurf Holz und Waren je zur

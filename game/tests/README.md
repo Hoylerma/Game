@@ -244,7 +244,7 @@ Dazwischen prüft er:
     „Dem Generalstab übergeben“ wirkt am nächsten Tag („Selbst führen“); Esc hebt die Auswahl auf.
     Das Staatspanel zeigt das mobile Heer ohne Abrüstung im Krieg, „Krieg …“ öffnet das
     Kriegsfenster mit Kriegspunkten und Friedensangeboten samt Antwort Österreichs; im Reiter
-    „Heere“ wählt ein Klick die I. Armee; Esc schließt. Binnen 60 Tagen kommt ein Schlachtbericht;
+    „Heere“ wählt ein Klick die I. Armee; Esc schließt. Binnen 60 Tagen kommt ein Schlachtbericht (seit M14a3 als Meldekarte);
     „Krieg erklären …“ im Fenster „Diplomatie“ fragt mit Seiten nach, am nächsten Tag läuft ein Krieg
     mehr. Düppel als Dänemark: Verliert der Spielerstaat alle Orte, hält die Zeit an und ein Hinweis
     erscheint (Review M10).
@@ -287,9 +287,20 @@ Dazwischen prüft er:
     Bevölkerung, Heer, Vermächtnis) mit Symbol und Wert, die Tooltips von Unruhe, Bevölkerung und Heer,
     eine Leiste nicht breiter als das Bild; in Königgrätz den Zähler der Kriege am Bereich „Militär“.
 18. **Karte frei** (seit M14a1, europa_und_oberflaeche.md 5–6): Ohne offenes Fenster verdecken obere
-    Leiste, Bereichsleiste, Übersicht, Legende, Kartenmodi, Ticker und Krisenleiste höchstens 20 % des
-    Bildes (gemessen 13 %) (gemessen auf einem Raster von 8 Pixeln); die Staatsübersicht ist eine Schublade, die der
+    Leiste, Bereichsleiste, Übersicht, Legende, Kartenmodi und Krisenleiste höchstens 20 % des
+    Bildes (gemessen 13 %, seit M14a3 ohne Ticker 9 %) (gemessen auf einem Raster von 8 Pixeln); die Staatsübersicht ist eine Schublade, die der
     Bereich „Staat“ und das Wappen öffnen, Esc schließt und Haushalt mit öffnet.
+19. **Meldekarten** (seit M14a3, europa_und_oberflaeche.md 5): Ein Wendepunkt und ein Bündnis mit der
+    Hauptstadt als Ort erscheinen als zwei Karten unten rechts über der Karte (nicht unter der rechten
+    Spalte oder den Kartenmodi), mit Symbol und Kopf „Datum · Art“; ein Mausklick auf die Karte wählt die
+    Hauptstadt aus und legt die Karte weg; eine gewöhnliche Karte geht nach ihrer Zeit, der Wendepunkt
+    bleibt, bis × ihn weglegt. Der Einheitentest prüft Stapelgrenze, Art aus Anlass und Text und die
+    Symbole aller Arten.
+
+20. **Bauen** (seit M15b3, bauen_und_anleitung.md 3.1): Der Bereich „Bauen“ zeigt Vorschläge, Bauamt und
+    Landesteile; „Bauen“ am ersten Vorschlag legt am nächsten Tag einen Auftrag an, der im Bauamt mit
+    „Abbrechen“ steht und damit wieder verschwindet; ein Landesteil zeigt seine Gebäude mit Stufe und
+    „Zurück“; im Kartenmodus Bauen öffnet ein Klick auf die Hauptstadt ihren Landesteil.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
@@ -367,7 +378,9 @@ die Partie 1848–1871 je Staat vollständig über die Oberfläche durch, standa
 5. **Spielstände:** alle fünf Jahre speichern (Ordner `user://durchspiel_test`, danach gelöscht),
    laden und Prüfsumme und Datum vergleichen.
 6. **Ende:** Das Urteil der Geschichte öffnet sich von selbst und nennt das Vermächtnis. Die Chronik
-   lässt sich als HTML schreiben, „Weiterspielen“ schließt das Urteil.
+   lässt sich als HTML schreiben, „Weiterspielen“ schließt das Urteil. Seit M15a1 läuft danach das
+   Nachspiel bis zum 31. Dezember 1880; am 1. Januar 1881 steht die Zeit, und das Urteil kommt mit
+   gesperrtem Weiterspielen wieder (der Klicktest prüft Knopf „Nachspiel bis 1880“ und Meldekarte).
 
 Je Staat nennt die Ausgabe Enddatum, Laufzeit, beantwortete Ereignisse, Wahlabende, Zeitungen,
 geöffnete Fenster, Spielstände, Orte, den Ausgang der deutschen Frage und das Vermächtnis. Auf dem

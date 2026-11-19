@@ -9,7 +9,8 @@ extends SceneTree
 ## 3. Einmal im Jahr jedes Fenster der Bereichsleiste öffnen und wieder schließen.
 ## 4. Alle SPEICHER_JAHRE Jahre speichern, den Spielstand laden und die Prüfsumme vergleichen.
 ## 5. Am Ende: Das Urteil der Geschichte öffnet sich von selbst, die Chronik lässt sich als HTML
-##    schreiben, „Weiterspielen“ schließt das Urteil.
+##    schreiben, „Weiterspielen“ schließt das Urteil. Seit M15a1 läuft das Nachspiel bis zum 31. Dezember
+##    1880; am 1. Januar 1881 steht die Zeit, und das Urteil kommt ohne Weiterspielen wieder.
 ## Jeder Fehler der Oberfläche (SCRIPT ERROR im Protokoll) zählt in der CI als Fehlschlag; der Test
 ## selbst prüft die Abläufe oben.
 ##
@@ -126,6 +127,32 @@ func _play(tag: String) -> void:
 	await process_frame
 	if verdict.is_open():
 		_fail(tag, "„Weiterspielen“ schließt das Urteil nicht")
+	# Nachspiel (seit M15a1): bis zum 31. Dezember 1880, nicht darüber hinaus; dann steht die Zeit und das
+	# Urteil kommt ohne Weiterspielen wieder.
+	var guard := 0
+	while not bool(_main.call("is_epilogue_over")) and guard < 200:
+		var step := mini(int(_main.call("_days_through_end")), 365)
+		sim.advance_days(step)
+		_main.call("_after_time_passed")
+		_answer_events(tag)
+		var night_late: ElectionNight = _main.call("election_night")
+		if night_late.is_open():
+			_main.call("_close_election_night", false)
+		var paper_late: NewspaperWindow = _main.call("newspaper_window")
+		if paper_late.is_open():
+			_main.call("close_newspaper")
+		guard += 1
+	var after := sim.get_date()
+	_main.call("_set_speed", 1)
+	_main.call("_process", 0.5)
+	await process_frame
+	if int(after.get("year", 0)) != 1881 or int(after.get("month", 0)) != 1 or int(after.get("day", 0)) != 1:
+		_fail(tag, "Nachspiel endet nicht am 1. Januar 1881, sondern am %s" % sim.get_date_text())
+	elif not verdict.is_open() or not verdict.button("Continue").disabled or int(_main.get("_speed")) != 0:
+		_fail(tag, "Nach dem Nachspiel: Urteil offen %s, Weiterspielen gesperrt %s, Tempo %d" % [
+			verdict.is_open(), verdict.button("Continue").disabled, int(_main.get("_speed"))
+		])
+	_main.call("close_verdict")
 	var legacy := PackedStringArray()
 	for dimension: Variant in sim.get_legacy(player).get("dimensions", []):
 		var d := dimension as Dictionary

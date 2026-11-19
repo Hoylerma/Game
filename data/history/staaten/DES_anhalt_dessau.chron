@@ -46,9 +46,9 @@ staat DES {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 17800
+        hofhaltung     = 11200
         heer           = 6
-        schulden       = 119000
+        schulden       = 75100
         zollunion      = zollverein
         verfassung     = keine
         wahlrecht      = keines

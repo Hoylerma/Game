@@ -1,0 +1,123 @@
+# Gebäude (Meilenstein M15, Schritt b1; docs/technik/bauen_und_anleitung.md Abschnitt 3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.43. Gebaut wird in Landesteilen (oberste
+# Verwaltungseinheit, sonst Kreis); nur in Szenarien mit bauen = ja.
+#
+#   betrieb, ertrag    – Mehrertrag dieses Betriebs in den Orten des Landesteils je Stufe (Anteil)
+#   beruf, aus, plaetze – Arbeitsplätze je Stufe als Anteil der Einwohner; angeworben aus 'aus'
+#   ausbau             – Melioration: Landesausbau je Stufe in Talern je km² (Tragfähigkeit, wirtschaft.md 4.6)
+#   bildung            – Volksschule: Ziel der Alphabetisierung je Stufe (Punkte 0..1)
+#   fracht             – Chaussee: weniger Landfracht je Stufe in den Märkten des Landesteils (Anteil)
+#   bahn               – Bahnstrecke: geplante Strecken der Märkte fahren schon vor ihrer Eröffnung
+#   kosten             – Taler je 1.000 Einwohner des Landesteils und Stufe (bezahlt in Raten über die Bauzeit)
+#   bauzeit            – Monate; unterhalt – je Jahr als Anteil der Kosten; stufen – höchste Stufe
+#   ab                 – optional: erst ab diesem Tag zu bauen
+#
+# Größenordnung (spielwert, kalibriert in b2 mit uhrwerk-cli bauen): Preußen nimmt 1848 rund 750 Taler je
+# 1.000 Einwohner und Jahr ein. Die Kosten sind so gewählt, dass die besten Vorhaben zum Start im Jahr 0,4
+# bis 0,5 ihrer Kosten an Einkommen und Steuern bringen (der Staat allein holt sie in 10 bis 20 Jahren über
+# die Steuern wieder herein). Zeche und Eisenhütte lohnen erst, wenn Maschinenfabriken Kohle und Eisen
+# verteuern.
+
+bauregeln {
+    anwerbung     = 0.02   # je Monat höchstens 2 % des Quellberufs in passenden Orten
+    bauamt        = 3      # gleichzeitige Aufträge je Staat …
+    bauamt_je_mio = 0.5    # … plus einer je zwei Millionen Einwohner (Preußen 10, Sachsen 3)
+    # KI (seit b2): neue Raten zusammen höchstens dieser Anteil der Monatseinnahmen; nur Vorhaben, die im
+    # Jahr mindestens so viel einbringen (Einkommen, Steuern, abzüglich Unterhalt) je Taler Baukosten.
+    ki_anteil        = 0.25
+    ki_mindestnutzen = 0.2
+    verfall          = ja  # Stufen, die weniger als ihren Unterhalt bringen, verfallen am 1. Januar
+}
+
+gebaeude mustergut {
+    name      = "Mustergut"          # Fruchtwechsel, Drainage, Zuchtvieh; Vorbild für die Bauern ringsum
+    betrieb   = bauernhof
+    ertrag    = 0.02
+    kosten    = 400
+    bauzeit   = 12
+    unterhalt = 0.03
+    stufen    = 3
+}
+
+gebaeude melioration {
+    name      = "Melioration"        # Entwässerung, Moorkultur, Flussbegradigung
+    ausbau    = 20
+    kosten    = 250
+    bauzeit   = 24
+    unterhalt = 0.01
+    stufen    = 5
+}
+
+gebaeude spinnerei {
+    name      = "Spinnerei"          # mechanische Baumwoll- und Flachsspinnerei mit Wasserkraft
+    betrieb   = spinnerei
+    ertrag    = 0.10
+    beruf     = fabrikarbeiter
+    aus       = landarme
+    plaetze   = 0.005
+    kosten    = 300
+    bauzeit   = 18
+    unterhalt = 0.03
+    stufen    = 5
+}
+
+gebaeude maschinenfabrik {
+    name      = "Maschinenfabrik"    # Dampfmaschinen, Lokomotiven, Landmaschinen (Borsig 1837)
+    betrieb   = maschinenbau
+    ertrag    = 0.15
+    beruf     = fabrikarbeiter
+    aus       = landarme
+    plaetze   = 0.003
+    kosten    = 120
+    bauzeit   = 24
+    unterhalt = 0.03
+    stufen    = 5
+}
+
+gebaeude zeche {
+    name      = "Zeche"              # Tiefbau mit Dampfpumpen statt Stollen
+    betrieb   = zeche
+    ertrag    = 0.5
+    kosten    = 40
+    bauzeit   = 18
+    unterhalt = 0.03
+    stufen    = 5
+}
+
+gebaeude eisenhuette {
+    name      = "Eisenhütte"         # Kokshochofen und Puddelwerk statt Holzkohle
+    betrieb   = huette
+    ertrag    = 0.5
+    kosten    = 50
+    bauzeit   = 24
+    unterhalt = 0.03
+    stufen    = 5
+}
+
+gebaeude volksschule {
+    name      = "Volksschule"        # Schulhäuser und Lehrerseminare
+    bildung   = 0.03
+    kosten    = 60
+    bauzeit   = 12
+    unterhalt = 0.10                 # Lehrergehälter
+    stufen    = 5
+}
+
+gebaeude chaussee {
+    name      = "Chaussee"           # gepflasterte Kunststraße mit Meilensteinen und Chausseegeld
+    fracht    = 0.05                 # je Stufe 5 % weniger Landfracht im Mittel der Märkte
+    kosten    = 40
+    bauzeit   = 18
+    unterhalt = 0.03
+    stufen    = 5
+}
+
+gebaeude bahnstrecke {
+    name      = "Bahnstrecke"        # Staatsbahn oder Zinsgarantie für eine Privatbahn
+    bahn      = ja
+    kosten    = 300
+    bauzeit   = 36
+    unterhalt = 0.02
+    stufen    = 1
+}

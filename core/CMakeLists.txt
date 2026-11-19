@@ -24,6 +24,7 @@ add_library(uhrwerk_core STATIC
     src/war_lab.cpp
     src/event_lab.cpp
     src/ai_lab.cpp
+    src/buildings.cpp
     src/economy.cpp
     src/events.cpp
     src/lasttest.cpp

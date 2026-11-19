@@ -86,6 +86,16 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"set_game_settings",
 	&"get_state_society",
 	&"get_state_economy",
+	&"get_building_info",
+	&"get_regions",
+	&"get_region",
+	&"get_location_region_indices",
+	&"get_build_orders",
+	&"get_build_office",
+	&"get_build_proposals",
+	&"get_build_problem",
+	&"order_build",
+	&"cancel_build",
 	&"get_state_laws",
 	&"get_votes",
 	&"get_office_history",
@@ -684,7 +694,8 @@ func get_game_settings() -> Dictionary:
 
 ## Gesellschaft eines Staates (seit M13a5b): { population, locations, cities, children, young, working, old,
 ## living_standard, literacy_percent, confessions, cultures (Name → Prozent), balance_previous, professions:
-## je { name, stratum, people, percent } }.
+## je { name, stratum, people, percent }, strata: je Schicht { stratum, people, percent, living_standard,
+## coverage_percent, food_percent, income_year, hungry }, hungry, worst_locations (seit 11/2026) }.
 func get_state_society(state_index: int) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_state_society", state_index))
 
@@ -694,6 +705,66 @@ func get_state_society(state_index: int) -> Dictionary:
 ## taxes_month, customs_zone_name, customs_tariff_percent }.
 func get_state_economy(state_index: int) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_state_economy", state_index))
+
+
+# --- Bauen (seit M15b3, docs/technik/bauen_und_anleitung.md 3) ---------------------------------------
+
+## { active, types: je { index, id, name, business, yield, profession, recruit_from, jobs, development,
+## literacy, freight, rail, cost_per_1000, months, upkeep, max_level } }.
+func get_building_info() -> Dictionary:
+	return _as_dictionary(_native.call(&"get_building_info"))
+
+
+## Landesteile, an denen der Staat Orte hat (state_index < 0: alle): je { index, id, name, owner, population,
+## levels (Stufen zusammen), locations }.
+func get_regions(state_index: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_regions", state_index))
+
+
+## Ein Landesteil aus Sicht eines Staates: { index, name, owner, population, buildings: je { type, id, name,
+## level, max_level, months_left (-1 ohne Auftrag), problem ("" = baubar), proposal } }.
+func get_region(region_index: int, state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_region", region_index, state_index))
+
+
+## Landesteil je Ort (-1 für Orte ohne Daten).
+func get_location_region_indices() -> PackedInt32Array:
+	var result: Variant = _native.call(&"get_location_region_indices")
+	if result is PackedInt32Array:
+		return result
+	return PackedInt32Array()
+
+
+## Laufende Aufträge (state_index < 0: alle): je { state, region, region_name, type, type_name, months_left,
+## months_total, monthly_cost, level_after }.
+func get_build_orders(state_index: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_build_orders", state_index))
+
+
+## Bauamt eines Staates: { capacity, orders, monthly_rates, building_month (Posten Bauten des Vormonats),
+## levels (Stufen in seinen Landesteilen) }.
+func get_build_office(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_build_office", state_index))
+
+
+## Die besten Vorhaben: je { region, region_name, type, type_id, type_name, level, cost, months, jobs,
+## income_gain, tax_gain, upkeep, literacy, score }.
+func get_build_proposals(state_index: int, limit: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_build_proposals", state_index, limit))
+
+
+## Warum ein Auftrag nicht geht; "" wenn er geht.
+func get_build_problem(state_index: int, region_index: int, type_index: int) -> String:
+	return str(_native.call(&"get_build_problem", state_index, region_index, type_index))
+
+
+## Befehl für den nächsten Tag; false, wenn der Auftrag nicht geht.
+func order_build(state_index: int, region_index: int, type_index: int) -> bool:
+	return bool(_native.call(&"order_build", state_index, region_index, type_index))
+
+
+func cancel_build(state_index: int, region_index: int, type_index: int) -> bool:
+	return bool(_native.call(&"cancel_build", state_index, region_index, type_index))
 
 
 ## Gesetze eines Staates (seit M13a5b): je Gruppe { id, name, current, options: je { id, name, unrest,

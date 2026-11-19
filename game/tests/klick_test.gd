@@ -637,6 +637,16 @@ func _check_areas() -> void:
 			continue
 		if not window.window_text().contains(str(expected_text[area])):
 			_fail("Bereich %s ohne „%s“: %s" % [area, expected_text[area], window.window_text().left(200).replace("\n", " / ")])
+	await _check_build_window()
+	# Wie geht es dem Volk? (Rückmeldung 11/2026): Urteil und Schichten im Fenster Gesellschaft, das Symbol
+	# der Bevölkerung in der Farbe des Urteils.
+	var society_text := (_main.call("area_window", &"gesellschaft") as AreaWindow).window_text()
+	if not society_text.contains("WIE GEHT ES DEM VOLK?") or not society_text.contains("Unterschicht") or not society_text.contains("●"):
+		_fail("Gesellschaft ohne „Wie geht es dem Volk?“: %s" % society_text.left(300).replace("\n", " / "))
+	var top_bar: TopBar = _main.get("_top_bar")
+	var level := int(_main.call("wellbeing_level"))
+	if top_bar.icon_ink(&"bevoelkerung") != Wellbeing.color_of(level):
+		_fail("Symbol der Bevölkerung nicht in der Farbe des Urteils (%s)" % Wellbeing.TITLES[level])
 	var parliament: ParliamentWindow = _main.call("area_window", &"parlament")
 	bar.button(&"parlament").emit_signal("pressed")
 	await _frames(1)
@@ -685,6 +695,13 @@ func _check_settings_chronicle_lexicon() -> void:
 	if not yearbook.is_open():
 		_fail("Einstellungen: neue Taste G öffnet das Jahrbuch nicht")
 	_main.call("close_yearbook")
+	# F11 schaltet das Vollbild um (seit dem Spieltest 11/2026), auch bei offenem Fenster.
+	var full := bool(settings.get_value("bild/vollbild"))
+	await _key(KEY_F11)
+	var toggled := bool(settings.get_value("bild/vollbild")) != full
+	await _key(KEY_F11)
+	if not toggled or bool(settings.get_value("bild/vollbild")) != full:
+		_fail("F11 schaltet das Vollbild nicht um")
 	settings.reset_group("tasten")
 	settings.reset_group("spiel")
 	settings.apply(_main.get_tree())
@@ -759,7 +776,7 @@ func _check_bars() -> void:
 		var icon := metric.get_node_or_null("Icon") as TextureRect if metric != null else null
 		if metric == null or not metric.is_visible_in_tree() or icon == null or icon.texture == null or top.field_text(key) == "–":
 			_fail("Obere Leiste: Kennzahl %s ohne Symbol oder Wert („%s“)" % [key, top.field_text(key)])
-	for pair: Array in [[&"unruhe", texts_source.unrest, "Ziel"], [&"bevoelkerung", texts_source.population, "Einwohner"], [&"heer", texts_source.army, "Kosten"]]:
+	for pair: Array in [[&"unruhe", texts_source.unrest, "Ziel"], [&"bevoelkerung", texts_source.population, "Je Schicht"], [&"heer", texts_source.army, "Kosten"]]:
 		layer.show_for(top.field(pair[0]), pair[1])
 		if not layer.text_of(0).contains(str(pair[2])):
 			_fail("Tooltip %s: „%s“" % [pair[0], layer.text_of(0).replace("\n", " / ")])
@@ -780,13 +797,136 @@ func _check_bars() -> void:
 		if windows.open_window() != _main.call("journal_window"):
 			_fail("Übersicht: Klick auf das Journal öffnet es nicht")
 		_main.call("close_journal")
-	var ticker: TickerBar = _main.call("ticker")
-	ticker.push([{"date_text": "01.01.1849", "text": "Probe für den Ticker", "turning_point": true, "location_index": -1}] as Array[Dictionary])
-	await _frames(1)
+	await _check_message_cards()
 	await _check_settings_chronicle_lexicon()
 	print("  Leisten: Kasse %s, Vermächtnis %s; Übersicht %d Einträge; Tooltips verschachtelt" % [
 		top.field_text(&"kasse"), top.field_text(&"vermaechtnis"), texts.size()
 	])
+
+
+## Schlachtbericht unter den Meldekarten (Titel „Sieg/Niederlage bei …“)?
+func _has_battle_report(stack: MessageStack) -> bool:
+	for i in stack.card_count():
+		var title := stack.card(i).find_child("Title", true, false) as Label
+		if stack.kind_of(i) == &"schlacht" and title != null and title.visible:
+			return true
+	return false
+
+
+## Meldekarten (seit M14a3, europa_und_oberflaeche.md 5): unten rechts über der Karte, nicht unter der
+## rechten Spalte oder den Kartenmodi; Symbol und Kopf; Klick fährt den Ort an und legt die Karte weg;
+## Wendepunkte bleiben, gewöhnliche gehen von selbst; × legt weg.
+func _check_message_cards() -> void:
+	var stack: MessageStack = _main.call("messages")
+	var sim: SimulationClient = _main.call("simulation")
+	stack.clear()
+	var capital := int(sim.get_state(int(_main.get("_player"))).get("capital_index", 0))
+	stack.push([
+		{"date_text": "01.01.1849", "text": "Probe: Wendepunkt", "turning_point": true, "location_index": -1},
+		{"date_text": "01.01.1849", "text": "Probe: Hannover und Kurhessen schließen ein Bündnis.", "location_index": capital},
+	] as Array[Dictionary])
+	await _frames(2)
+	var rect := stack.get_global_rect()
+	var right_column := (_main.get("_right_column") as Control).get_global_rect()
+	var modes := (_main.get("_mode_bar_area") as Control).get_global_rect()
+	if not stack.visible or stack.card_count() != 2:
+		_fail("Meldekarten: zwei Karten erwartet, %d sichtbar %s" % [stack.card_count(), stack.visible])
+	elif rect.end.x > right_column.position.x or rect.end.y > modes.position.y or rect.size.x < MessageStack.MIN_WIDTH:
+		_fail("Meldekarten liegen nicht über der Karte: %s (rechte Spalte %s, Kartenmodi %s)" % [rect, right_column, modes])
+	var icon := stack.card(0).find_child("Icon", true, false) as TextureRect
+	if icon == null or icon.texture == null or stack.kind_of(0) != &"wendepunkt" or stack.kind_of(1) != &"vertrag":
+		_fail("Meldekarten ohne Symbol oder mit falscher Art (%s, %s)" % [stack.kind_of(0), stack.kind_of(1)])
+	if not stack.cards_text().contains("01.01.1849 · " + TranslationServer.translate("Wendepunkt")):
+		_fail("Meldekarte ohne Kopf: %s" % stack.cards_text())
+	# Klick auf die Karte mit Ort: Ort ausgewählt, Karte weg.
+	var body := stack.card(1).find_child("Body", true, false) as Control
+	await _click(body.get_global_rect().get_center())
+	await _frames(1)
+	if int(_main.call("selected_location")) != capital or stack.card_count() != 1:
+		_fail("Klick auf die Meldekarte: Ort %d statt %d, %d Karten" % [
+			int(_main.call("selected_location")), capital, stack.card_count()
+		])
+	# Gewöhnliche Karten gehen von selbst, der Wendepunkt bleibt; × legt ihn weg.
+	stack.push([{"date_text": "02.01.1849", "text": "Probe: gewöhnlich", "location_index": -1}] as Array[Dictionary])
+	stack.age(MessageStack.SHOW_SECONDS + 1.0)
+	if stack.card_count() != 1 or stack.kind_of(0) != &"wendepunkt":
+		_fail("Meldekarten: gewöhnliche Karte bleibt oder Wendepunkt geht (%d)" % stack.card_count())
+	(stack.card(0).find_child("Close", true, false) as Button).pressed.emit()
+	await _frames(1)
+	if stack.card_count() != 0 or stack.visible:
+		_fail("× legt die Meldekarte nicht weg")
+	_main.call("select_location", -1)
+	print("  Meldekarten: Stapel %s, Klick fährt den Ort an, Wendepunkt bleibt" % rect)
+
+
+## Bauen (seit M15b3, bauen_und_anleitung.md 3.1): Fenster mit Vorschlägen, Bauamt und Landesteilen; ein
+## Vorschlag wird zum Auftrag (am nächsten Tag), „Abbrechen“ nimmt ihn zurück; ein Landesteil zeigt seine
+## Gebäude; im Kartenmodus Bauen öffnet ein Klick auf einen eigenen Ort seinen Landesteil.
+func _check_build_window() -> void:
+	var bar: AreaBar = _main.call("area_bar")
+	var sim: SimulationClient = _main.call("simulation")
+	var player := int(_main.get("_player"))
+	if not bar.visible_areas().has("bauen"):
+		_fail("Bereichsleiste ohne „Bauen“")
+		return
+	bar.button(&"bauen").emit_signal("pressed")
+	await _frames(2)
+	var window := _main.call("area_window", &"bauen") as BuildWindow
+	var text := window.window_text() if window != null else ""
+	if window == null or not window.is_open() or not text.contains("VORSCHLÄGE") or not text.contains("BAUAMT") or not text.contains("LANDESTEILE"):
+		_fail("Fenster Bauen ohne Vorschläge, Bauamt oder Landesteile: %s" % text.left(200).replace("\n", " / "))
+		return
+	var proposals := sim.get_build_proposals(player, 1)
+	if proposals.is_empty():
+		_fail("Bauen: kein Vorschlag für den Spielerstaat")
+		return
+	var region := int(proposals[0].get("region", -1))
+	var type := int(proposals[0].get("type", -1))
+	var build := window.find_child("Build_%d_%d" % [region, type], true, false) as Button
+	if build == null:
+		_fail("Bauen: Knopf zum ersten Vorschlag fehlt")
+		return
+	build.pressed.emit()
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	window.refresh(true)
+	await _frames(1)
+	if sim.get_build_orders(player).size() != 1 or window.find_child("Cancel_%d_%d" % [region, type], true, false) == null:
+		_fail("Bauen: Auftrag nicht angelegt oder nicht im Bauamt (%d Aufträge)" % sim.get_build_orders(player).size())
+	else:
+		(window.find_child("Cancel_%d_%d" % [region, type], true, false) as Button).pressed.emit()
+		sim.advance_days(1)
+		_main.call("_after_time_passed")
+		if not sim.get_build_orders(player).is_empty():
+			_fail("Bauen: „Abbrechen“ nimmt den Auftrag nicht zurück")
+	# Ein Landesteil mit seinen Gebäuden, „Zurück“ zur Übersicht.
+	window.refresh(true)
+	var region_button := window.find_child("Region_%d" % region, true, false) as Button
+	if region_button == null:
+		_fail("Bauen: Landesteil %d fehlt in der Liste" % region)
+	else:
+		region_button.pressed.emit()
+		await _frames(1)
+		if window.shown_region() != region or not window.window_text().contains("Stufe") or window.find_child("Back", true, false) == null:
+			_fail("Bauen: Landesteil zeigt keine Gebäude")
+		(window.find_child("Back", true, false) as Button).pressed.emit()
+		await _frames(1)
+	# Kartenmodus Bauen: Klick auf die Hauptstadt öffnet ihren Landesteil.
+	window.close()
+	_main.call("set_map_mode", MapModes.MAP_BAUEN)
+	await _frames(1)
+	var capital := int(sim.get_state(player).get("capital_index", -1))
+	_main.call("_on_location_clicked", capital)
+	await _frames(1)
+	var expected := sim.get_location_region_indices()[capital]
+	if not window.is_open() or window.shown_region() != expected:
+		_fail("Kartenmodus Bauen: Klick öffnet den Landesteil nicht (%d statt %d)" % [window.shown_region(), expected])
+	window.show_region(-1)
+	window.close()
+	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
+	_main.call("select_location", -1)
+	await _frames(1)
+	print("  Bauen: Vorschlag zum Auftrag und zurück, Landesteil, Kartenmodus Bauen")
 
 
 ## Urteil der Geschichte (seit M13a4) in der Partie ab 1848: Inhalt, Export der Chronik, Weiterspielen,
@@ -807,10 +947,19 @@ func _check_verdict() -> void:
 		if not html.contains("<h2>Chronik</h2>") or not html.contains("Vermächtnis"):
 			_fail("Urteil: exportierte Chronik ohne Chronik oder Vermächtnis")
 		DirAccess.remove_absolute(path)
-	window.button("Continue").emit_signal("pressed")
+	# Nachspiel (seit M15a1): Der Knopf heißt „Nachspiel bis 1880“, eine Meldekarte bleibt liegen.
+	var continue_button := window.button("Continue")
+	if continue_button.text != "Nachspiel bis 1880" or continue_button.disabled or str(_main.call("epilogue_end_text")) != "31. Dezember 1880":
+		_fail("Urteil: Knopf „%s“ statt „Nachspiel bis 1880“ (%s)" % [continue_button.text, _main.call("epilogue_end_text")])
+	var stack: MessageStack = _main.call("messages")
+	stack.clear()
+	continue_button.emit_signal("pressed")
 	await _frames(1)
 	if window.is_open():
 		_fail("Urteil: „Weiterspielen“ schließt es nicht")
+	if stack.card_count() != 1 or not stack.is_sticky(0) or not stack.cards_text().contains("Nachspiel bis zum 31. Dezember 1880"):
+		_fail("Nachspiel ohne Meldekarte: %s" % stack.cards_text())
+	stack.clear()
 	_main.call("open_verdict")
 	window.button("Menu").emit_signal("pressed")
 	await _frames(1)
@@ -983,7 +1132,7 @@ func _ui_coverage() -> float:
 	var screen := root.get_visible_rect()
 	var controls: Array[Control] = [
 		_main.get("_top_bar"), _main.call("area_bar"), _main.get("_left_column"), _main.get("_mode_bar"),
-		_main.call("ticker"), _main.get("_play_bar"),
+		_main.get("_play_bar"),
 	]
 	for child in (_main.get("_right_column") as Control).get_children():
 		if child is Control and (child as Control).name != &"Spacer":
@@ -1344,14 +1493,15 @@ func _check_war_ui(menu: GameMenu) -> void:
 		_fail("Escape schließt das Kriegsfenster nicht")
 	_main.call("select_army", -1)
 	# Schlachtbericht: Tage bis zur ersten Schlacht mit einem preußischen Heer.
-	var reports: BattleReports = _main.call("battle_reports")
+	var reports: MessageStack = _main.call("messages")
+	reports.clear()
 	var days := 0
-	while reports.report_count() == 0 and days < 60:
+	while not _has_battle_report(reports) and days < 60:
 		sim.advance_days(1)
 		_main.call("_after_time_passed")
 		days += 1
-	var report := reports.reports_text()
-	if reports.report_count() == 0 or not report.contains(" bei ") or not report.contains("Schlacht bei"):
+	var report := reports.cards_text()
+	if not _has_battle_report(reports) or not report.contains(" bei ") or not report.contains("Schlacht bei"):
 		_fail("Kein Schlachtbericht in %d Tagen („%s“)" % [days, report])
 	# Kriegserklärung aus dem Fenster „Diplomatie“: Rückfrage mit Seiten und Ziel, Krieg am nächsten Tag.
 	var enemy := -1

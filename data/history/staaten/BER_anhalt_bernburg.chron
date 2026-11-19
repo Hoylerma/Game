@@ -46,9 +46,9 @@ staat BER {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 7400
+        hofhaltung     = 5600
         heer           = 6
-        schulden       = 49000
+        schulden       = 37200
         zollunion      = zollverein
         verfassung     = keine
         wahlrecht      = keines

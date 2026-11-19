@@ -1,5 +1,6 @@
 #include "uhrwerk/economy.hpp"
 
+#include "uhrwerk/buildings.hpp"
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/events.hpp"
@@ -479,12 +480,28 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
     const Fixed income = budget.income();
     budget.diplomacy = envoy_costs(world, state_index, income);
 
-    // Bauten: Überschuss über der Rücklage, nur ohne Schulden.
+    // Bauten: Überschuss über der Rücklage, nur ohne Schulden. Seit M15b1 kommen die Raten der Bauaufträge
+    // und der Unterhalt der Gebäude hinzu; den selbsttätigen Landesausbau ersetzen Melioration und Mustergut
+    // für die KI mit M15b2 und für den Spieler mit der Oberfläche in M15b3.
     const Fixed available = state.treasury + income - budget.court - budget.administration - budget.army -
                             budget.interest - budget.diplomacy;
     const Fixed reserve = rules.reserve_years * (budget.court + budget.administration + budget.army) * twelve;
-    if (state.debt <= Fixed::zero() && available > reserve) {
-        budget.building = (available - reserve) * rules.building_share;
+    Fixed automatic;
+    const bool ai_builds = world.building_rules.active && state_index != world.event_player; // seit M15b2
+    // Seit M15b3 baut auch der Spieler selbst (Fenster „Bauen“): Mit dem Bauen gibt es für ihn keinen
+    // selbsttätigen Landesausbau mehr.
+    if (!world.building_rules.active && state.debt <= Fixed::zero() && available > reserve) {
+        automatic = (available - reserve) * rules.building_share;
+    }
+    // Die KI baut selbst (seit M15b2); was sie über eine halbe Jahreseinnahme hinaus im Schatz hat, geht wie
+    // bisher in den Landesausbau, damit kein Staat Geld hortet, das sein Bauamt nicht verbauen kann.
+    const Fixed hoard = state.yearly_income / Fixed::from_int(2);
+    if (ai_builds && state.debt <= Fixed::zero() && state.treasury > hoard) {
+        automatic = (state.treasury - hoard) * rules.building_share;
+    }
+    budget.building = automatic;
+    if (world.building_rules.active) {
+        budget.building += run_buildings(world, state_index); // Raten der Bauaufträge und Unterhalt
     }
 
     // Kasse, Kredit und Tilgung.
@@ -498,16 +515,16 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
         state.treasury -= repay;
     }
 
-    // Landesausbau: die Bauten verteilen sich nach Fläche auf die Orte des Staates.
-    if (budget.building > Fixed::zero()) {
+    // Landesausbau: die Bauten verteilen sich nach Fläche auf die Orte des Staates (nur der selbsttätige
+    // Teil; Gebäude wirken über ihre Stufen).
+    if (automatic > Fixed::zero()) {
         Fixed area;
         for (const Index li : locations) {
             area += world.locations[at(li)].area_km2;
         }
         if (area > Fixed::zero() && world.location_development.size() == world.locations.size()) {
             for (const Index li : locations) {
-                world.location_development[at(li)] +=
-                    budget.building * world.locations[at(li)].area_km2 / area;
+                world.location_development[at(li)] += automatic * world.locations[at(li)].area_km2 / area;
             }
         }
     }
@@ -639,7 +656,17 @@ void update_markets(World& world, const EconomyTopology& topology, const std::ve
             }
             const MarketState& sa = world.market_states[a];
             const MarketState& sb = world.market_states[b];
-            const Fixed freight = link.freight_on(world.date); // Bahnfracht ab der Verbindung (seit M7)
+            Fixed freight = link.freight_on(world.date); // Bahnfracht ab der Verbindung (seit M7)
+            // Bauen (seit M15b2): Bahnstrecke eröffnet geplante Strecken früher, Chaussee senkt die
+            // Landfracht.
+            if (!world.market_road.empty()) {
+                if (link.rail_from && world.date < *link.rail_from &&
+                    (world.market_rail[a] != 0 || world.market_rail[b] != 0)) {
+                    freight = link.rail_freight;
+                }
+                freight =
+                    freight * (one - (world.market_road[a] + world.market_road[b]) / Fixed::from_int(2));
+            }
             // Zoll wie zusätzliche Fracht (seit M9): Tarif des Gebiets, in dem gekauft wird.
             const Fixed into_b = customs ? customs_tariff(&sa, sb, tariffs) : Fixed{};
             const Fixed into_a = customs ? customs_tariff(&sb, sa, tariffs) : Fixed{};
@@ -716,17 +743,41 @@ void update_markets(World& world, const EconomyTopology& topology, const std::ve
     if (flows_out != nullptr) {
         flows_out->clear();
     }
+    // Handel nach Eigenbedarf (seit M15a2, nur mit trade_own_needs): Ausfuhr höchstens eigener Überschuss des
+    // Monats plus Einfuhr des Vormonats (Durchgangshandel), Einfuhr höchstens eigener Mangel plus Ausfuhr des
+    // Vormonats. Ohne diese Grenzen zählte ein Markt die Einfuhr des Vormonats als Angebot und führte sie
+    // wieder aus, und wer viel ausführte, galt als teuer und zog Einfuhr an: Der Handel schwang von Monat
+    // zu Monat hin und her, und die eigenen Leute bekamen in den Ausfuhrmonaten zu wenig.
+    const bool own_needs = world.scenario.trade_own_needs;
+    const auto out_limit = [&](std::size_t m, std::size_t g) {
+        const MarketState& state = world.market_states[m];
+        Fixed limit = kTradeCap * state.supply[g];
+        if (own_needs) {
+            const std::size_t k = m * goods + g;
+            const Fixed surplus = Fixed::max(Fixed::zero(), local_supply[k] - local_demand[k]);
+            limit = Fixed::min(limit, surplus + state.imports[g]);
+        }
+        return limit;
+    };
+    const auto in_limit = [&](std::size_t m, std::size_t g) {
+        const MarketState& state = world.market_states[m];
+        Fixed limit = kTradeCap * state.demand[g];
+        if (own_needs) {
+            const std::size_t k = m * goods + g;
+            const Fixed shortage = Fixed::max(Fixed::zero(), local_demand[k] - local_supply[k]);
+            limit = Fixed::min(limit, shortage + state.exports[g]);
+        }
+        return limit;
+    };
     for (const Flow& f : flows) {
         Fixed factor = one;
         if (f.from != kNone) {
             const std::size_t k = at(f.from) * goods + f.good;
-            factor = Fixed::min(
-                factor, scale(out_total[k], kTradeCap * world.market_states[at(f.from)].supply[f.good]));
+            factor = Fixed::min(factor, scale(out_total[k], out_limit(at(f.from), f.good)));
         }
         if (f.to != kNone) {
             const std::size_t k = at(f.to) * goods + f.good;
-            factor = Fixed::min(factor,
-                                scale(in_total[k], kTradeCap * world.market_states[at(f.to)].demand[f.good]));
+            factor = Fixed::min(factor, scale(in_total[k], in_limit(at(f.to), f.good)));
         }
         const Fixed amount = f.amount * factor;
         if (f.from != kNone) {
@@ -899,6 +950,10 @@ void run_location_economy(World& world, const EconomyTopology& topology, Index l
                     supplied = Fixed::min(supplied, market.buy_ratio[at(input.good)]);
                 }
                 Fixed unit = share * terrain_yield * factors.condition * supplied;
+                // Gebäude im Landesteil (seit M15b1): Mehrertrag dieses Betriebs.
+                if (!world.building_yield.empty()) {
+                    unit = unit * (one + world.building_yield[li * businesses + at(b)]);
+                }
                 if (business.agrarian) {
                     unit = unit * agrarian_factor;
                 }

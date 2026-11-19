@@ -26,6 +26,7 @@ const ACTIONS: Array[Array] = [
 	["kartenmodus_politisch", "Kartenmodus Politisch"], ["kartenmodus_wahlen", "Kartenmodus Wahlen"],
 	["kartenmodus_krieg", "Kartenmodus Krieg"], ["kartenmodus_bund", "Kartenmodus Bund"],
 	["spielmenue", "Spielmenü"], ["schnellspeichern", "Schnellspeichern"], ["schnellladen", "Schnellladen"],
+	["vollbild", "Vollbild ein/aus"],
 ]
 const AUTOSAVE := ["aus", "jaehrlich", "halbjaehrlich"]
 const FPS_LIMITS: PackedInt32Array = [0, 30, 60, 120]
@@ -95,6 +96,13 @@ func reset_group(group: String) -> void:
 	if group == "tasten":
 		_keys.clear()
 		changed.emit("tasten/")
+
+
+## Vollbild umschalten (Taste F11, seit dem Spieltest 11/2026), anwenden und speichern.
+func toggle_fullscreen(tree: SceneTree) -> void:
+	set_value("bild/vollbild", not bool(get_value("bild/vollbild")))
+	apply(tree)
+	save_file()
 
 
 ## Pausenregel an? (Schlüssel aus PAUSE_RULES, z. B. "pause_krieg").

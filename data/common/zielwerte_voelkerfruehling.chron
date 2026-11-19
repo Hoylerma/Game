@@ -35,8 +35,11 @@ preise {
         bereich = { 0.4 5 } # Basispreis gilt am Weltmarkt; im Binnenland kommt die Fracht hinzu
     }
     ausnahme salz {
-        bereich = { 0.4 4 } # Salinen liegen an wenigen Orten; das Salzregal hielt die Preise im
-                            # Binnenland hoch (Abgabe, Fracht)
+        bereich = { 0.25 4 } # Salinen liegen an wenigen Orten; das Salzregal hielt die Preise im
+                             # Binnenland hoch (Abgabe, Fracht). Seit M15a2 (Handel nach Eigenbedarf)
+                             # sinkt der Preis ab etwa 1860 in den Salzgegenden (Halle, Thüringen,
+                             # Württemberg) bis 0,3: Sie führen nur aus, was die Nachbarn brauchen
+                             # (bis M15a2 ab 0,4; historisch fiel der Salzpreis nach 1850)
     }
     ausnahme wein {
         bereich = { 0.4 4 } # nur in den Weinbaugebieten erzeugt; im Norden ein Gut der Oberschicht
@@ -64,4 +67,10 @@ lebensstandard {
     unten  = { 25 55 }
     mittel = { 45 75 }
     oben   = { 70 95 }
+}
+
+grundnahrung {
+    # Seit M15a2 (bauen_und_anleitung.md 7): Deckung der Grundnahrung in Prozent, Median über alle Jahre
+    # und Läufe. Hungerjahre dürfen darunter liegen, ein dauerndes Hungern bis 1871 nicht.
+    unten  = { 90 100 }
 }

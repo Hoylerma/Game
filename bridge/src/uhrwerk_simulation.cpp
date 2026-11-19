@@ -1,6 +1,7 @@
 #include "uhrwerk_simulation.h"
 
 #include "uhrwerk/ai.hpp"
+#include "uhrwerk/buildings.hpp"
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/diplomacy.hpp"
@@ -14,6 +15,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <filesystem>
@@ -96,7 +98,12 @@ constexpr double kCustomsAlone = 0.62;             // Zollgebiete (seit M9): Sta
 const Color kRelationNeutral(0.94f, 0.91f, 0.83f); // Beziehungen (seit M9, b3): 0 …
 const Color kRelationFriend(0.24f, 0.52f, 0.30f);  // … +100 und mehr
 const Color kRelationFoe(0.70f, 0.16f, 0.10f);     // … −100 und weniger
-const Color kRevoltColor(0.42f, 0.16f, 0.48f);     // Unruhe (seit M11, b4): Staat mit Aufstand
+const Color kRevoltColor(0.42f, 0.16f, 0.48f);
+const Color kBuildLow(0.94f, 0.91f, 0.83f);     // Bauen (seit M15b3): Landesteil ohne lohnendes Vorhaben …
+const Color kBuildHigh(0.24f, 0.52f, 0.30f);    // … Nutzen ab kBuildMax je Taler im Jahr
+const Color kBuildRunning(0.80f, 0.62f, 0.22f); // … ein Bau läuft
+const Color kBuildForeign(0.88f, 0.86f, 0.80f); // … Landesteil eines anderen Staates
+constexpr double kBuildMax = 0.5;               // Unruhe (seit M11, b4): Staat mit Aufstand
 constexpr double kRelationScale = 100.0;
 constexpr double kWarNeutral =
     0.6; // Krieg (seit M10, b3): Staaten ohne Krieg blass           // volle Farbe ab diesem Betrag
@@ -1226,7 +1233,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_BUND, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_BAUEN, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -1237,7 +1244,24 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     const std::int64_t parliament = mode == MAP_WAHLEN ? get_shown_parliament() : -1;
     const uhrwerk::ElectionResult* election = parliament >= 0 ? latest_election(parliament) : nullptr;
     // Beziehungen (seit M9, b3): zum Spielerstaat.
-    const std::int64_t player = mode == MAP_BEZIEHUNGEN ? get_player_state_index() : -1;
+    const std::int64_t player = mode == MAP_BEZIEHUNGEN || mode == MAP_BAUEN ? get_player_state_index() : -1;
+    // Bauen (seit M15b3): bester Nutzen je Landesteil des Spielerstaates, laufende Bauten.
+    std::vector<double> region_score;
+    std::vector<std::uint8_t> region_running;
+    if (mode == MAP_BAUEN && w->building_rules.active && player >= 0) {
+        region_score.assign(w->regions.size(), -1.0);
+        region_running.assign(w->regions.size(), 0);
+        for (const uhrwerk::BuildProposal& p : uhrwerk::build_proposals(
+                 *w, static_cast<uhrwerk::Index>(player), w->regions.size() * w->building_types.size())) {
+            double& best = region_score[static_cast<std::size_t>(p.region)];
+            best = std::max(best, p.score.to_double());
+        }
+        for (const uhrwerk::BuildOrder& o : w->build_orders) {
+            if (o.state == player) {
+                region_running[static_cast<std::size_t>(o.region)] = 1;
+            }
+        }
+    }
     colors.resize(count);
     for (std::int64_t i = 0; i < count; ++i) {
         const uhrwerk::Location& loc = at(w->locations, i);
@@ -1379,6 +1403,25 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
             }
             break;
         }
+        case MAP_BAUEN:
+            // Bauen (seit M15b3, bauen_und_anleitung.md 3.1): Landesteile des Spielerstaates nach dem Nutzen
+            // ihres besten Vorhabens (blass wenig, grün viel), gold mit laufendem Bau; andere Staaten grau.
+            if (valid_index(w->states, loc.owner) &&
+                static_cast<std::size_t>(i) < w->location_region.size() && !region_score.empty()) {
+                const uhrwerk::Index r = w->location_region[static_cast<std::size_t>(i)];
+                if (loc.owner != player || r < 0) {
+                    color = kBuildForeign;
+                } else if (region_running[static_cast<std::size_t>(r)] != 0) {
+                    color = kBuildRunning;
+                } else {
+                    color =
+                        blend(kBuildLow, kBuildHigh,
+                              std::clamp(region_score[static_cast<std::size_t>(r)] / kBuildMax, 0.0, 1.0));
+                }
+            } else if (valid_index(w->states, loc.owner)) {
+                color = kBuildForeign;
+            }
+            break;
         case MAP_BUND:
             // Bund (seit M13a2, vertical_slice.md 3.3): das Bundesgebiet, das gilt, in der Farbe der
             // Präsidialmacht (blass), sie selbst kräftig; außerhalb Papier.
@@ -3478,12 +3521,86 @@ Dictionary UhrwerkSimulation::get_state_society(std::int64_t state_index) const 
     std::vector<uhrwerk::Fixed> professions(w->professions.size());
     std::int64_t locations = 0;
     std::int64_t cities = 0;
+    // Wohlergehen je Schicht (seit der Rückmeldung 11/2026): Köpfe, Lebensstandard, Bedarfsdeckung,
+    // Nahrung und Einkommen, gewichtet mit den Köpfen; in Not = Köpfe mit Nahrung unter 75 % (dort steigt die
+    // Sterblichkeit spürbar, wirtschaft.md 4.4).
+    constexpr std::size_t kStrata = 3;
+    std::array<double, kStrata> stratum_people{};
+    std::array<double, kStrata> stratum_living{};
+    std::array<double, kStrata> stratum_coverage{};
+    std::array<double, kStrata> stratum_food{};
+    std::array<double, kStrata> stratum_income{};
+    std::array<double, kStrata> stratum_hungry{};
+    struct Place {
+        std::int64_t index;
+        double living;
+        double food;
+    };
+    std::vector<Place> places;
+    const std::size_t profession_count = w->professions.size();
+    const std::size_t need_count = w->needs.size();
     for (std::size_t l = 0; l < w->locations.size(); ++l) {
         const uhrwerk::Location& loc = w->locations[l];
         if (loc.owner != state_index || !loc.has_data()) {
             continue;
         }
         ++locations;
+        for (uhrwerk::Index pi = loc.first_pop; pi < loc.first_pop + loc.pop_count; ++pi) {
+            if (!valid_index(w->pops, pi)) {
+                continue;
+            }
+            const uhrwerk::PopBlock& pop = at(w->pops, pi);
+            if (!valid_index(w->professions, pop.profession)) {
+                continue;
+            }
+            const auto st = static_cast<std::size_t>(at(w->professions, pop.profession).stratum);
+            if (st < kStrata) {
+                stratum_living[st] += pop.living_standard.to_double() * pop.size().to_double();
+            }
+        }
+        {
+            const std::vector<uhrwerk::Fixed> heads = people_by_profession(*w, static_cast<std::int64_t>(l));
+            double place_people = 0.0;
+            double place_food = 0.0;
+            for (std::size_t pr = 0; pr < profession_count; ++pr) {
+                const double n = heads[pr].to_double();
+                if (n <= 0.0) {
+                    continue;
+                }
+                const auto st = static_cast<std::size_t>(w->professions[pr].stratum);
+                const std::size_t slot = l * profession_count + pr;
+                double coverage = 0.0;
+                double food = 1.0;
+                bool any_food = false;
+                for (std::size_t nd = 0; nd < need_count; ++nd) {
+                    const std::size_t c = slot * need_count + nd;
+                    const double value =
+                        c < w->location_coverage.size() ? w->location_coverage[c].to_double() : 1.0;
+                    coverage += value;
+                    if (w->needs[nd].hunger) {
+                        food = any_food ? std::min(food, value) : value;
+                        any_food = true;
+                    }
+                }
+                coverage = need_count > 0 ? coverage / static_cast<double>(need_count) : 1.0;
+                const double income =
+                    slot < w->location_income.size() ? w->location_income[slot].to_double() * 12.0 : 0.0;
+                if (st < kStrata) {
+                    stratum_people[st] += n;
+                    stratum_coverage[st] += coverage * n;
+                    stratum_food[st] += food * n;
+                    stratum_income[st] += income * n;
+                    stratum_hungry[st] += food < 0.75 ? n : 0.0;
+                }
+                place_people += n;
+                place_food += food * n;
+            }
+            if (place_people > 0.0) {
+                places.push_back({static_cast<std::int64_t>(l),
+                                  people_of(*w, static_cast<std::int64_t>(l)).living_standard,
+                                  place_food / place_people});
+            }
+        }
         cities += loc.is_city ? 1 : 0;
         const auto index = static_cast<std::int64_t>(l);
         const People people = people_of(*w, index);
@@ -3534,7 +3651,310 @@ Dictionary UhrwerkSimulation::get_state_society(std::int64_t state_index) const 
         rows.push_back(row);
     }
     result["professions"] = rows;
+    Array strata;
+    double hungry = 0.0;
+    for (std::size_t st = 0; st < kStrata; ++st) {
+        Dictionary row;
+        const double n = stratum_people[st];
+        row["stratum"] = static_cast<std::int64_t>(st);
+        row["people"] = static_cast<std::int64_t>(std::llround(n));
+        row["percent"] = total > 0.0 ? n * 100.0 / total : 0.0;
+        row["living_standard"] = n > 0.0 ? stratum_living[st] / n : 0.0;
+        row["coverage_percent"] = n > 0.0 ? stratum_coverage[st] * 100.0 / n : 0.0;
+        row["food_percent"] = n > 0.0 ? stratum_food[st] * 100.0 / n : 0.0;
+        row["income_year"] = n > 0.0 ? stratum_income[st] / n : 0.0;
+        row["hungry"] = static_cast<std::int64_t>(std::llround(stratum_hungry[st]));
+        hungry += stratum_hungry[st];
+        strata.push_back(row);
+    }
+    result["strata"] = strata;
+    result["hungry"] = static_cast<std::int64_t>(std::llround(hungry));
+    // Die drei Orte mit dem niedrigsten Lebensstandard (bei Gleichstand der kleinere Index).
+    std::sort(places.begin(), places.end(), [](const Place& a, const Place& b) {
+        return a.living != b.living ? a.living < b.living : a.index < b.index;
+    });
+    Array worst;
+    for (std::size_t i = 0; i < places.size() && i < 3; ++i) {
+        Dictionary row;
+        row["location_index"] = places[i].index;
+        row["name"] = to_godot(w->locations[static_cast<std::size_t>(places[i].index)].name);
+        row["living_standard"] = places[i].living;
+        row["food_percent"] = places[i].food * 100.0;
+        worst.push_back(row);
+    }
+    result["worst_locations"] = worst;
     return result;
+}
+
+// ─── Bauen (seit M15b3) ────────────────────────────────────────────────────────
+
+namespace {
+
+Dictionary proposal_to_godot(const uhrwerk::World& w, const uhrwerk::BuildProposal& p) {
+    Dictionary d;
+    d["region"] = static_cast<std::int64_t>(p.region);
+    d["region_name"] = to_godot(w.regions[static_cast<std::size_t>(p.region)].name);
+    d["type"] = static_cast<std::int64_t>(p.type);
+    d["type_id"] = to_godot(w.building_types[static_cast<std::size_t>(p.type)].id);
+    d["type_name"] = to_godot(w.building_types[static_cast<std::size_t>(p.type)].name);
+    d["level"] = static_cast<std::int64_t>(p.level);
+    d["cost"] = p.cost.to_double();
+    d["months"] = static_cast<std::int64_t>(p.months);
+    d["jobs"] = p.jobs.to_double();
+    d["income_gain"] = p.income_gain.to_double();
+    d["tax_gain"] = p.tax_gain.to_double();
+    d["upkeep"] = p.upkeep.to_double();
+    d["literacy"] = p.literacy.to_double();
+    d["score"] = p.score.to_double();
+    return d;
+}
+
+} // namespace
+
+Dictionary UhrwerkSimulation::get_building_info() const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    result["active"] = w != nullptr && w->building_rules.active;
+    Array types;
+    if (w != nullptr && w->building_rules.active) {
+        for (std::size_t t = 0; t < w->building_types.size(); ++t) {
+            const uhrwerk::BuildingType& b = w->building_types[t];
+            Dictionary d;
+            d["index"] = static_cast<std::int64_t>(t);
+            d["id"] = to_godot(b.id);
+            d["name"] = to_godot(b.name);
+            d["business"] = valid_index(w->businesses, b.business)
+                                ? to_godot(w->businesses[static_cast<std::size_t>(b.business)].name)
+                                : String();
+            d["yield"] = b.yield.to_double();
+            d["profession"] = valid_index(w->professions, b.profession)
+                                  ? to_godot(w->professions[static_cast<std::size_t>(b.profession)].name)
+                                  : String();
+            d["recruit_from"] = valid_index(w->professions, b.recruit_from)
+                                    ? to_godot(w->professions[static_cast<std::size_t>(b.recruit_from)].name)
+                                    : String();
+            d["jobs"] = b.jobs.to_double();
+            d["development"] = b.development.to_double();
+            d["literacy"] = b.literacy.to_double();
+            d["freight"] = b.freight.to_double();
+            d["rail"] = b.rail;
+            d["cost_per_1000"] = b.cost.to_double();
+            d["months"] = static_cast<std::int64_t>(b.months);
+            d["upkeep"] = b.upkeep.to_double();
+            d["max_level"] = static_cast<std::int64_t>(b.max_level);
+            types.push_back(d);
+        }
+        result["capacity_rules"] = w->building_rules.orders_base.to_double();
+    }
+    result["types"] = types;
+    return result;
+}
+
+Array UhrwerkSimulation::get_regions(std::int64_t state_index) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (w == nullptr || !w->building_rules.active) {
+        return result;
+    }
+    for (std::size_t r = 0; r < w->regions.size(); ++r) {
+        const uhrwerk::Region& region = w->regions[r];
+        bool own = state_index < 0;
+        for (const uhrwerk::Index li : region.locations) {
+            own = own || w->locations[static_cast<std::size_t>(li)].owner == state_index;
+        }
+        if (!own) {
+            continue;
+        }
+        Dictionary d;
+        d["index"] = static_cast<std::int64_t>(r);
+        d["id"] = to_godot(region.id);
+        d["name"] = to_godot(region.name);
+        d["owner"] = static_cast<std::int64_t>(uhrwerk::region_owner(*w, static_cast<uhrwerk::Index>(r)));
+        d["population"] = uhrwerk::region_population(*w, static_cast<uhrwerk::Index>(r)).round();
+        std::int64_t levels = 0;
+        for (std::size_t t = 0; t < w->building_types.size(); ++t) {
+            levels +=
+                uhrwerk::building_level(*w, static_cast<uhrwerk::Index>(r), static_cast<uhrwerk::Index>(t));
+        }
+        d["levels"] = levels;
+        PackedInt32Array locations;
+        for (const uhrwerk::Index li : region.locations) {
+            locations.push_back(static_cast<std::int32_t>(li));
+        }
+        d["locations"] = locations;
+        result.push_back(d);
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_region(std::int64_t region_index, std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (w == nullptr || !w->building_rules.active || !valid_index(w->regions, region_index)) {
+        return result;
+    }
+    const auto region = static_cast<uhrwerk::Index>(region_index);
+    result["index"] = region_index;
+    result["name"] = to_godot(w->regions[static_cast<std::size_t>(region_index)].name);
+    result["owner"] = static_cast<std::int64_t>(uhrwerk::region_owner(*w, region));
+    result["population"] = uhrwerk::region_population(*w, region).round();
+    Array buildings;
+    for (std::size_t t = 0; t < w->building_types.size(); ++t) {
+        const auto type = static_cast<uhrwerk::Index>(t);
+        const uhrwerk::BuildingType& b = w->building_types[t];
+        Dictionary d;
+        d["type"] = static_cast<std::int64_t>(t);
+        d["id"] = to_godot(b.id);
+        d["name"] = to_godot(b.name);
+        d["level"] = static_cast<std::int64_t>(uhrwerk::building_level(*w, region, type));
+        d["max_level"] = static_cast<std::int64_t>(b.max_level);
+        std::int64_t months_left = -1;
+        for (const uhrwerk::BuildOrder& o : w->build_orders) {
+            if (o.region == region && o.type == type) {
+                months_left = o.months_left;
+            }
+        }
+        d["months_left"] = months_left; // -1: kein Auftrag
+        d["problem"] =
+            state_index >= 0
+                ? to_godot(uhrwerk::build_problem(*w, static_cast<uhrwerk::Index>(state_index), region, type))
+                : String();
+        d["proposal"] = proposal_to_godot(
+            *w, uhrwerk::evaluate_building(*w, static_cast<uhrwerk::Index>(state_index), region, type));
+        buildings.push_back(d);
+    }
+    result["buildings"] = buildings;
+    return result;
+}
+
+PackedInt32Array UhrwerkSimulation::get_location_region_indices() const {
+    PackedInt32Array result;
+    const uhrwerk::World* w = world();
+    if (w == nullptr) {
+        return result;
+    }
+    result.resize(static_cast<std::int64_t>(w->locations.size()));
+    for (std::size_t li = 0; li < w->locations.size(); ++li) {
+        result.set(static_cast<std::int64_t>(li),
+                   li < w->location_region.size() ? static_cast<std::int32_t>(w->location_region[li]) : -1);
+    }
+    return result;
+}
+
+Array UhrwerkSimulation::get_build_orders(std::int64_t state_index) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (w == nullptr || !w->building_rules.active) {
+        return result;
+    }
+    for (const uhrwerk::BuildOrder& o : w->build_orders) {
+        if (state_index >= 0 && o.state != state_index) {
+            continue;
+        }
+        const uhrwerk::BuildingType& b = w->building_types[static_cast<std::size_t>(o.type)];
+        Dictionary d;
+        d["state"] = static_cast<std::int64_t>(o.state);
+        d["region"] = static_cast<std::int64_t>(o.region);
+        d["region_name"] = to_godot(w->regions[static_cast<std::size_t>(o.region)].name);
+        d["type"] = static_cast<std::int64_t>(o.type);
+        d["type_name"] = to_godot(b.name);
+        d["months_left"] = static_cast<std::int64_t>(o.months_left);
+        d["months_total"] = static_cast<std::int64_t>(std::max<std::int32_t>(1, b.months));
+        d["monthly_cost"] = o.monthly_cost.to_double();
+        d["level_after"] = static_cast<std::int64_t>(uhrwerk::building_level(*w, o.region, o.type) + 1);
+        result.push_back(d);
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_build_office(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (w == nullptr || !w->building_rules.active || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const auto state = static_cast<uhrwerk::Index>(state_index);
+    double rates = 0.0;
+    for (const uhrwerk::BuildOrder& o : w->build_orders) {
+        rates += o.state == state ? o.monthly_cost.to_double() : 0.0;
+    }
+    std::int64_t levels = 0;
+    for (std::size_t r = 0; r < w->regions.size(); ++r) {
+        if (uhrwerk::region_owner(*w, static_cast<uhrwerk::Index>(r)) != state) {
+            continue;
+        }
+        for (std::size_t t = 0; t < w->building_types.size(); ++t) {
+            levels +=
+                uhrwerk::building_level(*w, static_cast<uhrwerk::Index>(r), static_cast<uhrwerk::Index>(t));
+        }
+    }
+    result["capacity"] = static_cast<std::int64_t>(uhrwerk::order_capacity(*w, state));
+    result["orders"] = static_cast<std::int64_t>(uhrwerk::orders_of(*w, state));
+    result["monthly_rates"] = rates;
+    result["building_month"] = at(w->states, state_index).budget.building.to_double();
+    result["levels"] = levels;
+    return result;
+}
+
+Array UhrwerkSimulation::get_build_proposals(std::int64_t state_index, std::int64_t limit) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (w == nullptr || !w->building_rules.active || state_index < 0) {
+        return result;
+    }
+    for (const uhrwerk::BuildProposal& p :
+         uhrwerk::build_proposals(*w, static_cast<uhrwerk::Index>(state_index),
+                                  static_cast<std::size_t>(std::max<std::int64_t>(0, limit)))) {
+        result.push_back(proposal_to_godot(*w, p));
+    }
+    return result;
+}
+
+String UhrwerkSimulation::get_build_problem(std::int64_t state_index, std::int64_t region_index,
+                                            std::int64_t type_index) const {
+    const uhrwerk::World* w = world();
+    if (w == nullptr) {
+        return String("Keine Simulation.");
+    }
+    return to_godot(uhrwerk::build_problem(*w, static_cast<uhrwerk::Index>(state_index),
+                                           static_cast<uhrwerk::Index>(region_index),
+                                           static_cast<uhrwerk::Index>(type_index)));
+}
+
+bool UhrwerkSimulation::order_build(std::int64_t state_index, std::int64_t region_index,
+                                    std::int64_t type_index) {
+    if (!get_build_problem(state_index, region_index, type_index).is_empty() || !simulation_) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Build;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.target = static_cast<uhrwerk::Index>(region_index);
+    command.value = uhrwerk::Fixed::from_int(type_index);
+    simulation_->submit(command);
+    return true;
+}
+
+bool UhrwerkSimulation::cancel_build(std::int64_t state_index, std::int64_t region_index,
+                                     std::int64_t type_index) {
+    const uhrwerk::World* w = world();
+    if (w == nullptr || !simulation_) {
+        return false;
+    }
+    bool found = false;
+    for (const uhrwerk::BuildOrder& o : w->build_orders) {
+        found = found || (o.state == state_index && o.region == region_index && o.type == type_index);
+    }
+    if (!found) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::CancelBuild;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.target = static_cast<uhrwerk::Index>(region_index);
+    command.value = uhrwerk::Fixed::from_int(type_index);
+    simulation_->submit(command);
+    return true;
 }
 
 Dictionary UhrwerkSimulation::get_state_economy(std::int64_t state_index) const {
@@ -4403,6 +4823,23 @@ void UhrwerkSimulation::_bind_methods() {
                          &UhrwerkSimulation::choose_event_option);
     ClassDB::bind_method(D_METHOD("get_state_society", "state_index"), &UhrwerkSimulation::get_state_society);
     ClassDB::bind_method(D_METHOD("get_state_economy", "state_index"), &UhrwerkSimulation::get_state_economy);
+    // Bauen (seit M15b3).
+    ClassDB::bind_method(D_METHOD("get_building_info"), &UhrwerkSimulation::get_building_info);
+    ClassDB::bind_method(D_METHOD("get_regions", "state_index"), &UhrwerkSimulation::get_regions);
+    ClassDB::bind_method(D_METHOD("get_region", "region_index", "state_index"),
+                         &UhrwerkSimulation::get_region);
+    ClassDB::bind_method(D_METHOD("get_location_region_indices"),
+                         &UhrwerkSimulation::get_location_region_indices);
+    ClassDB::bind_method(D_METHOD("get_build_orders", "state_index"), &UhrwerkSimulation::get_build_orders);
+    ClassDB::bind_method(D_METHOD("get_build_office", "state_index"), &UhrwerkSimulation::get_build_office);
+    ClassDB::bind_method(D_METHOD("get_build_proposals", "state_index", "limit"),
+                         &UhrwerkSimulation::get_build_proposals);
+    ClassDB::bind_method(D_METHOD("get_build_problem", "state_index", "region_index", "type_index"),
+                         &UhrwerkSimulation::get_build_problem);
+    ClassDB::bind_method(D_METHOD("order_build", "state_index", "region_index", "type_index"),
+                         &UhrwerkSimulation::order_build);
+    ClassDB::bind_method(D_METHOD("cancel_build", "state_index", "region_index", "type_index"),
+                         &UhrwerkSimulation::cancel_build);
     ClassDB::bind_method(D_METHOD("get_state_laws", "state_index"), &UhrwerkSimulation::get_state_laws);
     ClassDB::bind_method(D_METHOD("get_votes"), &UhrwerkSimulation::get_votes);
     ClassDB::bind_method(D_METHOD("get_state_overview", "state_index"),
@@ -4479,6 +4916,7 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_KRIEG);
     BIND_ENUM_CONSTANT(MAP_UNRUHE);
     BIND_ENUM_CONSTANT(MAP_BUND);
+    BIND_ENUM_CONSTANT(MAP_BAUEN);
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);

@@ -46,9 +46,9 @@ staat ALT {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 19300
+        hofhaltung     = 14300
         heer           = 6
-        schulden       = 129000
+        schulden       = 95300
         zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch

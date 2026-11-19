@@ -2,6 +2,7 @@
 
 #include "state_access.hpp"
 #include "uhrwerk/ai.hpp"
+#include "uhrwerk/buildings.hpp"
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
@@ -66,6 +67,7 @@ Simulation::Simulation(World world, SimConfig config)
     build_schedule();
     build_migration_targets();
     prepare_population_state();
+    ensure_building_state(world_); // seit M15b1
     ensure_events_state(world_);
     rebuild_event_cache(world_, event_cache_);
     ensure_ai_state(world_, event_cache_);
@@ -86,6 +88,7 @@ void Simulation::rebuild_derived() {
     build_schedule();
     build_migration_targets();
     rebuild_event_cache(world_, event_cache_);
+    ensure_building_state(world_); // seit M15b1: Wirkungen der geladenen Stufen
 }
 
 void Simulation::build_schedule() {
@@ -278,6 +281,11 @@ void Simulation::step_day() {
     //    (wirtschaft.md, Abschnitt 4.1).
     if (day == 1) {
         reorganize(world_);
+        // Anwerbung für Gebäude mit Arbeitsplätzen (seit M15b1): Zugänge, die die nächste Neuordnung
+        // einreiht.
+        if (world_.building_rules.active) {
+            recruit_workers(world_);
+        }
         update_markets(world_, topology_, state_spending(world_), record_trade_ ? &trade_flows_ : nullptr);
         // Vereinskassen (seit M9, diplomatie.md Abschnitt 3.4): Zoll der Mitglieder, nach Bevölkerung
         // verteilt.
@@ -385,9 +393,16 @@ void Simulation::step_day() {
         ai_seconds_ += std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
     }
 
+    // 6g. Bauen der KI am Monatsersten (seit M15b2, bauen_und_anleitung.md 4): nach den Märkten des Tages,
+    //     wirksam sofort (der Auftrag zahlt ab dem nächsten Rechentag).
+    if (world_.building_rules.active && world_.date.day == 1) {
+        run_ai_building(world_);
+    }
+
     // 7. Jahreswechsel.
     if (new_year) {
         run_yearly();
+        decay_buildings(world_); // seit M15b2
     }
 
     // 7b. Letzter Tag der Partie (seit M13a4, vertical_slice.md 3.5): Jahresreihe und Chronik.
@@ -544,6 +559,12 @@ void Simulation::execute(const Command& command) {
             (command.state >= 0 && static_cast<std::size_t>(command.state) < world_.currents.size())) {
             world_.player_current = command.state;
         }
+        return;
+    case CommandType::Build:
+        order_building(world_, command.state, command.target, static_cast<Index>(command.value.trunc()));
+        return;
+    case CommandType::CancelBuild:
+        cancel_building(world_, command.state, command.target, static_cast<Index>(command.value.trunc()));
         return;
     case CommandType::GameSettings:
         // Nur am ersten Tag: Stufe und Verlauf gelten für die ganze Partie.

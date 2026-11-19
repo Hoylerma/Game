@@ -18,9 +18,9 @@ staat AUT {
         kontribution       = 0.12
         akzise             = 0.05
         zoll               = 0.03
-        hofhaltung         = 491100
+        hofhaltung         = 412500
         heer               = 10
-        schulden           = 35602000
+        schulden           = 29904400
         zollunion          = keine
         verfassung         = staendisch
         wahlrecht          = staendisch

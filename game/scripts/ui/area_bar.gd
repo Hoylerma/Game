@@ -18,6 +18,7 @@ const AREAS: Array[Array] = [
 	[&"parlament", "Parlament", "Plenarsaal: letzte Wahl nach Fraktionen, nächste Wahl, Abstimmungen"],
 	[&"gesellschaft", "Gesellschaft", "Bevölkerung: Alter, Kulturen, Konfessionen, Berufe, Wanderung"],
 	[&"wirtschaft", "Wirtschaft", "Güter, Preise, Betriebe, Märkte und Zollgebiet"],
+	[&"bauen", "Bauen", "Gebäude in den Landesteilen: Vorschläge, Bauamt, Stufen (Kartenmodus V)"],
 	[&"haushalt", "Haushalt", "Einnahmen und Ausgaben im Einzelnen"],
 	[&"zollunion", "Zollunion", "Zollunionen und Wechsel zum 1. Januar"],
 	[&"diplomatie", "Diplomatie", "Beziehungen, Bündnisse, Bundesversammlung und deutsche Frage"],

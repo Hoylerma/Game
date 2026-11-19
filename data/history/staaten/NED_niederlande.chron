@@ -18,9 +18,9 @@ staat NED {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 9500
+        hofhaltung     = 6900
         heer           = 6
-        schulden       = 189000
+        schulden       = 137900
         zollunion      = keine
         verfassung     = konstitutionell
         wahlrecht      = staendisch
