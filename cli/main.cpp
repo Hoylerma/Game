@@ -1750,6 +1750,10 @@ std::string describe_violation(const World& w, const uhrwerk::BalanceTargets& t,
         return "Lebensstandard " + std::string(subject < kStrata.size() ? kStrata[subject] : "–") +
                " im Median " + format_fixed(v.value, 1) + " (Ziel " +
                format_range(t.living_standard[subject % 3]) + ")";
+    case BalanceCheck::Food:
+        return "Grundnahrung " + std::string(subject < kStrata.size() ? kStrata[subject] : "–") + " im Median " +
+               format_fixed(v.value, 1) + " % (Ziel " +
+               (t.food[subject % 3] ? format_range(*t.food[subject % 3]) : std::string("–")) + ")";
     }
     return "–";
 }
@@ -1870,6 +1874,18 @@ int cmd_bilanz(const Options& o, const fs::path& data_dir) {
             std::cout << "–";
         }
         std::cout << ", Ziel " << format_range(t.living_standard[k]);
+    }
+    if (t.food[0] || t.food[1] || t.food[2]) {
+        std::cout << "\nGrundnahrung in % (Median über alle Jahre):";
+        for (std::size_t k = 0; k < 3; ++k) {
+            std::cout << (k == 0 ? " " : "; ") << kStrata[k] << ' ';
+            if (summary.food[k]) {
+                std::cout << format_quantiles(*summary.food[k], 1) << mark(BalanceCheck::Food, static_cast<Index>(k));
+            } else {
+                std::cout << "–";
+            }
+            std::cout << ", Ziel " << (t.food[k] ? format_range(*t.food[k]) : std::string("–"));
+        }
     }
     std::cout << "\n\n";
 

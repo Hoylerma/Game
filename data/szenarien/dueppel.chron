@@ -13,4 +13,5 @@ szenario dueppel {
     spielbar = { PRU AUT DEN }
     waehrung = "Taler"
     tragfaehigkeit_faktor = 2.5   # wie 1848 (keine Hochrechnung, Entscheidung 14)
+    handel_eigenbedarf = ja       # seit M15a2 wie 1848 (wirtschaft.md 4.1)
 }

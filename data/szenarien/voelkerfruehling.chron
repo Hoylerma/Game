@@ -14,4 +14,5 @@ szenario voelkerfruehling {
     spielbar = { PRU AUT BAV SAX BAD }   # Entscheidung 3; alle anderen Staaten sind ebenfalls wählbar
     waehrung = "Taler"
     tragfaehigkeit_faktor = 2.5   # Agrartechnik 1848: Kartoffel, Klee, Agrarreformen (chronik-skript.md 3.7)
+    handel_eigenbedarf = ja       # seit M15a2: Handel ohne Pendeln zwischen Ein- und Ausfuhr (wirtschaft.md 4.1)
 }

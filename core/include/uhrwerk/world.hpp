@@ -1060,6 +1060,10 @@ struct Scenario {
         Fixed::one();     // Faktor auf die Tragfähigkeit aller Gelände (Agrartechnik, seit M7)
     bool has_end = false; // seit M13a4: Ende der Partie (ende), danach Urteil der Geschichte
     Date end;
+    /// Seit M15a2 (bauen_und_anleitung.md 7, wirtschaft.md 4.1): Handel nach Eigenbedarf – ein Markt gibt
+    /// je Monat höchstens seinen eigenen Überschuss plus die Einfuhr des Vormonats ab und nimmt höchstens
+    /// seinen eigenen Mangel plus die Ausfuhr des Vormonats auf. Ohne (1648) wie bis M14.
+    bool trade_own_needs = false;
 };
 
 /// Eintrag der Chronik (Geschichtsbuch der Partie).

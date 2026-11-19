@@ -716,17 +716,41 @@ void update_markets(World& world, const EconomyTopology& topology, const std::ve
     if (flows_out != nullptr) {
         flows_out->clear();
     }
+    // Handel nach Eigenbedarf (seit M15a2, nur mit trade_own_needs): Ausfuhr höchstens eigener Überschuss des
+    // Monats plus Einfuhr des Vormonats (Durchgangshandel), Einfuhr höchstens eigener Mangel plus Ausfuhr des
+    // Vormonats. Ohne diese Grenzen zählte ein Markt die Einfuhr des Vormonats als Angebot und führte sie
+    // wieder aus, und wer viel ausführte, galt als teuer und zog Einfuhr an: Der Handel schwang von Monat
+    // zu Monat hin und her, und die eigenen Leute bekamen in den Ausfuhrmonaten zu wenig.
+    const bool own_needs = world.scenario.trade_own_needs;
+    const auto out_limit = [&](std::size_t m, std::size_t g) {
+        const MarketState& state = world.market_states[m];
+        Fixed limit = kTradeCap * state.supply[g];
+        if (own_needs) {
+            const std::size_t k = m * goods + g;
+            const Fixed surplus = Fixed::max(Fixed::zero(), local_supply[k] - local_demand[k]);
+            limit = Fixed::min(limit, surplus + state.imports[g]);
+        }
+        return limit;
+    };
+    const auto in_limit = [&](std::size_t m, std::size_t g) {
+        const MarketState& state = world.market_states[m];
+        Fixed limit = kTradeCap * state.demand[g];
+        if (own_needs) {
+            const std::size_t k = m * goods + g;
+            const Fixed shortage = Fixed::max(Fixed::zero(), local_demand[k] - local_supply[k]);
+            limit = Fixed::min(limit, shortage + state.exports[g]);
+        }
+        return limit;
+    };
     for (const Flow& f : flows) {
         Fixed factor = one;
         if (f.from != kNone) {
             const std::size_t k = at(f.from) * goods + f.good;
-            factor = Fixed::min(
-                factor, scale(out_total[k], kTradeCap * world.market_states[at(f.from)].supply[f.good]));
+            factor = Fixed::min(factor, scale(out_total[k], out_limit(at(f.from), f.good)));
         }
         if (f.to != kNone) {
             const std::size_t k = at(f.to) * goods + f.good;
-            factor = Fixed::min(factor,
-                                scale(in_total[k], kTradeCap * world.market_states[at(f.to)].demand[f.good]));
+            factor = Fixed::min(factor, scale(in_total[k], in_limit(at(f.to), f.good)));
         }
         const Fixed amount = f.amount * factor;
         if (f.from != kNone) {

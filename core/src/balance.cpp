@@ -5,6 +5,8 @@
 #include "uhrwerk/script.hpp"
 
 #include <algorithm>
+#include <array>
+#include <string_view>
 #include <initializer_list>
 
 namespace uhrwerk {
@@ -32,7 +34,8 @@ BalanceTargetsResult targets_from(const ParseResult& parsed, const World& world,
     }
     TargetReader r{file_name, {}};
     const ScriptNode& root = parsed.root;
-    r.only(root, {"vermoegen", "bankrotte", "steuerquote", "preise", "bevoelkerung", "lebensstandard"});
+    r.only(root, {"vermoegen", "bankrotte", "steuerquote", "preise", "bevoelkerung", "lebensstandard",
+                  "grundnahrung"});
 
     BalanceTargets t;
     if (const ScriptNode* b = r.block(root, "vermoegen")) {
@@ -82,6 +85,16 @@ BalanceTargetsResult targets_from(const ParseResult& parsed, const World& world,
         t.living_standard[0] = r.range(*b, "unten").value_or(ValueRange{});
         t.living_standard[1] = r.range(*b, "mittel").value_or(ValueRange{});
         t.living_standard[2] = r.range(*b, "oben").value_or(ValueRange{});
+    }
+    // Seit M15a2: Deckung der Grundnahrung je Schicht in Prozent (optional, je Schicht).
+    if (const ScriptNode* b = root.find("grundnahrung") != nullptr ? r.block(root, "grundnahrung") : nullptr) {
+        r.only(*b, {"unten", "mittel", "oben"});
+        const std::array<std::string_view, 3> keys = {"unten", "mittel", "oben"};
+        for (std::size_t k = 0; k < 3; ++k) {
+            if (b->find(keys[k]) != nullptr) {
+                t.food[k] = r.range(*b, keys[k]);
+            }
+        }
     }
     result.errors.insert(result.errors.end(), r.errors.begin(), r.errors.end());
     if (result.errors.empty()) {
@@ -191,6 +204,23 @@ void sample_year(const World& world, Fixed population_start, const BalanceTarget
     for (std::size_t k = 0; k < 3; ++k) {
         if (people[k] > Fixed::zero()) {
             run.living_standard[k].push_back(weighted[k] / people[k]);
+        }
+    }
+    // Grundnahrung (seit M15a2): Deckung, nach der der Kern die Sterblichkeit erhöht, nach Köpfen gemittelt.
+    if (targets.food[0] || targets.food[1] || targets.food[2]) {
+        std::array<Fixed, 3> fed{};
+        for (const PopBlock& block : world.pops) {
+            if (!(block.profession >= 0 && at(block.profession) < world.professions.size()) ||
+                block.location < 0) {
+                continue;
+            }
+            const auto stratum = static_cast<std::size_t>(world.professions[at(block.profession)].stratum);
+            fed[stratum] += food_coverage(world, block.location, block.profession) * block.size();
+        }
+        for (std::size_t k = 0; k < 3; ++k) {
+            if (people[k] > Fixed::zero()) {
+                run.food[k].push_back(Fixed::from_int(100) * fed[k] / people[k]);
+            }
         }
     }
 }
@@ -376,6 +406,18 @@ BalanceSummary summarize(const World& world, const std::vector<BalanceRun>& runs
             out.living_standard[k] = quantiles(values);
             if (!targets.living_standard[k].contains(out.living_standard[k]->median)) {
                 violate(BalanceCheck::LivingStandard, static_cast<Index>(k), out.living_standard[k]->median);
+            }
+        }
+    }
+    for (std::size_t k = 0; k < 3; ++k) {
+        std::vector<Fixed> values;
+        for (const BalanceRun& run : runs) {
+            values.insert(values.end(), run.food[k].begin(), run.food[k].end());
+        }
+        if (!values.empty()) {
+            out.food[k] = quantiles(values);
+            if (targets.food[k] && !targets.food[k]->contains(out.food[k]->median)) {
+                violate(BalanceCheck::Food, static_cast<Index>(k), out.food[k]->median);
             }
         }
     }

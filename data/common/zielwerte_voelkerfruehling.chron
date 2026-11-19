@@ -65,3 +65,9 @@ lebensstandard {
     mittel = { 45 75 }
     oben   = { 70 95 }
 }
+
+grundnahrung {
+    # Seit M15a2 (bauen_und_anleitung.md 7): Deckung der Grundnahrung in Prozent, Median über alle Jahre
+    # und Läufe. Hungerjahre dürfen darunter liegen, ein dauerndes Hungern bis 1871 nicht.
+    unten  = { 90 100 }
+}

@@ -44,6 +44,9 @@ struct BalanceTargets {
     std::int32_t population_year = 0;          // Jahrestag des Starts in diesem Jahr …
     ValueRange population;                     // … Bevölkerung gegen den Start (Median)
     std::array<ValueRange, 3> living_standard; // je Schicht: Median über alle Jahre und Läufe
+    /// Seit M15a2 (bauen_und_anleitung.md 7), optional: Deckung der Grundnahrung je Schicht in Prozent,
+    /// Median über alle Jahre und Läufe; nur Schichten mit Ziel werden geprüft.
+    std::array<std::optional<ValueRange>, 3> food;
 };
 
 struct BalanceTargetsResult {
@@ -68,6 +71,7 @@ struct BalanceRun {
     std::vector<Fixed> price_max;                      // je Gut: größter Faktor
     std::optional<Fixed> population_factor;            // Bevölkerung im Zieljahr ÷ Start
     std::array<std::vector<Fixed>, 3> living_standard; // je Schicht: Jahreswerte (gewichtet)
+    std::array<std::vector<Fixed>, 3> food;            // je Schicht: Grundnahrung in Prozent (seit M15a2)
 };
 
 /// Rechnet years Jahre ab dem aktuellen Datum der Simulation und misst dabei.
@@ -111,6 +115,7 @@ enum class BalanceCheck {
     PriceShare,
     Population,
     LivingStandard,
+    Food, // seit M15a2
 };
 
 struct BalanceViolation {
@@ -126,6 +131,7 @@ struct BalanceSummary {
     std::vector<BalanceGoodSummary> goods;
     std::optional<Quantiles> population;
     std::array<std::optional<Quantiles>, 3> living_standard;
+    std::array<std::optional<Quantiles>, 3> food; // seit M15a2
     std::vector<BalanceViolation> violations;
 };
 

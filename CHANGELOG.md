@@ -13,6 +13,14 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/bauen_und_anleitung.md](docs/technik/bauen_und_anleitung.md), Entscheidungen 1–7 wie
 empfohlen freigegeben; zuerst M15, dann der zweite Teil von M14 (Europa).
 
+- **Kein Dauerhunger mehr (Schritt a2):** Ab 1848 hungerte ein großer Teil der Unterschicht, und es wurde
+  mit den Jahren mehr – Preußen 1861 fast die Hälfte, Sachsen fast alle. Die Ursache war ein Fehler im
+  Handel: Märkte führten die Einfuhr des Vormonats gleich wieder aus und pendelten so jeden Monat
+  zwischen Ein- und Ausfuhr, und in den Ausfuhrmonaten fehlte den eigenen Leuten das Brot. Jetzt führt ein
+  Markt nur aus, was er übrig hat. Die Grundnahrung ist zu rund 98 % gedeckt, die Preise liegen nahe der
+  Basis, und der Balancing-Bericht prüft die Grundnahrung. Das Szenario 1648 rechnet unverändert. Weil
+  das Pendeln auch über die Zollgrenzen ging, bringt der Zoll jetzt weniger ein (rund 0,5 % statt 3 % der
+  Einnahmen).
 - **Nachspiel bis 1880 (Schritt a1):** Nach dem Urteil der Geschichte geht es als „Nachspiel bis 1880“
   weiter – freies Spiel ohne Ereignisse, Journale und Ziele, eine Meldekarte sagt es. Am 1. Januar 1881
   endet die Partie endgültig. Vorher lief die Zeit ohne Ende, und 1973 stand die Welt noch auf dem

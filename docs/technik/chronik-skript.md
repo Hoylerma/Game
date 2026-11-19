@@ -372,8 +372,14 @@ szenario westfaelischer_frieden {
     tragfaehigkeit_faktor = 1              # optional (seit M7): Agrartechnik, Faktor 0,1–10 auf die
                                            # Tragfähigkeit aller Gelände (Standard 1)
     ende     = 1871.07.01                  # optional (seit M13a4): letzter Tag der Partie
+    handel_eigenbedarf = ja                # optional (seit M15a2): Handel nach Eigenbedarf (Standard nein)
 }
 ```
+
+`handel_eigenbedarf` (seit M15a2, [wirtschaft.md](wirtschaft.md) 4.1): Ein Markt gibt je Monat höchstens
+seinen eigenen Überschuss plus die Einfuhr des Vormonats ab und nimmt höchstens seinen eigenen Mangel plus
+die Ausfuhr des Vormonats auf. Gesetzt in 1848 und den drei Lesezeichen der Kriege; 1648 rechnet ohne und
+bleibt bitgleich. Im Kern `Scenario::trade_own_needs`.
 
 `ende` (seit M13a4, [vertical_slice.md](vertical_slice.md) 3.5) muss nach `datum` liegen. Am letzten Tag
 treten keine Ereignisse und Folgeereignisse mehr ein, die Journale wählen noch ihren Ausgang; mit einem
@@ -558,7 +564,9 @@ lebensstandard {            # Median je Schicht über alle Jahre und Läufe
 ```
 
 Alle sechs Blöcke sind Pflicht; unbekannte Blöcke und Felder, Bereiche mit von > bis und unbekannte
-Güter in `ausnahme` sind Fehler. Im Kern: `BalanceTargets` (`uhrwerk/balance.hpp`). Bedeutung:
+Güter in `ausnahme` sind Fehler. Seit M15a2 gibt es den optionalen siebten Block `grundnahrung { unten =
+{ 90 100 } }` (je Schicht optional): Deckung der Grundnahrung in Prozent, nach der der Kern die
+Sterblichkeit erhöht, Median über alle Jahre und Läufe (gesetzt für 1848). Im Kern: `BalanceTargets` (`uhrwerk/balance.hpp`). Bedeutung:
 [wirtschaft.md](wirtschaft.md), Abschnitt 7.
 
 ### 3.16 `history/verwaltung/*.chron` (seit M7)

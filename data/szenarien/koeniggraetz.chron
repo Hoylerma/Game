@@ -13,4 +13,5 @@ szenario koeniggraetz {
     spielbar = { PRU AUT SAX BAV HAN }
     waehrung = "Taler"
     tragfaehigkeit_faktor = 2.5
+    handel_eigenbedarf = ja       # seit M15a2 wie 1848 (wirtschaft.md 4.1)
 }

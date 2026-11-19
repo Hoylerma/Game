@@ -4609,7 +4609,8 @@ private:
     void load_scenarios(const SourceFile& file, std::vector<Scenario>& scenarios) {
         for_each_definition(file, "szenario", "szenario <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "szenario " + node.value, issues_,
-                     {"name", "datum", "ende", "spieler", "spielbar", "waehrung", "tragfaehigkeit_faktor"});
+                     {"name", "datum", "ende", "spieler", "spielbar", "waehrung", "tragfaehigkeit_faktor",
+                      "handel_eigenbedarf"});
             Scenario s;
             s.id = node.value;
             s.name = f.text("name").value_or("");
@@ -4633,6 +4634,10 @@ private:
                 s.capacity_factor =
                     f.fixed("tragfaehigkeit_faktor", between(Fixed::from_ratio(1, 10), fx(10)))
                         .value_or(Fixed::one());
+            }
+            // Seit M15a2: Handel nach Eigenbedarf (wirtschaft.md 4.1).
+            if (f.has("handel_eigenbedarf")) {
+                s.trade_own_needs = f.boolean("handel_eigenbedarf").value_or(false);
             }
             std::vector<PlayerRef> playable_refs;
             if (f.has("spielbar")) {
