@@ -13,6 +13,11 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/bauen_und_anleitung.md](docs/technik/bauen_und_anleitung.md), Entscheidungen 1–7 wie
 empfohlen freigegeben; zuerst M15, dann der zweite Teil von M14 (Europa).
 
+- **Bauen im Spiel (Schritt b3):** Neuer Bereich „Bauen“: Er zeigt zuerst die fünf besten Vorhaben mit
+  Kosten und dem, was sie im Jahr bringen, und baut sie mit einem Klick. Darunter das Bauamt mit den
+  laufenden Bauten und die Landesteile mit ihren Gebäuden. Neuer Kartenmodus „Bauen“ (Taste V): Grün ist,
+  wo sich Bauen lohnt; ein Klick auf einen eigenen Ort öffnet seinen Landesteil. Fertige Bauten melden
+  sich als Karte. Der eigene Staat baut jetzt selbst, der automatische Landesausbau entfällt für ihn.
 - **Die KI baut, Vorschläge (Schritt b2):** Für jedes mögliche Vorhaben rechnet das Spiel aus, was es
   bringt – mehr Einkommen für die Leute, mehr Steuern, neue Arbeitsplätze – und was es kostet. Staaten ohne
   Spieler bauen danach selbst, wenn sie Überschuss haben: bis 1871 vor allem Spinnereien und

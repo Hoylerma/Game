@@ -488,7 +488,9 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
     const Fixed reserve = rules.reserve_years * (budget.court + budget.administration + budget.army) * twelve;
     Fixed automatic;
     const bool ai_builds = world.building_rules.active && state_index != world.event_player; // seit M15b2
-    if (!ai_builds && state.debt <= Fixed::zero() && available > reserve) {
+    // Seit M15b3 baut auch der Spieler selbst (Fenster „Bauen“): Mit dem Bauen gibt es für ihn keinen
+    // selbsttätigen Landesausbau mehr.
+    if (!world.building_rules.active && state.debt <= Fixed::zero() && available > reserve) {
         automatic = (available - reserve) * rules.building_share;
     }
     // Die KI baut selbst (seit M15b2); was sie über eine halbe Jahreseinnahme hinaus im Schatz hat, geht wie

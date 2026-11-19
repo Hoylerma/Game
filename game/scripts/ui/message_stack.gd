@@ -32,6 +32,7 @@ const KINDS := {
 	&"thron": [&"krone", "Thron"],
 	&"zoll": [&"zollunion", "Zollverein"],
 	&"wendepunkt": [&"wendepunkt", "Wendepunkt"],
+	&"bau": [&"bauen", "Bau"],
 	&"chronik": [&"chronik", "Chronik"],
 }
 
@@ -72,6 +73,9 @@ static func kind_for(occasion: String, text: String, turning_point: bool = false
 		return OCCASIONS[occasion]
 	if text.begins_with("Schlacht bei "):
 		return &"schlacht"
+	# Bauen (seit M15b3): Auftrag, Fertigstellung, Verfall.
+	if text.contains(" fertig (Stufe ") or text.contains(" verfällt (Stufe ") or text.contains(" baut in "):
+		return &"bau"
 	if (
 		text.contains(" den Krieg") or text.contains("Ultimatum") or text.contains(" wird zum Krieg")
 		or text.contains(" ist mobil") or text.contains(" macht mobil")

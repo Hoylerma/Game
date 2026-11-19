@@ -292,7 +292,7 @@ func _build_areas() -> void:
 	for entry: Array in [
 		[&"kabinett", CabinetWindow.new()], [&"gesetze", LawsWindow.new()], [&"gruppen", GroupsWindow.new()],
 		[&"parlament", ParliamentWindow.new()], [&"gesellschaft", SocietyWindow.new()],
-		[&"wirtschaft", EconomyWindow.new()], [&"chronik", ChronicleWindow.new()],
+		[&"wirtschaft", EconomyWindow.new()], [&"chronik", ChronicleWindow.new()], [&"bauen", BuildWindow.new()],
 	]:
 		var window: AreaWindow = entry[1]
 		root.add_child(window)
@@ -308,6 +308,14 @@ func _build_areas() -> void:
 	(_area_windows[&"chronik"] as ChronicleWindow).location_requested.connect(
 		func(location: int) -> void: _select_location(location, true)
 	)
+	# Bauen (seit M15b3): Landesteil auf der Karte zeigen, Meldung zum Auftrag in der oberen Leiste.
+	var build := _area_windows[&"bauen"] as BuildWindow
+	build.location_requested.connect(
+		func(location: int) -> void:
+			if location >= 0:
+				_select_location(location, true)
+	)
+	build.order_changed.connect(func(text: String) -> void: _top_bar.show_notice(text))
 	# Lexikon (seit M13a5d): Artikel aus data/lexikon.
 	_lexicon = Lexicon.load_dir(UhrwerkPaths.data_dir().path_join("lexikon"))
 	for problem in _lexicon.problems:
@@ -352,6 +360,16 @@ func _fit_mode_bar() -> void:
 	_mode_bar_area.offset_top = -12.0 - maxf(height, 52.0)
 	_place_diplomacy.call_deferred()
 	_place_messages.call_deferred()
+
+
+## Fenster „Bauen“ auf einem Landesteil öffnen (seit M15b3; Kartenmodus Bauen, Tests).
+func open_build_region(region: int) -> void:
+	var window := _area_windows.get(&"bauen") as BuildWindow
+	if window == null or _sim == null:
+		return
+	if not window.is_open():
+		toggle_area_window(&"bauen")
+	window.show_region(region)
 
 
 ## Fenster eines Bereichs (Tests): kabinett, gesetze, gruppen, parlament, gesellschaft, wirtschaft.
@@ -434,6 +452,7 @@ func _scenario_areas() -> Dictionary:
 		&"parlament": not _sim.get_parliaments().is_empty(),
 		&"gesellschaft": true,
 		&"wirtschaft": true,
+		&"bauen": bool(_sim.get_building_info().get("active", false)) and _player >= 0,
 		&"jahrbuch": bool(_sim.get_legacy(_player).get("active", false)),
 	}
 	return _areas_cache

@@ -176,6 +176,19 @@ static func show(
 				title = "%s" % str(sim.get_diet().get("federation_name", title))
 				federation.append_array(no_data)
 				legend.show_swatches(title, federation)
+		MapModes.MAP_BAUEN:
+			if not bool(sim.get_building_info().get("active", false)):
+				legend.show_message(title, "Gebaut wird erst ab 1848 (Gebäude in Landesteilen).")
+			else:
+				var entries: Array[Dictionary] = [
+					{"color": Color(0.24, 0.52, 0.30), "text": "Lohnt sich", "detail": "Bestes Vorhaben bringt im Jahr die Hälfte seiner Kosten oder mehr"},
+					{"color": Color(0.59, 0.72, 0.57), "text": "Mittel", "detail": "Bestes Vorhaben bringt im Jahr etwa ein Viertel seiner Kosten"},
+					{"color": Color(0.94, 0.91, 0.83), "text": "Kaum", "detail": "Kaum ein Vorhaben lohnt sich"},
+					{"color": Color(0.80, 0.62, 0.22), "text": "Bau läuft"},
+					{"color": Color(0.88, 0.86, 0.80), "text": "Anderer Staat"},
+				]
+				entries.append_array(no_data)
+				legend.show_swatches(title, entries)
 		MapModes.MAP_UNRUHE:
 			var unrest := LegendData.unrest_entries(sim)
 			if unrest.is_empty():

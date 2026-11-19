@@ -420,8 +420,8 @@ höchstens `ausbau_max` = 30 %). Vorbild: Meliorationen und Kolonisten der Peupl
 **Seit M15b1/b2 (Bauen, [bauen_und_anleitung.md](bauen_und_anleitung.md)):** Mit `bauen = ja` kommen zu
 den Bauten die Raten der Bauaufträge und der Unterhalt der Gebäude. Staaten ohne Spieler bauen selbst
 (KI am Monatsersten) und haben keinen selbsttätigen Landesausbau mehr; nur was sie über eine halbe
-Jahreseinnahme hinaus im Schatz haben, geht wie oben in den Landesausbau. Der Spielerstaat behält den
-Landesausbau, bis er mit der Oberfläche (M15b3) selbst baut.
+Jahreseinnahme hinaus im Schatz haben, geht wie oben in den Landesausbau. Der Spielerstaat baut seit
+M15b3 selbst (Fenster „Bauen“) und hat mit dem Bauen keinen selbsttätigen Landesausbau mehr.
 
 **Staatsnachfrage:** Hof, Verwaltung und Heer kaufen mit ihrem Betrag nach den Warenkörben „oben“,
 „mittel“ und „unten“, die Bauten wie die Verwaltung (Korb „mittel“; im Entwurf Holz und Waren je zur

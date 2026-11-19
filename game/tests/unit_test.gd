@@ -146,7 +146,7 @@ func _test_launch_options() -> void:
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
 		[
-			"--tage=-3", "--kartenmodus=18", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--tage=-3", "--kartenmodus=19", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
 			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja", "--diplomatie=krieg",
 			"--krieg=frieden", "--heer=1", "--ereignis=ja", "--journal=1"
 		]
@@ -320,7 +320,12 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 18, "achtzehn Kartenmodi (Bund seit M13)")
+	_equal(MapModes.COUNT, 19, "neunzehn Kartenmodi (Bauen seit M15b3)")
+	_equal(MapModes.MAP_BAUEN, 18, "Kartenmodus Bauen = 18 (bridge-api.md)")
+	var v_key := InputEventKey.new()
+	v_key.physical_keycode = KEY_V
+	_equal(MapModes.mode_for_event(v_key), MapModes.MAP_BAUEN, "Taste V: Bauen")
+	_true(MessageStack.kind_for("", "Provinz Schlesien: Spinnerei fertig (Stufe 2).") == &"bau", "Meldekarte Bau")
 	_equal(MapModes.MAP_BUND, 17, "Kartenmodus Bund = 17 (bridge-api.md)")
 	_equal(MapModes.KEY_HINTS[MapModes.MAP_BUND], "C", "Taste C für Bund")
 	var c_key := InputEventKey.new()

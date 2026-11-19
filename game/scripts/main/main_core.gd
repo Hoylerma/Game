@@ -29,7 +29,7 @@ const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
 	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR,
 	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN, MapModes.MAP_WAHLEN, MapModes.MAP_ZOLLGEBIETE,
-	MapModes.MAP_BEZIEHUNGEN, MapModes.MAP_KRIEG, MapModes.MAP_UNRUHE, MapModes.MAP_BUND,
+	MapModes.MAP_BEZIEHUNGEN, MapModes.MAP_KRIEG, MapModes.MAP_UNRUHE, MapModes.MAP_BUND, MapModes.MAP_BAUEN,
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -1133,6 +1133,11 @@ func _on_viewport_size_changed() -> void:
 
 func _on_location_clicked(sim_index: int) -> void:
 	_select_location(sim_index)
+	# Kartenmodus Bauen (seit M15b3): Ein Klick auf einen eigenen Landesteil öffnet ihn im Fenster „Bauen“.
+	if _map_mode == MapModes.MAP_BAUEN and _sim != null and sim_index >= 0 and _player >= 0 and _player_current < 0:
+		var regions := _sim.get_location_region_indices()
+		if sim_index < regions.size() and regions[sim_index] >= 0 and int(_sim.get_location(sim_index).get("owner_index", -1)) == _player:
+			open_build_region(regions[sim_index])
 
 
 func _on_chronicle_location_requested(sim_index: int) -> void:
@@ -1403,6 +1408,11 @@ func open_newspaper(_chronicle_index: int) -> bool:
 
 ## Platzhalter; die Hauptszene (main.gd oder main_windows.gd) überschreibt ihn.
 func _place_diplomacy() -> void:
+	pass
+
+
+## Platzhalter; main.gd überschreibt ihn (Fenster „Bauen“, seit M15b3).
+func open_build_region(_region: int) -> void:
 	pass
 
 

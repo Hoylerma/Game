@@ -50,6 +50,7 @@ public:
         MAP_KRIEG = 15,         // seit M10 (b3)
         MAP_UNRUHE = 16,        // seit M11 (b4)
         MAP_BUND = 17,          // seit M13 (a2)
+        MAP_BAUEN = 18,         // seit M15 (b3)
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
@@ -200,6 +201,18 @@ public:
 
     // Fenster der Bereiche (seit M13, Schritt a5b, vertical_slice.md 4.2)
     godot::Dictionary get_state_society(std::int64_t state_index) const;
+    // Bauen (seit M15b3, bauen_und_anleitung.md 3): Gebäudearten, Landesteile, Aufträge, Vorschläge, Befehle.
+    godot::Dictionary get_building_info() const;
+    godot::Array get_regions(std::int64_t state_index) const;
+    godot::Dictionary get_region(std::int64_t region_index, std::int64_t state_index) const;
+    godot::PackedInt32Array get_location_region_indices() const;
+    godot::Array get_build_orders(std::int64_t state_index) const;
+    godot::Dictionary get_build_office(std::int64_t state_index) const;
+    godot::Array get_build_proposals(std::int64_t state_index, std::int64_t limit) const;
+    godot::String get_build_problem(std::int64_t state_index, std::int64_t region_index,
+                                    std::int64_t type_index) const;
+    bool order_build(std::int64_t state_index, std::int64_t region_index, std::int64_t type_index);
+    bool cancel_build(std::int64_t state_index, std::int64_t region_index, std::int64_t type_index);
     godot::Dictionary get_state_economy(std::int64_t state_index) const;
     godot::Array get_state_laws(std::int64_t state_index) const;
     godot::Array get_votes() const;

@@ -637,6 +637,7 @@ func _check_areas() -> void:
 			continue
 		if not window.window_text().contains(str(expected_text[area])):
 			_fail("Bereich %s ohne „%s“: %s" % [area, expected_text[area], window.window_text().left(200).replace("\n", " / ")])
+	await _check_build_window()
 	# Wie geht es dem Volk? (Rückmeldung 11/2026): Urteil und Schichten im Fenster Gesellschaft, das Symbol
 	# der Bevölkerung in der Farbe des Urteils.
 	var society_text := (_main.call("area_window", &"gesellschaft") as AreaWindow).window_text()
@@ -856,6 +857,76 @@ func _check_message_cards() -> void:
 		_fail("× legt die Meldekarte nicht weg")
 	_main.call("select_location", -1)
 	print("  Meldekarten: Stapel %s, Klick fährt den Ort an, Wendepunkt bleibt" % rect)
+
+
+## Bauen (seit M15b3, bauen_und_anleitung.md 3.1): Fenster mit Vorschlägen, Bauamt und Landesteilen; ein
+## Vorschlag wird zum Auftrag (am nächsten Tag), „Abbrechen“ nimmt ihn zurück; ein Landesteil zeigt seine
+## Gebäude; im Kartenmodus Bauen öffnet ein Klick auf einen eigenen Ort seinen Landesteil.
+func _check_build_window() -> void:
+	var bar: AreaBar = _main.call("area_bar")
+	var sim: SimulationClient = _main.call("simulation")
+	var player := int(_main.get("_player"))
+	if not bar.visible_areas().has("bauen"):
+		_fail("Bereichsleiste ohne „Bauen“")
+		return
+	bar.button(&"bauen").emit_signal("pressed")
+	await _frames(2)
+	var window := _main.call("area_window", &"bauen") as BuildWindow
+	var text := window.window_text() if window != null else ""
+	if window == null or not window.is_open() or not text.contains("VORSCHLÄGE") or not text.contains("BAUAMT") or not text.contains("LANDESTEILE"):
+		_fail("Fenster Bauen ohne Vorschläge, Bauamt oder Landesteile: %s" % text.left(200).replace("\n", " / "))
+		return
+	var proposals := sim.get_build_proposals(player, 1)
+	if proposals.is_empty():
+		_fail("Bauen: kein Vorschlag für den Spielerstaat")
+		return
+	var region := int(proposals[0].get("region", -1))
+	var type := int(proposals[0].get("type", -1))
+	var build := window.find_child("Build_%d_%d" % [region, type], true, false) as Button
+	if build == null:
+		_fail("Bauen: Knopf zum ersten Vorschlag fehlt")
+		return
+	build.pressed.emit()
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	window.refresh(true)
+	await _frames(1)
+	if sim.get_build_orders(player).size() != 1 or window.find_child("Cancel_%d_%d" % [region, type], true, false) == null:
+		_fail("Bauen: Auftrag nicht angelegt oder nicht im Bauamt (%d Aufträge)" % sim.get_build_orders(player).size())
+	else:
+		(window.find_child("Cancel_%d_%d" % [region, type], true, false) as Button).pressed.emit()
+		sim.advance_days(1)
+		_main.call("_after_time_passed")
+		if not sim.get_build_orders(player).is_empty():
+			_fail("Bauen: „Abbrechen“ nimmt den Auftrag nicht zurück")
+	# Ein Landesteil mit seinen Gebäuden, „Zurück“ zur Übersicht.
+	window.refresh(true)
+	var region_button := window.find_child("Region_%d" % region, true, false) as Button
+	if region_button == null:
+		_fail("Bauen: Landesteil %d fehlt in der Liste" % region)
+	else:
+		region_button.pressed.emit()
+		await _frames(1)
+		if window.shown_region() != region or not window.window_text().contains("Stufe") or window.find_child("Back", true, false) == null:
+			_fail("Bauen: Landesteil zeigt keine Gebäude")
+		(window.find_child("Back", true, false) as Button).pressed.emit()
+		await _frames(1)
+	# Kartenmodus Bauen: Klick auf die Hauptstadt öffnet ihren Landesteil.
+	window.close()
+	_main.call("set_map_mode", MapModes.MAP_BAUEN)
+	await _frames(1)
+	var capital := int(sim.get_state(player).get("capital_index", -1))
+	_main.call("_on_location_clicked", capital)
+	await _frames(1)
+	var expected := sim.get_location_region_indices()[capital]
+	if not window.is_open() or window.shown_region() != expected:
+		_fail("Kartenmodus Bauen: Klick öffnet den Landesteil nicht (%d statt %d)" % [window.shown_region(), expected])
+	window.show_region(-1)
+	window.close()
+	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
+	_main.call("select_location", -1)
+	await _frames(1)
+	print("  Bauen: Vorschlag zum Auftrag und zurück, Landesteil, Kartenmodus Bauen")
 
 
 ## Urteil der Geschichte (seit M13a4) in der Partie ab 1848: Inhalt, Export der Chronik, Weiterspielen,

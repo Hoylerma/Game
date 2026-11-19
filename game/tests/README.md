@@ -297,6 +297,11 @@ Dazwischen prüft er:
     bleibt, bis × ihn weglegt. Der Einheitentest prüft Stapelgrenze, Art aus Anlass und Text und die
     Symbole aller Arten.
 
+20. **Bauen** (seit M15b3, bauen_und_anleitung.md 3.1): Der Bereich „Bauen“ zeigt Vorschläge, Bauamt und
+    Landesteile; „Bauen“ am ersten Vorschlag legt am nächsten Tag einen Auftrag an, der im Bauamt mit
+    „Abbrechen“ steht und damit wieder verschwindet; ein Landesteil zeigt seine Gebäude mit Stufe und
+    „Zurück“; im Kartenmodus Bauen öffnet ein Klick auf die Hauptstadt ihren Landesteil.
+
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
 

@@ -19,14 +19,15 @@ const GROUPS: Array = [
 		MapModes.MAP_VERWALTUNG, MapModes.MAP_KREISE],
 	[MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION, MapModes.MAP_KULTUR, MapModes.MAP_LEBENSSTANDARD,
 		MapModes.MAP_UNRUHE],
-	[MapModes.MAP_WIRTSCHAFT, MapModes.MAP_MAERKTE, MapModes.MAP_ZOLLGEBIETE, MapModes.MAP_EISENBAHNEN],
+	[MapModes.MAP_WIRTSCHAFT, MapModes.MAP_MAERKTE, MapModes.MAP_ZOLLGEBIETE, MapModes.MAP_EISENBAHNEN,
+		MapModes.MAP_BAUEN],
 	[MapModes.MAP_TERRAIN, MapModes.MAP_DEVASTATION, MapModes.MAP_KRIEG],
 ]
 ## Symbol je Kartenmodus (Index wie MapModes).
 const ICONS: Array[StringName] = [
 	&"politisch", &"dichte", &"konfession", &"gelaende", &"verwuestung", &"kreise", &"lebensstandard",
 	&"kultur", &"wirtschaft", &"maerkte", &"verwaltung", &"bahn", &"wahlen", &"zollunion", &"beziehung",
-	&"militaer", &"unruhe", &"bund",
+	&"militaer", &"unruhe", &"bund", &"bauen",
 ]
 const ICON_SIZE := 22.0
 
