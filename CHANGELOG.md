@@ -8,6 +8,16 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M15 – Bauen, Wirtschaft und Anleitung
+
+Vertrag: [technik/bauen_und_anleitung.md](docs/technik/bauen_und_anleitung.md), Entscheidungen 1–7 wie
+empfohlen freigegeben; zuerst M15, dann der zweite Teil von M14 (Europa).
+
+- **Nachspiel bis 1880 (Schritt a1):** Nach dem Urteil der Geschichte geht es als „Nachspiel bis 1880“
+  weiter – freies Spiel ohne Ereignisse, Journale und Ziele, eine Meldekarte sagt es. Am 1. Januar 1881
+  endet die Partie endgültig. Vorher lief die Zeit ohne Ende, und 1973 stand die Welt noch auf dem
+  Stand von 1871.
+
 ### Meilenstein M14 – Europa und Oberfläche
 
 Vertrag: [technik/europa_und_oberflaeche.md](docs/technik/europa_und_oberflaeche.md), Entscheidungen 1–8 wie

@@ -140,7 +140,7 @@ msgstr ""
 msgid "Ausgang"
 msgstr ""
 
-#: scripts/core/chronicle_export.gd:119 scripts/main/bar_tooltips.gd:118 scripts/ui/top_bar.gd:110 scripts/ui/verdict_window.gd:204
+#: scripts/core/chronicle_export.gd:119 scripts/main/bar_tooltips.gd:118 scripts/ui/top_bar.gd:110 scripts/ui/verdict_window.gd:211
 msgid "Vermächtnis"
 msgstr ""
 
@@ -846,15 +846,15 @@ msgstr ""
 msgid "Bundesgebiet, das gilt (Deutscher Bund oder ein neuer Bund): Präsidialmacht kräftig, Mitglieder blass; seit 1848"
 msgstr ""
 
-#: scripts/core/pause_rules.gd:11 scripts/main/main_core.gd:926 scripts/main.gd:1015 scripts/ui/message_stack.gd:76 scripts/ui/windows/recap_window.gd:58
+#: scripts/core/pause_rules.gd:11 scripts/main/main_core.gd:935 scripts/main.gd:1025 scripts/ui/message_stack.gd:76 scripts/ui/windows/recap_window.gd:58
 msgid " den Krieg"
 msgstr ""
 
-#: scripts/core/pause_rules.gd:13 scripts/main/main_core.gd:915
+#: scripts/core/pause_rules.gd:13 scripts/main/main_core.gd:924
 msgid " fordert von %s "
 msgstr ""
 
-#: scripts/core/pause_rules.gd:15 scripts/main.gd:1018 scripts/ui/windows/recap_window.gd:58
+#: scripts/core/pause_rules.gd:15 scripts/main.gd:1028 scripts/ui/windows/recap_window.gd:58
 msgid "Frieden zwischen"
 msgstr ""
 
@@ -1254,11 +1254,11 @@ msgstr ""
 msgid "[url=vermaechtnis:%s]%s[/url] %d – %s"
 msgstr ""
 
-#: scripts/main/bar_tooltips.gd:136 scripts/ui/verdict_window.gd:234
+#: scripts/main/bar_tooltips.gd:136 scripts/ui/verdict_window.gd:241
 msgid "Grundwert %+d"
 msgstr ""
 
-#: scripts/main/legend_view.gd:14 scripts/main.gd:195
+#: scripts/main/legend_view.gd:14 scripts/main.gd:201
 msgid "Ohne Simulation liegen keine Daten vor."
 msgstr ""
 
@@ -1328,203 +1328,207 @@ msgid ""
 "cmake --build --preset bridge"
 msgstr ""
 
-#: scripts/main/main_core.gd:260
+#: scripts/main/main_core.gd:264
 msgid "Karte nicht verfügbar"
 msgstr ""
 
-#: scripts/main/main_core.gd:262
+#: scripts/main/main_core.gd:266
 msgid "Die Kartenansicht braucht das Ort-ID-Bild provinzen.png und die Zuordnung definition.csv. Beide erzeugt der Kartengenerator aus den Ortsdaten. Die übrige Oberfläche funktioniert auch ohne Karte."
 msgstr ""
 
-#: scripts/main/main_core.gd:276
+#: scripts/main/main_core.gd:280
 msgid "(erwartet game/%s). Bauen im Repository-Hauptordner mit: "
 msgstr ""
 
-#: scripts/main/main_core.gd:277
+#: scripts/main/main_core.gd:281
 msgid "cmake --preset bridge && cmake --build --preset bridge"
 msgstr ""
 
-#: scripts/main/main_core.gd:280 scripts/main/main_core.gd:304
+#: scripts/main/main_core.gd:284 scripts/main/main_core.gd:308
 msgid "Simulationskern nicht geladen"
 msgstr ""
 
-#: scripts/main/main_core.gd:282
+#: scripts/main/main_core.gd:286
 msgid "Die GDExtension „uhrwerk_bridge“ fehlt oder konnte nicht geladen werden. Ohne sie läuft keine Simulation; Leisten und Karte bleiben ohne Daten. Baue die Erweiterung im Repository-Hauptordner und starte das Spiel danach neu."
 msgstr ""
 
-#: scripts/main/main_core.gd:286
+#: scripts/main/main_core.gd:290
 msgid ""
 "Erwartet: game/%s\n"
 "\n"
 "%s"
 msgstr ""
 
-#: scripts/main/main_core.gd:293
+#: scripts/main/main_core.gd:297
 msgid "Erweiterung passt nicht zur Oberfläche"
 msgstr ""
 
-#: scripts/main/main_core.gd:295
+#: scripts/main/main_core.gd:299
 msgid "Die geladene GDExtension stellt nicht alle Methoden der Brücken-Schnittstelle bereit (docs/technik/bridge-api.md). Bitte die Erweiterung neu bauen."
 msgstr ""
 
-#: scripts/main/main_core.gd:298
+#: scripts/main/main_core.gd:302
 msgid ""
 "Fehlende Methoden:\n"
 "\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:305
+#: scripts/main/main_core.gd:309
 msgid "Die Klasse UhrwerkSimulation konnte nicht erzeugt werden."
 msgstr ""
 
-#: scripts/main/main_core.gd:317
+#: scripts/main/main_core.gd:321
 msgid "Szenario nicht geladen"
 msgstr ""
 
-#: scripts/main/main_core.gd:318
+#: scripts/main/main_core.gd:322
 msgid "--szenario=%s ließ sich nicht laden; es gilt das Standardszenario."
 msgstr ""
 
-#: scripts/main/main_core.gd:326
+#: scripts/main/main_core.gd:330
 msgid "Spieldaten konnten nicht geladen werden"
 msgstr ""
 
-#: scripts/main/main_core.gd:328
+#: scripts/main/main_core.gd:332
 msgid ""
 "Datenordner: %s\n"
 "Herkunft: %s\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:330
+#: scripts/main/main_core.gd:334
 msgid "Einen anderen Ordner wählt die Umgebungsvariable %s."
 msgstr ""
 
-#: scripts/main/main_core.gd:334
+#: scripts/main/main_core.gd:338
 msgid "Unbekannter Fehler beim Laden."
 msgstr ""
 
-#: scripts/main/main_core.gd:345
+#: scripts/main/main_core.gd:349
 msgid "Unbekannter Staat"
 msgstr ""
 
-#: scripts/main/main_core.gd:346
+#: scripts/main/main_core.gd:350
 msgid "--staat=%s besteht im Szenario nicht; Ihr spielt den vorgesehenen Staat."
 msgstr ""
 
-#: scripts/main/main_core.gd:381
+#: scripts/main/main_core.gd:385
 msgid ""
 "Kartenorte ohne Spieldaten: %s\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:383
+#: scripts/main/main_core.gd:387
 msgid ""
 "Orte ohne Kartenfläche: %s\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:384
+#: scripts/main/main_core.gd:388
 msgid ""
 "\n"
 "Karte neu erzeugen:\n"
 msgstr ""
 
-#: scripts/main/main_core.gd:387
+#: scripts/main/main_core.gd:391
 msgid "Karte passt nicht zu den Spieldaten"
 msgstr ""
 
-#: scripts/main/main_core.gd:388
+#: scripts/main/main_core.gd:392
 msgid "Einige Orte der Karte und der Spieldaten lassen sich nicht zuordnen."
 msgstr ""
 
-#: scripts/main/main_core.gd:397
+#: scripts/main/main_core.gd:401
 msgid "%s … und %d weitere"
 msgstr ""
 
-#: scripts/main/main_core.gd:536
+#: scripts/main/main_core.gd:540
 msgid "%s hat keine Orte mehr"
 msgstr ""
 
-#: scripts/main/main_core.gd:537
+#: scripts/main/main_core.gd:541
 msgid "Der Staat hat im Frieden alle Orte auf der Karte verloren. Die Partie läuft weiter: Ein Klick auf einen Ort und „Diesen Staat spielen“ in der Ortsinfo übernimmt einen anderen Staat."
 msgstr ""
 
-#: scripts/main/main_core.gd:568
+#: scripts/main/main_core.gd:572
 msgid "%s marschiert nach %s: %s Tage, Ankunft %s"
 msgstr ""
 
-#: scripts/main/main_core.gd:573
+#: scripts/main/main_core.gd:577
 msgid "%s: kein Weg nach %s"
 msgstr ""
 
-#: scripts/main/main_core.gd:642 scripts/main/main_core.gd:642 scripts/main/map_tooltip_text.gd:9
+#: scripts/main/main_core.gd:646 scripts/main/main_core.gd:646 scripts/main/map_tooltip_text.gd:9
 msgid "Reichstaler"
 msgstr ""
 
-#: scripts/main/main_core.gd:913
+#: scripts/main/main_core.gd:922
 msgid " erklärt %s den Krieg"
 msgstr ""
 
-#: scripts/main/main_core.gd:922
+#: scripts/main/main_core.gd:931
 msgid " (Protest)"
 msgstr ""
 
-#: scripts/main/main_core.gd:924
+#: scripts/main/main_core.gd:933
 msgid " den Krieg."
 msgstr ""
 
-#: scripts/main/main_core.gd:929
+#: scripts/main/main_core.gd:938
 msgid " – Gründe: "
 msgstr ""
 
-#: scripts/main/main_core.gd:946
+#: scripts/main/main_core.gd:955
 msgid "%s bei %s"
 msgstr ""
 
-#: scripts/main/main_core.gd:946
+#: scripts/main/main_core.gd:955
 msgid "Sieg"
 msgstr ""
 
-#: scripts/main/main_core.gd:946
+#: scripts/main/main_core.gd:955
 msgid "Niederlage"
 msgstr ""
 
-#: scripts/main/main_core.gd:953 scripts/ui/message_stack.gd:73
+#: scripts/main/main_core.gd:962 scripts/ui/message_stack.gd:73
 msgid "Schlacht bei "
 msgstr ""
 
-#: scripts/main/main_core.gd:1039
+#: scripts/main/main_core.gd:1048
 msgid "Die Geschichtsstunde wartet: erst die Aufgabe des Schritts"
 msgstr ""
 
-#: scripts/main/main_core.gd:1044
+#: scripts/main/main_core.gd:1053
 msgid "Erst das Ereignis entscheiden"
 msgstr ""
 
-#: scripts/main/main_core.gd:1156
+#: scripts/main/main_core.gd:1165
 msgid "%s: kein Weg"
 msgstr ""
 
-#: scripts/main/main_core.gd:1158
+#: scripts/main/main_core.gd:1167
 msgid "Rechtsklick: %s marschiert hierher, %s Tage (Ankunft %s)"
 msgstr ""
 
-#: scripts/main/main_core.gd:1185
+#: scripts/main/main_core.gd:1194
 msgid "Der Satz %s wurde nicht angenommen."
 msgstr ""
 
-#: scripts/main/main_core.gd:1194
+#: scripts/main/main_core.gd:1203
 msgid "Der Antrag wurde nicht angenommen."
 msgstr ""
 
-#: scripts/main/main_core.gd:1288
+#: scripts/main/main_core.gd:1297
 msgid "kein Bild. Ohne Bildschirm z. B. mit xvfb-run starten."
 msgstr ""
 
-#: scripts/main/main_core.gd:1317
+#: scripts/main/main_core.gd:1326
 msgid "ohne Simulation"
 msgstr ""
 
-#: scripts/main/main_core.gd:1319
+#: scripts/main/main_core.gd:1328
 msgid "%s, Prüfsumme %s"
+msgstr ""
+
+#: scripts/main/main_core.gd:1583
+msgid "31. Dezember %d"
 msgstr ""
 
 #: scripts/main/main_windows.gd:109
@@ -1695,87 +1699,115 @@ msgstr ""
 msgid "%s: %s (ab dem nächsten Tag)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:741
+#: scripts/main/main_windows.gd:732
+msgid "Weiterspielen"
+msgstr ""
+
+#: scripts/main/main_windows.gd:734
+msgid "Partie beendet"
+msgstr ""
+
+#: scripts/main/main_windows.gd:734
+msgid "Das Nachspiel endete am %s."
+msgstr ""
+
+#: scripts/main/main_windows.gd:737
+msgid "Nachspiel bis %s"
+msgstr ""
+
+#: scripts/main/main_windows.gd:738
+msgid "Freies Spiel ohne Ereignisse, Journale und Ziele bis zum %s; danach endet die Partie."
+msgstr ""
+
+#: scripts/main/main_windows.gd:750
+msgid "Nachspiel bis zum %s"
+msgstr ""
+
+#: scripts/main/main_windows.gd:751
+msgid "Die Geschichte nach 1871 ist nicht nachgebildet: keine Ereignisse, Journale und Ziele mehr. Danach endet die Partie."
+msgstr ""
+
+#: scripts/main/main_windows.gd:759
 msgid "Die Chronik konnte nicht geschrieben werden."
 msgstr ""
 
-#: scripts/main/main_windows.gd:743
+#: scripts/main/main_windows.gd:761
 msgid "Chronik gespeichert: %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1022 scripts/main/main_windows.gd:1102
+#: scripts/main/main_windows.gd:1046 scripts/main/main_windows.gd:1126
 msgid "Keine Simulation geladen."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1024
+#: scripts/main/main_windows.gd:1048
 msgid "Gespeichert als „%s“"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1031
+#: scripts/main/main_windows.gd:1055
 msgid "Schnellgespeichert"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1039
+#: scripts/main/main_windows.gd:1063
 msgid "Noch kein Schnellspeicher vorhanden (F5 legt ihn an)."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1056
+#: scripts/main/main_windows.gd:1080
 msgid "Geladen: %s (%s)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1104
+#: scripts/main/main_windows.gd:1128
 msgid "Kein Simulationskern."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1121
+#: scripts/main/main_windows.gd:1145
 msgid "Neues Spiel: %s (%s)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1125
+#: scripts/main/main_windows.gd:1149
 msgid "Neues Spiel: %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1127
+#: scripts/main/main_windows.gd:1151
 msgid "Hervorgehobene Staaten: %s. Jeden anderen Staat übernimmt der Knopf "
 msgstr ""
 
-#: scripts/main/main_windows.gd:1129
+#: scripts/main/main_windows.gd:1153
 msgid "„Diesen Staat spielen“ in der Ortsinfo."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1153
+#: scripts/main/main_windows.gd:1177
 msgid "Ihr spielt jetzt %s"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1183
+#: scripts/main/main_windows.gd:1207
 msgid "Automatisch gespeichert (%s)"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1186
+#: scripts/main/main_windows.gd:1210
 msgid "Automatischer Spielstand fehlgeschlagen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1202
+#: scripts/main/main_windows.gd:1226
 msgid "Speichern fehlgeschlagen: "
 msgstr ""
 
-#: scripts/main/main_windows.gd:1204
+#: scripts/main/main_windows.gd:1228
 msgid "Speichern fehlgeschlagen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1204
+#: scripts/main/main_windows.gd:1228
 msgid "Der Spielstand wurde nicht geschrieben."
 msgstr ""
 
-#: scripts/main/main_windows.gd:1210
+#: scripts/main/main_windows.gd:1234
 msgid "Laden fehlgeschlagen: "
 msgstr ""
 
-#: scripts/main/main_windows.gd:1213
+#: scripts/main/main_windows.gd:1237
 msgid "Spielstand nicht geladen"
 msgstr ""
 
-#: scripts/main/main_windows.gd:1213
+#: scripts/main/main_windows.gd:1237
 msgid "Die laufende Partie geht unverändert weiter."
 msgstr ""
 
@@ -1891,43 +1923,43 @@ msgstr ""
 msgid " im ersten Wahlgang, Sieg in der Stichwahl"
 msgstr ""
 
-#: scripts/main.gd:232
+#: scripts/main.gd:238
 msgid "Wahl: %s (Spielmenü „Letzte Wahl“)"
 msgstr ""
 
-#: scripts/main.gd:575
+#: scripts/main.gd:581
 msgid "Pause: "
 msgstr ""
 
-#: scripts/main.gd:587
+#: scripts/main.gd:593
 msgid "Rückmeldung gespeichert: {pfad} – bitte diese Datei schicken; es wurde nichts versandt."
 msgstr ""
 
-#: scripts/main.gd:646
+#: scripts/main.gd:652
 msgid "Hinweise abgeschaltet (Einstellungen, Spiel)"
 msgstr ""
 
-#: scripts/main.gd:660 scripts/ui/area_bar.gd:21 tutorial/hinweise.cfg:73
+#: scripts/main.gd:666 scripts/ui/area_bar.gd:21 tutorial/hinweise.cfg:73
 msgid "Haushalt"
 msgstr ""
 
-#: scripts/main.gd:662 scripts/ui/area_bar.gd:22 scripts/ui/message_stack.gd:86 tutorial/hinweise.cfg:77
+#: scripts/main.gd:668 scripts/ui/area_bar.gd:22 scripts/ui/message_stack.gd:86 tutorial/hinweise.cfg:77
 msgid "Zollunion"
 msgstr ""
 
-#: scripts/main.gd:694
+#: scripts/main.gd:700
 msgid "Die Geschichtsstunde fehlt oder ist fehlerhaft"
 msgstr ""
 
-#: scripts/main.gd:737
+#: scripts/main.gd:743
 msgid "Die Geschichtsstunde ist zu Ende – die Partie gehört Ihnen."
 msgstr ""
 
-#: scripts/main.gd:738
+#: scripts/main.gd:744
 msgid "Geschichtsstunde beendet; die Partie läuft weiter."
 msgstr ""
 
-#: scripts/main.gd:1018
+#: scripts/main.gd:1028
 msgid " schließen ein Bündnis"
 msgstr ""
 
@@ -4492,67 +4524,67 @@ msgstr ""
 msgid "Die Geschichtsstunde beenden und frei weiterspielen"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:80
+#: scripts/ui/verdict_window.gd:87
 msgid "URTEIL DER GESCHICHTE"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:108
+#: scripts/ui/verdict_window.gd:115
 msgid "Export"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:108
+#: scripts/ui/verdict_window.gd:115
 msgid "Chronik exportieren"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:110
+#: scripts/ui/verdict_window.gd:117
 msgid "Menu"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:110
+#: scripts/ui/verdict_window.gd:117
 msgid "Hauptmenü"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:111
+#: scripts/ui/verdict_window.gd:118
 msgid "Continue"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:133
+#: scripts/ui/verdict_window.gd:140
 msgid "%s · vom %s bis zum %s"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:141
+#: scripts/ui/verdict_window.gd:148
 msgid "Wendepunkte"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:150
+#: scripts/ui/verdict_window.gd:157
 msgid "Kriege"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:153
+#: scripts/ui/verdict_window.gd:160
 msgid "%s gegen %s, %s bis %s: %s"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:155
+#: scripts/ui/verdict_window.gd:162
 msgid "Sieg "
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:155
+#: scripts/ui/verdict_window.gd:162
 msgid "ohne Sieger"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:190
+#: scripts/ui/verdict_window.gd:197
 msgid "offen: %s"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:266
+#: scripts/ui/verdict_window.gd:273
 msgid "Herrscher und Minister"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:269
+#: scripts/ui/verdict_window.gd:276
 msgid "%s: %s (seit %s)"
 msgstr ""
 
-#: scripts/ui/verdict_window.gd:282
+#: scripts/ui/verdict_window.gd:289
 msgid "… und %d weitere"
 msgstr ""
 

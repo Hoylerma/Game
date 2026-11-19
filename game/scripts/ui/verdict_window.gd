@@ -3,7 +3,7 @@ extends PanelContainer
 ## Urteil der Geschichte (seit M13, Schritt a4; vertical_slice.md 3.5): am Ende der Partie der Ausgang
 ## der Journale mit Wertung und historischem Vergleich, die fünf Dimensionen des Vermächtnisses mit
 ## ihrem Verlauf seit dem Start und einem Satz, die Wendepunkte, die Kriege und Herrscher und Minister
-## im Amt. Knöpfe: Weiterspielen (ohne neue Ereignisse), Chronik exportieren (HTML), Hauptmenü.
+## im Amt. Knöpfe: Weiterspielen (ohne neue Ereignisse; seit M15a1 als Nachspiel bis Ende 1880), Chronik exportieren (HTML), Hauptmenü.
 ## main.gd legt das Fenster an, öffnet es am Ende von selbst und aus dem Spielmenü.
 
 signal continue_requested
@@ -47,6 +47,13 @@ func open(sim: SimulationClient, player: int) -> void:
 
 func close() -> void:
 	visible = false
+
+
+## Knopf „Weiterspielen“: Aufschrift, frei oder gesperrt, Tooltip (seit M15a1: Nachspiel bis 1880).
+func set_continue(text: String, enabled: bool, tooltip: String) -> void:
+	_continue_button.text = text
+	_continue_button.disabled = not enabled
+	_continue_button.tooltip_text = tooltip
 
 
 func is_open() -> bool:

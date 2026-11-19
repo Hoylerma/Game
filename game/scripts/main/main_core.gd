@@ -160,6 +160,10 @@ var _newspaper_day := -1000000 # Tag der letzten Zeitung (höchstens eine im Mon
 var _verdict_shown := false
 ## Letzter Tag der Partie als Tagesnummer (ElectionTally.day_number), −1 ohne Ende.
 var _end_day := -1
+## Nachspiel (seit M15a1, bauen_und_anleitung.md 8): Nach dem Urteil läuft die Zeit noch bis zum
+## 31. Dezember des Jahres Ende + EPILOGUE_YEARS (1871 → 1880), ohne Geschichte; danach endet die Partie.
+const EPILOGUE_YEARS := 9
+var _epilogue_end_day := -1
 ## Tempo vor dem Ereignisfenster; nach der letzten Wahl geht es damit weiter.
 var _speed_before_event := 0
 ## Kriege beim letzten Aufbau der Legende im Kartenmodus „Krieg“ (_war_signature).
@@ -671,6 +675,11 @@ func _read_scenario_constants() -> bool:
 	_end_day = -1
 	if bool(verdict.get("has_end", false)) and bool(verdict.get("active", false)):
 		_end_day = ElectionTally.day_number(verdict.get("end_date", {}))
+	_epilogue_end_day = -1
+	if _end_day >= 0:
+		_epilogue_end_day = ElectionTally.day_number({
+			"year": int((verdict.get("end_date", {}) as Dictionary).get("year", 0)) + EPILOGUE_YEARS, "month": 12, "day": 31
+		})
 	_verdict_shown = _sim.is_game_over()
 	if _verdict_window != null:
 		_verdict_window.close()
@@ -1564,3 +1573,16 @@ func _apply_state_drawer() -> void:
 func _left_column_hidden_by_overlay() -> bool:
 	return false
 
+
+
+## Letzter Tag des Nachspiels als Text („31. Dezember 1880“, seit M15a1), "" ohne Ende der Partie.
+func epilogue_end_text() -> String:
+	if _epilogue_end_day < 0 or _sim == null:
+		return ""
+	var year := int((_sim.get_verdict().get("end_date", {}) as Dictionary).get("year", 0)) + EPILOGUE_YEARS
+	return "31. Dezember %d" % year
+
+
+## Ist das Nachspiel vorbei (der Tag nach seinem letzten Tag ist erreicht)?
+func is_epilogue_over() -> bool:
+	return _sim != null and _epilogue_end_day >= 0 and ElectionTally.day_number(_sim.get_date()) > _epilogue_end_day

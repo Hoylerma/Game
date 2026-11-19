@@ -726,12 +726,30 @@ func open_verdict() -> void:
 	_windows.close_all()
 	_sync_area_bar()
 	_verdict_window.open(_sim, _player)
+	# Nachspiel (seit M15a1): bis Ende 1880 weiter, danach nur noch Chronik und Hauptmenü.
+	var end_text := epilogue_end_text()
+	if end_text.is_empty():
+		_verdict_window.set_continue("Weiterspielen", true, "")
+	elif is_epilogue_over():
+		_verdict_window.set_continue("Partie beendet", false, "Das Nachspiel endete am %s." % end_text)
+	else:
+		_verdict_window.set_continue(
+			"Nachspiel bis %s" % end_text.get_slice(" ", 2), true,
+			"Freies Spiel ohne Ereignisse, Journale und Ziele bis zum %s; danach endet die Partie." % end_text
+		)
 	_place_verdict()
 
 
-## Weiterspielen: schließt das Urteil, die Zeit bleibt angehalten.
+## Weiterspielen: schließt das Urteil, die Zeit bleibt angehalten. Im Nachspiel (seit M15a1) sagt eine
+## Meldekarte, was es ist und wann es endet.
 func close_verdict() -> void:
 	_verdict_window.close()
+	if not epilogue_end_text().is_empty() and not is_epilogue_over() and _messages != null:
+		_messages.add_card({
+			"kind": &"chronik", "date_text": _sim.get_date_text(), "sticky": true, "location_index": -1,
+			"title": "Nachspiel bis zum %s" % epilogue_end_text(),
+			"text": "Die Geschichte nach 1871 ist nicht nachgebildet: keine Ereignisse, Journale und Ziele mehr. Danach endet die Partie.",
+		})
 
 
 ## Schreibt die Chronik als HTML-Datei und nennt den Pfad im Urteil.
@@ -940,10 +958,16 @@ func _update_pending_elections() -> void:
 			_pending_election_days.append(ElectionTally.day_number(parliament.get("election_date", {})))
 
 
-## Tage bis einschließlich zum letzten Tag der Partie (mindestens 1), solange das Urteil aussteht.
+## Tage bis einschließlich zum letzten Tag der Partie (mindestens 1), solange das Urteil aussteht, danach bis
+## zum letzten Tag des Nachspiels (seit M15a1).
 func _days_through_end() -> int:
-	if _end_day < 0 or _verdict_shown:
+	if _end_day < 0:
 		return MAX_DAYS_PER_FRAME
+	if _verdict_shown:
+		# Nachspiel (seit M15a1): bis einschließlich zu seinem letzten Tag.
+		if _epilogue_end_day < 0:
+			return MAX_DAYS_PER_FRAME
+		return maxi(_epilogue_end_day - ElectionTally.day_number(_sim.get_date()) + 1, 1)
 	var today := ElectionTally.day_number(_sim.get_date())
 	return maxi(_end_day - today + 1, 1)
 

@@ -876,10 +876,19 @@ func _check_verdict() -> void:
 		if not html.contains("<h2>Chronik</h2>") or not html.contains("Vermächtnis"):
 			_fail("Urteil: exportierte Chronik ohne Chronik oder Vermächtnis")
 		DirAccess.remove_absolute(path)
-	window.button("Continue").emit_signal("pressed")
+	# Nachspiel (seit M15a1): Der Knopf heißt „Nachspiel bis 1880“, eine Meldekarte bleibt liegen.
+	var continue_button := window.button("Continue")
+	if continue_button.text != "Nachspiel bis 1880" or continue_button.disabled or str(_main.call("epilogue_end_text")) != "31. Dezember 1880":
+		_fail("Urteil: Knopf „%s“ statt „Nachspiel bis 1880“ (%s)" % [continue_button.text, _main.call("epilogue_end_text")])
+	var stack: MessageStack = _main.call("messages")
+	stack.clear()
+	continue_button.emit_signal("pressed")
 	await _frames(1)
 	if window.is_open():
 		_fail("Urteil: „Weiterspielen“ schließt es nicht")
+	if stack.card_count() != 1 or not stack.is_sticky(0) or not stack.cards_text().contains("Nachspiel bis zum 31. Dezember 1880"):
+		_fail("Nachspiel ohne Meldekarte: %s" % stack.cards_text())
+	stack.clear()
 	_main.call("open_verdict")
 	window.button("Menu").emit_signal("pressed")
 	await _frames(1)

@@ -1,6 +1,7 @@
 # Bauen, Wirtschaft und Anleitung (Meilenstein M15)
 
-> **Status: Entwurf** – zu bestätigen sind die Entscheidungen in Abschnitt 9. Anlass ist die zweite
+> **Status: verbindlich** – Entscheidungen 1–7 wie empfohlen freigegeben (19.11.2026, Abschnitt 9);
+> Umsetzung läuft, Stand in Abschnitt 11. Anlass ist die zweite
 > Rückmeldung aus dem Spiel (18./19.11.2026). Grundlage sind [wirtschaft.md](wirtschaft.md) (M5, Betriebe,
 > Haushalt, Landesausbau), [lesezeichen_1848.md](lesezeichen_1848.md) (Verwaltung, Eisenbahnen, Industrie
 > 1848), [ki.md](ki.md) und der Vertrag von M14 ([europa_und_oberflaeche.md](europa_und_oberflaeche.md)).
@@ -14,7 +15,7 @@
 | 3 | Es gibt keine Gebäude, die man bauen kann und die die Wirtschaft ankurbeln; „noch relativ langweilig“ | **dieser Vertrag**, Abschnitte 3–5 |
 | 4 | Beim Bauen bei so vielen Landkreisen nicht unübersichtlich werden | **dieser Vertrag**, Abschnitt 3.1 (Bauen je Landesteil, Vorschläge) |
 | 5 | Man erkennt nicht, wie es der Bevölkerung geht; mehr Hinweise in den Tooltips | **erledigt** (19.11.2026): Urteil in Worten mit Farbe am Symbol, je Schicht, Gründe, was hilft; dabei fiel Abschnitt 7 auf |
-| 6 | 1973 gibt es noch Preußen – sehr unhistorisch | **dieser Vertrag**, Abschnitt 8 |
+| 6 | 1973 gibt es noch Preußen – sehr unhistorisch | **erledigt** (M15a1): Nachspiel bis Ende 1880, Abschnitt 8 |
 
 ## 2. Ausgangslage
 
@@ -174,4 +175,4 @@ Meilensteinen.
 
 | Schritt | Stand |
 |---|---|
-| – | Vertrag im Entwurf; Entscheidungen offen |
+| a1 | **erledigt:** Nach dem Urteil heißt „Weiterspielen“ „Nachspiel bis 1880“ (Tooltip: freies Spiel ohne Ereignisse, Journale und Ziele bis zum 31. Dezember 1880), eine Meldekarte bleibt liegen und sagt es. Die Zeit läuft bis einschließlich 31. Dezember 1880 (Ende der Partie + 9 Jahre, `EPILOGUE_YEARS`); am 1. Januar 1881 steht sie, das Urteil kommt wieder, der Knopf heißt „Partie beendet“ und ist gesperrt. Ein Spielstand nach dem Nachspiel (etwa 1973) öffnet beim Laden gleich das Urteil. Nur in der Oberfläche, Kern und Prüfsummen unverändert. Durchspieltest bis 1. Januar 1881, Klicktest (Knopf, Meldekarte) |

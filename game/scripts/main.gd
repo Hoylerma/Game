@@ -115,6 +115,12 @@ func _process(delta: float) -> void:
 		_place_tutorial()
 	if _sim == null or _speed == 0:
 		return
+	# Nach dem Nachspiel (seit M15a1) steht die Zeit; das Urteil kommt wieder, ohne Weiterspielen.
+	if is_epilogue_over():
+		_set_speed(0)
+		if not _verdict_window.is_open():
+			open_verdict()
+		return
 	_day_accumulator += delta * SPEED_DAYS_PER_SECOND[_speed]
 	var days := floori(_day_accumulator)
 	if days < 1:
@@ -906,6 +912,10 @@ func _offer_hint(key: String) -> void:
 
 ## Nach dem Laden eines Spielstands: „Was ist passiert?“ mit den wichtigsten Nachrichten des letzten Jahres.
 func _after_loading_save() -> void:
+	# Spielstand nach dem Nachspiel (seit M15a1, etwa aus einer Partie bis 1973): gleich das Urteil.
+	if is_epilogue_over():
+		open_verdict()
+		return
 	if _settings != null and not bool(_settings.get_value("spiel/rueckblick")):
 		return
 	if RecapWindow.collect(_sim, _player).is_empty():

@@ -373,7 +373,9 @@ die Partie 1848–1871 je Staat vollständig über die Oberfläche durch, standa
 5. **Spielstände:** alle fünf Jahre speichern (Ordner `user://durchspiel_test`, danach gelöscht),
    laden und Prüfsumme und Datum vergleichen.
 6. **Ende:** Das Urteil der Geschichte öffnet sich von selbst und nennt das Vermächtnis. Die Chronik
-   lässt sich als HTML schreiben, „Weiterspielen“ schließt das Urteil.
+   lässt sich als HTML schreiben, „Weiterspielen“ schließt das Urteil. Seit M15a1 läuft danach das
+   Nachspiel bis zum 31. Dezember 1880; am 1. Januar 1881 steht die Zeit, und das Urteil kommt mit
+   gesperrtem Weiterspielen wieder (der Klicktest prüft Knopf „Nachspiel bis 1880“ und Meldekarte).
 
 Je Staat nennt die Ausgabe Enddatum, Laufzeit, beantwortete Ereignisse, Wahlabende, Zeitungen,
 geöffnete Fenster, Spielstände, Orte, den Ausgang der deutschen Frage und das Vermächtnis. Auf dem
