@@ -18,9 +18,9 @@ staat DEN {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 49900
+        hofhaltung     = 44500
         heer           = 8
-        schulden       = 2946000
+        schulden       = 2627800
         zollunion      = keine
         verfassung     = staendisch
         wahlrecht      = staendisch

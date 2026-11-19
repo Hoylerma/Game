@@ -14,11 +14,11 @@ staat LIE {
         hauptstadt     = vaduz
         regierungsform = absolute_monarchie
         konfession     = katholisch
-        schatz         = 800
+        schatz         = 721
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 500
+        hofhaltung     = 450
         heer           = 2
         zollunion      = keine
         verfassung     = staendisch

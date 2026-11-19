@@ -46,9 +46,9 @@ staat WEI {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 35600
+        hofhaltung     = 26000
         heer           = 6
-        schulden       = 237000
+        schulden       = 172900
         zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch

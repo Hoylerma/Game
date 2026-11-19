@@ -18,9 +18,9 @@ staat PRU {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 645200
+        hofhaltung     = 510600
         heer           = 9
-        schulden       = 24197000
+        schulden       = 19150100
         zollunion      = zollverein
         verfassung     = staendisch
         wahlrecht      = staendisch

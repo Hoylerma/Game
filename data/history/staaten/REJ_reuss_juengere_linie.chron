@@ -18,9 +18,9 @@ staat REJ {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 9700
+        hofhaltung     = 7400
         heer           = 6
-        schulden       = 65000
+        schulden       = 49600
         zollunion      = zollverein
         verfassung     = keine
         wahlrecht      = keines

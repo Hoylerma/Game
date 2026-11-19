@@ -46,9 +46,9 @@ staat BWO {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 37000
+        hofhaltung     = 28400
         heer           = 6
-        schulden       = 247000
+        schulden       = 189400
         zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch

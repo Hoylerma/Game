@@ -18,9 +18,9 @@ staat HAN {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 170900
+        hofhaltung     = 126900
         heer           = 7
-        schulden       = 3845000
+        schulden       = 2855300
         zollunion      = steuerverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch

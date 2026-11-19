@@ -18,9 +18,9 @@ staat LIP {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 14000
+        hofhaltung     = 9500
         heer           = 6
-        schulden       = 93000
+        schulden       = 63000
         zollunion      = zollverein
         verfassung     = staendisch
         wahlrecht      = staendisch

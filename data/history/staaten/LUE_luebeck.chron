@@ -15,9 +15,9 @@ staat LUE {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 800
+        hofhaltung     = 738
         heer           = 4
-        schulden       = 45000
+        schulden       = 41500
         zollunion      = keine
         verfassung     = staendisch
         wahlrecht      = staendisch

@@ -18,9 +18,9 @@ staat WAL {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 7700
+        hofhaltung     = 6500
         heer           = 6
-        schulden       = 52000
+        schulden       = 43700
         zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch

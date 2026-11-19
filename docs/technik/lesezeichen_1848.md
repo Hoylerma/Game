@@ -194,7 +194,10 @@ besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Dat
   Verhältnissen um 1847: Hof 4 % (Preußen, Österreich) bis 12 % (kleine Fürstentümer); Schulden
   abzüglich Schatz in Jahreseinnahmen, etwa Preußen 1,5, Bayern 2,9, Österreich 2,95 (in b2 3,45;
   gesenkt in b3, damit das Vermögen in den ersten Jahren über −3 bleibt), Kurhessen schuldenfrei mit
-  Schatz. Heer wie in a1 (Soldaten je 1.000
+  Schatz. **Seit M15a2** (Handel nach Eigenbedarf, wirtschaft.md 4.1) liegen die Preise nahe der Basis
+  statt beim 1,3- bis 1,6-fachen; die Einnahmen sind nominal 8 bis 37 % niedriger. Schulden, Schatz und
+  Hofhaltung zum 1. März 1848 sind deshalb je Staat mit dem Verhältnis der neuen zu den alten
+  Starteinnahmen skaliert, die Vielfachen bleiben (Österreich 35,6 → 29,9 Mio. Taler Schulden). Heer wie in a1 (Soldaten je 1.000
   Einwohner). Werkzeug: ein einmaliges Skript; die Werte sind `spielwert`. Der Bericht `wirtschaft
   --szenario voelkerfruehling` zeigt danach Überschüsse in allen Staaten (Preußen rund ein Drittel der
   Einnahmen); Ausgleich und Zielwerte folgen in b3.
